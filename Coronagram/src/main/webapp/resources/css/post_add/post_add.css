@@ -1,0 +1,166 @@
+
+
+body{
+    background-color: white;
+    font-family: "Noto Sans KR", sans-serif;
+    background: #ecf0f1;
+}
+
+.post_form_container{
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+#imageCanvas{
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events:none;
+}
+
+/* #img_id{
+    position: absolute;
+    left: 0;
+    top: 0;
+} */
+
+
+
+.post_form{
+    padding: 40px;
+    background-color: #fff;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    border-radius: 10px;
+    margin: 0 0 10px;
+}
+
+.post_form .title{
+    margin: 0 10px 40px;
+    font-weight: 400;
+    font-size: 30px;
+    text-align: center;
+    font-weight: 600;
+}
+
+
+.post_form .preview{
+    margin-bottom: 30px;
+}
+
+.post_form .preview .upload{
+    max-width: 300px;
+    height: 300px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    border-radius: 10px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.plus_icon{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    border: 1px solid dodgerblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#id_photo{
+    border-radius: 10px;
+}
+
+.plus_icon span{
+    position: absolute;
+    display: block;
+    width: 2px;
+    height: 30px;
+    background: dodgerblue;
+
+}
+
+.plus_icon span:nth-child(2){
+    transform:rotate(90deg);
+}
+
+.post_form p{
+    margin-bottom: 20px;
+}
+
+.post_form input[type=file]{
+    width: 100%;
+    background: 0 0;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    border-radius: px;
+    box-sizing: border-box;
+    color: #262626;
+    font-size: 14px;
+    padding: 7px 8px 7px;
+}
+
+
+.post_form textarea{
+    width: 100%;
+    background: 0 0;
+    border-radius: 3px;
+    box-sizing: border-box;
+    border: 0px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    border-radius: 10px;
+    color: #262626;
+    font-size: 14px;
+    padding: 7px 8px 7px;
+    resize: none;
+}
+
+
+
+.add_btn {
+    display: inline-block;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.5s;
+            cursor: pointer;
+            width: 60px;
+            height: 30px;
+            border: none;
+            border-radius: 7px;
+            background: #0d6efd;
+}
+
+.btn_area{
+    display: inline-block;
+    float:right;
+}
+
+.cancel_btn{
+    display: inline-block;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.5s;
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+    border: none;
+    border-radius: 7px;
+    background: gray;
+}
+
+.add_btn:hover{
+    opacity: .8;
+}
+
+textarea:focus{
+    outline: 2px solid #64d488;
+}
+
+.cancel_btn:hover{
+    opacity: .8;
+}

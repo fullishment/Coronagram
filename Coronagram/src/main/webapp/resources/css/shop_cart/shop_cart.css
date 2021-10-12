@@ -1,0 +1,285 @@
+
+
+#main {
+    display: flex;
+    position: relative;;
+    font-family: "Noto Sans KR", sans-serif;
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    top: 5vh;
+}
+
+.main-left{
+    
+    width: 69%;
+    height: 100%;
+    margin: 0;
+}
+
+.main-right{
+    
+    width: 30%;
+    height: 100%;
+    margin: 0px 60px 0px 60px;
+    
+}
+
+/* 왼쪽화면 */
+.lcon1{
+    padding: 20px;
+    justify-content: space-between;
+    display: flex;
+    height: 20%;
+    margin-right: 40px;
+    margin-left: 40px;
+}
+.input_box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.check_all{
+    height: 20px;
+    margin: 5px; 
+}
+
+.seldel_btn{
+    height: 30px;
+    width: 90px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #ccc;
+    align-self: flex-end;
+    background-color: white;
+}
+
+.lcon2 {
+    height: 70%;
+    border-top: 2px solid black;
+    margin: 0px 60px 0px 60px;
+}
+
+.lcon2_up{
+    display: flex;
+    height: 70%;
+    border-bottom: 1px solid #ccc;
+
+}
+
+
+
+.check_btn{
+    margin-left: 7px;
+    margin-top: 4px;
+    width: 11px;
+    height: 25px;
+}
+
+
+.up_con1,
+.up_con2,
+.up_con3,
+.up_con4,
+.up_con5{
+    height: 100%;
+}
+.up_con1{
+    display: flex;
+    background-image: url("../../images/mask_goods.png");
+    background-size:cover;
+    height: 150px;
+    width: 30%;
+    vertical-align: middle;
+    align-content: center;
+    margin: 5%;
+}
+.up_con2{
+    width: 25%;
+}
+
+
+.con2_title{
+    color: black;
+    font-size: 25px;
+    font-weight: 300;
+    margin-top: 17%;
+}
+
+.con2_subtitle{
+    color: grey;
+    font-size: 15px;
+    font-weight: 200;
+    padding-bottom: 10%;
+}
+.con2_color{
+    color: black;
+    font-size: 15px;
+    font-weight: 200;
+}
+.con2_memo{
+    color: red;
+    font-size: 15px;
+    font-weight: 200;
+}
+
+.up_con3{
+    display: flex;
+    margin: 0;
+    width: 20%;
+    align-content: center;
+    padding-top: 30px;
+}
+
+ /* 수량증감폼 */
+ .qt, .qt-plus, .qt-minus {
+    display: block;
+    float: left;
+    height: 25px;
+    padding: 0 8px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    background-color: white;
+}
+/* 갯수 */
+.qt {
+    width: 47px;
+    text-align: center;
+}
+/* 증감 */
+.qt-plus, .qt-minus {
+    border: 1px solid;
+    width: 28px;
+}
+.qt-plus {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.qt-minus {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+/* 증감호버 */
+.qt-plus:hover, .qt-minus:hover {
+    background: gray;
+    border-color: gray;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+.up_con4{
+    width: 20%;
+}
+.del_btn{
+    background-image: url(../../images/delete.btn.png);
+    background-size: cover;
+    margin-left: 90px;
+    margin-top: 6px;
+    width: 21px;
+    height: 22px;
+}
+
+
+.lcon2_down
+{
+    height: 120px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 3px solid black;
+}
+.down_con1{
+    display: inline-block;
+    width: 60%;
+    padding-top: 5%;
+}
+
+
+/* 오른쪽화면 */
+.rcon1{
+    height: 20%;
+}
+.rcon2{
+    border-top: 2px solid black;
+    height: 70%;
+
+}
+
+.rcon2_con1{
+    height: 30%;
+    background-color: #ccc;
+    opacity: 0.5;
+    padding: 10px;
+    width:100%;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+.add_btn{
+    display: inline-block;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.5s;
+            cursor: pointer;
+            width: 100px;
+            height: 30px;
+            border: none;
+            border-radius: 7px;
+            background: #0d6efd;
+            margin: auto;
+}
+.add_btn:hover{
+    opacity: .8;
+}
+
+
+.rcon2_con2{
+    border-bottom: 1px solid black;
+    height: 29%;
+}
+.entire_item, .order_price,.discount_price {
+    height: 25%;
+    color: #ccc;
+    display: flex;
+    justify-content: space-between;
+}
+.entire_item{
+    margin-top: 12%;
+
+}
+
+
+.rcon2_con3{
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+.due_price{
+    display: flex;
+    justify-content: space-between;
+}
+.order_btn{
+    display: inline-block;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.5s;
+            cursor: pointer;
+            width: 200px;
+            height: 30px;
+            border: none;
+            border-radius: 7px;
+            background: #0d6efd;
+    
+    margin: auto;
+}
+.order_btn:hover{
+    opacity: .8;
+}
