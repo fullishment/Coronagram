@@ -6,10 +6,11 @@
 </head>
 <body>
 <h1>
-	Hello world!   ãããã
+	Hello world!
 </h1>
 박경득
 kimety 다시해보기
+김기훈
 <P> 내가올린시간 The time on the server is ${serverTime}. </P>
 </body>
 </html>
