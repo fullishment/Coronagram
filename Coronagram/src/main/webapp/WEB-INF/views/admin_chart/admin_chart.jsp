@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
 
-    <link rel="stylesheet" href="../../resources/css/admin_chart/admin_chart.css">
-    <link rel="stylesheet" href="../../resources/css/menu_bar/menu_bar.css">
-    <link rel="stylesheet" href="../../resources/css/admin_chart/3.3.4bootstrap.min.css">
+    <link rel="stylesheet" href="resources/css/admin_chart/admin_chart.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/admin_chart/3.3.4bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.4/jquery-jvectormap.min.css">
@@ -469,8 +469,8 @@
         </section>
     </main>
     <!-- <script src="../../resources/script/admin_chart/doughnutchart2.js"></script> -->
-    <script src="../../resources/script/admin_chart/admin_chart.js"></script>
-    <script src="../../resources/script/menu_bar/menu_bar.js"></script>
+    <script src="resources/script/admin_chart/admin_chart.js"></script>
+    <script src="resources/script/menu_bar/menu_bar.js"></script>
 </body>
 
 </html>
