@@ -6,8 +6,9 @@
 </head>
 <body>
 <h1>
-	Hello world!   ãããã
+	Hello world!
 </h1>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 <P>  The time on the server is ${serverTime}.
@@ -16,6 +17,11 @@
  </P>
 =======
 kimety
+=======
+박경득
+kimety 다시해보기
+김기훈
+>>>>>>> branch 'main' of https://github.com/fullishment/coronagram.git
 <P> 내가올린시간 The time on the server is ${serverTime}. </P>
 >>>>>>> branch 'main' of https://github.com/fullishment/coronagram.git
 </body>
