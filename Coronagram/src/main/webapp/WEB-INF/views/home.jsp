@@ -9,6 +9,9 @@
 	Hello world!  
 </h1>
 
-<P> 내가올린시간 The time on the server is ${serverTime}. </P>
+<P>  The time on the server is ${serverTime}.
+	누군가 한글 올리면 깨지시는거같은데 UTF-8 설정확인 부탁
+	test o
+ </P>
 </body>
 </html>
