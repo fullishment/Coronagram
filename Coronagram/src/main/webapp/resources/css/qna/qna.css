@@ -1,0 +1,162 @@
+/* Q&A */
+html {
+    overflow-x: hidden;
+}
+        .QTI, .QCI{
+            width: 95%;
+            border-radius: 10px;
+            border: 0px;
+            box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+        }
+        .QTI {
+            height: 30px;
+        }
+        .QCI{
+            height: 250px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .qnaBtn {
+            float: right;
+        }
+        .add_btn {
+            display: inline-block;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.5s;
+            cursor: pointer;
+            width: 60px;
+            height: 30px;
+            border: none;
+            border-radius: 7px;
+            background: #0d6efd;
+        }
+        .add_btn:hover{
+            opacity: .8;
+        }
+        .cancel_btn:hover {
+            opacity: .8;
+        }
+        .list_btn:hover {
+            opacity: .8;
+        }
+        
+/* 문의내역 */
+        p {
+            font-family: "Noto Sans KR", sans-serif;
+        }
+        .scmL{
+            border: 1px solid black;
+            border-collapse:collapse;
+            width: 90%;
+            height: 265px;
+            margin: 30px;
+            text-align: center;
+        }
+        .scmLT {
+            background-color: gray;
+            color: white
+        }
+        .check0{
+            color:  red;
+        }
+        .check1{
+            color: green;
+        }
+        .cancel_btn {
+            float: right;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.5s;
+            cursor: pointer;
+            width: 60px;
+            height: 30px;
+            border: none;
+            border-radius: 7px;
+            background: gray;
+            margin-left: 10px;
+            margin-right: 35px;
+        }
+        .list_btn {
+            float: right;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.5s;
+            cursor: pointer;
+            width: 60px;
+            height: 30px;
+            border: none;
+            border-radius: 7px;
+            background: gray;
+            margin-left: 10px;
+            margin-top: 35px;
+            margin-right: 10px;
+            padding: 0px;
+        }
+        .scmL2 {
+            float: left;
+            width: 350px;
+            height: 320px;
+        }
+        .scmL3 {
+            float: left;
+            width: 350px;
+            height: 320px;
+        }
+        .scmL3T{
+            width: 380px;
+            height: 310px;
+            border: 0px;
+            border-radius: 10px;
+            box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+            font-size: 11pt;
+            margin-bottom: 10px;
+            margin-top:10px;
+        }
+        .scmL2T {
+            width: 315px;
+            height: 25px;
+            border: 0px;
+            border-radius: 10px;
+            box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+            font-size: 11pt;
+            margin-top:10px;
+        }
+        .scmL4{
+            width: 315px;
+            height: 250px;
+            border: 0px;
+            border-radius: 10px;
+            box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+            font-size: 11pt;
+            margin-top:10px;
+        }
+        input:focus{
+            outline : 2px solid #64d488;
+        }
+        textarea:focus {
+            outline : 2px solid #64d488;
+        }
+        .AsCon {
+            margin-top: 30px;
+        }
+
+/* 반응형 */
+@media (max-width: 770px) {
+    .scImg {
+        display: none;
+    }
+    .scMain {
+        width: 100%;
+    }
+    .group {
+        min-height: 435px;
+        max-width: 400px;
+    }
+}

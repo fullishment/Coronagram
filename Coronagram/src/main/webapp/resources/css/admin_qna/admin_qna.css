@@ -1,0 +1,188 @@
+html {
+    background: #ecf0f1;
+}
+p {
+    font-family: "Noto Sans KR", sans-serif;
+}
+
+/* main */
+.group {
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+    min-height: 405px;
+    background: white;
+}
+.sc {
+    max-width: 800px;
+    margin: auto;
+    margin-top: 5%;
+    padding: 10px;
+}
+
+.scName1 {
+    font-size: 15pt;
+    color: gray;
+}
+
+.sc-html .scm1-htm,
+.sc-html .scm2-htm{
+top:10px;
+left:0;
+right:0;
+bottom:0;
+position:absolute;
+transform:rotateY(180deg);
+backface-visibility:hidden;
+}
+.sc-html .scm1,
+.sc-html .scm2,
+.sc-form .group .check{
+display:none;
+}
+
+.sc-html .tab{
+display:inline-block;
+border-bottom:2px solid transparent;
+}
+
+#tab-1{
+float: left;
+}
+.sc-html .scm1:checked + .tab,
+.sc-html .scm2:checked + .tab{
+color:grey;
+border-color:#1161ee;
+}
+.sc-form{
+min-height:25px;
+position:relative;
+perspective:1000px;
+transform-style:preserve-3d;
+}
+.sc-form .group .sclabel,
+.sc-form .group .input,
+.sc-form .group .button{
+display:inline-block;
+}
+
+.sc-html .scm1:checked + .tab + .scm2 + .tab +.sc-form .scm1-htm{
+transform:rotate(0);
+}
+.sc-html .scm2:checked + .tab + .sc-form .scm2-htm{
+transform:rotate(0);
+}
+.scmL{
+    border: 1px solid black;
+    border-collapse:collapse;
+    width: 90%;
+    height: 265px;
+    margin: 30px;
+    text-align: center;
+}
+.scmLT {
+    background-color: gray;
+    color: white;
+}
+input {
+    width: 98.8%;
+    height: 30px;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    border: none;
+
+}
+textarea{
+    resize:none;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    border-radius: 10px;
+    border: none ;
+    height: 200px;
+}
+input:focus{
+    outline : 2px solid #64d488;
+}
+textarea:focus {
+    outline : 2px solid #64d488;
+}
+a {
+    text-decoration: none;
+}
+
+h3 {
+    margin-bottom: 15px;
+}
+.btnForm {
+    float: right;
+    margin-top: 15px;
+}
+.add_btn {
+    display: inline-block;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.5s;
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+    border: none;
+    border-radius: 7px;
+    background: #0d6efd;
+}
+.edit_btn {
+    display: inline-block;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.5s;
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+    border: none;
+    border-radius: 7px;
+    background: #64d488;
+}
+.cancel_btn {
+    display: inline-block;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.5s;
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+    border: none;
+    border-radius: 7px;
+    background: gray;
+}
+
+.scmL2 {
+    float: left;
+    border: 0;
+    width: 350px;
+    height: 320px;
+}
+.scmL_txt {
+    height: 255px;
+}
+.scmL3 {
+    float: right;
+    border: 0;
+    width: 350px;
+    height: 320px;
+}
+.scmL2T {
+    width: 350px;
+}
+
+/* 반응형 */
+@media (max-width: 770px) {
+    .group {
+        min-height: 700px;
+        max-width: 400px;
+    }
+}
