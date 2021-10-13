@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="ko" >
 <head>
   <meta charset="UTF-8">
   <title>CodePen - React Profile Card with image upload</title>
