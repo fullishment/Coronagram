@@ -1,6 +1,7 @@
 /* 메인CSS */
 html {
     overflow: hidden;
+    top: 30px;
 }
 * {
     box-sizing: border-box;
