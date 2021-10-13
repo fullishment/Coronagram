@@ -10,10 +10,10 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
     <title>instagram</title>
-    <link rel="stylesheet" href="../../resources/css/p_coronagram/common.css">
-    <link rel="stylesheet" href="../../resources/css/p_coronagram/style.css">
-    <link rel="stylesheet" href="../../resources/css/post_add/post_add.css">
-    <link rel="stylesheet" href="../../resources/css/menu_bar/menu_bar.css">
+    <link rel="stylesheet" href="resources/css/p_coronagram/common.css">
+    <link rel="stylesheet" href="resources/css/p_coronagram/style.css">
+    <link rel="stylesheet" href="resources/css/post_add/post_add.css">
+    <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
