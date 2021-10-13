@@ -80,22 +80,22 @@
                     <div class="thumbsCont">
                         <ul class="thumbs">
                             <li><a href="#abc" onmouseover="changeImage(img1src)">
-                                    <img src="../resources/images/마스크.jpg" alt="" /></a></li>
+                                    <img src="resources/images/etc/msk1.jpg" alt="" /></a></li>
 
                             <li><a href="#abc" onmouseover="changeImage(img2src)">
-                                    <img src="../../resources/images/마스크2.jpg" alt="" /></a></li>
+                                    <img src="resources/images/etc/msk2.jpg" alt="" /></a></li>
 
                             <li><a href="#abc" onmouseover="changeImage(img3src)">
-                                    <img src="../../resources/images/마스크3.jpg" alt="" /></a></li>
+                                    <img src="resources/images/etc/msk3.jpg" alt="" /></a></li>
                             <li><a href="#abc" onmouseover="changeImage(img4src)">
-                                    <img src="../../resources/images/마스크4.jpg" alt="" /></a></li>
+                                    <img src="resources/images/etc/msk4.jpg" alt="" /></a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="leftCont">
                     <div class="imagesCont">
                         <div class="mainImageCont">
-                            <img id="mainImage" src="../../resources/images/마스크.jpg" alt="">
+                            <img id="mainImage" src="resources/images/etc/msk1.jpg" alt="">
                         </div>
                     </div>
                 </div>
