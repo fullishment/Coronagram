@@ -1,0 +1,226 @@
+
+/* main */
+main{
+    font-family: 'Noto Sans KR', sans-serif;
+
+}
+p {
+    font-family: "Noto Sans KR", sans-serif;
+}
+.sc {
+    max-width: 800px;
+    margin: auto;
+    margin-top: 5%;
+    background: white;
+    padding: 10px;
+}
+.scHead {
+    padding-bottom: 10px;
+}
+.scHead h4{
+    font-size: 15pt;
+    color: gray;
+}
+
+.sc-html .scm1-htm,
+.sc-html .scm2-htm{
+top:10px;
+left:0;
+right:0;
+bottom:0;
+position:absolute;
+transform:rotateY(180deg); /* 다른창 가림*/
+backface-visibility:hidden; /*다른창 가림*/
+/* transition:all .4s linear; 빙글도는액션 */
+}
+.sc-html .scm1,
+.sc-html .scm2,
+.sc-form .group :checked{
+display:none;
+}
+
+.sc-html .tab{
+display:inline-block;
+border-bottom:2px solid transparent;
+}
+
+#tab-1{
+float: left;
+}
+.sc-html .scm1:checked + .tab,
+.sc-html .scm2:checked + .tab{
+color:grey;
+border-color:#1161ee;
+}
+.sc-form{
+min-height:25px;
+position:relative;
+perspective:1000px;
+transform-style:preserve-3d;
+}
+.sc-form .group .sclabel,
+.sc-form .group .input,
+.sc-form .group .button{
+display:inline-block;
+}
+
+.sc-html .scm1:checked + .tab + .scm2 +  .tab +.sc-form .scm1-htm{
+transform:rotate(0);
+}
+.sc-html .scm2:checked  + .tab + .sc-form .scm2-htm{
+transform:rotate(0);
+}
+
+.map_dtl{
+    width: 300px;
+    height: 435px;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+}
+.map{
+    width: 500px;
+    height: 500px;
+    margin: 0;
+    margin-top: 25px;
+    padding: 0;
+}
+
+.group {
+    padding: 20px;
+    margin-top: 10px;
+    height: 480px;
+    min-height: 400px;
+    min-width: 800px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    display: flex;
+    border-radius: 10px;
+}
+.local_info{
+    position: absolute;
+    display: block;
+    transform: translate(0%, -100%);
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    padding: 4px;
+    border-radius: 3px;
+    text-align: center;
+    width: 50px;
+    height: 60px;
+    background-color: rgba(255, 255, 255);
+    color:black;
+}
+
+/* Q&A */
+
+.QnaTitle {
+    display: flex;
+}
+
+.QnaTitle div{
+    margin-right: 40px;
+}
+
+.QnaTitle input {
+    margin-left: 10px;
+}
+
+.dbox {
+    margin-left: 10px;
+    border: none;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+}
+select:focus{
+    outline: none;
+    border: 2px solid #64d488;
+  }
+
+input:focus{
+    outline: none;
+    border: 2px solid #64d488;
+  }
+
+.QCI{
+    width: 100%;
+    height: 250px;
+    border: 0px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+}
+.border{
+    border: 0px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+}
+
+
+
+textarea {
+    resize: none;
+}
+
+
+/* 작성버튼 */
+.qnaBtn1 {
+    display: inline-block;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.5s;
+            cursor: pointer;
+            width: 60px;
+            height: 30px;
+            border: none;
+            border-radius: 7px;
+            background: #0d6efd;
+            /* 추가 */
+            float: right;
+            margin: 10px;
+}
+
+.qnaBtn1:hover{
+    opacity: .8;
+  }
+.local_link{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.active{
+    /*background-color: black;*/
+    color: white;
+}
+
+/* 취소버튼 */
+.qnaBtn2 {
+    display: inline-block;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.5s;
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+    border: none;
+    border-radius: 7px;
+    background: gray;
+    /* 추가 */
+    float: right;
+    margin: 10px;
+}
+.qnaBtn2:hover{
+    opacity: .8;
+  }
+
+
+/* 반응형 */
+@media (max-width: 980px) {
+    .scImg {
+        display: none;
+    }
+    .scMain {
+        width: 100%;
+    }
+}
