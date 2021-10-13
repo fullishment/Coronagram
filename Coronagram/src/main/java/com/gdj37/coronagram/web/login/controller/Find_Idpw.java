@@ -5,17 +5,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gdj37.coronagram.web.login.service.IServiceSign_up;
+import com.gdj37.coronagram.web.login.service.IServiceFind_Idpw;
 
 @Controller
-public class ControllerSign_up {
+public class Find_Idpw {
 	@Autowired
-	public IServiceSign_up iServiceSign_up;
+	public IServiceFind_Idpw iServiceFind_Idpw;
 	
-	@RequestMapping(value= "/sign_up")
-	public ModelAndView sign_up(ModelAndView mav) {
+	@RequestMapping(value="/find_idpw")
+	public ModelAndView find_idpw(ModelAndView mav) {	
 		
-		mav.setViewName("sign_up/sign_up");
+		mav.setViewName("find_idpw/find_idpw");
 		
 		return mav;
 	}

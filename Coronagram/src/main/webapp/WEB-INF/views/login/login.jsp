@@ -14,20 +14,33 @@
 		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 
-$(document).ready(function(){
-	$("#login_btn").on("click",function(){
-		if(checkVal("#m_id")){
-			alert("아이디를 입력해 주세요.")
-			$("#m_id").focus();
-		}else if(checkVal("#m_pw")){
-			alert("비밀번호를 입력해 주세요.")
-			$("#m_pw").focus();
-		}else{
-			$("#loginForm").submit();
+	$(document).ready(function(){
+		$("#loginBtn").on("click",function(){
+			if(checkVal("#m_id")){
+				alert("아이디를 입력해 주세요.")
+				$("#m_id").focus();
+			}else if(checkVal("#m_pw")){
+				alert("비밀번호를 입력해 주세요.")
+				$("#m_pw").focus();
+			}else{
+				$("#loginForm").submit();
+			}
+		});
+	/* 	$("#joinBtn").on("click",function(){
+	
 		}
-			
+		$("#findBtn").on("click",function(){
+	
+		} */
 	});
-});// document ready end
+	function checkVal(sel){
+		if($.trim($(sel).val())==""){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 </script>
 </head>
 
@@ -58,9 +71,9 @@ $(document).ready(function(){
       
       <br>
       <div class="btn_con">
-        <button class="login_btn">로그인</button>
-        <button class="join_btn">가입</button>
-        <button class="find_btn">ID/PW 찾기</button>
+        <button id="loginBtn" class="login_btn">로그인</button>
+        <button id="joinBtn"class="join_btn">가입</button>
+        <button id="findBtn" class="find_btn">ID/PW 찾기</button>
       </div>
     </div>
 

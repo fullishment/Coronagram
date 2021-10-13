@@ -119,7 +119,7 @@
               </div>
             </div>
             <picture class="img-box">
-              <img src="../../resources/images/insta_bg.jpg" alt="">
+              <img src="resources/images/main_page/insta_bg.jpg" alt="">
             </picture>
           </div>
         </div>
@@ -135,7 +135,7 @@
               </div>
             </div>
             <picture class="img-box">
-              <img src="../../resources/images/infomation.jpg" alt="">
+              <img src="resources/images/main_page/infomation.jpg" alt="">
             </picture>
           </div>
         </div>
@@ -150,7 +150,7 @@
               </div>
             </div>
             <picture class="img-box">
-              <img src="../../resources/images/worldmap.jpg" alt="">
+              <img src="resources/images/main_page/worldmap.jpg" alt="">
             </picture>
           </div>
         </div>
@@ -166,7 +166,7 @@
               </div>
             </div>
             <picture class="img-box">
-              <img src="../../resources/images/mypage.jpg" alt="">
+              <img src="resources/images/main_page/mypage.jpg" alt="">
             </picture>
           </div>
         </div>
@@ -174,15 +174,15 @@
           <div class="slide-con">
             <div class="slide-dummy"></div>
             <div class="slide-txt" >
-              <h2 class="txt-tt" style="color:black;">Ser</h2><h2 class="txt-tt" style="color:white;">vice&nbsp;center</h2><br>
-              <p class="txt-desc" style="display:inline-block; color:black; font-weight: 500;">궁금한건 여기에&nbsp;</p><p class="txt-desc" style="display:inline-block; color:white; font-weight: 500;">물어봐</p>
+              <h2 class="txt-tt" style="color:black;">Servi</h2><h2 class="txt-tt" style="color:white;">ce&nbsp;center</h2><br>
+              <p class="txt-desc" style="display:inline-block; color:black; font-weight: 500;">궁금한건 여기에 물어</p><p class="txt-desc" style="display:inline-block; color:white; font-weight: 500;">봐</p>
               <div class="txt-btn">
                 <a href="#" class="txt-btn-1" style="color:black;">자주하는 질문 보기</a>
                 <a href="#" class="txt-btn-2">내가 한 질문 보기</a>
               </div>
             </div>
             <picture class="img-box">
-              <img src="../../resources/images/qna.jpg" alt="">
+              <img src="resources/images/main_page/qna.jpg" alt="">
             </picture>
           </div>
         </div>
