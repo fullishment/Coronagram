@@ -17,9 +17,9 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-  <link rel="stylesheet" href="../../resources/css/shop_main/headercss.css">
-  <link rel="stylesheet" href="../../resources/css/shop_main/maincss.css">
-  <link rel="stylesheet" href="../../resources/css/shop_main/slide.css">
+  <link rel="stylesheet" href="resources/css/shop_main/headercss.css">
+  <link rel="stylesheet" href="resources/css/shop_main/maincss.css">
+  <link rel="stylesheet" href="resources/css/shop_main/slide.css">
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js'></script>
   <style>
@@ -1003,9 +1003,9 @@
   <!-- partial -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src='https://use.fontawesome.com/8ae46bccf5.js'></script>
-  <script src="../../resources/script/shop_main/header_script.js"></script>
-  <script src="../../resources/script/shop_main/main_script.js"></script>
-  <script src="../../resources/script/shop_main/slide.js"></script>
+  <script src="resources/script/shop_main/header_script.js"></script>
+  <script src="resources/script/shop_main/main_script.js"></script>
+  <script src="/resources/script/shop_main/slide.js"></script>
   <script>
     setInterval(function(){
         var timer = new Date();

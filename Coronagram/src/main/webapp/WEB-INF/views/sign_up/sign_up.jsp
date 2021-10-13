@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../resources/css/sign_up/sign_up.css">
+  <link rel="stylesheet" href="resources/css/sign_up/sign_up.css">
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 
@@ -61,7 +61,7 @@
     </div>
   </div>
   <!-- partial -->
-  <script src="../../resources/script/sign_up/sign_up.js"></script>
+  <script src="resources/script/sign_up/sign_up.js"></script>
   <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
 <script>
     function cm_execDaumPostcode() {

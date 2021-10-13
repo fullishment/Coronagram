@@ -7,8 +7,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../resources/css/menu_bar/menu_bar.css">
-    <link rel="stylesheet" href="../../resources/css/user_page/userpage.css">
+    <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
+    <link rel="stylesheet" href="resources/css/user_page/userpage.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css'>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -395,7 +395,7 @@
         <!-- End of container -->
 
     </main>
-    <script src="../../resources/script/menu_bar/menu_bar.js"></script>
+    <script src="resources/script/menu_bar/menu_bar.js"></script>
 </body>
 
 </html>

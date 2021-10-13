@@ -8,8 +8,8 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css'>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
-  <link rel="stylesheet" href="../../resources/css/menu_bar/menu_bar.css">
-  <link rel="stylesheet" href="../../resources/css/edit_profile/edit_profile.css">
+  <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
+  <link rel="stylesheet" href="resources/css/edit_profile/edit_profile.css">
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
 </head>
@@ -107,7 +107,7 @@
         </div>
     </form>
 </div>
-<script src="../../resources/script/menu_bar/menu_bar.js"></script>
+<script src="resources/script/menu_bar/menu_bar.js"></script>
 <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
 <script>
     function cm_execDaumPostcode() {

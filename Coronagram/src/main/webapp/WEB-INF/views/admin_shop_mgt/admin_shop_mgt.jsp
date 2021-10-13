@@ -8,8 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>상품 배송 관리 페이지</title>
-    <link rel="stylesheet" href="../../resources/css/menu_bar/menu_bar.css">
-    <link rel="stylesheet" href="../../resources/css/admin_shop_mgt/admin_shop_mgt.css">
+    <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
+    <link rel="stylesheet" href="resources/css/admin_shop_mgt/admin_shop_mgt.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -280,7 +280,7 @@
         </table> -->
     </main>
 
-    <script src="../../resources/script/menu_bar/menu_bar.js"></script>
+    <script src="resources/script/menu_bar/menu_bar.js"></script>
 </body>
 
 </html>

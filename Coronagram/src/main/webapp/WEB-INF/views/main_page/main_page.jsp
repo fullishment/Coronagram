@@ -16,8 +16,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css'>
-  <link rel="stylesheet" href="../../resources/css/main_page/main_page.css">
-  <link rel="stylesheet" href="../../resources/css/menu_bar/menu_bar.css">
+  <link rel="stylesheet" href="resources/css/main_page/main_page.css">
+  <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react.min.js'></script>
@@ -512,7 +512,7 @@
         <section>
     </div>
   </footer>
-  <script src="../../resources/script/main_page/main_page.js"></script>
-  <script src="../../resources/script/menu_bar/menu_bar.js"></script>
+  <script src="resources/script/main_page/main_page.js"></script>
+  <script src="resources/script/menu_bar/menu_bar.js"></script>
 </body>
 </html>
