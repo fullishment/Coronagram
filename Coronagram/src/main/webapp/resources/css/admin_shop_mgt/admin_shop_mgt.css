@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+html{
+    overflow-x: hidden;
+}
+main {
+    font-family: "Noto Sans KR", sans-serif;
+}
+select{
+    border-radius: 10px;
+    border:0px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    height: 30px;
+}
+select:focus{
+    outline: 2px solid #64d488;
+}
+input:not(.chk){
+    border-radius: 10px;
+    border:0px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    height: 30px;
+}
+input:not(.chk):focus{
+    outline: 2px solid #64d488;
+}
+th{
+    text-align: center;
+    font-weight: 500;
+    font-size: 12px;
+    color: black;
+    text-transform: uppercase;
+    background-color: rgba(255,255,255,0.3);
+  }
+  td{
+    text-align: center;
+    vertical-align:middle;
+    font-weight: 300;
+    font-size: 12px;
+    color: black;
+    border-bottom: solid 1px rgba(255,255,255,0.1);
+    background-color: rgba(255,255,255,0.3);
+  }
+  .shop_mgt_nav2{
+      display: flex;
+  }
+  .cancel_dt{
+    flex:1;
+  }
+  .cancel_box{
+    flex:1.5;
+    padding-left: 180px;
+  }
+#adm_page:before {
+    content: "";
+    background-image: url("../../images/user.png");
+    background-size: 30px 30px;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+}
+
+#adm_page {
+    margin-left: 380px;
+    margin-top: 50px;
+}
+.cancel_select{
+    margin-left:30px;
+}
+.edit_btn {
+    float: right;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.5s;
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+    border: none;
+    border-radius: 7px;
+    background: #64d488;
+    margin-right: 40px;
+}
+.edit_btn:hover {
+    opacity: .8;
+}
+.shop_mgt_title{
+    flex:1;
+    width: 100%;
+    padding-left: 380px;
+}
+.top_text {
+    padding-left: 380px;
+}
+
+.search_box {
+    position: absolute;
+    padding-left: 970px;
+}
+
+/* 표 */
+.side_box {
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    padding: 20px;
+    margin: 20px;
+    height: 600px;
+    width: 1295px;
+    margin-left: 380px;
+}
+
+
+.user_box {
+    border: solid 1px grey;
+    height: 300px;
+    width: 1185px;
+    text-align: center;
+    border-collapse: collapse;
+    padding: 0;
+    margin: 30px;
+}
+
+tr,
+td,
+th {
+    border: 1px solid grey;
+    padding: 4px;
+}
+
+
+/* 버튼 */
+.search_btn {
+    display: inline-block;
+    color: black;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.5s;
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+    border: none;
+    border-radius: 7px;
+    background: #ffc107;
+}
+.search_btn:hover{
+    opacity: .8;
+}
