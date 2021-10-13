@@ -21,9 +21,9 @@ public class Login {
 	@RequestMapping(value="/login")
 	public ModelAndView mLogin (HttpSession session, 
 			ModelAndView mav)throws Throwable{
-		if(session.getAttribute("sMNo")!=null) {//로그인중
+		if(session.getAttribute("sMNo")!=null) {
 			mav.setViewName("redirect:main_page");
-		}else {//로그인 안된상태
+		}else {
 			mav.setViewName("login/login");
 		}
 		
@@ -31,8 +31,8 @@ public class Login {
 	}
 	@RequestMapping(value="/logins")
 	public ModelAndView mLogins (@RequestParam HashMap<String,String> params, 
-			//HttpServletRequest request,1번쨰 방식
-			HttpSession session,//2번쨰 방식
+
+			HttpSession session,
 			ModelAndView mav)throws Throwable{
 		System.out.println(params);
 		String mPw =Utils.encryptAES128(params.get("m_pw"));
