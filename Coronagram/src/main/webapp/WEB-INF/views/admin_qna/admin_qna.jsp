@@ -8,8 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../resources/css/admin_qna/menu_bar.css">
-    <link rel="stylesheet" href="../../resources/css/admin_qna/admin_qna.css">
+    <link rel="stylesheet" href="resources/css/admin_qna/menu_bar.css">
+    <link rel="stylesheet" href="resources/css/admin_qna/admin_qna.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -242,7 +242,7 @@
             </div> <!-- sc-form -->
         </div>
     </main>
-        <script src="../../resources/script/admin_qna/admin_Qna.js"></script>
+        <script src="resources/script/admin_qna/admin_Qna.js"></script>
         <script>
             //목록 그리기
       function drawList(list){
