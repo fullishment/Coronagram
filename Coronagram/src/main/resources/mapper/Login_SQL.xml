@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="login">
 	<select id="getMLogin" parameterType="hashmap" resultType="hashmap">
-	select m_no, m_nm
+	select m_no, m_nm, acct_type_no
 	from m
 	where m_id = #{m_id}
 	and m_pw = #{m_pw}
