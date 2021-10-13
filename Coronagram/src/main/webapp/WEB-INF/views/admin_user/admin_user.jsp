@@ -100,7 +100,6 @@
 
         <div class="side_box">
             <table class="user_box">
-               <!--  <c:forEach items="${}" var="member">--> 
                     <thead>
                         <tr>
                             <th>회원번호</th>
@@ -182,7 +181,6 @@
                             <td>Dolor</td>
                         </tr>
                     </tbody>
-               <!-- </c:forEach> --> 
             </table>
 
         </div>
