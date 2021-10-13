@@ -32,7 +32,7 @@ var fileInput  = document.querySelector( "#id_photo" ),
             var file_type = file_name.toLowerCase();
            
            
-           
+          /*
             var check_file_type=new Array();​
            
             check_file_type=['jpg','gif','png','jpeg','bmp'];
@@ -44,5 +44,8 @@ var fileInput  = document.querySelector( "#id_photo" ),
              var parent_Obj=obj.parentNode
              var node=parent_Obj.replaceChild(obj.cloneNode(true),obj);
              return false;
-            }
+            }   
+            
+           */      
+            
            }
