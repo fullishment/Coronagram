@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../resources/css/menu_bar/menu_bar.css">
+    <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 </head>
@@ -70,7 +70,7 @@
             </a>
         </div>
     </header>
-        <script src="../../resources/script/menu_bar/menu_bar.js"></script>
+        <script src="resources/script/menu_bar/menu_bar.js"></script>
     </body>
     
     </html>
