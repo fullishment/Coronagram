@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +21,7 @@
   <link rel="stylesheet" href="resources/css/shop_main/headercss.css">
   <link rel="stylesheet" href="resources/css/shop_main/maincss.css">
   <link rel="stylesheet" href="resources/css/shop_main/slide.css">
-
+	<script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js'></script>
   <style>
     html {
@@ -29,20 +30,63 @@
       overflow-x: hidden;
     }
   </style>
+  <script type="text/javascript">
+  $(document).ready(function(){
+	  drawList();
+	  
+  });
+  function drawList(list){
+	  var html = "";
+	  for(var data of list){                                                                                                ";
+		html+= "<div class=\"card\">                                                                                          ";
+        html+= "<div class=\"top-bar\">                                                                                       ";
+        html+= "  <i class=\"fab fa-apple\"></i>                                                                              ";
+        html+= "  <em class=\"stocks\">Elec</em>                                                                              ";
+        html+= "</div>                                                                                                      ";
+        html+= "<div class=\"img-container\">                                                                                 ";
+        html+= "  <img class=\"product-img\" src=\"https://purepng.com/public/uploads/large/apple-watch-pcq.png\" alt=\"\">       ";
+        html+= "</div>                                                                                                      ";
+        html+= "<div class=\"details\">                                                                                       ";
+        html+= "  <div class=\"name-fav\">                                                                                    ";
+        html+= "    <strong class=\"product-name\">Apple Watch</strong>                                                       ";
+        html+= "    <button class=\"heart\">                                                                               ";
+        html+= "        <i class=\"fas fa-heart\"></i>												";
+        html+= "  </button>                                                                  ";
+        html+= "  </div>                                                                                                    ";
+        html+= "  <div class=\"wrapper\">                                                                                     ";
+        html+= "    <h5>You’ve never seen a watch like this</h5>                                                            ";
+        html+= "    <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international";
+        html+= "      emergency calling, fall detection and a built‑in compass.</p>                                         ";
+        html+= "  </div>                                                                                                    ";
+        html+= "  <div class=\"purchase\">                                                                                    ";
+        html+= "    <p class=\"product-price\">$ 40900</p>                                                                    ";
+        html+= "    <span class=\"btn-add\">                                                                                  ";
+        html+= "<div>                                                                                                 ";
+        html+= "<button class=\"add-btn\">detail <i class=\"fas fa-chevron-down\"></i></button>                         ";
+        html+= "<button class=\"add-btn\">Add <i class=\"fas fa-chevron-right\"></i></button>                           ";
+        html+= "</div>                                                                                                ";
+        html+= "</span>                                                                                                 ";
+        html+= "</div>                                                                                                    ";
+        html+= "</div>                                                                                                  ";
+        html+= "</div>                                                                                                       ";
+	  }
+	  $("#main_cart").html(html);
+  }
+  </script>
 </head>
 
 <body>
   <!-- partial:index.partial.html -->
 
-  <body>
+  
     <header class="main-header">
       <div class="header-wrapper">
         <div class="main-logo">Coronagram<sup style="font-size: 1.1rem;">Shop</sup></div>
         <nav>
           <ul class="main-menu">
-            <li><a href="#">Main</a></li>
-            <li><a href="#">Corona Map</a></li>
-            <li><a href="#">Corona Info</a></li>
+            <li><a href="">Main</a></li>
+            <li><a href="">Corona Map</a></li>
+            <li><a href="">Corona Info</a></li>
             <li><a href="#">Coronagram</a></li>
             <li><a href="#">Service Center</a></li>
             <li><a href="#"><span class="fa fa-shopping-cart"></span></a></li>
@@ -115,21 +159,21 @@
           <div class="shop_menu_list">
             <div class="shop_menu_left">
               <div class="shop_box1">
-                <img id="img_box1" src="../../resources/images/shop_boximg1.JPG">
+                <img id="img_box1" src="resources/images/shop_boximg1.JPG">
               </div>
               <div class="shop_box2">
-                <img id="img_box2" src="../../resources/images/shop_boximg2.JPG">
+                <img id="img_box2" src="resources/images/shop_boximg2.JPG">
               </div>
             </div>
             <div class="shop_box3 shop_menu_center">
-              <img id="img_box3" src="../../resources/images/shop_boximg3.JPG">
+              <img id="img_box3" src="resources/images/shop_boximg3.JPG">
             </div>
             <div class="shop_menu_right">
               <div class="shop_box4">
-                <img id="img_box4" src="../../resources/images/shop_boximg4.JPG">
+                <img id="img_box4" src="resources/images/shop_boximg4.JPG">
               </div>
               <div class="shop_box5">
-                <img id="img_box1" src="../../resources/images/shop_boximg5.JPG">
+                <img id="img_box1" src="resources/images/shop_boximg5.JPG">
               </div>
             </div>
           </div>
@@ -145,7 +189,7 @@
                 스마트하게 사는 새로운 방법을<br> 알아보세요</p>
             </div>
             <div  class="story_box">
-              <img id="story_img" src="../../resources/images/shop1.jpg">
+              <img id="story_img" src="resources/images/shop1.jpg">
             </div>
             <div class="story_w_right">
               <div id="img_ch1" class="story_img_change1">
@@ -269,669 +313,10 @@
     <section class="selmain">
       
       <div class="banner">
-        <div class="main-cart">
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-                    <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="top-bar">
-              <i class="fab f
-              a-apple"></i>
-              <em class="stocks">Elec</em>
-            </div>
-            <div class="img-container">
-              <img class="product-img" src="https://purepng.com/public/uploads/large/apple-watch-pcq.png" alt="">
-            </div>
-            <div class="details">
-              <div class="name-fav">
-                <strong class="product-name">Apple Watch</strong>
-                <button class="heart"><i
-                    class="fas fa-heart"></i></button>
-              </div>
-              <div class="wrapper">
-                <h5>You’ve never seen a watch like this</h5>
-                <p>The most advanced Apple Watch yet, featuring the Always-On Retina display, the ECG app, international
-                  emergency calling, fall detection and a built‑in compass.</p>
-              </div>
-              <div class="purchase">
-                <p class="product-price">$ 40900</p>
-                <span class="btn-add">
-                  <div>
-                    <button class="add-btn">detail <i class="fas fa-chevron-down"></i></button>
-                    <button class="add-btn">Add <i class="fas fa-chevron-right"></i></button>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
+        <div class="main-cart" id="main_cart">
+         
+          
+          
         </div>
       </div>
     </section>
@@ -999,13 +384,13 @@
           <section>
       </div>
     </footer>
-  </body>
+ 
   <!-- partial -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src='https://use.fontawesome.com/8ae46bccf5.js'></script>
   <script src="resources/script/shop_main/header_script.js"></script>
   <script src="resources/script/shop_main/main_script.js"></script>
-  <script src="/resources/script/shop_main/slide.js"></script>
+  <script src="resources/script/shop_main/slide.js"></script>
   <script>
     setInterval(function(){
         var timer = new Date();
