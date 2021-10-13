@@ -105,7 +105,6 @@
                 </div>
                 <div class="gbn"></div>
                 <table class="user_box">
-                    <c:forEach items="${}" var="member">
                         <thead>
                             <tr>
                                 <th>선택</th>
@@ -154,7 +153,6 @@
                                 <td>배송 완료</td>
                             </tr>
                         </tbody>
-                    </c:forEach>
                 </table>
             </div>
         </section>
