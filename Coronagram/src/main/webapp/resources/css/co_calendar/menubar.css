@@ -40,7 +40,7 @@
             /* transform: scale(1.2); */
             color: rgba(0, 0, 0, 0.2);
         }
-        
+        *,
         *::before,
         *::after {
             margin: 0;
@@ -281,7 +281,6 @@
 
         .cm_cam {
             background-image: url("../../images/icon/cam.png");
-            
         }
 
         .cm_user {
