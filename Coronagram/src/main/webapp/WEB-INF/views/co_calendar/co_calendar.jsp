@@ -204,7 +204,7 @@
   </div>
   <div id='search_result'>result</div>
   <script src="resources/script/menu_bar/menu_bar.js"></script>
-  <script src="resources/script/calendar/co_calendar.js"></script>
+  <script src="resources/script/co_calendar/co_calendar.js"></script>
 </body>
 
 </html>
