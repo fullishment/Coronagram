@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="resources/css/co_calendar/co_calendar.css">
   <link rel="stylesheet" href="resources/css/co_calendar/menu_bar.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css">
+  <link rel="stylesheet" href="resources/css/co_calendar/menu_bar.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/css/bootstrap.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
