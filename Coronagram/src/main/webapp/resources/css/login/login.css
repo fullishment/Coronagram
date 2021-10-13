@@ -6,7 +6,6 @@ html {
 }
 
 body {
-  background-image: linear-gradient(135deg, #FAB2FF 10%, #1904E5 100%);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -24,7 +23,7 @@ body {
   display: flex;
   flex: 1 1 100%;
   align-items: stretch;
-  box-shadow: 0 0 20px 6px #090b6f85;
+  box-shadow: 0 0 10px 1px #090b6f85;
   position: relative;
   top:100px;
 }
