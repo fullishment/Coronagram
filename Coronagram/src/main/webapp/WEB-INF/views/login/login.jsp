@@ -10,8 +10,25 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="resources/css/login/login.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
+  <script type="text/javascript"
+		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
 
-  
+$(document).ready(function(){
+	$("#login_btn").on("click",function(){
+		if(checkVal("#m_id")){
+			alert("아이디를 입력해 주세요.")
+			$("#m_id").focus();
+		}else if(checkVal("#m_pw")){
+			alert("비밀번호를 입력해 주세요.")
+			$("#m_pw").focus();
+		}else{
+			$("#loginForm").submit();
+		}
+			
+	});
+});// document ready end
+</script>
 </head>
 
 <body>
@@ -28,12 +45,12 @@
 
     <div class="right">
       <p class="r_title">Login</p>
-      <form action="#" method="post">
+      <form action="logins" id="loginForm" method="post">
       <div class="inputs">
         <span class="title_Name">아이디</span><br>
-        <input type="text" placeholder="아이디를 입력하세요"><br>
-        <span class="title_Name">패스워드</span><br>
-        <input type="password" placeholder="패스워드를 입력하세요"><br><br>
+        <input type="text" id="m_id" placeholder="아이디를 입력하세요" name="m_id"><br>
+        <span class="title_Name" >패스워드</span><br>
+        <input type="password" id="m_pw" placeholder="패스워드를 입력하세요" name="m_pw"><br><br>
       </div>
     </form>
       <br><br>
