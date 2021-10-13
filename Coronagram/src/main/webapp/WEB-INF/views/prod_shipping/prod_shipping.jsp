@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -102,7 +105,6 @@
                 </div>
                 <div class="gbn"></div>
                 <table class="user_box">
-                    <c:forEach items="${}" var="member">
                         <thead>
                             <tr>
                                 <th>선택</th>
@@ -151,7 +153,6 @@
                                 <td>배송 완료</td>
                             </tr>
                         </tbody>
-                    </c:forEach>
                 </table>
             </div>
         </section>

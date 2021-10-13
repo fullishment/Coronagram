@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,8 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../resources/css/qna/menu_bar.css">
-    <link rel="stylesheet" href="../../resources/css/qna/qna.css">
+    <link rel="stylesheet" href="../../resources/css/admin_qna/menu_bar.css">
+    <link rel="stylesheet" href="../../resources/css/admin_qna/admin_qna.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -34,7 +36,6 @@
                         </li>
                     </div>
                 </div>
-                
                 
             </div>
         <div class="cm_menu" id="cm_menu">
@@ -86,27 +87,29 @@
             </div>
             <div class="sc-wrap">
                 <div class="sc-html">
-                    <input id="tab-3" type="radio" name="tab" class="scm3" checked><label for="tab-3" class="tab"><p>내 문의내역</p></label>
+                    <input id="tab-1" type="radio" name="tab" class="scm1" checked><label for="tab-1" class="tab"><p>FAQ 관리</p></label>
+                    <input id="tab-2" type="radio" name="tab" class="scm2"><label for="tab-2" class="tab"><p>Q&A관리</p></label>
                     <div class="sc-form">
-                        <div class="scm3-htm">
-                            <label for="user" class="sclabel"></label>
+                        <div class="scm1-htm">
+                            <label for="user" class="sclabel"><p>자주 묻는 질문 수정</p></label>
                             <div class="group">
                                 <div class="qnaList">
-                                    <div>
-                                        <div class="scmL2">
-                                            <div><p>제목</p></div>
-                                            <input type="text" class="scmL2T">
-                                            <div><p>질문</p></div>
-                                            <textarea cols="42" rows="13" class="scmL4"></textarea>
-                                        </div>
+                                    <p>제목 <input type="text" placeholder=" 왜이리 어렵나요?"></p>
+                                    <br>
+                                    <p>답변</p>
+                                    <textarea id="" cols="102" rows="18"></textarea>
+                                    <div class="btnForm">
+                                        <button href="#" type="button" class="edit_btn">수정</button>
+                                        <button href="#" type="button" class="cancel_btn">취소</button>
                                     </div>
-                                    <div class="scmL3">
-                                        <div><p>답변내용</p></div>
-                                        <textarea cols="42" rows="16" class="scmL3T"></textarea>                                      
-                                    </div>
-                                    <div class="btn_area">
-                                        <button type="button" class="list_btn">목록</button>
-                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="scm2-htm">
+                            <label for="user" class="sclabel"><p>1:1 질문 관리</p></label>
+                            <div class="group">
+                                <div class="qnaList2">
+                    
                                 </div>
                             </div>
                         </div>
@@ -115,7 +118,7 @@
             </div> <!-- sc-form -->
         </div>
     </main>
-        <script src="../../resources/script/qna/qna.js"></script>
+        <script src="../../resources/script/admin_qna/admin_Qna.js"></script>
     </body>
     
     </html>
