@@ -1,7 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin_coinfo/admin_coinfo.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/admin_profile/admin_pofile.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/admin_profile/admin_profile.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin_user/admin_user.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/login/login.jsp=UTF-8
