@@ -24,14 +24,21 @@
                     <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
                     <ul class="cm_dropdown-content">
                         <li>
-                            <a href="#" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
+                            <a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
                         </li>
                         <li>
                             <a href="#" class="cm_userinfo">개인정보수정</a>
                         </li>
                     </div>
-                </div>
-                
+                    <div class="login_wrap">
+		<c:choose>
+			<c:otherwise>
+				<!-- 로그인시 -->
+        <div class="user_name"> ${m_nm}님 어서오십시오 </div>
+			</c:otherwise>
+		</c:choose>
+	</div>
+
             </div>
         <div class="cm_menu" id="cm_menu">
             <a href="#" class="cm_mLogo">Coronagram</a>
