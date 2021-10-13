@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,16 +31,12 @@
                             <a href="#" class="cm_userinfo">개인정보수정</a>
                         </li>
                     </div>
-                    <div class="login_wrap">
-		<c:choose>
-			<c:otherwise>
-				<!-- 로그인시 -->
-        <div class="user_name"> ${m_nm}님 어서오십시오 </div>
-			</c:otherwise>
-		</c:choose>
-	</div>
-
-            </div>
+                    <div class="cm_user_name">
+						<c:if test="${!empty sMNo}">
+							${sMNm}님 어서오세요.
+						</c:if>
+					</div>
+                </div>
         <div class="cm_menu" id="cm_menu">
             <a href="#" class="cm_mLogo">Coronagram</a>
             <a href="#" class="cm_mTitle" id="cm_mTitle">

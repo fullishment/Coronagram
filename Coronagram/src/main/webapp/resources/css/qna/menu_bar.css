@@ -13,30 +13,35 @@ textarea{
     padding: 5px;
     background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
 }
-.cm_logo, .cm_home, .cm_msg, .cm_cld, .cm_dot {
-    position: absolute;
-    margin-top: 10px;
-    background-color: rgba(255, 255, 255, 0);
-    background-size: cover;
-    border: none;
-    font-size: 15pt;
-    color: white;
-    font-family: 'Lobster', cursive;
-}
-.cm_logo {
-    left: 60px;
-}
-.cm_home {
-    right: 290px;
-}
-
-.cm_msg {
-    right: 190px;
-}
-
-.cm_cld {
-    right: 90px;
-}
+	.cm_logo, .cm_home, .cm_msg, .cm_cld, .cm_dot, .cm_user_name {
+            position: absolute;
+            margin-top: 10px;
+            background-color: rgba(255, 255, 255, 0);
+            background-size: cover;
+            border: none;
+            font-size: 15pt;
+            color: white;
+            font-family: 'Lobster', cursive;
+        }
+        .cm_logo {
+            left: 60px;
+        }
+        .cm_user_name {
+            right: 380px;
+            font-size: 10pt;
+            font-family: "Noto Sans KR", sans-serif;
+        }
+		.cm_home {
+		    right: 290px;
+		}
+		
+		.cm_msg {
+		    right: 190px;
+		}
+		
+		.cm_cld {
+		    right: 90px;
+		}
 .cm_logo:hover, .cm_home:hover, .cm_msg:hover, .cm_cld:hover {
     /* transform: scale(1.2); */
     color: rgba(0, 0, 0, 0.2);
@@ -352,133 +357,4 @@ a.cm_userinfo {
 
 .cm_mTitle.deployed {
     opacity: 1;
-}
-/* main */
-a {
-    text-decoration: none;
-}
-.sc {
-    max-width: 800px;
-    margin: auto;
-    margin-top: 5%;
-    background: white;
-    padding: 10px;
-}
-
-.scName1 {
-    font-size: 15pt;
-    color: gray;
-}
-
-.sc-html .scm1-htm,
-.sc-html .scm2-htm,
-.sc-html .scm3-htm{
-top:10px;
-left:0;
-right:0;
-bottom:0;
-position:absolute;
-transform:rotateY(180deg); /*다른창 가림*/
-backface-visibility:hidden; /*다른창 가림*/
-/* transition:all .4s linear; 빙글도는액션 */
-}
-.sc-html .scm1,
-.sc-html .scm2,
-.sc-html .scm3,
-.sc-form .group .check{
-display:none;
-}
-
-.sc-html .tab{
-display:inline-block;
-border-bottom:2px solid transparent;
-}
-
-#tab-1{
-float: left;
-}
-.sc-html .scm1:checked + .tab,
-.sc-html .scm2:checked + .tab,
-.sc-html .scm3:checked + .tab{
-color:grey;
-border-color:#1161ee;
-}
-.sc-form{
-min-height:25px;
-position:relative;
-perspective:1000px;
-transform-style:preserve-3d;
-}
-.sc-form .group .sclabel,
-.sc-form .group .input,
-.sc-form .group .button{
-display:inline-block;
-}
-
-.sc-html .scm1:checked + .tab + .scm2 + .tab +  .scm3 + .tab +.sc-form .scm1-htm{
-transform:rotate(0);
-}
-.sc-html .scm2:checked + .tab + .scm3 + .tab + .sc-form .scm2-htm{
-transform:rotate(0);
-}
-.sc-html .scm3:checked + .tab + .sc-form .scm3-htm{
-transform:rotate(0);
-}
-.scm {
-    margin-top: 30px;
-    margin-left: 20px;
-}
-.group {
-    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-    padding: 20px;
-    margin-top: 10px;
-    min-height: 450px;
-    border-radius: 10px;
-}
-.scMain {
-    width: 60%;
-    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-}
-/* FAQ */
-.scQ {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-    transition: 0.4s;
-}
-
-.SCactive,
-.scQ:hover {
-    background-color: #ccc;
-}
-
-.scA {
-    padding: 0 18px;
-    width: 100%;
-    display: none;
-    background-color: white;
-    overflow: hidden;
-}
-button.scQ.active::after {
-    content: "\2212";
-}
-button.scQ:after {
-    content: '\002B';
-    color: #777;
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
-}
-.scImg {
-    background-image: url("../../images/etc/question.png");
-    background-size: cover;
-    float: right;
-    width: 260px;
-    height: 350px;
 }

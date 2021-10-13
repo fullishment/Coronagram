@@ -32,6 +32,11 @@
                             <a href="#" class="cm_userinfo">개인정보수정</a>
                         </li>
                     </div>
+                    <div class="cm_user_name">
+						<c:if test="${!empty sMNo}">
+							${sMNm}님 어서오세요.
+						</c:if>
+					</div>
                 </div>
             </div>
         <div class="cm_menu" id="cm_menu">
