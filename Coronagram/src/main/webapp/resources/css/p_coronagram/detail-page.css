@@ -16,20 +16,6 @@
 
 }
 
-.contents .img_section .trans_inner{
-    /*width: 2448px;*/
-    font-size: 0;
-}
-
-.contents .img_section .trans_inner > div{
-    width: 100%;
-    display: inline-block;
-}
-.contents .img_section .trans_inner img{
-    width: 100%;
-    height: 100%;
-}
-
 
 
 .user_container{
@@ -101,19 +87,6 @@
     overflow: hidden;
 }
 
-.contents .img_section .trans_inner{
-    /*width: 2448px;*/
-    font-size: 0;
-}
-
-.contents .img_section .trans_inner > div{
-    width: 100%;
-    display: inline-block;
-}
-.contents .img_section .trans_inner img{
-    width: 100%;
-    height: 100%;
-}
 
 .detail--right_box{
     max-width:335px;
