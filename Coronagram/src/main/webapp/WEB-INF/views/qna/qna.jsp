@@ -14,6 +14,49 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script type="text/javascript"
+		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+        $(document).ready(function(){
+        	
+        	reloadList();
+        });
+        
+//데이터 취득
+        function reloadList(){
+        	var params = $("#actionForm").serialize();
+        	
+        	$.ajax({ //jquery의 ajax함수 호출
+        		url: "QnaListAjax", //접속 주소
+        		type:"post", //전송 방식
+        		dataType:"json", // 받아올 데이터 형태
+        		data:params, // 보낼 데이터(문자열 형태)
+        		success:function(res){ //성공(ajax통신 성공) 시 다음 함수 실행
+        			drawList(res.list);
+        			drawPaging(res.pb);
+        		},
+        		error:function(request, status, error){ //실패시 다음 함수 실행
+        			console.log(error);
+        		}
+        	});
+        }
+//목록 그리기
+	function drawList(list) {
+	var html = "";
+	
+	for(var data of list) {
+		html += "<tr no=\"" + data.Q_NO+"\">";
+		html += "<td>"+data.Q_NO+"</td>";
+		html += "<td>"+data.TITLE+"</td>";
+		html += "<td>"+data.DT+"</td>";
+		html += "<td>"+data.CON+"</td>";
+		html += "</tr>";
+	}
+	$("tbody").html(html);
+	
+	}
+
+        </script>
 </head>
 <body>
 <header>
@@ -155,83 +198,24 @@
                             <div class="group">
                                 <div class="qnaList">
                                     <table class="scmL" border="1">
-                                        <thead class="scmLT">
+                                        <thead>
                                             <tr>
                                                 <th><p>번호</p></th>
                                                 <th><p>제목</p></th>
                                                 <th><p>등록일</p></th>
-                                                <th><p>현황</p></th>
+                                                <th><p>내용</p></th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
                                     </table>
-                                    <!-- <table>
-                                        <tr>
-                                            <th>1</th>
-                                            <td><a href="file:///C:/base/coronagram/view/qna/myqna.html">Q. 왜이리 어렵나요?</a></td>
-                                            <td>2021-09-16</td>
-                                            <td class="check0">확인중</td>
-                                        </tr>
-                                        <tr>
-                                            <th>2</th>
-                                            <td><a href="#">Q. 왜이리 어렵나요?</a></td>
-                                            <td>2021-09-16</td>
-                                        </tr>
-                                        <tr>
-                                            <th>3</th>
-                                            <td><a href="#">Q. 왜이리 어렵나요?</a></td>
-                                            <td>2021-09-16</td>
-                                            <td class="check1">답변완료</td>
-                                        </tr>
-                                        <tr>
-                                            <th>4</th>
-                                            <td><a href="#">Q. 왜이리 어렵나요?</a></td>
-                                            <td>2021-09-16</td>
-                                            <td style="color: green;">답변완료</td>
-                                        </tr>
-                                        <tr>
-                                            <th>5</th>
-                                            <td><a href="#">Q. 왜이리 어렵나요?</a></td>
-                                            <td>2021-09-16</td>
-                                            <td class="check1">답변완료</td>
-                                        </tr>
-                                        <tr>
-                                            <th>6</th>
-                                            <td><a href="#">Q. 왜이리 어렵나요?</a></td>
-                                            <td>2021-09-16</td>
-                                            <td class="check1">답변완료</td>
-                                        </tr>
-                                    </table> -->
                                 </div>
                             </div>
                         </div>
-                     </div><!-- sc-form -->
-                </div><!-- sc-html -->
-            </div> <!-- sc-form -->
+                     </div>
+                </div>
+            </div> 
         </div>
     </main>
-        <script src="resources/script/qna/qna.js"></script>
-        <script>
-            //목록 그리기
-      function drawList(list){
-         var html ="";
-         
-         for(var data of list){
-            html += "<tr no=\""+NO+"\">";
-            html += "<td>"+TITLE+"</td>";
-            html += "<td>"+DATE+"</td>";
-            html += "<td>"+CHECK
-            if(data.CHECK == OK){
-               html +="<td style=\"color: green;\"/>";
-            }
-            html += "</td>";
-         }
-         
-         
-         $("tbody").html(html);
-      }
-
-        </script>
+	<script src="resources/script/qna/qna.js"></script>
     </body>
-    
-    </html>
+</html>
