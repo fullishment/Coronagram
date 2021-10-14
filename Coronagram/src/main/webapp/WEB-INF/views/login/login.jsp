@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -41,6 +42,15 @@
 			return false;
 		}
 	}
+	
+	$("#joinBtn").on("click",function(){
+		location.href = "sign_up";
+	});
+	
+	$("#findBtn").on("click",function(){
+		location.href = "find_idpw";
+	});
+	
 </script>
 </head>
 
