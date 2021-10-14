@@ -17,5 +17,15 @@
 		FROM PROD_OPT
 		WHERE PROD_NO =${prodNo}
 	</select>
-
+	<select id="getProdImgList" parameterType="hashmap" resultType="hashmap">
+		SELECT ATTC_NO,PROD_NO,FILE_ADDR
+		FROM PROD_ATTC
+		WHERE PROD_NO = #{prodNo}
+	</select>
+	<insert id="addCart" parameterType="hashmap">
+		INSERT INTO CART(PROD_NO,M_NO,OPT_NO)
+		SELECT #{prodNo},#{sMNo},OPT_NO
+		FROM PROD_OPT
+		WHERE PROD_NO= #{prodNo} AND PRICE = #{price} AND UNIT=#{unit}
+	</insert>
 </mapper>

@@ -36,4 +36,16 @@ public class ServiceShop implements IServiceShop{
 		// TODO Auto-generated method stub
 		return iDaoShop.getOptList(params);
 	}
+
+	@Override
+	public List<HashMap<String, String>> getProdImgList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.getProdImgList(params);
+	}
+
+	@Override
+	public int addCart(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.addCart(params);
+	}
 }

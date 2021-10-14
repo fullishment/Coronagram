@@ -35,4 +35,16 @@ public class DaoShop implements IDaoShop {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("shop.getOptList",params);
 	}
+
+	@Override
+	public List<HashMap<String, String>> getProdImgList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("shop.getProdImgList",params);
+	}
+
+	@Override
+	public int addCart(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("shop.addCart",params);
+	}
 }

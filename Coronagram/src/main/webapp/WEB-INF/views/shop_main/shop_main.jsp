@@ -84,6 +84,7 @@
 <body>
 	<form action="#" id="actionForm" method="post">
 		<input type="hidden" name="prodNo" id="prodNo" />
+		<input type="hidden" name="sMNo" id="sMNo" value={param.sMNo} />
 	</form>
   
     <header class="main-header">

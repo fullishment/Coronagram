@@ -16,7 +16,9 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script type="text/javascript">
     $(document).ready(function(){
-    	redrawOpt();
+    	redraw();
+    	console.log(${sMNo});
+    	
 	   var point= parseInt(${data.POINT});
 	   $(".qt-plus").click(function(){
 	   	var qt = parseInt($("#qt").html());
@@ -31,8 +33,8 @@
 	       
 	   });
     	$("#cartBtn").click(function(){
-    		$("#priceInp").val($(".color_L p").html());
-    		$("#unitInp").val($("#color").val());
+    		$("#priceInp").val($("#color").val());
+    		$("#unitInp").val($(".color_L p").html());
     		$("#qtInp").val($("#qt").html());
     		var params = $("#addForm").serialize();
 			$.ajax({ 
@@ -42,11 +44,11 @@
 				data : params, 
 				success : function(res){ 
 					if(res.result == "success"){
-						location.href="shop";
+						location.href="shopCart";
 					}else if(res.result == "failed"){
-						alert("작성에 실패했습니다");
+						alert("장바구니 담기 에 실패했습니다");
 					}else {
-						alert("작성중 문제가 발생했습니다");
+						alert("장바구니 담기 중 문제가 발생했습니다");
 						console.log(result);
 					}
 				},
@@ -55,23 +57,15 @@
 				}
 			});
    		});
-    })
-   	function imgdraw(list){
-    	var html = "";
-    	for(var data of list){
-	    	html+="<li>                                                      ";
-	    	html+="	<a href=\"#abc\" onmouseover=\"changeImage()\">             ";
-	        html+="		<img src=\"resources/images/etc/msk1.jpg\" alt=\"\" />  ";
-	        html+="	</a>                                                    ";
-	        html+="</li>                                                     ";
-    		
-    	}
-		
-    }
-    function changeImage() {
-    	$("#mainImage").src = $(this).children(img).attr("src");
-    }
-    function redrawOpt(){
+    	
+    	$("#imgBox").on("mouseover","img",function(){
+    		$("#mainImage").attr("src",$(this).attr("src"));
+    	});
+    	
+    	
+    });
+
+    function redraw(){
     	var params = $("#addForm").serialize();
 		$.ajax({ 
 			url : "prodDetails",
@@ -80,12 +74,25 @@
 			data : params,
 			success : function(res){
 				drawOpt(res.opt);
+				imgDraw(res.attc);
 			},
 			error : function(request, status, error){
 				console.log(error);
 			}
 		});
     }
+   	function imgDraw(list){
+    	var html = "";
+    	for(var data of list){
+	    	html+="<li>                                                      ";
+	    	html+="	<a href=\"#abc\" >             ";
+	        html+="		<img src=\""+data.FILE_ADDR+"\" alt=\"\" />  ";
+	        html+="	</a>                                                    ";
+	        html+="</li>                                                     ";
+    	}
+		$("#imgBox").html(html);
+    }
+	
     function drawOpt(list){
     	var html = "";
     	var same= new Array();
@@ -190,16 +197,7 @@
                 <div class="firstCont">
                     <div class="thumbsCont">
                         <ul class="thumbs" id="imgBox">
-                            <li><a href="#abc" onmouseover="changeImage(img1src)">
-                                    <img src="resources/images/etc/msk1.jpg" alt="" /></a></li>
-
-                            <li><a href="#abc" onmouseover="changeImage(img2src)">
-                                    <img src="resources/images/etc/msk2.jpg" alt="" /></a></li>
-
-                            <li><a href="#abc" onmouseover="changeImage(img3src)">
-                                    <img src="resources/images/etc/msk3.jpg" alt="" /></a></li>
-                            <li><a href="#abc" onmouseover="changeImage(img4src)">
-                                    <img src="resources/images/etc/msk4.jpg" alt="" /></a></li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -251,9 +249,9 @@
                         <br>
                         <form action="#" id="addForm">
                         	<input type="hidden" name="prodNo" id="prodNo" value="${data.PROD_NO}">
-                        	<input type="hidden" name="sMNo" id="sMNo" value="${sMNo}">
                         	<input type="hidden" name="price" id="priceInp">
                         	<input type="hidden" name="unit" id="unitInp">
+                        	<input type="hidden" name="sMNo" id="sMNo" value="${sMNo}">
                         	<input type="hidden" name="qt" id="qtInp">             
                         </form>
                         <div class="otherLinksCont">
@@ -277,7 +275,7 @@
                     </div>
                 </div>
     </main>
-    <script src="resources/script/prod_dtl/prod_dtl.js"></script>
+   	<script src="resources/script/prod_dtl/prod_dtl.js"></script>
     <script src="resources/script/menu_bar/menu_bar.js"></script>
 </body>
 

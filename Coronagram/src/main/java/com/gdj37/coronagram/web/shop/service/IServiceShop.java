@@ -13,4 +13,8 @@ public interface IServiceShop {
 
 	public List<HashMap<String, String>> getOptList(HashMap<String, String> params)throws Throwable;
 
+	public List<HashMap<String, String>> getProdImgList(HashMap<String, String> params)throws Throwable;
+
+	public int addCart(HashMap<String, String> params)throws Throwable;
+
 }
