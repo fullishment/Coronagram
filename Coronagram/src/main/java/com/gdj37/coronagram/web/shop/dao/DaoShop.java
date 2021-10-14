@@ -17,4 +17,22 @@ public class DaoShop implements IDaoShop {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("shop.getProdList",params);
 	}
+
+	@Override
+	public HashMap<String, String> getProd(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shop.getProd",params);
+	}
+
+	@Override
+	public int addOpt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("shop.getOpt", params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getOptList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("shop.getOptList",params);
+	}
 }

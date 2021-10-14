@@ -7,5 +7,15 @@
 		FROM PRODUCT
 		WHERE 1=1
 	</select>
+	<select id="getProd" parameterType="hashmap" resultType="hashmap">
+		SELECT PROD_NO,REG_NO,CAT_NO,PROD_NM,POINT,CON,SALE_STAT,PROD_DT,DEL
+		FROM PRODUCT
+		WHERE PROD_NO = ${prodNo}
+	</select>
+	<select id="getOptList" parameterType="hashmap" resultType="hashmap" >
+		SELECT OPT_NO, PROD_NO, PRICE, UNIT
+		FROM PROD_OPT
+		WHERE PROD_NO =${prodNo}
+	</select>
 
 </mapper>

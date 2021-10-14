@@ -13,7 +13,6 @@ p {
 }
 .wrapper {
     background: #ecf0f1;
-    height: 94vh;
     padding: 0% 2%;
 }
 
@@ -65,7 +64,7 @@ p {
     margin: 3%
 }
 
-.thumbs li img {
+.thumbsCont img {
     width: 80px;
     height: 80px;
     background: white;
@@ -126,10 +125,14 @@ p {
         }
 
         /* 옵션박스 */
+        .opt_box{
+        	display : flex;
+        	width : 100%;
+        }
         .dtl_option {
             background: #ecf0f1;
             border-radius: 10px;
-            padding: 40px;
+            padding: 20px 40px;
             margin-top: 20px;
             height: 150px;
         }
@@ -147,10 +150,12 @@ p {
             width: 100px;
             border-radius: 10px;
         }
+        .dtl_cnt{
+        display:flex;
+        }
         .cnt_L {
             width: 30%;
             float: left;
-            margin-left: -95px; /*폰트하고 이상해져서 맞춤*/
         }
         .cnt_R {
             width: 69%; /*폰트하고 이상해져서 맞춤*/
@@ -205,7 +210,8 @@ p {
             width: 40%;
         }
 
-        .otherLinks li a {
+        .otherLinks li a ,
+        .loginBtn{
             display: block;
             text-decoration: none;
             font: bold 80% Verdana;
@@ -214,7 +220,8 @@ p {
             border-radius: 50px;
             padding: 5% 5%;
         }
-        .btn_L a {
+        .btn_L a,
+        .loginBtn {
             color: black;
         }
         .btn_R a {
@@ -222,3 +229,5 @@ p {
             background: black;
             color: #fff;
         }
+        
+        

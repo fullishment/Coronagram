@@ -139,12 +139,6 @@
             </div>
         </section>
 
-    </main>
-
-
-
-
-
 
     <script>
         $(document).ready(function () {
@@ -154,13 +148,7 @@
         });
     </script>
 
-
-
-
-
-
-
-    <script src="../../resources/script/menu_bar/menu_bar.js"></script>
+    <script src="resources/script/menu_bar/menu_bar.js"></script>
 </body>
 
 </html>

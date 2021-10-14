@@ -14,6 +14,110 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+    	redrawOpt();
+	   var point= parseInt(${data.POINT});
+	   $(".qt-plus").click(function(){
+	   	var qt = parseInt($("#qt").html());
+	       $("#qt").html( qt + 1 );
+	       $("#total").html(point * parseInt($("#qt").html()));
+	   });
+	
+	   $(".qt-minus").click(function(){
+	   	var qt = parseInt($("#qt").html());
+	       $("#qt").html( qt - 1);
+	       $("#total").html(point * parseInt($("#qt").html()));
+	       
+	   });
+    	$("#cartBtn").click(function(){
+    		$("#priceInp").val($(".color_L p").html());
+    		$("#unitInp").val($("#color").val());
+    		$("#qtInp").val($("#qt").html());
+    		var params = $("#addForm").serialize();
+			$.ajax({ 
+				url : "cartAdd", 
+				type : "post", 
+				dataType : "json", 
+				data : params, 
+				success : function(res){ 
+					if(res.result == "success"){
+						location.href="shop";
+					}else if(res.result == "failed"){
+						alert("작성에 실패했습니다");
+					}else {
+						alert("작성중 문제가 발생했습니다");
+						console.log(result);
+					}
+				},
+				error : function(request, status, error){ 
+					console.log(error);
+				}
+			});
+   		});
+    })
+   	function imgdraw(list){
+    	var html = "";
+    	for(var data of list){
+	    	html+="<li>                                                      ";
+	    	html+="	<a href=\"#abc\" onmouseover=\"changeImage()\">             ";
+	        html+="		<img src=\"resources/images/etc/msk1.jpg\" alt=\"\" />  ";
+	        html+="	</a>                                                    ";
+	        html+="</li>                                                     ";
+    		
+    	}
+		
+    }
+    function changeImage() {
+    	$("#mainImage").src = $(this).children(img).attr("src");
+    }
+    function redrawOpt(){
+    	var params = $("#addForm").serialize();
+		$.ajax({ 
+			url : "prodDetails",
+			type : "post",
+			dataType : "json",
+			data : params,
+			success : function(res){
+				drawOpt(res.opt);
+			},
+			error : function(request, status, error){
+				console.log(error);
+			}
+		});
+    }
+    function drawOpt(list){
+    	var html = "";
+    	var same= new Array();
+    	var i = 0;
+    	for(var data of list){   
+    		var key = data.UNIT;
+    		if(same.indexOf(data.UNIT) < 0){
+    			html+= "<div class=\"opt_box\">";
+		    	html +="	<div class=\"color_L\"><p>"+data.UNIT+"</p></div>                ";
+		        html +="	<div class=\"color_R\">                                    ";
+		        html +="		<select name=\"color\" id=\"color\" class=\"select_color\">";
+		        html += 			drawSelectOpt(key ,list);
+		        html +="		</select>                                            ";
+		        html +="	</div>                                                   ";
+		        html +="	</div>                                                   ";
+    		}
+    		same[i] = data.UNIT;
+    		i++;
+
+    	}
+    	$(".dtl_color").html(html);
+    }
+    function drawSelectOpt(key,list){
+    	var html = "";
+    	for(var data of list){
+    		if(data.UNIT == key){
+    			html += "<option value=\""+data.PRICE+"\" selected>"+data.PRICE+"</option>" ;
+    		}
+    	}
+    	return html;
+    }
+    </script>
 </head>
 
 <body>
@@ -85,7 +189,7 @@
             <div class="mainContent">
                 <div class="firstCont">
                     <div class="thumbsCont">
-                        <ul class="thumbs">
+                        <ul class="thumbs" id="imgBox">
                             <li><a href="#abc" onmouseover="changeImage(img1src)">
                                     <img src="resources/images/etc/msk1.jpg" alt="" /></a></li>
 
@@ -111,36 +215,26 @@
                         <div class="dtl">
                             <!--이름 -->
                             <div class="dtl_title">
-                                <h1><p>마스크</p></h1>
+                                <h1> ${data.PROD_NM}</h1>
                             </div>
                             <div class="dtl_text">
-                                <p>의료용 마스크 10매입</p>
+                                <p>${data.CON}</p>
                             </div>
                         </div>
                         <br>
                         <div class="price"><!--가격 -->
                             <div class="price1"><p>판매가</p></div>
-                            <div class="price2"><p><span>10,000</span> P</p></div>
+                            <div class="price2"><p><span>${data.POINT}</span> P</p></div>
                         </div>
                         <br>
                         <div class="dtl_option"><!--옵션 -->
                             <div class="dtl_color">
-                                <div class="color_L"><p>색상</p></div>
-                                <div class="color_R">
-                                    <select name="color" id="color" class="select_color">
-                                        <option value="blue" selected>blue</option>
-                                        <option value="yellow">yellow</option>
-                                        <option value="purple">purple</option>
-                                        <option value="red">red</option>
-                                    </select>
-                                </div>
                             </div>
-                            <br>
                             <div class="dtl_cnt">
                                 <div class="cnt_L"><p>수량</p></div>
                                 <div class="cnt_R">
                                     <span class="qt-minus">-</span>
-                                    <span class="qt">1</span>
+                                    <span class="qt" id ="qt">1</span>
                                     <span class="qt-plus">+</span>
                                 </div>
                             </div>
@@ -150,16 +244,34 @@
                         <br>
                         <div class="full_price"><!--총 가격 -->
                             <div class="price1"><p>총금액</p></div>
-                            <div class="price2"><p><span>10,000</span> P</p></div>
+                            <div class="price2"><p ><span id="total">${data.POINT}</span> P</p></div>
                         </div>
                         <br>
                         <div class="gbn"></div>
                         <br>
+                        <form action="#" id="addForm">
+                        	<input type="hidden" name="prodNo" id="prodNo" value="${data.PROD_NO}">
+                        	<input type="hidden" name="sMNo" id="sMNo" value="${sMNo}">
+                        	<input type="hidden" name="price" id="priceInp">
+                        	<input type="hidden" name="unit" id="unitInp">
+                        	<input type="hidden" name="qt" id="qtInp">             
+                        </form>
                         <div class="otherLinksCont">
-                            <ul class="otherLinks">
-                                <li class="btn_L"><a href="#"><p>장바구니</p></a></li>
+                        	<ul class="otherLinks">
+                               	<li class="btn_L" id="cartBtn"><a href="#"><p>장바구니</p></a></li>
+                                <li class="btn_R" id="buyBtn"><a href="#"><p>바로구매</p></a></li>
+                            </ul>
+                        	<%-- <c:choose>
+                        	<c:when test="${!empty sMNo}">
+                        		<ul class="otherLinks">
+                               	<li class="btn_L"><a href="#"><p>장바구니</p></a></li>
                                 <li class="btn_R"><a href="#"><p>바로구매</p></a></li>
                             </ul>
+                            </c:when>
+	                        	<c:otherwise>
+		                           	<div class="loginBtn">로그인</div>
+	                        	</c:otherwise>
+                        	</c:choose> --%>
                         </div>
 
                     </div>
