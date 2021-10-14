@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link rel="stylesheet" href="../../resources/css/co_news/co_news.css">
+<link rel="stylesheet" href="../../resources/css/coinfo_news/coinfo_news.css">
 <link rel="stylesheet" href="../../resources/css/menu_bar/menu_bar.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
@@ -92,7 +92,7 @@
 						<a href="#">
 							<div class="sc_section" id="sc_section">
 								<div class="sc_img">
-									<img src="../../resources/images/covidnews1.jpg" id="sc_newimg"
+									<img src="../../images/coinfo/coinfo_news/covidnews1.jpg" id="sc_newimg"
 										width="220" height="140" onerror="this.style.display='none'">
 								</div>
 								<div class="sc_article">
@@ -142,7 +142,7 @@
 						<a href="#">
 							<div class="sc_section" id="sc_section">
 								<div class="sc_img">
-									<img src="../../resources/images/covidnews2.jpg" id="sc_newimg"
+									<img src="../../images/coinfo/coinfo_news/covidnews2.jpg" id="sc_newimg"
 										width="220" height="140" onerror="this.style.display='none'">
 								</div>
 								<div class="sc_article">
@@ -167,7 +167,7 @@
 						<a href="#">
 							<div class="sc_section" id="sc_section">
 								<div class="sc_img">
-									<img src="../../resources/images/covidnews3.jpg" id="sc_newimg"
+									<img src="../../images/coinfo/coinfo_news/covidnews3.jpg" id="sc_newimg"
 										width="220" height="140" onerror="this.style.display='none'">
 								</div>
 								<div class="sc_article">
@@ -193,7 +193,7 @@
 			<!-- scMain -->
 		</div>
 		<!-- sc -->
-		<script src="../../resources/script/co_news/co_news.js"></script>
+		<script src="../../resources/script/coinfo_news/coinfo_news.js"></script>
 		<script src="../../resources/script/menu_bar/menu_bar.js"></script>
 	</main>
 </body>
