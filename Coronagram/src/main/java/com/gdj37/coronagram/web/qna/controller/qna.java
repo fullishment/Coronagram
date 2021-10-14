@@ -27,6 +27,7 @@ public class qna {
 			return mav;
 		}
 		
+		
 		@RequestMapping(value = "/QnaListAjax", method = RequestMethod.POST,
 				produces = "text/json;charset=UTF-8")
 		@ResponseBody
@@ -43,12 +44,50 @@ public class qna {
 			
 			return mapper.writeValueAsString(modelMap);
 		}
-		@RequestMapping(value ="/myqna")
-		public ModelAndView myqna(ModelAndView mav) {
+	//이거만하면 웹만나오고 
+//		@RequestMapping(value = "/myqna")
+//		public ModelAndView myqna(ModelAndView mav) {
+//			mav.setViewName("qna/myqna");
+//			return mav;
+//		}
+	//이거만하면 데이터만 불러오고^^
+		@RequestMapping(value="/myqna")
+		public ModelAndView myqna(@RequestParam HashMap<String, String> params,
+								ModelAndView mav) throws Throwable {
+			HashMap<String, String> data = iServiceQna.getQna(params);
+			
+			mav.addObject("data", data);
 			
 			mav.setViewName("qna/myqna");
+			
 			return mav;
 		}
+	//Add
+	/*
+	 * @RequestMapping(value = "/qna") public ModelAndView qnaAdd(ModelAndView mav)
+	 * { mav.setViewName("qna/qna");
+	 * 
+	 * return mav; }
+	 * 
+	 * @RequestMapping(value = "/qnaAdds", method = RequestMethod.POST, produces =
+	 * "text/json;charset=UTF-8")
+	 * 
+	 * @ResponseBody public String qnaAdds(@RequestParam HashMap<String, String>
+	 * params) throws Throwable { ObjectMapper mapper = new ObjectMapper();
+	 * 
+	 * Map<String, Object> modelMap = new HashMap<String, Object>();
+	 * 
+	 * String result = "success";
+	 * 
+	 * try { int cnt = iServiceQna.qnaAdd(params);
+	 * 
+	 * if(cnt ==0) { result = "failed"; } }catch (Exception e) {
+	 * e.printStackTrace();
+	 * 
+	 * result = "error"; } modelMap.put("result", result);
+	 * 
+	 * return mapper.writeValueAsString(modelMap); }
+	 */
 }
 
 

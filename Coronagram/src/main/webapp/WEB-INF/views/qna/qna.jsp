@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,10 +18,68 @@
 <script type="text/javascript"
 		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
+
+/* 2.문의하기 */
+// 취소버튼
+$("#cancleBtn").on("click", function(){
+	$("#backForm").submit();//history.back()동작은 하지만 상태값을 유지하지못함
+});
+//엔터키 폼 실행 막기
+$("#addForm").on("keypress", "input", function(){
+	if(event.keyCode == 13) { //엔터키가 눌러졌을때
+		return false; //form실행 이벤트를 하지 않음
+	}
+});
+//저장 버튼
+$("#addBtn").on("click",function(){					
+	if(checkVal("#title")) {
+		alert("제목을 입력해 주세요");
+		$("#title").focus();
+			}else if(checkVal("#con")) {
+				alert("내용을 입력해 주세요");
+			} else {
+				var params = $("#addForm").serialize();
+				$.ajax({
+				url:"qna",
+				type:"post",
+				dataType:"json",
+				data:params,
+				success:function(res){
+					if(res.result=="success"){
+						location.href="qna";
+					}
+					else if(res.result=="failed"){
+						alert("작성에 실패하였습니다.");
+					}else{
+						alert("작성중 문제가 발생했습니다.");
+					}
+				},
+			error:function(request,status,error){
+				console.log(error);
+			}
+		});
+	}
+});
+function checkVal(sel) { //함수 만들어줌
+	if($.trim($(sel).val())=="") { //공백만 넘어가는경우 방지
+		return true;
+	} else {
+		return false;
+	}
+}
+/* 3.문의내역 */
         $(document).ready(function(){
         	
         	reloadList();
-        });
+        
+//myqna이동
+        $("tbody").on("click", "tr", function(){
+    		$("#no").val($(this).attr("no"));
+    		
+    		$("#actionForm").attr("action", "myqna");
+    		$("#actionForm").submit();
+    	});
+	});
         
 //데이터 취득
         function reloadList(){
@@ -33,7 +92,6 @@
         		data:params, // 보낼 데이터(문자열 형태)
         		success:function(res){ //성공(ajax통신 성공) 시 다음 함수 실행
         			drawList(res.list);
-        			drawPaging(res.pb);
         		},
         		error:function(request, status, error){ //실패시 다음 함수 실행
         			console.log(error);
@@ -45,10 +103,10 @@
 	var html = "";
 	
 	for(var data of list) {
-		html += "<tr no=\"" + data.Q_NO+"\">";
-		html += "<td>"+data.Q_NO+"</td>";
+		html += "<tr no=\"" + data.QNA_NO+"\">";
+		html += "<td>"+data.QNA_NO+"</td>";
 		html += "<td>"+data.TITLE+"</td>";
-		html += "<td>"+data.DT+"</td>";
+		html += "<td>"+data.Q_DT+"</td>";
 		html += "<td>"+data.CON+"</td>";
 		html += "</tr>";
 	}
@@ -177,27 +235,29 @@
                         <div class="scm2-htm">
                             <label for="user" class="sclabel"><p>1:1문의하기</p></label>
                             <div class="group">
+                            <form action="#" id="addForm" method="post">
                                 <div class="qnaMain">
                                     <div class="QnaTitle">
-                                        <p>제목</p><input class="QTI">
+                                        <p>제목</p><input class="QTI"  type = "text" id = "title" name = "title" />
                                     </div>
                                 </div>
                                 <div class="qnaMain">
                                     <div class="QnaCon">
-                                        <p>내용</p><textarea class="QCI"></textarea>
-                                    </div>
-                                    <div class="qnaBtn">
-                                        <button href="#" type="button" class="add_btn">작성</button>
-                                        <button href="#" type="button" class="cancel_btn">취소</button>
+                                        <p>내용</p><textarea class="QCI" id="con" name="con"></textarea>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                             </form>
+                             	<div class="qnaBtn">
+                                    <button href="#" type="button" class="add_btn" id="addBtn" />작성</button>
+                                    <button href="#" type="button" class="cancel_btn" id="cancelBtn" />취소</button>
+                                </div>
+                        </div><!-- scm2-htm -->
+                    </div><!-- sc-form -->
                         <div class="scm3-htm">
                             <label for="user" class="sclabel"><p>문의내역</p></label>
                             <div class="group">
-                                <div class="qnaList">
-                                    <table class="scmL" border="1">
+                                <div>
+                                    <table class= "qnaList" border="1">
                                         <thead>
                                             <tr>
                                                 <th><p>번호</p></th>

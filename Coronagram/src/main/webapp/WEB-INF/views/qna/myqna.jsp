@@ -14,7 +14,16 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
+<script type="text/javascript"
+		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#listBtn").on("click", function(){
+		$("#actionForm").attr("action", "qna");
+		$("#actionForm").submit();
+	});
+});
+</script>
 </head>
 <body>
 <header>
@@ -78,6 +87,9 @@
     </div>
   </header>
     <main>
+<%--     <form action="#" id="actionForm" method="post">
+		   <input type="hidden" name="no" value="${param.no}" />
+		</form> --%>
         <div class="sc" id="sc">
             <div class="scHead" id="scHead">
                 <div class="scName1" id="scName1">
@@ -97,14 +109,14 @@
                                 <div class="qnaList">
                                     <div>
                                         <div class="scmL2">
-                                            <div><p>제목</p></div>
-                                            <input type="text" class="scmL2T">
-                                            <div><p>질문</p></div>
-                                            <textarea cols="42" rows="13" class="scmL4"></textarea>
+                                            <div><p>제목 : ${data.TITLE}</p></div>
+                                            <input type="text" class="scmL2T" placeholder="">
+                                            <div><p>질문 : ${data.CON}</p></div>
+                                            <textarea cols="42" rows="13" class="scmL4"  placeholder="${data.CON}"></textarea>
                                         </div>
                                     </div>
                                     <div class="scmL3">
-                                        <div><p>답변내용</p></div>
+                                        <div><p>답변내용 <br/> ${data.ANS_CON}</p></div>
                                         <textarea cols="42" rows="16" class="scmL3T"></textarea>                                      
                                     </div>
                                     <div class="btn_area">

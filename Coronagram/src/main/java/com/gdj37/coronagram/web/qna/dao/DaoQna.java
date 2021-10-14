@@ -16,4 +16,14 @@ public class DaoQna implements IDaoQna {
 public List<HashMap<String, String>> getQnaList(HashMap<String, String> params) throws Throwable {
 	return sqlSession.selectList("qna.getQnaList", params);
 }
+
+@Override
+public HashMap<String, String> getQna(HashMap<String, String> params) throws Throwable {
+	return sqlSession.selectOne("qna.getQna", params);
+}
+
+@Override
+public int qnaAdd(HashMap<String, String> params) throws Throwable {
+	return sqlSession.insert("qna.qnaAdd",params);
+}
 }
