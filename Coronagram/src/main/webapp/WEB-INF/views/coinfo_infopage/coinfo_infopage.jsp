@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../resources/css/coinfo_infopage/coinfo_infopage.css">
+    <link rel="stylesheet" href="resources/css/coinfo_infopage/coinfo_infopage.css?after">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 </head>
@@ -32,9 +32,14 @@
                         <a href="#" class="cm_userinfo">개인정보수정</a>
                     </li>
             </div>
+            
+        <div class="cm_user_name">
+	       <c:if test="${!empty sMNo}">
+	          ${sMNm}님 어서오세요.
+	       </c:if>
+	    </div>
         </div>
 
-        </div>
         <div class="cm_menu" id="cm_menu">
             <a href="#" class="cm_mLogo">Coronagram</a>
             <a href="#" class="cm_mTitle" id="cm_mTitle">
@@ -155,8 +160,8 @@
     </main>
     <!-- partial -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="../../resources/script/coinfo_infopage/coinfo_infopage.js"></script>
-    <script src="../../resources/script/menu_bar/menu_bar.js"></script>
+    <script src="resources/script/coinfo_infopage/coinfo_infopage.js"></script>
+    <script src="resources/script/menu_bar/menu_bar.js"></script>
 
 </body>
 

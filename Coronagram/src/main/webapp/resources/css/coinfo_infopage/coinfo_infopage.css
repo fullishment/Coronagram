@@ -20,7 +20,7 @@
             padding: 5px;
             background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
         }
-        .cm_logo, .cm_home, .cm_msg, .cm_cld, .cm_dot {
+        .cm_logo, .cm_home, .cm_msg, .cm_cld, .cm_dot, .cm_user_name {
             position: absolute;
             margin-top: 10px;
             background-color: rgba(255, 255, 255, 0);
@@ -30,6 +30,13 @@
             color: white;
             font-family: 'Lobster', cursive;
         }
+
+		.cm_user_name {
+            right: 380px;
+            font-size: 10pt;
+            font-family: "Noto Sans KR", sans-serif;
+        }
+
         .cm_logo {
             left: 60px;
         }
@@ -60,7 +67,7 @@
 
         .cm_dot {
             right: 35px;
-            background-image: url(../../images/dot.png);
+            background-image: url("../../images/icon/dot.png");
             width: 30px;
             height: 30px;
         }
@@ -250,7 +257,7 @@
             width: 20px;
             height: 20px;
             background-size: cover;
-            background-image: url(../../images/logout.png);
+            background-image: url("../../images/icon/logout.png");
         }
 
         a.cm_logout {
@@ -276,7 +283,7 @@
         /* 메뉴아이콘 */
         .cm_map, .cm_info, .cm_cam, .cm_user, .cm_qna {
             position: absolute;
-            background-image: url(../../images/map.png);
+            background-image: url("../../images/icon/map.png");
             background-size: cover;
             width: 20px;
             height: 20px;
@@ -284,19 +291,19 @@
         }
 
         .cm_info {
-            background-image: url(../../images/info.png);
+            background-image: url("../../images/icon/info.png");
         }
 
         .cm_cam {
-            background-image: url(../../images/cam.png);
+            background-image: url("../../images/icon/cam.png");
         }
 
         .cm_user {
-            background-image: url(../../images/user.png);
+            background-image: url("../../images/icon/user.png");
         }
 
         .cm_qna {
-            background-image: url(../../images/msk.png);
+            background-image: url("../../images/icon/msk.png");
         }
 
         /* 메뉴 화살표 */
@@ -376,7 +383,7 @@ body { margin:0px; padding:0px; }
 }
 .header-banner {
     background-color: #333;
-    background-image: url(../../images/coinfo/coinfo_infopage/covid19.jpg);
+    background-image: url("../../images/coinfo/coinfo_infopage/covid19.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

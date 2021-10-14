@@ -1,4 +1,4 @@
-package com.gdj37.coronagram.web.coinfo.controller;
+package com.gdj37.coronagram.web.coinfo_step.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
