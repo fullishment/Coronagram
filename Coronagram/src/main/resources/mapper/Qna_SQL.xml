@@ -5,7 +5,7 @@
 	<select id="getQnaCnt" parameterType="hashmap" resultType="Integer">
 		SELECT COUNT(*) AS CNT
 		FROM QNA
-		WHERE DEL = 1 
+		WHERE DEL = 0
 	</select>
 <!-- list -->
 	<select id="getQnaList" parameterType="hashmap" resultType="hashmap">
@@ -14,7 +14,9 @@
 				SELECT QNA_NO, TITLE, TO_CHAR(Q_DT,'yyyy-mm-dd') AS Q_DT, CON,
 				ROW_NUMBER() OVER(ORDER BY QNA_NO DESC) AS RNUM
 				FROM QNA
+				WHERE DEL = 0
 			) QNA
+		WHERE QNA.RNUM BETWEEN #{startCnt} AND #{endCnt}
 	</select>
 <!-- dtl -->
 	<select id="getQna" parameterType="hashmap" resultType="hashmap">

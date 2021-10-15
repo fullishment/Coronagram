@@ -54,7 +54,7 @@ public class qna {
 			
 			int cnt = iServiceQna.getQnaCnt(params);
 			
-			PagingBean pb = iPagingService.getPagingBean(page, cnt, 5, 3);
+			PagingBean pb = iPagingService.getPagingBean(page, cnt, 12, 5);
 			
 			params.put("startCnt", Integer.toString(pb.getStartCount()));
 			params.put("endCnt", Integer.toString(pb.getEndCount()));

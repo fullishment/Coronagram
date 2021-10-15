@@ -190,8 +190,11 @@ html {
         p {
             font-family: "Noto Sans KR", sans-serif;
         }
-        
-        
+        /* .qnaList { 테이블인데 왜 안먹을까
+            width :90%;
+            height: 80%;
+            font-size: 15pt;
+        } */
 /*mysql*/
         .scmL2 {
             float: left;

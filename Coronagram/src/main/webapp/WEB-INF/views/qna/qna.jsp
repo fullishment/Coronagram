@@ -10,6 +10,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+<style>
+	.qnaList {
+            font-size: 15pt;
+     }
+     table {
+	    padding: 0px;
+	    width: 100%;
+	}
+	table th {
+		background : gray;
+	}
+	.paging {
+		float : left;
+	}
+	.paging_wrap {
+		margin-bottom : 1px;
+	}
+	
+</style>
     <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css?after">
     <link rel="stylesheet" href="resources/css/qna/qna.css?after">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
@@ -301,8 +320,8 @@ function checkVal(sel) { //함수 만들어줌
 							      <input type="hidden" name="no" id="no" />
 							   </form>
 							</div>
-                                <div>
-                                    <table class= "qnaList">
+                                <div class= "qnaList">
+                                    <table>
                                         <thead>
                                             <tr>
                                                 <th><p>번호</p></th>
@@ -313,7 +332,9 @@ function checkVal(sel) { //함수 만들어줌
                                         </thead>
                                         <tbody></tbody>
                                     </table>
-                                    <div class="paging_wrap"></div>
+                                    <div class="paging">
+                                    	<div class="paging_wrap"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
