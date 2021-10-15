@@ -30,7 +30,7 @@
 		 /* $("#joinBtn").on("click",function(){
 			$("#actionForm").attr("action", "sign_up");
 			$("#actionForm").submit();
-		}  */
+		}   */
 		/*  $("#findBtn").on("click",function(){
 			$("#actionForm").attr("action", "");
 			$("#actionForm").submit();
@@ -87,5 +87,6 @@
   <!-- partial -->
 
 </body>
+
 
 </html>

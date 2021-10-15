@@ -29,5 +29,4 @@ public class ServiceSign_up implements IServiceSign_up{
 
 	
 
-	
 }

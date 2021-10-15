@@ -52,5 +52,4 @@ public class Sign_up {
 		return mav;
 	}
 
-
 }

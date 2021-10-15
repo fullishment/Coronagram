@@ -30,5 +30,6 @@
 	where m_id = #{m_id}	
 </select>
 	
-	
+
+
 </mapper>

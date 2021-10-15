@@ -8,5 +8,4 @@ public interface IDaoSign_up {
 
 	public int addSign(HashMap<String, String> params) throws Throwable;
 
-	
 }

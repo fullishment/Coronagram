@@ -23,5 +23,4 @@ public class DaoSign_up implements IDaoSign_up{
 		return sqlSession.insert("signup.addSign", params);
 	}
 
-	
 }
