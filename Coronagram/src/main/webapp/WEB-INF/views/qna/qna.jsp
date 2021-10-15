@@ -46,7 +46,8 @@ $(document).ready(function(){
 		}
 	}); */
 //저장 버튼
-	$("#addBtn").on("click",function(){					
+	$("#addBtn").on("click",function(){
+		
 		if(checkVal("#title")) {
 			alert("제목을 입력해 주세요");
 			$("#title").focus();
@@ -55,7 +56,7 @@ $(document).ready(function(){
 				} else {
 					var params = $("#addForm").serialize();
 					$.ajax({
-					url:"qna",
+					url:"qnaAdds",
 					type:"post",
 					dataType:"json",
 					data:params,
@@ -70,7 +71,7 @@ $(document).ready(function(){
 						}
 					},
 				error:function(request,status,error){
-					console.log(error);
+					console.log("error");
 				}
 			});
 		}
@@ -208,8 +209,8 @@ function checkVal(sel) { //함수 만들어줌
       <a href="#" class="cm_mTitle" id="cm_mTitle">
         <div class="cm_qna"></div>Service Center
         <ul class="cm_mcon" id="cm_mcon">
-          <a href="#">FAQ</a> <br>
-          <a href="#">Q&A</a>
+          <a href="http://localhost:8090/Coronagram/qna">FAQ</a> <br>
+          <a href="http://localhost:8090/Coronagram/qna">Q&A</a>
         </ul>
       </a>
     </div>
@@ -270,9 +271,11 @@ function checkVal(sel) { //함수 만들어줌
                         <div class="scm2-htm">
                             <label for="user" class="sclabel"><p>1:1문의하기</p></label>
                             <div class="group">
-                            <form action="#" id="addForm" method="post">
+                            <form action="" id="addForm" method="post">
                                 <div class="qnaMain">
                                     <div class="QnaTitle">
+                                    	<p>작성자 : ${sMNm}</p>
+                                    	<input type = "hidden" name = "m_no" value="${sMNo}" /> </br>
                                         <p>제목</p><input class="QTI"  type = "text" id = "title" name = "title" />
                                     </div>
                                 </div>

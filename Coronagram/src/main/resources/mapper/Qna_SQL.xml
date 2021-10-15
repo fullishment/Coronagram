@@ -24,8 +24,8 @@
 	</select>
 	
 <!-- add -->
-<!-- 	<insert id="qnaAdd" parameterType="hashmap">
-		INSERT INTO QNA(QNA_NO, WRITER_NO, TITLE, CON, ANS_CON, DEL)
-		VALUES (Q_SEQ.NEXTVAL, 1, #{title}, #{con}, #{ans}, 0);
-	</insert> -->
+ 	<insert id="qnaAdd" parameterType="hashmap">
+		INSERT INTO QNA(QNA_NO, WRITER_NO, TITLE, CON, DEL)
+		VALUES (Q_SEQ.NEXTVAL, #{m_no}, #{title}, #{con}, 0)
+	</insert>
 </mapper>
