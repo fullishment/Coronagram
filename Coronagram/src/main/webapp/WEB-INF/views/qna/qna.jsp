@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +15,106 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script type="text/javascript"
+		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+
+/* 2.문의하기 */
+// 취소버튼
+$("#cancleBtn").on("click", function(){
+	$("#backForm").submit();//history.back()동작은 하지만 상태값을 유지하지못함
+});
+//엔터키 폼 실행 막기
+$("#addForm").on("keypress", "input", function(){
+	if(event.keyCode == 13) { //엔터키가 눌러졌을때
+		return false; //form실행 이벤트를 하지 않음
+	}
+});
+//저장 버튼
+$("#addBtn").on("click",function(){					
+	if(checkVal("#title")) {
+		alert("제목을 입력해 주세요");
+		$("#title").focus();
+			}else if(checkVal("#con")) {
+				alert("내용을 입력해 주세요");
+			} else {
+				var params = $("#addForm").serialize();
+				$.ajax({
+				url:"qna",
+				type:"post",
+				dataType:"json",
+				data:params,
+				success:function(res){
+					if(res.result=="success"){
+						location.href="qna";
+					}
+					else if(res.result=="failed"){
+						alert("작성에 실패하였습니다.");
+					}else{
+						alert("작성중 문제가 발생했습니다.");
+					}
+				},
+			error:function(request,status,error){
+				console.log(error);
+			}
+		});
+	}
+});
+function checkVal(sel) { //함수 만들어줌
+	if($.trim($(sel).val())=="") { //공백만 넘어가는경우 방지
+		return true;
+	} else {
+		return false;
+	}
+}
+/* 3.문의내역 */
+        $(document).ready(function(){
+        	
+        	reloadList();
+        
+//myqna이동
+        $("tbody").on("click", "tr", function(){
+    		$("#no").val($(this).attr("no"));
+    		
+    		$("#actionForm").attr("action", "myqna");
+    		$("#actionForm").submit();
+    	});
+	});
+        
+//데이터 취득
+        function reloadList(){
+        	var params = $("#actionForm").serialize();
+        	
+        	$.ajax({ //jquery의 ajax함수 호출
+        		url: "QnaListAjax", //접속 주소
+        		type:"post", //전송 방식
+        		dataType:"json", // 받아올 데이터 형태
+        		data:params, // 보낼 데이터(문자열 형태)
+        		success:function(res){ //성공(ajax통신 성공) 시 다음 함수 실행
+        			drawList(res.list);
+        		},
+        		error:function(request, status, error){ //실패시 다음 함수 실행
+        			console.log(error);
+        		}
+        	});
+        }
+//목록 그리기
+	function drawList(list) {
+	var html = "";
+	
+	for(var data of list) {
+		html += "<tr no=\"" + data.QNA_NO+"\">";
+		html += "<td>"+data.QNA_NO+"</td>";
+		html += "<td>"+data.TITLE+"</td>";
+		html += "<td>"+data.Q_DT+"</td>";
+		html += "<td>"+data.CON+"</td>";
+		html += "</tr>";
+	}
+	$("tbody").html(html);
+	
+	}
+
+        </script>
 </head>
 <body>
 <header>
@@ -134,104 +235,47 @@
                         <div class="scm2-htm">
                             <label for="user" class="sclabel"><p>1:1문의하기</p></label>
                             <div class="group">
+                            <form action="#" id="addForm" method="post">
                                 <div class="qnaMain">
                                     <div class="QnaTitle">
-                                        <p>제목</p><input class="QTI">
+                                        <p>제목</p><input class="QTI"  type = "text" id = "title" name = "title" />
                                     </div>
                                 </div>
                                 <div class="qnaMain">
                                     <div class="QnaCon">
-                                        <p>내용</p><textarea class="QCI"></textarea>
-                                    </div>
-                                    <div class="qnaBtn">
-                                        <button href="#" type="button" class="add_btn">작성</button>
-                                        <button href="#" type="button" class="cancel_btn">취소</button>
+                                        <p>내용</p><textarea class="QCI" id="con" name="con"></textarea>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                             </form>
+                             	<div class="qnaBtn">
+                                    <button href="#" type="button" class="add_btn" id="addBtn" />작성</button>
+                                    <button href="#" type="button" class="cancel_btn" id="cancelBtn" />취소</button>
+                                </div>
+                        </div><!-- scm2-htm -->
+                    </div><!-- sc-form -->
                         <div class="scm3-htm">
                             <label for="user" class="sclabel"><p>문의내역</p></label>
                             <div class="group">
-                                <div class="qnaList">
-                                    <table class="scmL" border="1">
-                                        <thead class="scmLT">
+                                <div>
+                                    <table class= "qnaList" border="1">
+                                        <thead>
                                             <tr>
                                                 <th><p>번호</p></th>
                                                 <th><p>제목</p></th>
                                                 <th><p>등록일</p></th>
-                                                <th><p>현황</p></th>
+                                                <th><p>내용</p></th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
                                     </table>
-                                    <!-- <table>
-                                        <tr>
-                                            <th>1</th>
-                                            <td><a href="file:///C:/base/coronagram/view/qna/myqna.html">Q. 왜이리 어렵나요?</a></td>
-                                            <td>2021-09-16</td>
-                                            <td class="check0">확인중</td>
-                                        </tr>
-                                        <tr>
-                                            <th>2</th>
-                                            <td><a href="#">Q. 왜이리 어렵나요?</a></td>
-                                            <td>2021-09-16</td>
-                                        </tr>
-                                        <tr>
-                                            <th>3</th>
-                                            <td><a href="#">Q. 왜이리 어렵나요?</a></td>
-                                            <td>2021-09-16</td>
-                                            <td class="check1">답변완료</td>
-                                        </tr>
-                                        <tr>
-                                            <th>4</th>
-                                            <td><a href="#">Q. 왜이리 어렵나요?</a></td>
-                                            <td>2021-09-16</td>
-                                            <td style="color: green;">답변완료</td>
-                                        </tr>
-                                        <tr>
-                                            <th>5</th>
-                                            <td><a href="#">Q. 왜이리 어렵나요?</a></td>
-                                            <td>2021-09-16</td>
-                                            <td class="check1">답변완료</td>
-                                        </tr>
-                                        <tr>
-                                            <th>6</th>
-                                            <td><a href="#">Q. 왜이리 어렵나요?</a></td>
-                                            <td>2021-09-16</td>
-                                            <td class="check1">답변완료</td>
-                                        </tr>
-                                    </table> -->
                                 </div>
                             </div>
                         </div>
-                     </div><!-- sc-form -->
-                </div><!-- sc-html -->
-            </div> <!-- sc-form -->
+                     </div>
+                </div>
+            </div> 
         </div>
     </main>
-        <script src="resources/script/qna/qna.js"></script>
-        <script>
-            //목록 그리기
-      function drawList(list){
-         var html ="";
-         
-         for(var data of list){
-            html += "<tr no=\""+NO+"\">";
-            html += "<td>"+TITLE+"</td>";
-            html += "<td>"+DATE+"</td>";
-            html += "<td>"+CHECK
-            if(data.CHECK == OK){
-               html +="<td style=\"color: green;\"/>";
-            }
-            html += "</td>";
-         }
-         
-         
-         $("tbody").html(html);
-      }
-
-        </script>
+	<script src="resources/script/qna/qna.js"></script>
     </body>
-    
-    </html>
+</html>

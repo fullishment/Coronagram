@@ -8,7 +8,7 @@
   <title>co_news_main</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-  <link rel="stylesheet" href="../../resources/css/coinfo_infolist/coinfo_infolist.css">
+  <link rel="stylesheet" href="resources/css/coinfo_infolist/coinfo_infolist.css?after">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 </head>
@@ -25,13 +25,17 @@
             <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
             <ul class="cm_dropdown-content">
                 <li>
-                    <a href="#" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
+                    <a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
                 </li>
                 <li>
                     <a href="#" class="cm_userinfo">개인정보수정</a>
                 </li>
             </div>
-        </div>
+		<div class="cm_user_name">
+	       <c:if test="${!empty sMNo}">
+	          ${sMNm}님 어서오세요.
+	       </c:if>
+	    </div>
         
     </div>
 <div class="cm_menu" id="cm_menu">
@@ -148,7 +152,7 @@
     </div>
 
   <!-- partial -->
-  <script src="../../resources/script/coinfo_infolist/coinfo_infolist.js"></script> <!-- script -->
+  <script src="resources/script/coinfo_infolist/coinfo_infolist.js"></script> <!-- script -->
 </body>
 
 </html>

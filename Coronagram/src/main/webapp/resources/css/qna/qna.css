@@ -165,6 +165,20 @@ html {
         .add_btn:hover{
             opacity: .8;
         }
+        .cancel_btn {
+            display: inline-block;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.5s;
+            cursor: pointer;
+            width: 60px;
+            height: 30px;
+            border: none;
+            border-radius: 7px;
+            background: gray;
+        }
         .cancel_btn:hover {
             opacity: .8;
         }
@@ -176,58 +190,9 @@ html {
         p {
             font-family: "Noto Sans KR", sans-serif;
         }
-        .mL{
-            border: 1px solid black;
-            border-collapse:collapse;
-            width: 90%;
-            height: 265px;
-            margin: 30px;
-            text-align: center;
-        }
-        .scmLT {
-            background-color: gray;
-            color: white
-        }
-        .check0{
-            color:  red;
-        }
-        .check1{
-            color: green;
-        }
-        .cancel_btn {
-            float: right;
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            text-align: center;
-            transition: 0.5s;
-            cursor: pointer;
-            width: 60px;
-            height: 30px;
-            border: none;
-            border-radius: 7px;
-            background: gray;
-            margin-left: 10px;
-            margin-right: 35px;
-        }
-        .list_btn {
-            float: right;
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            text-align: center;
-            transition: 0.5s;
-            cursor: pointer;
-            width: 60px;
-            height: 30px;
-            border: none;
-            border-radius: 7px;
-            background: gray;
-            margin-left: 10px;
-            margin-top: 35px;
-            margin-right: 10px;
-            padding: 0px;
-        }
+        
+        
+/*mysql*/
         .scmL2 {
             float: left;
             width: 350px;
@@ -269,6 +234,9 @@ html {
         input:focus{
             outline : 2px solid #64d488;
         }
+        textarea{
+		    resize: none;
+		}	
         textarea:focus {
             outline : 2px solid #64d488;
         }

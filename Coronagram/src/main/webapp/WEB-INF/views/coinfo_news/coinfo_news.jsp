@@ -8,8 +8,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link rel="stylesheet" href="../../resources/css/coinfo_news/coinfo_news.css">
-<link rel="stylesheet" href="../../resources/css/menu_bar/menu_bar.css">
+<link rel="stylesheet" href="resources/css/coinfo_news/coinfo_news.css?after">
+<link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css?after">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
 <script
@@ -31,7 +31,11 @@
 							class="cm_icon-logout"></i> <span>로그아웃</span> </a></li>
 					<li><a href="#" class="cm_userinfo">개인정보수정</a></li>
 			</div>
-		</div>
+		<div class="cm_user_name">
+	       <c:if test="${!empty sMNo}">
+	          ${sMNm}님 어서오세요.
+	       </c:if>
+	    </div>
 
 		</div>
 		<div class="cm_menu" id="cm_menu">
@@ -193,8 +197,8 @@
 			<!-- scMain -->
 		</div>
 		<!-- sc -->
-		<script src="../../resources/script/coinfo_news/coinfo_news.js"></script>
-		<script src="../../resources/script/menu_bar/menu_bar.js"></script>
+		<script src="resources/script/coinfo_news/coinfo_news.js"></script>
+		<script src="resources/script/menu_bar/menu_bar.js"></script>
 	</main>
 </body>
 </html>

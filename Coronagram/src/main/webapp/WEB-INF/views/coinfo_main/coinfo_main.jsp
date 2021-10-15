@@ -8,7 +8,7 @@
   <title>coinfo_menu</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel="stylesheet" href="../../resources/css/coinfo_main/coinfo_main.css">
+  <link rel="stylesheet" href="resources/css/coinfo_main/coinfo_main.css?after">
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js'></script>
@@ -29,12 +29,17 @@
         <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
         <ul class="cm_dropdown-content">
           <li>
-            <a href="#" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
+            <a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
           </li>
           <li>
             <a href="#" class="cm_userinfo">개인정보수정</a>
           </li>
       </div>
+      
+	<div class="cm_user_name">
+       <c:if test="${!empty sMNo}">
+          ${sMNm}님 어서오세요.
+       </c:if>
     </div>
 
     </div>
@@ -133,8 +138,8 @@
       </section>
     </div>
     <!-- partial -->
-    <script src="../../resources/script/menu_bar/menu_bar.js"></script>
-    <script src="../../resources/script/coinfo_main/coinfo_main.js"></script>
+    <script src="resources/script/menu_bar/menu_bar.js"></script>
+    <script src="resources/script/coinfo_main/coinfo_main.js"></script>
   </main>
 
 </body>

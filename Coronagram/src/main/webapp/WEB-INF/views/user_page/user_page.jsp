@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
-    <link rel="stylesheet" href="resources/css/user_page/userpage.css">
+    <link rel="stylesheet" href="resources/css/user_page/user_page.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css'>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -98,6 +98,7 @@
     
                         <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog"
                                 aria-hidden="true"></i></button>
+                        <button id="follow_btn" class="follow_btn">follow</button>
     
                     </div>
     
@@ -193,12 +194,6 @@
 
                     <img src="https://images.unsplash.com/photo-1502630859934-b3b41d18206c?w=500&h=500&fit=crop"
                         class="gallery-image" alt="">
-
-                    <div class="gallery-item-type">
-
-                        <span class="visually-hidden">Video</span><i class="fas fa-video" aria-hidden="true"></i>
-
-                    </div>
 
                     <div class="gallery-item-info">
 

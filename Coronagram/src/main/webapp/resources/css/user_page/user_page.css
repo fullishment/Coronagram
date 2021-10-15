@@ -1,15 +1,4 @@
 @charset "UTF-8";
-/*
-
-All grid code is placed in a 'supports' rule (feature query) at the bottom of the CSS (Line 310). 
-        
-The 'supports' rule will only run if your browser supports CSS grid.
-
-Flexbox and floats are used as a fallback so that browsers which don't support grid will still recieve a similar layout.
-
-*/
-
-/* Base Styles */
 
 :root {
     font-size: 10px;
@@ -38,7 +27,15 @@ img {
     margin: 0 auto;
     padding: 0 2rem;
 }
-
+.follow_btn{
+	background-color: #0095f6;
+	color:white;
+	border:0px;
+	cursor: pointer;
+}
+.follow_btn:hover {
+    opacity: .8;
+}
 .btn {
     display: inline-block;
     font: inherit;
@@ -60,7 +57,6 @@ img {
     overflow: hidden;
     clip: rect(1px, 1px, 1px, 1px);
 }
-
 /* Profile Section */
 
 .profile {
