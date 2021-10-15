@@ -14,7 +14,7 @@
 	<select id="getQna" parameterType="hashmap" resultType="hashmap">
 		SELECT TITLE, CON, ANS_CON 
 		FROM QNA
-		<!-- WHERE QNA_NO = #{no} -->
+		WHERE QNA_NO = #{no}
 	</select>
 	
 <!-- add -->

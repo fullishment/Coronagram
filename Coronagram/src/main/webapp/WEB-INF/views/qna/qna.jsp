@@ -21,45 +21,63 @@
 
 /* 2.문의하기 */
 // 취소버튼
-$("#cancleBtn").on("click", function(){
-	$("#backForm").submit();//history.back()동작은 하지만 상태값을 유지하지못함
+$(document).ready(function(){
+	reloadList();
+	$(".paging_wrap").on("click","span",function(){
+		  $("#page").val($(this).attr("page"));
+		  $("#searchTxt").val($("#oldTxt").val());
+		  reloadList();
+	   });
+	 	
+	$("tbody").on("click","tr",function(){
+		  $("#no").val($(this).attr("no"));
+		  
+		  $("#actionForm").attr("action","myqna");
+		  $("#actionForm").submit();
+		  
+	  });
+	$("#cancleBtn").on("click", function(){
+		$("#backForm").submit();//history.back()동작은 하지만 상태값을 유지하지못함
+	});
+	//엔터키 폼 실행 막기
+	/* $("#addForm").on("keypress", "input", function(){
+		if(event.keyCode == 13) { //엔터키가 눌러졌을때
+			return false; //form실행 이벤트를 하지 않음
+		}
+	}); */
+	//저장 버튼
+	$("#addBtn").on("click",function(){					
+		if(checkVal("#title")) {
+			alert("제목을 입력해 주세요");
+			$("#title").focus();
+				}else if(checkVal("#con")) {
+					alert("내용을 입력해 주세요");
+				} else {
+					var params = $("#addForm").serialize();
+					$.ajax({
+					url:"qna",
+					type:"post",
+					dataType:"json",
+					data:params,
+					success:function(res){
+						if(res.result=="success"){
+							location.href="qna";
+						}
+						else if(res.result=="failed"){
+							alert("작성에 실패하였습니다.");
+						}else{
+							alert("작성중 문제가 발생했습니다.");
+						}
+					},
+				error:function(request,status,error){
+					console.log(error);
+				}
+			});
+		}
+	});
+	
 });
-//엔터키 폼 실행 막기
-$("#addForm").on("keypress", "input", function(){
-	if(event.keyCode == 13) { //엔터키가 눌러졌을때
-		return false; //form실행 이벤트를 하지 않음
-	}
-});
-//저장 버튼
-$("#addBtn").on("click",function(){					
-	if(checkVal("#title")) {
-		alert("제목을 입력해 주세요");
-		$("#title").focus();
-			}else if(checkVal("#con")) {
-				alert("내용을 입력해 주세요");
-			} else {
-				var params = $("#addForm").serialize();
-				$.ajax({
-				url:"qna",
-				type:"post",
-				dataType:"json",
-				data:params,
-				success:function(res){
-					if(res.result=="success"){
-						location.href="qna";
-					}
-					else if(res.result=="failed"){
-						alert("작성에 실패하였습니다.");
-					}else{
-						alert("작성중 문제가 발생했습니다.");
-					}
-				},
-			error:function(request,status,error){
-				console.log(error);
-			}
-		});
-	}
-});
+		
 function checkVal(sel) { //함수 만들어줌
 	if($.trim($(sel).val())=="") { //공백만 넘어가는경우 방지
 		return true;
@@ -68,19 +86,6 @@ function checkVal(sel) { //함수 만들어줌
 	}
 }
 /* 3.문의내역 */
-        $(document).ready(function(){
-        	
-        	reloadList();
-        
-//myqna이동
-        $("tbody").on("click", "tr", function(){
-    		$("#no").val($(this).attr("no"));
-    		
-    		$("#actionForm").attr("action", "myqna");
-    		$("#actionForm").submit();
-    	});
-	});
-        
 //데이터 취득
         function reloadList(){
         	var params = $("#actionForm").serialize();
@@ -113,7 +118,35 @@ function checkVal(sel) { //함수 만들어줌
 	$("tbody").html(html);
 	
 	}
-
+	function drawPaging(pb) {
+		var html = "";
+		
+		html += "<span page =\"1\">처음</span>      ";
+		
+		if($("#page").val() == "1") {
+			html += "<span page=\"1\">이전</span>    ";
+		} else {
+			html += "<span page=\""+($("#page").val() * 1 -1) + "\">이전</span>	";  //-1(자동숫자변환)
+		}
+		
+		for(var i = pb.startPcount ; i<= pb.endPcount ; i++) {
+			if($("#page").val() == i) {
+				html += "<span page=\"" + i + "\"><b>" + i + "</b></span> ";
+			}else {
+				html += "<span page=\"" + i + "\">" +i + "</span> ";
+			}
+		}
+		
+		if($("#page").val()== pb.maxPcount) {
+			html += "<span page=\"" + pb.maxPcount + "\">다음</span>      ";
+		} else {
+			html += "<span page=\"" + ($("#page").val()* 1 + 1) + "\">다음</span>      ";
+		}
+		
+		html += "<span page=\"" + pb.maxPcount+"\">마지막</span>    ";
+		
+		$(".paging_wrap").html(html);
+	}
         </script>
 </head>
 <body>
@@ -256,6 +289,13 @@ function checkVal(sel) { //함수 만들어줌
                         <div class="scm3-htm">
                             <label for="user" class="sclabel"><p>문의내역</p></label>
                             <div class="group">
+                            <div>
+							   <form action="#" id="actionForm" method="post">
+							      <input type="hidden" id="oldTxt" value="${param.searchTxt}"/>	
+							      <input type="hidden" name="page" id="page" value="${page}"/>
+							      <input type="hidden" name="no" id="no" />
+							   </form>
+							</div>
                                 <div>
                                     <table class= "qnaList" border="1">
                                         <thead>
@@ -268,6 +308,7 @@ function checkVal(sel) { //함수 만들어줌
                                         </thead>
                                         <tbody></tbody>
                                     </table>
+                                    <div class="paging_wrap"></div>
                                 </div>
                             </div>
                         </div>
