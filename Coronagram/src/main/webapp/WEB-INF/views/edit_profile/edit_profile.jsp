@@ -76,9 +76,61 @@
         </ul>
       </a>
     </div>
+    <!-- 메뉴 -->
+    
+<script type="text/javascript">
+
+function checkVal(sel){
+	if($.trim($(sel).val()) == ""){
+		return true;
+	} else {
+		return false;
+	}
+}
+
+$(document).ready(function(){
+	$("#cancelBtn").on("click",function(){
+		history.back();
+	});
+	$("#updateBtn").on("click", function(){
+		if($("#m_pw").val() != ""){//비밀번호를 변경할 경우
+		  	if(checkVal("#m_ocpw")){//기존 비밀번호 입력여부
+				alert("기존 비밀번호를 입력해 주세요")
+				$("#m_ocpw").focus();
+			} else if($("#opw").val() == $("#m_ocpw").val()){//실 비밀번호와 입력된 기존비밀번호 비교
+				if(checkVal("#m_repw")){
+					alert("비밀번호를 확인을 입력해 주세요")
+					$("#m_repw").focus();
+				} else if($("#m_pw").val() != $("#m_repw").val()){
+					alert("비밀번호 확인이 일치하지 않습니다.");
+					$("#m_pw").val("");
+					$("#m_repw").val("");
+					$("#m_repw").focus();
+				} else if(checkVal("#m_nm")) {
+					alert("이름을 입력해 주세요.");
+					$("#m_nm").focus();
+				} else {
+					$("#edit_profileForm").submit();
+				}
+			} else {// 비교 결과 같지 않은 경우
+				alert("기존 비밀번호가 일치하지 않습니다.");
+				$("#ocpw").val("");
+				$("#ocpw").focus();
+			}
+		} else if(checkVal("#m_nm")){
+			alert("이름을 입력해 주세요")
+			$("#m_nm").focus();
+		} else {
+			$("#edit_profileForm").submit();
+		}
+	});
+});// document ready end
+</script>    
+    
+    
   </header>
 <div class="card">
-  <form>
+  <form action="edit_profiles" id="edit_profileForm" method="post">
     <div class="input_area">
       <label for="photo-upload" class="custom-file-upload fas">
         <div class="img-wrap img-upload">
@@ -86,38 +138,40 @@
         </div>
       </label>
     <input type="file" id="photo-upload" class="img-wrap img-upload"><br>
-    <input type="hidden" name="id">
+    <input type="hidden" name="id" value="${param.M_ID}" />
+    <input type="hidden" name="no" value="${param.M_NO}" />
    
       <p>이름</p>
-      <input type="text"><br>
+      <input type="text" id="m_nm" name="m_nm" value="${data.M_NM}" /><br>
       <p>닉네임</p>
-      <input type="text"><br>
+      <input type="text" id="nick_nm" name="nick_nm" value="${data.NICK_NM}"><br>
+      <input type="hidden" id="opw" value="${data.M_PW}" />
       <p>현재 비밀번호</p>
-      <input type="text"><br>
+      <input type="password" id="m_ocpw"><br>
       <p>변경 비밀번호</p>
-      <input type="text"><br>
+      <input type="password" id="m_pw" name="m_pw"><br>
       <p>변경 비밀번호 확인</p>
-      <input type="text"><br>
+      <input type="password" id="m_repw" ><br>
       <p>번호</p>
-      <input type="text"><br>
+      <input type="text" id="phone" name="phone" value="${data.PHONE}"><br>
       <p>이메일</p>
-      <input type="text"><br>
-      백신 접종 여부 <label><input type="radio" name="vec" value="y"> 예</label>
-      <label><input type="radio" name="vec" value="n"> 아니오</label><br>
+      <input type="text" id="email" name="email" value="${data.EMAIL}"><br>
+      백신 접종 여부 <label><input type="radio" id="vac_y" name="vec" value="y"> 예</label>
+      <label><input type="radio" id="vac_n" name="vec" value="n"> 아니오</label><br>
       <p>주소</p>
       <input type="text" id="cm_postcode" class="post_num" placeholder="우편번호">
       <button type="button" class="find_btn" onclick="cm_execDaumPostcode()">찾기</button><br>
       <input type="text" id="cm_address" placeholder="주소"><br>
       <input type="text" id="cm_detailAddress" placeholder="상세주소"><br>
-        <button href="#" type="button" class="edit_btn">수정</button>
-        <button href="#" type="button" class="cancel_btn">취소</button>   
+        <button type="button" id="updateBtn" class="edit_btn">수정</button>
+        <button type="button" id="cancelBtn" class="cancel_btn">취소</button>   
         </div>
     </form>
 </div>
 <script src="resources/script/menu_bar/menu_bar.js"></script>
 <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
 <script>
-    function cm_execDaumPostcode() {
+function cm_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
             var addr = ''; 
@@ -140,16 +194,16 @@
                 if(extraAddr !== ''){
                     extraAddr = ' (' + extraAddr + ')';
                 }
-                document.getElementById("cm_extraAddress").value = extraAddr;
+                document.getElementById("cm_detailAddress").value = extraAddr;
             
             } else {
-                document.getElementById("cm_extraAddress").value = '';
+                document.getElementById("cm_detailAddress").value = '';
             }
 
             document.getElementById('cm_postcode').value = data.zonecode;
             document.getElementById("cm_address").value = addr;
             document.getElementById("cm_detailAddress").focus();
-        }
+        } 
     }).open();
 }
 </script>

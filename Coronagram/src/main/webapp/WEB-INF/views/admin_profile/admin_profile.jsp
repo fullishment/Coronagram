@@ -134,7 +134,7 @@
 <script src="../../resources/script/menu_bar/menu_bar.js"></script>
 <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
 <script>
-    function cm_execDaumPostcode() {
+function cm_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
             var addr = ''; 
@@ -157,16 +157,16 @@
                 if(extraAddr !== ''){
                     extraAddr = ' (' + extraAddr + ')';
                 }
-                document.getElementById("cm_extraAddress").value = extraAddr;
+                document.getElementById("cm_detailAddress").value = extraAddr;
             
             } else {
-                document.getElementById("cm_extraAddress").value = '';
+                document.getElementById("cm_detailAddress").value = '';
             }
 
             document.getElementById('cm_postcode').value = data.zonecode;
             document.getElementById("cm_address").value = addr;
             document.getElementById("cm_detailAddress").focus();
-        }
+        } 
     }).open();
 }
 </script>
