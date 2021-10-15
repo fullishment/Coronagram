@@ -17,7 +17,7 @@ public class Sign_up {
 	public IServiceSign_up iServiceSign_up;    
 	
 	@RequestMapping(value = "/sign_up")   //add
-	public ModelAndView m1Add(ModelAndView mav) {
+	public ModelAndView sign_up(ModelAndView mav) {
 
 		mav.setViewName("sign_up/sign_up");
 
