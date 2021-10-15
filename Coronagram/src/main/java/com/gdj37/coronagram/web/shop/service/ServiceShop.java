@@ -48,4 +48,22 @@ public class ServiceShop implements IServiceShop{
 		// TODO Auto-generated method stub
 		return iDaoShop.addCart(params);
 	}
+
+	@Override
+	public List<HashMap<String, String>> getCartList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.getCartList(params);
+	}
+
+	@Override
+	public HashMap<String,String> getCartCnt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.getCartCnt(params);
+	}
+
+	@Override
+	public int cartDel(Integer integer) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.cartDel(integer);
+	}
 }

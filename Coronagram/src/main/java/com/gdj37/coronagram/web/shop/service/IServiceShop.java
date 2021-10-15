@@ -17,4 +17,10 @@ public interface IServiceShop {
 
 	public int addCart(HashMap<String, String> params)throws Throwable;
 
+	public List<HashMap<String, String>> getCartList(HashMap<String, String> params)throws Throwable;
+
+	public HashMap<String, String> getCartCnt(HashMap<String, String> params)throws Throwable;
+
+	public int cartDel(Integer integer)throws Throwable;
+
 }

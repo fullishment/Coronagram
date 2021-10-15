@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,9 +76,46 @@ public class ShopController {
 		return mapper.writeValueAsString(modelMap);
 	}
 	@RequestMapping(value="/shopCart")
-	public ModelAndView shopCart(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+	public ModelAndView shopCart(ModelAndView mav,HttpSession session, @RequestParam HashMap<String,String> params) throws Throwable {
+		String sMNo=String.valueOf( session.getAttribute("sMNo"));
+		params.put("sMNo", sMNo);
 		mav.setViewName("shop_cart/shop_cart");
 		return mav;
 	}
-
+	
+	
+	
+	@RequestMapping(value="/shopCarts" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String cartList(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		List<HashMap<String,String>> list = iServiceShop.getCartList(params);
+		HashMap<String,String> cnt = iServiceShop.getCartCnt(params);
+		modelMap.put("cnt", cnt);
+		modelMap.put("list", list);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/cartDel" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String cartDel(ModelAndView mav, @RequestParam HashMap<String,String> params, @RequestParam(value="valueArr[]") List<Integer> cartList) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		String result ="success";
+		for(int i=0;i<cartList.size();i++) {
+			try {
+				int cartDel = iServiceShop.cartDel(cartList.get(i));
+				if(cartDel==0) {
+					result="failed";
+				}
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+				result="error";
+			}
+			
+		}
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}
 }

@@ -47,4 +47,22 @@ public class DaoShop implements IDaoShop {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("shop.addCart",params);
 	}
+
+	@Override
+	public List<HashMap<String, String>> getCartList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("shop.getCartList",params);
+	}
+
+	@Override
+	public HashMap<String,String> getCartCnt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shop.getCartCnt",params);
+	}
+
+	@Override
+	public int cartDel(Integer integer) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("shop.cartDel", integer);
+	}
 }

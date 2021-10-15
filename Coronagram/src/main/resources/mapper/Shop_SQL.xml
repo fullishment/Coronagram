@@ -10,12 +10,12 @@
 	<select id="getProd" parameterType="hashmap" resultType="hashmap">
 		SELECT PROD_NO,REG_NO,CAT_NO,PROD_NM,POINT,CON,SALE_STAT,PROD_DT,DEL
 		FROM PRODUCT
-		WHERE PROD_NO = ${prodNo}
+		WHERE PROD_NO = #{prodNo}
 	</select>
 	<select id="getOptList" parameterType="hashmap" resultType="hashmap" >
 		SELECT OPT_NO, PROD_NO, PRICE, UNIT
 		FROM PROD_OPT
-		WHERE PROD_NO =${prodNo}
+		WHERE PROD_NO =#{prodNo}
 	</select>
 	<select id="getProdImgList" parameterType="hashmap" resultType="hashmap">
 		SELECT ATTC_NO,PROD_NO,FILE_ADDR
@@ -23,9 +23,30 @@
 		WHERE PROD_NO = #{prodNo}
 	</select>
 	<insert id="addCart" parameterType="hashmap">
-		INSERT INTO CART(PROD_NO,M_NO,OPT_NO)
-		SELECT #{prodNo},#{sMNo},OPT_NO
+		INSERT INTO CART(CART_NO, PROD_NO, M_NO, OPT_NO)
+		SELECT CART_SEQ.NEXTVAL,#{prodNo},#{sMNo},OPT_NO
 		FROM PROD_OPT
 		WHERE PROD_NO= #{prodNo} AND PRICE = #{price} AND UNIT=#{unit}
 	</insert>
+	<select id="getCartList" parameterType="hashmap" resultType="hashmap">
+		SELECT C.CART_NO, C.M_NO,C.OPT_NO,O.PRICE,O.UNIT,P.CON,P.PROD_NM,P.POINT
+		FROM CART C 
+		JOIN PRODUCT P
+		    ON C.PROD_NO = P.PROD_NO
+		JOIN PROD_OPT O
+		    ON C.OPT_NO = O.OPT_NO
+		WHERE C.M_NO = #{sMNo}
+	</select>
+	<select id="getCartCnt" parameterType="hashmap" resultType="hashmap">
+		SELECT COUNT(*) AS CNT ,SUM(POINT) AS SUM
+		FROM CART C
+		JOIN PRODUCT P
+		    ON C.PROD_NO= P.PROD_NO
+		WHERE M_NO = #{sMNo}
+	</select>
+	<delete id="cartDel" parameterType="Integer" >
+		DELETE
+		FROM CART
+		WHERE CART_NO = #{cartList}
+	</delete>
 </mapper>
