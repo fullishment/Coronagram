@@ -11,4 +11,6 @@ public interface IDaoQna {
 
 	public int qnaAdd(HashMap<String, String> params)throws Throwable;
 
+	public int getQnaCnt(HashMap<String, String> params)throws Throwable;
+
 }

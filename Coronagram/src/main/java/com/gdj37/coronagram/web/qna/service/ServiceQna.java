@@ -27,4 +27,9 @@ public class ServiceQna implements IServiceQna{
 	public int qnaAdd(HashMap<String, String> params) throws Throwable {
 		return iDaoQna.qnaAdd(params);
 	}
+
+	@Override
+	public int getQnaCnt(HashMap<String, String> params) throws Throwable {
+		return iDaoQna.getQnaCnt(params);
+	}
 }

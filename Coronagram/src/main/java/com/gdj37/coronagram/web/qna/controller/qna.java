@@ -13,17 +13,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gdj37.coronagram.common.bean.PagingBean;
+import com.gdj37.coronagram.common.service.IPagingService;
 import com.gdj37.coronagram.web.qna.service.IServiceQna;
 
 @Controller
 public class qna {
 	@Autowired
 	public IServiceQna iServiceQna;
-
+	@Autowired
+	public IPagingService iPagingService;
+	//list
 		@RequestMapping(value ="/qna")
-		public ModelAndView qna(ModelAndView mav) {
+		public ModelAndView qna(@RequestParam HashMap<String, String> params,
+				ModelAndView mav) {
+			
+			int page = 1;
+			
+			if(params.get("page") != null) {
+				page = Integer.parseInt(params.get("page"));
+			}
+			mav.addObject("page", page);
 			
 			mav.setViewName("qna/qna");
+			
 			return mav;
 		}
 		
@@ -37,20 +50,24 @@ public class qna {
 			
 			Map<String, Object> modelMap = new HashMap<String, Object>();
 			
+			int page = Integer.parseInt(params.get("page"));
+			
+			int cnt = iServiceQna.getQnaCnt(params);
+			
+			PagingBean pb = iPagingService.getPagingBean(page, cnt, 5, 3);
+			
+			params.put("startCnt", Integer.toString(pb.getStartCount()));
+			params.put("endCnt", Integer.toString(pb.getEndCount()));
 			
 			List<HashMap<String, String>> list = iServiceQna.getQnaList(params);
 			
 			modelMap.put("list", list);
+			modelMap.put("pb", pb);
 			
 			return mapper.writeValueAsString(modelMap);
 		}
-	//이거만하면 웹만나오고 
-//		@RequestMapping(value = "/myqna")
-//		public ModelAndView myqna(ModelAndView mav) {
-//			mav.setViewName("qna/myqna");
-//			return mav;
-//		}
-	//이거만하면 데이터만 불러오고^^
+		
+	//dtl
 		@RequestMapping(value="/myqna")
 		public ModelAndView myqna(@RequestParam HashMap<String, String> params,
 								ModelAndView mav) throws Throwable {
@@ -62,6 +79,7 @@ public class qna {
 			
 			return mav;
 		}
+		
 	//Add
 	
 	  @RequestMapping(value = "/qnaAdd") public ModelAndView qnaAdd(ModelAndView mav)

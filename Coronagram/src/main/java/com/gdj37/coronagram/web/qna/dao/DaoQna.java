@@ -26,4 +26,9 @@ public HashMap<String, String> getQna(HashMap<String, String> params) throws Thr
 public int qnaAdd(HashMap<String, String> params) throws Throwable {
 	return sqlSession.insert("qna.qnaAdd",params);
 }
+
+@Override
+public int getQnaCnt(HashMap<String, String> params) throws Throwable {
+	return sqlSession.selectOne("qna.getQnaCnt", params);
+}
 }

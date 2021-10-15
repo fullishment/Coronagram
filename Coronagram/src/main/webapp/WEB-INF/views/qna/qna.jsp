@@ -19,8 +19,7 @@
 		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 
-/* 2.문의하기 */
-// 취소버튼
+
 $(document).ready(function(){
 	reloadList();
 	$(".paging_wrap").on("click","span",function(){
@@ -36,16 +35,17 @@ $(document).ready(function(){
 		  $("#actionForm").submit();
 		  
 	  });
+//취소버튼
 	$("#cancleBtn").on("click", function(){
 		$("#backForm").submit();//history.back()동작은 하지만 상태값을 유지하지못함
 	});
-	//엔터키 폼 실행 막기
+//엔터키 폼 실행 막기
 	/* $("#addForm").on("keypress", "input", function(){
 		if(event.keyCode == 13) { //엔터키가 눌러졌을때
 			return false; //form실행 이벤트를 하지 않음
 		}
 	}); */
-	//저장 버튼
+//저장 버튼
 	$("#addBtn").on("click",function(){					
 		if(checkVal("#title")) {
 			alert("제목을 입력해 주세요");
@@ -86,6 +86,7 @@ function checkVal(sel) { //함수 만들어줌
 	}
 }
 /* 3.문의내역 */
+
 //데이터 취득
         function reloadList(){
         	var params = $("#actionForm").serialize();
@@ -97,6 +98,7 @@ function checkVal(sel) { //함수 만들어줌
         		data:params, // 보낼 데이터(문자열 형태)
         		success:function(res){ //성공(ajax통신 성공) 시 다음 함수 실행
         			drawList(res.list);
+        			drawPaging(res.pb);
         		},
         		error:function(request, status, error){ //실패시 다음 함수 실행
         			console.log(error);
@@ -147,7 +149,7 @@ function checkVal(sel) { //함수 만들어줌
 		
 		$(".paging_wrap").html(html);
 	}
-        </script>
+</script>
 </head>
 <body>
 <header>
@@ -297,7 +299,7 @@ function checkVal(sel) { //함수 만들어줌
 							   </form>
 							</div>
                                 <div>
-                                    <table class= "qnaList" border="1">
+                                    <table class= "qnaList">
                                         <thead>
                                             <tr>
                                                 <th><p>번호</p></th>

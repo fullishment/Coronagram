@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="qna">
+<!-- cnt -->
+	<select id="getQnaCnt" parameterType="hashmap" resultType="Integer">
+		SELECT COUNT(*) AS CNT
+		FROM QNA
+		WHERE DEL = 1 
+	</select>
 <!-- list -->
 	<select id="getQnaList" parameterType="hashmap" resultType="hashmap">
 		SELECT QNA.QNA_NO, QNA.TITLE, QNA.Q_DT, QNA.CON
