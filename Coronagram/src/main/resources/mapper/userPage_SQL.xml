@@ -1,4 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="userPage">
+	<select id="getMPostList" parameterType="hashmap" resultType="hashmap">
+		 <![CDATA[
+		 	SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON, C.DT, C.DEL, NVL(L.LCNT, 0) AS LCNT, NVL(CC.CCNT, 0) AS CCNT,
+       		ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
+			FROM CRNG C INNER JOIN M M
+                    ON C.WRITER_NO = M.M_NO
+                   AND M.M_NO = #{m_no}
+            INNER JOIN (SELECT WRITING_NO, FILE_ADR,
+                               RANK() OVER(PARTITION BY WRITING_NO ORDER BY ATTC_NO ASC) AS RNK
+                        FROM CRNG_ATTC) CA
+                    ON C.WRITING_NO = CA.WRITING_NO
+                   AND CA.RNK = 1
+            LEFT OUTER JOIN (SELECT WRITING_NO, COUNT(*) AS CCNT
+                             FROM CRNG_CMT
+                             GROUP BY WRITING_NO) CC
+                         ON C.WRITING_NO = CC.WRITING_NO
+            LEFT OUTER JOIN (SELECT WRITING_NO, COUNT(*) AS LCNT
+                             FROM LK
+                             GROUP BY WRITING_NO) L
+                         ON C.WRITING_NO = L.WRITING_NO
+			WHERE C.DEL = 1
+		 ]]>
+	</select>
+	<select id="getFollowCnt" parameterType="hashmap" resultType="Integer">
+		select count(*) as fcnt from follow where rp_user = #{m_no}
+	</select>
+	<select id="getLikeCnt" parameterType="hashmap" resultType="Integer">
+		select count(*) as lcnt from lk where writing_no = #{writingNo}
+	</select>
+	<select id="getCmtCnt" parameterType="hashmap" resultType="Integer">
+		select count(*) as ccnt from crng_cmt where writing_no = #{writingNo}
+	</select>
+	<select id="getMImgList" parameterType="hashmap" resultType="hashmap">
+		SELECT ATTC_NO,WRITING_NO,FILE_ADR
+		FROM CRNG_ATTC
+		WHERE writing_no = #{writingNo}
+	</select>
+	<select id="getMDtlList" parameterType="hashmap" resultType="hashmap">
+		
+	</select>
 </mapper>
