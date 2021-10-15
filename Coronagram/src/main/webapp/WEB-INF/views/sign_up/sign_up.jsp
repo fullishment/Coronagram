@@ -12,6 +12,76 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="resources/css/sign_up/sign_up.css">
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+  	$("#cancel_btn").on("click",function(){
+  		history.back();
+  	});
+  	
+  	$("#add_btn").on("click", function(){
+  		if(checkVal("#m_id")){
+  			alert("아이디를 입력해 주세요.");
+  			$("#m_id").focus();
+  		} else if (checkVal("#m_nm")){
+  			alert("이름을 입력해 주세요.");
+  			$("#m_nm").focus();
+  		}else if (checkVal("#nick_nm")){
+  			alert("닉네임을 입력해 주세요.");
+  			$("#nick_nm").focus();
+  		}else if (checkVal("#m_pw")){
+  			alert("비밀번호를 입력해 주세요.");
+  			$("#m_pw").focus();
+  		} else if (checkVal("#m_repw")){
+  			alert("비밀번호 확인을 입력해 주세요.");
+  			$("#m_repw").focus();
+  		} else if($("#m_pw").val() != $("#m_repw").val()){
+  			alert("비밀번호 확인이 일치하지 않습니다.")
+  			$("#m_pw").val("");
+  			$("#m_repw").val("");
+  			$("#m_repw").focus();
+  		} else if (checkVal("#phone")){
+  			alert("휴대폰번호를 입력해 주세요.");
+  			$("#phone").focus();
+  		}  else if (checkVal("#email")){
+  			alert("이메일을 입력해 주세요.");
+  			$("#email").focus();
+  		}  else if (checkVal("#cm_postcode")){
+  			alert("우편번호를 입력해 주세요.");
+  			$("#cm_postcode").focus();
+  		}  else if (checkVal("#cm_address")){
+  			alert("주소를 입력해 주세요.");
+  			$("#cm_address").focus();
+  		}  else if (checkVal("#cm_detailAddress")){
+  			alert("상세주소를 입력해 주세요.");
+  			$("#cm_detailAddress").focus();
+  		} //else if (checkVal("#vac_y")){
+  		//	if(checkVal("#vac_n")){
+	  	//		alert("백신접종여부를 입력해 주세요.");
+	  	//		$("#vac_y").focus();
+  		//	}
+  	//	}
+	  		else {
+	  			
+	  			$("#addForm").submit();  
+	  			
+	  		}
+  	});
+  });
+  
+
+  function checkVal(sel){
+  	if($.trim($(sel).val()) == ""){
+  		return true;
+  	} else {
+  		return false;
+  	}
+  }
+    
+  $("input:radio[name='vec']:radio[value='y']").attr("checked",true); 
+  $("input:radio[name='vec']").removeAttr("checked");
+	  
+  </script>
 </head>
 
 <body>
@@ -25,37 +95,48 @@
     </div>
     <div class="right">
       
-      <form action="#" method="post">
+      <form action="mAdds" id="addForm" method="post">
         <div class="inputs">
           <p class="r_title"><b>Sign Up</b></p>
           <span class="title_Name">아이디</span><br>
-          <input type="text" placeholder="아이디를 입력하세요">
+          <input type="text" id="m_id" name="m_id" placeholder="아이디를 입력하세요">
           <p class="idchk">중복되지 않은 아이디 입니다.</p>
           <span class="title_Name">이름</span><br>
-          <input type="text" placeholder="이름을 입력하세요"><br>
+          <input type="text" id="m_nm" name="m_nm" placeholder="이름을 입력하세요"><br>
           <span class="title_Name">닉네임</span><br>
-          <input type="text" placeholder="닉네임을 입력하세요"><br>
+          <input type="text" id="nick_nm" name="nick_nm" placeholder="닉네임을 입력하세요"><br>
           <span class="title_Name">패스워드</span><br>
-          <input type="password" placeholder="패스워드를 입력하세요"><br>
+          <input type="password" id="m_pw" name="m_pw" placeholder="패스워드를 입력하세요"><br>
           <span class="title_Name">패스워드 확인</span><br>
-          <input type="password" placeholder="패스워드를 확인하세요"><br>
+          <input type="password" id="m_repw" name="m_repw" placeholder="패스워드를 확인하세요"><br>
           <span class="title_Name">휴대폰 번호</span><br>
-          <input type="text" placeholder="번호를 입력하세요"><br>
+          <input type="text" id="phone" name="phone" placeholder="번호를 입력하세요"><br>
           <span class="title_Name">이메일</span><br>
-          <input type="email" placeholder="이메일을 입력하세요"><br>
+          <input type="email" id="email" name="email" placeholder="이메일을 입력하세요"><br>
+          백신 접종 여부 <input type="radio" id="vac_y" name="vec" value="y"> 예
+      	  <input type="radio" id="vac_n" name="vec" value="n"> 아니오<br>
+      	  
+      	  
+      	 
+
+
+      	  
           <div class="birth">
-            <span>생년월일</span><br>
-            <select name="yy" id="year"></select>년
-            <select name="mm" id="month"></select>월
-            <select name="dd" id="day"></select>일<br>
+            <span>생년월일</span><br>   
+            <div id="m_bdt" >
+	            <select name="yy" id="year"></select> 년
+	            <select name="mm" id="month"></select>월
+	            <select name="dd" id="day"></select>일<br>
+	        </div>
             <span class="title_Name">주소</span><br>
-            <input type="text" id="cm_postcode" class="post_num" placeholder="우편번호">
+            
+            <input type="text" id="cm_postcode" name="cm_postcode" class="post_num" placeholder="우편번호">
             <button type="button" class="find_btn" onclick="cm_execDaumPostcode()">찾기</button><br>
-            <input type="text" id="cm_address" placeholder="주소"><br>
-            <input type="text" id="cm_detailAddress" placeholder="상세주소"><br>  
+            <input type="text" id="cm_address" name="adr" placeholder="주소"><br>
+            <input type="text" id="cm_detailAddress" name="dtl_adr"  placeholder="상세주소"><br>  
           </div>
-          <button class="add_btn">가입</button>
-          <button class="cancel_btn">취소</button>
+          <button id="add_btn" class="add_btn">가입</button>
+          <button id="cancel_btn" class="cancel_btn">취소</button>
         </div>
       </form>
       <br>
@@ -63,9 +144,9 @@
   </div>
   <!-- partial -->
   <script src="resources/script/sign_up/sign_up.js"></script>
-  <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
+<script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
 <script>
-    function cm_execDaumPostcode() {
+function cm_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
             var addr = ''; 
@@ -88,19 +169,19 @@
                 if(extraAddr !== ''){
                     extraAddr = ' (' + extraAddr + ')';
                 }
-                document.getElementById("cm_extraAddress").value = extraAddr;
+                document.getElementById("cm_detailAddress").value = extraAddr;
             
             } else {
-                document.getElementById("cm_extraAddress").value = '';
+                document.getElementById("cm_detailAddress").value = '';
             }
 
             document.getElementById('cm_postcode').value = data.zonecode;
             document.getElementById("cm_address").value = addr;
             document.getElementById("cm_detailAddress").focus();
-        }
+        } 
     }).open();
 }
-</script>
+</script>  
 </body>
 
 </html>

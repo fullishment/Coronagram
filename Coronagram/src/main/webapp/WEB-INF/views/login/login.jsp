@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>CodePen - Responsive Login Form</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <link rel="stylesheet" href="resources/css/login/login.css">
+  <link rel="stylesheet" href="resources/css/login/login.css?after">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
   <script type="text/javascript"
 		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
@@ -27,12 +27,14 @@
 				$("#loginForm").submit();
 			}
 		});
-	/* 	$("#joinBtn").on("click",function(){
-	
-		}
-		$("#findBtn").on("click",function(){
-	
-		} */
+		 /* $("#joinBtn").on("click",function(){
+			$("#actionForm").attr("action", "sign_up");
+			$("#actionForm").submit();
+		}  */
+		/*  $("#findBtn").on("click",function(){
+			$("#actionForm").attr("action", "");
+			$("#actionForm").submit();
+		}   */
 	});
 	function checkVal(sel){
 		if($.trim($(sel).val())==""){
@@ -42,14 +44,6 @@
 			return false;
 		}
 	}
-	
-	$("#joinBtn").on("click",function(){
-		location.href = "sign_up";
-	});
-	
-	$("#findBtn").on("click",function(){
-		location.href = "find_idpw";
-	});
 	
 </script>
 </head>
@@ -81,9 +75,11 @@
       
       <br>
       <div class="btn_con">
-        <button id="loginBtn" class="login_btn">로그인</button>
-        <button id="joinBtn"class="join_btn">가입</button>
-        <button id="findBtn" class="find_btn">ID/PW 찾기</button>
+        <button id="loginBtn" class="login_btn">로그인</button>      
+        <a href="sign_up" id="joinBtn"><button class="join_btn">가입</button></a> 
+        <a href="find_idpw" id="findBtn"><button class="find_btn">ID/PW 찾기</button></a> 
+       <!-- <button id="joinBtn" class="join_btn">가입</button>
+        <button id="findBtn" class="find_btn">ID/PW 찾기</button> -->
       </div>
     </div>
 

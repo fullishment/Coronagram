@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="signup">
+	
+	<insert id="addSign" parameterType="hashmap">
+		insert into m (
+		M_NO,
+		M_ID, 
+		M_NM, 
+		M_BDT,  
+		NICK_NM, 
+		M_PW, 
+		PHONE,
+		EMAIL, 
+		VAC_YN, 
+		POST_NO, 
+		ADR, 
+		DTL_ADR    
+		
+		)  
+	values (M_SEQ.NEXTVAL, #{m_id}, #{m_nm}, #{yy}|| '-' || #{mm} || '-' || #{dd} ,  
+	#{nick_nm}, #{m_pw}, #{phone},
+		#{email}, #{vec}, #{cm_postcode}, #{adr}, #{dtl_adr}  )
+	</insert> 
+	
+	<!-- 아이디 중복체크 -->
+<select id="getMIdCheck" parameterType="hashmap" resultType="Integer">
+	select count(*) as CNT
+	from m
+	where m_id = #{m_id}	
+</select>
+	
+	
+</mapper>
