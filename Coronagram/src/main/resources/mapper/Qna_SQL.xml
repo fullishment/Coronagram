@@ -10,16 +10,17 @@
 				FROM QNA
 			) QNA
 	</select>
+	
 <!-- dtl -->
 	<select id="getQna" parameterType="hashmap" resultType="hashmap">
-		SELECT TITLE, CON, ANS_CON 
+		SELECT QNA_NO, TITLE, CON, ANS_CON 
 		FROM QNA
 		<!-- WHERE QNA_NO = #{no} -->
 	</select>
 	
 <!-- add -->
-<!-- 	<insert id="qnaAdd" parameterType="hashmap">
+	<insert id="qnaAdd" parameterType="hashmap">
 		INSERT INTO QNA(QNA_NO, WRITER_NO, TITLE, CON, ANS_CON, DEL)
 		VALUES (Q_SEQ.NEXTVAL, 1, #{title}, #{con}, #{ans}, 0);
-	</insert> -->
+	</insert>
 </mapper>
