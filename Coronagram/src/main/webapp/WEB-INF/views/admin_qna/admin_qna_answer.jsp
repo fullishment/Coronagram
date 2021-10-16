@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,17 +10,77 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="resources/css/admin_qna/menu_bar.css">
-    <link rel="stylesheet" href="resources/css/admin_qna/admin_qna.css">
+<style>
+	.scmL4 {
+		width: 315px;
+		height: 230px;
+		border: 0px;
+		border-radius: 10px;
+		box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+		font-size: 11pt;
+		margin-top:10px;
+		padding : 15px;
+		overflow : auto;
+	}
+</style>
+    <link rel="stylesheet" href="resources/css/qna/menu_bar.css?after">
+    <link rel="stylesheet" href="resources/css/admin_qna/admin_qna.css?after">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <style>
-        
-    </style>
+<script type="text/javascript"
+		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#cancelBtn").on("click", function(){
+		$("#backForm").submit();
+	});
+	$("#updateForm").on("keypress", "input", function(event){
+		if(event.keyCode == 13){
+			return false;
+		}
+	});
+//수정 버튼
+	$("#updateBtn").on("click", function(){
+		if(checkVal("#ansCon")) {
+			alert("답변해 주세요.");
+			$("#ansCon").focus();
+		}else {
+			var params = $("#updateForm").serialize();
+			
+			$.ajax({
+				url : "admin_qna_updates",
+				type : "post",
+				dataType : "json",
+				data : params,
+				success : function(res){
+					if(res.result == "success"){
+						$("#backForm").submit();
+					} else if(res.result == "failed"){
+						alert("답변에 실패하였습니다.");
+					} else {
+						alert("답변중 문제가 발생했습니다.");
+					}
+				},
+				error : function(request, status, error){
+					console.log(error);
+				}
+			});
+		}
+	});
+});
+function checkVal(sel){
+	if($.trim($(sel).val())==""){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+</script>
 </head>
 <body>
-        <header>
+    <header>
             <div class="cm_menuBar" id="cm_menuBar">
                 <div class="cm_menu__toggler"><span></span></div>
                 <a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
@@ -87,64 +149,47 @@
             </div>
             <div class="sc-wrap">
                 <div class="sc-html">
-                    <input id="tab-1" type="radio" name="tab" class="scm1" ><label for="tab-1" class="tab"><p>FAQ 관리</p></label>
                     <input id="tab-2" type="radio" name="tab" class="scm2" checked><label for="tab-2" class="tab"><p>Q&A관리</p></label>
                     <div class="sc-form">
-                        <div class="scm1-htm">
-                            <label for="user" class="sclabel"><p>자주 묻는 질문 관리</p></label>
-                            <div class="group">
-                                <div class="qnaList">
-                                    
-                                </div>
-                            </div>
-                        </div>
                         <div class="scm2-htm">
                             <label for="user" class="sclabel"><p>1:1 질문 관리</p></label>
                             <div class="group">
-                               <div class="qnaList2">
-                                <div>
-                                    <h3><p>User 질문</p></h3>
-                                    <div class="scmL2">
-                                        <div><p>제목</p></div>
-
-                                        <input type="text" class="scmL2T">
-                                        <div><p>질문</p></div>
-                                        <textarea cols="47" rows="13"></textarea>
-                                    </div>
-                                </div>
-                                <div class="scmL3">
-                                    <div><p>답변하기</p></div>
-                                    <textarea class="scmL_txt" cols="47" rows="16"></textarea> <br>
-                                    <div class="btnForm">
-                                        <button href="#" type="button" class="add_btn">작성</button>
-                                        <button href="#" type="button" class="cancel_btn">취소</button>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
+                            	<div>
+                            		<form action="admin_qna" id="backForm" method="post">
+										<input type="hidden" name="searchTxt" value="${param.searchTxt}" />
+										<input type="hidden" name="page" value="${param.page}" />
+										<input type="hidden" name="no" value="${param.no}" />
+									</form>
+                            	</div>
+	                               <form action="#" id="updateForm" method="post">
+	                                <div>
+	                                    <div class="scmL2">
+	                                    	<input type="hidden" id="no" name="no" value="${data.QNA_NO}" disabled>
+	                                    	<input type="hidden" name="no" value="${data.QNA_NO}">
+	                                        <div><p>제목</p></div>
+											<div id="title" class="scmL2T"><p>${data.TITLE}</p></div>
+	                                        <div><p>질문</p></div>
+	                                        <div id="con" class="scmL4"><p>${data.CON}</p></div>
+	                                    </div>
+	                                </div>
+	                                <div class="scmL3">
+	                                    <div><p>답변하기</p></div> <br>
+		                                <textarea id="ansCon" name="ansCon" cols="42" rows="16" class="scmL3T" value="${data.ANS_CON}">${data.ANS_CON}</textarea>
+		                             </div>
+		                             
+		                             	<div class="btnForm">
+		                             		<button  type="button" class="add_btn" id="updateBtn">수정</button>
+		                                	<a href="javascript:window.history.back()"><button type="button" class="cancel_btn" id="backForm">목록</button></a>
+		                                </div>
+		                            </form>
+							</div> <!-- group -->
+						</div><!-- scm2-htm -->
                      </div><!-- sc-form -->
                 </div><!-- sc-html -->
-            </div> <!-- sc-form -->
-        </div>
+            </div> <!-- sc-wrap -->
+        </div> <!-- sc -->
     </main>
         <script src="resources/script/admin_qna/admin_Qna.js"></script>
-        <script>
-            //목록 그리기
-      function drawList(list){
-         var html ="";
-         
-         for(var data of list){
-            html += "<tr no=\""+NO+"\">";
-            html += "<td>"+TITLE+"</td>";
-            html += "<td>"+DATE+"</td>";
-            html += "<td>"+FUNC+"</td>";
-         }
-         
-         $("tbody").html(html);
-      }
-
-        </script>
     </body>
     
     </html>

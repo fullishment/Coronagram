@@ -10,6 +10,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <style>
+	.scmL3T{
+            width: 380px;
+            height: 310px;
+            border: 0px;
+            border-radius: 10px;
+            box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+            font-size: 11pt;
+            margin-bottom: 10px;
+            margin-top:10px;
+            padding : 20px;
+            overflow : auto;
+        }
 	.back_btn {
 		    float: right;
 	    	margin-top: 55px;
@@ -30,8 +42,8 @@
             opacity: .8;
         }
 </style>
-    <link rel="stylesheet" href="resources/css/qna/menu_bar.css">
-    <link rel="stylesheet" href="resources/css/qna/qna.css">
+    <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css?after">
+    <link rel="stylesheet" href="resources/css/qna/qna.css?after">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -40,7 +52,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#listBtn").on("click", function(){
-		$("#actionForm").attr("action", "qna");
+		$("#actionForm").attr("action", "myqna");
 		$("#actionForm").submit();
 	});
 });
@@ -131,17 +143,18 @@ $(document).ready(function(){
                                     <div>
                                         <div class="scmL2">
                                         	<div class = "title"><p>제목</p></div>
-                                            <div class="scmL2T"><p>${data.TITLE}</p></div>
+                                            <div class="scmL2T"><p>${data.TITLE}</p></div> <br>
                                             <div class = "con"><p>질문</p></div>
                                             <div cols="42" rows="13" class="scmL4"><p>${data.CON}</p></div>
                                         </div>
                                     </div>
+                                    <br>
                                     <div class="scmL3">
                                         <div class="ans"><p>답변내용</p></div>
                                         <div cols="42" rows="16" class="scmL3T"><p>${data.ANS_CON}</p></div>                             
                                     </div>
                                     <div class="btn_area">
-                                        <a href="qna"> <button type="button" class="back_btn">목록</button> </a>
+                                        <a href="javascript:window.history.back()"> <button type="button" class="back_btn">목록</button> </a>
                                     </div>
                                 </div>
                             </div>

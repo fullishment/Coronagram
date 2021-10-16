@@ -1,33 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="qna">
-<!-- cnt -->
-	<select id="getQnaCnt" parameterType="hashmap" resultType="Integer">
-		SELECT COUNT(*) AS CNT
-		FROM QNA
-		WHERE DEL = 0
-	</select>
-<!-- list -->
-	<select id="getQnaList" parameterType="hashmap" resultType="hashmap">
-		SELECT QNA.QNA_NO, QNA.TITLE, QNA.Q_DT, QNA.CON
-		FROM (	
-				SELECT QNA_NO, TITLE, TO_CHAR(Q_DT,'yyyy-mm-dd') AS Q_DT, CON,
-				ROW_NUMBER() OVER(ORDER BY QNA_NO DESC) AS RNUM
-				FROM QNA
-				WHERE DEL = 0
-			) QNA
-		WHERE QNA.RNUM BETWEEN #{startCnt} AND #{endCnt}
-	</select>
-<!-- dtl -->
-	<select id="getQna" parameterType="hashmap" resultType="hashmap">
-		SELECT TITLE, CON, ANS_CON 
-		FROM QNA
-		WHERE QNA_NO = #{no}
-	</select>
+
+<!-- USER -->
+	<!-- cnt -->
+		<select id="getQnaCnt" parameterType="hashmap" resultType="Integer">
+			SELECT COUNT(*) AS CNT
+			FROM QNA
+			WHERE DEL = 0
+		</select>
+	<!-- list -->
+		<select id="getQnaList" parameterType="hashmap" resultType="hashmap">
+			SELECT QNA.QNA_NO, QNA.TITLE, QNA.Q_DT, QNA.ANS_CON
+			FROM (	
+					SELECT QNA_NO, TITLE, TO_CHAR(Q_DT,'yyyy-mm-dd') AS Q_DT, ANS_CON,
+					ROW_NUMBER() OVER(ORDER BY QNA_NO DESC) AS RNUM
+					FROM QNA
+					WHERE DEL = 0
+				) QNA
+			WHERE QNA.RNUM BETWEEN #{startCnt} AND #{endCnt}
+		</select>
+	<!-- dtl -->
+		<select id="getQna" parameterType="hashmap" resultType="hashmap">
+			SELECT TITLE, CON, ANS_CON 
+			FROM QNA
+			WHERE QNA_NO = #{no}
+		</select>
+		
+	<!-- add -->
+	 	<insert id="qnaAdd" parameterType="hashmap">
+			INSERT INTO QNA(QNA_NO, WRITER_NO, TITLE, CON, DEL)
+			VALUES (Q_SEQ.NEXTVAL, #{m_no}, #{title}, #{con}, 0)
+		</insert>
 	
-<!-- add -->
- 	<insert id="qnaAdd" parameterType="hashmap">
-		INSERT INTO QNA(QNA_NO, WRITER_NO, TITLE, CON, DEL)
-		VALUES (Q_SEQ.NEXTVAL, #{m_no}, #{title}, #{con}, 0)
-	</insert>
+<!-- ADMIN -->
+	<!-- cnt -->
+		<select id="getadminQnaCnt" parameterType="hashmap" resultType="Integer">
+			SELECT COUNT(*) AS CNT
+			FROM QNA
+			WHERE DEL = 0
+		</select>
+	<!-- list -->
+		<select id="getadminQnaList" parameterType="hashmap" resultType="hashmap">
+			SELECT QNA.QNA_NO, QNA.TITLE, QNA.Q_DT, QNA.ANS_CON
+			FROM (	
+					SELECT QNA_NO, TITLE, TO_CHAR(Q_DT,'yyyy-mm-dd') AS Q_DT, ANS_CON,
+					ROW_NUMBER() OVER(ORDER BY QNA_NO DESC) AS RNUM
+					FROM QNA
+					WHERE DEL = 0
+				) QNA
+			WHERE QNA.RNUM BETWEEN #{startCnt} AND #{endCnt}
+		</select>
+	<!-- dtl -->
+		<select id="getadminQna" parameterType="hashmap" resultType="hashmap">
+			SELECT QNA_NO, TITLE, CON, ANS_CON 
+			FROM QNA
+			WHERE QNA_NO = #{no}
+		</select>
+	<!-- update -->
+		<update id="getadminQnaUp" parameterType="hashmap">
+			UPDATE QNA SET QNA_NO = #{no}, ANS_CON = #{ansCon}
+			WHERE QNA_NO = #{no}
+		</update>
 </mapper>

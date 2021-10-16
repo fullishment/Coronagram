@@ -18,14 +18,14 @@ import com.gdj37.coronagram.common.service.IPagingService;
 import com.gdj37.coronagram.web.qna.service.IServiceQna;
 
 @Controller
-public class qna {
+	public class qna {
 	@Autowired
-	public IServiceQna iServiceQna;
+		public IServiceQna iServiceQna;
 	@Autowired
-	public IPagingService iPagingService;
-	//list
+		public IPagingService iPagingService;
+//list
 		@RequestMapping(value ="/qna")
-		public ModelAndView qna(@RequestParam HashMap<String, String> params,
+		public ModelAndView Qna(@RequestParam HashMap<String, String> params,
 				ModelAndView mav) {
 			
 			int page = 1;
@@ -66,7 +66,7 @@ public class qna {
 			
 			return mapper.writeValueAsString(modelMap);
 		}
-	//dtl
+//dtl
 		@RequestMapping(value="/myqna")
 		public ModelAndView myqna(@RequestParam HashMap<String, String> params,
 								ModelAndView mav) throws Throwable {
@@ -79,7 +79,7 @@ public class qna {
 			return mav;
 		}
 		
-
+//add
 	  @RequestMapping(value = "/qnaAdds", method = RequestMethod.POST,
 			  produces = "text/json;charset=UTF-8")
 	  @ResponseBody

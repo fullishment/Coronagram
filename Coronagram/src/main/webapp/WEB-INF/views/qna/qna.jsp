@@ -12,7 +12,7 @@
     <title>Document</title>
 <style>
 	.qnaList {
-            font-size: 15pt;
+            font-size: 12pt;
             height: 365px;
     		box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
      }
@@ -42,8 +42,7 @@
 <script type="text/javascript"
 		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
-
-
+//페이징
 $(document).ready(function(){
 	reloadList();
 	$(".paging_wrap").on("click","span",function(){
@@ -51,7 +50,7 @@ $(document).ready(function(){
 		  $("#searchTxt").val($("#oldTxt").val());
 		  reloadList();
 	   });
-	 	
+//상세보기
 	$("tbody").on("click","tr",function(){
 		  $("#no").val($(this).attr("no"));
 		  
@@ -63,12 +62,7 @@ $(document).ready(function(){
 	$("#cancleBtn").on("click", function(){
 		$("#backForm").submit();//history.back()동작은 하지만 상태값을 유지하지못함
 	});
-//엔터키 폼 실행 막기
-	/* $("#addForm").on("keypress", "input", function(){
-		if(event.keyCode == 13) { //엔터키가 눌러졌을때
-			return false; //form실행 이벤트를 하지 않음
-		}
-	}); */
+
 //저장 버튼
 	$("#addBtn").on("click",function(){
 		
@@ -102,9 +96,9 @@ $(document).ready(function(){
 	});
 	
 });
-		
-function checkVal(sel) { //함수 만들어줌
-	if($.trim($(sel).val())=="") { //공백만 넘어가는경우 방지
+//공백만 넘어가는경우 방지
+function checkVal(sel) {
+	if($.trim($(sel).val())=="") { 
 		return true;
 	} else {
 		return false;
@@ -139,12 +133,19 @@ function checkVal(sel) { //함수 만들어줌
 		html += "<td>"+data.QNA_NO+"</td>";
 		html += "<td>"+data.TITLE+"</td>";
 		html += "<td>"+data.Q_DT+"</td>";
-		html += "<td>"+data.CON+"</td>";
+		html += "<td>"
+		if(data.ANS_CON !=null){
+			html += "답변완료";
+		} else {
+			html += "확인중";
+		}
+		html += "</td>";
 		html += "</tr>";
 	}
 	$("tbody").html(html);
 	
 	}
+//페이징 그리기
 	function drawPaging(pb) {
 		var html = "";
 		
@@ -332,7 +333,7 @@ function checkVal(sel) { //함수 만들어줌
                                                 <th><p>번호</p></th>
                                                 <th><p>제목</p></th>
                                                 <th><p>등록일</p></th>
-                                                <th><p>내용</p></th>
+                                                <th><p>현황</p></th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
