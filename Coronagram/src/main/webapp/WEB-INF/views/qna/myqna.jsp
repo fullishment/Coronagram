@@ -9,6 +9,27 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
+<style>
+	.back_btn {
+		    float: right;
+	    	margin-top: 55px;
+            display: inline-block;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.5s;
+            cursor: pointer;
+            width: 60px;
+            height: 30px;
+            border: none;
+            border-radius: 7px;
+            background: gray;
+        }
+        .back_btn:hover {
+            opacity: .8;
+        }
+</style>
     <link rel="stylesheet" href="resources/css/qna/menu_bar.css">
     <link rel="stylesheet" href="resources/css/qna/qna.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
@@ -109,19 +130,18 @@ $(document).ready(function(){
                                 <div class="qnaList">
                                     <div>
                                         <div class="scmL2">
-                                            <div><p>제목 : ${data.TITLE}</p></div>
-                                            <!-- <input type="text" class="scmL2T"> -->
-                                            <div><p>질문 : ${data.CON}</p></div>
-                                            <!-- <textarea cols="42" rows="13" class="scmL4"></textarea> -->
+                                        	<div class = "title"><p>제목</p></div>
+                                            <div class="scmL2T"><p>${data.TITLE}</p></div>
+                                            <div class = "con"><p>질문</p></div>
+                                            <div cols="42" rows="13" class="scmL4"><p>${data.CON}</p></div>
                                         </div>
                                     </div>
                                     <div class="scmL3">
-                                        <div><p>답변내용 <br/>
-                                         ${data.ANS_CON}</p></div>
-                                        <!-- <textarea cols="42" rows="16" class="scmL3T"></textarea>  -->                                     
+                                        <div class="ans"><p>답변내용</p></div>
+                                        <div cols="42" rows="16" class="scmL3T"><p>${data.ANS_CON}</p></div>                             
                                     </div>
                                     <div class="btn_area">
-                                        <a href="qna"> <button type="button" class="list_btn">목록</button> </a>
+                                        <a href="qna"> <button type="button" class="back_btn">목록</button> </a>
                                     </div>
                                 </div>
                             </div>

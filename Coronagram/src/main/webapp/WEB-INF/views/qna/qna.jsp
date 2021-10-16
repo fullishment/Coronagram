@@ -13,6 +13,8 @@
 <style>
 	.qnaList {
             font-size: 15pt;
+            height: 365px;
+    		box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
      }
      table {
 	    padding: 0px;
@@ -21,11 +23,14 @@
 	table th {
 		background : gray;
 	}
+	table td {
+		text-align : center;
+	}
 	.paging {
 		float : left;
 	}
 	.paging_wrap {
-		margin-bottom : 1px;
+		margin: 10px 240px;
 	}
 	
 </style>
