@@ -82,6 +82,17 @@
         <script>
         $(document).ready(function(){
         	reloadList();
+        	$("tbody").on("click","tr",function(){
+  			  $("#no").val($(this).attr("no"));
+  			  
+  			  $("#actionForm").attr("action","testM");
+  			  $("#actionForm").submit();
+  			  
+  		   });
+        	$("#editBtn").on("click",function(){	   
+  			  $("#editForm").attr("action","edit_profile");
+  			  $("#editForm").submit(); 
+  		   });
         });
         
         function reloadList(){
@@ -134,8 +145,8 @@
                             alt="">    
                     </div>    
                     <div class="profile-user-settings">    
-                        <h1 class="profile-user-name">janedoe_</h1>    
-                        <button class="btn profile-edit-btn">Edit Profile</button>    
+                        <h1 id="mId" class="profile-user-name">janedoe_</h1>    
+                        <button id="editBtn" class="btn profile-edit-btn">Edit Profile</button>    
                         <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog"
                                 aria-hidden="true"></i></button>
                         <button id="follow_btn" class="follow_btn">follow</button>    
@@ -171,6 +182,9 @@
 		   </form>
 		   <form action="#" id="dtlForm">
               <input type="hidden" name="writingNo" id="writingNo" value="${data.WRITING_NO}">             
+           </form>
+           <form action="#" id="editForm" method="post">
+               <input type="hidden" name="m_no" id="m_no" value="${sMNo}"/>  
            </form>
     <script src="resources/script/menu_bar/menu_bar.js"></script>
 </body>
