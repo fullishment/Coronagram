@@ -95,10 +95,6 @@
 					<div class="sc_content" id="sc_content">
 						<a href="#">
 							<div class="sc_section" id="sc_section">
-								<div class="sc_img">
-									<img src="../../images/coinfo/coinfo_news/covidnews1.jpg" id="sc_newimg"
-										width="220" height="140" onerror="this.style.display='none'">
-								</div>
 								<div class="sc_article">
 									<div class="sc_hd">
 										<h3>만남 시간 줄이고 환기 자주하면 감염 위험 1/3까지 줄어</h3>
@@ -120,10 +116,6 @@
 					<div class="sc_content" id="sc_content">
 						<a href="#">
 							<div class="sc_section" id="sc_section">
-								<div class="sc_img">
-									<img src="" id="sc_newimg" width="220" height="140"
-										onerror="this.style.display='none'">
-								</div>
 								<div class="sc_article">
 									<div class="sc_hd">
 										<h3>만남 시간 줄이고 환기 자주하면 감염 위험 1/3까지 줄어</h3>
@@ -145,10 +137,6 @@
 					<div class="sc_content" id="sc_content">
 						<a href="#">
 							<div class="sc_section" id="sc_section">
-								<div class="sc_img">
-									<img src="../../images/coinfo/coinfo_news/covidnews2.jpg" id="sc_newimg"
-										width="220" height="140" onerror="this.style.display='none'">
-								</div>
 								<div class="sc_article">
 									<div class="sc_hd">
 										<h3>만남 시간 줄이고 환기 자주하면 감염 위험 1/3까지 줄어</h3>
@@ -170,10 +158,6 @@
 					<div class="sc_content" id="sc_content">
 						<a href="#">
 							<div class="sc_section" id="sc_section">
-								<div class="sc_img">
-									<img src="../../images/coinfo/coinfo_news/covidnews3.jpg" id="sc_newimg"
-										width="220" height="140" onerror="this.style.display='none'">
-								</div>
 								<div class="sc_article">
 									<div class="sc_hd">
 										<h3>만남 시간 줄이고 환기 자주하면 감염 위험 1/3까지 줄어</h3>

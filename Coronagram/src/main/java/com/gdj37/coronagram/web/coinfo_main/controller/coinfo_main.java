@@ -1,5 +1,7 @@
 package com.gdj37.coronagram.web.coinfo_main.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +15,13 @@ public class coinfo_main {
 	public IServiceCoinfo_Main iServiceCoinfo_Main;
 
 	@RequestMapping(value="/coinfo_main")
-	public ModelAndView coinfo_main(ModelAndView mav) {
+	public ModelAndView coinfo_main(HttpSession session, ModelAndView mav)throws Throwable {
 		
-		mav.setViewName("coinfo_main/coinfo_main");
+		if(session.getAttribute("sMNo")!=null) {
+			mav.setViewName("coinfo_main/coinfo_main");
+		}else {
+			mav.setViewName("login/login");
+		}
 		
 		return mav;
 	}

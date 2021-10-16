@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+html{
+    background: #ecf0f1;
+}
+
 .sc {
 	max-width: 800px;
 	margin: auto;
@@ -36,12 +40,17 @@
 	margin: 10px;
 }
 
-.sc_img {
-	
+.sc_hd h3 {
+	font-size: 21px;
 }
 
-.sc_article {
-	
+.sc_dt p {
+	font-size: 13px;
+	color: gray;
+}
+
+.sc_cnt p {
+	font-size: 15px;
 }
 
 .sc_content a:link, .sc_content a:visited {

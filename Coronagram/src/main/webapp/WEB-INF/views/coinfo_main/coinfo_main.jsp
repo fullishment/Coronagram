@@ -99,14 +99,14 @@
               <span class="down-scroll down-arrow-3"></span>
             </div>
           </div>
-          <button class="link_btn" href="#">move to</button>
+          <button class="link_btn" onclick="location.href='coinfo_infolist'">move to</button>
         </div>
       </section>
       <section class="background">
         <div class="content-wrapper">
           <p class="content-title">거리두기 단계 현황</p>
           <p class="content-subtitle">Scroll Down or Up</p>
-          <button class="link_btn" href="#">move to</button>
+          <button class="link_btn"  onclick="location.href='coinfo_step'"">move to</button>
           <div id="mouse-scroll">
             <div class="mouse">
               <div class="mouse-in"></div>
@@ -133,7 +133,7 @@
               <span class="up-scroll up-arrow-3"></span>
             </div>
           </div>
-          <button class="link_btn" href="#">move to</button>
+          <button class="link_btn"  onclick="location.href='coinfo_news'">move to</button>
         </div>
       </section>
     </div>
