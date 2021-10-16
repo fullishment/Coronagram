@@ -12,9 +12,7 @@
     <title>Document</title>
 <style>
 	.qnaList {
-            font-size: 12pt;
-            height: 365px;
-    		box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+            height: 355px;
      }
      table {
 	    padding: 0px;
@@ -327,7 +325,7 @@ function checkVal(sel) {
 							   </form>
 							</div>
                                 <div class= "qnaList">
-                                    <table>
+                                    <table class = "scmL" border="1">
                                         <thead>
                                             <tr>
                                                 <th><p>번호</p></th>
@@ -338,9 +336,10 @@ function checkVal(sel) {
                                         </thead>
                                         <tbody></tbody>
                                     </table>
-                                    <div class="paging">
+                                    
+                                </div>
+                                <div class="paging">
                                     	<div class="paging_wrap"></div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

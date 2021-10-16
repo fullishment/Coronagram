@@ -190,6 +190,14 @@ html {
             font-family: "Noto Sans KR", sans-serif;
         }
 /*mysql*/
+		.scmL {
+		    border: 1px solid black;
+		    border-collapse: collapse;
+		    width: 90%;
+			margin: 30px;
+			text-align: center;
+		}
+	
         .scmL2 {
             float: left;
             width: 350px;

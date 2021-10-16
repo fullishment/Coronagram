@@ -15,6 +15,9 @@
 		float : left;
 		margin-left : 37%;
 	}
+	.qnaList2 {
+        height: 320px;
+     }
 </style>
     <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
     <link rel="stylesheet" href="resources/css/admin_qna/admin_qna.css">
@@ -238,10 +241,10 @@ function checkVal(sel) {
                                     </thead>
                                     <tbody id="tbody2"></tbody>
                                 </table>
-                                    <div class="paging">
+                                </div>
+                                <div class="paging">
                                    		<div class="paging_wrap"></div>
                                    	</div>
-                                </div>
                             </div>
                         </div>
                      </div><!-- sc-form -->
