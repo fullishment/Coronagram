@@ -111,7 +111,7 @@
 				}
 			});
 		}
-
+		
 	    function drawList(list){
 			var html ="";
 			
@@ -153,9 +153,9 @@
                     </div>  
                     <div class="profile-stats">  
                         <ul>
-                            <li><span class="profile-stat-count">164</span> posts</li>
-                            <li><span class="profile-stat-count">188</span> followers</li>
-                            <li><span class="profile-stat-count">206</span> following</li>
+                            <li><span class="profile-stat-count"></span> posts</li>
+                            <li><span class="profile-stat-count">${fcnt}</span> followers</li>
+                            <li><span class="profile-stat-count">${fingCnt}</span> following</li>
                         </ul>   
                     </div>   
                     <div class="profile-bio">    

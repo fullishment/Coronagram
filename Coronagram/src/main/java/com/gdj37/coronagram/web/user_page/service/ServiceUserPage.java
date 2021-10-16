@@ -38,15 +38,15 @@ public class ServiceUserPage implements IServiceUserPage{
 	}
 
 	@Override
-	public List<HashMap<String, String>> getMImgList(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return iDaoUserPage.getMImgList(params);
-	}
-
-	@Override
 	public HashMap<String, String> getMDtlList(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return iDaoUserPage.getMDtlList(params);
+	}
+
+	@Override
+	public int getFollowingCnt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.getFollowingCnt(params);
 	}
 	
 	

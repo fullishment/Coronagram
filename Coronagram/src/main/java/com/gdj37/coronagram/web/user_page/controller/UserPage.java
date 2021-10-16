@@ -33,11 +33,14 @@ public class UserPage {
 		Map<String,Object> modelMap= new HashMap<String,Object>();
 
 		List<HashMap<String,String>> list = iServiceUserPage.getMPostList(params);
-		List<HashMap<String,String>> attc = iServiceUserPage.getMImgList(params);
-
+		
+		int fcnt = iServiceUserPage.getFollowCnt(params);
+		int fingCnt = iServiceUserPage.getFollowingCnt(params);
+		
+		modelMap.put("fcnt", fcnt);
+		modelMap.put("fingCnt", fingCnt);
 		modelMap.put("list", list);
-		modelMap.put("attc", attc);
-		return mapper.writeValueAsString(modelMap);
+		return mapper.writeValueAsString(modelMap);	
 	}
 	@RequestMapping(value="/userimages" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
 	@ResponseBody

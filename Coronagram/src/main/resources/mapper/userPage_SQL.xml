@@ -25,18 +25,16 @@
 		 ]]>
 	</select>
 	<select id="getFollowCnt" parameterType="hashmap" resultType="Integer">
-		select count(*) as fcnt from follow where rp_user = #{m_no}
+		select count(*) as fpcnt from follow where rp_user = #{m_no}
+	</select>
+	<select id="getFollowingCnt" parameterType="hashmap" resultType="Integer">
+		select count(*) as fqcnt from follow where rq_user = #{m_no}
 	</select>
 	<select id="getLikeCnt" parameterType="hashmap" resultType="Integer">
 		select count(*) as lcnt from lk where writing_no = #{writingNo}
 	</select>
 	<select id="getCmtCnt" parameterType="hashmap" resultType="Integer">
 		select count(*) as ccnt from crng_cmt where writing_no = #{writingNo}
-	</select>
-	<select id="getMImgList" parameterType="hashmap" resultType="hashmap">
-		SELECT ATTC_NO,WRITING_NO,FILE_ADR
-		FROM CRNG_ATTC
-		WHERE writing_no = #{writingNo}
 	</select>
 	<select id="getMDtlList" parameterType="hashmap" resultType="hashmap">
 		

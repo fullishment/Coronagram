@@ -38,15 +38,15 @@ public class DaoUserPage implements IDaoUserPage {
 	}
 
 	@Override
-	public List<HashMap<String, String>> getMImgList(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("userPage.getMImgList",params);
-	}
-
-	@Override
 	public HashMap<String, String> getMDtlList(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("userPage.getMDtlList",params);
+	}
+
+	@Override
+	public int getFollowingCnt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("userPage.getFollowingCnt",params);
 	}
 
 }
