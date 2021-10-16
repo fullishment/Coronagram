@@ -25,10 +25,10 @@
 		 ]]>
 	</select>
 	<select id="getFollowCnt" parameterType="hashmap" resultType="Integer">
-		select count(*) as fpcnt from follow where rp_user = #{m_no}
+		select count(*) as FPCNT from follow where rp_user = #{m_no}
 	</select>
 	<select id="getFollowingCnt" parameterType="hashmap" resultType="Integer">
-		select count(*) as fqcnt from follow where rq_user = #{m_no}
+		select count(*) as FQCNT from follow where rq_user = #{m_no}
 	</select>
 	<select id="getLikeCnt" parameterType="hashmap" resultType="Integer">
 		select count(*) as lcnt from lk where writing_no = #{writingNo}

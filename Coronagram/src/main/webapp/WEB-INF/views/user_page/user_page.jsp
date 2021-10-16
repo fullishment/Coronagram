@@ -105,13 +105,20 @@
 				data: params,
 				success : function(res){
 					drawList(res.list);
+					profileCnt(res.f1,res.f2);
 				},
 				error : function(request,status,error){
 					console.log(error);
 				}
 			});
 		}
-		
+        function profileCnt(f1,f2){
+			var html ="";
+			html +="<li><span class=\"profile-stat-count\"></span> posts</li>";
+		    html +="<li><span class=\"profile-stat-count\">"+f1.FPCNT+"</span> followers</li>";
+		    html +="<li><span class=\"profile-stat-count\">"+f2.FQCNT+"</span> following</li>";
+	    	$("#profile-stat").html(html);
+        }
 	    function drawList(list){
 			var html ="";
 			
@@ -152,10 +159,8 @@
                         <button id="follow_btn" class="follow_btn">follow</button>    
                     </div>  
                     <div class="profile-stats">  
-                        <ul>
-                            <li><span class="profile-stat-count"></span> posts</li>
-                            <li><span class="profile-stat-count">${fcnt}</span> followers</li>
-                            <li><span class="profile-stat-count">${fingCnt}</span> following</li>
+                        <ul id="profile-stat">
+                        
                         </ul>   
                     </div>   
                     <div class="profile-bio">    

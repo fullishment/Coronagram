@@ -37,8 +37,8 @@ public class UserPage {
 		int fcnt = iServiceUserPage.getFollowCnt(params);
 		int fingCnt = iServiceUserPage.getFollowingCnt(params);
 		
-		modelMap.put("fcnt", fcnt);
-		modelMap.put("fingCnt", fingCnt);
+		modelMap.put("f1", fcnt);
+		modelMap.put("f2", fingCnt);
 		modelMap.put("list", list);
 		return mapper.writeValueAsString(modelMap);	
 	}
