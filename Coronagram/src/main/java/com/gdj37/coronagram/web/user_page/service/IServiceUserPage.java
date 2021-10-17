@@ -13,8 +13,9 @@ public interface IServiceUserPage {
 
 	int getCmtCnt(HashMap<String, String> params) throws Throwable;
 	
-	HashMap<String, String> getMDtlList(HashMap<String, String> params)throws Throwable;
 
 	int getFollowingCnt(HashMap<String, String> params)throws Throwable;
+
+	List<HashMap<String, String>> getMDtlList(HashMap<String, String> params) throws Throwable;
 
 }

@@ -31,12 +31,21 @@
 		select count(*) as FQCNT from follow where rq_user = #{m_no}
 	</select>
 	<select id="getLikeCnt" parameterType="hashmap" resultType="Integer">
-		select count(*) as lcnt from lk where writing_no = #{writingNo}
+		select count(*) as lcnt from lk where user_no={m_no} and writing_no = #{writingNo}
 	</select>
 	<select id="getCmtCnt" parameterType="hashmap" resultType="Integer">
-		select count(*) as ccnt from crng_cmt where writing_no = #{writingNo}
+		select count(*) as ccnt from crng_cmt where user_no={m_no} and writing_no = #{writingNo}
 	</select>
 	<select id="getMDtlList" parameterType="hashmap" resultType="hashmap">
-		
+		SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON, C.DT, C.DEL, 
+       ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
+FROM CRNG C INNER JOIN M M
+                    ON C.WRITER_NO = M.M_NO
+                   AND M.M_NO = #{m_no}
+            INNER JOIN (SELECT WRITING_NO, FILE_ADR
+                        FROM CRNG_ATTC) CA
+                    ON C.WRITING_NO = CA.WRITING_NO
+                    AND ca.writing_no= #{writingNo}
+WHERE C.DEL = 1
 	</select>
 </mapper>
