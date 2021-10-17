@@ -11,7 +11,61 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
   <link rel="stylesheet" href="resources/css/edit_profile/edit_profile.css">
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+   
+<script type="text/javascript">
+
+function checkVal(sel){
+	if($.trim($(sel).val()) == ""){
+		return true;
+	} else {
+		return false;
+	}
+}
+
+$(document).ready(function(){
+	$("#cancelBtn").on("click",function(){
+		history.back();
+	});
+	$("#updateBtn").on("click", function(){
+		if($("#m_pw").val() != ""){//비밀번호를 변경할 경우
+		  	if(checkVal("#m_ocpw")){//기존 비밀번호 입력여부
+				alert("기존 비밀번호를 입력해 주세요")
+				$("#m_ocpw").focus();
+			} else if($("#opw").val() == $("#m_ocpw").val()){//실 비밀번호와 입력된 기존비밀번호 비교
+				if(checkVal("#m_repw")){
+					alert("비밀번호를 확인을 입력해 주세요")
+					$("#m_repw").focus();
+				} else if($("#m_pw").val() != $("#m_repw").val()){
+					alert("비밀번호 확인이 일치하지 않습니다.");
+					$("#m_pw").val("");
+					$("#m_repw").val("");
+					$("#m_repw").focus();
+				} else if(checkVal("#m_nm")) {
+					alert("이름을 입력해 주세요.");
+					$("#m_nm").focus();
+				} else {
+					$("#edit_profileForm").submit();
+				}
+			} else {// 비교 결과 같지 않은 경우
+				alert("기존 비밀번호가 일치하지 않습니다.");
+				$("#ocpw").val("");
+				$("#ocpw").focus();
+			}
+		} else if(checkVal("#m_nm")){
+			alert("이름을 입력해 주세요")
+			$("#m_nm").focus();
+		} else {
+			$("#edit_profileForm").submit();
+		}
+	});
+});// document ready end
+
+
+$("input:radio[name='vec']:radio[value='y']").attr("checked",true); 
+$("input:radio[name='vec']").removeAttr("checked");
+</script>    
 
 </head>
 <body>
@@ -77,60 +131,12 @@
       </a>
     </div>
     <!-- 메뉴 -->
-    
-<script type="text/javascript">
-
-function checkVal(sel){
-	if($.trim($(sel).val()) == ""){
-		return true;
-	} else {
-		return false;
-	}
-}
-
-$(document).ready(function(){
-	$("#cancelBtn").on("click",function(){
-		history.back();
-	});
-	$("#updateBtn").on("click", function(){
-		if($("#m_pw").val() != ""){//비밀번호를 변경할 경우
-		  	if(checkVal("#m_ocpw")){//기존 비밀번호 입력여부
-				alert("기존 비밀번호를 입력해 주세요")
-				$("#m_ocpw").focus();
-			} else if($("#opw").val() == $("#m_ocpw").val()){//실 비밀번호와 입력된 기존비밀번호 비교
-				if(checkVal("#m_repw")){
-					alert("비밀번호를 확인을 입력해 주세요")
-					$("#m_repw").focus();
-				} else if($("#m_pw").val() != $("#m_repw").val()){
-					alert("비밀번호 확인이 일치하지 않습니다.");
-					$("#m_pw").val("");
-					$("#m_repw").val("");
-					$("#m_repw").focus();
-				} else if(checkVal("#m_nm")) {
-					alert("이름을 입력해 주세요.");
-					$("#m_nm").focus();
-				} else {
-					$("#edit_profileForm").submit();
-				}
-			} else {// 비교 결과 같지 않은 경우
-				alert("기존 비밀번호가 일치하지 않습니다.");
-				$("#ocpw").val("");
-				$("#ocpw").focus();
-			}
-		} else if(checkVal("#m_nm")){
-			alert("이름을 입력해 주세요")
-			$("#m_nm").focus();
-		} else {
-			$("#edit_profileForm").submit();
-		}
-	});
-});// document ready end
-</script>    
+ 
     
     
   </header>
 <div class="card">
-  <form action="edit_profiles" id="edit_profileForm" method="post">
+  <input type="hidden" name="M_NO" value="${param.M_NO}" />
     <div class="input_area">
       <label for="photo-upload" class="custom-file-upload fas">
         <div class="img-wrap img-upload">
