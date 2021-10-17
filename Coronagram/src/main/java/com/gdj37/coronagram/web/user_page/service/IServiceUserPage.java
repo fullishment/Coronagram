@@ -18,4 +18,10 @@ public interface IServiceUserPage {
 
 	List<HashMap<String, String>> getMDtlList(HashMap<String, String> params) throws Throwable;
 
+	HashMap<String, String> getIntroM(HashMap<String, String> params) throws Throwable;
+
+	HashMap<String, String> getModalM(HashMap<String, String> params) throws Throwable;
+
+	List<HashMap<String, String>> getModalCmt(HashMap<String, String> params) throws Throwable;
+
 }

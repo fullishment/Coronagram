@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,91 +30,25 @@
   		   });
         	
             $(document).on("click",".gallery-item",function(){
+            	
             	$("#writingNo2").val($(this).attr("wtno"));
             	modal.style.display="block";
-	      		mdDraw();
-                
+            	mdDraw();   
+            	slide();
             });
-            $(".close").on("click",function(){
-                document.getElementById("myModal").style.display="none";
-            });
-            
             var modal = document.getElementById('myModal');
+            
+            $(".close").on("click",function(){
+            	modal.style.display="none";
+            });
 
             window.onclick = function(event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
                 }
             }
-            $('.slider').each(function(){
-                var $this = $(this);
-                var $group = $this.find('.slide-group');
-                var $slides = $this.find('.slide');
-                var buttonArray = [];
-                var currentIndex = 0;
-
-                var $nav = $('.slide-nav').find('div');
             
-                 $nav.on('click', function (event) {
-                    event.preventDefault();
-                    console.log($(this));
-                    if ($(this).hasClass('next')) {
-                        if (currentIndex === $slides.length -1) {
-                            move(0);
-                        }
-                        move(currentIndex + 1);
-                    } else {
-                        if (currentIndex === 0) {
-                            move($slides.length -1);
-                        }
-                        move(currentIndex - 1);
-                    }
-                });
-
-            function move(newIndex) {
-                var animateLeft, slideLeft;
-
-                if ($group.is(':animated') || currentIndex === newIndex) {
-                    return;
-                }
-
-                buttonArray[currentIndex].removeClass('active');
-                buttonArray[newIndex].addClass('active');
-
-                if (newIndex > currentIndex) {
-                    slideLeft = '100%';
-                    animateLeft = '-100%';
-                } else {
-                    slideLeft = '-100%';
-                    animateLeft = '100%';
-                }
-
-                $slides.eq(newIndex).css({
-                    left: slideLeft,
-                    display: 'block'
-                });
-
-                $group.animate({left: animateLeft}, function() {
-                    $slides.eq(currentIndex).css({display: 'none'});
-                    $slides.eq(newIndex).css({left: 0});
-                    $group.css({left: 0});
-                    currentIndex = newIndex;
-                });
-            }
-
-            $.each($slides, function(index) {
-                var $button = $('<button type="button" class="slide-btn">&bull;</button>');
-                if (index === currentIndex) {
-                    $button.addClass('active');
-                }
-                $button.on('click', function(){
-                    move(index);
-                }).appendTo('.slide-buttons');
-                buttonArray.push($button);
-            });
-            })
         });
-        
         function reloadList(){
 			var params=$("#actionForm").serialize();
 			
@@ -123,22 +58,36 @@
 				dataType:"json",
 				data: params,
 				success : function(res){
-					drawList(res.list);
-					profileCnt(res.f1,res.f2);
+					drawList(res.list, res.lcnt,res.ccnt);
+					profileCnt(res.fingCnt,res.fcnt);
+					intro(res.intro);
+					introNm(res.intro);
 				},
 				error : function(request,status,error){
 					console.log(error);
 				}
 			});
 		}
-        function profileCnt(f1,f2){
+        function intro(intro){
+        	var html ="";
+        	html+="<h1 id=\"mId\" class=\"profile-user-name\">"+intro.NICK_NM+"</h1>    ";
+        	$(".profile-user-settings").html(html);
+        	
+        }
+        function introNm(intro){
+        	var html ="";
+        	html+="<span class=\"profile-real-name\">"+intro.M_NM+"</span>";
+        	html+="<div class=\"intro_con\">"+intro.INTRO_CON+"</div>";
+        	$(".profile-bio").html(html);
+        }
+        function profileCnt(fingCnt,fcnt){
 			var html ="";
 			html +="<li><span class=\"profile-stat-count\"></span> posts</li>";
-		    html +="<li><span class=\"profile-stat-count\">"+f1.FPCNT+"</span> followers</li>";
-		    html +="<li><span class=\"profile-stat-count\">"+f2.FQCNT+"</span> following</li>";
+		    html +="<li><span class=\"profile-stat-count\">"+fcnt.FPCNT+"</span> followers</li>";
+		    html +="<li><span class=\"profile-stat-count\">"+fingCnt.FQCNT+"</span> following</li>";
 	    	$("#profile-stat").html(html);
         }
-	    function drawList(list){
+	    function drawList(list,lcnt,ccnt){
 			var html ="";
 			
 			for(var data of list){                                                                                    
@@ -148,12 +97,11 @@
 			    html+= "    	<div class=\"gallery-item-info\">                                                              "; 
 			    html+= "        	<ul>                                                                                     "; 
 			    html+= "            <li class=\"gallery-item-likes\"><span class=\"visually-hidden\">Likes:</span><i         "; 
-			    html+= "                    class=\"fas fa-heart\" aria-hidden=\"true\"></i>"+data.LCNT+"</li>               "; 
+			    html+= "                    class=\"fas fa-heart\" aria-hidden=\"true\"></i>"+lcnt.LCNT+"</li>               "; 
 			    html+= "            <li class=\"gallery-item-comments\"><span class=\"visually-hidden\">Comments:</span><i   "; 
-			    html+= "                    class=\"fas fa-comment\" aria-hidden=\"true\"></i>"+data.CCNT+"</li>             "; 
+			    html+= "                    class=\"fas fa-comment\" aria-hidden=\"true\"></i>"+ccnt.CCNT+"</li>             "; 
 			    html+= "        	</ul>                                                                                    ";
 			    html+= "    	</div>                                                                                       "; 
-
 		    	html+= "</div>                                                                                           "; 
 			}
 			
@@ -164,35 +112,240 @@
 	    	var params = $("#addForm").serialize();
 			$.ajax({ 
 				url : "modalpages",
-				type : "post",
+				type : "get",
 				dataType : "json",
 				data : params,
-				success : function(res){
-					drawModal(res.md);
+				success : function(res){	
+					drawModal(res.modalM,res.lcnt);
+					drawModalImg(res.md);
+					console.log(res.modalM);
+					slide();
 				},
 				error : function(request, status, error){
+					console.log("에러");
 					console.log(error);
 				}
 			});
 	    }
-	    function drawModal(md){
-			var html ="";
-			var i=1;
-			for(var v of md){ 
+	    function drawModal(modalM,lcnt){   
+	    	var html ="";
+	    		
+				 html+="   	<div class=\"modal-content\">                                                                                ";
+			     html+="       <div class=\"modal_img\">                                                                                 ";
+			     html+="           <div class=\"slider\">                                                                                ";
+			     html+="               <div class=\"slide-viewer\">                                                                      ";
+			     html+="               <div id=\"slide-group\" class=\"slide-group\">                                                      ";	                                                                        
+			     html+="               </div>                                                                                          ";
+			     html+="               </div>                                                                                          ";
+			     html+="               <div class=\"slide-nav\">                                                                         ";
+			     html+="                   <div class=\"prev\"></div>                                                                    ";
+			     html+="                   <div class=\"next\"></div>                                                                    ";
+			     html+="               </div>                                                                                          ";
+			     html+="               <div class=\"slide-buttons\"></div>                                                               ";
+			     html+="           </div>                                                                                              ";
+			     html+="       </div>                                                                                                  ";
+			     html+="       <div class=\"modal_box\">                                                                                 ";
+			     html+="           <div class=\"cmt_head\">                                                                              ";
+			     html+="               <span id=\"close\" class=\"close\">&times;</span>                                                   ";
+			     html+="               <div class=\"user_container\">                                                                    ";
+			     html+="                   <div class=\"profile_img\">                                                                   ";
+			     html+="                       <img src=\"resources/css/p_coronagram/imgs/thumb.jpeg\" alt=\"프로필이미지\">               ";
+			     html+="                   </div>                                                                                      ";
+			     html+="                   <div class=\"user_name\">                                                                     ";
+			     html+="                       <div class=\"nick_name head_text\">"+modalM.NICK_NM+"</div>                                        ";
+			     html+="                   </div>                                                                                      ";
+			     html+="               </div>                                                                                          ";
+			     html+="           </div>                                                                                              ";
+			     html+="           <div class=\"cmt_sec1\">                                                                              ";
+			     html+="                   <div class=\"user_container\">                                                                ";
+			     html+="                       <div class=\"profile_img\">                                                               ";
+			     html+="                           <img src=\"resources/css/p_coronagram/imgs/thumb.jpeg\" alt=\"프로필이미지\">           ";
+			     html+="                       </div>                                                                                  ";
+			     html+="                       <div class=\"user_name\">                                                                 ";
+			     html+="                           <div class=\"nick_name head_text\">"+modalM.M_NM+"</div>                                    ";
+			     html+="                       </div>                                                                                  ";
+			     html+="                   </div>                                                                                      ";
+			     html+="                   <div class=\"modal_con\">"+modalM.CON+"</div>                                                               ";
+			     html+="           </div>                                                                                              ";
+			     html+="           <div class=\"cmt_sec2\">                                                                              ";
+			     html+="               <div class=\"bottom_icons\">                                                                      ";
+			     html+="                   <div class=\"left_icons\">                                                                    ";
+			     html+="                       <div class=\"heart_btn\">                                                                 ";
+			     html+="                           <div class=\"sprite_heart_icon_outline\" name=\"39\" data-name=\"heartbeat\">             ";
+			     html+="                                     <input type=\"checkbox\" id=\"checkbox\">                                     ";
+			     html+="                                     <label for=\"checkbox\">                                                    ";
+			     html+="                                       <svg id=\"heart-svg\" viewBox=\"467 392 58 57\" xmlns=\"http://www.w3.org/2000/svg\"> ";
+			     html+="                                         <g id=\"Group\" fill=\"none\" fill-rule=\"evenodd\" transform=\"translate(467 392)\">";
+			     html+="                                           <path d=\"M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z\" id=\"heart\" stroke=\"#000000\" stroke-width=\"3\"></path>";
+			     html+="                                           <circle id=\"main-circ\" fill=\"#E2264D\" opacity=\"0\" cx=\"29.5\" cy=\"29.5\" r=\"1.5\"></circle>     ";
+			     html+="                                           <g id=\"grp7\" opacity=\"0\" transform=\"translate(7 6)\">                                              ";
+			     html+="                                             <circle id=\"oval1\" fill=\"#9CD8C3\" cx=\"2\" cy=\"6\" r=\"2\"></circle>                             ";
+			     html+="                                             <circle id=\"oval2\" fill=\"#8CE8C3\" cx=\"5\" cy=\"2\" r=\"2\"></circle>                             ";
+			     html+="                                           </g>                                                                                                    ";
+			     html+="                                                                                                                                                   ";
+			     html+="                                           <g id=\"grp6\" opacity=\"0\" transform=\"translate(0 28)\">                                             ";
+			     html+="                                             <circle id=\"oval1\" fill=\"#CC8EF5\" cx=\"2\" cy=\"7\" r=\"2\"></circle>                             ";
+			     html+="                                             <circle id=\"oval2\" fill=\"#91D2FA\" cx=\"3\" cy=\"2\" r=\"2\"></circle>                             ";
+			     html+="                                           </g>                                                                                                    ";
+			     html+="                                                                                                                                                   ";
+			     html+="                                           <g id=\"grp3\" opacity=\"0\" transform=\"translate(52 28)\">                                            ";
+			     html+="                                             <circle id=\"oval2\" fill=\"#9CD8C3\" cx=\"2\" cy=\"7\" r=\"2\"></circle>                             ";
+			     html+="                                             <circle id=\"oval1\" fill=\"#8CE8C3\" cx=\"4\" cy=\"2\" r=\"2\"></circle>                             ";
+			     html+="                                           </g>                                                                                                    ";
+			     html+="                                                                                                                                                   ";
+			     html+="                                           <g id=\"grp2\" opacity=\"0\" transform=\"translate(44 6)\">                                             ";
+			     html+="                                             <circle id=\"oval2\" fill=\"#CC8EF5\" cx=\"5\" cy=\"6\" r=\"2\"></circle>                             ";
+			     html+="                                             <circle id=\"oval1\" fill=\"#CC8EF5\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                             ";
+			     html+="                                           </g>                                                                                                    ";
+			     html+="                                           <g id=\"grp5\" opacity=\"0\" transform=\"translate(14 50)\">                                            ";
+			     html+="                                             <circle id=\"oval1\" fill=\"#91D2FA\" cx=\"6\" cy=\"5\" r=\"2\"></circle>                             ";
+			     html+="                                             <circle id=\"oval2\" fill=\"#91D2FA\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                             ";
+			     html+="                                           </g>                                                                                                    ";
+			     html+="                                           <g id=\"grp4\" opacity=\"0\" transform=\"translate(35 50)\">                                            ";
+			     html+="                                             <circle id=\"oval1\" fill=\"#F48EA7\" cx=\"6\" cy=\"5\" r=\"2\"></circle>                             ";
+			     html+="                                             <circle id=\"oval2\" fill=\"#F48EA7\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                             ";
+			     html+="                                           </g>                                                                                                    ";
+			     html+="                                           <g id=\"grp1\" opacity=\"0\" transform=\"translate(24)\">                                               ";
+			     html+="                                             <circle id=\"oval1\" fill=\"#9FC7FA\" cx=\"2.5\" cy=\"3\" r=\"2\"></circle>                           ";
+			     html+="                                             <circle id=\"oval2\" fill=\"#9FC7FA\" cx=\"7.5\" cy=\"2\" r=\"2\"></circle>                           ";
+			     html+="                                           </g>                                                                                                    ";
+			     html+="                                         </g>                                                                                                      ";
+			     html+="                                       </svg>                                                                                                      ";
+			     html+="                                     </label>                                                                                                      ";
+			     html+="                           </div>                                                                                                                  ";
+			     html+="                       </div>                                                                                                                      ";
+			     html+="                       <div class=\"sprite_bubble_icon\">                                                                                          ";
+			     html+="                           <i class=\"far fa-comment f_size\"></i>                                                                                 ";
+			     html+="                       </div>                                                                                                                      ";
+			     html+="                       <div class=\"sprite_share_icon\" data-name=\"share\">                                                                       ";
+			     html+="                           <i class=\"far fa-paper-plane f_size\"></i>                                                                             ";
+			     html+="                       </div>                                                                                                                      ";
+			     html+="                   </div>                                                                                                                          ";
+			     html+="                   <div class=\"right_icon\">                                                                                                      ";
+			     html+="                       <div class=\"sprite_bookmark_outline\" data-name=\"bookmark\"></div>                                                        ";
+			     html+="                   </div>                                                                                                                          ";
+			     html+="               </div>                                                                                                                              ";
+			     html+="               <div class=\"likes head_text\">                                                                                                     ";
+			     html+="                   좋아요                                                                                                                          ";
+			     html+="                   <span id=\"like-count-39\">"+lcnt.LCNT+"</span>                                                                                 ";
+			     html+="                   <span id=\"bookmark-count-39\"></span>                                                                                          ";
+			     html+="                   개                                                                                                                              ";
+			     html+="               </div>                                                                                                                              ";
+			     html+="               <div class=\"comment_container\">                                                                                                   ";
+			     html+="                   <div class=\"comment\" id=\"comment-list-ajax-post37\">                                                                         ";
+			     html+="                       <div class=\"comment-detail\">                                                                                              ";
+			     html+="                           <div class=\"head_text\">dongdong2</div>                                                                                ";
+			     html+="                           <div>강아지가 너무 귀여워요~!</div>                                                                                     ";
+			     html+="                       </div>                                                                                                                      ";
+			     html+="                   </div>                                                                                                                          ";
+			     html+="               </div>                                                                                                                              ";
+			     html+="               <div class=\"timer\">1시간 전</div>                                                                                                 ";
+			     html+="               <div class=\"comment_container\">                                                                                                   ";
+			     html+="                   <div class=\"comment\" id=\"comment-list-ajax-post37\">                                                                         ";
+			     html+="                       <div class=\"comment-detail\">                                                                                              ";
+			     html+="                           <div class=\"head_text\">dongdong2</div>                                                                                ";
+			     html+="                           <div>강아지가 너무 귀여워요~!</div>                                                                                     ";
+			     html+="                       </div>                                                                                                                      ";
+			     html+="                   </div>                                                                                                                          ";
+			     html+="               </div>                                                                                                                              ";
+			     html+="               <div class=\"timer\">1시간 전</div>                                                                                                 ";
+			     html+="           </div>                                                                                                                                  ";
+			     html+="           <div class=\"cmt_field\" id=\"cmt_field\">                                                                                              ";
+			     html+="               <textarea class=\"cmt_con\" placeholder=\"댓글 달기...\"></textarea>                                                                ";
+			     html+="               <div class=\"m_text head_text\" id=\"add_cmt\">게시</div>                                                                           ";
+			     html+="           </div>                                                                                                                                  ";
+			     html+="       </div>                                                                                                                          ";
+			     html+="   </div>                                                                                                                              ";
+	    	
+		    	 $("#myModal").html(html);
+	    }                                                                                                                                                  
+	    function drawModalImg(md){                                                                                                                         
+			var html ="";                                                                                                                                  
+			var i=1;                                                                                                                                       
+			for(var v of md){                                                                                                                              
 				
 				html+=" <div class=\"slide slide-"+i+"\">                                       ";
                 html+=" <img src=\""+v.FILE_ADR+"\" alt=\"\" />	   							    ";
 	           	html+=" </div>                                                                  ";
 				i++;	
 			}
+			
 			$("#slide-group").html(html);
 		}
+	    function slide(){
+	    	$('.slider').each(function(){
+	            var $this = $(this);
+	            var $group = $this.find('.slide-group');
+	            var $slides = $this.find('.slide');
+	            var buttonArray = [];
+	            var currentIndex = 0;
+
+	            var $nav = $('.slide-nav').find('div');
+	        
+	             $nav.on('click', function (event) {
+	                event.preventDefault();
+	                console.log($(this));
+	                if ($(this).hasClass('next')) {
+	                    if (currentIndex === $slides.length -1) {
+	                        move(0);
+	                    }
+	                    move(currentIndex + 1);
+	                } else {
+	                    if (currentIndex === 0) {
+	                        move($slides.length -1);
+	                    }
+	                    move(currentIndex - 1);
+	                }
+	            });
+
+	        function move(newIndex) {
+	            var animateLeft, slideLeft;
+
+	            if ($group.is(':animated') || currentIndex === newIndex) {
+	                return;
+	            }
+
+	            buttonArray[currentIndex].removeClass('active');
+	            buttonArray[newIndex].addClass('active');
+
+	            if (newIndex > currentIndex) {
+	                slideLeft = '100%';
+	                animateLeft = '-100%';
+	            } else {
+	                slideLeft = '-100%';
+	                animateLeft = '100%';
+	            }
+
+	            $slides.eq(newIndex).css({
+	                left: slideLeft,
+	                display: 'block'
+	            });
+
+	            $group.animate({left: animateLeft}, function() {
+	                $slides.eq(currentIndex).css({display: 'none'});
+	                $slides.eq(newIndex).css({left: 0});
+	                $group.css({left: 0});
+	                currentIndex = newIndex;
+	            });
+	        }
+
+	        $.each($slides, function(index) {
+	            var $button = $('<button type="button" class="slide-btn">&bull;</button>');
+	            if (index === currentIndex) {
+	                $button.addClass('active');
+	            }
+	            $button.on('click', function(){
+	                move(index);
+	            }).appendTo('.slide-buttons');
+	            buttonArray.push($button);
+	        });
+	        })
+	    }
         </script>
 </head>
 
 <body>
-    <div id="menu">
-        <header>
+	<header>
             <div class="cm_menuBar" id="cm_menuBar">
                 <div class="cm_menu__toggler"><span></span></div>
                 <a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
@@ -203,15 +356,19 @@
                     <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
                     <ul class="cm_dropdown-content">
                         <li>
-                            <a href="#" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
+                            <a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
                         </li>
                         <li>
                             <a href="#" class="cm_userinfo">개인정보수정</a>
                         </li>
+                    </ul>
                     </div>
+                    <div class="cm_user_name">
+						<c:if test="${!empty sMNo}">
+							${sMNm}님 어서오세요.
+						</c:if>
+					</div>
                 </div>
-                
-            </div>
         <div class="cm_menu" id="cm_menu">
             <a href="#" class="cm_mLogo">Coronagram</a>
             <a href="#" class="cm_mTitle" id="cm_mTitle">
@@ -258,7 +415,7 @@
                             alt="">    
                     </div>    
                     <div class="profile-user-settings">    
-                        <h1 id="mId" class="profile-user-name">janedoe_</h1>    
+                        
                         <button id="editBtn" class="btn profile-edit-btn">Edit Profile</button>    
                         <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog"
                                 aria-hidden="true"></i></button>
@@ -270,8 +427,8 @@
                         </ul>   
                     </div>   
                     <div class="profile-bio">    
-                        <p><span class="profile-real-name">Jane Doe</span> Lorem ipsum dolor sit, amet consectetur
-                            adipisicing elit 📷✈️🏕️</p>    
+                        
+                        
                     </div>    
                 </div>
                 <!-- End of profile section -->
@@ -279,138 +436,7 @@
             <!-- End of container -->
         </header>
         <div id="myModal" class="modal">
-            <div class="modal-content">
-                <div class="modal_img">
-                    <div class="slider">
-                        <div class="slide-viewer">
-                        <div id="slide-group" class="slide-group">
-
-                        </div>
-                        </div>
-                        <div class="slide-nav">
-                            <div class="prev"></div>
-                            <div class="next"></div>
-                        </div>
-                        <div class="slide-buttons"></div>
-                    </div>
-                </div>
-                <div class="modal_box">
-                    <div class="cmt_head">
-                        <span id="close" class="close">&times;</span> 
-                        <div class="user_container">
-                            <div class="profile_img">
-                                <img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="프로필이미지">
-                            </div>
-                            <div class="user_name">
-                                <div class="nick_name head_text">KindTiger</div>                          
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div class="cmt_sec1">
-                            <div class="user_container">
-                                <div class="profile_img">
-                                    <img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="프로필이미지">
-                                </div>
-                                <div class="user_name">
-                                    <div class="nick_name head_text">KindTiger</div>                          
-                                </div>
-                            </div>
-                            <div class="modal_con"></div>
-                    </div>
-                    <div class="cmt_sec2">
-                        <div class="bottom_icons">
-                            <div class="left_icons">
-                                <div class="heart_btn">
-                                    <div class="sprite_heart_icon_outline" name="39" data-name="heartbeat">
-                                              <input type="checkbox" id="checkbox">
-                                              <label for="checkbox">
-                                                <svg id="heart-svg" viewBox="467 392 58 57" xmlns="http://www.w3.org/2000/svg">
-                                                  <g id="Group" fill="none" fill-rule="evenodd" transform="translate(467 392)">
-                                                    <path d="M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z" id="heart" stroke="#000000" stroke-width="3"></path>
-                                                    <circle id="main-circ" fill="#E2264D" opacity="0" cx="29.5" cy="29.5" r="1.5"></circle>
-                                          
-                                                    <g id="grp7" opacity="0" transform="translate(7 6)">
-                                                      <circle id="oval1" fill="#9CD8C3" cx="2" cy="6" r="2"></circle>
-                                                      <circle id="oval2" fill="#8CE8C3" cx="5" cy="2" r="2"></circle>
-                                                    </g>
-                                          
-                                                    <g id="grp6" opacity="0" transform="translate(0 28)">
-                                                      <circle id="oval1" fill="#CC8EF5" cx="2" cy="7" r="2"></circle>
-                                                      <circle id="oval2" fill="#91D2FA" cx="3" cy="2" r="2"></circle>
-                                                    </g>
-                                          
-                                                    <g id="grp3" opacity="0" transform="translate(52 28)">
-                                                      <circle id="oval2" fill="#9CD8C3" cx="2" cy="7" r="2"></circle>
-                                                      <circle id="oval1" fill="#8CE8C3" cx="4" cy="2" r="2"></circle>
-                                                    </g>
-                                          
-                                                    <g id="grp2" opacity="0" transform="translate(44 6)">
-                                                      <circle id="oval2" fill="#CC8EF5" cx="5" cy="6" r="2"></circle>
-                                                      <circle id="oval1" fill="#CC8EF5" cx="2" cy="2" r="2"></circle>
-                                                    </g>
-                                          
-                                                    <g id="grp5" opacity="0" transform="translate(14 50)">
-                                                      <circle id="oval1" fill="#91D2FA" cx="6" cy="5" r="2"></circle>
-                                                      <circle id="oval2" fill="#91D2FA" cx="2" cy="2" r="2"></circle>
-                                                    </g>
-                                          
-                                                    <g id="grp4" opacity="0" transform="translate(35 50)">
-                                                      <circle id="oval1" fill="#F48EA7" cx="6" cy="5" r="2"></circle>
-                                                      <circle id="oval2" fill="#F48EA7" cx="2" cy="2" r="2"></circle>
-                                                    </g>
-                                          
-                                                    <g id="grp1" opacity="0" transform="translate(24)">
-                                                      <circle id="oval1" fill="#9FC7FA" cx="2.5" cy="3" r="2"></circle>
-                                                      <circle id="oval2" fill="#9FC7FA" cx="7.5" cy="2" r="2"></circle>
-                                                    </g>
-                                                  </g>
-                                                </svg>
-                                              </label>
-                                    </div>
-                                </div>
-                                <div class="sprite_bubble_icon">
-                                    <i class="far fa-comment f_size"></i>
-                                </div>
-                                <div class="sprite_share_icon" data-name="share">
-                                    <i class="far fa-paper-plane f_size"></i>
-                                </div>
-                            </div>
-                            <div class="right_icon">                          
-                                <div class="sprite_bookmark_outline" data-name="bookmark"></div>
-                            </div>     
-                        </div>
-                        <div class="likes head_text">
-                            좋아요
-                            <span id="like-count-39">2,346</span>
-                            <span id="bookmark-count-39"></span>
-                            개
-                        </div>
-                        <div class="comment_container">
-                            <div class="comment" id="comment-list-ajax-post37">
-                                <div class="comment-detail">
-                                    <div class="head_text">dongdong2</div>
-                                    <div>강아지가 너무 귀여워요~!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="timer">1시간 전</div>
-                        <div class="comment_container">
-                            <div class="comment" id="comment-list-ajax-post37">
-                                <div class="comment-detail">
-                                    <div class="head_text">dongdong2</div>
-                                    <div>강아지가 너무 귀여워요~!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="timer">1시간 전</div>
-                    </div>
-                    <div class="cmt_field" id="cmt_field">
-                        <textarea class="cmt_con" placeholder="댓글 달기..."></textarea>
-                        <div class="m_text head_text" id="add_cmt">게시</div>
-                    </div>                
-                </div>                                         
-            </div>
+            
         </div>
         
         <div class="container">

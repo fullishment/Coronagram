@@ -37,8 +37,6 @@ public class DaoUserPage implements IDaoUserPage {
 		return sqlSession.selectOne("userPage.getCmtCnt",params);
 	}
 
-
-
 	@Override
 	public int getFollowingCnt(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
@@ -49,6 +47,25 @@ public class DaoUserPage implements IDaoUserPage {
 	public List<HashMap<String, String>> getMDtlList(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("userPage.getMDtlList",params);
+	}
+
+	@Override
+	public HashMap<String, String> getIntroM(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("userPage.getIntroM",params);
+	}
+
+
+	@Override
+	public List<HashMap<String, String>> getModalCmt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("userPage.getModalCmt",params);
+	}
+
+	@Override
+	public HashMap<String, String> getModalM(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("userPage.getModalM",params);
 	}
 
 }

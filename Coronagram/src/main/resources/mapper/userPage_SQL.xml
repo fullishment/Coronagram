@@ -3,7 +3,7 @@
 <mapper namespace="userPage">
 	<select id="getMPostList" parameterType="hashmap" resultType="hashmap">
 		 <![CDATA[
-		 	SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON, C.DT, C.DEL, NVL(L.LCNT, 0) AS LCNT, NVL(CC.CCNT, 0) AS CCNT,
+		 	SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON, C.DT, C.DEL,
        		ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
 			FROM CRNG C INNER JOIN M M
                     ON C.WRITER_NO = M.M_NO
@@ -13,33 +13,42 @@
                         FROM CRNG_ATTC) CA
                     ON C.WRITING_NO = CA.WRITING_NO
                    AND CA.RNK = 1
-            LEFT OUTER JOIN (SELECT WRITING_NO, COUNT(*) AS CCNT
-                             FROM CRNG_CMT
-                             GROUP BY WRITING_NO) CC
-                         ON C.WRITING_NO = CC.WRITING_NO
-            LEFT OUTER JOIN (SELECT WRITING_NO, COUNT(*) AS LCNT
-                             FROM LK
-                             GROUP BY WRITING_NO) L
-                         ON C.WRITING_NO = L.WRITING_NO
 			WHERE C.DEL = 1
 		 ]]>
 	</select>
-	<select id="getFollowCnt" parameterType="hashmap" resultType="Integer">
-		select count(*) as FPCNT from follow where rp_user = #{m_no}
+	<select id="getModalCmt" parameterType="hashmap" resultType="hashmap">
+		select cc.CMT_WRITER_NO,cc.cmt_con, m.m_nm, m.nick_nm,
+            ROW_NUMBER() OVER(ORDER BY cc.CMT_WRITER_NO DESC) AS RNUM
+            from crng_cmt cc
+            left outer join m m 
+            on cc.CMT_WRITER_NO = m.m_no
+            where WRITER_NO=#{m_no}
 	</select>
-	<select id="getFollowingCnt" parameterType="hashmap" resultType="Integer">
-		select count(*) as FQCNT from follow where rq_user = #{m_no}
+	<select id="getModalM" parameterType="hashmap" resultType="hashmap">
+		select C.WRITER_NO, C.CON, M.M_NM, M.NICK_NM from CRNG C
+            INNER JOIN M M
+            ON C.WRITER_NO = M_NO
+            where m_no=#{m_no} AND WRITING_NO =#{writingNo}
+	</select>
+	<select id="getIntroM" parameterType="hashmap" resultType="hashmap">
+		select m_no,m_nm,nick_nm,intro_con from m where m_no=#{m_no}
+	</select>
+	<select id="getFollowCnt"  resultType="Integer">
+		select NVL(count(*),0) as FPCNT from follow where rp_user = #{m_no}
+	</select>
+	<select id="getFollowingCnt" resultType="Integer">
+		select NVL(count(*),0) as FQCNT from follow where rq_user = #{m_no}
 	</select>
 	<select id="getLikeCnt" parameterType="hashmap" resultType="Integer">
-		select count(*) as lcnt from lk where user_no={m_no} and writing_no = #{writingNo}
+		select NVL(count(*),0) as lcnt from lk where user_no=#{m_no} and writing_no =#{writingNo}
 	</select>
 	<select id="getCmtCnt" parameterType="hashmap" resultType="Integer">
-		select count(*) as ccnt from crng_cmt where user_no={m_no} and writing_no = #{writingNo}
+		select NVL(count(*),0) as ccnt from crng_cmt where WRITER_NO= #{m_no} and writing_no =#{writingNo}
 	</select>
 	<select id="getMDtlList" parameterType="hashmap" resultType="hashmap">
 		SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON, C.DT, C.DEL, 
        ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
-FROM CRNG C INNER JOIN M M
+		FROM CRNG C INNER JOIN M M
                     ON C.WRITER_NO = M.M_NO
                    AND M.M_NO = #{m_no}
             INNER JOIN (SELECT WRITING_NO, FILE_ADR

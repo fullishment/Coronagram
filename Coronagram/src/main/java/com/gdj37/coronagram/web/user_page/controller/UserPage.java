@@ -33,24 +33,36 @@ public class UserPage {
 		Map<String,Object> modelMap= new HashMap<String,Object>();
 
 		List<HashMap<String,String>> list = iServiceUserPage.getMPostList(params);
-		
+		HashMap<String,String> intro = iServiceUserPage.getIntroM(params);
 		int fcnt = iServiceUserPage.getFollowCnt(params);
 		int fingCnt = iServiceUserPage.getFollowingCnt(params);
+		int ccnt = iServiceUserPage.getCmtCnt(params);
+		int lcnt = iServiceUserPage.getLikeCnt(params);
 		
-		modelMap.put("f1", fcnt);
-		modelMap.put("f2", fingCnt);
+		modelMap.put("lcnt", lcnt);
+		modelMap.put("ccnt", ccnt);
+		modelMap.put("fcnt", fcnt);
+		modelMap.put("fingCnt", fingCnt);
+		modelMap.put("intro", intro);
 		modelMap.put("list", list);
 		return mapper.writeValueAsString(modelMap);	
 	}
-	@RequestMapping(value="/modalpages" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@RequestMapping(value="/modalpages" ,method = RequestMethod.GET,produces = "text/json;charset=UTF-8")
 	@ResponseBody
 	public String modalpages(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String,Object> modelMap= new HashMap<String,Object>();
 		
+		HashMap<String,String> modalM = iServiceUserPage.getModalM(params);
 		List<HashMap<String,String>> md = iServiceUserPage.getMDtlList(params);
+		List<HashMap<String,String>> modalCmt = iServiceUserPage.getModalCmt(params);
+		int lcnt = iServiceUserPage.getLikeCnt(params);
 		
+		modelMap.put("lcnt", lcnt);
 		modelMap.put("md", md);
+		modelMap.put("modalM", modalM);
+		modelMap.put("modalCmt", modalCmt);
+		
 		return mapper.writeValueAsString(modelMap);
 	}
 	

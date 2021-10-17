@@ -49,6 +49,24 @@ public class ServiceUserPage implements IServiceUserPage{
 		// TODO Auto-generated method stub
 		return iDaoUserPage.getMDtlList(params);
 	}
+
+	@Override
+	public HashMap<String, String> getIntroM(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.getIntroM(params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getModalCmt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.getModalCmt(params);
+	}
+
+	@Override
+	public HashMap<String, String> getModalM(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.getModalM(params);
+	}
 	
 	
 }
