@@ -13,30 +13,38 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
+	<script type="text/javascript"
+		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" 
+		src="resources/script/jquery/jquery.form.js"></script>
+	<script type="text/javascript">
+	</script>
 </head>
 
 <body>
     <header>
-        <div class="cm_menuBar" id="cm_menuBar">
-            <div class="cm_menu__toggler"><span></span></div>
-            <a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
-            <a href="#" class="cm_home" id="cm_home">Home</a>
-            <a href="#" class="cm_msg" id="cm_msg">Message</a>
-            <a href="#" class="cm_cld" id="cm_cld">Calendar</a>
-            <div class="cm_dropdown">
-                <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
-                <ul class="cm_dropdown-content">
-                    <li>
-                        <a href="#" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
-                    </li>
-                    <li>
-                        <a href="#" class="cm_userinfo">개인정보수정</a>
-                    </li>
-            </div>
-        </div>
-
-        </div>
+                   <div class="cm_menuBar" id="cm_menuBar">
+                <div class="cm_menu__toggler"><span></span></div>
+                <a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
+                <a href="#" class="cm_home" id="cm_home">Home</a>
+                <a href="#" class="cm_msg" id="cm_msg">Message</a>
+                <a href="#" class="cm_cld" id="cm_cld">Calendar</a>
+                <div class="cm_dropdown">
+                    <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
+                    <ul class="cm_dropdown-content">
+                        <li>
+                            <a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
+                        </li>
+                        <li>
+                            <a href="#" class="cm_userinfo">개인정보수정</a>
+                        </li>
+                    </div>
+                    <div class="cm_user_name">
+						<c:if test="${!empty sMNo}">
+							${sMNm}님 어서오세요.
+						</c:if>
+					</div>
+                </div>
         <div class="cm_menu" id="cm_menu">
             <a href="#" class="cm_mLogo">Coronagram</a>
             <a href="#" class="cm_mTitle" id="cm_mTitle">
@@ -121,9 +129,14 @@
                                     <div class="QnaCon">
                                         <p>내용</p><textarea class="QCI" class="border" type="text" placeholder="내용을 입력하세요"></textarea>
                                     </div>
+                                    <div class="qnaImg">
+										<span>이미지</span><input type="button" value="file" class="fileBtn" id="fileBtn" />
+										<span id="fileName"></span><br/> 
+										<input type="hidden" id="mimg" name="mimg" /> <img alt="" src="" id="img" />
+									</div>
                                     <div class="qnaBtn">
-                                        <button class="qnaBtn2">취소</button>
-                                        <button class="qnaBtn1">저장</button>
+                                    	<input type="button" id="addBtnInfo" class="qnaBtn1" value="저장" />
+                                    	<input type="button" id="cancelBtnInfo" class="qnaBtn2" value="취소" />
                                     </div>
                                 </div>
                             </div>
@@ -153,10 +166,14 @@
                                         <div>
                                             <p>내용</p><textarea class="QCI" class="border" type="text" placeholder="내용을 입력하세요"></textarea>
                                         </div>
-
+	                                    <div class="qnaImg">
+											<span>이미지</span><input type="button" value="file" class="fileBtn" id="fileBtn" />
+											<span id="fileName"></span><br/> 
+											<input type="hidden" id="mimg" name="mimg" /> <img alt="" src="" id="img" />
+										</div>
                                         <div class="qnaBtn">
-                                            <button class="qnaBtn2">취소</button>
-                                            <button class="qnaBtn1">저장</button>
+                                    		<input type="button" id="addBtnStep" class="qnaBtn1" value="저장" />
+                                    		<input type="button" id="cancelBtnStep" class="qnaBtn2" value="취소" />
                                         </div>
                                     </div>
                                 </div>

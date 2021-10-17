@@ -108,7 +108,9 @@
         <div class="main">
             <section class="content">
                 <article>
-                    <p>Wolf vinyl hella, jean shorts disrupt skateboard master cleanse hashtag iPhone. Pop-up bicycle
+					<p><img class="infoimg" id="infoimg"
+							src="resources/images/coinfo/coinfo_infopage/infoimg1.png"></p></br>
+					<p>Wolf vinyl hella, jean shorts disrupt skateboard master cleanse hashtag iPhone. Pop-up bicycle
                         rights Brooklyn iPhone Helvetica kitsch Godard, XOXO blog aesthetic beard quinoa. Fixie kale
                         chips PBR&B twee, YOLO raw denim before they sold out photo booth bespoke seitan food truck.
                         Ethical chia before they sold out, trust fund viral ennui you probably haven't heard of them
