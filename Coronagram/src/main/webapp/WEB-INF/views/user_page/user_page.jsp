@@ -58,8 +58,8 @@
 				dataType:"json",
 				data: params,
 				success : function(res){
-					drawList(res.list, res.lcnt,res.ccnt);
-					profileCnt(res.fingCnt,res.fcnt);
+					drawList(res.list);
+					profileCnt(res.fcnt);
 					intro(res.intro);
 					introNm(res.intro);
 				},
@@ -71,7 +71,7 @@
         function intro(intro){
         	var html ="";
         	html+="<h1 id=\"mId\" class=\"profile-user-name\">"+intro.NICK_NM+"</h1>    ";
-        	$(".profile-user-settings").html(html);
+        	$(".profile-user-setting").html(html);
         	
         }
         function introNm(intro){
@@ -80,11 +80,11 @@
         	html+="<div class=\"intro_con\">"+intro.INTRO_CON+"</div>";
         	$(".profile-bio").html(html);
         }
-        function profileCnt(fingCnt,fcnt){
+        function profileCnt(fcnt){
 			var html ="";
 			html +="<li><span class=\"profile-stat-count\"></span> posts</li>";
-		    html +="<li><span class=\"profile-stat-count\">"+fcnt.FPCNT+"</span> followers</li>";
-		    html +="<li><span class=\"profile-stat-count\">"+fingCnt.FQCNT+"</span> following</li>";
+		    html +="<li><span class=\"profile-stat-count\">"+fcnt.FPCNT+"</span>followers</li>";
+		    html +="<li><span class=\"profile-stat-count\">"+fcnt.FQCNT+"</span>following</li>";
 	    	$("#profile-stat").html(html);
         }
 	    function drawList(list){
@@ -110,15 +110,17 @@
 	    function mdDraw(){
 	    	
 	    	var params = $("#addForm").serialize();
-			$.ajax({ 
+			$.ajax({
 				url : "modalpages",
 				type : "get",
 				dataType : "json",
 				data : params,
 				success : function(res){	
-					drawModal(res.modalM,res.lcnt);
+					drawModal(res.modalM);
 					drawModalImg(res.md);
 					console.log(res.modalM);
+					drawModalCmt(res.modalCmt);
+					console.log(res.modalCmt);
 					slide();
 				},
 				error : function(request, status, error){
@@ -127,7 +129,7 @@
 				}
 			});
 	    }
-	    function drawModal(modalM,lcnt){   
+	    function drawModal(modalM){   
 	    	var html ="";
 	    		
 				 html+="   	<div class=\"modal-content\">                                                                                ";
@@ -166,6 +168,7 @@
 			     html+="                       </div>                                                                                  ";
 			     html+="                   </div>                                                                                      ";
 			     html+="                   <div class=\"modal_con\">"+modalM.CON+"</div>                                                               ";
+			     html+="                   <div class=\"modal_cmt\"></div> 																";
 			     html+="           </div>                                                                                              ";
 			     html+="           <div class=\"cmt_sec2\">                                                                              ";
 			     html+="               <div class=\"bottom_icons\">                                                                      ";
@@ -227,28 +230,10 @@
 			     html+="               </div>                                                                                                                              ";
 			     html+="               <div class=\"likes head_text\">                                                                                                     ";
 			     html+="                   좋아요                                                                                                                          ";
-			     html+="                   <span id=\"like-count-39\">"+lcnt.LCNT+"</span>                                                                                 ";
+			     html+="                   <span id=\"like-count-39\">"+modalM.LCNT+"</span>                                                                                 ";
 			     html+="                   <span id=\"bookmark-count-39\"></span>                                                                                          ";
 			     html+="                   개                                                                                                                              ";
 			     html+="               </div>                                                                                                                              ";
-			     html+="               <div class=\"comment_container\">                                                                                                   ";
-			     html+="                   <div class=\"comment\" id=\"comment-list-ajax-post37\">                                                                         ";
-			     html+="                       <div class=\"comment-detail\">                                                                                              ";
-			     html+="                           <div class=\"head_text\">dongdong2</div>                                                                                ";
-			     html+="                           <div>강아지가 너무 귀여워요~!</div>                                                                                     ";
-			     html+="                       </div>                                                                                                                      ";
-			     html+="                   </div>                                                                                                                          ";
-			     html+="               </div>                                                                                                                              ";
-			     html+="               <div class=\"timer\">1시간 전</div>                                                                                                 ";
-			     html+="               <div class=\"comment_container\">                                                                                                   ";
-			     html+="                   <div class=\"comment\" id=\"comment-list-ajax-post37\">                                                                         ";
-			     html+="                       <div class=\"comment-detail\">                                                                                              ";
-			     html+="                           <div class=\"head_text\">dongdong2</div>                                                                                ";
-			     html+="                           <div>강아지가 너무 귀여워요~!</div>                                                                                     ";
-			     html+="                       </div>                                                                                                                      ";
-			     html+="                   </div>                                                                                                                          ";
-			     html+="               </div>                                                                                                                              ";
-			     html+="               <div class=\"timer\">1시간 전</div>                                                                                                 ";
 			     html+="           </div>                                                                                                                                  ";
 			     html+="           <div class=\"cmt_field\" id=\"cmt_field\">                                                                                              ";
 			     html+="               <textarea class=\"cmt_con\" placeholder=\"댓글 달기...\"></textarea>                                                                ";
@@ -258,7 +243,46 @@
 			     html+="   </div>                                                                                                                              ";
 	    	
 		    	 $("#myModal").html(html);
-	    }                                                                                                                                                  
+	    }                        
+	    function drawModalCmt(modalCmt){  
+	    	var html ="";                                                                                                                                  
+			var i=1;                                                                                                                                       
+			for(var list of modalCmt){                                                                                                                              				
+			     html+="               <div class=\"comment_container\">                                                                                                   ";
+			     html+="                   <div class=\"comment\" id=\"comment-list-ajax-post37\">                                                                         ";
+			     html+="                       <div class=\"comment-detail\">                                                                                              ";
+			     html+="                           <div class=\"head_text\">"+list.NICK_NM+"</div>                                                                                ";
+			     html+="                           <div>"+list.CMT_CON+"</div>                                                                                     ";
+			     html+="                       </div>                                                                                                                      ";
+			     html+="                   </div>                                                                                                                          ";
+			     html+="               </div>                                                                                                                              ";
+			     html+="               <div class=\"timer\">"+timeForToday(list.DT)+"</div>                                                                                                 ";
+			}
+			
+			$(".modal_cmt").html(html);
+	    };
+	    function timeForToday(value) {
+	        const today = new Date();
+	        const timeValue = new Date(value);
+
+	        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+	        if (betweenTime < 1) return '방금전';
+	        if (betweenTime < 60) {
+	            return `${betweenTime}분전`;
+	        }
+
+	        const betweenTimeHour = Math.floor(betweenTime / 60);
+	        if (betweenTimeHour < 24) {
+	            return `${betweenTimeHour}시간전`;
+	        }
+
+	        const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+	        if (betweenTimeDay < 365) {
+	            return `${betweenTimeDay}일전`;
+	        }
+
+	        return `${Math.floor(betweenTimeDay / 365)}년전`;
+	 }
 	    function drawModalImg(md){                                                                                                                         
 			var html ="";                                                                                                                                  
 			var i=1;                                                                                                                                       
@@ -415,7 +439,8 @@
                             alt="">    
                     </div>    
                     <div class="profile-user-settings">    
-                        
+                        <div class="profile-user-setting">
+                        </div>
                         <button id="editBtn" class="btn profile-edit-btn">Edit Profile</button>    
                         <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog"
                                 aria-hidden="true"></i></button>

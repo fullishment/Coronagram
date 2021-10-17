@@ -35,15 +35,9 @@ public class UserPage {
 
 		List<HashMap<String,String>> list = iServiceUserPage.getMPostList(params);
 		HashMap<String,String> intro = iServiceUserPage.getIntroM(params);
-		int fcnt = iServiceUserPage.getFollowCnt(params);
-		int fingCnt = iServiceUserPage.getFollowingCnt(params);
-		int ccnt = iServiceUserPage.getCmtCnt(params);
-		int lcnt = iServiceUserPage.getLikeCnt(params);
-		
-		modelMap.put("lcnt", lcnt);
-		modelMap.put("ccnt", ccnt);
+		List<HashMap<String, String>> fcnt = iServiceUserPage.getFollowCnt(params);
+
 		modelMap.put("fcnt", fcnt);
-		modelMap.put("fingCnt", fingCnt);
 		modelMap.put("intro", intro);
 		modelMap.put("list", list);
 		return mapper.writeValueAsString(modelMap);	
@@ -57,14 +51,11 @@ public class UserPage {
 		HashMap<String,String> modalM = iServiceUserPage.getModalM(params);
 		List<HashMap<String,String>> md = iServiceUserPage.getMDtlList(params);
 		List<HashMap<String,String>> modalCmt = iServiceUserPage.getModalCmt(params);
-		int lcnt = iServiceUserPage.getLikeCnt(params);
-		
-		modelMap.put("lcnt", lcnt);
+
 		modelMap.put("md", md);
 		modelMap.put("modalM", modalM);
 		modelMap.put("modalCmt", modalCmt);
 		
 		return mapper.writeValueAsString(modelMap);
 	}
-	
 }

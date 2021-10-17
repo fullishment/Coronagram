@@ -21,6 +21,10 @@ body {
 img {
     display: block;
 }
+.profile-user-settings {
+        display: inline-flex;
+    	min-width: 500px;
+    }
 .modal {
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
@@ -355,8 +359,13 @@ svg {
     padding: 0px 10px 5px 20px;
 }
 .modal_con{
-    height: 350px;
+    height: 150px;
     padding: 0px 10px 0px 20px;
+    overflow: auto;
+}
+.modal_cmt{
+	height: 310px;
+    overflow: auto;
 }
 .profile_img{
     width: 32px;
@@ -501,9 +510,12 @@ svg {
 }
 .follow_btn{
 	background-color: #0095f6;
-	color:white;
-	border:0px;
-	cursor: pointer;
+    color: white;
+    border: 0px;
+    cursor: pointer;
+    width: 130px;
+    border-radius: 10px;
+    margin-left: 10px;
 }
 .follow_btn:hover {
     opacity: .8;
@@ -714,10 +726,8 @@ svg {
     }
 
     .profile-user-settings {
-        flex-basis: calc(100% - 10.7rem);
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: 1rem;
+        display: inline-flex;
+    	min-width: 500px;
     }
 
     .profile-user-name {
@@ -825,11 +835,6 @@ Remove or comment-out the code block below to see how the browser will fall-back
             grid-row: 1 / 2;
         }
 
-        .profile-user-settings {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            grid-gap: 1rem;
-        }
 
         .profile-edit-btn,
         .profile-stats,

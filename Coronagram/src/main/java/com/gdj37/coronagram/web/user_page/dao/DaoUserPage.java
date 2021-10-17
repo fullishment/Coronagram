@@ -20,12 +20,6 @@ public class DaoUserPage implements IDaoUserPage {
 	}
 
 	@Override
-	public int getFollowCnt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("userPage.getFollowCnt",params);
-	}
-
-	@Override
 	public int getLikeCnt(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("userPage.getLikeCnt",params);
@@ -35,12 +29,6 @@ public class DaoUserPage implements IDaoUserPage {
 	public int getCmtCnt(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("userPage.getCmtCnt",params);
-	}
-
-	@Override
-	public int getFollowingCnt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("userPage.getFollowingCnt",params);
 	}
 
 	@Override
@@ -66,6 +54,12 @@ public class DaoUserPage implements IDaoUserPage {
 	public HashMap<String, String> getModalM(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("userPage.getModalM",params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getFollowCnt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("userPage.getFollowCnt",params);
 	}
 
 }

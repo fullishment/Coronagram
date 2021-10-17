@@ -19,11 +19,6 @@ public class ServiceUserPage implements IServiceUserPage{
 		return iDaoUserPage.getMPostList(params);
 	}
 
-	@Override
-	public int getFollowCnt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return iDaoUserPage.getFollowCnt(params);
-	}
 
 	@Override
 	public int getLikeCnt(HashMap<String, String> params) throws Throwable {
@@ -35,13 +30,6 @@ public class ServiceUserPage implements IServiceUserPage{
 	public int getCmtCnt(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return iDaoUserPage.getCmtCnt(params);
-	}
-
-
-	@Override
-	public int getFollowingCnt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return iDaoUserPage.getFollowingCnt(params);
 	}
 
 	@Override
@@ -66,6 +54,13 @@ public class ServiceUserPage implements IServiceUserPage{
 	public HashMap<String, String> getModalM(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return iDaoUserPage.getModalM(params);
+	}
+
+
+	@Override
+	public List<HashMap<String, String>> getFollowCnt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.getFollowCnt(params);
 	}
 	
 	

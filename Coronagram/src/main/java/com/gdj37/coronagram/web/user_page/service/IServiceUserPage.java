@@ -5,23 +5,20 @@ import java.util.List;
 
 public interface IServiceUserPage {
 
-	List<HashMap<String, String>> getMPostList(HashMap<String, String> params) throws Throwable;
+	public List<HashMap<String, String>> getMPostList(HashMap<String, String> params) throws Throwable;
 
-	int getFollowCnt(HashMap<String, String> params) throws Throwable;
+	public int getLikeCnt(HashMap<String, String> params) throws Throwable;
 
-	int getLikeCnt(HashMap<String, String> params) throws Throwable;
-
-	int getCmtCnt(HashMap<String, String> params) throws Throwable;
+	public int getCmtCnt(HashMap<String, String> params) throws Throwable;
 	
+	public List<HashMap<String, String>> getMDtlList(HashMap<String, String> params) throws Throwable;
+     
+	public HashMap<String, String> getIntroM(HashMap<String, String> params) throws Throwable;
+     
+	public HashMap<String, String> getModalM(HashMap<String, String> params) throws Throwable;
+     
+	public List<HashMap<String, String>> getModalCmt(HashMap<String, String> params) throws Throwable;
 
-	int getFollowingCnt(HashMap<String, String> params)throws Throwable;
-
-	List<HashMap<String, String>> getMDtlList(HashMap<String, String> params) throws Throwable;
-
-	HashMap<String, String> getIntroM(HashMap<String, String> params) throws Throwable;
-
-	HashMap<String, String> getModalM(HashMap<String, String> params) throws Throwable;
-
-	List<HashMap<String, String>> getModalCmt(HashMap<String, String> params) throws Throwable;
+	public List<HashMap<String, String>> getFollowCnt(HashMap<String, String> params) throws Throwable;
 
 }
