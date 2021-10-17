@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<!DOCTYPE html>	
 <html lang="ko">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>CodePen - Responsive Login Form</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="resources/css/login/login.css?after">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
@@ -54,8 +53,9 @@
     <div class="left">
       <div class="overlay">
         <h1>Coronagram</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Curabitur et est sed felis aliquet sollicitudin</p>
+        <p>오른쪽 id 와 비밀번호를 입력해주세요</p>
+        <p>비회원이시라면 회원가입을 눌러 가입을 진행해주세요</p>
+        <p>아이디와 비밀번호를 잊으셨다면 ID/PW찾기를 클릭해주세요</p>
       </div>
     </div>
 
@@ -78,8 +78,6 @@
         <button id="loginBtn" class="login_btn">로그인</button>      
         <a href="sign_up" id="joinBtn"><button class="join_btn">가입</button></a> 
         <a href="find_idpw" id="findBtn"><button class="find_btn">ID/PW 찾기</button></a> 
-       <!-- <button id="joinBtn" class="join_btn">가입</button>
-        <button id="findBtn" class="find_btn">ID/PW 찾기</button> -->
       </div>
     </div>
 

@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Responsive Login Form</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
@@ -34,8 +34,7 @@
     <div class="left">
       <div class="overlay">
         <h1>Coronagram</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Curabitur et est sed felis aliquet sollicitudin</p>
+        <p>변경할 패스워드를 입력후 비밀번호 변경 버튼을 클릭해주세요</p>
       </div>
     </div>
 
