@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -12,8 +13,84 @@
     <link rel="stylesheet" href="resources/css/admin_user/admin_user.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-	
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			redrawList();
+			$("tbody").on("click","#dtlBtn",function(){
+				$("#m_no").attr("no",$(this).parent.attr("no"));
+				$("#actionForm").attr("action","주소");
+				$("#actionForm").submit();
+			});
+		});
+		function redrawList(){
+	    	var params=$("#actionForm").serialize();
+	    	$.ajax({ 
+				url : "adminUsers",
+				type : "post",
+				dataType : "json",
+				data : params,
+				success : function(res){
+					listDraw(res.list);
+					drawPaging(res.pb);
+				},
+				error : function(request, status, error){
+					console.log(error);
+				}
+			});
+	    }
+		function listDraw(list){ 
+			var html ="";
+			for(var data of list){
+				html+="		<tr no=\""+data.M_NO+"\">                 ";
+			    html+="       <td>"+data.M_NO+"</td>     ";
+			    html+="       <td>"+data.M_ID+"</td>     ";
+			    html+="       <td>"+data.M_NM+"</td>     ";
+			    html+="       <td>"+data.PHONE+"</td>     ";
+			    html+="       <td>"+data.EMAIL+"</td>     ";
+			    html+="       <td>"+data.M_DT+"</td>     ";
+			    html+="       <td>"+data.POINT+"</td>     ";
+			    html+="       <td>"+data.ACCT_TYPE_NO+"</td>     ";
+			    html+="       <td><input type=\"button\" id=\"dtlBtn\"></input></td>     ";
+			    html+="   </tr>                  ";
+			}
+			$("tbody").html(html);
+		}
+		
+
+		function drawPaging(pb){
+			var html = "";
+			
+			html += "<span page=\"1\">처음</span>     ";
+			
+			if($("#page").val() == "1"){
+				html += "<span page=\"1\">이전</span>     ";
+			} else {
+				html += "<span page=\"" + ($("#page").val() * 1 - 1) + "\">이전</span>   ";
+			}
+			// *1을 하면 자동 숫자변환
+			
+			for(var i = pb.startPcount ; i <= pb.endPcount ; i++){
+				if($("#page").val() == i){
+					html += "<span page=\"" + i + "\"><b>" + i + "</b></span> ";
+				} else {
+					html += "<span page=\"" + i + "\">" + i + "</span>		  ";
+				}
+			}
+			
+			if($("#page").val() == pb.maxPcount){
+				html += "<span page=\"" + pb.maxPcount + "\">다음</span>     ";
+			} else {
+				html += "<span page=\"" + ($("#page").val() * 1 + 1) + "\">다음</span>     ";
+			}
+			
+			html += "<span page=\"" + pb.maxPcount + "\">마지막</span>   ";
+			
+			$(".paging_wrap").html(html);
+		}
+		
+		
+	</script>
 </head>
 
 <body>
@@ -99,11 +176,13 @@
             </div>
 
         </div>
-
+		<form action="#" id="actionForm">
+			<input type="hidden" name="m_no" id="m_no">
+		</form>
         <div class="side_box">
             <table class="user_box">
                     <thead>
-                        <tr>
+                        <tr >
                             <th>회원번호</th>
                             <th>ID</th>
                             <th>이름</th>
@@ -115,95 +194,14 @@
                             <th>관리</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                        </tr>
-                    </tbody>
+                   
             </table>
-
+			 
         </div>
-        <!-- <table>
-            <c:forEach items = "${}" var = "member">
-               <tr>
-                 <td>${}</td>
-                 <td>${}</td>
-                 <td>${}</td>
-                 <td>${}</td>
-                 <td>${}</td>
-                 <td>${}</td>
-                 <td>${}</td>
-                 <td>${}</td>
-                 <td>${}</td>
-               </tr>
-            </c:forEach>
-        </table> -->
+        
     </main>
 
-    <script src="../../resources/script/menu_bar/menu_bar.js"></script>
+    <script src="resources/script/menu_bar/menu_bar.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminUser">
+
+	<select id="getUserList" parameterType="hashmap" resultType="hashmap">
+		SELECT M_NO,M_ID,M_NM,PHONE,EMAIL,M_DT,POINT,ACCT_TYPE_NO
+		FROM M
+	
+	</select>
+	
+	<select id="getAuCnt" parameterType="hashmap" resultType="Integer">
+		SELECT COUNT(*) AS CNT
+		FROM M
+		
+	</select>
+	
+</mapper>

@@ -31,7 +31,6 @@ public class Login {
 	}
 	@RequestMapping(value="/logins")
 	public ModelAndView mLogins (@RequestParam HashMap<String,String> params, 
-
 			HttpSession session,
 			ModelAndView mav)throws Throwable{
 		System.out.println(params);
