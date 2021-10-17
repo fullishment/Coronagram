@@ -94,6 +94,7 @@ transform:rotate(0);
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
     display: flex;
     border-radius: 10px;
+    margin-bottom: 50px;
 }
 .local_info{
     position: absolute;
@@ -214,6 +215,20 @@ textarea {
     opacity: .8;
   }
 
+div h3 {
+	margin-left:-50px;
+}
+.group_table0, .group_table1, .group_table2, .group_table3, .group_table4 {
+	width: 121%;
+    margin-left: -10%;
+    margin-bottom: 50px;
+}
+.group_table0 {
+	margin-top: 50px;
+}
+.group_table1 td {
+	padding : 0 29px;
+}
 
 /* 반응형 */
 @media (max-width: 980px) {

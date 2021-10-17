@@ -11,13 +11,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 <style>
+table {
+  width: 100%;
+  height: 100%;
+  display: block;
+  table-layout: fixed;
+  border-collapse: collapse;
+  position: relative;
+  margin-bottom: 68px;
+  text-align: center;
+}
+  tr:nth-child(even) td {
+    background: #e3e3e3;
+  }
+  
+  th {
+    border-bottom: 2px solid black;
+    background: #fff;
+  }
+  
+  tfoot td {
+    border-top: 1px solid black;
+  }
+  
+  th,
+  td {
+    text-align: center;
+    padding: 6px 10px;
+  }
+  
+  thead,
+  tbody > tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  tbody {
+    display: block;
+    transform: translate(0, 34px);
+    height: 95%;
+    margin-top: -35px;
+    border-bottom : 2px solid black;
+    border-collapse: collapse;
+  }
+
+
 	.paging {
 		float : left;
-		margin-left : 37%;
+	}
+	.paging_wrap {
+		margin: 40px 265px;
 	}
 	.qnaList2 {
         height: 320px;
      }
+     .ans_o {
+		color : green;
+	}
+	.ans_x {
+		color : red;
+		font-weight: 600;
+	}
 </style>
     <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
     <link rel="stylesheet" href="resources/css/admin_qna/admin_qna.css">
@@ -79,9 +134,9 @@ function checkVal(sel) {
 		html += "<td>"+data.Q_DT+"</td>";
 		html += "<td>"
 		if(data.ANS_CON !=null){
-			html += "O";
+			html += "<div class=\"ans_o\">" + "답변완료" + "</div>";
 		} else {
-			html += "답변하기";
+			html += "<div class=\"ans_x\">" + "답변하기" + "</div>";
 		}
 		html += "</td>";
 		html += "</tr>";
@@ -198,27 +253,8 @@ function checkVal(sel) {
             </div>
             <div class="sc-wrap">
                 <div class="sc-html">
-                    <!--<input id="tab-1" type="radio" name="tab" class="scm1" checked><label for="tab-1" class="tab"><p>FAQ 관리</p></label> -->
                     <input id="tab-2" type="radio" name="tab" class="scm2" checked><label for="tab-2" class="tab"><p>Q&A관리</p></label>
                     <div class="sc-form">
-                        <!-- <div class="scm1-htm">
-                            <label for="user" class="sclabel"><p>자주 묻는 질문 관리</p></label>
-                            <div class="group">
-                                <div class="qnaList">
-                                    <table class="scmL" border="1">
-                                        <thead class="scmLT">
-                                            <tr>
-                                                <th><p>번호</p></th>
-                                                <th><p>제목</p></th>
-                                                <th><p>등록일</p></th>
-                                                <th><p>기능</p></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="scm2-htm">
                             <label for="user" class="sclabel"><p>1:1 질문 관리</p></label>
                             <div class="group">
@@ -230,8 +266,8 @@ function checkVal(sel) {
 								   </form>
 								</div>
                                <div class="qnaList2">
-                                <table class="scmL" border="1">
-                                    <thead class="scmLT">
+                                <table>
+                                    <thead>
                                         <tr>
                                             <th><p>번호</p></th>
                                             <th><p>제목</p></th>

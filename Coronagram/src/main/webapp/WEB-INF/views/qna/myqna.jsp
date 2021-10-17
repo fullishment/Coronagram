@@ -24,7 +24,7 @@
         }
 	.back_btn {
 		    float: right;
-	    	margin-top: 55px;
+	    	margin-top: 40px;
             display: inline-block;
             color: white;
             font-size: 1rem;

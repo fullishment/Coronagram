@@ -82,7 +82,6 @@ transform:rotate(0);
 }
 .scMain {
     width: 60%;
-    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
 }
 /* FAQ */
 .scQ {
@@ -96,6 +95,7 @@ transform:rotate(0);
     outline: none;
     font-size: 15px;
     transition: 0.4s;
+    border-radius: 40px;
 }
 
 .SCactive,
@@ -126,6 +126,7 @@ button.scQ:after {
     float: right;
     width: 260px;
     height: 350px;
+    margin-top: 15px;
 }
 /* Q&A */
 html {
@@ -142,7 +143,7 @@ html {
             height: 30px;
         }
         .QCI{
-            height: 250px;
+            height: 245px;
             margin-top: 10px;
             margin-bottom: 10px;
         }
@@ -189,15 +190,10 @@ html {
         p {
             font-family: "Noto Sans KR", sans-serif;
         }
+        .qnaList {
+	     	height: 350px;
+	     }
 /*mysql*/
-		.scmL {
-		    border: 1px solid black;
-		    border-collapse: collapse;
-		    width: 90%;
-			margin: 30px;
-			text-align: center;
-		}
-	
         .scmL2 {
             float: left;
             width: 350px;
