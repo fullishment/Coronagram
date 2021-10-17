@@ -66,7 +66,7 @@ import com.gdj37.coronagram.web.admin_qna.service.IServiceAdmin_Qna;
 					
 					return mapper.writeValueAsString(modelMap);
 				}
-//dtl
+//상세보기
 	@RequestMapping(value="/admin_qna_answer")
 		public ModelAndView admin_qna_answer(@RequestParam HashMap<String, String> params,
 				ModelAndView mav) throws Throwable {
@@ -119,4 +119,31 @@ import com.gdj37.coronagram.web.admin_qna.service.IServiceAdmin_Qna;
 		
 		return mapper.writeValueAsString(modelMap);
 	}
+	//삭제
+		@RequestMapping(value = "/admin_qna_deletes", method = RequestMethod.POST,
+				produces = "text/json;charset=UTF-8")
+		@ResponseBody
+		public String admin_qna_deletes(@RequestParam HashMap<String, String> params) throws Throwable {
+			ObjectMapper mapper = new ObjectMapper();
+
+			Map<String, Object> modelMap = new HashMap<String, Object>();
+			
+			String result = "success";
+			
+			try {
+				int cnt = iServiceAdminQna.getadminQnaDel(params);
+				
+				if(cnt ==0) {
+					result = "failed";
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+				
+				result = "error";
+			}
+			modelMap.put("result", result);
+			
+			return mapper.writeValueAsString(modelMap);
+		}
+	
 }

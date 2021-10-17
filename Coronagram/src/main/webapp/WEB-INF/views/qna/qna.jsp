@@ -254,44 +254,52 @@ function checkVal(sel) {
                     <input id="tab-2" type="radio" name="tab" class="scm2"><label for="tab-2" class="tab"><p>Q&A</p></label>
                     <input id="tab-3" type="radio" name="tab" class="scm3"><label for="tab-3" class="tab"><p>문의내역</p></label>
                     <div class="sc-form">
-                        <div class="scm1-htm">
+                        <div class="scm1-htm"><!-- FAQ -->
                             <label for="user" class="sclabel"><p>자주 묻는 질문</p></label>
                             <div class="group">
                                 <div class="scImg"></div>
                                 <div class="scMain" id="scMain">
-                                    <button class="scQ">Q. 왜이리 어렵나요</button>
+                                    <button class="scQ">Q. 코로나바이러스 감염증은 어떤 질병인가요?</button>
                                     <div class="scA">
-                                        <p>A. 나도 몰라요</p>
+                                        <p> ○ 코로나바이러스감염증-19(코로나19)는 과거에 발견되지 않았던 새로운 코로나 바이러스인 SARS-CoV-2에 의해 발생하는 호흡기 감염병입니다. 이 바이러스에 감염되면 무증상부터 중증에 이르기까지 다양한 임상증상이 나타날 수 있습니다.<br>
+										<br>○ 이 새로운 바이러스와 질병은 2019년 12월 중국 우한에서 처음 보고되었고, 현재 전 세계에 확산되었습니다.</p>
                                     </div>
-                                    <button class="scQ">Q. 왜이리 어렵나요</button>
+                                    <button class="scQ">Q. 코로나는 어떻게 전염되나요</button>
                                     <div class="scA">
-                                        <p>A. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis, laborum ex, eligendi tempore harum saepe, ea corporis at totam ipsum eum inventore veniam itaque fuga repudiandae sit voluptatibus. Error, rerum.
+                                        <p>○ 코로나19를 일으키는 바이러스는 사람에서 사람으로 전파되며 주로 환자와 직접 접촉 또는 호흡기를 통해 배출되는 비말에 의해 전염됩니다. 다시 말해서 코로나19에 감염된 사람이 말을 하거나, 기침이나 재채기, 노래 등을 할 때 생성된 비말이 근처에 있는 사람들의 호흡기에 직접 닿거나, 비말이 묻은 손 또는 물건 등을 만진 뒤 눈, 코 또는 입을 만질 때 전염될 수 있습니다.<br>
+                                        <br>○ 또한 공기 감염은 흔하지 않으나 의료기관의 에어로졸 생성 시술이나 밀폐된 공간에서 장시간 호흡기 비말을 만드는 환경 등 특수상황에서 보통 비말이 도달하는 거리(2미터) 이상까지 바이러스 전파가 가능할 수 있습니다.
                                         </p>
                                     </div>
-                                    <button class="scQ">Q. 왜이리 어렵나요</button>
+                                    <button class="scQ">Q. 음식을 통해 전염될 수 있나요?</button>
                                     <div class="scA">
-                                        <p>A. 나도 몰라요</p>
+                                        <p>○ 현재까지 코로나19가 음식을 통해 전파된다는 증거는 없습니다.<br>
+                                        <br>○ 바이러스가 있는 음식의 포장 용기 표면이나 물체를 만진 후 자신의 입, 코 또는 눈을 만지면 코로나19에 걸릴 수 있지만, 물체의 표면에서 이러한 코로나바이러스의 생존력이 높지 않기 때문에 식품이나 포장 용기를 통해 확산될 위험은 매우 낮습니다.<br>
+                                        <br>○ 안전을 위해서는 항상 음식을 준비하거나 먹기 전에 비누와 물로 30초 동안 손을 씻는 것이 도움이 될 수 있습니다.</p>
                                     </div>
-                                    <button class="scQ">Q. 왜이리 어렵나요</button>
+                                    <button class="scQ">Q. 증상은 어떤 것이 있나요?</button>
                                     <div class="scA">
-                                        <p>A. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi neque in architecto eaque velit eum distinctio aliquid pariatur laboriosam tempore? Veniam at exercitationem quaerat consectetur nostrum, ea ipsam optio saepe?</p>
+                                        <p>○ 코로나19의 가장 흔한 증상은 발열, 마른 기침, 피로이며 그 외에 후각 및 미각 소실, 근육통, 인후통, 콧물, 코막힘, 두통, 결막염, 설사, 피부 증상 등 다양한 증상이 나타날 수 있습니다.<br>
+                                        <br>○ 이러한 증상은 보통 경미하고 점진적으로 나타납니다. 어떤 사람들은 감염되어도 매우 약한 증상만 나타날 수 있습니다.<br>
+                                        <br>○ 대부분의 환자들(약 80%)은 특별한 치료 없이 회복되나, 5명 중 1명 정도는 중증으로 진행할 수 있습니다. 고령자나 고혈압, 심폐질환, 당뇨병이나 암과 같은 기저질환이 있는 사람들은 중증으로 진행될 가능성이 높습니다.</p>
                                     </div>
-                                    <button class="scQ">Q. 왜이리 어렵나요</button>
+                                    <button class="scQ">Q. 검사는 어떻게 이루어지나요?</button>
                                     <div class="scA">
-                                        <p>A. 나도 몰라요</p>
+                                        <p>○ (검체 채취) 검체는 의사, 간호사, 임상병리사가 지정된 장소(선별진료소 등)에서 채취합니다. 필수 검체는 상기도 검체이며, 하기도 검체는 가래가 있는 환자에서 채취합니다. 검체 채취 시 불편감ㆍ통증이 있을 수 있습니다.</p>
                                     </div>
-                                    <button class="scQ">Q. 왜이리 어렵나요</button>
+                                    <button class="scQ">Q. 코로나19에서 회복되면 면역이 생기나요?</button>
                                     <div class="scA">
-                                        <p>A. 나도 몰라요</p>
+                                        <p>○ 아직까지 코로나19에 감염되었던 사람이 다시 감염될 수 있는지에 대한 정보는 부족합니다. 재감염이 가능한지에 대한 연구가 전 세계 여러 곳에서 진행중입니다.</p>
                                     </div>
-                                    <button class="scQ">Q. 왜이리 어렵나요</button>
+                                    <button class="scQ">Q. 반려동물에게 감염될 수 있나요?</button>
                                     <div class="scA">
-                                        <p>A. 나도 몰라요</p>
+                                        <p>○ 아직까지 코로나19에 감염된 반려동물들이 질병을 사람에게 전염시키고 전파시킬 수 있다는 증거는 없습니다.<br>
+                                        <br>○ 반려동물이 코로나19 바이러스에 감염된 사례들이 보고되었는데, 대부분 코로나19에 감염된 사람과 접촉한 후에 감염되었습니다.<br>
+                                        <br>○ 코로나19나 다른 질병을 예방하기 위해서는, 반려동물이나 반려동물의 물건을 접촉하기 전·후에 손을 물과 비누로 깨끗이 씻는 예방수칙을 잘 지켜야 합니다.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="scm2-htm">
+                        <div class="scm2-htm"><!-- 질문추가 -->
                             <label for="user" class="sclabel"><p>1:1문의하기</p></label>
                             <div class="group">
                             <form action="" id="addForm" method="post">
@@ -314,7 +322,7 @@ function checkVal(sel) {
                                 </div>
                         </div><!-- scm2-htm -->
                     </div><!-- sc-form -->
-                        <div class="scm3-htm">
+                        <div class="scm3-htm"><!-- 문의list -->
                             <label for="user" class="sclabel"><p>문의내역</p></label>
                             <div class="group">
                             <div>

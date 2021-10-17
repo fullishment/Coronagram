@@ -13,4 +13,6 @@ public interface IServiceAdmin_Qna {
 
 	public int getadminQnaUp(HashMap<String, String> params)throws Throwable;
 
+	public int getadminQnaDel(HashMap<String, String> params)throws Throwable;
+
 }

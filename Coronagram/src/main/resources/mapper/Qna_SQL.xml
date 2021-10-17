@@ -7,7 +7,7 @@
 		<select id="getQnaCnt" parameterType="hashmap" resultType="Integer">
 			SELECT COUNT(*) AS CNT
 			FROM QNA
-			WHERE DEL = 0
+			WHERE DEL = 1
 		</select>
 	<!-- list -->
 		<select id="getQnaList" parameterType="hashmap" resultType="hashmap">
@@ -16,7 +16,7 @@
 					SELECT QNA_NO, TITLE, TO_CHAR(Q_DT,'yyyy-mm-dd') AS Q_DT, ANS_CON,
 					ROW_NUMBER() OVER(ORDER BY QNA_NO DESC) AS RNUM
 					FROM QNA
-					WHERE DEL = 0
+					WHERE DEL = 1
 				) QNA
 			WHERE QNA.RNUM BETWEEN #{startCnt} AND #{endCnt}
 		</select>
@@ -30,7 +30,7 @@
 	<!-- add -->
 	 	<insert id="qnaAdd" parameterType="hashmap">
 			INSERT INTO QNA(QNA_NO, WRITER_NO, TITLE, CON, DEL)
-			VALUES (Q_SEQ.NEXTVAL, #{m_no}, #{title}, #{con}, 0)
+			VALUES (Q_SEQ.NEXTVAL, #{m_no}, #{title}, #{con}, 1)
 		</insert>
 	
 <!-- ADMIN -->
@@ -38,7 +38,7 @@
 		<select id="getadminQnaCnt" parameterType="hashmap" resultType="Integer">
 			SELECT COUNT(*) AS CNT
 			FROM QNA
-			WHERE DEL = 0
+			WHERE DEL = 1
 		</select>
 	<!-- list -->
 		<select id="getadminQnaList" parameterType="hashmap" resultType="hashmap">
@@ -47,7 +47,7 @@
 					SELECT QNA_NO, TITLE, TO_CHAR(Q_DT,'yyyy-mm-dd') AS Q_DT, ANS_CON,
 					ROW_NUMBER() OVER(ORDER BY QNA_NO DESC) AS RNUM
 					FROM QNA
-					WHERE DEL = 0
+					WHERE DEL = 1
 				) QNA
 			WHERE QNA.RNUM BETWEEN #{startCnt} AND #{endCnt}
 		</select>
@@ -60,6 +60,11 @@
 	<!-- update -->
 		<update id="getadminQnaUp" parameterType="hashmap">
 			UPDATE QNA SET QNA_NO = #{no}, ANS_CON = #{ansCon}
+			WHERE QNA_NO = #{no}
+		</update>
+	<!-- delete -->
+		<update id="getadminQnaDel" parameterType="hashmap">
+			UPDATE QNA SET DEL = 0
 			WHERE QNA_NO = #{no}
 		</update>
 </mapper>

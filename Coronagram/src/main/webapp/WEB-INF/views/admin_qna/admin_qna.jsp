@@ -198,10 +198,10 @@ function checkVal(sel) {
             </div>
             <div class="sc-wrap">
                 <div class="sc-html">
-                    <input id="tab-1" type="radio" name="tab" class="scm1" checked><label for="tab-1" class="tab"><p>FAQ 관리</p></label>
-                    <input id="tab-2" type="radio" name="tab" class="scm2"><label for="tab-2" class="tab"><p>Q&A관리</p></label>
+                    <!--<input id="tab-1" type="radio" name="tab" class="scm1" checked><label for="tab-1" class="tab"><p>FAQ 관리</p></label> -->
+                    <input id="tab-2" type="radio" name="tab" class="scm2" checked><label for="tab-2" class="tab"><p>Q&A관리</p></label>
                     <div class="sc-form">
-                        <div class="scm1-htm">
+                        <!-- <div class="scm1-htm">
                             <label for="user" class="sclabel"><p>자주 묻는 질문 관리</p></label>
                             <div class="group">
                                 <div class="qnaList">
@@ -218,7 +218,7 @@ function checkVal(sel) {
                                     </table>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="scm2-htm">
                             <label for="user" class="sclabel"><p>1:1 질문 관리</p></label>
                             <div class="group">

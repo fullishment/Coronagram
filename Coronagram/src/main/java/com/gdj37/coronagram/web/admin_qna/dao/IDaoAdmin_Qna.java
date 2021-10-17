@@ -12,5 +12,7 @@ public interface IDaoAdmin_Qna {
 	public HashMap<String, String> getadminQna(HashMap<String, String> params)throws Throwable;
 
 	public int getadminQnaUp(HashMap<String, String> params)throws Throwable;
+
+	public int getadminQnaDel(HashMap<String, String> params)throws Throwable;
 	
 }

@@ -31,4 +31,9 @@ public class DaoAdmin_Qna implements IDaoAdmin_Qna{
 	public int getadminQnaUp(HashMap<String, String> params) throws Throwable {
 		return sqlSession.update("qna.getadminQnaUp", params);
 	}
+
+	@Override
+	public int getadminQnaDel(HashMap<String, String> params) throws Throwable {
+		return sqlSession.update("qna.getadminQnaDel", params);
+	}
 }

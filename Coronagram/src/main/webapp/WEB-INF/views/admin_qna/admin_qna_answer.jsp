@@ -22,6 +22,20 @@
 		padding : 15px;
 		overflow : auto;
 	}
+	.del_btn {
+		display: inline-block;
+		color: white;
+		font-size: 1rem;
+		font-weight: 600;
+		text-align: center;
+		transition: 0.5s;
+		cursor: pointer;
+		width: 60px;
+		height: 30px;
+		border: none;
+		border-radius: 7px;
+		background: #dc3545;
+	}
 </style>
     <link rel="stylesheet" href="resources/css/qna/menu_bar.css?after">
     <link rel="stylesheet" href="resources/css/admin_qna/admin_qna.css?after">
@@ -67,6 +81,31 @@ $(document).ready(function(){
 				}
 			});
 		}
+	});
+//삭제 버튼
+	$("#deleteBtn").on("click",function(){
+		if(confirm("삭제하시겠습니까?")){
+			var params = $("#actionForm").serialize();
+			$.ajax({
+				url: "admin_qna_deletes",
+				type: "post",
+				dataType: "json",
+				data: params,
+				success: function(res){
+					if(res.result== "success"){
+						location.href="admin_qna";
+					}
+					else if(res.result== "failed"){
+						alert("삭제에 실패하였습니다.");
+					}else{
+						alert("삭제중 문제가 발생했습니다.");
+					}
+				},
+				error:function(request,status,error){
+					console.log(error);
+				}
+			});
+		}					
 	});
 });
 function checkVal(sel){
@@ -138,6 +177,21 @@ function checkVal(sel){
         </div>
     </header>
     <main>
+    <div>
+       	<form action="admin_qna" id="backForm" method="post">
+			<input type="hidden" name="searchTxt" value="${param.searchTxt}" />
+			<input type="hidden" name="page" value="${param.page}" />
+			<input type="hidden" name="no" value="${param.no}" />
+		</form>
+	</div>
+	<div>
+		<form action="admin_qna" id="actionForm" method="post">
+			<input type="hidden" name="searchGbn" value="${param.searchGbn}" />
+			<input type="hidden" name="searchTxt" value="${param.searchTxt}" />
+			<input type="hidden" name="page" value="${param.page}" />
+			<input type="hidden" name="no" value="${param.no}" />
+		</form>
+	</div>
         <div class="sc" id="sc">
             <div class="scHead" id="scHead">
                 <div class="scName1" id="scName1">
@@ -154,13 +208,6 @@ function checkVal(sel){
                         <div class="scm2-htm">
                             <label for="user" class="sclabel"><p>1:1 질문 관리</p></label>
                             <div class="group">
-                            	<div>
-                            		<form action="admin_qna" id="backForm" method="post">
-										<input type="hidden" name="searchTxt" value="${param.searchTxt}" />
-										<input type="hidden" name="page" value="${param.page}" />
-										<input type="hidden" name="no" value="${param.no}" />
-									</form>
-                            	</div>
 	                               <form action="#" id="updateForm" method="post">
 	                                <div>
 	                                    <div class="scmL2">
@@ -179,6 +226,7 @@ function checkVal(sel){
 		                             
 		                             	<div class="btnForm">
 		                             		<button  type="button" class="add_btn" id="updateBtn">수정</button>
+		                             		<button  type="button" class="del_btn" id="deleteBtn">삭제</button>
 		                                	<a href="javascript:window.history.back()"><button type="button" class="cancel_btn" id="backForm">목록</button></a>
 		                                </div>
 		                            </form>

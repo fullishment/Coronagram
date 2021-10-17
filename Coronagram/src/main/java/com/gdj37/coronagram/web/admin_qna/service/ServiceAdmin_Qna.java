@@ -32,4 +32,9 @@ public class ServiceAdmin_Qna implements IServiceAdmin_Qna {
 	public int getadminQnaUp(HashMap<String, String> params) throws Throwable {
 		return iDaoAdmin_Qna.getadminQnaUp(params);
 	}
+
+	@Override
+	public int getadminQnaDel(HashMap<String, String> params) throws Throwable {
+		return iDaoAdmin_Qna.getadminQnaDel(params);
+	}
 }
