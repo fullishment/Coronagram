@@ -3,7 +3,7 @@
 <mapper namespace="userPage">
 	<select id="getMPostList" parameterType="hashmap" resultType="hashmap">
 		 <![CDATA[
-		 	SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON, C.DT, C.DEL,
+		 	SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON, C.DT, C.DEL, NVL(L.LCNT, 0) AS LCNT, NVL(CC.CCNT, 0) AS CCNT, 
        		ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
 			FROM CRNG C INNER JOIN M M
                     ON C.WRITER_NO = M.M_NO
@@ -13,6 +13,15 @@
                         FROM CRNG_ATTC) CA
                     ON C.WRITING_NO = CA.WRITING_NO
                    AND CA.RNK = 1
+             LEFT OUTER JOIN (SELECT WRITER_NO, WRITING_NO, COUNT(*) AS CCNT
+                             FROM CRNG_CMT
+                             GROUP BY WRITER_NO,WRITING_NO) CC
+                         ON C.WRITER_NO = CC.WRITER_NO
+                         AND C.WRITING_NO = CC.WRITING_NO
+            LEFT OUTER JOIN (SELECT USER_NO,WRITING_NO, COUNT(*) AS LCNT
+                             FROM LK
+                             GROUP BY USER_NO,WRITING_NO) L
+                         ON C.WRITING_NO = L.WRITING_NO
 			WHERE C.DEL = 1
 		 ]]>
 	</select>

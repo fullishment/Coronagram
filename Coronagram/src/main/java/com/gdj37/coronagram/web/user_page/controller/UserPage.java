@@ -29,6 +29,7 @@ public class UserPage {
 	@RequestMapping(value="/userpages" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
 	@ResponseBody
 	public String userpages(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String,Object> modelMap= new HashMap<String,Object>();
 

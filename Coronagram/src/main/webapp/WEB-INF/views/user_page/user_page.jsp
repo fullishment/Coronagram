@@ -87,7 +87,7 @@
 		    html +="<li><span class=\"profile-stat-count\">"+fingCnt.FQCNT+"</span> following</li>";
 	    	$("#profile-stat").html(html);
         }
-	    function drawList(list,lcnt,ccnt){
+	    function drawList(list){
 			var html ="";
 			
 			for(var data of list){                                                                                    
@@ -97,9 +97,9 @@
 			    html+= "    	<div class=\"gallery-item-info\">                                                              "; 
 			    html+= "        	<ul>                                                                                     "; 
 			    html+= "            <li class=\"gallery-item-likes\"><span class=\"visually-hidden\">Likes:</span><i         "; 
-			    html+= "                    class=\"fas fa-heart\" aria-hidden=\"true\"></i>"+lcnt.LCNT+"</li>               "; 
+			    html+= "                    class=\"fas fa-heart\" aria-hidden=\"true\"></i>"+data.LCNT+"</li>               "; 
 			    html+= "            <li class=\"gallery-item-comments\"><span class=\"visually-hidden\">Comments:</span><i   "; 
-			    html+= "                    class=\"fas fa-comment\" aria-hidden=\"true\"></i>"+ccnt.CCNT+"</li>             "; 
+			    html+= "                    class=\"fas fa-comment\" aria-hidden=\"true\"></i>"+data.CCNT+"</li>             "; 
 			    html+= "        	</ul>                                                                                    ";
 			    html+= "    	</div>                                                                                       "; 
 		    	html+= "</div>                                                                                           "; 
