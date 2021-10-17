@@ -11,31 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 <style>
-	.scmL4 {
-		width: 315px;
-		height: 230px;
-		border: 0px;
-		border-radius: 10px;
-		box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-		font-size: 11pt;
-		margin-top:10px;
-		padding : 15px;
-		overflow : auto;
-	}
-	.del_btn {
-		display: inline-block;
-		color: white;
-		font-size: 1rem;
-		font-weight: 600;
-		text-align: center;
-		transition: 0.5s;
-		cursor: pointer;
-		width: 60px;
-		height: 30px;
-		border: none;
-		border-radius: 7px;
-		background: #dc3545;
-	}
+	
 </style>
     <link rel="stylesheet" href="resources/css/qna/menu_bar.css?after">
     <link rel="stylesheet" href="resources/css/admin_qna/admin_qna.css?after">

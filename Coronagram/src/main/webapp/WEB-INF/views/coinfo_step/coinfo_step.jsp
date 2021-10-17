@@ -16,7 +16,7 @@
 <style>
 	html {
 	overflow-x: hidden;
-	min-height: 4100px;
+	min-height: 3030px;
 	}
 	table {
 		box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
@@ -25,6 +25,9 @@
 	}
 	td {
 		font-size: 9pt;
+	}
+	th {
+		background: #e3e3e3;
 	}
 </style>
 </head>
@@ -489,9 +492,9 @@
                                             <td colspan="2">좌석 두 칸 띄우기 또는 시설면적 6㎡ 당 1명(좌석 없는 경우)</td>
                                         </tr>
                                         <tr>
-                                            <td>운영시간 제한×	</td>
-                                            <td>운영시간 제한×	</td>
-                                            <td>운영시간 제한×	</td>
+                                            <td>운영시간 제한×</td>
+                                            <td>운영시간 제한×</td>
+                                            <td>운영시간 제한×</td>
                                             <td>22시이후 운영‧이용제한</td>
                                         </tr>
                                         <tr>

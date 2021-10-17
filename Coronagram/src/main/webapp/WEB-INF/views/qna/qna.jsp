@@ -10,52 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<style>
-table {
-  width: 100%;
-  height: 100%;
-  display: block;
-  table-layout: fixed;
-  border-collapse: collapse;
-  position: relative;
-  margin-bottom: 68px;
-  text-align: center;
-}
-  tr:nth-child(even) td {
-    background: #e3e3e3;
-  }
-  
-  th {
-    border-bottom: 2px solid black;
-    background: #fff;
-  }
-  
-  tfoot td {
-    border-top: 1px solid black;
-  }
-  
-  th,
-  td {
-    text-align: center;
-    padding: 6px 10px;
-  }
-  
-  thead,
-  tbody > tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-  }
-  
-  tbody {
-    display: block;
-    transform: translate(0, 34px);
-    height: 95%;
-    margin-top: -35px;
-    border-bottom : 2px solid black;
-    border-collapse: collapse;
-  }
-     
+<style> 
 	.paging {
 		float : left;
 	}
@@ -69,8 +24,6 @@ table {
 		color : red;
 		font-weight: 600;
 	}
-	
-	
 </style>
     <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css?after">
     <link rel="stylesheet" href="resources/css/qna/qna.css?after">
