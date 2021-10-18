@@ -111,7 +111,7 @@
                     <div class="sc-form">
                         <div class="scm1-htm">
                             <label for="user" class="sclabel">
-                                <p>사회적 거리두기 단계</p>
+                                <!-- <p>사회적 거리두기 단계</p> -->
                             </label>
                             <div class="group">
                                 <div class="map">                                  
@@ -268,7 +268,7 @@
                         </div>
                         <div class="scm2-htm">
                             <label for="user" class="sclabel">
-                                <p>거리두기 정보 단계 관리</p>
+                                <!-- <p>거리두기 정보 단계 관리</p> -->
                             </label>
                             <div class="group_table0"> <!-- 단계별수칙 -->
                             <div><h3>사회적 거리두기 단계별 수칙</h3></div>

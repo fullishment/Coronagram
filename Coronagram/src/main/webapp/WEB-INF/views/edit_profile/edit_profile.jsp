@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html lang="ko" >
 <head>
@@ -11,58 +12,103 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
   <link rel="stylesheet" href="resources/css/edit_profile/edit_profile.css">
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
-
-   
-<script type="text/javascript">
-
-function checkVal(sel){
-	if($.trim($(sel).val()) == ""){
-		return true;
-	} else {
-		return false;
-	}
-}
-
+  <script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="resources/script/jquery/jquery.form.js"></script>
+  <script type="text/javascript">
 $(document).ready(function(){
-	$("#cancelBtn").on("click",function(){
-		history.back();
+	$("#cancelBtn").on("click", function(){
+		$("#backForm").submit();
+	});
+	$("#updateForm").on("keypress", "input", function(event){
+		if(event.keyCode == 13){
+			return false;
+		}
 	});
 	$("#updateBtn").on("click", function(){
-		if($("#m_pw").val() != ""){//비밀번호를 변경할 경우
-		  	if(checkVal("#m_ocpw")){//기존 비밀번호 입력여부
-				alert("기존 비밀번호를 입력해 주세요")
-				$("#m_ocpw").focus();
-			} else if($("#opw").val() == $("#m_ocpw").val()){//실 비밀번호와 입력된 기존비밀번호 비교
-				if(checkVal("#m_repw")){
-					alert("비밀번호를 확인을 입력해 주세요")
-					$("#m_repw").focus();
-				} else if($("#m_pw").val() != $("#m_repw").val()){
+		if($("#mPw").val() != "") { 
+			if(checkVal("#ocpw")) { 
+				alert("기존 비밀번호를 입력해 주세요.");
+				$("#ocpw").focus();
+			} else if($("#opw").val() == $("#ocpw").val()) { 
+				if(checkVal("#repw")) {
+					alert("비밀번호 확인을 입력해 주세요.");
+					$("#repw").focus();
+				} else if($("#mPw").val() != $("#repw").val()) {
 					alert("비밀번호 확인이 일치하지 않습니다.");
-					$("#m_pw").val("");
-					$("#m_repw").val("");
-					$("#m_repw").focus();
-				} else if(checkVal("#m_nm")) {
+					$("#mPw").val("");
+					$("#repw").val("");
+					$("#mPw").focus();
+				} else if(checkVal("#mNm")) {
 					alert("이름을 입력해 주세요.");
-					$("#m_nm").focus();
+					$("#mNm").focus();
 				} else {
-					$("#edit_profileForm").submit();
+					var params = $("#updateForm").serialize();
+					
+					$.ajax({
+						url : "edit_profiles",
+						type : "post",
+						dataType : "json",
+						data : params,
+						success : function(res){
+							if(res.result == "success"){
+								$("#backForm").submit();
+							} else if(res.result == "failed"){
+								alert("수정에 실패하였습니다.");
+							} else {
+								alert("수정중 문제가 발생했습니다.");
+							}
+						},
+						error : function(request, status, error){
+							console.log(error);
+						}
+					});
 				}
-			} else {// 비교 결과 같지 않은 경우
+			} else { // 비교 결과 같지 않은 경우
 				alert("기존 비밀번호가 일치하지 않습니다.");
 				$("#ocpw").val("");
 				$("#ocpw").focus();
 			}
-		} else if(checkVal("#m_nm")){
-			alert("이름을 입력해 주세요")
-			$("#m_nm").focus();
-		} else {
-			$("#edit_profileForm").submit();
+		} else if(checkVal("#mNm")) {
+			alert("이름을 입력해 주세요.");
+			$("#mNm").focus();
+		}
+		else if(checkVal("#mPhone")){
+			alert("전화번호를 입력하세요.");
+			$("#Phone").focus();
+		}
+		 else {
+			var params = $("#updateForm").serialize();
+			
+			$.ajax({
+				url : "edit_profiles",
+				type : "post",
+				dataType : "json",
+				data : params,
+				success : function(res){
+					if(res.result == "success"){
+						$("#backForm").submit();
+					} else if(res.result == "failed"){
+						alert("수정에 실패하였습니다.");
+					} else {
+						alert("수정중 문제가 발생했습니다.");
+					}
+				},
+				error : function(request, status, error){
+					console.log(error);
+				}
+			});
 		}
 	});
-});// document ready end
-
-
+});
+//공백함수
+function checkVal(sel){
+	if($.trim($(sel).val())==""){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
 $("input:radio[name='vec']:radio[value='y']").attr("checked",true); 
 $("input:radio[name='vec']").removeAttr("checked");
 </script>    
@@ -135,31 +181,42 @@ $("input:radio[name='vec']").removeAttr("checked");
     
     
   </header>
+  <main>
+	<form action="main_page" id="backForm" method="post">
+			<%-- <input type="hidden" name="searchGbn" value="${param.searchGbn}" />
+			<input type="hidden" name="searchTxt" value="${param.searchTxt}" />
+			<input type="hidden" name="page" value="${param.page}" /> --%>
+		<input type="hidden" name="no" value="${param.no}" />
+	</form>
+	
 <div class="card">
-  <input type="hidden" name="M_NO" value="${param.M_NO}" />
+	<form action="#" id="updateForm" method="post">
+		    
     <div class="input_area">
       <label for="photo-upload" class="custom-file-upload fas">
         <div class="img-wrap img-upload">
           <img for="photo-upload" src="https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"/>
         </div>
       </label>
-    <input type="file" id="photo-upload" class="img-wrap img-upload"><br>
-    <input type="hidden" name="id" value="${param.M_ID}" />
-    <input type="hidden" name="no" value="${param.M_NO}" />
-   
-      <p>이름</p>
-      <input type="text" id="m_nm" name="m_nm" value="${data.M_NM}" /><br>
+		<input type="file" id="photo-upload" class="img-wrap img-upload"><br>
+	    <input type="hidden" id="no" name="no" value="${data.M_NO}" disabled>
+		<input type="hidden" name="no" value="${param.M_NO}" />
+	    <input type="hidden" name="id" value="${param.M_ID}" />
+   		
+      <p>이름 ${sMNm}</p>
+      <input type="text" id="mNm" name="mNm" value="${data.M_NM}"><br>
       <p>닉네임</p>
-      <input type="text" id="nick_nm" name="nick_nm" value="${data.NICK_NM}"><br>
+      <input type="text" id="nickNm" name="nickNnm" value="${data.NICK_NM}"><br>
+
       <input type="hidden" id="opw" value="${data.M_PW}" />
       <p>현재 비밀번호</p>
-      <input type="password" id="m_ocpw"><br>
+      <input type="text" id="ocpw" name="ocmPw"><br>
       <p>변경 비밀번호</p>
-      <input type="password" id="m_pw" name="m_pw"><br>
+      <input type="text" id="mPw" name="mPw"><br>
       <p>변경 비밀번호 확인</p>
-      <input type="password" id="m_repw" ><br>
+      <input type="password" id="repw" name="repw"><br>
       <p>번호</p>
-      <input type="text" id="phone" name="phone" value="${data.PHONE}"><br>
+      <input type="text" id="mPhone" name="mPhone" value="${data.PHONE}" onKeyup="inputTelNumber(this);" maxlength="13"><br>
       <p>이메일</p>
       <input type="text" id="email" name="email" value="${data.EMAIL}"><br>
       백신 접종 여부 <label><input type="radio" id="vac_y" name="vec" value="y"> 예</label>
@@ -174,6 +231,7 @@ $("input:radio[name='vec']").removeAttr("checked");
         </div>
     </form>
 </div>
+</main>
 <script src="resources/script/menu_bar/menu_bar.js"></script>
 <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
 <script>

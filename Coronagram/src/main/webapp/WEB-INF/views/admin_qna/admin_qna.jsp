@@ -50,7 +50,7 @@ table {
   tbody {
     display: block;
     transform: translate(0, 34px);
-    height: 95%;
+    height: 104%;
     margin-top: -35px;
     border-bottom : 2px solid black;
     border-collapse: collapse;

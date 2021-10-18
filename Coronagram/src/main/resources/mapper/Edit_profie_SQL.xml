@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="edit_profile">
+<mapper namespace="editProfile">
+
+	<!-- list -->
+		<select id="getedit_profileList" parameterType="hashmap" resultType="hashmap">
+			SELECT M_NO, M_NM, NICK_NM, M_PW, PHONE, EMAIL, VAC_YN, POST_NO, ADR, DTL_ADR
+			FROM M
+			WHERE M_NO = #{no}
+		</select>
+		
+	<!-- IDcheck -->
+		<select id="getprofileIdCheck" parameterType="hashmap" resultType="Integer">
+			SELECT COUNT(*) AS CNT
+			FROM M
+			WHERE M_ID = #{id}
+		</select>
+		
+	<!-- dtl -->
+		<select id="getedit_profile" parameterType="hashmap" resultType="hashmap">
+			SELECT M_NO, M_NM, NICK_NM, M_PW, PHONE, EMAIL, VAC_YN, POST_NO, ADR, DTL_ADR
+			FROM M
+			WHERE M_NO = #{no}
+		</select>	
 	
+	<!-- update -->
+ 		<update id="update_edit_profile" parameterType="hashmap">
+		    UPDATE M SET M_NM = #{mNm},
+		    			 <if test="M_PW != null and M_PW !=''">
+		       			 M_PW = #{mPw},
+		    			 </if>
+		    			 NICK_NM = #{nickNm}, PHONE = #{mPhone},
+		    			 EMAIL = #{email}, VAC_YN = #{vac_y},
+						 POST_NO = #{"cm_postcode"},  ADR = #{cm_address},  DTL_ADR = #{cm_detailAddress},
+			WHERE M_NO = #{no}
+		</update>
 	
-	<update id="update_edit_profile" parameterType="hashmap">
-    UPDATE m SET m_nm = #{m_nm},
-    			 <if test="m_pw != null and m_pw !=''">
-       			 m_pw = #{m_pw},
-    			 </if>
-    			 NICK_NM = #{NICK_NM},
-				 phone = #{phone},
-				 EMAIL = #{EMAIL},
-				 
-				 
-	WHERE m_no = #{no}
-	</update>
+
 
 </mapper>
