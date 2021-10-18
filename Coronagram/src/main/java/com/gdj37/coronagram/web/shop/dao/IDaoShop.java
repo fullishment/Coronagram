@@ -23,4 +23,6 @@ public interface IDaoShop {
 
 	public int cartDel(Integer integer)throws Throwable;
 
+	public int addOrder(HashMap<String, String> params)throws Throwable;
+
 }

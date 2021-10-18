@@ -292,3 +292,7 @@ $('.chart1').easyPieChart({
     onStart: $.noop,
     onStop: $.noop
 });
+
+$("#cartIcon").on("click",function(){
+	location.href="shopCart";
+});

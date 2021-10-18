@@ -28,7 +28,7 @@ function slideshowSwitch(slideshow,index,auto){
       opacity:0
     });
 
-    TweenMax.to(newSlideImage,1,{
+    TweenMax.to(newSlideImage,1,{ 
       alpha:1,
       onComplete:function(){
         newSlide.addClass('is-active').removeClass('is-new');

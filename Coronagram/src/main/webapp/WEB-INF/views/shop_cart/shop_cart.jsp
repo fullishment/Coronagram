@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
     <script type="text/javascript">
     $(document).ready(function(){
     	redrawCartList();
@@ -20,15 +21,133 @@
     		delCart();
     	});
     	$("#allCheck").on("click",function(){
-    		if($("#allCheck").is("":checked') == true){
-    				$("input[name=\"cartCheck\"]:checked").attr("checked", true);
-    			}else{
-    				$("input[name=\"cartCheck\"]:checked").attr("checked", false);
-    			}
+    		if($("#allCheck").prop("checked")) {
+                $("input[type=checkbox]").prop("checked",true);
+            
+            } else {
+                $("input[type=checkbox]").prop("checked",false);
+
+            }
+    	});
+    	$("#cartList").on("click",".check_btn",function(){
+    		var total = $("input[name=cartCheck]").length;
+    		var checked = $("input[name=cartCheck]:checked").length;
+
+    		if(total != checked){
+    			$("#allCheck").prop("checked", false);
+    		}else {
+    			$("#allCheck").prop("checked", true);
+    		}
+    	});
+    	
+    	
+    	$("#addr_btn").on("click",function(){
+    		cm_execDaumPostcode();
+    	});
+    	
+    	
+    	$("#cartList").on("click",".qt-plus",function(){
+    	   var qt = parseInt($(this).prev().html());
+    	   
+    	   $(this).prev().html(qt + 1);
+    	   
+    	   var total = parseInt($("#totalP").html());
+    	   $("#totalP").html( total + (parseInt($(this).parent().next().children().html())));
+    	   
+    	   
+    	   
+   	   	});
+    	
+   	   	$("#cartList").on("click",".qt-minus",function(){
+   	   		var qt = parseInt($(this).next().html());
+   	   		if(qt > 1){ 
+	   	   		$(this).next().html(qt - 1);	
+   	   		}
+   	   		var total = parseInt($("#totalP").html());
+ 	   		$("#totalP").html( total - (parseInt($(this).parent().next().children().html())));
+    	});
+    	   
+    	   
+    	$("#orderBtn").click(function(){
+    		if(confirm("주문하시겠습니까?")){
+	    		var params=$("#orderForm").serialize();
+	        	$.ajax({ 
+	    			url : "orderAdd",
+	    			type : "post",
+	    			dataType : "json",
+	    			data : params,
+	    			success : function(res){
+	    				var qt = $("span [class=\"qt\"]");
+	    				var valueArr = new Array();
+	    				
+	    				for(var i = 0 ; i< qt.length; i++){	
+    		    			valueArr.push(qt[i].value);
+	    		    	}
+	    				$.ajax({
+	    					url:"orderProAdd",
+	    					type : "post",
+	    					dataType : "json",
+	    					data : {
+	    						valueArr:valueArr
+	    					},
+	    					success : function(res){
+	    						if(result == "success"){
+	    							location.href("prod_shipping");
+	    						}else if(result="failed"){
+	    							alert("주문에 실패했습니다");
+	    						}else{
+	    							alert("주문 중 오류가 발생했습니다");
+	    							console.log(result);
+	    						}
+	    					},
+	    					error : function(request, status,error){
+	    						console.log(error);
+	    					}
+	    				});
+	    			},
+	    			error : function(request, status, error){
+	    				console.log(error);
+	    			}
+	    		});
+    		}
     	});
     });
     
-    
+    function cm_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = ''; 
+                var extraAddr = ''; 
+
+                if (data.userSelectedType === 'R') { 
+                    addr = data.roadAddress;
+                } else { 
+                    addr = data.jibunAddress;
+                }
+
+                if(data.userSelectedType === 'R'){
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    document.getElementById("cm_detailAddress").value = extraAddr;
+                
+                } else {
+                    document.getElementById("cm_detailAddress").value = '';
+                }
+
+                document.getElementById('cm_postcode').value = data.zonecode;
+                document.getElementById("cm_address").value = addr;
+                document.getElementById("cm_detailAddress").focus();
+            } 
+        }).open();
+    }
     
     
     
@@ -79,28 +198,30 @@
 			dataType : "json",
 			data : params,
 			success : function(res){
-				drawCartList(res.list);
-				drawTotal(res.cnt);
+				drawCartList(res.list,res.cnt);
 			},
 			error : function(request, status, error){
 				console.log(error);
 			}
 		});
     }
-    function drawTotal(list){
+    function drawTotal(list,mno){
     	var html="";
-	    html +="<div class=\"entire_item\"><span>전체 상품</span><span>"+list.CNT+"개</span></div>";
-	    html +="<div class=\"order_price\"><span>주문 금액</span><span>"+list.SUM+"P</span></div>";
-    	$("#rcon2_con2").html(html);
+    	html +="<div class=\"entire_item\"><span>전체 상품</span><span>"+cnt.CNT+"개</span></div>";
+	    html +="<div class=\"order_price\"><span>주문 금액</span><span>"+total+"P</span></div>";
+	    html +="<div class=\"order_price\"><span>보유 포인트</span><span>"+cnt.POINT+"P</span></div>";
+	    
     	
     } 
-    function drawCartList(list){
+    function drawCartList(list,cnt){
     	var html="";
+    	var total=0;
+    	var totalhtml = "";
     	
     	for(var data of list){
     			html+="<div class=\"lcon2_up\" no=\"${data.CART_NO}\">								";                                   
    				html+=" <input type=\"checkbox\" name=\"cartCheck\" class=\"check_btn\" value=\""+data.CART_NO+"\">						";                    
-				html+="	<div class=\"up_con1\"></div>                                             ";
+				html+="	<div class=\"up_con1\"><img alt=\"\" src=\""+data.FILE_ADDR+"\"></div>                                             ";
 				html+="	<div class=\"up_con2\">                                                   ";
 				html+="   		<div class=\"con2_title\">"+data.PROD_NM+"</div>                   ";
 				html+="		<div class=\"con2_subtitle\">"+data.CON+"</div>                       ";
@@ -109,15 +230,20 @@
 				html+="		</div>                                                              ";
 				html+="		<div class=\"up_con3\">                                               ";
 				html+="		<span class=\"qt-minus\">-</span>                                     ";
-				html+="		<span class=\"qt\">1</span>                                           ";
+				html+="		<span class=\"qt\" id =\"qt\">1</span>                                           ";
 				html+="		<span class=\"qt-plus\">+</span>                                      ";
 				html+="	</div>                                                                  ";
 				html+="		<div class=\"up_con4\">                                               ";
-				html+="		<p class=\"del_btn\"></p>                                             ";
 				html+="  			<p>"+data.POINT+"P</p>                                      ";
 				html+="	</div>                                                                  ";
 				html+="</div>                                                                   ";
+				total += data.POINT;
     	}
+    	totalhtml +="<div class=\"entire_item\"><span>전체 상품</span><span>"+cnt.CNT+"개</span></div>";
+	    totalhtml +="<div class=\"order_price\"><span>주문 금액</span><span id=\"totalP\">"+total+"</span></div>";
+	    totalhtml +="<div class=\"order_price\"><span>보유 포인트</span><span>"+cnt.POINT+"P</span></div>";
+	    
+    	$("#rcon2_con2").html(totalhtml);
     	$("#cartList").html(html);
     }
     
@@ -165,6 +291,7 @@
             <a href="#" class="cm_sTitle">
                 <div class="cm_cam"></div>Coronagram
             </a>
+            
             <a href="#" class="cm_mTitle" id="cm_mTitle">
                 <div class="cm_user"></div>My Page
                 <ul class="cm_mcon" id="cm_mcon">
@@ -185,6 +312,9 @@
 
     <main>
     <form action="#" id="actionForm" method="post">
+		<input type="hidden" name="sMNo" id="sMNo" value="${sMNo}" />
+	</form>
+	<form action="" id="orderForm" method="post">
 		<input type="hidden" name="sMNo" id="sMNo" value="${sMNo}" />
 	</form>
         <section id="main">
@@ -219,18 +349,22 @@
                 <div class="rcon2">
                     <div class="rcon2_con1">
                         <p>배송지를 등록해 주세요.</p><br>
-                        <button class="add_btn">배송지 등록</button>
+                        <form action="#" id="addrForm" method="post"></form>
+	                        <input type="text" id="cm_postcode" name="cm_postcode" class="post_num" placeholder="우편번호">
+				            <input type="text" id="cm_address" name="adr" placeholder="주소"><br>
+				            <input type="text" id="cm_detailAddress" name="dtl_adr"  placeholder="상세주소"><br>
+                        <button class="addr_btn" id="addr_btn">배송지 등록</button>
                     </div>
                     <div class="rcon2_con2" id="rcon2_con2">
                     </div>
                     <div class="rcon2_con3">
                         <!-- <div class="due_price"><span>결제 예정 금액</span><span>원</span></div> -->
-                        <button class="order_btn">주문하기</button>
+                        <button class="order_btn" id="orderBtn">주문하기</button>
                     </div>
                 </div>
             </div>
         </section>
-
+	</main>
     <script src="resources/script/menu_bar/menu_bar.js"></script>
 </body>
 

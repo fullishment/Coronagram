@@ -77,9 +77,12 @@ public class ShopController {
 	}
 	@RequestMapping(value="/shopCart")
 	public ModelAndView shopCart(ModelAndView mav,HttpSession session, @RequestParam HashMap<String,String> params) throws Throwable {
-		String sMNo=String.valueOf( session.getAttribute("sMNo"));
-		params.put("sMNo", sMNo);
-		mav.setViewName("shop_cart/shop_cart");
+		if(session.getAttribute("sMNo")!=null) {
+			mav.setViewName("shop_cart/shop_cart");
+		}else {
+			mav.setViewName("login/login");
+		}
+		
 		return mav;
 	}
 	
@@ -114,6 +117,24 @@ public class ShopController {
 				result="error";
 			}
 			
+		}
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/orderAdd" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String orderAdd(ModelAndView mav, @RequestParam HashMap<String,String> params,@RequestParam(value="valueArr[]") List<Integer> qtList) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		String result="success";
+		try {
+			int cart = iServiceShop.addOrder(params);
+			if(cart==0) {
+				result="failed";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result="error";
 		}
 		modelMap.put("result", result);
 		return mapper.writeValueAsString(modelMap);

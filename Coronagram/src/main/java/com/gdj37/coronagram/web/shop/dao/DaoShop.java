@@ -65,4 +65,10 @@ public class DaoShop implements IDaoShop {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("shop.cartDel", integer);
 	}
+
+	@Override
+	public int addOrder(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("shop.addOrder",params);
+	}
 }

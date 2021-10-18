@@ -29,20 +29,26 @@
 		WHERE PROD_NO= #{prodNo} AND PRICE = #{price} AND UNIT=#{unit}
 	</insert>
 	<select id="getCartList" parameterType="hashmap" resultType="hashmap">
-		SELECT C.CART_NO, C.M_NO,C.OPT_NO,O.PRICE,O.UNIT,P.CON,P.PROD_NM,P.POINT
+		SELECT C.CART_NO, C.M_NO,C.OPT_NO,O.PRICE,O.UNIT,P.CON,P.PROD_NM,P.POINT,PA.FILE_ADDR
 		FROM CART C 
 		JOIN PRODUCT P
 		    ON C.PROD_NO = P.PROD_NO
 		JOIN PROD_OPT O
 		    ON C.OPT_NO = O.OPT_NO
+        JOIN (  SELECT PROD_NO,FILE_ADDR,RANK() OVER(PARTITION BY PROD_NO ORDER BY ATTC_NO ASC) AS RNK
+                FROM PROD_ATTC) PA
+            ON C.PROD_NO = PA.PROD_NO
+            AND RNK = 1
 		WHERE C.M_NO = #{sMNo}
 	</select>
 	<select id="getCartCnt" parameterType="hashmap" resultType="hashmap">
-		SELECT COUNT(*) AS CNT ,SUM(POINT) AS SUM
+		SELECT COUNT(C.PROD_NO) AS CNT ,SUM(P.POINT) AS SUM,SUM(M.POINT) AS POINT
 		FROM CART C
 		JOIN PRODUCT P
 		    ON C.PROD_NO= P.PROD_NO
-		WHERE M_NO = #{sMNo}
+        INNER JOIN M M
+        ON M.M_NO = C.M_NO
+		WHERE C.M_NO = 6
 	</select>
 	<delete id="cartDel" parameterType="Integer" >
 		DELETE
