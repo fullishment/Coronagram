@@ -5,7 +5,8 @@
 		INSERT INTO INFO(INFO_TITLE, INFO_SUBHD, CON, REP_IMG)
 		VALUES (M1_SEQ.NEXTVAL, #{info_title}, #{info_subhd}, #{con}, #{rep_img})
 	</insert>
-
+	
+<!-- 
 	<select id="getInfolist" parameterType="hashmap" resultType="hashmap">
 		SELECT INFO_TITLE, INFO_SUBHD, TO_CHAR(DT, 'YYYY-MM-DD') AS DT, REP_IMG
 		FROM INFO
@@ -17,5 +18,5 @@
 		FROM INFO
 		WHERE INFO_NO = #{no}
 	</select>
-
+ -->
 </mapper>
