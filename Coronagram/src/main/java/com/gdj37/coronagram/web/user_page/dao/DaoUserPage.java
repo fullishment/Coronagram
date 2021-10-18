@@ -20,18 +20,6 @@ public class DaoUserPage implements IDaoUserPage {
 	}
 
 	@Override
-	public int getLikeCnt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("userPage.getLikeCnt",params);
-	}
-
-	@Override
-	public int getCmtCnt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("userPage.getCmtCnt",params);
-	}
-
-	@Override
 	public List<HashMap<String, String>> getMDtlList(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("userPage.getMDtlList",params);
@@ -66,6 +54,12 @@ public class DaoUserPage implements IDaoUserPage {
 	public int getFollowing(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("userPage.getFollowing",params);
+	}
+
+	@Override
+	public HashMap<String, String> getEditP(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("userPage.getEditP",params);
 	}
 
 }

@@ -6,10 +6,6 @@ import java.util.List;
 public interface IServiceUserPage {
 
 	public List<HashMap<String, String>> getMPostList(HashMap<String, String> params) throws Throwable;
-
-	public int getLikeCnt(HashMap<String, String> params) throws Throwable;
-
-	public int getCmtCnt(HashMap<String, String> params) throws Throwable;
 	
 	public List<HashMap<String, String>> getMDtlList(HashMap<String, String> params) throws Throwable;
      
@@ -22,5 +18,7 @@ public interface IServiceUserPage {
 	public int getFollow(HashMap<String, String> params)throws Throwable;
 
 	public int getFollowing(HashMap<String, String> params)throws Throwable;
+
+	public HashMap<String, String> getEditP(HashMap<String, String> params)throws Throwable;
 
 }

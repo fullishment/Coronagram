@@ -7,10 +7,6 @@ public interface IDaoUserPage {
 
 	public List<HashMap<String, String>> getMPostList(HashMap<String, String> params) throws Throwable;
 
-	public int getLikeCnt(HashMap<String, String> params) throws Throwable;
-
-	public int getCmtCnt(HashMap<String, String> params) throws Throwable;
-
 	public List<HashMap<String, String>> getMDtlList(HashMap<String, String> params) throws Throwable;
 
 	public HashMap<String, String> getIntroM(HashMap<String, String> params)throws Throwable;
@@ -22,6 +18,8 @@ public interface IDaoUserPage {
 	public int getFollow(HashMap<String, String> params)throws Throwable;
 
 	public int getFollowing(HashMap<String, String> params)throws Throwable;
+
+	public HashMap<String, String> getEditP(HashMap<String, String> params)throws Throwable;
 
 
 

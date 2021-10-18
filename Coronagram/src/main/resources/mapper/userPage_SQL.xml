@@ -24,6 +24,7 @@
 			WHERE C.DEL = 1
 		 ]]>
 	</select>
+	
 	<select id="getModalCmt" parameterType="hashmap" resultType="hashmap">
 		select cc.CMT_WRITER_NO,CC.WRITING_NO,cc.cmt_con,m.M_NO, m.m_nm, m.nick_nm,
 			            TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD HH24:MI:SS'),'YYYYMMDD HH24:MI:SS') as dt,
@@ -69,4 +70,10 @@
                     	AND ca.writing_no= #{writingNo}
 			WHERE C.DEL = 1
 	</select>
+	
+	<select id="getEditP" parameterType="hashmap" resultType="hashmap">
+         SELECT M_NO, M_NM, NICK_NM, M_PW, PHONE, EMAIL, VAC_YN, POST_NO, ADR, DTL_ADR
+         FROM M
+         WHERE M_NO = #{m_no}
+      </select>   
 </mapper>

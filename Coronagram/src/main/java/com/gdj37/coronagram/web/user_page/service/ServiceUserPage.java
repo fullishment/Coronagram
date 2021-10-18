@@ -20,18 +20,6 @@ public class ServiceUserPage implements IServiceUserPage{
 	}
 
 	@Override
-	public int getLikeCnt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return iDaoUserPage.getLikeCnt(params);
-	}
-
-	@Override
-	public int getCmtCnt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return iDaoUserPage.getCmtCnt(params);
-	}
-
-	@Override
 	public List<HashMap<String, String>> getMDtlList(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return iDaoUserPage.getMDtlList(params);
@@ -65,6 +53,12 @@ public class ServiceUserPage implements IServiceUserPage{
 	public int getFollowing(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return iDaoUserPage.getFollowing(params);
+	}
+
+	@Override
+	public HashMap<String, String> getEditP(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.getEditP(params);
 	}
 	
 	
