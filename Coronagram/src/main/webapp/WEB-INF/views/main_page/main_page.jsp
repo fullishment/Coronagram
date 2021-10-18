@@ -448,8 +448,8 @@
 
   <article class="midbg">
     <div class="midtext">
-      <h1>POINT SHOP</h1>
-      <h4 style="color: white;">the healthy new collection</h4>
+      <!-- <h1>POINT SHOP</h1>
+      <h4 style="color: white;">the healthy new collection</h4> -->
       <button><b class="btn_now">SHOP NOW</b></button>
     </div>
   </article>

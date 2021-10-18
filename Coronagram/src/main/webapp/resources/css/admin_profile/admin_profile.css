@@ -21,8 +21,8 @@ p{
   border-radius: 25px;
   /* position: fixed; */
   position:absolute;
-  top: 45px;
-  right: 38%;
+  top: 85px;
+  right: 31%;
   display: flex;
   justify-content: center;
   box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);

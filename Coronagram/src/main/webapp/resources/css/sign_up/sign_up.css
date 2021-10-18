@@ -36,10 +36,10 @@ html {
   }
 
   .box-form .left {
-    color: #FFFFFF;
+     color: #FFFFFF;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url(../../images/insta_bg.jpg);
+    background-image: url(../../images/main_page/insta_bg.jpg);
     overflow: hidden;
   }
 

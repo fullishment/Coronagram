@@ -131,7 +131,7 @@
         </div>
     </form>
 </div>
-<script src="../../resources/script/menu_bar/menu_bar.js"></script>
+<script src="resources/script/menu_bar/menu_bar.js"></script>
 <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
 <script>
 function cm_execDaumPostcode() {
