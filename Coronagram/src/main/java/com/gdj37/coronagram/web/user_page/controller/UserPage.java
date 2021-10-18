@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gdj37.coronagram.util.Utils;
 import com.gdj37.coronagram.web.user_page.service.IServiceUserPage;
 
 @Controller
@@ -23,21 +22,11 @@ public class UserPage {
 	public IServiceUserPage iServiceUserPage;
 	
 	@RequestMapping(value="/userpage/{nicknm}" ,method = RequestMethod.GET)
-	public ModelAndView userpage(ModelAndView mav,@RequestParam HashMap<String, String> params, @PathVariable("nicknm") String nicknm) throws Throwable {
-		
-	      if(params.get("m_no") != null) { //주소치고 들어갔을때 리스트로 넘어가게하고 목록에서 클릭해서 no랑 같이 넘어갔을땐 상세보기 잘나오게
-	          HashMap<String, String> data = iServiceUserPage.getEditP(params);
-	          
-	          data.put("M_PW", Utils.decryptAES128(data.get("M_PW")));
-	          
-	          mav.addObject("data", data);
-	          mav.setViewName("edit_profile/edit_profile");
-	       }else {
-	          mav.setViewName("redirect:main_page");
-	       }
-	       
-	       return mav;
+	public ModelAndView userpage(ModelAndView mav, @PathVariable("nicknm") String nicknm) {
+		System.out.println(nicknm);
 
+		mav.setViewName("user_page/user_page");
+		return mav;
 	}
 	@RequestMapping(value="/userpage/userpages" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
 	@ResponseBody

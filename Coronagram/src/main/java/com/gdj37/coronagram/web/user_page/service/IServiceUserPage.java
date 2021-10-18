@@ -19,6 +19,4 @@ public interface IServiceUserPage {
 
 	public int getFollowing(HashMap<String, String> params)throws Throwable;
 
-	public HashMap<String, String> getEditP(HashMap<String, String> params)throws Throwable;
-
 }

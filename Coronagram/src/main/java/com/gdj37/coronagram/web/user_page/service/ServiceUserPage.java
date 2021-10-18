@@ -55,11 +55,6 @@ public class ServiceUserPage implements IServiceUserPage{
 		return iDaoUserPage.getFollowing(params);
 	}
 
-	@Override
-	public HashMap<String, String> getEditP(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return iDaoUserPage.getEditP(params);
-	}
 	
 	
 }

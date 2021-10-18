@@ -24,35 +24,31 @@
 			WHERE C.DEL = 1
 		 ]]>
 	</select>
-	
 	<select id="getModalCmt" parameterType="hashmap" resultType="hashmap">
-		select cc.CMT_WRITER_NO,CC.WRITING_NO,cc.cmt_con,m.M_NO, m.m_nm, m.nick_nm,
-			            TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD HH24:MI:SS'),'YYYYMMDD HH24:MI:SS') as dt,
-			            ROW_NUMBER() OVER(ORDER BY cc.WRITING_NO DESC) AS RNUM
-			            from crng_cmt cc
+			select cc.CMT_WRITER_NO,CC.WRITING_NO,cc.cmt_con,m.M_NO, m.m_nm, m.nick_nm
+	            ,TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD HH24:MI:SS'),'YYYYMMDD HH24:MI:SS') as dt,
+	            ROW_NUMBER() OVER(ORDER BY cc.WRITING_NO DESC) AS RNUM
+	            from crng_cmt cc
 	            INNER JOIN M M
 	                    ON cc.CMT_WRITER_NO = m.m_no
                         where CC.WRITING_NO= #{writingNo}
 	</select>
-	
 	<select id="getModalM" parameterType="hashmap" resultType="hashmap">
 		select C.WRITER_NO, C.CON, M.M_NM, M.NICK_NM,NVL(L.LCNT, 0) AS LCNT 
-	       		from CRNG C
-	            INNER JOIN M M
-	            		     ON C.WRITER_NO = M_NO
-                LEFT OUTER JOIN (SELECT WRITING_NO, COUNT(*) AS LCNT
+            from CRNG C
+            INNER JOIN M M
+            ON C.WRITER_NO = M_NO
+                        LEFT OUTER JOIN (SELECT WRITING_NO, COUNT(*) AS LCNT
                              FROM LK
                              GROUP BY WRITING_NO) L
-                        	 ON C.WRITING_NO = L.WRITING_NO
-	            where del=1 
-	            and m.NICK_NM=#{nickNm}
-	            and l.writing_no = #{writingNo}
+                         ON C.WRITING_NO = L.WRITING_NO
+            where del=1 
+            and m.NICK_NM=#{nickNm}
+            and l.writing_no = #{writingNo}
 	</select>
-	
 	<select id="getIntroM" parameterType="hashmap" resultType="hashmap">
 		select m_no,m_nm,nick_nm,intro_con from m where NICK_NM = #{nickNm}
 	</select>
-	
 	<select id="getFollow" parameterType="hashmap" resultType="Integer">
 		select count(*) fo from follow 
    		where rp_user = (select m_no from m where nick_nm=#{nickNm})
@@ -70,10 +66,4 @@
                     	AND ca.writing_no= #{writingNo}
 			WHERE C.DEL = 1
 	</select>
-	
-	<select id="getEditP" parameterType="hashmap" resultType="hashmap">
-         SELECT M_NO, M_NM, NICK_NM, M_PW, PHONE, EMAIL, VAC_YN, POST_NO, ADR, DTL_ADR
-         FROM M
-         WHERE M_NO = #{m_no}
-      </select>   
 </mapper>

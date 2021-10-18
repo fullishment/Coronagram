@@ -56,10 +56,4 @@ public class DaoUserPage implements IDaoUserPage {
 		return sqlSession.selectOne("userPage.getFollowing",params);
 	}
 
-	@Override
-	public HashMap<String, String> getEditP(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("userPage.getEditP",params);
-	}
-
 }
