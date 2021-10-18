@@ -43,9 +43,11 @@ public class Login {
 			
 			session.setAttribute("sMNo", data.get("M_NO"));
 			session.setAttribute("sMNm", data.get("M_NM"));
+			session.setAttribute("sMNick", data.get("NICK_NM"));
 			session.setAttribute("acctNo", data.get("ACCT_TYPE_NO"));
 
 			System.out.println(session.getAttribute("sMNo"));
+			System.out.println(session.getAttribute("sMNick"));
 			System.out.println(session.getAttribute("acctNo"));
 			mav.setViewName("redirect:main_page");
 		}

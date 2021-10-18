@@ -367,6 +367,13 @@ svg {
 	height: 310px;
     overflow: auto;
 }
+.gallery-item-type {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2.5rem;
+    text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
+}
 .profile_img{
     width: 32px;
     height: 32px;
@@ -667,14 +674,6 @@ svg {
 
 .gallery-item-likes {
     margin-right: 2.2rem;
-}
-
-.gallery-item-type {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 2.5rem;
-    text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
 }
 
 .fa-clone,

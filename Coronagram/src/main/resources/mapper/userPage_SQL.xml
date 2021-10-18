@@ -7,7 +7,7 @@
        		ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
 			FROM CRNG C INNER JOIN M M
                     ON C.WRITER_NO = M.M_NO
-                   AND M.M_NO = #{m_no}
+                   AND M.NICK_NM = #{nickNm}
             INNER JOIN (SELECT WRITING_NO, FILE_ADR,
                                RANK() OVER(PARTITION BY WRITING_NO ORDER BY ATTC_NO ASC) AS RNK
                         FROM CRNG_ATTC) CA
@@ -50,7 +50,7 @@
             and l.writing_no = #{writingNo}
 	</select>
 	<select id="getIntroM" parameterType="hashmap" resultType="hashmap">
-		select m_no,m_nm,nick_nm,intro_con from m where m_no=#{m_no}
+		select m_no,m_nm,nick_nm,intro_con from m where NICK_NM = #{nickNm}
 	</select>
 	<select id="getFollowCnt"  parameterType="hashmap" resultType="hashmap">
 		select NVL(count(case when rp_user=#{m_no} then 1 end),0) as FQCNT,NVL(count(case when rq_user=#{m_no} then 1 end),0) as FPCNT from follow
@@ -71,6 +71,6 @@
                         FROM CRNG_ATTC) CA
                     ON C.WRITING_NO = CA.WRITING_NO
                     AND ca.writing_no= #{writingNo}
-WHERE C.DEL = 1
+		WHERE C.DEL = 1
 	</select>
 </mapper>

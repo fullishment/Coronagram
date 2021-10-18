@@ -22,14 +22,11 @@ public class admin_coinfo {
 	public IServiceAdmin_Coinfo iServiceAdmin_Coinfo;
 	
 	@RequestMapping(value="/admin_coinfo")
-	public ModelAndView admin_coinfo(HttpSession session, ModelAndView mav)throws Throwable {
+	public ModelAndView admin_coinfo(ModelAndView mav)throws Throwable {
 		
-		if(session.getAttribute("acctNo")!=null) {
+		
 			mav.setViewName("admin_coinfo/admin_coinfo");
-		}else {
-			mav.setViewName("login/login");
-		}
-		
+			
 		return mav;
 	}
 

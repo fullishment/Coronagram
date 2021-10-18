@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,23 +21,24 @@ public class UserPage {
 	@Autowired
 	public IServiceUserPage iServiceUserPage;
 	
-	@RequestMapping(value="/userpage")
-	public ModelAndView userpage(ModelAndView mav) {
-		
+	@RequestMapping(value="/userpage/{nicknm}" ,method = RequestMethod.GET)
+	public ModelAndView userpage(ModelAndView mav, @PathVariable("nicknm") String nicknm) {
+		System.out.println(nicknm);
+
 		mav.setViewName("user_page/user_page");
 		return mav;
 	}
-	@RequestMapping(value="/userpages" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@RequestMapping(value="/userpage/userpages" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
 	@ResponseBody
-	public String userpages(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
-		
+	public String userpages(ModelAndView mav,@RequestParam HashMap<String,String> params) throws Throwable {
+		System.out.println(params);
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String,Object> modelMap= new HashMap<String,Object>();
 
 		List<HashMap<String,String>> list = iServiceUserPage.getMPostList(params);
 		HashMap<String,String> intro = iServiceUserPage.getIntroM(params);
 		List<HashMap<String, String>> fcnt = iServiceUserPage.getFollowCnt(params);
-
+		
 		modelMap.put("fcnt", fcnt);
 		modelMap.put("intro", intro);
 		modelMap.put("list", list);

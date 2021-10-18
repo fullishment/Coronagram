@@ -8,8 +8,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
-    <link rel="stylesheet" href="resources/css/user_page/user_page.css">
+    <link rel="stylesheet" href="../resources/css/menu_bar/menu_bar.css">
+    <link rel="stylesheet" href="../resources/css/user_page/user_page.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css'>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -50,16 +50,15 @@
             
         });
         function reloadList(){
-			var params=$("#actionForm").serialize();
+			var params=$("#addrForm").serialize();
 			
 			$.ajax({ 
 				url:"userpages",
-				type:"post",
+				type:"POST",
 				dataType:"json",
-				data: params,
-				success : function(res){
+				data:params,
+				success : function(res){	
 					drawList(res.list);
-					profileCnt(res.fcnt);
 					intro(res.intro);
 					introNm(res.intro);
 				},
@@ -87,12 +86,14 @@
 		    html +="<li><span class=\"profile-stat-count\">"+fcnt.FQCNT+"</span>following</li>";
 	    	$("#profile-stat").html(html);
         }
-	    function drawList(list){
+	    function drawList(list, md){
 			var html ="";
 			
 			for(var data of list){                                                                                    
 				html+= "<div class=\"gallery-item\" tabindex=\"0\" wtno=\""+data.WRITING_NO+"\" no=\""+data.M_NO+"\">                                     "; 
-				
+				html+= "		<div class=\"gallery-item-type\">																";
+				html+= "            <span class=\"visually-hidden\"></span><i class=\"fas fa-clone\" aria-hidden=\"true\"></i>		";
+				html+= "        </div>																						";
 			    html+= "    	<img src=\""+data.FILE_ADR+"\" class=\"gallery-image\" alt=\"\" />							 "; 
 			    html+= "    	<div class=\"gallery-item-info\">                                                              "; 
 			    html+= "        	<ul>                                                                                     "; 
@@ -164,7 +165,7 @@
 			     html+="                           <img src=\"resources/css/p_coronagram/imgs/thumb.jpeg\" alt=\"프로필이미지\">           ";
 			     html+="                       </div>                                                                                  ";
 			     html+="                       <div class=\"user_name\">                                                                 ";
-			     html+="                           <div class=\"nick_name head_text\">"+modalM.M_NM+"</div>                                    ";
+			     html+="                           <div class=\"nick_name head_text\">"+modalM.NICK_NM+"</div>                                    ";
 			     html+="                       </div>                                                                                  ";
 			     html+="                   </div>                                                                                      ";
 			     html+="                   <div class=\"modal_con\">"+modalM.CON+"</div>                                                               ";
@@ -175,7 +176,8 @@
 			     html+="                   <div class=\"left_icons\">                                                                    ";
 			     html+="                       <div class=\"heart_btn\">                                                                 ";
 			     html+="                           <div class=\"sprite_heart_icon_outline\" name=\"39\" data-name=\"heartbeat\">             ";
-			     html+="                                     <input type=\"checkbox\" id=\"checkbox\">                                     ";
+			     											
+			     html+="                                     <input type=\"checkbox\" id=\"checkbox\" >                                     ";
 			     html+="                                     <label for=\"checkbox\">                                                    ";
 			     html+="                                       <svg id=\"heart-svg\" viewBox=\"467 392 58 57\" xmlns=\"http://www.w3.org/2000/svg\"> ";
 			     html+="                                         <g id=\"Group\" fill=\"none\" fill-rule=\"evenodd\" transform=\"translate(467 392)\">";
@@ -246,7 +248,7 @@
 	    }                        
 	    function drawModalCmt(modalCmt){  
 	    	var html ="";                                                                                                                                  
-			var i=1;                                                                                                                                       
+                                                                                                                                    
 			for(var list of modalCmt){                                                                                                                              				
 			     html+="               <div class=\"comment_container\">                                                                                                   ";
 			     html+="                   <div class=\"comment\" id=\"comment-list-ajax-post37\">                                                                         ";
@@ -286,10 +288,10 @@
 	    function drawModalImg(md){                                                                                                                         
 			var html ="";                                                                                                                                  
 			var i=1;                                                                                                                                       
-			for(var v of md){                                                                                                                              
+			for(var list of md){                                                                                                                              
 				
 				html+=" <div class=\"slide slide-"+i+"\">                                       ";
-                html+=" <img src=\""+v.FILE_ADR+"\" alt=\"\" />	   							    ";
+                html+=" <img src=\""+list.FILE_ADR+"\" alt=\"\" />	   							    ";
 	           	html+=" </div>                                                                  ";
 				i++;	
 			}
@@ -473,18 +475,22 @@
         </div>
         <!-- End of container -->
     </main>
-    	   <form action="#" id="actionForm" method="post">
+    		<form action="#" id="addrForm" method="post">
+    			<input type="hidden" name="nickNm" id="nickNm" value="<%= request.getAttribute("nicknm") %>"/>
+    		</form>
+    	   <form action="#" id="actionForm" method="get">
     	   	  <input type="hidden" name="writingNo" id="writingNo" />
     	   	  <input type="hidden" name="m_no" id="m_no" value="${sMNo}"/>
+    	   	  
 		   </form>
            <form action="#" id="editForm" method="post">
                <input type="hidden" name="m_no" id="m_no2" value="${sMNo}"/>  
            </form>
-           <form action="#" id="addForm" method="post">
+           <form action="#" id="addForm" method="get">
     	   	  <input type="hidden" name="writingNo" id="writingNo2"/>
     	   	  <input type="hidden" name="m_no" id="m_no3" value="${sMNo}"/>
 		   </form>
-    <script src="resources/script/menu_bar/menu_bar.js"></script>
+    <script src="../resources/script/menu_bar/menu_bar.js"></script>
 </body>
 
 </html>

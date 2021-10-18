@@ -13,40 +13,84 @@
     <link rel="stylesheet" href="resources/css/admin_coinfo/admin_coinfo.css?after">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script type="text/javascript"
-		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
+		<script type="text/javascript" src="resources/script/jquery/jquery.form.js"></script>
 <script type="text/javascript"
 		src = "resources/script/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#imgBtn").on("click",function(){
-	    $("#imgAtt").click();
-	 });
 
-	 $("#imgAtt").on("change",function(){
-	    $("#fileName").html($(this).val().substring($(this).val().lastIndexOf("\\")+1));
-	    var imgForm = $("#imgForm");
-	    imgForm.ajaxForm({
-	          success:function(res){
-	          if(res.result=="SUCCESS"){
-	             if(res.fileName.length > 0){
-	                $("#imgFile").val(res.fileName[0]);
-	                var imgRep = res.fileName[0].replace('[', '%5B').replace(']', '%5D');
-	                //$("#preView").attr("src", "resources/upload/"+imgRep);
-	                $("#preView").html("<img src=\"resources/upload/"+imgRep+"\" id=\"prevImg"+"\">");
-	             }
-	          }else{
-	             alert("파일 업로드에 실패하였습니다.");
-	          }
-	       },
-	       error:function(req,status,error){
-	          console.log(error);
-	          alert("파일 업로드중 문제가 발생하였습니다.");
-	       }
-	    });               
-	    imgForm.submit();
-	 });
+	$("#cancelBtn").on("click",function(){
+		$("#backForm").submit();
+	});
+	$("#addForm").on("keypress","input",function(event){
+		if(event.keyCode==13){
+			return false;
+		}
+	});
+	$("#imgFile").on("click",function(){
+		$("#imgAtt").click();
+	});
+
+	$("#imgAtt").on("change",function(){
+		$("#fileName").html($(this).val().substring($(this).val().lastIndexOf("\\")+1));
+		var imgForm = $("#imgForm");
+		imgForm.ajaxForm({
+				success:function(res){
+				if(res.result=="SUCCESS"){
+					if(res.fileName.length > 0){
+						$("#imgFile").val(res.fileName[0]);
+						var imgRep = res.fileName[0].replace('[', '%5B').replace(']', '%5D');
+						//$("#preView").attr("src", "resources/upload/"+imgRep);
+						$("#preView").html("<img src=\"resources/upload/coinfo/coinfo_infopage/"+imgRep+"\" id=\"prevImg"+"\">");
+					}
+				}else{
+					alert("파일 업로드에 실패하였습니다.");
+				}
+			},
+			error:function(req,status,error){
+				console.log(error);
+				alert("파일 업로드중 문제가 발생하였습니다.");
+			}
+		});					
+		imgForm.submit();
+	});
+	$("#addBtn").on("click",function(){					
+		if(checkVal("#info_title")){
+			alert("제목을 입력해 주세요");
+			$("#info_title").focus();
+		}
+		else if(checkVal("#info_subhd")){
+			alert("내용을 입력해 주세요");
+			$("#info_subhd").focus();
+		}
+		else if(checkVal("#con")){
+			alert("내용을 입력해 주세요");
+			$("#con").focus();
+		}
+		else{
+			var params = $("#addForm").serialize();
+			$.ajax({
+				url:"coinfoAddAjax",
+				type:"post",
+				dataType:"json",
+				data:params,
+				success:function(res){
+					if(res.result=="success"){
+						location.href="";
+					}
+					else if(res.result=="failed"){
+						alert("작성에 실패하였습니다.");
+					}else{
+						alert("작성중 문제가 발생했습니다.");
+					}
+				},
+				error:function(request,status,error){
+					console.log(error);
+				}
+			});
+		}
+	});
 });
 
 	
@@ -140,9 +184,9 @@ $(document).ready(function(){
                                 <p>코로나 관련 정보 관리</p>
                             </label>
                             <div class="group">
-                            	<form id="fileForm" action="fileUploadAjax" method="post" enctype="multipart/form-data">
-							       <input type="file" name="Att" id="Att" >
-							    </form>
+                            	<form id="imgForm" action="fileUploadAjax" method="post" enctype="multipart/form-data">
+								<input type="file" name="imgAtt" id="imgAtt" accept="image/*" >
+							</form>
                             	<form action="#" id="addForm" method="post">
 	                                <div class="qnaTitle">
 	                                    <div class="qnaTitle1">
@@ -157,9 +201,10 @@ $(document).ready(function(){
 	                                        <p>내용</p><textarea class="QCI" type="text" id="con" name="con" placeholder="내용을 입력하세요"></textarea>
 	                                    </div>
 	                                    <div class="qnaImg">
-											<span>이미지</span><input type="button" value="file" class="fileBtn" id="fileBtn" />									
+											<span>이미지</span><input type="button" value="file" class="fileBtn" name="imgFile" id="imgFile" />
+											<span id="fileName"></span>									
 										   <div id="preView">
-										      <img name="image" id="image" src="resources/images/coinfo/coinfo_infopage/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
+										      <img src="resources/images/coinfo/coinfo_infopage/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
 										   </div>
 										</div>
 	                              	  </div>

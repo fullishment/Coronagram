@@ -12,6 +12,13 @@ p {
 input,select,textarea{
     border-radius: 15px;
 }
+#imgAtt{
+				display:none;
+			}
+#preView{
+	width:200px;
+	hegiht:200px;
+}
 .sc {
     max-width: 800px;
     margin: auto;
