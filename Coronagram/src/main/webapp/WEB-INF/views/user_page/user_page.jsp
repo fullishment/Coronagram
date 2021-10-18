@@ -30,21 +30,24 @@
   		   });
         	
             $(document).on("click",".gallery-item",function(){
-            	
+            	$("#myModal").val("");
             	$("#writingNo").val($(this).attr("wtno"));
+
             	modal.style.display="block";
             	mdDraw();   
-            	slide();
+            	
             });
             var modal = document.getElementById('myModal');
             
             $(".close").on("click",function(){
-            	modal.style.display="none";
+            	document.getElementById("myModal").style.display="none";
+            	reloadList();
             });
 
             window.onclick = function(event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
+                    reloadList();
                 }
             }
             
@@ -54,10 +57,11 @@
 			
 			$.ajax({ 
 				url:"userpages",
-				type:"POST",
+				type:"post",
 				dataType:"json",
 				data:params,
-				success : function(res){	
+				success : function(res){
+					$("#myModal").val("");
 					drawList(res.list);
 					intro(res.intro);
 					introNm(res.intro);
@@ -91,11 +95,13 @@
 			var html ="";
 			
 			for(var data of list){                                                                                    
-				html+= "<div class=\"gallery-item\" tabindex=\"0\" wtno=\""+data.WRITING_NO+"\" no=\""+data.M_NO+"\">                                     "; 
-				html+= "		<div class=\"gallery-item-type\">																";
-				html+= "            <span class=\"visually-hidden\"></span><i class=\"fas fa-clone\" aria-hidden=\"true\"></i>		";
-				html+= "        </div>																						";
-			    html+= "    	<img src=\""+data.FILE_ADR+"\" class=\"gallery-image\" alt=\"\" />							 "; 
+				html+= "<div class=\"gallery-item\" tabindex=\"0\" wtno=\""+data.WRITING_NO+"\" no=\""+data.M_NO+"\">               "; 
+			    html+= "    	<img src=\""+data.FILE_ADR+"\" class=\"gallery-image\" alt=\"\" />									"; 
+			    				if(data.WCNT>1){
+			    html+= "			<div class=\"gallery-item-type\">																	";
+			    html+= "            	<span class=\"visually-hidden\">Gallery</span><i class=\"fas fa-clone\" aria-hidden=\"true\"></i>	";
+			    html+= "        	</div>																						    ";
+			    				}
 			    html+= "    	<div class=\"gallery-item-info\">                                                              "; 
 			    html+= "        	<ul>                                                                                     "; 
 			    html+= "            <li class=\"gallery-item-likes\"><span class=\"visually-hidden\">Likes:</span><i         "; 
@@ -114,16 +120,18 @@
 	    	var params = $("#modalForm").serialize();
 			$.ajax({
 				url : "modalpages",
-				type : "get",
+				type : "post",
 				dataType : "json",
 				data : params,
-				success : function(res){	
+				success : function(res){
+					$("#myModal").val("");
 					drawModal(res.modalM);
 					drawModalImg(res.md);
-					console.log(res.modalM);
+					
 					drawModalCmt(res.modalCmt);
-					console.log(res.modalCmt);
+					
 					slide();
+					
 				},
 				error : function(request, status, error){
 					console.log("에러");
@@ -153,7 +161,6 @@
 			     html+="               <span id=\"close\" class=\"close\">&times;</span>                                                   ";
 			     html+="               <div class=\"user_container\">                                                                    ";
 			     html+="                   <div class=\"profile_img\">                                                                   ";
-			     html+="                       <img src=\"resources/css/p_coronagram/imgs/thumb.jpeg\" alt=\"프로필이미지\">               ";
 			     html+="                   </div>                                                                                      ";
 			     html+="                   <div class=\"user_name\">                                                                     ";
 			     html+="                       <div class=\"nick_name head_text\">"+modalM.NICK_NM+"</div>                                        ";
@@ -163,7 +170,6 @@
 			     html+="           <div class=\"cmt_sec1\">                                                                              ";
 			     html+="                   <div class=\"user_container\">                                                                ";
 			     html+="                       <div class=\"profile_img\">                                                               ";
-			     html+="                           <img src=\"resources/css/p_coronagram/imgs/thumb.jpeg\" alt=\"프로필이미지\">           ";
 			     html+="                       </div>                                                                                  ";
 			     html+="                       <div class=\"user_name\">                                                                 ";
 			     html+="                           <div class=\"nick_name head_text\">"+modalM.NICK_NM+"</div>                                    ";
@@ -244,7 +250,7 @@
 			     html+="           </div>                                                                                                                                  ";
 			     html+="       </div>                                                                                                                          ";
 			     html+="   </div>                                                                                                                              ";
-	    	
+			     
 		    	 $("#myModal").html(html);
 	    }                        
 	    function drawModalCmt(modalCmt){  
@@ -383,7 +389,7 @@
                     <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
                     <ul class="cm_dropdown-content">
                         <li>
-                            <a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
+                            <a href="../logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
                         </li>
                         <li>
                             <a href="#" class="cm_userinfo">개인정보수정</a>
@@ -482,9 +488,9 @@
            <form action="#" id="editForm" method="post">
                <input type="hidden" name="m_no" value="${sMNo}"/>  
            </form>
-           <form action="#" id="modalForm" method="get">
+           <form action="#" id="modalForm" method="post">
     	   	  <input type="hidden" name="writingNo" id="writingNo"/>
-    	   	  <input type="hidden" name="nickNm" value="<%= request.getAttribute("nicknm") %>"/>
+    	   	  <input type="hidden" name="nickNm" value="<%=request.getAttribute("nicknm")%>"/>
 		   </form>
     <script src="../resources/script/menu_bar/menu_bar.js"></script>
 </body>
