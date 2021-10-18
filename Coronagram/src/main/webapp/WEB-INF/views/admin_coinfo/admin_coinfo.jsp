@@ -42,7 +42,7 @@ $(document).ready(function(){
 						$("#imgFile").val(res.fileName[0]);
 						var imgRep = res.fileName[0].replace('[', '%5B').replace(']', '%5D');
 						//$("#preView").attr("src", "resources/upload/"+imgRep);
-						$("#preView").html("<img src=\"resources/upload/coinfo/coinfo_infopage/"+imgRep+"\" id=\"prevImg"+"\">");
+						$("#preView").html("<img src=\"../../resources/images/coinfo/coinfo_infopage/"+imgRep+"\" id=\"prevImg"+"\">");
 					}
 				}else{
 					alert("파일 업로드에 실패하였습니다.");
@@ -204,7 +204,7 @@ $(document).ready(function(){
 											<span>이미지</span><input type="button" value="file" class="fileBtn" name="imgFile" id="imgFile" />
 											<span id="fileName"></span>									
 										   <div id="preView">
-										      <img src="resources/images/coinfo/coinfo_infopage/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
+										      <img src="../../resources/images/coinfo/coinfo_infopage/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
 										   </div>
 										</div>
 	                              	  </div>

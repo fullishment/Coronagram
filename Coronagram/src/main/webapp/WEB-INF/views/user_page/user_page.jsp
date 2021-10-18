@@ -86,7 +86,7 @@
 		    html +="<li><span class=\"profile-stat-count\">"+fcnt.FQCNT+"</span>following</li>";
 	    	$("#profile-stat").html(html);
         }
-	    function drawList(list, md){
+	    function drawList(list){
 			var html ="";
 			
 			for(var data of list){                                                                                    

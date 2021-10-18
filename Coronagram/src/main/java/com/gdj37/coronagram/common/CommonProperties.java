@@ -20,7 +20,7 @@ public class CommonProperties {
 	 * 파일 업로드
 	 */
 	//파일 업로드 경로
-	public static final String FILE_UPLOAD_PATH = "D:\\spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\kkh\\resources\\upload";
+	public static final String FILE_UPLOAD_PATH = "D:\\spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\Coronagram\\resources\\upload";
 	
 	//허용파일 확장자
 	public static final String FILE_EXT = "xls|ppt|doc|xlsx|pptx|docx|hwp|csv|jpg|jpeg|png|gif|bmp|tld|txt|pdf|zip|alz|7z";

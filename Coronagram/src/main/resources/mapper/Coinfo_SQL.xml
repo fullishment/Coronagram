@@ -3,7 +3,7 @@
 <mapper namespace="coinfo">
 	<insert id="coinfoAdd" parameterType="hashmap">
 		INSERT INTO INFO(INFO_TITLE, INFO_SUBHD, CON, REP_IMG)
-		VALUES (M1_SEQ.NEXTVAL, #{info_title}, #{info_subhd}, #{con}, #{rep_img})
+		VALUES (M1_SEQ.NEXTVAL, #{info_title}, #{info_subhd}, #{con}, #{imgFile})
 	</insert>
 	
 <!-- 

@@ -37,9 +37,7 @@ public class UserPage {
 
 		List<HashMap<String,String>> list = iServiceUserPage.getMPostList(params);
 		HashMap<String,String> intro = iServiceUserPage.getIntroM(params);
-		List<HashMap<String, String>> fcnt = iServiceUserPage.getFollowCnt(params);
-		
-		modelMap.put("fcnt", fcnt);
+
 		modelMap.put("intro", intro);
 		modelMap.put("list", list);
 		return mapper.writeValueAsString(modelMap);	
