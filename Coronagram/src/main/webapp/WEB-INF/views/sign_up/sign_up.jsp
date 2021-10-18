@@ -90,7 +90,7 @@
     <div class="left">
       <div class="overlay">
         <h1>Coronagram</h1>
-        <p>이곳은 회원가입 페이지 입니다.<br> 정보를 입력하시고 Sign Up버튼을 눌러주세요.</p>
+        <p>이곳은 회원가입 페이지 입니다.<br> 정보를 입력하시고 가입버튼을 눌러주세요.</p>
       </div>
     </div>
     <div class="right">

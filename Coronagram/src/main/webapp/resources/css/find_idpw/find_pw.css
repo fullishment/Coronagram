@@ -6,7 +6,7 @@ html {
 }
 
 body {
-  background-image: linear-gradient(135deg, #FAB2FF 10%, #1904E5 100%);
+  /* background-image: linear-gradient(135deg, #FAB2FF 10%, #1904E5 100%); */
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -16,17 +16,17 @@ body {
 
 .box-form {
   margin: 0 auto;
-  width: 50%;
-  height: 70%;
+  width: 60%;
+  height: 80%;
   background: #FFFFFF;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex: 1 1 100%;
   align-items: stretch;
-  box-shadow: 0 0 20px 6px #090b6f85;
+  box-shadow: 0 0 20px 6px ;
   position: relative;
-  top:100px;
+  top:10%;
 }
 
 
@@ -35,12 +35,12 @@ body {
   color: #FFFFFF;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url("https://i.pinimg.com/736x/5d/73/ea/5d73eaabb25e3805de1f8cdea7df4a42--tumblr-backgrounds-iphone-phone-wallpapers-iphone-wallaper-tumblr.jpg");
+  /* background-image: url("https://i.pinimg.com/736x/5d/73/ea/5d73eaabb25e3805de1f8cdea7df4a42--tumblr-backgrounds-iphone-phone-wallpapers-iphone-wallaper-tumblr.jpg"); */
   overflow: hidden;
 }
 
 .box-form .left .overlay {
-  padding: 10px;
+  padding: 30px;
   width: 100%;
   height: 100%;
   background: #5961f9ad;
@@ -107,7 +107,7 @@ body {
 
 
 .btn_con{
-
+  margin-left: 5%;
   padding-top: 30px;
   display: inline-block;
   width:300px;
@@ -137,8 +137,7 @@ body {
   font-size: 12px;
   border-radius: 15px;
   display: inline-block;
-  border: 2px solid #b7b7b7;
-  padding: 5px 5px 5px 10px;
+  padding: 4px 0px 4px 2px;
   font-size: 18px;
   transition: 0.2s;
   size:30;
@@ -158,7 +157,7 @@ body {
             height: 30px;
             border: none;
             border-radius: 7px;
-            background: #0d6efd;
+            background: #64d488;
         }
 .add_btn:hover {
     opacity: .8;

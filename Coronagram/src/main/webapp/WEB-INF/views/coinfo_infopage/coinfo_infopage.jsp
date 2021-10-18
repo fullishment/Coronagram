@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +12,10 @@
     <link rel="stylesheet" href="resources/css/coinfo_infopage/coinfo_infopage.css?after">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script type="text/javascript"
+		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+	</script>
 </head>
 
 <body>
@@ -85,13 +90,9 @@
     <main>
         <div class="header">
             <div class="header-banner">
-                <h1>한국 위드코로나 청사진 나왔다… ‘10월 말 11월 초’</h1>
+                <h1>${data.info_title}</h1>
                 <div class="header-subtitle">
-                    <h5>거리두기, 접종완료자 중심 단계적 완화.
-                        중증환자 진료 중심으로 의료체계 전환.
-                        거리두기, 접종완료자 중심 단계적 완화.
-                        중증환자 진료 중심으로 의료체계 전환
-                    </h5>
+                    <h5>${data.info_subhd}</h5>
                 </div>
             </div>
             <div class="clear"></div>
@@ -104,57 +105,14 @@
                     <ul>
             </nav>
         </div>
-
         <div class="main">
             <section class="content">
+            	<div class="infoimg" id="infoimg">
+            		<c:if test="${!empty data.rep_img}">
+						<img src="resources/images/coinfo/coinfo_infopage/${data.rep_img}">
+            		</c:if>
                 <article>
-					<p><img class="infoimg" id="infoimg"
-							src="resources/images/coinfo/coinfo_infopage/infoimg1.png"></p></br>
-					<p>Wolf vinyl hella, jean shorts disrupt skateboard master cleanse hashtag iPhone. Pop-up bicycle
-                        rights Brooklyn iPhone Helvetica kitsch Godard, XOXO blog aesthetic beard quinoa. Fixie kale
-                        chips PBR&B twee, YOLO raw denim before they sold out photo booth bespoke seitan food truck.
-                        Ethical chia before they sold out, trust fund viral ennui you probably haven't heard of them
-                        cred bitters mixtape semiotics deep v jean shorts pork belly occupy shabby chic sriracha ethnic
-                        normcore bicycle rights single-origin coffee slow-carb jean shorts. Twee ethnic mumblecore,
-                        Carles banh mi slow-carb pour-over organic. Ethical tofu narwhal, hoodie viral ennui tousled
-                        paleo. Butcher chia cray iPhone keytar, sustainable Cosby sweater literally try-hard put a bird
-                        on it photo booth ethical street art literally semiotics.</p></br>
-                    <p>Twee 8-bit Blue Bottle, wolf tattooed distillery retro dreamcatcher put a bird on it letterpress
-                        asymmetrical actually Austin crucifix cred. Selfies ethical butcher vegan, umami bitters
-                        literally wolf seitan +1 Intelligentsia Pitchfork. Godard mixtape pork belly Pitchfork, fap food
-                        truck wolf banh mi post-ironic. Narwhal letterpress Etsy direct trade irony pour-over. Cosby
-                        sweater literally Vice DIY butcher selvage shabby chic, XOXO hashtag letterpress single-origin
-                        coffee. Artisan Portland disrupt swag small batch chambray, Neutra bespoke Wes Anderson tofu VHS
-                        ennui. Cosby sweater letterpress 90's shabby chic cornhole, literally YOLO sartorial bitters
-                        Blue Bottle cardigan chambray asymmetrical.</p></br>
-                    <p>Fixie gluten-free sriracha flannel, selfies chambray direct trade. Authentic mixtape semiotics
-                        deep v jean shorts pork belly occupy shabby chic sriracha. Tousled Williamsburg fanny pack High
-                        Life shabby chic Cosby sweater, gastropub organic cornhole post-ironic hella drinking vinegar
-                        cliche wolf pork belly. Wolf selvage cornhole church-key, ethnic raw denim chillwave authentic
-                        asymmetrical Austin synth. Single-origin coffee iPhone Carles, Godard synth chia photo booth fap
-                        mustache authentic pickled direct trade. Literally Vice Echo Park, trust fund viral ennui you
-                        probably haven't heard of them cred biodiesel lomo scenester gastropub chia keffiyeh
-                        Intelligentsia. Blue Bottle blog asymmetrical, pickled XOXO sustainable twee seitan cornhole
-                        90's.</p></br>
-                    <p>Flexitarian bitters cardigan tofu tattooed, Kickstarter Thundercats umami hella raw denim
-                        mumblecore stumptown Godard trust fund. Pop-up organic iPhone, Godard actually vegan fanny pack
-                        Intelligentsia sartorial. Chambray Echo Park you probably haven't heard of them, food truck Wes
-                        Anderson Brooklyn brunch. Scenester Austin street art, sartorial sriracha letterpress hashtag.
-                        Wayfarers vinyl single-origin coffee, fashion axe pork belly hoodie polaroid mumblecore street
-                        art Truffaut. Readymade ethical Carles American Apparel fanny pack twee. Normcore Etsy squid,
-                        farm-to-table XOXO forage selfies distillery photo booth Tonx.</p></br>
-                    <p>Mlkshk flexitarian ethical, narwhal forage bespoke artisan hella plaid vinyl try-hard Tonx
-                        actually keytar. McSweeney's chambray forage next level, mixtape Austin Portland Odd Future
-                        ethical seitan. Gluten-free roof party locavore, pop-up cornhole chambray mlkshk bitters
-                        McSweeney's Kickstarter bespoke. YOLO cred pop-up chambray PBR&B. Kitsch mixtape DIY skateboard
-                        leggings, YOLO ennui chillwave dreamcatcher put a bird on it. Pug artisan PBR&B PBR
-                        dreamcatcher, Marfa Etsy mixtape mustache messenger bag Vice. Plaid lomo pour-over post-ironic,
-                        synth disrupt beard Truffaut church-key Tumblr narwhal Bushwick cred slow-carb tofu.</p></br>
-                    <p>Pitchfork disrupt Vice fixie sriracha Blue Bottle. Carles gastropub skateboard Schlitz, Truffaut
-                        semiotics PBR fanny pack. Truffaut biodiesel aesthetic, skateboard Etsy distillery blog. Craft
-                        beer mumblecore bitters, Tonx fixie viral fingerstache Bushwick occupy. DIY tofu pug lo-fi,
-                        street art flexitarian Truffaut. 90's banjo lo-fi master cleanse selvage Tonx, narwhal tote bag.
-                        Helvetica before they sold out put a bird on it slow-carb normcore lo-fi.</p>
+					${data.con}
                 </article>
 
             </section>

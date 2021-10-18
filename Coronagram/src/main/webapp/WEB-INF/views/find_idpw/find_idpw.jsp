@@ -6,7 +6,6 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Responsive Login Form</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
@@ -43,8 +42,7 @@
     <div class="left">
       <div class="overlay">
         <h1>Coronagram</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Curabitur et est sed felis aliquet sollicitudin</p>
+        <p>ID와 PW를 찾기 위해 정보를 입력 후 찾기 버튼을 눌러주세요</p>
       </div>
     </div>
 
