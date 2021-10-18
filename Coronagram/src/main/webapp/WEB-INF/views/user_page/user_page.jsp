@@ -481,7 +481,7 @@
     			<input type="hidden" name="nickNm" value="<%= request.getAttribute("nicknm") %>"/>
     		</form>
            <form action="#" id="editForm" method="post">
-               <input type="hidden" name="m_no" value="${sMNo}"/>  
+               <input type="hidden" name="m_no" id="m_no" value="${sMNo}"/>  
            </form>
            <form action="#" id="modalForm" method="get">
     	   	  <input type="hidden" name="writingNo" id="writingNo"/>
