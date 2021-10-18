@@ -16,7 +16,7 @@ body {
 
 .box-form {
   margin: 0 auto;
-  width: 50%;
+  width: 700px;
   height: 70%;
   background: #FFFFFF;
   border-radius: 10px;
@@ -113,7 +113,7 @@ body {
   padding: 5px 5px 5px 10px;
   font-size: 18px;
   transition: 0.2s;
-  size:30;
+  width:270px;
   overflow: auto;
 }
 .group input:focus{
@@ -154,7 +154,7 @@ body {
 }
 
 .btn_con{
-  margin-left: 50%;
+  margin-left: 58%;
   padding-top: 30px;
   display: inline-block;
   width:80%;

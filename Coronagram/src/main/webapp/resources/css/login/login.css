@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 html {
-  height: 100%;
+  height: 100vh;
   font-family: "Noto Sans KR", sans-serif;
 }
 
@@ -10,12 +10,12 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: #333333;
-  height: 100%;
+  height: 100vh;
 }
 
 .box-form {
   margin: 0 auto;
-  width: 50%;
+  width: 700px;
   height: 70%;
   background: #FFFFFF;
   border-radius: 10px;
