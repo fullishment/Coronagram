@@ -2,10 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="coinfo">
 	<insert id="coinfoAdd" parameterType="hashmap">
-		INSERT INTO INFO(INFO_TITLE, INFO_SUBHD, CON, REP_IMG)
-		VALUES (M1_SEQ.NEXTVAL, #{info_title}, #{info_subhd}, #{con}, #{imgFile})
+		INSERT INTO INFO(WRITER_NO, INFO_TITLE, INFO_SUBHD, CON, REP_IMG)
+		VALUES (#{m_no}, #{info_title}, #{info_subhd}, #{con}, #{imgFile})
 	</insert>
-	
 <!-- 
 	<select id="getInfolist" parameterType="hashmap" resultType="hashmap">
 		SELECT INFO_TITLE, INFO_SUBHD, TO_CHAR(DT, 'YYYY-MM-DD') AS DT, REP_IMG

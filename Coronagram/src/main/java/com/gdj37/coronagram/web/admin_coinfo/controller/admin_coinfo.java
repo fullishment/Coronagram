@@ -22,7 +22,7 @@ public class admin_coinfo {
 	public IServiceAdmin_Coinfo iServiceAdmin_Coinfo;
 	
 	@RequestMapping(value="/admin_coinfo")
-	public ModelAndView admin_coinfo(ModelAndView mav)throws Throwable {
+	public ModelAndView admincoinfo(ModelAndView mav)throws Throwable {
 		
 		
 			mav.setViewName("admin_coinfo/admin_coinfo");
@@ -33,7 +33,6 @@ public class admin_coinfo {
 	
 
 	@RequestMapping(value = "/coinfoAddAjax", method = RequestMethod.POST, produces = "text/json;charset=UTF-8")
-	
 	@ResponseBody 
 	public String coinfoAddAjax(@RequestParam HashMap<String, String> params) throws Throwable { 
 		ObjectMapper mapper = new ObjectMapper();
@@ -44,7 +43,6 @@ public class admin_coinfo {
 		
 		try {
 			int cnt = iServiceAdmin_Coinfo.coinfoAdd(params);
-			
 			if(cnt == 0) {
 				result = "failed";
 			}

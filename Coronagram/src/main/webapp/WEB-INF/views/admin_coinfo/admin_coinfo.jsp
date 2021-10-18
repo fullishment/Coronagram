@@ -28,7 +28,7 @@ $(document).ready(function(){
 			return false;
 		}
 	});
-	$("#imgFile").on("click",function(){
+	$("#imgBtn").on("click",function(){
 		$("#imgAtt").click();
 	});
 
@@ -42,7 +42,7 @@ $(document).ready(function(){
 						$("#imgFile").val(res.fileName[0]);
 						var imgRep = res.fileName[0].replace('[', '%5B').replace(']', '%5D');
 						//$("#preView").attr("src", "resources/upload/"+imgRep);
-						$("#preView").html("<img src=\"../../resources/images/coinfo/coinfo_infopage/"+imgRep+"\" id=\"prevImg"+"\">");
+						$("#preView").html("<img src=\"../../resources/upload/"+imgRep+"\" id=\"prevImg"+"\">");
 					}
 				}else{
 					alert("파일 업로드에 실패하였습니다.");
@@ -77,7 +77,7 @@ $(document).ready(function(){
 				data:params,
 				success:function(res){
 					if(res.result=="success"){
-						location.href="";
+						location.href="main_page";
 					}
 					else if(res.result=="failed"){
 						alert("작성에 실패하였습니다.");
@@ -92,7 +92,14 @@ $(document).ready(function(){
 		}
 	});
 });
-
+function checkVal(sel){
+	if($.trim($(sel).val())==""){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
 	
 	</script>
 </head>
@@ -188,6 +195,7 @@ $(document).ready(function(){
 								<input type="file" name="imgAtt" id="imgAtt" accept="image/*" >
 							</form>
                             	<form action="#" id="addForm" method="post">
+                            		<input type="hidden" name="m_no" value="${sMNo}">
 	                                <div class="qnaTitle">
 	                                    <div class="qnaTitle1">
 	                                        <span>제목</span><input type="text" class="border" id="info_title" name="info_title" placeholder="내용을 입력하세요">
@@ -201,17 +209,18 @@ $(document).ready(function(){
 	                                        <p>내용</p><textarea class="QCI" type="text" id="con" name="con" placeholder="내용을 입력하세요"></textarea>
 	                                    </div>
 	                                    <div class="qnaImg">
-											<span>이미지</span><input type="button" value="file" class="fileBtn" name="imgFile" id="imgFile" />
-											<span id="fileName"></span>									
+											<span>이미지</span><input type="button" value="file" class="fileBtn" id="imgBtn" />
+											<span id="fileName"></span>		
+											<input type="hidden" name="imgFile" id="imgFile">							
 										   <div id="preView">
-										      <img src="../../resources/images/coinfo/coinfo_infopage/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
+										      <img src="../../resources/upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
 										   </div>
 										</div>
 	                              	  </div>
 	                               </form>
                                 <div class="qnaBtn">
-                                 	<input type="button" id="addBtnInfo" class="qnaBtn1" value="저장" />
-                                 	<input type="button" id="cancelBtnInfo" class="qnaBtn2" value="취소" />
+                                 	<input type="button" id="addBtn" class="qnaBtn1" value="저장" />
+                                 	<input type="button" id="cancelBtn" class="qnaBtn2" value="취소" />
                                 </div>
                             </div>
                         </div>

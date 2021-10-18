@@ -18,8 +18,11 @@ public interface IDaoUserPage {
 	public List<HashMap<String, String>> getModalCmt(HashMap<String, String> params)throws Throwable;
 
 	public HashMap<String, String> getModalM(HashMap<String, String> params)throws Throwable;
+	
+	public int getFollow(HashMap<String, String> params)throws Throwable;
 
-	public List<HashMap<String, String>> getFollowCnt(HashMap<String, String> params)throws Throwable;
+	public int getFollowing(HashMap<String, String> params)throws Throwable;
+
 
 
 }

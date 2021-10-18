@@ -61,6 +61,7 @@
 					drawList(res.list);
 					intro(res.intro);
 					introNm(res.intro);
+					profileCnt(res.follow,res.following);
 				},
 				error : function(request,status,error){
 					console.log(error);
@@ -79,11 +80,11 @@
         	html+="<div class=\"intro_con\">"+intro.INTRO_CON+"</div>";
         	$(".profile-bio").html(html);
         }
-        function profileCnt(fcnt){
+        function profileCnt(follow,following){
 			var html ="";
 			html +="<li><span class=\"profile-stat-count\"></span> posts</li>";
-		    html +="<li><span class=\"profile-stat-count\">"+fcnt.FPCNT+"</span>followers</li>";
-		    html +="<li><span class=\"profile-stat-count\">"+fcnt.FQCNT+"</span>following</li>";
+		    html +="<li><span class=\"profile-stat-count\">"+follow.fi+"</span>followers</li>";
+		    html +="<li><span class=\"profile-stat-count\">"+following.fo+"</span>following</li>";
 	    	$("#profile-stat").html(html);
         }
 	    function drawList(list){

@@ -57,9 +57,15 @@ public class DaoUserPage implements IDaoUserPage {
 	}
 
 	@Override
-	public List<HashMap<String, String>> getFollowCnt(HashMap<String, String> params) throws Throwable {
+	public int getFollow(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("userPage.getFollowCnt",params);
+		return sqlSession.selectOne("userPage.getFollow",params);
+	}
+
+	@Override
+	public int getFollowing(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("userPage.getFollowing",params);
 	}
 
 }

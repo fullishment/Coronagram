@@ -37,9 +37,13 @@ public class UserPage {
 
 		List<HashMap<String,String>> list = iServiceUserPage.getMPostList(params);
 		HashMap<String,String> intro = iServiceUserPage.getIntroM(params);
-
+		int follow = iServiceUserPage.getFollow(params);
+		int following = iServiceUserPage.getFollowing(params);
+		
 		modelMap.put("intro", intro);
 		modelMap.put("list", list);
+		modelMap.put("follow", follow);
+		modelMap.put("following", following);
 		return mapper.writeValueAsString(modelMap);	
 	}
 	@RequestMapping(value="/modalpages" ,method = RequestMethod.GET,produces = "text/json;charset=UTF-8")
