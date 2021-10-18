@@ -14,6 +14,14 @@
   <script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
   <script type="text/javascript" src="resources/script/jquery/jquery.form.js"></script>
   <script type="text/javascript">
+  function checkVal(sel){
+		if($.trim($(sel).val())==""){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 $(document).ready(function(){
 	$("#cancelBtn").on("click", function(){
 		$("#backForm").submit();
@@ -100,14 +108,7 @@ $(document).ready(function(){
 	});
 });
 //공백함수
-function checkVal(sel){
-	if($.trim($(sel).val())==""){
-		return true;
-	}
-	else{
-		return false;
-	}
-}
+
 $("input:radio[name='vec']:radio[value='y']").attr("checked",true); 
 $("input:radio[name='vec']").removeAttr("checked");
 </script>    
@@ -198,37 +199,37 @@ $("input:radio[name='vec']").removeAttr("checked");
         </div>
       </label>
 		<input type="file" id="photo-upload" class="img-wrap img-upload"><br>
-	    <input type="hidden" id="no" name="no" value="${data.M_NO}" disabled>
+	    <input type="hidden" id="no" name="no" value="${data.M_NO}">
 		<input type="hidden" name="no" value="${param.M_NO}" />
 	    <input type="hidden" name="id" value="${param.M_ID}" />
    		
       <p>이름</p>
       <input type="text" id="mNm" name="mNm" value="${data.M_NM}"><br>
-      <p>닉네임</p>
-      <input type="text" id="nickNm" name="nickNnm" value="${data.NICK_NM}"><br>
-
       <input type="hidden" id="opw" value="${data.M_PW}" />
+      
       <p>현재 비밀번호</p>
-      <input type="text" id="ocpw" name="ocmPw"><br>
+      <input type="password" id="ocpw" name="ocmPw"><br>
       <p>변경 비밀번호</p>
-      <input type="text" id="mPw" name="mPw"><br>
+      <input type="password" id="mPw" name="mPw"><br>
       <p>변경 비밀번호 확인</p>
       <input type="password" id="repw" name="repw"><br>
       <p>번호</p>
       <input type="text" id="mPhone" name="mPhone" value="${data.PHONE}" onKeyup="inputTelNumber(this);" maxlength="13"><br>
       <p>이메일</p>
       <input type="text" id="email" name="email" value="${data.EMAIL}"><br>
-      백신 접종 여부 <label><input type="radio" id="vac_y" name="vec" value="y"> 예</label>
-      <label><input type="radio" id="vac_n" name="vec" value="n"> 아니오</label><br>
+      백신 접종 여부 <label><input type="radio" id="vac_y" name="vec" value="y" checked> 예</label>
+      			 <label><input type="radio" id="vac_n" name="vec" value="n"> 아니오</label><br>
       <p>주소</p>
-      <input type="text" id="cm_postcode" class="post_num" placeholder="우편번호">
+      <input type="text" id="cm_postcode" name="cm_postcode" class="post_num" value="${data.POST_NO}">
       <button type="button" class="find_btn" onclick="cm_execDaumPostcode()">찾기</button><br>
-      <input type="text" id="cm_address" placeholder="주소"><br>
-      <input type="text" id="cm_detailAddress" placeholder="상세주소"><br>
-        <button type="button" id="updateBtn" class="edit_btn">수정</button>
-        <button type="button" id="cancelBtn" class="cancel_btn">취소</button>   
+      <input type="text" id="cm_address" name="cm_address" value="${data.ADR}"><br>
+      <input type="text" id="cm_detailAddress" name="cm_detailAddress" value="${data.DTL_ADR}"><br>
+        
         </div>
-    </form>
+    
+    <button type="button" id="updateBtn" class="edit_btn">수정</button>
+        <button type="button" id="cancelBtn" class="cancel_btn">취소</button>
+    </form>   
 </div>
 </main>
 <script src="resources/script/menu_bar/menu_bar.js"></script>
