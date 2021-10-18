@@ -502,7 +502,7 @@ article p:first-of-type {
     margin-top: 0;
 }
 
-p img {
+.infoimg img {
     max-width: 100%;
 }
 

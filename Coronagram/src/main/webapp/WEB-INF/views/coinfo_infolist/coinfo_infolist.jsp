@@ -11,6 +11,35 @@
   <link rel="stylesheet" href="resources/css/coinfo_infolist/coinfo_infolist.css?after">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function() {
+
+		}
+  
+  function drawList(list) {
+		var html="";
+		
+		for(var data of list){
+			html += "<tr no=\"" + data.B_NO + "\">          ";
+			html += "<td>" + data.B_NO + "</td>    ";
+			html += "<td>";
+			html += data.B_TITLE ;
+			
+			if(data.B_FILE != null){
+				html += "<img src=\"resources/images/attFile.png\" />";
+			}
+			
+			html += "<td>" + data.M_NM + "</td>  ";
+			html += "<td>" + data.B_DT + "</td> ";
+			html += "<td>" + data.B_HIT + "</td>    ";
+			html += "</tr>         ";
+		}
+		
+		$("tbody").html(html);
+	}
+
+  </script>
 </head>
 
 <body>

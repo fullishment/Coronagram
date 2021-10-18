@@ -87,22 +87,40 @@ transform:rotate(0);
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
     background: white;
     margin-left: -10px;
+    margin-bottom: 20px;
     border-radius: 10px;
+	display: inline-block;
 }
 
 
 /* Q&A */
 
-.QnaTitle {
-    display: flex;
+.qnaTitle {
+    margin-bottom: 0px;
 }
 
-.QnaTitle div{
+.qnaTitle div{
     margin-right: 40px;
+    margin-bottom: 15px;
 }
 
-.QnaTitle input {
-    margin-left: 10px;
+.qnaTitle input {
+        height: 25px;
+        width: 500px;
+}
+
+.qnaTitle1 input {
+	margin-left: 22px;
+}
+
+.qnaTitle2 input {
+	margin-left: 8px;
+}
+
+
+.qnaImg {
+	margin-top: 10px;
+	margin-left: 10px;
 }
 
 .dbox {
@@ -132,9 +150,11 @@ input:focus{
     border: 0px;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
 }
+
 .border{
     border: 0px;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    padding: 10px;
 }
 
 
@@ -203,6 +223,7 @@ textarea {
     border: none;
     border-radius: 7px;
     background: #cfcfcf;
+    margin-left: 5px;
 }
 .fileBtn:hover {
     opacity: .8;
