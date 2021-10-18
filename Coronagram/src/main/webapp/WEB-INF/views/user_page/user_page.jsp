@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css'>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <title>Document</title>
+    <title><%= request.getAttribute("nicknm") %>님 개인 페이지</title>
     <style>
     	.img_size{
     		width:500px;
@@ -31,7 +31,7 @@
         	
             $(document).on("click",".gallery-item",function(){
             	
-            	$("#writingNo2").val($(this).attr("wtno"));
+            	$("#writingNo").val($(this).attr("wtno"));
             	modal.style.display="block";
             	mdDraw();   
             	slide();
@@ -111,7 +111,7 @@
 		}
 	    function mdDraw(){
 	    	
-	    	var params = $("#addForm").serialize();
+	    	var params = $("#modalForm").serialize();
 			$.ajax({
 				url : "modalpages",
 				type : "get",
@@ -477,19 +477,15 @@
         <!-- End of container -->
     </main>
     		<form action="#" id="addrForm" method="post">
-    			<input type="hidden" name="nickNm" id="nickNm" value="<%= request.getAttribute("nicknm") %>"/>
+    			<input type="hidden" name="writingNo"/>
+    			<input type="hidden" name="nickNm" value="<%= request.getAttribute("nicknm") %>"/>
     		</form>
-    	   <form action="#" id="actionForm" method="get">
-    	   	  <input type="hidden" name="writingNo" id="writingNo" />
-    	   	  <input type="hidden" name="m_no" id="m_no" value="${sMNo}"/>
-    	   	  
-		   </form>
            <form action="#" id="editForm" method="post">
-               <input type="hidden" name="m_no" id="m_no2" value="${sMNo}"/>  
+               <input type="hidden" name="m_no" value="${sMNo}"/>  
            </form>
-           <form action="#" id="addForm" method="get">
-    	   	  <input type="hidden" name="writingNo" id="writingNo2"/>
-    	   	  <input type="hidden" name="m_no" id="m_no3" value="${sMNo}"/>
+           <form action="#" id="modalForm" method="get">
+    	   	  <input type="hidden" name="writingNo" id="writingNo"/>
+    	   	  <input type="hidden" name="nickNm" value="<%= request.getAttribute("nicknm") %>"/>
 		   </form>
     <script src="../resources/script/menu_bar/menu_bar.js"></script>
 </body>

@@ -46,7 +46,7 @@ public class UserPage {
 		modelMap.put("following", following);
 		return mapper.writeValueAsString(modelMap);	
 	}
-	@RequestMapping(value="/modalpages" ,method = RequestMethod.GET,produces = "text/json;charset=UTF-8")
+	@RequestMapping(value="/userpage/modalpages" ,method = RequestMethod.GET,produces = "text/json;charset=UTF-8")
 	@ResponseBody
 	public String modalpages(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
 		ObjectMapper mapper = new ObjectMapper();

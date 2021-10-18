@@ -7,73 +7,66 @@
        		ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
 			FROM CRNG C INNER JOIN M M
                     ON C.WRITER_NO = M.M_NO
-                   AND M.NICK_NM = #{nickNm}
+                    AND M.NICK_NM = #{nickNm}
             INNER JOIN (SELECT WRITING_NO, FILE_ADR,
                                RANK() OVER(PARTITION BY WRITING_NO ORDER BY ATTC_NO ASC) AS RNK
                         FROM CRNG_ATTC) CA
                     ON C.WRITING_NO = CA.WRITING_NO
                    AND CA.RNK = 1
-             LEFT OUTER JOIN (SELECT WRITER_NO, WRITING_NO, COUNT(*) AS CCNT
+             LEFT OUTER JOIN (SELECT WRITING_NO, COUNT(*) AS CCNT
                              FROM CRNG_CMT
-                             GROUP BY WRITER_NO,WRITING_NO) CC
-                         ON C.WRITER_NO = CC.WRITER_NO
-                         AND C.WRITING_NO = CC.WRITING_NO
-            LEFT OUTER JOIN (SELECT USER_NO,WRITING_NO, COUNT(*) AS LCNT
+                             GROUP BY WRITING_NO) CC
+                         ON C.WRITING_NO = CC.WRITING_NO 
+            LEFT OUTER JOIN (SELECT WRITING_NO, COUNT(*) AS LCNT
                              FROM LK
-                             GROUP BY USER_NO,WRITING_NO) L
+                             GROUP BY WRITING_NO) L
                          ON C.WRITING_NO = L.WRITING_NO
 			WHERE C.DEL = 1
 		 ]]>
 	</select>
 	<select id="getModalCmt" parameterType="hashmap" resultType="hashmap">
-		select cc.CMT_WRITER_NO,CC.WRITING_NO,cc.cmt_con,m.M_NO, m.m_nm, m.nick_nm
-            ,TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD HH24:MI:SS'),'YYYYMMDD HH24:MI:SS') as dt,
-            ROW_NUMBER() OVER(ORDER BY cc.WRITING_NO DESC) AS RNUM
-            from crng_cmt cc
-            INNER JOIN M M
-                    ON CC.CMT_WRITER_NO = M.M_NO
-                   and cc.WRITER_NO =#{m_no}
-                   AND M.M_NO != #{m_no}
-                   AND CC.WRITING_NO=#{writingNo}
+		select cc.CMT_WRITER_NO,CC.WRITING_NO,cc.cmt_con,m.M_NO, m.m_nm, m.nick_nm,
+			            TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD HH24:MI:SS'),'YYYYMMDD HH24:MI:SS') as dt,
+			            ROW_NUMBER() OVER(ORDER BY cc.WRITING_NO DESC) AS RNUM
+			            from crng_cmt cc
+	            INNER JOIN M M
+	                    ON cc.CMT_WRITER_NO = m.m_no
+                        where CC.WRITING_NO= #{writingNo}
 	</select>
+	
 	<select id="getModalM" parameterType="hashmap" resultType="hashmap">
 		select C.WRITER_NO, C.CON, M.M_NM, M.NICK_NM,NVL(L.LCNT, 0) AS LCNT 
-            from CRNG C
-            INNER JOIN M M
-            ON C.WRITER_NO = M_NO
-                        LEFT OUTER JOIN (SELECT USER_NO,WRITING_NO, COUNT(*) AS LCNT
+	       		from CRNG C
+	            INNER JOIN M M
+	            		     ON C.WRITER_NO = M_NO
+                LEFT OUTER JOIN (SELECT WRITING_NO, COUNT(*) AS LCNT
                              FROM LK
-                             GROUP BY USER_NO,WRITING_NO) L
-                         ON C.WRITING_NO = L.WRITING_NO
-            where del=1 
-            and m_no=#{m_no} 
-            and l.writing_no = #{writingNo}
+                             GROUP BY WRITING_NO) L
+                        	 ON C.WRITING_NO = L.WRITING_NO
+	            where del=1 
+	            and m.NICK_NM=#{nickNm}
+	            and l.writing_no = #{writingNo}
 	</select>
+	
 	<select id="getIntroM" parameterType="hashmap" resultType="hashmap">
 		select m_no,m_nm,nick_nm,intro_con from m where NICK_NM = #{nickNm}
 	</select>
+	
 	<select id="getFollow" parameterType="hashmap" resultType="Integer">
-		select count(*) as fo from follow where rp_user= #{nickNm}
+		select count(*) fo from follow 
+   		where rp_user = (select m_no from m where nick_nm=#{nickNm})
 	</select>
-	<select id="getFollowing" parameterType="hashmap" resultType="Integer">
-		select count(*) fi from follow where rq_user= #{nickNm}
-	</select>
-	<select id="getLikeCnt" parameterType="hashmap" resultType="Integer">
-		select NVL(count(*),0) as lcnt from lk where user_no=#{m_no} and writing_no =#{writingNo}
-	</select>
-	<select id="getCmtCnt" parameterType="hashmap" resultType="Integer">
-		select NVL(count(*),0) as ccnt from crng_cmt where WRITER_NO= #{m_no} and writing_no =#{writingNo}
-	</select>
+	
 	<select id="getMDtlList" parameterType="hashmap" resultType="hashmap">
 		SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON, C.DT, C.DEL, 
-       ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
+        ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
 		FROM CRNG C INNER JOIN M M
                     ON C.WRITER_NO = M.M_NO
-                   AND M.M_NO = #{m_no}
+                    AND M.M_NO =(select m_no from m where nick_nm=#{nickNm})
             INNER JOIN (SELECT WRITING_NO, FILE_ADR
                         FROM CRNG_ATTC) CA
-                    ON C.WRITING_NO = CA.WRITING_NO
-                    AND ca.writing_no= #{writingNo}
-		WHERE C.DEL = 1
+                    	ON C.WRITING_NO = CA.WRITING_NO
+                    	AND ca.writing_no= #{writingNo}
+			WHERE C.DEL = 1
 	</select>
 </mapper>
