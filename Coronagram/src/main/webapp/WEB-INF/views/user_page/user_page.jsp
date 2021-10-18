@@ -25,7 +25,7 @@
         $(document).ready(function(){
         	reloadList();
         	$("#editBtn").on("click",function(){	   
-  			  $("#editForm").attr("action","edit_profile");
+  			  $("#editForm").attr("action","../edit_profile");
   			  $("#editForm").submit(); 
   		   });
         	
