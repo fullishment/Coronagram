@@ -477,7 +477,6 @@
         <!-- End of container -->
     </main>
     		<form action="#" id="addrForm" method="post">
-    			<input type="hidden" name="writingNo"/>
     			<input type="hidden" name="nickNm" value="<%= request.getAttribute("nicknm") %>"/>
     		</form>
            <form action="#" id="editForm" method="post">

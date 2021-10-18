@@ -53,6 +53,10 @@
 		select count(*) fo from follow 
    		where rp_user = (select m_no from m where nick_nm=#{nickNm})
 	</select>
+	<select id="getFollowing" parameterType="hashmap" resultType="Integer">
+		select count(*) fi from follow 
+   		where rq_user = (select m_no from m where nick_nm=#{nickNm})
+	</select>
 	
 	<select id="getMDtlList" parameterType="hashmap" resultType="hashmap">
 		SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON, C.DT, C.DEL, 
