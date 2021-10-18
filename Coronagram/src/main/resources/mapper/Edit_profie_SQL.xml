@@ -17,10 +17,10 @@
 		</select>
 		
 	<!-- dtl -->
-		<select id="getedit_profile" parameterType="hashmap" resultType="hashmap">
+		<select id="getEditP" parameterType="hashmap" resultType="hashmap">
 			SELECT M_NO, M_NM, NICK_NM, M_PW, PHONE, EMAIL, VAC_YN, POST_NO, ADR, DTL_ADR
 			FROM M
-			WHERE M_NO = #{no}
+			WHERE M_NO = #{m_no}
 		</select>	
 	
 	<!-- update -->

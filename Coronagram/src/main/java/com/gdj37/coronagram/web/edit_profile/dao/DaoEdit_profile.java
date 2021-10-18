@@ -24,7 +24,7 @@ public class DaoEdit_profile implements IDaoEdit_profile{
 
 	@Override
 	public HashMap<String, String> getedit_profile(HashMap<String, String> params) throws Throwable {
-		return sqlSession.selectOne("editProfile.getedit_profile", params);
+		return sqlSession.selectOne("editProfile.getEditP", params);
 	}
 
 	@Override

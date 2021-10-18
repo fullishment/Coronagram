@@ -6,7 +6,6 @@
 <html lang="ko" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - React Profile Card with image upload</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css'>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
@@ -45,7 +44,7 @@ $(document).ready(function(){
 					var params = $("#updateForm").serialize();
 					
 					$.ajax({
-						url : "edit_profiles",
+						url : "edit_profileUps",
 						type : "post",
 						dataType : "json",
 						data : params,
@@ -80,7 +79,7 @@ $(document).ready(function(){
 			var params = $("#updateForm").serialize();
 			
 			$.ajax({
-				url : "edit_profiles",
+				url : "edit_profileUps",
 				type : "post",
 				dataType : "json",
 				data : params,
@@ -203,7 +202,7 @@ $("input:radio[name='vec']").removeAttr("checked");
 		<input type="hidden" name="no" value="${param.M_NO}" />
 	    <input type="hidden" name="id" value="${param.M_ID}" />
    		
-      <p>이름 ${sMNm}</p>
+      <p>이름</p>
       <input type="text" id="mNm" name="mNm" value="${data.M_NM}"><br>
       <p>닉네임</p>
       <input type="text" id="nickNm" name="nickNnm" value="${data.NICK_NM}"><br>

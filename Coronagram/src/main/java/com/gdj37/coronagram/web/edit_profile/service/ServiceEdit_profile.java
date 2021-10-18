@@ -32,5 +32,7 @@ public class ServiceEdit_profile implements IServiceEdit_profile {
 	public int getprofileUp(HashMap<String, String> params) throws Throwable {
 		return iDaoEdit_profile.getprofileUp(params);
 	}
+
+
 	
 }

@@ -13,7 +13,6 @@ public interface IServiceEdit_profile {
 
 	public int getprofileUp(HashMap<String, String> params)throws Throwable;
 
-	public String update_edit_profile(HashMap<String, String> params);
 
 
 }
