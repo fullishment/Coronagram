@@ -1,10 +1,7 @@
 package com.gdj37.coronagram.web.edit_profile.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,29 +21,26 @@ public class edit_profile {
 		public IServiceEdit_profile iServiceEdit_profile;
 
 //list
-	@RequestMapping(value="/edit_profile")
-		public ModelAndView edit_profileList(@RequestParam HashMap<String, String> params,
-				ModelAndView mav)throws Throwable {
-		if(params.get("m_no") != null) { //주소치고 들어갔을때 리스트로 넘어가게하고 목록에서 클릭해서 no랑 같이 넘어갔을땐 상세보기 잘나오게
-			HashMap<String, String> data = iServiceEdit_profile.getedit_profile(params);
-			
-			data.put("M_PW", Utils.decryptAES128(data.get("M_PW")));
-			
-			mav.addObject("data", data);
-			mav.setViewName("edit_profile/edit_profile");
-		}else {
-			mav.setViewName("redirect:main_page");
-		}
-		
-		
-		return mav;
-	}
-
+		@RequestMapping(value="/edit_profile")
+	    public ModelAndView edit_profileList(@RequestParam HashMap<String, String> params,
+	          ModelAndView mav)throws Throwable {
+	    if(params.get("m_no") != null) { //주소치고 들어갔을때 리스트로 넘어가게하고 목록에서 클릭해서 no랑 같이 넘어갔을땐 상세보기 잘나오게
+	       HashMap<String, String> data = iServiceEdit_profile.getedit_profile(params);
+	       
+	       data.put("M_PW", Utils.decryptAES128(data.get("M_PW")));
+	       
+	       mav.addObject("data", data);
+	       mav.setViewName("edit_profile/edit_profile");
+	    }else {
+	       mav.setViewName("redirect:main_page");
+	    }
+	    
+	    return mav;
+	 }
 		@RequestMapping(value="/edit_profileUps",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
 		@ResponseBody
-		public String edit_profileUps (@RequestParam HashMap<String,String> params) throws Throwable {
+		public String proUpdates (@RequestParam HashMap<String,String> params) throws Throwable {
 
-			
 			ObjectMapper mapper = new ObjectMapper();
 			Map<String,Object> modelMap = new HashMap<String,Object>();
 			String result ="success";
@@ -65,4 +59,5 @@ public class edit_profile {
 			modelMap.put("result", result);
 			return mapper.writeValueAsString(modelMap);
 		}
+
 }
