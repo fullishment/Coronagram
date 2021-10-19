@@ -281,7 +281,7 @@
 			   html+="좋아요<span id=\"like-count-39\">"+data+"</span>개";				   
 			   $(".likes").html(html);
 	    }
-	    function timeForToday(value) {
+	 /*    function timeForToday(value) {
 	        const today = new Date();
 	        const timeValue = new Date(value);
 
@@ -302,7 +302,7 @@
 	        }
 
 	        return `${Math.floor(betweenTimeDay / 365)}년전`;
-	 	}
+	 	} */
 	    function ModalImg(md){                                                                                                                         
 			var html ="";                                                                                                                                  
 			var i=1;                                                                                                                                       
@@ -503,43 +503,27 @@
             <div class="container">    
                 <div class="profile">   
                     <div class="profile-image">
-                            <img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces"
-                            alt="">    
+                            <img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">    
                     </div>    
                     <div class="profile-user-settings">    
                         <div class="profile-user-setting">
                         </div>
                         <button id="editBtn" class="btn profile-edit-btn">Edit Profile</button>    
-                        <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog"
-                                aria-hidden="true"></i></button>
+                        <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
                         <button id="follow_btn" class="follow_btn">follow</button>    
                     </div>  
                     <div class="profile-stats">  
-                        <ul id="profile-stat">
-                        
-                        </ul>   
+                        <ul id="profile-stat"></ul>   
                     </div>   
-                    <div class="profile-bio">    
-                        
-                        
-                    </div>    
+                    <div class="profile-bio"></div>    
                 </div>
-                <!-- End of profile section -->
             </div>
-            <!-- End of container -->
         </header>
-        <div id="myModal" class="modal">
-            
-        </div>
+        <div id="myModal" class="modal"></div>
         
         <div class="container">
-            <div id="gallery" class="gallery">
-
-            </div>
-            <!-- End of gallery -->
-            
+            <div id="gallery" class="gallery"></div>     
         </div>
-        <!-- End of container -->
     </main>
     		<form action="#" id="addrForm" method="post">
     			<input type="hidden" name="nickNm" value="<%= request.getAttribute("nicknm") %>"/>
