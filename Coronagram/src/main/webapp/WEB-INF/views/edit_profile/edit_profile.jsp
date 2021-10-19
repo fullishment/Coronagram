@@ -200,9 +200,25 @@ $("input:radio[name='vec']").removeAttr("checked");
 <div class="card">
    <form action="#" id="updateForm" method="post">
     <div class="input_area">
+    <%-- <c:choose>		
+			<c:when test="${!empty data.M_IMG}">
+				<label for="photo-upload" class="custom-file-upload fas">
+		        	<div class="img-wrap img-upload">
+		          		<img for="photo-upload"  src="resources/images/edit_profile/edit_profile.png" /> <!-- 이미지그림 --> 
+		        	</div>
+		      	</label>
+			</c:when>
+			<c:otherwise>
+				<label for="photo-upload" class="custom-file-upload fas">
+		        	<div class="img-wrap img-upload">
+		          		<img for="photo-upload" src="https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"/>
+		        	</div>
+		      	</label>
+			</c:otherwise>
+		</c:choose> --%>
       <label for="photo-upload" class="custom-file-upload fas">
         <div class="img-wrap img-upload">
-          <img for="photo-upload"  src="resources/images/edit_profile/edit_profile.png" />  
+          <img for="photo-upload"  src="resources/images/edit_profile/edit_profile.png" /> <!-- 이미지그림 --> 
         </div>
       </label>
    <input type="file" id="photo-upload" class="img-wrap img-upload"><br>

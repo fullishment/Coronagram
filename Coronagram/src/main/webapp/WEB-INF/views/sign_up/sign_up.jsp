@@ -18,17 +18,78 @@
   	$("#cancel_btn").on("click",function(){
   		history.back();
   	});
-  	
+//id체크
+  	$("#m_id").on("change", function(){
+		//Ajax
+		var params = $("#addForm").serialize();
+		
+		$.ajax({
+			url: "MIdCheckAjax",
+			type : "post",
+			dataType:"json",
+			data: params,
+			success: function(res) {
+				if(res.cnt > 0) {  
+					$("#check").html("중복된 아이디가 있습니다.");
+					$("#check").css("color", "red");
+					$("#checkId").val("false");
+				} else {
+					$("#check").html("사용 가능한 아이디 입니다.");
+					$("#check").css("color", "green");
+					$("#checkId").val("true");
+				}
+			},
+			error:function(request, status, error) {
+				console.log(error);
+			}
+		});
+	});
+//닉네임 체크
+  	$("#nick_nm").on("change", function(){
+		//Ajax
+		var params = $("#addForm").serialize();
+		
+		$.ajax({
+			url: "MNickCheckAjax",
+			type : "post",
+			dataType:"json",
+			data: params,
+			success: function(res) {
+				if(res.cnt > 0) {  
+					$("#checkNc").html("중복된 닉네임이 있습니다.");
+					$("#checkNc").css("color", "red");
+					$("#checknick").val("false");
+				} else {
+					$("#checkNc").html("사용 가능한 닉네임 입니다.");
+					$("#checkNc").css("color", "green");
+					$("#checknick").val("true");
+				}
+			},
+			error:function(request, status, error) {
+				console.log(error);
+			}
+		});
+	});
+//add버튼 
   	$("#add_btn").on("click", function(){
   		if(checkVal("#m_id")){
   			alert("아이디를 입력해 주세요.");
   			$("#m_id").focus();
+  		}else if($("#checkId").val() == "false") {
+			alert("아이디 중복 체크를 해주세요.");
+			$("#m_id").focus();
+			
   		} else if (checkVal("#m_nm")){
   			alert("이름을 입력해 주세요.");
   			$("#m_nm").focus();
+  			
   		}else if (checkVal("#nick_nm")){
   			alert("닉네임을 입력해 주세요.");
   			$("#nick_nm").focus();
+  		}else if($("#checknick").val() == "false") {
+			alert("닉네임 중복 체크를 해주세요.");
+			$("#nick_nm").focus();
+			
   		}else if (checkVal("#m_pw")){
   			alert("비밀번호를 입력해 주세요.");
   			$("#m_pw").focus();
@@ -96,23 +157,35 @@
     <div class="right">
       
       <form action="mAdds" id="addForm" method="post">
+      <input type="hidden" id="checkId" value="false" />
+      <input type="hidden" id="checknick" value="false" />
+      
         <div class="inputs">
           <p class="r_title"><b>Sign Up</b></p>
+          
           <span class="title_Name">아이디</span><br>
           <input type="text" id="m_id" name="m_id" placeholder="아이디를 입력하세요">
-          <p class="idchk">중복되지 않은 아이디 입니다.</p>
+          	<p id="check" class="checkSpan"></p><br/>
+          
           <span class="title_Name">이름</span><br>
           <input type="text" id="m_nm" name="m_nm" placeholder="이름을 입력하세요"><br>
+          
           <span class="title_Name">닉네임</span><br>
           <input type="text" id="nick_nm" name="nick_nm" placeholder="닉네임을 입력하세요"><br>
+          	<p id="checkNc" class="checkSpan"></p><br/>
+          
           <span class="title_Name">패스워드</span><br>
           <input type="password" id="m_pw" name="m_pw" placeholder="패스워드를 입력하세요"><br>
+          
           <span class="title_Name">패스워드 확인</span><br>
           <input type="password" id="m_repw" name="m_repw" placeholder="패스워드를 확인하세요"><br>
+          
           <span class="title_Name">휴대폰 번호</span><br>
           <input type="text" id="phone" name="phone" placeholder="번호를 입력하세요"><br>
+          
           <span class="title_Name">이메일</span><br>
           <input type="email" id="email" name="email" placeholder="이메일을 입력하세요"><br>
+          
           백신 접종 여부 <input type="radio" id="vac_y" name="vec" value="y"> 예
       	  <input type="radio" id="vac_n" name="vec" value="n"> 아니오<br>
       	  

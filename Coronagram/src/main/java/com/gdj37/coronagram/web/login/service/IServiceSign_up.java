@@ -8,6 +8,8 @@ public interface IServiceSign_up {
 
 	public int addSign(HashMap<String, String> params) throws Throwable;
 
+	public int getNickCheck(HashMap<String, String> params) throws Throwable;
+
 	
 
 	

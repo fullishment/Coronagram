@@ -23,4 +23,9 @@ public class DaoSign_up implements IDaoSign_up{
 		return sqlSession.insert("signup.addSign", params);
 	}
 
+	@Override
+	public int getNickCheck(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectOne("signup.getNickCheck", params);
+	}
+
 }

@@ -24,11 +24,18 @@
 	</insert> 
 	
 	<!-- 아이디 중복체크 -->
-<select id="getMIdCheck" parameterType="hashmap" resultType="Integer">
-	select count(*) as CNT
-	from m
-	where m_id = #{m_id}	
-</select>
+	<select id="getMIdCheck" parameterType="hashmap" resultType="Integer">
+		SELECT COUNT(*) AS CNT
+		FROM M
+		WHERE M_ID = #{m_id}	
+	</select>
+	
+	<!-- 닉네임 중복체크 -->
+	<select id="getNickCheck" parameterType="hashmap" resultType="Integer">
+		SELECT COUNT(*) AS CNT
+		FROM M
+		WHERE NICK_NM = #{nick_nm}	
+	</select>
 	
 
 
