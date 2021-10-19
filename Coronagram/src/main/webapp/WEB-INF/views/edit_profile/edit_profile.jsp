@@ -25,7 +25,7 @@ $(document).ready(function(){
       }
    });
    $("#updateBtn").on("click", function(){
-      if($("#mPw").val() != "") { //비밀번호를 변경할 경우
+      if($("#ocpw").val() != "") { //비밀번호를 변경할 경우
          if(checkVal("#ocpw")) { //기존 비밀번호 입력 여부
             alert("기존 비밀번호를 입력해 주세요.");
             $("#ocpw").focus();
@@ -68,10 +68,12 @@ $(document).ready(function(){
             $("#ocpw").val("");
             $("#ocpw").focus();
          }
+      
       } else if(checkVal("#mNm")) {
          alert("이름을 입력해 주세요.");
          $("#mNm").focus();
       }
+      
       else if(checkVal("#mPhone")){
          alert("전화번호를 입력하세요.");
          $("#Phone").focus();
@@ -208,7 +210,7 @@ $("input:radio[name='vec']").removeAttr("checked");
       <input type="text" id="opw" value="${data.M_PW}" />
       
       <p>현재 비밀번호</p>
-      <input type="password" id="ocpw" ><br>
+      <input type="password" id="ocpw" name="ocpw"><br>
       <p>변경 비밀번호</p>
       <input type="password" id="mPw" name="mPw"><br>
       <p>변경 비밀번호 확인</p>

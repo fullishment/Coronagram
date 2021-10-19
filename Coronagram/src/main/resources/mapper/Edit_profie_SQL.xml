@@ -12,7 +12,10 @@
 	<!-- update -->
  		<update id="proUp" parameterType="hashmap">
 		    UPDATE M SET M_NM = #{mNm}, NICK_NM = #{nickNm},
-		    			 M_PW = #{mPw}, PHONE = #{mPhone}, EMAIL = #{email},
+		    			 <if test = "ocpw != null and ocpw != '' and mpw != null and mpw != ''">
+							M_PW = #{mPw},
+						 </if>
+		    			 PHONE = #{mPhone}, EMAIL = #{email},
 		    			 vac_yn=#{vec},POST_NO = #{cm_postcode}, ADR = #{cm_address},
 		    			 DTL_ADR = #{cm_detailAddress}
 			WHERE M_NO = #{no}
