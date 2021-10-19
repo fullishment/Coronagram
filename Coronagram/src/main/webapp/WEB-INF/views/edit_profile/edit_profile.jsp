@@ -14,14 +14,7 @@
   <script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
   <script type="text/javascript" src="resources/script/jquery/jquery.form.js"></script>
   <script type="text/javascript">
-  function checkVal(sel){
-		if($.trim($(sel).val())==""){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
+
 $(document).ready(function(){
 	$("#cancelBtn").on("click", function(){
 		$("#backForm").submit();
@@ -32,11 +25,11 @@ $(document).ready(function(){
 		}
 	});
 	$("#updateBtn").on("click", function(){
-		if($("#mPw").val() != "") { 
-			if(checkVal("#ocpw")) { 
+		if($("#mPw").val() != "") { //비밀번호를 변경할 경우
+			if(checkVal("#ocpw")) { //기존 비밀번호 입력 여부
 				alert("기존 비밀번호를 입력해 주세요.");
 				$("#ocpw").focus();
-			} else if($("#opw").val() == $("#ocpw").val()) { 
+			} else if($("#opw").val() == $("#ocpw").val()) { // 실 비밀번호와 입력된 기존비밀번호 비교
 				if(checkVal("#repw")) {
 					alert("비밀번호 확인을 입력해 주세요.");
 					$("#repw").focus();
@@ -108,6 +101,14 @@ $(document).ready(function(){
 	});
 });
 //공백함수
+function checkVal(sel){
+		if($.trim($(sel).val())==""){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 
 $("input:radio[name='vec']:radio[value='y']").attr("checked",true); 
 $("input:radio[name='vec']").removeAttr("checked");
@@ -183,36 +184,35 @@ $("input:radio[name='vec']").removeAttr("checked");
   </header>
   <main>
 	<form action="main_page" id="backForm" method="post">
-			<%-- <input type="hidden" name="searchGbn" value="${param.searchGbn}" />
-			<input type="hidden" name="searchTxt" value="${param.searchTxt}" />
-			<input type="hidden" name="page" value="${param.page}" /> --%>
 		<input type="hidden" name="no" value="${param.no}" />
 	</form>
 	
 <div class="card">
 	<form action="#" id="updateForm" method="post">
-		    
     <div class="input_area">
       <label for="photo-upload" class="custom-file-upload fas">
         <div class="img-wrap img-upload">
           <img for="photo-upload" src="https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"/>
         </div>
       </label>
-		<input type="file" id="photo-upload" class="img-wrap img-upload"><br>
-	    <input type="hidden" id="no" name="no" value="${data.M_NO}">
-		<input type="hidden" name="no" value="${param.M_NO}" />
-	    <input type="hidden" name="id" value="${param.M_ID}" />
+	<input type="file" id="photo-upload" class="img-wrap img-upload"><br>
+	<input type="hidden" id="no" name="no" value="${data.M_NO}">
+	<input type="hidden" name="no" value="${param.M_NO}" />
+	<input type="hidden" name="id" value="${param.M_ID}" />
    		
       <p>이름</p>
       <input type="text" id="mNm" name="mNm" value="${data.M_NM}"><br>
+      <p>닉네임</p>
+      <input type="text" id="nickNm" name="nickNm" value="${data.NICK_NM}"><br>
+      
       <input type="hidden" id="opw" value="${data.M_PW}" />
       
       <p>현재 비밀번호</p>
-      <input type="password" id="ocpw" name="ocmPw"><br>
+      <input type="password" id="ocpw" ><br>
       <p>변경 비밀번호</p>
       <input type="password" id="mPw" name="mPw"><br>
       <p>변경 비밀번호 확인</p>
-      <input type="password" id="repw" name="repw"><br>
+      <input type="password" id="repw"><br>
       <p>번호</p>
       <input type="text" id="mPhone" name="mPhone" value="${data.PHONE}" onKeyup="inputTelNumber(this);" maxlength="13"><br>
       <p>이메일</p>
