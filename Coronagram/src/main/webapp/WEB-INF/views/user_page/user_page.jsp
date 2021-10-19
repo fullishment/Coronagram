@@ -26,10 +26,7 @@
         $(document).ready(function(){
         	reloadList();
         	
-        	$("#editBtn").on("click",function(){	   
-  			  $("#editForm").attr("action","../edit_profile");
-  			  $("#editForm").submit(); 
-  		    });       
+        	      
         	
             $(document).on("click",".gallery-item",function(){
             	$("#myModal").val("");
@@ -66,6 +63,7 @@
 					introNm(res.intro);
 					profileCnt(res.follow, res.following);
 					follow(res.fExist,res.fExist2);
+					editProfile();
 				},
 				error : function(request,status,error){
 					console.log(error);
@@ -149,6 +147,7 @@
 					slide();
 					heart(res.hcnt);
 					addH(res.result);
+					
 				},
 				error : function(request, status, error){
 					console.log(error);
@@ -380,6 +379,12 @@
 	    			});
 	    		}
     		});	    		    		
+	    }
+	    function editProfile(){
+	    	$("#editBtn").on("click",function(){	   
+	  			  $("#editForm").attr("action","../edit_profile");
+	  			  $("#editForm").submit(); 
+	  		}); 
 	    }
 	    function slide(){
 	    	$('.slider').each(function(){
