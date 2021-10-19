@@ -39,9 +39,11 @@ public class UserPage {
 		HashMap<String,String> intro = iServiceUserPage.getIntroM(params);
 		int follow = iServiceUserPage.getFollow(params);
 		int following = iServiceUserPage.getFollowing(params);
+		int fExist = iServiceUserPage.getfollowEx(params);
+		int fExist2 = iServiceUserPage.getfollowEx2(params);
 		
-		
-		
+		modelMap.put("fExist", fExist);
+		modelMap.put("fExist2", fExist2);
 		modelMap.put("intro", intro);
 		modelMap.put("list", list);
 		modelMap.put("follow", follow);
@@ -56,8 +58,9 @@ public class UserPage {
 		
 		HashMap<String,String> modalM = iServiceUserPage.getModalM(params);
 		List<HashMap<String,String>> md = iServiceUserPage.getMDtlList(params);
-		List<HashMap<String,String>> modalCmt = iServiceUserPage.getModalCmt(params);
+		List<HashMap<String,String>> modalCmt = iServiceUserPage.getModalCmt(params);		
 		int hcnt = iServiceUserPage.getHeartCnt(params);
+		
 		
 		modelMap.put("hcnt", hcnt);
 		modelMap.put("md", md);

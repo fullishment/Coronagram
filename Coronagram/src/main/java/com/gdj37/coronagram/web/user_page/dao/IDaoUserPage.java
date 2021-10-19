@@ -8,10 +8,10 @@ public interface IDaoUserPage {
 	public List<HashMap<String, String>> getMPostList(HashMap<String, String> params) throws Throwable;
 
 	public List<HashMap<String, String>> getMDtlList(HashMap<String, String> params) throws Throwable;
+	
+	public List<HashMap<String, String>> getModalCmt(HashMap<String, String> params)throws Throwable;
 
 	public HashMap<String, String> getIntroM(HashMap<String, String> params)throws Throwable;
-
-	public List<HashMap<String, String>> getModalCmt(HashMap<String, String> params)throws Throwable;
 
 	public HashMap<String, String> getModalM(HashMap<String, String> params)throws Throwable;
 	
@@ -26,5 +26,9 @@ public interface IDaoUserPage {
 	public int delHeart(HashMap<String, String> params)throws Throwable;
 
 	public int getLkCnt(HashMap<String, String> params)throws Throwable;
+
+	public int getfollowEx(HashMap<String, String> params)throws Throwable;
+
+	public int getfollowEx2(HashMap<String, String> params)throws Throwable;
 
 }

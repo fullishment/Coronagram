@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,26 +17,28 @@
     	.img_size{
     		width:500px;
     		height:500px;
+    	}    	
+    	.nav_menu{
+    		height: 120px;
     	}
-    	
     </style>
     <script>
         $(document).ready(function(){
         	reloadList();
+        	
         	$("#editBtn").on("click",function(){	   
   			  $("#editForm").attr("action","../edit_profile");
   			  $("#editForm").submit(); 
-  		   });
+  		    });       
         	
             $(document).on("click",".gallery-item",function(){
             	$("#myModal").val("");
             	$("#writingNo").val($(this).attr("wtno"));
-
             	modal.style.display="block";
-            	mdDraw();   
-            	
+            	mdDraw();          	
             });
-            var modal = document.getElementById('myModal');
+            
+            var modal = document.getElementById('myModal');  
             
             $(".close").on("click",function(){
             	document.getElementById("myModal").style.display="none";
@@ -49,8 +50,7 @@
                     modal.style.display = "none";
                     reloadList();
                 }
-            }
-            
+            }           
         });
         function reloadList(){
 			var params=$("#addrForm").serialize();		
@@ -61,10 +61,11 @@
 				data:params,
 				success : function(res){
 					$("#myModal").val("");
-					drawList(res.list);
+					imgList(res.list);
 					intro(res.intro);
 					introNm(res.intro);
 					profileCnt(res.follow, res.following);
+					follow(res.fExist,res.fExist2);
 				},
 				error : function(request,status,error){
 					console.log(error);
@@ -73,26 +74,45 @@
 		}
         function intro(intro){
         	var html ="";
-        	html+="<h1 id=\"mId\" class=\"profile-user-name\">"+intro.NICK_NM+"</h1>    ";
-        	$(".profile-user-setting").html(html);
-        	
+        		html+="<h1 id=\"mId\" class=\"profile-user-name\">"+intro.NICK_NM+"</h1> ";
+        		$(".profile-user-setting").html(html);      	
         }
-        function introNm(intro){
+        function introNm(data){
         	var html ="";
-        	html+="<span class=\"profile-real-name\">"+intro.M_NM+"</span>";
-        	html+="<div class=\"intro_con\">"+intro.INTRO_CON+"</div>";
-        	$(".profile-bio").html(html);
+	        	html+="<span class=\"profile-real-name\">"+data.M_NM+"</span>	";
+	        	html+="<div class=\"intro_con\">"+data.INTRO_CON+"</div>		";
+        		$(".profile-bio").html(html);
         }
         function profileCnt(data1,data2){
 			var html ="";
-			html +="<li><span class=\"profile-stat-count\"></span> posts</li>";
-		    html +="<li><span class=\"profile-stat-count\">"+data1+"</span>followers</li>";
-		    html +="<li><span class=\"profile-stat-count\">"+data2+"</span>following</li>";
-	    	$("#profile-stat").html(html);
+				html +="<li><span class=\"profile-stat-count\"></span> posts</li>";
+			    html +="<li><span class=\"profile-stat-count\">"+data1+"</span>followers</li>";
+			    html +="<li><span class=\"profile-stat-count\">"+data2+"</span>following</li>";
+	    		$("#profile-stat").html(html);
         }
-	    function drawList(list){
+        function follow(data1,data2){
 			var html ="";
-			
+			if(data1 == 0 && data2 == 0){
+				html +="<button id=\"follow_btn\" class=\"follow_btn\">		";
+			    html +="팔로우<i class=\"fas fa-user-plus\"></i>				";
+			    html +="</button>											";
+			}
+			else if(data1 == 1 && data2 == 0){
+			    html +="<button id=\"unfollow_btn\" class=\"unfollow_btn\"> ";
+			    html +="<i class=\"fas fa-user-check\"></i>					";
+			    html +="</button>											";
+			}else if(data1 == 0 && data2 == 1){
+				html +="<button id=\"editBtn\" class=\"btn profile-edit-btn\">Edit Profile</button>";
+				html +="<button class=\"btn profile-settings-btn\" aria-label=\"profile settings\">";
+				html +="<i class=\"fas fa-cog\" aria-hidden=\"true\"></i>						   ";
+				html +="</button>															   	   ";
+			}else{
+				alert("error");
+			}		
+	    	$(".follow_area").html(html);
+        }
+	    function imgList(list){
+			var html ="";			
 			for(var data of list){                                                                                    
 				html+= "<div class=\"gallery-item\" tabindex=\"0\" wtno=\""+data.WRITING_NO+"\" no=\""+data.M_NO+"\">               "; 
 			    html+= "    	<img src=\""+data.FILE_ADR+"\" class=\"gallery-image\" alt=\"\" />									"; 
@@ -110,8 +130,7 @@
 			    html+= "        	</ul>                                                                                    ";
 			    html+= "    	</div>                                                                                       "; 
 		    	html+= "</div>                                                                                           	 "; 
-			}
-			
+			}			
 			$("#gallery").html(html);
 		}
 	    function mdDraw(){  	
@@ -132,7 +151,6 @@
 					addH(res.result);
 				},
 				error : function(request, status, error){
-					console.log("에러");
 					console.log(error);
 				}
 			});
@@ -148,7 +166,6 @@
 					likeCnt(res.like);
 				},
 				error : function(request, status, error){
-					console.log("에러");
 					console.log(error);
 				}
 			});
@@ -281,28 +298,28 @@
 			   html+="좋아요<span id=\"like-count-39\">"+data+"</span>개";				   
 			   $(".likes").html(html);
 	    }
-	 /*    function timeForToday(value) {
+	    function timeForToday(value) {
 	        const today = new Date();
 	        const timeValue = new Date(value);
 
 	        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
 	        if (betweenTime < 1) return '방금전';
 	        if (betweenTime < 60) {
-	            return betweenTime '분전';
+	            return `${betweenTime} 분전`;
 	        }
 
 	        const betweenTimeHour = Math.floor(betweenTime / 60);
 	        if (betweenTimeHour < 24) {
-	            return betweenTimeHour '시간전';
+	            return `${betweenTimeHour} 시간전`;
 	        }
 
 	        const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
 	        if (betweenTimeDay < 365) {
-	            return betweenTimeDay '일전';
+	            return `${betweenTimeDay} 일전`;
 	        }
 
 	        return `${Math.floor(betweenTimeDay / 365)}년전`;
-	 	} */
+	 	}
 	    function ModalImg(md){                                                                                                                         
 			var html ="";                                                                                                                                  
 			var i=1;                                                                                                                                       
@@ -440,77 +457,72 @@
 	<header>
             <div class="cm_menuBar" id="cm_menuBar">
                 <div class="cm_menu__toggler"><span></span></div>
-                <a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
-                <a href="#" class="cm_home" id="cm_home">Home</a>
-                <a href="#" class="cm_msg" id="cm_msg">Message</a>
-                <a href="#" class="cm_cld" id="cm_cld">Calendar</a>
-                <div class="cm_dropdown">
-                    <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
-                    <ul class="cm_dropdown-content">
-                        <li>
-                            <a href="../logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
-                        </li>
-                        <li>
-                            <a href="#" class="cm_userinfo">개인정보수정</a>
-                        </li>
-                    </ul>
-                    </div>
-                    <div class="cm_user_name">
-						<c:if test="${!empty sMNo}">
-							${sMNm}님 어서오세요.
-						</c:if>
-					</div>
-                </div>
-        <div class="cm_menu" id="cm_menu">
-            <a href="#" class="cm_mLogo">Coronagram</a>
-            <a href="#" class="cm_mTitle" id="cm_mTitle">
-                <div class="cm_map"></div> Corona Map
-                <ul class="cm_mcon" id="cm_mcon">
-                    <a href="#">국내</a> <br>
-                    <a href="#">해외</a>
-                </ul>
-            </a>
-            <a href="#" class="cm_mTitle" id="cm_mTitle">
-                <div class="cm_info"></div>Corona Info
-                <ul class="cm_mcon" id="cm_mcon">
-                    <a href="#">관련 정보</a> <br>
-                    <a href="#">거리두기</a> <br>
-                    <a href="#">News</a>
-                </ul>
-            </a>
-            <a href="#" class="cm_sTitle">
-                <div class="cm_cam"></div>Coronagram
-            </a>
-            <a href="#" class="cm_mTitle" id="cm_mTitle">
-                <div class="cm_user"></div>My Page
-                <ul class="cm_mcon" id="cm_mcon">
-                    <a href="#">개인 페이지</a> <br>
-                    <a href="#">출석 체크</a> <br>
-                    <a href="#">Message</a>
-                </ul>
-            </a>
-            <a href="#" class="cm_mTitle" id="cm_mTitle">
-                <div class="cm_qna"></div>Service Center
-                <ul class="cm_mcon" id="cm_mcon">
-                    <a href="#">FAQ</a> <br>
-                    <a href="#">Q&A</a>
-                </ul>
-            </a>
-        </div>
-    </header>
-    <main>
-        <header>
+	                <a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
+	                <a href="#" class="cm_home" id="cm_home">Home</a>
+	                <a href="#" class="cm_msg" id="cm_msg">Message</a>
+	                <a href="#" class="cm_cld" id="cm_cld">Calendar</a>
+	                <div class="cm_dropdown">
+		                <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
+		                <ul class="cm_dropdown-content">
+		                    <li>
+		                        <a href="../logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
+		                    </li>
+		                    <li>
+		                        <a href="#" class="cm_userinfo">개인정보수정</a>
+		                    </li>
+		                </ul>
+                	</div>
+	                <div class="cm_user_name">
+					<c:if test="${!empty sMNo}">
+						${sMNm}님 어서오세요.
+					</c:if>
+				</div>
+            </div>
+	        <div class="cm_menu" id="cm_menu">
+	            <a href="#" class="cm_mLogo">Coronagram</a>
+	            <a href="#" class="cm_mTitle" id="cm_mTitle">
+	                <div class="cm_map"></div> Corona Map
+	                <ul class="cm_mcon" id="cm_mcon">
+	                    <a href="#">국내</a> <br>
+	                    <a href="#">해외</a>
+	                </ul>
+	            </a>
+	            <a href="#" class="cm_mTitle" id="cm_mTitle">
+	                <div class="cm_info"></div>Corona Info
+	                <ul class="cm_mcon" id="cm_mcon">
+	                    <a href="#">관련 정보</a> <br>
+	                    <a href="#">거리두기</a> <br>
+	                    <a href="#">News</a>
+	                </ul>
+	            </a>
+	            <a href="#" class="cm_sTitle">
+	                <div class="cm_cam"></div>Coronagram
+	            </a>
+	            <a href="#" class="cm_mTitle" id="cm_mTitle">
+	                <div class="cm_user"></div>My Page
+	                <ul class="cm_mcon" id="cm_mcon">
+	                    <a href="#">개인 페이지</a> <br>
+	                    <a href="#">출석 체크</a> <br>
+	                    <a href="#">Message</a>
+	                </ul>
+	            </a>
+	            <a href="#" class="cm_mTitle" id="cm_mTitle">
+	                <div class="cm_qna"></div>Service Center
+	                <ul class="cm_mcon" id="cm_mcon">
+	                    <a href="#">FAQ</a> <br>
+	                    <a href="#">Q&A</a>
+	                </ul>
+	            </a>
+	        </div>
             <div class="container">    
                 <div class="profile">   
                     <div class="profile-image">
-                            <img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">    
+                        <img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">    
                     </div>    
                     <div class="profile-user-settings">    
                         <div class="profile-user-setting">
-                        </div>
-                        <button id="editBtn" class="btn profile-edit-btn">Edit Profile</button>    
-                        <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
-                        <button id="follow_btn" class="follow_btn">follow</button>    
+                        </div>                                                         
+                       	<div class="follow_area"></div>
                     </div>  
                     <div class="profile-stats">  
                         <ul id="profile-stat"></ul>   
@@ -519,13 +531,14 @@
                 </div>
             </div>
         </header>
-        <div id="myModal" class="modal"></div>
-        
-        <div class="container">
-            <div id="gallery" class="gallery"></div>     
-        </div>
-    </main>
+     	<main>
+	        <div class="nav_menu"></div>
+	        <div id="myModal" class="modal"></div>        
+	        <div class="container">
+	            <div id="gallery" class="gallery"></div>     
+	        </div>   
     		<form action="#" id="addrForm" method="post">
+    			<input type="hidden" name="m_no" value="${sMNo}"/>
     			<input type="hidden" name="nickNm" value="<%= request.getAttribute("nicknm") %>"/>
     		</form>
            <form action="#" id="editForm" method="post">
@@ -536,8 +549,7 @@
     	   	  <input type="hidden" name="writingNo" id="writingNo"/>
     	   	  <input type="hidden" name="nickNm" value="<%=request.getAttribute("nicknm")%>"/>
 		   </form>
-		   
-    <script src="../resources/script/menu_bar/menu_bar.js"></script>
-</body>
-
+	 	</main>	   
+    	<script src="../resources/script/menu_bar/menu_bar.js"></script>
+	</body>
 </html>

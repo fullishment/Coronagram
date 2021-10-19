@@ -80,4 +80,16 @@ public class DaoUserPage implements IDaoUserPage {
 		return sqlSession.selectOne("userPage.getLkCnt",params);
 	}
 
+	@Override
+	public int getfollowEx(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("userPage.getfollowEx",params);
+	}
+
+	@Override
+	public int getfollowEx2(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("userPage.getfollowEx2",params);
+	}
+
 }
