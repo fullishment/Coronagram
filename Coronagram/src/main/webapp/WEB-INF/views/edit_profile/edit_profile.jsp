@@ -29,7 +29,7 @@ $(document).ready(function(){
 			if(checkVal("#ocpw")) { //기존 비밀번호 입력 여부
 				alert("기존 비밀번호를 입력해 주세요.");
 				$("#ocpw").focus();
-			} else if($("#opw").val() == $("#ocpw").val()) { // 실 비밀번호와 입력된 기존비밀번호 비교
+			} else if($("#opw").val() == $("#ocpw").val()) { // 실 비밀번호와 입력된 기존비밀번호비교
 				if(checkVal("#repw")) {
 					alert("비밀번호 확인을 입력해 주세요.");
 					$("#repw").focus();
