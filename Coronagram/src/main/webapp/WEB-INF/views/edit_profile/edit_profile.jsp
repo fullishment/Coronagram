@@ -79,10 +79,12 @@ $(document).ready(function(){
          $("#Phone").focus();
       }
        else {
-    	   if(checkVal("#ocpw")){
-       		alert("현재비밀번호를 입력해 주세요.");
-       		$("#ocpw").focus();
-       	}else{
+    	   if(!checkVal("#mPw") && checkVal("#ocpw") ){
+
+   	       		alert("현재비밀번호를 입력해 주세요.");
+   	       		$("#ocpw").focus();
+    	   }
+    	   else{
        		
          var params = $("#updateForm").serialize();
          

@@ -17,6 +17,7 @@
     <script type="text/javascript">
     $(document).ready(function(){
     	redrawCartList();
+    	console.log(parseInt($("#ono1").parent().children(".up_con3").children("#qt").html()))
     	$("#delBtn").on("click",function(){
     		delCart();
     	});
@@ -259,47 +260,7 @@
     }
     
     </script>
-    <style type="text/css">
-    	.lcon2_up label {
-		  background-color: #fff;
-		  border: 1px solid #ccc;
-		  border-radius: 50%;
-		  cursor: pointer;
-		  height: 28px;
-		  left: 0;
-		  position: relative;
-		  top: 15px;
-		  width: 28px;
-		}
-
-		.lcon2_up label:after {
-		  border: 2px solid #000;
-		  border-top: none;
-		  border-right: none;
-		  content: "";
-		  height: 6px;
-		  left: 7px;
-		  opacity: 0;
-		  position: absolute;
-		  top: 8px;
-		  transform: rotate(-45deg);
-		  width: 12px;
-		  
-		}
-		
-		.lcon2_up input[type="checkbox"] {
-		  visibility: hidden;
-		}
-		
-		.lcon2_up input[type="checkbox"]:checked + label {
-		  background-color: #ffffff;
-		  border-color: #000000;
-		}
-		
-		.lcon2_up input[type="checkbox"]:checked + label:after {
-		  opacity: 1;
-		}
-    </style>
+    
 </head>
 
 <body>
