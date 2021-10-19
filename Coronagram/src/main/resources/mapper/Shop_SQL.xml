@@ -29,7 +29,7 @@
 		WHERE PROD_NO= #{prodNo} AND PRICE = #{price} AND UNIT=#{unit}
 	</insert>
 	<select id="getCartList" parameterType="hashmap" resultType="hashmap">
-		SELECT C.CART_NO, C.M_NO,C.OPT_NO,O.PRICE,O.UNIT,P.CON,P.PROD_NM,P.POINT,PA.FILE_ADDR
+		SELECT C.CART_NO, C.M_NO,C.OPT_NO,O.PRICE,O.UNIT,P.CON,P.PROD_NM,P.POINT,PA.FILE_ADDR,P.PROD_NO
 		FROM CART C 
 		JOIN PRODUCT P
 		    ON C.PROD_NO = P.PROD_NO
@@ -55,4 +55,19 @@
 		FROM CART
 		WHERE CART_NO = #{cartList}
 	</delete>
+	<insert id="addOrder" parameterType="hashmap">
+		INSERT INTO ORD (ORD_NO,USER_NO,ORD_STAT,POST_NO,ADR,DTL_ADR)
+		VALUES (ORD_SEQ.NEXTVAL,#{sMNo},1,#{postNo},#{adr},#{dtlAdr})
+	</insert>
+	<select id="getOrd" parameterType="hashmap" resultType="Integer">
+		SELECT O.ORD_NO as ORD_NO
+		FROM (SELECT ORD_NO,USER_NO,RANK() OVER(PARTITION BY USER_NO ORDER BY ORD_DT DESC) RNK
+        		FROM ORD) O
+    		  WHERE USER_NO = #{sMNo}
+   		AND RNK= 1;
+	</select>
+	<insert id="addOrdP" parameterType="hashmap">
+		INSERT INTO ORDER_PROD(ORDER_NO,PROD_NO,OPT_NO,QTY)
+		VALUES(#{ono},#{pno},#{ono},#{qt})
+	</insert>
 </mapper>

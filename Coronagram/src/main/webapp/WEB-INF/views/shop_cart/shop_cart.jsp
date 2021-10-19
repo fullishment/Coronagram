@@ -68,51 +68,14 @@
     	});
     	   
     	   
-    	$("#orderBtn").click(function(){
-    		if(confirm("주문하시겠습니까?")){
-	    		var params=$("#orderForm").serialize();
-	        	$.ajax({ 
-	    			url : "orderAdd",
-	    			type : "post",
-	    			dataType : "json",
-	    			data : params,
-	    			success : function(res){
-	    				var qt = $("span [class=\"qt\"]");
-	    				var valueArr = new Array();
-	    				
-	    				for(var i = 0 ; i< qt.length; i++){	
-    		    			valueArr.push(qt[i].value);
-	    		    	}
-	    				$.ajax({
-	    					url:"orderProAdd",
-	    					type : "post",
-	    					dataType : "json",
-	    					data : {
-	    						valueArr:valueArr
-	    					},
-	    					success : function(res){
-	    						if(result == "success"){
-	    							location.href("prod_shipping");
-	    						}else if(result="failed"){
-	    							alert("주문에 실패했습니다");
-	    						}else{
-	    							alert("주문 중 오류가 발생했습니다");
-	    							console.log(result);
-	    						}
-	    					},
-	    					error : function(request, status,error){
-	    						console.log(error);
-	    					}
-	    				});
-	    			},
-	    			error : function(request, status, error){
-	    				console.log(error);
-	    			}
-	    		});
-    		}
-    	});
-    });
-    
+    	
+    function checkVal(sel){
+    	if($.trim($(sel).val())==""){
+    		return true;
+    	}else{
+    		return false;
+    	}
+    };
     function cm_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -150,7 +113,50 @@
     }
     
     
-    
+    $("#orderBtn").click(function(){
+		if(checkVal("#cm_postcode")){
+			alert("우편번호를 입력해주세요");
+		}else if(checkVal("#cm_address")){
+			alert("주소를 입력해주세요");
+		}else if(checkVal("#cm_detailAddress")){
+			alert("상세주소를 입력해주세요");
+		}else if(confirm("주문하시겠습니까?")){
+    		var cnt = parseInt($("#totalCnt").html());
+   			var params=$("#orderForm").serialize();
+        	$.ajax({ 
+    			url : "orderAdd",
+    			type : "post",
+    			dataType : "json",
+    			data : params,
+    			success : function(res){
+    				for(var i=0; i<cnt; i++){
+    	    			var qt = parseInt($("#ono"+i).parent().children(".up_con3").children("#qt").html());
+    	    			$("#oNoIn").val($("#ono"+i));
+    	    			$("#pNoIn").val($("#pno"+i));
+    	    			$("#oNoIn").val($("#ono"+i));
+    	    			$("#qNoIn").val(qt);
+    	    			params = $("#orderFrom").serialize();
+    	    			$.ajax({
+    	    				url : "ordPAdd",
+    	    				type :"post",
+    	    				dataType : "json",
+    	    				data : params,
+    	    				success : function(res){
+    	    					
+    	    				},
+    	    				error : function(request, status, error){
+    	        				console.log(error);
+    	        			}
+    	    			});
+    				}
+    			},
+    			error : function(request, status, error){
+    				console.log(error);
+    			}
+    		});
+		}
+	});
+});
     function delCart(){
     	var valueArr = new Array();
     	var inp = $("input[name=\"cartCheck\"]");
@@ -217,18 +223,21 @@
     	var html="";
     	var total=0;
     	var totalhtml = "";
-    	
+ 		var i=0;
     	for(var data of list){
-    			html+="<div class=\"lcon2_up\" no=\"${data.CART_NO}\">								";                                   
-   				html+=" <input type=\"checkbox\" name=\"cartCheck\" class=\"check_btn\" value=\""+data.CART_NO+"\">						";                    
-				html+="	<div class=\"up_con1\"><img alt=\"\" src=\""+data.FILE_ADDR+"\"></div>                                             ";
-				html+="	<div class=\"up_con2\">                                                   ";
-				html+="   		<div class=\"con2_title\">"+data.PROD_NM+"</div>                   ";
+    			html+="<div class=\"lcon2_up\">								";
+    			html+="<input type=\"hidden\" name=\"cno\" value=\""+data.CART_NO+"\" id=\"cno"+i+"\">";
+    			html+="<input type=\"hidden\" name=\"pno\" value=\""+data.PROD_NO+"\" id=\"pno"+i+"\">";
+    			html+="<input type=\"hidden\" name=\"ono\" value=\""+data.ORT_NO+"\" id=\"ono"+i+"\">";    			
+   				html+="<input type=\"checkbox\" name=\"cartCheck\" class=\"check_btn\" value=\""+data.CART_NO+"\">						";                    
+				html+="<div class=\"up_con1\"><img alt=\"\" src=\""+data.FILE_ADDR+"\"></div>                                             ";
+				html+="<div class=\"up_con2\">                                                   ";
+				html+="   	<div class=\"con2_title\">"+data.PROD_NM+"</div>                   ";
 				html+="		<div class=\"con2_subtitle\">"+data.CON+"</div>                       ";
 				html+="		<div class=\"con2_color\"><p>"+data.UNIT+" : "+data.PRICE+"</p></div>  ";             
 				html+="		<div class=\"con2_memo\">메모</div>                                   	";
-				html+="		</div>                                                              ";
-				html+="		<div class=\"up_con3\">                                               ";
+				html+="	</div>                                                              ";
+				html+="	<div class=\"up_con3\">                                               ";
 				html+="		<span class=\"qt-minus\">-</span>                                     ";
 				html+="		<span class=\"qt\" id =\"qt\">1</span>                                           ";
 				html+="		<span class=\"qt-plus\">+</span>                                      ";
@@ -238,8 +247,9 @@
 				html+="	</div>                                                                  ";
 				html+="</div>                                                                   ";
 				total += data.POINT;
+				i++;
     	}
-    	totalhtml +="<div class=\"entire_item\"><span>전체 상품</span><span>"+cnt.CNT+"개</span></div>";
+    	totalhtml +="<div class=\"entire_item\"><span>전체 상품</span><span id=\"totalCnt\">"+cnt.CNT+"개</span></div>";
 	    totalhtml +="<div class=\"order_price\"><span>주문 금액</span><span id=\"totalP\">"+total+"</span></div>";
 	    totalhtml +="<div class=\"order_price\"><span>보유 포인트</span><span>"+cnt.POINT+"P</span></div>";
 	    
@@ -314,9 +324,6 @@
     <form action="#" id="actionForm" method="post">
 		<input type="hidden" name="sMNo" id="sMNo" value="${sMNo}" />
 	</form>
-	<form action="" id="orderForm" method="post">
-		<input type="hidden" name="sMNo" id="sMNo" value="${sMNo}" />
-	</form>
         <section id="main">
             <div class="main-left">
                 <div class="lcon1">
@@ -349,10 +356,16 @@
                 <div class="rcon2">
                     <div class="rcon2_con1">
                         <p>배송지를 등록해 주세요.</p><br>
-                        <form action="#" id="addrForm" method="post"></form>
-	                        <input type="text" id="cm_postcode" name="cm_postcode" class="post_num" placeholder="우편번호">
+                        <form action="#" id="orderForm" method="post">
+	                        <input type="text" id="cm_postcode" name="postNo" class="post_num" placeholder="우편번호">
 				            <input type="text" id="cm_address" name="adr" placeholder="주소"><br>
-				            <input type="text" id="cm_detailAddress" name="dtl_adr"  placeholder="상세주소"><br>
+				            <input type="text" id="cm_detailAddress" name="dtlAdr"  placeholder="상세주소"><br>
+				            <input type="hidden" name="sMNo" id="sMNo" value="${sMNo}" />
+				            <input type="hidden" name="oNo" id="oNoIn" value="" />
+				            <input type="hidden" name="pNo" id="pNoIn" value="" />
+				            <input type="hidden" name="qNo" id="qNoIn" value="" />
+				            <input type="hidden" name="cNo" id="cNoIn" value="" />
+                        </form>
                         <button class="addr_btn" id="addr_btn">배송지 등록</button>
                     </div>
                     <div class="rcon2_con2" id="rcon2_con2">

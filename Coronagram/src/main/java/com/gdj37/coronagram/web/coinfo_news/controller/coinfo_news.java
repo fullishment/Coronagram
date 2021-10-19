@@ -27,17 +27,17 @@ public class coinfo_news {
 	@RequestMapping(value="/coinfo_news")
 	public ModelAndView coinfo_news(@RequestParam HashMap<String,String> params,
 									ModelAndView mav) {
-		/*
-		String page = "1";
 		
-		if(params.get("page") != null) {
-		page = params.get("page");
-		}
-		
-		mav.addObject("page", page);
-		*/
-		
-		mav.setViewName("coinfo_news/coinfo_news");
+//		  String page = "1";
+//		  
+//		  if(params.get("page") != null) {
+//			  page = params.get("page"); 
+//		  }
+//		  
+//		  mav.addObject("page", page);
+//		 
+//		
+//		mav.setViewName("coinfo_news/coinfo_news");
 		
 		return mav;
 	}

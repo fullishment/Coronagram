@@ -123,19 +123,40 @@ public class ShopController {
 	}
 	@RequestMapping(value="/orderAdd" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
 	@ResponseBody
-	public String orderAdd(ModelAndView mav, @RequestParam HashMap<String,String> params,@RequestParam(value="valueArr[]") List<Integer> qtList) throws Throwable {
+	public String orderAdd(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String,Object> modelMap= new HashMap<String,Object>();
 		String result="success";
 		try {
-			int cart = iServiceShop.addOrder(params);
-			if(cart==0) {
+			int addO = iServiceShop.addOrder(params);
+			if(addO==0) {
 				result="failed";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			result="error";
 		}
+
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/ordPAdd" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String ordPAdd(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		String result="success";
+		try {
+			int cnt = iServiceShop.addOrdP(params);
+			if(cnt==0) {
+				result="failed";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			result="error";
+		}
+		
 		modelMap.put("result", result);
 		return mapper.writeValueAsString(modelMap);
 	}

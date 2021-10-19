@@ -25,5 +25,10 @@ public interface IServiceShop {
 
 	public int addOrder(HashMap<String, String> params)throws Throwable;
 
+	public Integer getOrdNo(HashMap<String, String> params)throws Throwable;
+
+	public int addOrdP( HashMap<String, String> params)throws Throwable;
+
+
 
 }
