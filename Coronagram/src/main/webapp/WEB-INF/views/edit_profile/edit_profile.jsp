@@ -192,7 +192,7 @@ $("input:radio[name='vec']").removeAttr("checked");
     <div class="input_area">
       <label for="photo-upload" class="custom-file-upload fas">
         <div class="img-wrap img-upload">
-          <img for="photo-upload" src="https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"/>
+          <img for="photo-upload"  src="resources/images/edit_profile/edit_profile.png" />  
         </div>
       </label>
 	<input type="file" id="photo-upload" class="img-wrap img-upload"><br>

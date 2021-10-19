@@ -37,16 +37,17 @@ function drawList(data) {
 	var html = "";
 	$(data).find('item').each(function(index, item){
 			html += "<div>"
-				html += "<item>" + $(this).find('areaNm').text() + "</item>       ";
-				html += "<item>" + $(this).find('areaNmEn').text() + "</item>     ";
-				html += "<item>" + $(this).find('createDt').text() + "</item>     ";
-				html += "<item>" + $(this).find('natDeathCnt').text() + "</item>  ";
-				html += "<item>" + $(this).find('natDeathRate').text() + "</item> ";
-				html += "<item>" + $(this).find('natDefCnt').text() + "</item>    ";
-				html += "<item>" + $(this).find('nationNm').text() + "</item>     ";
-				html += "<item>" + $(this).find('nationNmEn').text() + "</item>   ";
-				html += "<item>" + $(this).find('seq').text() + "</item>          ";
-				html += "<item>" + $(this).find('stdDay').text() + "</item>       ";
+				//html += "<item>" + $(this).find('areaNm').text() + "</item>       "; //지역명        
+				//html += "<item>" + $(this).find('areaNmEn').text() + "</item>     "; //지역명(영문)
+				//html += "<item>" + $(this).find('createDt').text() + "</item>     "; //등록일시분초
+				html += "<item>" + $(this).find('nationNmEn').text() + "</item>   "; //국가명(영문)
+				html += "<item>" + $(this).find('stdDay').text() + "</item>       "; //기준일시
+				html += "<item>" + $(this).find('natDefCnt').text() + "</item>    "; //국가별 확진자 수
+				html += "<item>" + $(this).find('natDeathCnt').text() + "</item>  "; //국가별 사망자 수
+				//html += "<item>" + $(this).find('natDeathRate').text() + "</item> "; //확진률 대비 사망률
+				//html += "<item>" + $(this).find('nationNm').text() + "</item>     "; //국가명			
+				//html += "<item>" + $(this).find('seq').text() + "</item>          "; //게시글번호(국외발생현황고유값)				
+				//html += "<item>" + $(this).find('UPDATE_DT').text() + "</item>    "; //수정일시분초
 			html += "</div>"
 			
 		});
