@@ -79,7 +79,7 @@ input[type="file"] {
     height: 176px;
 }
 .img-upload:before{
-  content: "\f093";
+  content: "\f093"; /* 화살표 이미지 */
   font-size: 90px;
   position: absolute;
   padding-top: 80px;
