@@ -14,6 +14,106 @@
 	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
 <script
 	src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	
+<script type="text/javascript"
+		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+var totCnt = 0;
+
+var page = 1;
+var maxP = 0;
+
+$(document).ready(function() {
+
+	getList();
+	
+});
+
+function getList() {
+	$.ajax({
+	    type:"GET",
+	    url:"https://api.odcloud.kr/api/15069309/v1/uddi:d2dba5c8-9ee5-45e3-aabf-98d95f0374fe?page=" + page + "&perPage=10&serviceKey=pdbFQpTLYSE6kbg9mPcwLcT8UNGIwIXgJXzx43scUwQ3to1K4WXvqL8mjztO%2BOdVkhKTgcwDByeMphPXizH7Bg%3D%3D",
+	    dataType: "json",
+	    success: function(res){
+	    	maxP = res.totalCount / 10;
+	    	if(res.totalCount % 10 > 0) {
+	    		maxP++;
+	    	}
+	    	drawList(res.data)
+	      
+	    }
+	 });
+}
+
+function drawList(list) {
+	 var html = "";
+     for(var i = 0; i < list.length ;i++){
+			html += "<tr><td class=\"t1\">" + "<a href =\"" + list[i]['주소'] + "\">" + list[i]['제목'] + "</a>" + "</td></tr>";
+			html += "<tr><td class=\"t2\">" + list[i]['일자'] + "</td></tr>";
+			html += "<tr><td class=\"t3\">" + list[i]['본문'] + "</td></tr";
+			html += "<tr><td class=\"t4\"></td></tr>";
+		}
+		
+     $(".tr1").html(html);
+     
+     drawPaging()
+}
+
+
+
+
+
+	function drawPaging(){
+		
+		var startPcount = 0;
+		
+		if(page % 10 == 0 ) {
+			startPcount = page - 10 + 1;
+		} else {
+			startPcount = (Math.floor(page / 10) * 10) + 1;
+		}
+	
+		var endPcount = 0;
+		
+		
+		endPcount = startPcount + 10 - 1;
+		
+		if(endPcount >= maxP){
+			endPcount = maxP;
+		}
+		
+		var html = "";
+		
+		html += "<span page=\"1\">처음</span>     ";
+		
+		if($("#page").val() == "1"){
+			html += "<span page=\"1\">이전</span>     ";
+		} else {
+			html += "<span page=\"" + ($("#page").val() * 1 - 1) + "\">이전</span>   ";
+		}
+		// *1을 하면 자동 숫자변환
+		
+		for(var i = startPcount ; i <= endPcount ; i++){
+			if($("#page").val() == i){
+				html += "<span page=\"" + i + "\"><b>" + i + "</b></span> ";
+			} else {
+				html += "<span page=\"" + i + "\">" + i + "</span>		  ";
+			}
+		}
+		
+		if($("#page").val() == maxP){
+			html += "<span page=\"" + maxP + "\">다음</span>     ";
+		} else {
+			html += "<span page=\"" + ($("#page").val() * 1 + 1) + "\">다음</span>     ";
+		}
+		
+		html += "<span page=\"" + maxP + "\">마지막</span>   ";
+		
+		$(".paging_wrap").html(html);
+	}
+	
+
+</script>
 </head>
 <body>
 	<header>
@@ -92,92 +192,25 @@
 			<!-- scHead -->
 			<div class="sc_main">
 				<div class="group">
-					<div class="sc_content" id="sc_content">
-						<a href="#">
-							<div class="sc_section" id="sc_section">
-								<div class="sc_article">
-									<div class="sc_hd">
-										<h3>만남 시간 줄이고 환기 자주하면 감염 위험 1/3까지 줄어</h3>
-									</div>
-									<div class="sc_dt">
-										<p>2021-09-16</p>
-									</div>
-									<div class="sc_cnt">
-										<p>Lorem ipsum dolor sit amet consectetur adipisicing
-											elit. Ea itaque laudantium, cum, praesentium impedit
-											consequatur soluta ab explicabo mollitia, recusandae deserunt
-											placeat similique dolorum ipsum vel aliquid? Praesentium, rem
-											voluptate?</p>
-									</div>
-								</div>
-							</div>
-						</a>
-					</div>
-					<div class="sc_content" id="sc_content">
-						<a href="#">
-							<div class="sc_section" id="sc_section">
-								<div class="sc_article">
-									<div class="sc_hd">
-										<h3>만남 시간 줄이고 환기 자주하면 감염 위험 1/3까지 줄어</h3>
-									</div>
-									<div class="sc_dt">
-										<p>2021-09-16</p>
-									</div>
-									<div class="sc_cnt">
-										<p>Lorem ipsum dolor sit amet consectetur adipisicing
-											elit. Ea itaque laudantium, cum, praesentium impedit
-											consequatur soluta ab explicabo mollitia, recusandae deserunt
-											placeat similique dolorum ipsum vel aliquid? Praesentium, rem
-											voluptate?</p>
-									</div>
-								</div>
-							</div>
-						</a>
-					</div>
-					<div class="sc_content" id="sc_content">
-						<a href="#">
-							<div class="sc_section" id="sc_section">
-								<div class="sc_article">
-									<div class="sc_hd">
-										<h3>만남 시간 줄이고 환기 자주하면 감염 위험 1/3까지 줄어</h3>
-									</div>
-									<div class="sc_dt">
-										<p>2021-09-16</p>
-									</div>
-									<div class="sc_cnt">
-										<p>Lorem ipsum dolor sit amet consectetur adipisicing
-											elit. Ea itaque laudantium, cum, praesentium impedit
-											consequatur soluta ab explicabo mollitia, recusandae deserunt
-											placeat similique dolorum ipsum vel aliquid? Praesentium, rem
-											voluptate?</p>
-									</div>
-								</div>
-							</div>
-						</a>
-					</div>
-					<div class="sc_content" id="sc_content">
-						<a href="#">
-							<div class="sc_section" id="sc_section">
-								<div class="sc_article">
-									<div class="sc_hd">
-										<h3>만남 시간 줄이고 환기 자주하면 감염 위험 1/3까지 줄어</h3>
-									</div>
-									<div class="sc_dt">
-										<p>2021-09-16</p>
-									</div>
-									<div class="sc_cnt">
-										<p>Lorem ipsum dolor sit amet consectetur adipisicing
-											elit. Ea itaque laudantium, cum, praesentium impedit
-											consequatur soluta ab explicabo mollitia, recusandae deserunt
-											placeat similique dolorum ipsum vel aliquid? Praesentium, rem
-											voluptate?</p>
-									</div>
-								</div>
-							</div>
-						</a>
+					<div>
+						<table>
+							<thead>
+								<tr>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="tr1"></tr>
+								<tr class="tr2"></tr>
+								<tr class="tr3"></tr>
+								<tr class="tr4"></tr>
+								<tr class="tr5"></tr>
+								<tr class="tr6"></tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
+			<div class="paging_wrap"></div>
 			<!-- scMain -->
 		</div>
 		<!-- sc -->
