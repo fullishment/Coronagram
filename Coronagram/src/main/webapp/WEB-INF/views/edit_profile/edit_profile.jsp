@@ -39,7 +39,7 @@ $(document).ready(function(){
 					$("#repw").val("");
 					$("#mPw").focus();
 				} else if(checkVal("#mNm")) {
-					alert("이을 입력해 주세요.");
+					alert("이름을 입력해 주세요.");
 					$("#mNm").focus();
 				} else {
 					var params = $("#updateForm").serialize();
