@@ -229,7 +229,8 @@
     			html+="<input type=\"hidden\" name=\"cno\" value=\""+data.CART_NO+"\" id=\"cno"+i+"\">";
     			html+="<input type=\"hidden\" name=\"pno\" value=\""+data.PROD_NO+"\" id=\"pno"+i+"\">";
     			html+="<input type=\"hidden\" name=\"ono\" value=\""+data.ORT_NO+"\" id=\"ono"+i+"\">";    			
-   				html+="<input type=\"checkbox\" name=\"cartCheck\" class=\"check_btn\" value=\""+data.CART_NO+"\">						";                    
+   				html+="<input type=\"checkbox\" name=\"cartCheck\" class=\"check_btn\" value=\""+data.CART_NO+"\" checked id=\"checkbox"+i+"\">						";
+   				html+="<label for=\"checkbox"+i+"\"></label>"
 				html+="<div class=\"up_con1\"><img alt=\"\" src=\""+data.FILE_ADDR+"\"></div>                                             ";
 				html+="<div class=\"up_con2\">                                                   ";
 				html+="   	<div class=\"con2_title\">"+data.PROD_NM+"</div>                   ";
@@ -258,6 +259,47 @@
     }
     
     </script>
+    <style type="text/css">
+    	.lcon2_up label {
+		  background-color: #fff;
+		  border: 1px solid #ccc;
+		  border-radius: 50%;
+		  cursor: pointer;
+		  height: 28px;
+		  left: 0;
+		  position: relative;
+		  top: 15px;
+		  width: 28px;
+		}
+
+		.lcon2_up label:after {
+		  border: 2px solid #000;
+		  border-top: none;
+		  border-right: none;
+		  content: "";
+		  height: 6px;
+		  left: 7px;
+		  opacity: 0;
+		  position: absolute;
+		  top: 8px;
+		  transform: rotate(-45deg);
+		  width: 12px;
+		  
+		}
+		
+		.lcon2_up input[type="checkbox"] {
+		  visibility: hidden;
+		}
+		
+		.lcon2_up input[type="checkbox"]:checked + label {
+		  background-color: #ffffff;
+		  border-color: #000000;
+		}
+		
+		.lcon2_up input[type="checkbox"]:checked + label:after {
+		  opacity: 1;
+		}
+    </style>
 </head>
 
 <body>

@@ -10,13 +10,15 @@
 		</select>	
 	
 	<!-- update -->
- 		<update id="proUp" parameterType="hashmap">
+ 		<update id="getprofileUp" parameterType="hashmap">
 		    UPDATE M SET M_NM = #{mNm}, NICK_NM = #{nickNm},
-		    			 <if test = "ocpw != null and ocpw != '' and mpw != null and mpw != ''">
+		    			 <if test = "ocpw != null and ocpw != ''">
 							M_PW = #{mPw},
 						 </if>
 		    			 PHONE = #{mPhone}, EMAIL = #{email},
-		    			 vac_yn=#{vec},POST_NO = #{cm_postcode}, ADR = #{cm_address},
+		    			 vac_yn=#{vec},
+		    			 POST_NO = #{cm_postcode}, 
+		    			 ADR = #{cm_address},
 		    			 DTL_ADR = #{cm_detailAddress}
 			WHERE M_NO = #{no}
 		</update>

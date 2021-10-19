@@ -41,7 +41,7 @@ $(document).ready(function(){
             } else if(checkVal("#mNm")) {
                alert("이름을 입력해 주세요.");
                $("#mNm").focus();
-            } else {
+            }else {
                var params = $("#updateForm").serialize();
                
                $.ajax({
@@ -79,6 +79,11 @@ $(document).ready(function(){
          $("#Phone").focus();
       }
        else {
+    	   if(checkVal("#ocpw")){
+       		alert("현재비밀번호를 입력해 주세요.");
+       		$("#ocpw").focus();
+       	}else{
+       		
          var params = $("#updateForm").serialize();
          
          $.ajax({
@@ -99,6 +104,7 @@ $(document).ready(function(){
                console.log(error);
             }
          });
+       	}
       }
    });
 });
