@@ -16,24 +16,44 @@
   $(document).ready(function() {
 
 		}
+ 
+//	$("tbody").on("click", "tr", function() {
+//		$("#no").val($(this).attr("no"));
+//		
+//		$("#actionForm").attr("action", "testAB");
+//		$("#actionForm").submit();
+//	});
+//});
+  
+  
+  
+	// 데이터 취득
+	function reloadList() {
+		var params = $("#actionForm").serialize(); // form의 데이터를 문자열로 변환
+		
+		$.ajax({ // jquery의 ajax함수 호출
+			url : "coinfo_infolistAjex", // 접속 주소
+			type : "post", // 전송 방식
+			dataType : "json", // 받아올 데이터 형태
+			data : params, // 보낼 데이터(문자열 형태)
+			success : function(res) { // 성공(ajax통신 성공) 시 다음 함수 실행
+				drawList(res.list);
+				drawPaging(res.pb);
+			},
+			error : function(request, status, error) { // 실패 시 다음 함수 실행
+				console.log(error);
+			}
+		});
+	}
+	
+  
   
   function drawList(list) {
 		var html="";
 		
 		for(var data of list){
-			html += "<tr no=\"" + data.B_NO + "\">          ";
-			html += "<td>" + data.B_NO + "</td>    ";
-			html += "<td>";
-			html += data.B_TITLE ;
-			
-			if(data.B_FILE != null){
-				html += "<img src=\"resources/images/attFile.png\" />";
-			}
-			
-			html += "<td>" + data.M_NM + "</td>  ";
-			html += "<td>" + data.B_DT + "</td> ";
-			html += "<td>" + data.B_HIT + "</td>    ";
-			html += "</tr>         ";
+			html += "<h2>" + data.INFO_TITLE + "</h2>      ";
+			html += "<p>" + data.INFO_SUBHD + "</p>    ";
 		}
 		
 		$("tbody").html(html);
@@ -120,7 +140,7 @@
               <path class="slide__overlay-path" d="M0,0 150,0 500,405 0,405" />
             </svg>
             <div class="slide__text">
-              <h2 class="slide__text-heading">Project name 1</h2>
+              <h2 class="slide__text-heading">코로나좀</h2>
               <p class="slide__text-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam
                 minus illo debitis nihil animi facere, doloremque voluptate tempore quia. Lorem ipsum dolor sit amet,
                 consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque

@@ -13,14 +13,14 @@
                         FROM CRNG_ATTC) CA
                     ON C.WRITING_NO = CA.WRITING_NO
                    AND CA.RNK = 1
-            left outer JOIN (SELECT WRITING_NO,count(*) AS WCNT
+            left outer JOIN (SELECT WRITING_NO,NVL(count(*),0) AS WCNT
                         FROM CRNG_ATTC group by WRITING_NO) CW
                     ON C.WRITING_NO = CW.WRITING_NO
-             LEFT OUTER JOIN (SELECT WRITING_NO, COUNT(*) AS CCNT
+             LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS CCNT
                              FROM CRNG_CMT
                              GROUP BY WRITING_NO) CC
                          ON C.WRITING_NO = CC.WRITING_NO 
-            LEFT OUTER JOIN (SELECT WRITING_NO, COUNT(*) AS LCNT
+            LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS LCNT
                              FROM LK
                              GROUP BY WRITING_NO) L
                          ON C.WRITING_NO = L.WRITING_NO
@@ -37,27 +37,27 @@
                         where CC.WRITING_NO= #{writingNo}
 	</select>
 	<select id="getModalM" parameterType="hashmap" resultType="hashmap">
-		select C.WRITER_NO, C.CON, M.M_NM, M.NICK_NM,NVL(L.LCNT, 0) AS LCNT 
+		 select C.WRITER_NO, C.CON, M.M_NM, M.NICK_NM,NVL(L.LCNT,0) AS LCNT 
             from CRNG C
             INNER JOIN M M
-            ON C.WRITER_NO = M_NO
-                        LEFT OUTER JOIN (SELECT WRITING_NO, COUNT(*) AS LCNT
+                        ON C.WRITER_NO = M_NO
+            LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS LCNT
                              FROM LK
                              GROUP BY WRITING_NO) L
                          ON C.WRITING_NO = L.WRITING_NO
             where del=1 
             and m.NICK_NM=#{nickNm}
-            and l.writing_no = #{writingNo}
+            and C.writing_no = #{writingNo}
 	</select>
 	<select id="getIntroM" parameterType="hashmap" resultType="hashmap">
 		select m_no,m_nm,nick_nm,intro_con from m where NICK_NM = #{nickNm}
 	</select>
 	<select id="getFollow" parameterType="hashmap" resultType="Integer">
-		select count(*) fo from follow 
+		select NVL(count(*),0) fo from follow 
    		where rp_user = (select m_no from m where nick_nm=#{nickNm})
 	</select>
 	<select id="getFollowing" parameterType="hashmap" resultType="Integer">
-		select count(*) fi from follow 
+		select NVL(count(*),0) fi from follow 
    		where rq_user = (select m_no from m where nick_nm=#{nickNm})
 	</select>
 	
