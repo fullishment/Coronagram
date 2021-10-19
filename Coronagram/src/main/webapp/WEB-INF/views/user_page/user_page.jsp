@@ -21,7 +21,7 @@
     	}
     	
     </style>
-            <script>
+    <script>
         $(document).ready(function(){
         	reloadList();
         	$("#editBtn").on("click",function(){	   
@@ -53,8 +53,7 @@
             
         });
         function reloadList(){
-			var params=$("#addrForm").serialize();
-			
+			var params=$("#addrForm").serialize();		
 			$.ajax({ 
 				url:"userpages",
 				type:"post",
@@ -65,7 +64,7 @@
 					drawList(res.list);
 					intro(res.intro);
 					introNm(res.intro);
-					profileCnt(res.follow,res.following);
+					profileCnt(res.follow, res.following);
 				},
 				error : function(request,status,error){
 					console.log(error);
@@ -84,11 +83,11 @@
         	html+="<div class=\"intro_con\">"+intro.INTRO_CON+"</div>";
         	$(".profile-bio").html(html);
         }
-        function profileCnt(follow,following){
+        function profileCnt(data1,data2){
 			var html ="";
 			html +="<li><span class=\"profile-stat-count\"></span> posts</li>";
-		    html +="<li><span class=\"profile-stat-count\">"+follow.fi+"</span>followers</li>";
-		    html +="<li><span class=\"profile-stat-count\">"+following.fo+"</span>following</li>";
+		    html +="<li><span class=\"profile-stat-count\">"+data1+"</span>followers</li>";
+		    html +="<li><span class=\"profile-stat-count\">"+data2+"</span>following</li>";
 	    	$("#profile-stat").html(html);
         }
 	    function drawList(list){
@@ -97,26 +96,25 @@
 			for(var data of list){                                                                                    
 				html+= "<div class=\"gallery-item\" tabindex=\"0\" wtno=\""+data.WRITING_NO+"\" no=\""+data.M_NO+"\">               "; 
 			    html+= "    	<img src=\""+data.FILE_ADR+"\" class=\"gallery-image\" alt=\"\" />									"; 
-			    				if(data.WCNT>1){
-			    html+= "			<div class=\"gallery-item-type\">																	";
-			    html+= "            	<span class=\"visually-hidden\">Gallery</span><i class=\"fas fa-clone\" aria-hidden=\"true\"></i>	";
-			    html+= "        	</div>																						    ";
-			    				}
-			    html+= "    	<div class=\"gallery-item-info\">                                                              "; 
-			    html+= "        	<ul>                                                                                     "; 
+				if(data.WCNT>1){
+				    html+= "	<div class=\"gallery-item-type\">																		";
+				    html+= "        <span class=\"visually-hidden\">Gallery</span><i class=\"fas fa-clone\" aria-hidden=\"true\"></i>	";
+				    html+= "    </div>																						    		";
+				}
+			    html+= "    	<div class=\"gallery-item-info\">                                                            "; 
+			    html+= "        <ul>                                                                                     	 "; 
 			    html+= "            <li class=\"gallery-item-likes\"><span class=\"visually-hidden\">Likes:</span><i         "; 
 			    html+= "                    class=\"fas fa-heart\" aria-hidden=\"true\"></i>"+data.LCNT+"</li>               "; 
 			    html+= "            <li class=\"gallery-item-comments\"><span class=\"visually-hidden\">Comments:</span><i   "; 
 			    html+= "                    class=\"fas fa-comment\" aria-hidden=\"true\"></i>"+data.CCNT+"</li>             "; 
 			    html+= "        	</ul>                                                                                    ";
 			    html+= "    	</div>                                                                                       "; 
-		    	html+= "</div>                                                                                           "; 
+		    	html+= "</div>                                                                                           	 "; 
 			}
 			
 			$("#gallery").html(html);
 		}
-	    function mdDraw(){
-	    	
+	    function mdDraw(){  	
 	    	var params = $("#modalForm").serialize();
 			$.ajax({
 				url : "modalpages",
@@ -125,13 +123,13 @@
 				data : params,
 				success : function(res){
 					$("#myModal").val("");
-					drawModal(res.modalM);
-					drawModalImg(res.md);
-					
-					drawModalCmt(res.modalCmt);
-					
+					ModalContent(res.modalM);
+					ModalImg(res.md);
+					ModalCmt(res.modalCmt);	
+					like();
 					slide();
-					
+					heart(res.hcnt);
+					addH(res.result);
 				},
 				error : function(request, status, error){
 					console.log("에러");
@@ -139,52 +137,66 @@
 				}
 			});
 	    }
-	    function drawModal(modalM){   
+		function like(){
+	    	var params = $("#modalForm").serialize();
+			$.ajax({
+				url : "likeCnt",
+				type : "post",
+				dataType : "json",
+				data : params,
+				success : function(res){
+					likeCnt(res.like);
+				},
+				error : function(request, status, error){
+					console.log("에러");
+					console.log(error);
+				}
+			});
+	    }	
+	    function ModalContent(data){   
 	    	var html ="";
 	    		
 				 html+="   	<div class=\"modal-content\">                                                                                ";
 			     html+="       <div class=\"modal_img\">                                                                                 ";
 			     html+="           <div class=\"slider\">                                                                                ";
 			     html+="               <div class=\"slide-viewer\">                                                                      ";
-			     html+="               <div id=\"slide-group\" class=\"slide-group\">                                                      ";	                                                                        
-			     html+="               </div>                                                                                          ";
-			     html+="               </div>                                                                                          ";
+			     html+="               <div id=\"slide-group\" class=\"slide-group\">                                                    ";	                                                                        
+			     html+="               </div>                                                                                            ";
+			     html+="               </div>                                                                                            ";
 			     html+="               <div class=\"slide-nav\">                                                                         ";
 			     html+="                   <div class=\"prev\"></div>                                                                    ";
 			     html+="                   <div class=\"next\"></div>                                                                    ";
-			     html+="               </div>                                                                                          ";
+			     html+="               </div>                                                                                            ";
 			     html+="               <div class=\"slide-buttons\"></div>                                                               ";
-			     html+="           </div>                                                                                              ";
-			     html+="       </div>                                                                                                  ";
+			     html+="           </div>                                                                                                ";
+			     html+="       </div>                                                                                                    ";
 			     html+="       <div class=\"modal_box\">                                                                                 ";
 			     html+="           <div class=\"cmt_head\">                                                                              ";
-			     html+="               <span id=\"close\" class=\"close\">&times;</span>                                                   ";
+			     html+="               <span id=\"close\" class=\"close\">&times;</span>                                                 ";
 			     html+="               <div class=\"user_container\">                                                                    ";
 			     html+="                   <div class=\"profile_img\">                                                                   ";
-			     html+="                   </div>                                                                                      ";
+			     html+="                   </div>                                                                                        ";
 			     html+="                   <div class=\"user_name\">                                                                     ";
-			     html+="                       <div class=\"nick_name head_text\">"+modalM.NICK_NM+"</div>                                        ";
-			     html+="                   </div>                                                                                      ";
-			     html+="               </div>                                                                                          ";
-			     html+="           </div>                                                                                              ";
+			     html+="                       <div class=\"nick_name head_text\">"+data.NICK_NM+"</div>                                 ";
+			     html+="                   </div>                                                                                        ";
+			     html+="               </div>                                                                                            ";
+			     html+="           </div>                                                                                                ";
 			     html+="           <div class=\"cmt_sec1\">                                                                              ";
-			     html+="                   <div class=\"user_container\">                                                                ";
-			     html+="                       <div class=\"profile_img\">                                                               ";
-			     html+="                       </div>                                                                                  ";
-			     html+="                       <div class=\"user_name\">                                                                 ";
-			     html+="                           <div class=\"nick_name head_text\">"+modalM.NICK_NM+"</div>                                    ";
-			     html+="                       </div>                                                                                  ";
-			     html+="                   </div>                                                                                      ";
-			     html+="                   <div class=\"modal_con\">"+modalM.CON+"</div>                                                               ";
-			     html+="                   <div class=\"modal_cmt\"></div> 																";
-			     html+="           </div>                                                                                              ";
+			     html+="               <div class=\"user_container\">                                                                	 ";
+			     html+="                   <div class=\"profile_img\"></div>                                                             ";
+			     html+="                   <div class=\"user_name\">                                                                 	 ";
+			     html+="                        <div class=\"nick_name head_text\">"+data.NICK_NM+"</div>                             	 ";
+			     html+="                   </div>                                                                                    	 ";
+			     html+="               </div>                                                                                     	 	 ";
+			     html+="               <div class=\"modal_con\">"+data.CON+"</div>                                                   	 ";
+			     html+="               <div class=\"modal_cmt\"></div> 																 	 ";
+			     html+="           </div>                                                                                                ";
 			     html+="           <div class=\"cmt_sec2\">                                                                              ";
 			     html+="               <div class=\"bottom_icons\">                                                                      ";
 			     html+="                   <div class=\"left_icons\">                                                                    ";
 			     html+="                       <div class=\"heart_btn\">                                                                 ";
-			     html+="                           <div class=\"sprite_heart_icon_outline\" name=\"39\" data-name=\"heartbeat\">             ";
-			     											
-			     html+="                                     <input type=\"checkbox\" id=\"checkbox\" >                                     ";
+			     html+="                           <div class=\"sprite_heart_icon_outline\" name=\"39\" data-name=\"heartbeat\">         ";			     											
+			     html+="                                     <input type=\"checkbox\" name=\"checkbox\" id=\"checkbox\" >                ";
 			     html+="                                     <label for=\"checkbox\">                                                    ";
 			     html+="                                       <svg id=\"heart-svg\" viewBox=\"467 392 58 57\" xmlns=\"http://www.w3.org/2000/svg\"> ";
 			     html+="                                         <g id=\"Group\" fill=\"none\" fill-rule=\"evenodd\" transform=\"translate(467 392)\">";
@@ -234,42 +246,41 @@
 			     html+="                       </div>                                                                                                                      ";
 			     html+="                   </div>                                                                                                                          ";
 			     html+="                   <div class=\"right_icon\">                                                                                                      ";
-			     html+="                       <div class=\"sprite_bookmark_outline\" data-name=\"bookmark\"></div>                                                        ";
+			     html+="                       <i class=\"far fa-bookmark\"></i>                                                        								   ";
 			     html+="                   </div>                                                                                                                          ";
 			     html+="               </div>                                                                                                                              ";
-			     html+="               <div class=\"likes head_text\">                                                                                                     ";
-			     html+="                   좋아요                                                                                                                          ";
-			     html+="                   <span id=\"like-count-39\">"+modalM.LCNT+"</span>                                                                                 ";
-			     html+="                   <span id=\"bookmark-count-39\"></span>                                                                                          ";
-			     html+="                   개                                                                                                                              ";
-			     html+="               </div>                                                                                                                              ";
+			     html+="               <div class=\"likes head_text\"></div>                                                                                               ";
 			     html+="           </div>                                                                                                                                  ";
 			     html+="           <div class=\"cmt_field\" id=\"cmt_field\">                                                                                              ";
-			     html+="               <textarea class=\"cmt_con\" placeholder=\"댓글 달기...\"></textarea>                                                                ";
-			     html+="               <div class=\"m_text head_text\" id=\"add_cmt\">게시</div>                                                                           ";
-			     html+="           </div>                                                                                                                                  ";
-			     html+="       </div>                                                                                                                          ";
-			     html+="   </div>                                                                                                                              ";
+			     html+="               <textarea class=\"cmt_con\" placeholder=\"댓글 달기...\"></textarea>                                                                   ";
+			     html+="               <div class=\"m_text head_text\" id=\"add_cmt\">게시</div>                                                                             ";
+			     html+="           </div>                                                                                                                                   ";
+			     html+="       </div>                                                                                                                          				";
+			     html+="   </div>                                                                                                                              				";
 			     
 		    	 $("#myModal").html(html);
 	    }                        
-	    function drawModalCmt(modalCmt){  
-	    	var html ="";                                                                                                                                  
-                                                                                                                                    
+	    function ModalCmt(modalCmt){  
+	    	var html ="";                                                                                                                                                                                                                                                                      
 			for(var list of modalCmt){                                                                                                                              				
-			     html+="               <div class=\"comment_container\">                                                                                                   ";
-			     html+="                   <div class=\"comment\" id=\"comment-list-ajax-post37\">                                                                         ";
-			     html+="                       <div class=\"comment-detail\">                                                                                              ";
-			     html+="                           <div class=\"head_text\">"+list.NICK_NM+"</div>                                                                                ";
-			     html+="                           <div>"+list.CMT_CON+"</div>                                                                                     ";
-			     html+="                       </div>                                                                                                                      ";
-			     html+="                   </div>                                                                                                                          ";
-			     html+="               </div>                                                                                                                              ";
-			     html+="               <div class=\"timer\">"+timeForToday(list.DT)+"</div>                                                                                                 ";
+			     html+="<div class=\"comment_container\">                               ";
+			     html+="   <div class=\"comment\" id=\"comment-list-ajax-post37\">      ";
+			     html+="       <div class=\"comment-detail\">                           ";
+			     html+="           <div class=\"head_text\">"+list.NICK_NM+"</div>      ";
+			     html+="              <div>"+list.CMT_CON+"</div>                       ";
+			     html+="          </div>                                                ";
+			     html+="       </div>                                                	";
+			     html+="   </div>                                                       ";
+			     html+="<div class=\"timer\">"+timeForToday(list.DT)+"</div>           	";
 			}
 			
 			$(".modal_cmt").html(html);
 	    };
+	    function likeCnt(data){
+	       var html ="";    
+			   html+="좋아요<span id=\"like-count-39\">"+data+"</span>개";				   
+			   $(".likes").html(html);
+	    }
 	    function timeForToday(value) {
 	        const today = new Date();
 	        const timeValue = new Date(value);
@@ -277,22 +288,22 @@
 	        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
 	        if (betweenTime < 1) return '방금전';
 	        if (betweenTime < 60) {
-	            return `${betweenTime}분전`;
+	            return betweenTime '분전';
 	        }
 
 	        const betweenTimeHour = Math.floor(betweenTime / 60);
 	        if (betweenTimeHour < 24) {
-	            return `${betweenTimeHour}시간전`;
+	            return betweenTimeHour '시간전';
 	        }
 
 	        const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
 	        if (betweenTimeDay < 365) {
-	            return `${betweenTimeDay}일전`;
+	            return betweenTimeDay '일전';
 	        }
 
 	        return `${Math.floor(betweenTimeDay / 365)}년전`;
-	 }
-	    function drawModalImg(md){                                                                                                                         
+	 	}
+	    function ModalImg(md){                                                                                                                         
 			var html ="";                                                                                                                                  
 			var i=1;                                                                                                                                       
 			for(var list of md){                                                                                                                              
@@ -305,6 +316,54 @@
 			
 			$("#slide-group").html(html);
 		}
+	    function heart(data){
+	    	if( data == 1 ){
+    			$("#checkbox").attr("checked",true);
+	    	}else{
+            	$("#checkbox").attr("checked",false);
+	    	}
+	    }
+	    function addH(){
+	    	$("#checkbox").on("click",function(){
+	    		if($(this).is(":checked") == true) {
+		    		var params = $("#modalForm").serialize();
+		    		$.ajax({
+		    			url : "addHeart",
+		    			type : "post",
+		    			dataType : "json",
+		    			data : params,
+		    			success : function(res){
+		    				if(res.result=="success"){
+		    					like();
+		    				}else{
+		    					alert("add실패");
+		    				}
+		    			},
+		    			error : function(request, status, error){
+		    				console.log(error);
+		    			}
+		    		});
+	    		}else{
+		    		var params = $("#modalForm").serialize();
+	    			$.ajax({
+	    				url : "delHeart",
+	    				type : "post",
+	    				dataType : "json",
+	    				data : params,
+	    				success : function(res){
+	    					if(res.result=="success"){
+	    						like();
+	    					}else{
+	    						alert("삭제실패");
+	    					}
+	    				},
+	    				error : function(request, status, error){
+	    					console.log(error);
+	    				}
+	    			});
+	    		}
+    		});	    		    		
+	    }
 	    function slide(){
 	    	$('.slider').each(function(){
 	            var $this = $(this);
@@ -489,9 +548,11 @@
                <input type="hidden" name="m_no" value="${sMNo}"/>  
            </form>
            <form action="#" id="modalForm" method="post">
+           	  <input type="hidden" name="m_no" value="${sMNo}"/> 
     	   	  <input type="hidden" name="writingNo" id="writingNo"/>
     	   	  <input type="hidden" name="nickNm" value="<%=request.getAttribute("nicknm")%>"/>
 		   </form>
+		   
     <script src="../resources/script/menu_bar/menu_bar.js"></script>
 </body>
 

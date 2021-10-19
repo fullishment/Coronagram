@@ -19,4 +19,12 @@ public interface IServiceUserPage {
 
 	public int getFollowing(HashMap<String, String> params)throws Throwable;
 
+	public int getHeartCnt(HashMap<String, String> params)throws Throwable;
+
+	public int addHeart(HashMap<String, String> params)throws Throwable;
+
+	public int delHeart(HashMap<String, String> params)throws Throwable;
+
+	public int getLkCnt(HashMap<String, String> params)throws Throwable;
+
 }

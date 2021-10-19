@@ -55,6 +55,30 @@ public class ServiceUserPage implements IServiceUserPage{
 		return iDaoUserPage.getFollowing(params);
 	}
 
+	@Override
+	public int getHeartCnt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.getHeartCnt(params);
+	}
+
+	@Override
+	public int addHeart(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.addHeart(params);
+	}
+
+	@Override
+	public int delHeart(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.delHeart(params);
+	}
+
+	@Override
+	public int getLkCnt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.getLkCnt(params);
+	}
+
 	
 	
 }

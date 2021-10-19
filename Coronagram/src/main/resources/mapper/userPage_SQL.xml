@@ -37,17 +37,17 @@
                         where CC.WRITING_NO= #{writingNo}
 	</select>
 	<select id="getModalM" parameterType="hashmap" resultType="hashmap">
-		 select C.WRITER_NO, C.CON, M.M_NM, M.NICK_NM,NVL(L.LCNT,0) AS LCNT 
+		 select C.WRITER_NO, C.CON, M.M_NM, M.NICK_NM
             from CRNG C
             INNER JOIN M M
                         ON C.WRITER_NO = M_NO
-            LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS LCNT
-                             FROM LK
-                             GROUP BY WRITING_NO) L
-                         ON C.WRITING_NO = L.WRITING_NO
+     
             where del=1 
             and m.NICK_NM=#{nickNm}
             and C.writing_no = #{writingNo}
+	</select>
+	<select id="getLkCnt" parameterType="hashmap" resultType="Integer">
+		select NVL(count(*),0) AS lkcnt from lk where WRITING_NO = #{writingNo}
 	</select>
 	<select id="getIntroM" parameterType="hashmap" resultType="hashmap">
 		select m_no,m_nm,nick_nm,intro_con from m where NICK_NM = #{nickNm}
@@ -73,4 +73,14 @@
                     	AND ca.writing_no= #{writingNo}
 			WHERE C.DEL = 1
 	</select>
+	
+	<select id="getHeartCnt" parameterType="hashmap" resultType="Integer">
+		select nvl(count(*),0) as hc from lk where user_no =#{m_no} and writing_no = #{writingNo}
+	</select>
+	<delete id="delHeart" parameterType="hashmap">
+		delete from lk where user_no =#{m_no} and writing_no= #{writingNo}
+	</delete>
+	<insert id="addHeart" parameterType="hashmap">
+		insert into lk(user_no,writing_no) values ( #{m_no}, #{writingNo} )
+	</insert>
 </mapper>

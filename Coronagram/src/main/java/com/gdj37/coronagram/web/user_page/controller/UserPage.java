@@ -40,6 +40,8 @@ public class UserPage {
 		int follow = iServiceUserPage.getFollow(params);
 		int following = iServiceUserPage.getFollowing(params);
 		
+		
+		
 		modelMap.put("intro", intro);
 		modelMap.put("list", list);
 		modelMap.put("follow", follow);
@@ -55,11 +57,61 @@ public class UserPage {
 		HashMap<String,String> modalM = iServiceUserPage.getModalM(params);
 		List<HashMap<String,String>> md = iServiceUserPage.getMDtlList(params);
 		List<HashMap<String,String>> modalCmt = iServiceUserPage.getModalCmt(params);
-
+		int hcnt = iServiceUserPage.getHeartCnt(params);
+		
+		modelMap.put("hcnt", hcnt);
 		modelMap.put("md", md);
 		modelMap.put("modalM", modalM);
 		modelMap.put("modalCmt", modalCmt);
 		
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/userpage/likeCnt",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String LK (@RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		int like = iServiceUserPage.getLkCnt(params);
+		
+		modelMap.put("like", like);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/userpage/addHeart",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String testABAdds (@RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		String result ="success";
+		try {
+			int hAdd = iServiceUserPage.addHeart(params);
+			
+			if(hAdd==0) {
+				result="failed";
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			result ="error";
+		}
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/userpage/delHeart",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String testABDeletes (@RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		String result ="success";
+		try {
+			int hDel = iServiceUserPage.delHeart(params);
+			if(hDel==0) {
+				result="failed";
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			result ="error";
+		}
+		modelMap.put("result", result);
 		return mapper.writeValueAsString(modelMap);
 	}
 }

@@ -56,4 +56,28 @@ public class DaoUserPage implements IDaoUserPage {
 		return sqlSession.selectOne("userPage.getFollowing",params);
 	}
 
+	@Override
+	public int getHeartCnt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("userPage.getHeartCnt",params);
+	}
+
+	@Override
+	public int addHeart(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("userPage.addHeart",params);
+	}
+
+	@Override
+	public int delHeart(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("userPage.delHeart",params);
+	}
+
+	@Override
+	public int getLkCnt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("userPage.getLkCnt",params);
+	}
+
 }
