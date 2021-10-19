@@ -10,14 +10,29 @@ html{
 	margin-top: 5%;
 	margin-bottom: 5%;
 	background: white;
-	padding: 10px;
 	border-radius: 10px;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    padding-bottom: 20px;
+}
+
+.sc_head {
+	padding-top: 30px;
+	padding-left: 30px;
+	height: 140px;
+    background-size: cover;
+    border-radius: 10px 10px 0px 0px / 10px 10px 0px 0px ;
+	background-image: linear-gradient(rgba(255, 221, 196, 0.8),rgba(255, 221, 196, 0.8)), url("../../images/coinfo/coinfo_news/coinfo_news_resize.jpg");
 }
 
 .sc_name1 {
-	font-size: 15pt;
-	color: gray;
+	margin-bottom: 10px;
+}
+
+.sc_name1 h5{
+	font-size: 13pt;
+	color: #ffffff;
+	text-decoration-line: underline;
+	
 }
 
 .group {
@@ -111,9 +126,8 @@ table .t4 {
     position: relative;
     clear: both;
     width: 100%;
-    padding-top: 30px;
     text-align: center;
-    margin-bottom: 10px;
+    padding-top: 10px;
 }
 
 
