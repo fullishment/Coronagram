@@ -25,8 +25,11 @@ public class CommonAOP {
 	 * .. -> 모든 경로
 	 * && -> 필터 추가
 	 */
-	@Pointcut("execution(* com.gdj37.coronagram..CalendarController.*(..))")
-	public void testAOP() {}
+	
+	/*
+	 * @Pointcut("execution(* com.gdj37.coronagram..CalendarController.*(..))")
+	 * public void testAOP() {}
+	 */
 	
 	//ProceedingJoinPoint -> 대상 적용 이벤트 필터
 	/*
@@ -36,21 +39,21 @@ public class CommonAOP {
 	 * @After-throwing -> 메소드 예외 발생 후
 	 * @Around -> 모든 동작시점
 	 */
-	@Around("testAOP()")
-	public ModelAndView testAOP(ProceedingJoinPoint joinPoint)
-														throws Throwable {
-		ModelAndView mav = new ModelAndView();
-		
-		//Request 객체 취득
-		HttpServletRequest request
-		= ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-		
-		mav = (ModelAndView) joinPoint.proceed(); //기존 이벤트 처리 행위를 이어서 진행
-		
-		System.out.println("------- testAOP 실행됨 ------");
-		
-		return mav;
-	}
+//	@Around("testAOP()")
+//	public ModelAndView testAOP(ProceedingJoinPoint joinPoint)
+//														throws Throwable {
+//		ModelAndView mav = new ModelAndView();
+//		
+//		//Request 객체 취득
+//		HttpServletRequest request
+//		= ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+//		
+//		mav = (ModelAndView) joinPoint.proceed(); //기존 이벤트 처리 행위를 이어서 진행
+//		
+//		System.out.println("------- testAOP 실행됨 ------");
+//		
+//		return mav;
+//	}
 }
 
 
