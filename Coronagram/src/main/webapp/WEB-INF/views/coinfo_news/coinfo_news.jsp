@@ -50,7 +50,8 @@ function getList() {
 }
 
 function drawList(list) {
-	 var html = "";
+	 var html = ""
+   //for(var i = list.length-1; i >= 0 ;i--){
      for(var i = 0; i < list.length ;i++){
 			html += "<tr><td class=\"t1\">" + "<a href =\"" + list[i]['주소'] + "\">" + list[i]['제목'] + "</a>" + "</td></tr>";
 			html += "<tr><td class=\"t2\">" + list[i]['일자'] + "</td></tr>";

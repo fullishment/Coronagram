@@ -11,11 +11,11 @@
 		FROM INFO
 		WHERE INFO_NO = #{no}
 	</select>
-	
+ -->	
 	<select id="getInfopage" parameterType="hashmap" resultType="hashmap">
 		SELECT INFO_TITLE, INFO_SUBHD, TO_CHAR(DT, 'YYYY-MM-DD') AS DT, REP_IMG, CON 
 		FROM INFO
-		WHERE INFO_NO = #{no}
+		WHERE INFO_NO = 11
 	</select>
- -->
+
 </mapper>
