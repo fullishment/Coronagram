@@ -6,6 +6,15 @@
 <html lang="ko" >
 <head>
   <meta charset="UTF-8">
+  <style>
+			#imgAtt{
+				display:none;
+			}
+			#preView{
+			width:200px;
+			hegiht:200px;
+			}
+  </style>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css'>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
@@ -31,6 +40,7 @@ $(document).ready(function(){
 	$("#imgAtt").on("change",function(){
 		$("#fileName").html($(this).val().substring($(this).val().lastIndexOf("\\")+1));
 		var imgForm = $("#imgForm");
+		
 		imgForm.ajaxForm({
 				success:function(res){
 				if(res.result=="SUCCESS"){
@@ -38,7 +48,7 @@ $(document).ready(function(){
 						$("#imgFile").val(res.fileName[0]);
 						var imgAdr = res.fileName[0].replace('[', '%5B').replace(']', '%5D');
 						//$("#preView").attr("src", "resources/upload/"+imgAdr);
-						$("#preView").html("<img src=\"resources/upload/editprofile/"+imgadr+"\" id=\"prevImg"+"\">");
+						$("#preView").html("<img src=\"resources/images/edit_profile/"+imgAdr+"\" id=\"prevImg"+"\">");
 					}
 				}else{
 					alert("파일 업로드에 실패하였습니다.");
@@ -243,7 +253,7 @@ $("input:radio[name='vec']").removeAttr("checked");
    
 <div class="card">
 <form id="imgForm" action="fileUploadAjax" method="post" enctype="multipart/form-data">
-	<input type="file" name="imgAtt" id="imgAtt" accept="image/*" >
+	<input type="file" name="imgAtt" id="imgAtt" >
 </form>
    <form action="#" id="updateForm" method="post">
     <div class="input_area">
@@ -252,20 +262,19 @@ $("input:radio[name='vec']").removeAttr("checked");
           <img for="photo-upload"  src="resources/images/edit_profile/edit_profile.png" /> 이미지그림 
         </div>
       </label> -->
-      <div class="qnaImg" class="custom-file-upload fas">
-		<span></span><input type="button" id="imgBtn" />
+      <div class="qnaImg">
+		<input type="button" class="fileBtn" id="imgBtn" />
 		<span id="fileName"></span>		
 		<input type="hidden" name="imgFile" id="imgFile">							
-		<div id="preView" class="preView">
-			<img name="image" id="image" src="resources/upload/editprofile/${fn:replace(fn:replace(data.IMG_ADR, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
+		<div id="preView">
+			<img name="image" id="image" src="resources/images/edit_profile/${fn:replace(fn:replace(data.IMG_ADR, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
 		</div>
 	</div>
 	
-   <input type="file" id="photo-upload" class="img-wrap img-upload"><br>
-   <input type="hidden" id="no" name="no" value="${data.M_NO}">
-   <input type="hidden" name="no" value="${param.M_NO}" />
-   <input type="hidden" name="id" value="${param.M_ID}" />
-         
+      <input type="hidden" id="no" name="no" value="${data.M_NO}">
+  	  <input type="hidden" name="no" value="${param.M_NO}" />
+ 	  <input type="hidden" name="id" value="${param.M_ID}" />
+ 	  
       <p>이름</p>
       <input type="text" id="mNm" name="mNm" value="${data.M_NM}"><br>
       <p>닉네임</p>

@@ -2,6 +2,11 @@
         header a {
             text-decoration-line: none;
         }
+        header .cm_user_name {
+        	font-family: "Noto Sans KR", sans-serif;
+		    font-weight: 600;
+		    padding-top: 4px;
+        }
 
         .cm_menuBar {
             display: flex;
