@@ -29,12 +29,13 @@
 	</select>
 	<select id="getModalCmt" parameterType="hashmap" resultType="hashmap">
 			select cc.CMT_WRITER_NO,CC.WRITING_NO,cc.cmt_con,m.M_NO, m.m_nm, m.nick_nm
-	            ,TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDD HH24:MI:SS'),'YYYYMMDD HH24:MI:SS') as dt,
+	            ,TO_CHAR(cc.dt, 'YYYY/MM/DD HH24:MI:SS') as dt,
 	            ROW_NUMBER() OVER(ORDER BY cc.WRITING_NO DESC) AS RNUM
 	            from crng_cmt cc
 	            INNER JOIN M M
 	                    ON cc.CMT_WRITER_NO = m.m_no
                         where CC.WRITING_NO= #{writingNo}
+                ORDER BY RNUM DESC
 	</select>
 	<select id="getModalM" parameterType="hashmap" resultType="hashmap">
 		 select C.WRITER_NO, C.CON, M.M_NM, M.NICK_NM
@@ -78,11 +79,11 @@
 		select nvl(count(*),0) as hc from lk where user_no =#{m_no} and writing_no = #{writingNo}
 	</select>
 	<select id="getfollowEx" parameterType="hashmap" resultType="Integer">
-		SELECT COUNT(*) FROM FOLLOW WHERE RQ_USER = #{m_no} 
+		SELECT  nvl(count(*),0) as fExist FROM FOLLOW WHERE RQ_USER = #{m_no} 
             and RP_USER = (SELECT M_NO FROM M WHERE NICK_NM=#{nickNm})
 	</select>
 	<select id="getfollowEx2" parameterType="hashmap" resultType="Integer">
-		SELECT COUNT(*) FROM M WHERE M_NO= #{m_no} AND NICK_NM =#{nickNm}
+		SELECT  nvl(count(*),0) as fExist2 FROM M WHERE M_NO= #{m_no} AND NICK_NM =#{nickNm}
 	</select>
 	<delete id="delHeart" parameterType="hashmap">
 		delete from lk where user_no =#{m_no} and writing_no= #{writingNo}
@@ -90,4 +91,19 @@
 	<insert id="addHeart" parameterType="hashmap">
 		insert into lk(user_no,writing_no) values ( #{m_no}, #{writingNo} )
 	</insert>
+    
+    <insert id="addFollow" parameterType="hashmap">
+		insert into FOLLOW(RQ_USER,RP_USER) 
+		select #{m_no}, m_no from m where nick_nm = #{nickNm}
+	</insert>
+	<delete id="delFollow" parameterType="hashmap">
+		 DELETE FROM FOLLOW 
+		 WHERE RQ_USER= #{m_no}
+         AND RP_USER = (SELECT M_NO FROM M WHERE NICK_NM = #{nickNm})
+	</delete>
+	 <insert id="addCmt" parameterType="hashmap">
+		insert into FOLLOW(RQ_USER,RP_USER) 
+		select #{m_no}, m_no from m where nick_nm = #{nickNm}
+	</insert>      
+
 </mapper>

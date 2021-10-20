@@ -31,4 +31,8 @@ public interface IDaoUserPage {
 
 	public int getfollowEx2(HashMap<String, String> params)throws Throwable;
 
+	public int addFollow(HashMap<String, String> params)throws Throwable;
+
+	public int delFollow(HashMap<String, String> params)throws Throwable;
+
 }

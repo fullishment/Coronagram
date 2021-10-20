@@ -26,7 +26,6 @@
         $(document).ready(function(){
         	reloadList();
         	
-        	      
         	
             $(document).on("click",".gallery-item",function(){
             	$("#myModal").val("");
@@ -61,9 +60,11 @@
 					imgList(res.list);
 					intro(res.intro);
 					introNm(res.intro);
-					profileCnt(res.follow, res.following);
-					follow(res.fExist,res.fExist2);
 					editProfile();
+					profileCnt(res.follow, res.following);
+					followArea();					
+					addFollow();
+		        	delFollow();					
 				},
 				error : function(request,status,error){
 					console.log(error);
@@ -88,27 +89,7 @@
 			    html +="<li><span class=\"profile-stat-count\">"+data2+"</span>following</li>";
 	    		$("#profile-stat").html(html);
         }
-        function follow(data1,data2){
-			var html ="";
-			if(data1 == 0 && data2 == 0){
-				html +="<button id=\"follow_btn\" class=\"follow_btn\">		";
-			    html +="팔로우<i class=\"fas fa-user-plus\"></i>				";
-			    html +="</button>											";
-			}
-			else if(data1 == 1 && data2 == 0){
-			    html +="<button id=\"unfollow_btn\" class=\"unfollow_btn\"> ";
-			    html +="<i class=\"fas fa-user-check\"></i>					";
-			    html +="</button>											";
-			}else if(data1 == 0 && data2 == 1){
-				html +="<button id=\"editBtn\" class=\"btn profile-edit-btn\">Edit Profile</button>";
-				html +="<button class=\"btn profile-settings-btn\" aria-label=\"profile settings\">";
-				html +="<i class=\"fas fa-cog\" aria-hidden=\"true\"></i>						   ";
-				html +="</button>															   	   ";
-			}else{
-				alert("error");
-			}		
-	    	$(".follow_area").html(html);
-        }
+        
 	    function imgList(list){
 			var html ="";			
 			for(var data of list){                                                                                    
@@ -146,7 +127,7 @@
 					like();
 					slide();
 					heart(res.hcnt);
-					addH(res.result);
+					heartAD();
 					
 				},
 				error : function(request, status, error){
@@ -162,7 +143,7 @@
 				dataType : "json",
 				data : params,
 				success : function(res){
-					likeCnt(res.like);
+					likeArea(res.like);
 				},
 				error : function(request, status, error){
 					console.log(error);
@@ -292,7 +273,7 @@
 			
 			$(".modal_cmt").html(html);
 	    };
-	    function likeCnt(data){
+	    function likeArea(data){
 	       var html ="";    
 			   html+="좋아요<span id=\"like-count-39\">"+data+"</span>개";				   
 			   $(".likes").html(html);
@@ -304,21 +285,28 @@
 	        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
 	        if (betweenTime < 1) return '방금전';
 	        if (betweenTime < 60) {
-	            return `${betweenTime} 분전`;
+	            return betweenTime+'분전';
 	        }
 
 	        const betweenTimeHour = Math.floor(betweenTime / 60);
 	        if (betweenTimeHour < 24) {
-	            return `${betweenTimeHour} 시간전`;
+	            return betweenTimeHour+'시간전';
 	        }
 
-	        const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
-	        if (betweenTimeDay < 365) {
-	            return `${betweenTimeDay} 일전`;
+	        const betweenTimeDay = Math.floor(betweenTimeHour / 24);
+	        if (betweenTimeDay < 7) {
+	            return betweenTimeDay+'일전';
 	        }
-
-	        return `${Math.floor(betweenTimeDay / 365)}년전`;
-	 	}
+	        const betweenTimeWeek = Math.floor(betweenTimeDay / 7);
+	        if (betweenTimeWeek	< 5) {
+	            return betweenTimeWeek+'주전';
+	        }
+	        const betweenTimeMonth = Math.floor(betweenTimeDay / 30);
+	        if (betweenTimeMonth < 12) {
+	            return betweenTimeDay+'개월';
+	        }
+	        return Math.floor(betweenTimeDay / 365)+'년전';
+	 	}		
 	    function ModalImg(md){                                                                                                                         
 			var html ="";                                                                                                                                  
 			var i=1;                                                                                                                                       
@@ -339,7 +327,7 @@
             	$("#checkbox").attr("checked",false);
 	    	}
 	    }
-	    function addH(){
+	    function heartAD(){
 	    	$("#checkbox").on("click",function(){
 	    		if($(this).is(":checked") == true) {
 		    		var params = $("#modalForm").serialize();
@@ -380,6 +368,89 @@
 	    		}
     		});	    		    		
 	    }
+	    function followArea(){
+        	var params = $("#modalForm").serialize();
+			$.ajax({
+				url : "followArea",
+				type : "post",
+				dataType : "json",
+				data : params,
+				success : function(res){
+					follows(res.fExist,res.fExist2);
+					addFollow();
+					delFollow();
+				},
+				error : function(request, status, error){
+					console.log(error);
+				}
+			});
+        }
+        
+        function follows(data1,data2){
+			var html ="";
+			if(data1 == 0 && data2 == 0){
+				html +="<button id=\"follow_btn\" class=\"follow_btn\">		";
+			    html +="팔로우<i class=\"fas fa-user-plus\"></i>				";
+			    html +="</button>											";
+			}
+			else if(data1 > 0 && data2 == 0){
+			    html +="<button id=\"unfollow_btn\" class=\"unfollow_btn\"> ";
+			    html +="<i class=\"fas fa-user-check\"></i>					";
+			    html +="</button>											";
+			}else if(data1 == 0 && data2 > 0){
+				html +="<button id=\"editBtn\" class=\"btn profile-edit-btn\">Edit Profile</button>";
+				html +="<button class=\"btn profile-settings-btn\" aria-label=\"profile settings\">";
+				html +="<i class=\"fas fa-cog\" aria-hidden=\"true\"></i>						   ";
+				html +="</button>															   	   ";
+			}else{
+				alert("error");
+			}		
+	    	$(".follow_area").html(html);
+        }
+	    function addFollow(){
+	    	$("#follow_btn").on("click",function(){
+	    		var params = $("#addrForm").serialize();
+	    		$.ajax({
+	    			url : "addFollow",
+	    			type : "post",
+	    			dataType : "json",
+	    			data : params,
+	    			success : function(res){
+	    				if(res.result=="success"){
+	    					followArea(); 						    					
+	    				}else{
+	    					alert("add실패");
+	    				}
+	    			},
+	    			error : function(request, status, error){
+	    				console.log(error);
+	    			}
+	    		});
+	    	});
+	    }
+	    function delFollow(){
+	    	$("#unfollow_btn").on("click",function(){
+	    		var params = $("#addrForm").serialize();
+				$.ajax({
+					url : "delFollow",
+					type : "post",
+					dataType : "json",
+					data : params,
+					success : function(res){
+						if(res.result=="success"){
+							followArea();
+							
+						}else{							
+							alert("삭제실패");
+						}
+					},
+					error : function(request, status, error){
+						console.log(error);
+					}
+				});
+	    	})	
+	    }
+	    
 	    function editProfile(){
 	    	$("#editBtn").on("click",function(){	   
 	  			  $("#editForm").attr("action","../edit_profile");

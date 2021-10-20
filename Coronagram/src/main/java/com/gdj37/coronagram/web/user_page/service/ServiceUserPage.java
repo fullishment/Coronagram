@@ -89,6 +89,18 @@ public class ServiceUserPage implements IServiceUserPage{
 	public int getfollowEx2(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return iDaoUserPage.getfollowEx2(params);
+	}
+
+	@Override
+	public int addFollow(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.addFollow(params);
+	}
+
+	@Override
+	public int delFollow(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.delFollow(params);
 	}	
 	
 }

@@ -25,9 +25,10 @@ body {
     width: 130px;
     border-radius: 7px;
     margin-left: 10px;
+    padding: 5px;
 }
-.follow_btn:active {
-    opacity: 1;
+.follow_btn:hover {
+    opacity: 0.4;
 }
 .unfollow_btn{
 	font-size: 1.4rem;
@@ -37,8 +38,8 @@ body {
     padding: 0 2.4rem;
     margin-left: 2rem;
 }
-.unfollow_btn:active {
-    opacity: 1;
+.unfollow_btn:hover {
+    opacity: 0.4;
 }
 .follow_area{
 	margin-top: 5px;
