@@ -22,7 +22,6 @@ public class Sign_up {
 	
 	@RequestMapping(value = "/sign_up")   //add
 	public ModelAndView sign_up(ModelAndView mav) {
-
 		mav.setViewName("sign_up/sign_up");
 
 		return mav;
@@ -32,8 +31,9 @@ public class Sign_up {
 	public ModelAndView mAdds(@RequestParam HashMap<String, String> params, ModelAndView mav) throws Throwable {
 
 		int checkCnt = iServiceSign_up.getMIdCheck(params);
-
-		if (checkCnt == 0) {
+		int checkNickCnt = iServiceSign_up.getNickCheck(params);
+		
+		if (checkCnt + checkNickCnt == 0) {
 			//비밀번호 암호화
 			String m_pw = Utils.encryptAES128(params.get("m_pw"));
 			params.put("m_pw",m_pw);
@@ -41,18 +41,20 @@ public class Sign_up {
 			int cnt = iServiceSign_up.addSign(params);    
 
 			if (cnt > 0) {
+				mav.setViewName("redirect:login");
 				
-				mav.setViewName("redirect:main_page");
 			} else {
 				mav.addObject("msg", "등록중 문제가 발생했습니다..");
 				mav.setViewName("failed/failed");
 			}
 		} else {
-			mav.addObject("msg", "중복된 아이디가 있습니다.");
+			mav.addObject("msg", "중복된 아이디나 닉네임이 있습니다.");
 			mav.setViewName("failed/failed");
 		}
+		
 		return mav;
 	}
+	
 	//ID체크
 		@RequestMapping(value = "/MIdCheckAjax", method = RequestMethod.POST,
 				produces = "text/json;charset=UTF-8")

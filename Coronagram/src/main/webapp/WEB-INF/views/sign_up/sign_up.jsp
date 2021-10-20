@@ -16,7 +16,7 @@
 <script type="text/javascript">
   $(document).ready(function(){
   	$("#cancel_btn").on("click",function(){
-  		history.back();
+  		history.back(); 
   	});
 //id체크
   	$("#m_id").on("change", function(){
@@ -75,9 +75,7 @@
   		if(checkVal("#m_id")){
   			alert("아이디를 입력해 주세요.");
   			$("#m_id").focus();
-  		}else if($("#checkId").val() == "false") {
-			alert("아이디 중복 체크를 해주세요.");
-			$("#m_id").focus();
+  		
 			
   		} else if (checkVal("#m_nm")){
   			alert("이름을 입력해 주세요.");
@@ -86,18 +84,15 @@
   		}else if (checkVal("#nick_nm")){
   			alert("닉네임을 입력해 주세요.");
   			$("#nick_nm").focus();
-  		}else if($("#checknick").val() == "false") {
-			alert("닉네임 중복 체크를 해주세요.");
-			$("#nick_nm").focus();
-			
+
   		}else if (checkVal("#m_pw")){
   			alert("비밀번호를 입력해 주세요.");
   			$("#m_pw").focus();
-  		} else if (checkVal("#m_repw")){
+  		}else if (checkVal("#m_repw")){
   			alert("비밀번호 확인을 입력해 주세요.");
   			$("#m_repw").focus();
   		} else if($("#m_pw").val() != $("#m_repw").val()){
-  			alert("비밀번호 확인이 일치하지 않습니다.")
+  			alert("비밀번호 확인이 일치하지 않습니다.");
   			$("#m_pw").val("");
   			$("#m_repw").val("");
   			$("#m_repw").focus();
@@ -116,21 +111,18 @@
   		}  else if (checkVal("#cm_detailAddress")){
   			alert("상세주소를 입력해 주세요.");
   			$("#cm_detailAddress").focus();
-  		} //else if (checkVal("#vac_y")){
-  		//	if(checkVal("#vac_n")){
-	  	//		alert("백신접종여부를 입력해 주세요.");
-	  	//		$("#vac_y").focus();
-  		//	}
-  	//	}
-	  		else {
-	  			
-	  			$("#addForm").submit();  
-	  			
-	  		}
+  		}else if($("#checkId").val() == "false") {
+			alert("아이디 중복 체크를 해주세요.");
+			$("#m_id").focus();
+  		}else if($("#checknick").val() == "false") {
+			alert("닉네임 중복 체크를 해주세요.");
+			$("#nick_nm").focus();
+  		}else {
+  			console.log("aaa");
+			$("#addForm").submit();
+		}
   	});
-  });
-  
-
+});
   function checkVal(sel){
   	if($.trim($(sel).val()) == ""){
   		return true;
@@ -156,11 +148,10 @@
     </div>
     <div class="right">
       
-      <form action="mAdds" id="addForm" method="post">
+        <div class="inputs">
+        <form action="mAdds" id="addForm" method="post">
       <input type="hidden" id="checkId" value="false" />
       <input type="hidden" id="checknick" value="false" />
-      
-        <div class="inputs">
           <p class="r_title"><b>Sign Up</b></p>
           
           <span class="title_Name">아이디</span><br>
@@ -186,14 +177,9 @@
           <span class="title_Name">이메일</span><br>
           <input type="email" id="email" name="email" placeholder="이메일을 입력하세요"><br>
           
-          백신 접종 여부 <input type="radio" id="vac_y" name="vec" value="y"> 예
+          백신 접종 여부 <input type="radio" id="vac_y" name="vec" value="y" checked> 예
       	  <input type="radio" id="vac_n" name="vec" value="n"> 아니오<br>
-      	  
-      	  
-      	 
 
-
-      	  
           <div class="birth">
             <span>생년월일</span><br>   
             <div id="m_bdt" >
@@ -208,10 +194,12 @@
             <input type="text" id="cm_address" name="adr" placeholder="주소"><br>
             <input type="text" id="cm_detailAddress" name="dtl_adr"  placeholder="상세주소"><br>  
           </div>
+          </form>
           <button id="add_btn" class="add_btn">가입</button>
           <button id="cancel_btn" class="cancel_btn">취소</button>
         </div>
-      </form>
+        
+      
       <br>
     </div>
   </div>
