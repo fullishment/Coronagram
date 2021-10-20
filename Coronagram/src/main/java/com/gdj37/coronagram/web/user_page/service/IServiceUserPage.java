@@ -35,4 +35,5 @@ public interface IServiceUserPage {
 
 	public int delFollow(HashMap<String, String> params)throws Throwable;
 
+	public int addMCmt(HashMap<String, String> params)throws Throwable;
 }

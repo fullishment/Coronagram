@@ -24,23 +24,18 @@
     </style>
     <script>
         $(document).ready(function(){
-        	reloadList();
-        	
+        	reloadList();       	
         	
             $(document).on("click",".gallery-item",function(){
             	$("#myModal").val("");
             	$("#writingNo").val($(this).attr("wtno"));
+            	$("#writingNo2").val($(this).attr("wtno"));
             	modal.style.display="block";
             	mdDraw();          	
             });
             
             var modal = document.getElementById('myModal');  
             
-            $(".close").on("click",function(){
-            	document.getElementById("myModal").style.display="none";
-            	reloadList();
-            });
-
             window.onclick = function(event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
@@ -48,6 +43,12 @@
                 }
             }           
         });
+        function modalFunc(){
+            $(".close").on("click",function(){
+            	document.getElementById("myModal").style.display="none";
+            	reloadList();
+            });
+        }
         function reloadList(){
 			var params=$("#addrForm").serialize();		
 			$.ajax({ 
@@ -59,10 +60,10 @@
 					$("#myModal").val("");
 					imgList(res.list);
 					intro(res.intro);
-					introNm(res.intro);
-					editProfile();
+					introNm(res.intro);				
 					profileCnt(res.follow, res.following);
-					followArea();					
+					followArea();
+					editProfile();
 					addFollow();
 		        	delFollow();					
 				},
@@ -123,33 +124,20 @@
 					$("#myModal").val("");
 					ModalContent(res.modalM);
 					ModalImg(res.md);
-					ModalCmt(res.modalCmt);	
+					modalFunc();
+					ModalCmt();
 					like();
 					slide();
 					heart(res.hcnt);
 					heartAD();
-					
+					addModalCmt();				
 				},
 				error : function(request, status, error){
 					console.log(error);
 				}
 			});
 	    }
-		function like(){
-	    	var params = $("#modalForm").serialize();
-			$.ajax({
-				url : "likeCnt",
-				type : "post",
-				dataType : "json",
-				data : params,
-				success : function(res){
-					likeArea(res.like);
-				},
-				error : function(request, status, error){
-					console.log(error);
-				}
-			});
-	    }	
+		
 	    function ModalContent(data){   
 	    	var html ="";
 	    		
@@ -249,17 +237,32 @@
 			     html+="               <div class=\"likes head_text\"></div>                                                                                               ";
 			     html+="           </div>                                                                                                                                  ";
 			     html+="           <div class=\"cmt_field\" id=\"cmt_field\">                                                                                              ";
-			     html+="               <textarea class=\"cmt_con\" placeholder=\"댓글 달기...\"></textarea>                                                                   ";
+			     html+="               <textarea id=\"cmt_con\" class=\"cmt_con\" placeholder=\"댓글 달기...\"></textarea>                                                                   ";
 			     html+="               <div class=\"m_text head_text\" id=\"add_cmt\">게시</div>                                                                             ";
 			     html+="           </div>                                                                                                                                   ";
 			     html+="       </div>                                                                                                                          				";
 			     html+="   </div>                                                                                                                              				";
 			     
 		    	 $("#myModal").html(html);
-	    }                        
-	    function ModalCmt(modalCmt){  
+	    }            
+	    function ModalCmt(){
+	    	var params = $("#modalForm").serialize();
+			$.ajax({
+				url : "modalCmt",
+				type : "post",
+				dataType : "json",
+				data : params,
+				success : function(res){
+					ModalArea(res.modalCmt);
+				},
+				error : function(request, status, error){
+					console.log(error);
+				}
+			});
+	    }	
+	    function ModalArea(data){  
 	    	var html ="";                                                                                                                                                                                                                                                                      
-			for(var list of modalCmt){                                                                                                                              				
+			for(var list of data){                                                                                                                              				
 			     html+="<div class=\"comment_container\">                               ";
 			     html+="   <div class=\"comment\" id=\"comment-list-ajax-post37\">      ";
 			     html+="       <div class=\"comment-detail\">                           ";
@@ -273,6 +276,50 @@
 			
 			$(".modal_cmt").html(html);
 	    };
+	    function addModalCmt(){
+	    	$("#add_cmt").on("click",function(){
+	    		if($("#cmt_con").val()==""){
+	    			alert("댓글 내용을 입력하세요.");
+	    		}
+	    		else{
+	    			$("#cmtVal").val($("#cmt_con").val());
+		    		var params = $("#modalCmtForm").serialize();
+					$.ajax({
+						url : "addModalCmt",
+						type : "post",
+						dataType : "json",
+						data : params,
+						success : function(res){
+							if(res.result=="success"){
+								ModalCmt();	
+								$("#cmt_con").val("");
+								$("#cmtVal").val("");
+							}else{							
+								alert("삭제실패");
+							}
+						},
+						error : function(request, status, error){
+							console.log(error);
+						}
+					});
+	    		}	
+	    	})	
+	    }
+	    function like(){
+	    	var params = $("#modalForm").serialize();
+			$.ajax({
+				url : "likeCnt",
+				type : "post",
+				dataType : "json",
+				data : params,
+				success : function(res){
+					likeArea(res.like);
+				},
+				error : function(request, status, error){
+					console.log(error);
+				}
+			});
+	    }	
 	    function likeArea(data){
 	       var html ="";    
 			   html+="좋아요<span id=\"like-count-39\">"+data+"</span>개";				   
@@ -377,6 +424,7 @@
 				data : params,
 				success : function(res){
 					follows(res.fExist,res.fExist2);
+					editProfile();
 					addFollow();
 					delFollow();
 				},
@@ -438,8 +486,7 @@
 					data : params,
 					success : function(res){
 						if(res.result=="success"){
-							followArea();
-							
+							followArea();						
 						}else{							
 							alert("삭제실패");
 						}
@@ -624,6 +671,11 @@
            	  <input type="hidden" name="m_no" value="${sMNo}"/> 
     	   	  <input type="hidden" name="writingNo" id="writingNo"/>
     	   	  <input type="hidden" name="nickNm" value="<%=request.getAttribute("nicknm")%>"/>
+		   </form>
+		   <form action="#" id="modalCmtForm" method="post">
+           	  <input type="hidden" name="m_no" value="${sMNo}"/> 
+    	   	  <input type="hidden" name="writingNo" id="writingNo2"/>
+    	   	  <input type="hidden" name="cmt_con" id="cmtVal"/>
 		   </form>
 	 	</main>	   
     	<script src="../resources/script/menu_bar/menu_bar.js"></script>

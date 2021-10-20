@@ -101,6 +101,12 @@ public class ServiceUserPage implements IServiceUserPage{
 	public int delFollow(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return iDaoUserPage.delFollow(params);
+	}
+
+	@Override
+	public int addMCmt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.addMCmt(params);
 	}	
 	
 }

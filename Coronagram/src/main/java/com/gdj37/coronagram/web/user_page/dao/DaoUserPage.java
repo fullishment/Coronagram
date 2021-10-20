@@ -104,4 +104,10 @@ public class DaoUserPage implements IDaoUserPage {
 		return sqlSession.delete("userPage.delFollow",params);
 	}
 
+	@Override
+	public int addMCmt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("userPage.addMCmt",params);
+	}
+
 }

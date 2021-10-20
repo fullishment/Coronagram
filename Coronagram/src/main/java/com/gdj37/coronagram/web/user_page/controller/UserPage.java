@@ -54,30 +54,17 @@ public class UserPage {
 		
 		HashMap<String,String> modalM = iServiceUserPage.getModalM(params);
 		List<HashMap<String,String>> md = iServiceUserPage.getMDtlList(params);
-		List<HashMap<String,String>> modalCmt = iServiceUserPage.getModalCmt(params);		
+				
 		int hcnt = iServiceUserPage.getHeartCnt(params);
 				
 		modelMap.put("hcnt", hcnt);
 		modelMap.put("md", md);
 		modelMap.put("modalM", modalM);
-		modelMap.put("modalCmt", modalCmt);
+		
 		
 		return mapper.writeValueAsString(modelMap);
 	}
-	@RequestMapping(value="/userpage/followArea",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
-	@ResponseBody
-	public String followArea (@RequestParam HashMap<String,String> params) throws Throwable {
-		ObjectMapper mapper = new ObjectMapper();
-		
-		Map<String,Object> modelMap = new HashMap<String,Object>();
-		int fExist = iServiceUserPage.getfollowEx(params);
-		int fExist2 = iServiceUserPage.getfollowEx2(params);
-		System.out.println(fExist);
-		System.out.println(fExist2);
-		modelMap.put("fExist", fExist);
-		modelMap.put("fExist2", fExist2);
-		return mapper.writeValueAsString(modelMap);
-	}
+	
 	@RequestMapping(value="/userpage/likeCnt",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
 	@ResponseBody
 	public String likeCnt (@RequestParam HashMap<String,String> params) throws Throwable {
@@ -108,27 +95,6 @@ public class UserPage {
 		modelMap.put("result", result);
 		return mapper.writeValueAsString(modelMap);
 	}
-	@RequestMapping(value="/userpage/addFollow",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
-	@ResponseBody
-	public String addFollow (@RequestParam HashMap<String,String> params) throws Throwable {
-		ObjectMapper mapper = new ObjectMapper();
-		Map<String,Object> modelMap = new HashMap<String,Object>();
-		String result ="success";
-		try {
-			int addFollow = iServiceUserPage.addFollow(params);
-			System.out.println(addFollow);
-			if(addFollow==0) {
-				result="failed";
-				System.out.println(addFollow);
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-			result ="error";
-		}
-		
-		modelMap.put("result", result);
-		return mapper.writeValueAsString(modelMap);
-	}
 	@RequestMapping(value="/userpage/delHeart",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
 	@ResponseBody
 	public String delHeart (@RequestParam HashMap<String,String> params) throws Throwable {
@@ -148,6 +114,38 @@ public class UserPage {
 		modelMap.put("result", result);
 		return mapper.writeValueAsString(modelMap);
 	}
+	@RequestMapping(value="/userpage/followArea",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String followArea (@RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		int fExist = iServiceUserPage.getfollowEx(params);
+		int fExist2 = iServiceUserPage.getfollowEx2(params);
+		
+		modelMap.put("fExist", fExist);
+		modelMap.put("fExist2", fExist2);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/userpage/addFollow",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String addFollow (@RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		String result ="success";
+		try {
+			int addFollow = iServiceUserPage.addFollow(params);
+			if(addFollow==0) {
+				result="failed";
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			result ="error";
+		}		
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}
+	
 	@RequestMapping(value="/userpage/delFollow",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
 	@ResponseBody
 	public String delFollow (@RequestParam HashMap<String,String> params) throws Throwable {
@@ -156,16 +154,43 @@ public class UserPage {
 		String result ="success";
 		try {
 			int delFollow = iServiceUserPage.delFollow(params);
-			System.out.println(delFollow);
 			if(delFollow==0) {
 				result="failed";
-				System.out.println(delFollow);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			result ="error";
+		}	
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/userpage/modalCmt",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String modalCmt (@RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		List<HashMap<String,String>> modalCmt = iServiceUserPage.getModalCmt(params);
+		
+		modelMap.put("modalCmt", modalCmt);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/userpage/addModalCmt",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String addModalCmt (@RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		String result ="success";
+		try {
+			int addMCmt = iServiceUserPage.addMCmt(params);
+			
+			if(addMCmt==0) {
+				result="failed";
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 			result ="error";
 		}
-		
 		modelMap.put("result", result);
 		return mapper.writeValueAsString(modelMap);
 	}

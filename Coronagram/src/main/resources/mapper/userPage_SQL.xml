@@ -101,9 +101,9 @@
 		 WHERE RQ_USER= #{m_no}
          AND RP_USER = (SELECT M_NO FROM M WHERE NICK_NM = #{nickNm})
 	</delete>
-	 <insert id="addCmt" parameterType="hashmap">
-		insert into FOLLOW(RQ_USER,RP_USER) 
-		select #{m_no}, m_no from m where nick_nm = #{nickNm}
+	<insert id="addMCmt" parameterType="hashmap">
+		insert into crng_cmt(WRITING_NO, CMT_WRITER_NO, CMT_CON)
+            values(#{writingNo},#{m_no},#{cmt_con})
 	</insert>      
 
 </mapper>
