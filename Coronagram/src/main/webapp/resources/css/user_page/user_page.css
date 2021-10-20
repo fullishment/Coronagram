@@ -434,8 +434,8 @@ svg {
 	color: white;
 }
 .modal_cmt::-webkit-scrollbar-thumb{
-	border-radius:30px;
-	color: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
+	background-color: gray;
+	border-radius:3px;
 }
 .gallery-item-type {
     position: absolute;

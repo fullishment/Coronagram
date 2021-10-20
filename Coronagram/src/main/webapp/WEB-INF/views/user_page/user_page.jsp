@@ -371,7 +371,7 @@
 	    function ProfileImg(data){                                                                                                                         
 			var html ="";
 				
-                html+=" <img src=\"../"+data.IMG_ADR+"\" alt=\"../resources/images/userpage/replace.png\" /> ";
+                html+=" <img src=\"../"+data.IMG_ADR+"\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />  ";
 					
 			$(".profile-image").html(html);
 		}
