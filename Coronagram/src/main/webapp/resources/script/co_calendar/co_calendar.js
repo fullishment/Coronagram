@@ -1,406 +1,132 @@
-var events = []
-events = parselocalstorage('events')
-var renderPopup = function (jsEvent, start, end, calEvent) {
-  var $popup = $('#calendar-popup');
-  var $eventForm = $('#event-form');
-  $event = $('#event');
-  var $selectedElmt = $(jsEvent.target);
+document.addEventListener('DOMContentLoaded', function() {
+	var calendarEl = document.getElementById('calendar');
+	var today = new Date();
+	var year = today.getFullYear();
+	var month = today.getMonth()+1;
+	var day = today.getDate();
+	var fulldate = year+ '-' + month + '-' + day;
 
-  var relativeStartDay = start.calendar(null, { lastDay: '[yesterday]', sameDay: '[today]' });
-  var endNextDay = '';
+	calendar = new FullCalendar.Calendar(calendarEl, {
+		height : '850px',
+		expandRows : true,
+		slotMinTime : '08:00',
+		slotMaxTime : '24:00',
+		headerToolbar : {
+			left : 'title',
+			right : 'checkAtt prev,today,next'
+		},
 
-  if (relativeStartDay === 'yesterday') {
-    endNextDay = '[Today at] ';
-  }
-  else if (relativeStartDay === 'today') {
-    endNextDay = '[Tomorrow at] ';
-  }
-  else {
-    endNextDay = 'dddd ';
-  }
+		customButtons : {
+			checkAtt : {
+				text : '출석체크',
+				id : 'check',
 
-  $('.start-time').html(
-    ' <p><i class="fa fa-play" aria-hidden="true"></i>' + (start.isSameOrBefore(moment()) ? 'Started' : 'Starts') + '</p>'
-    + '<time datetime="' + start.format() + '">'
-    + start.calendar(null, {
-      lastWeek: 'L LT',
-      nextWeek: 'dddd LT',
-      sameElse: 'L LT'
-    })
-    + '</time>'
-  );
-  $('.end-time').html(
-    '<p><i class="fa fa-stop" aria-hidden="true"></i> '
-    + (end.isSameOrBefore(moment()) ? 'Ended' : 'Ends')
-    + (end.isSame(start, 'day') ? ' at' : '')
-    + '</p>'
-    + '<time datetime="' + end.format() + '">'
-    + end.calendar(start, {
-      sameDay: 'LT',
-      nextDay: endNextDay + 'LT',
-      nextWeek: 'dddd LT',
-      sameElse: 'L LT'
-    })
-    + '</time>'
-  );
+				click : function() {
 
-  if (calEvent) {
-    $eventForm.hide();
+					var params = $("#calForm").serialize();
+					
+					$.ajax({
+						url : "calendarDataCheck",
+						type : "POST",
+						dataType : "json",
+						data : params,
+						success : function(res){
+							if(res.attCnt > 0){
+								
+								alert("이미 출석체크를 완료 하였습니다")
+								$(".fc-checkAtt-button").prop('disabled',true);
+								calendar.render();
+								
+							}else{
+								$.ajax({
+									url : 'getSysdate',
+									type : 'POST',
+									dataType : 'json',
+									data : params,
+									success : function(res) {
+										console.log(res.result);
+										
+										calendar.addEvent({
+											start : res.ATT_DT,
+											title : res.TITLE
+										});
+										
+										$(".fc-checkAtt-button").prop('disabled', true);
+										alert("출석완료");
+//										location.reload(true);
+										calendar.render();
+									},
+									error : function(data) {
+										alert('데이터 불러오기 실패');
+									}
+									
+								});
+								
+							}
+							
+						},
+						error : function(request, status, error){
+							console.log(error);
+						}
+					});
+				}
+			}
+		},
 
-    $event.children('header').html(`<i class="fa fa-calendar-o"></i>` + calEvent.title);
-    $event.find('.location').text(calEvent.location ? calEvent.location : '(No location information.)');
-    $event.find('.details').text(calEvent.details ? calEvent.details : '');
+		eventSources : [ {
 
-    $event.show();
-  }
-  else {
-    $event.hide();
-    $('#event-start').val(start.format('YYYY-MM-DD[T]HH:mm'));
-    $('#event-end').val(end.format('YYYY-MM-DD[T]HH:mm'));
-    $eventForm.show();
-  }
+			events : function(info, successCallback, failureCallback) {
+				var params = $("#calForm").serialize();
 
-  var leftPosition = 0;
-  var $prong = $('.prong');
-  var prongPos = 0;
+				$.ajax({
+					url : 'attendances',
+					type : 'POST',
+					dataType : 'json',
+					data : params
 
-  if ($selectedElmt.hasClass('fc-highlight')) {
-    leftPosition = $selectedElmt.offset().left - $popup.width() + ($selectedElmt.width() / 2);
-    if (leftPosition <= 0) {
-      leftPosition = 5;
-      prongPos = $popup.width() - $selectedElmt.offset().left - 30
-    }
-    else {
-      prongPos = 15;
-    }
+					,
+					success : function(data) {
+						successCallback(data.data);
+						calendar.render();
+					}
+				});
+			},
+			color : 'yellow',
+			textColor : 'black'
 
-    $popup.css('left', leftPosition);
-    $prong.css({
-      'left': '',
-      'right': prongPos,
-      'float': 'right'
-    });
-  }
-  else {
-    leftPosition = jsEvent.originalEvent.pageX - $popup.width() / 2;
-    if (leftPosition <= 0) {
-      leftPosition = 5;
-    }
-    prongPos = jsEvent.originalEvent.pageX - leftPosition - ($prong.width() * 1.7);
-
-    $popup.css('left', leftPosition);
-    $prong.css({
-      'left': prongPos,
-      'float': 'none',
-      'right': ''
-    });
-  }
-
-  var topPosition = (calEvent ? jsEvent.originalEvent.pageY : $selectedElmt.offset().top) - $popup.height() - 15;
-
-  if ((topPosition <= window.pageYOffset)
-    && !((topPosition + $popup.height()) > window.innerHeight)) {
-    $popup.css('top', jsEvent.originalEvent.pageY + 15);
-    $prong.css('top', -($popup.height() + 12))
-      .children('div:first-child').removeClass('bottom-prong-dk').addClass('top-prong-dk')
-      .next().removeClass('bottom-prong-lt').addClass('top-prong-lt');
-  }
-  else {
-    $popup.css('top', topPosition);
-    $prong.css({ 'top': 0, 'bottom': 0 })
-      .children('div:first-child').removeClass('top-prong-dk').addClass('bottom-prong-dk')
-      .next().removeClass('top-prong-lt').addClass('bottom-prong-lt');
-  }
-
-  $popup.show();
-  $popup.find('input[type="text"]:first').focus();
-}
-
-$(document).ready(function () {
-  $('#calendar').fullCalendar({
-    header: {
-      left: 'title',
-      right: 'prev,next td_check today'
-    },
-    customButtons: {
-      td_check: {
-        text: '출석체크',
-        id: 'check',
-
-      },
-      eventSources: [
-        {
-
-        }
-      ]
-    },
-    timezone: 'local',
-    defaultView: 'month',
-    allDayDefault: false,
-    allDaySlot: false,
-    slotEventOverlap: true,
-    slotDuration: "01:00:00",
-    slotLabelInterval: "01:00:00",
-    snapDuration: "00:15:00",
-    contentHeight: 600,
-    scrollTime: "8:00:00",
-    axisFormat: 'h:mm a',
-    timeFormat: 'h:mm A()',
-    selectable: true,
-    events: function (start, end, timezone, callback) {
-      let arr = parselocalstorage('events')
-      callback(arr);
-    },
-    eventColor: '#dec5c9',
-    eventClick: function (calEvent, jsEvent) {
-
-      renderPopup(jsEvent, calEvent.start, calEvent.end, calEvent);
+		} ],
+		select: function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
+			var title = prompt('할일 입력:');
+			if (title) {
+			calendar.addEvent({
+			title: title,
+			start: arg.start,
+			end: arg.end,
+			allDay: arg.allDay
+			})
+			}
+			calendar.unselect()
+			},
 
 
-    },
-    eventRender: function (event, element) {
-      element.append(`<span class='I_delete'><i class="fa fa-remove fa-2x"></i></span>`);
-      element.append(`<span class='I_edit'><i class="fa fa-edit fa-2x"></i></span>`);
-      element.find(".I_delete").click(function () {
-        $('#calendar-popup').hide();
-        if (confirm('are you sure want to delete event?')) {
-          $('#calendar').fullCalendar('removeEvents', event._id);
-          var index = events.map(function (x) { return x.id; }).indexOf(event.id);
-          events.splice(index, 1);
-          localStorage.setItem('events', JSON.stringify(events));
+		initialView : 'dayGridMonth',
+		navLinks : false,
+		editable : false,
+		selectable : true,
+		nowIndicator : true,
+		dayMaxEvents : true,
+		locale : 'ko',
+		eventAdd : function(obj) {
+			console.log(obj);
+		},
+		eventChange : function(obj) {
+			console.log(obj);
+		},
+		eventRemove : function(obj) {
+			console.log(obj);
+		}
+	});
 
-          events = parselocalstorage('events')
-
-        }
-      });
-      element.find(".I_edit").click(function () {
-        $('#calendar-popup').hide();
-
-        $('#eventname').val(event.title)
-        $('#location').val(event.location)
-        $('#eventdetails').val(event.details)
-        $('input#eventstart').val(event.start._i)
-        $('input#eventend').val(event.end._i)
-        $('#simplemodal').show();
-
-
-        //update events
-        var that = event;
-        $('#edit-form').on('submit', function (e) {
-          e.preventDefault();
-          $form = $(e.currentTarget);
-
-          $title = $form.find('input#eventname');
-          $location = $form.find('input#location');
-          $details = $form.find('textarea#eventdetails');
-          $start = $form.find('input#eventstart');
-          $end = $form.find('input#eventend');
-          //update value
-          that.title = $title.val();
-          that.location = $location.val();
-          that.details = $details.val();
-          that.start = $start.val();
-          that.end = $end.val();
-
-          $('#calendar').fullCalendar('updateEvent', that);
-          console.log('after update', events)
-          $('#simplemodal').hide();
-          $('#calendar-popup').hide();
-        });
-        $('#calendar').fullCalendar('updateEvent', event);
-
-        // 
-        // 		localStorage.setItem('events', JSON.stringify(events));
-      });
-
-      $('#close-btnid').click(function () {
-        $('#simplemodal').hide();
-      })
-
-      var modal = document.getElementById('simplemodal')
-
-      window.addEventListener('click', clickOutside)
-      function clickOutside(e) {
-        if (e.target == modal) {
-          modal.style.display = 'none';
-
-        }
-      }
-    }
-    ,
-    select: function (start, end, jsEvent) {
-      $('.btn-primary').css('opacity', 1)
-      $('.btn-primary').click(function () {
-        renderPopup(jsEvent, start.local(), end.local());
-      })
-      renderPopup(jsEvent, start.local(), end.local());
-
-    }
-  });
-
-  $('#event-form').on('submit', function (e) {
-    e.preventDefault();
-
-    $form = $(e.currentTarget);
-
-    $title = $form.find('input#event-title');
-    $location = $form.find('input#event-location');
-    $details = $form.find('textarea#event-details');
-    $ID = '_' + Math.random().toString(36).substr(2, 9)
-    events.push({
-      id: $ID,
-      title: $title.val(),
-      start: $form.find('input#event-start').val(),
-      end: $form.find('input#event-end').val(),
-      location: $location.val(),
-      details: $details.val()
-    });
-
-    $title.val('');
-    $location.val('');
-    $details.val('');
-
-    $form.parent().blur().hide();
-    localStorage.setItem('events', JSON.stringify(events));
-    $('#calendar').fullCalendar('refetchEvents');
-
-  });
-
-
-
-  //Set hide action for ESC key event
-  $('#calendar-popup').on('keydown', function (e) {
-    $this = $(this);
-    console.log($this);
-    if ($this.is(':visible') && e.which === 27) {
-      $this.blur();
-    }
-  })
-    //Set hide action for lost focus event
-    .on('focusout', function (e) {
-      $this = $(this);
-      if ($this.is(':visible') && !$(e.relatedTarget).is('#calendar-popup, #calendar-popup *')) {
-        $this.hide();
-      }
-    });
-});
-
-/*** TESTING/DEMO ***/
-var date = new Date();
-var today = date.getDate();
-var month = date.getMonth() + 1;
-var year = date.getFullYear();
-today = today < 10 ? '0' + today.toString() : today;
-var tomorrow = today + 1 < 10 ? '0' + (today + 1).toString() : today + 1; //today not last day
-var yesterday = today - 1 < 10 ? '0' + (today - 1).toString() : today - 1; //today not first day
-localStorage.clear()
-
-var str = localStorage.getItem('events');
-var obj = JSON.parse(str) || []
-let arr = Object.keys(obj).map((k) => obj[k])
-console.log('what is in aarrr1', events)
-if (events.length === 0) {
-  events.push(
-    { id: 1, title: 'event1', start: year + '-' + month + '-' + today + 'T07:00', end: year + '-' + month + '-' + today + 'T10:00', location: 'The Moon', details: 'There will be cheese' },
-    { id: 2, title: 'event2', start: year + '-' + month + '-' + tomorrow + 'T03:00', end: year + '-' + month + '-' + tomorrow + 'T08:00', location: 'The Moon', details: 'There will be cheese' },
-    { id: 3, title: 'event3', start: year + '-' + month + '-' + yesterday + 'T20:00', end: year + '-' + month + '-' + today + 'T05:00', location: 'The Moon', details: 'There will be cheese' }
-  );
-}
-/*events.push(
-  {title: 'event1', start: year + '-' + month + '-' + today + 'T07:00', end: year + '-' + month + '-' + today + 'T10:00', location: 'The Moon', details: 'There will be cheese'},
-  {title: 'event2', start: year + '-' + month + '-' + tomorrow + 'T03:00', end: year + '-' + month + '-' + tomorrow + 'T08:00', location: 'The Moon', details: 'There will be cheese'},
-  {title: 'event3', start: year + '-' + month + '-' + yesterday + 'T20:00', end: year + '-' + month + '-' + today + 'T05:00', location: 'The Moon', details: 'There will be cheese'}
-);*/
-
-localStorage.setItem('events', JSON.stringify(events));
-
-/***************/
-
-
-
-
-
-//handle search
-
-var alreadyFilled = false;
-function initDialog() {
-  clearDialog();
-  for (var i = 0; i < events.length; i++) {
-    var mS1 = { "01": 'Jan', "02": 'Feb', "03": 'Mar', "04": 'Apr', "05": 'May', "06": 'June', "07": 'July', "08": 'Aug', "09": 'Sept', "10": 'Oct', "11": 'Nov', "12": 'Dec' };
-
-    $('.dialog').append('<div><span class="s_title">' + events[i].title + `</span><br><span class='s_des'>"` + events[i].details +
-
-      `</span> <span class='duration'>` + events[i].start + `</span>`
-
-      + `</div>
-   <ul class="vertical-date">
-            <li class="list-daynumber">`+ events[i].start.slice(8, 10) + `</li>
-            <li class="list-monthname">`+ mS1[events[i].start.slice(5, 7)] + `</li>
-          </ul>
-
-`);
-
-  }
-}
-function clearDialog() {
-  $('.dialog').empty();
-}
-$('.autocomplete input').click(function () {
-  if (!alreadyFilled) {
-    $('.dialog').addClass('open');
-  }
+	calendar.render();
 
 });
-$('body').on('click', '.dialog > div', function () {
-  $('.autocomplete input').val($(this).find('.s_title').text()).focus();
-  $('.autocomplete .close').addClass('visible');
-  alreadyFilled = true;
-});
-$('.autocomplete .close').click(function () {
-  alreadyFilled = false;
-  $('.dialog').addClass('open');
-  $('.autocomplete input').val('').focus();
-  $(this).removeClass('visible');
-});
-
-function match(str) {
-  str = str.toLowerCase();
-  clearDialog();
-  for (var i = 0; i < events.length; i++) {
-    if ((events[i].title).toLowerCase().startsWith(str)) {
-
-      var mS2 = { "01": 'Jan', "02": 'Feb', "03": 'Mar', "04": 'Apr', "05": 'May', "06": 'June', "07": 'July', "08": 'Aug', "09": 'Sept', "10": 'Oct', "11": 'Nov', "12": 'Dec' };
-
-      $('.dialog').append('<div><span class="s_title">' + events[i].title + `</span><br><span class='s_des'>` + events[i].details
-        +
-        ` </span><span class='duration'>` + events[i].start + `</span>`
-        +
-        `</div>
-   <ul class="vertical-date">
-            <li class="list-daynumber">`+ events[i].start.slice(8, 10) + `</li>
-            <li class="list-monthname">`+ mS2[events[i].start.slice(5, 7)] + `</li>
-          </ul>
-`);
-
-    }
-  }
-}
-$('.autocomplete input').on('input', function () {
-  $('.dialog').addClass('open');
-  alreadyFilled = false;
-  match($(this).val());
-});
-$('body').click(function (e) {
-  if (!$(e.target).is("input, .close")) {
-    $('.dialog').removeClass('open');
-  }
-});
-initDialog();
-
-
-function parselocalstorage(name) {
-  var str = localStorage.getItem(name);
-  var obj = JSON.parse(str) || []
-  let arr = Object.keys(obj).map((k) => obj[k]) || []
-  return arr
-}

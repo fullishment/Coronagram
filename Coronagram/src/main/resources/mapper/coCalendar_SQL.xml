@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cal">
+	
+	<select id="getCalendarbyDate" parameterType="hashmap" resultType="hashmap">
+		
+		SELECT 
+			  A.USER_NO
+			, M.M_NO
+			, TO_CHAR( A.ATT_DT, 'YYYY-MM-DD') AS "start"
+			, TITLE AS "title"
+		FROM 
+			ATT_CHECK A
+			JOIN M ON ( A.USER_NO = M.M_NO )
+		WHERE
+			1=1
+			AND A.USER_NO = #{m_no}
+		
+	</select>
+	
+	<insert id="insertSysdate" parameterType="hashmap">
+		<selectKey keyProperty="USER_NO,ATT_DT,TITLE" resultType="hashmap" order="AFTER">
+			SELECT 
+				USER_NO AS USER_NO
+			  , TO_CHAR(ATT_DT,'YYYY-MM-DD') AS ATT_DT
+			  , TITLE AS TITLE
+			FROM
+				ATT_CHECK
+			WHERE
+				1=1
+			AND USER_NO = #{m_no}
+			AND TO_CHAR(ATT_DT,'YYYY-MM-DD') = TO_CHAR(SYSDATE,'YYYY-MM-DD') 
+		</selectKey>
+		
+		INSERT INTO ATT_CHECK
+		( ATT_NO
+		, USER_NO
+		, POINT 
+		, TITLE
+		)VALUES(
+		ATT_SEQ.NEXTVAL
+		, #{m_no}
+		, 10
+		, '출석체크'
+		)
+		
+	</insert>
+	<select id="getCalendarDateCheck" parameterType="Hashmap" resultType="Integer">
+		SELECT 
+			COUNT(*) AS CNT
+		FROM 
+			ATT_CHECK
+		WHERE
+			USER_NO = #{m_no}
+		AND TO_CHAR(ATT_DT,'YYYY-MM-DD') = TO_CHAR(SYSDATE,'YYYY-MM-DD')
+			
+	</select>
+	
+<!-- 	<select id="getSysDate" parameterType="hashmap" resultType="String">
+		SELECT
+			TO_CHAR(SYSDATE , 'YYYY-MM-DD') AS "start"
+		FROM
+			DUAL
+	
+	</select> -->
+
+</mapper>
