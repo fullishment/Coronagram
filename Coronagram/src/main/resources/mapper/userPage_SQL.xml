@@ -28,7 +28,7 @@
 		 ]]>
 	</select>
 	<select id="getModalCmt" parameterType="hashmap" resultType="hashmap">
-			select cc.CMT_WRITER_NO,CC.WRITING_NO,cc.cmt_con,m.M_NO, m.m_nm, m.nick_nm
+			select cc.CMT_WRITER_NO,CC.WRITING_NO,cc.cmt_con,m.M_NO, m.m_nm, m.nick_nm,M.IMG_ADR
 	            ,TO_CHAR(cc.dt, 'YYYY/MM/DD HH24:MI:SS') as dt,
 	            ROW_NUMBER() OVER(ORDER BY cc.WRITING_NO DESC) AS RNUM
 	            from crng_cmt cc
@@ -38,7 +38,7 @@
                 ORDER BY RNUM DESC
 	</select>
 	<select id="getModalM" parameterType="hashmap" resultType="hashmap">
-		 select C.WRITER_NO, C.CON, M.M_NM, M.NICK_NM
+		 select C.WRITER_NO, C.CON, M.M_NM, M.IMG_ADR, M.NICK_NM
             from CRNG C
             INNER JOIN M M
                         ON C.WRITER_NO = M_NO
@@ -51,7 +51,9 @@
 		select NVL(count(*),0) AS lkcnt from lk where WRITING_NO = #{writingNo}
 	</select>
 	<select id="getIntroM" parameterType="hashmap" resultType="hashmap">
-		select m_no,m_nm,nick_nm,intro_con from m where NICK_NM = #{nickNm}
+		SELECT M_NO, IMG_ADR, M_NM, NICK_NM, INTRO_CON 
+        FROM M
+        WHERE NICK_NM = #{nickNm}
 	</select>
 	<select id="getFollow" parameterType="hashmap" resultType="Integer">
 		select NVL(count(*),0) fo from follow 

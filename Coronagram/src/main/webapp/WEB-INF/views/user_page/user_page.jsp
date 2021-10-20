@@ -58,6 +58,7 @@
 				data:params,
 				success : function(res){
 					$("#myModal").val("");
+					ProfileImg(res.intro);
 					imgList(res.list);
 					intro(res.intro);
 					introNm(res.intro);				
@@ -85,9 +86,9 @@
         }
         function profileCnt(data1,data2){
 			var html ="";
-				html +="<li><span class=\"profile-stat-count\"></span> posts</li>";
-			    html +="<li><span class=\"profile-stat-count\">"+data1+"</span>followers</li>";
-			    html +="<li><span class=\"profile-stat-count\">"+data2+"</span>following</li>";
+				html +="<li>게시물 <span class=\"profile-stat-count\"></span></li>";
+			    html +="<li>팔로워 <span class=\"profile-stat-count\">"+data1+"</span></li>";
+			    html +="<li>팔로우 <span class=\"profile-stat-count\">"+data2+"</span></li>";
 	    		$("#profile-stat").html(html);
         }
         
@@ -160,6 +161,7 @@
 			     html+="               <span id=\"close\" class=\"close\">&times;</span>                                                 ";
 			     html+="               <div class=\"user_container\">                                                                    ";
 			     html+="                   <div class=\"profile_img\">                                                                   ";
+			     html+=" 						<img src=\"../"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 	 ";
 			     html+="                   </div>                                                                                        ";
 			     html+="                   <div class=\"user_name\">                                                                     ";
 			     html+="                       <div class=\"nick_name head_text\">"+data.NICK_NM+"</div>                                 ";
@@ -168,7 +170,9 @@
 			     html+="           </div>                                                                                                ";
 			     html+="           <div class=\"cmt_sec1\">                                                                              ";
 			     html+="               <div class=\"user_container\">                                                                	 ";
-			     html+="                   <div class=\"profile_img\"></div>                                                             ";
+			     html+="                   <div class=\"profile_img\">                                                                   ";
+			     html+=" 						<img src=\"../"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 ";
+			     html+="				   </div>																						 ";
 			     html+="                   <div class=\"user_name\">                                                                 	 ";
 			     html+="                        <div class=\"nick_name head_text\">"+data.NICK_NM+"</div>                             	 ";
 			     html+="                   </div>                                                                                    	 ";
@@ -266,8 +270,11 @@
 			     html+="<div class=\"comment_container\">                               ";
 			     html+="   <div class=\"comment\" id=\"comment-list-ajax-post37\">      ";
 			     html+="       <div class=\"comment-detail\">                           ";
+			     html+="           <div class=\"profile_img\">                                                                   ";
+			     html+=" 				<img src=\"../"+data.IMG_ADR+"\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 ";
+			     html+="		   </div>																						 ";
 			     html+="           <div class=\"head_text\">"+list.NICK_NM+"</div>      ";
-			     html+="              <div>"+list.CMT_CON+"</div>                       ";
+			     html+="              <div class=\"ccon\">"+list.CMT_CON+"</div>                       ";
 			     html+="          </div>                                                ";
 			     html+="       </div>                                                	";
 			     html+="   </div>                                                       ";
@@ -360,12 +367,19 @@
 			for(var list of md){                                                                                                                              
 				
 				html+=" <div class=\"slide slide-"+i+"\">                                       ";
-                html+=" <img src=\"../"+list.FILE_ADR+"\" alt=\"\" />	   							    ";
+                html+=" <img src=\"../"+list.FILE_ADR+"\" alt=\"\" />	   						";
 	           	html+=" </div>                                                                  ";
 				i++;	
 			}
 			
 			$("#slide-group").html(html);
+		}
+	    function ProfileImg(data){                                                                                                                         
+			var html ="";
+				
+                html+=" <img src=\"../"+data.IMG_ADR+"\" alt=\"../resources/images/userpage/replace.png\" /> ";
+					
+			$(".profile-image").html(html);
 		}
 	    function heart(data){
 	    	if( data == 1 ){
@@ -638,8 +652,7 @@
 	        </div>
             <div class="container">    
                 <div class="profile">   
-                    <div class="profile-image">
-                        <img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">    
+                    <div class="profile-image"> 
                     </div>    
                     <div class="profile-user-settings">    
                         <div class="profile-user-setting">

@@ -17,8 +17,81 @@
     <link rel="stylesheet" href="resources/css/p_coronagram/style.css">
     <script src="resources/script/coronagram_main/coronagram_main.js?after"></script>
     <script>
+    $(document).ready(function(){
+    	drawList();
+    	slide();
+    });
     
-    function reloadList(){
+    function slide(){
+    	$('.slider').each(function(){
+            var $this = $(this);
+            var $group = $this.find('.slide-group');
+            var $slides = $this.find('.slide');
+            var buttonArray = [];
+            var currentIndex = 0;
+
+            var $nav = $('.slide-nav').find('div');
+        
+             $nav.on('click', function (event) {
+                event.preventDefault();
+                console.log($(this));
+                if ($(this).hasClass('next')) {
+                    if (currentIndex === $slides.length -1) {
+                        move(0);
+                    }
+                    move(currentIndex + 1);
+                } else {
+                    if (currentIndex === 0) {
+                        move($slides.length -1);
+                    }
+                    move(currentIndex - 1);
+                }
+            });
+
+        function move(newIndex) {
+            var animateLeft, slideLeft;
+
+            if ($group.is(':animated') || currentIndex === newIndex) {
+                return;
+            }
+
+            buttonArray[currentIndex].removeClass('active');
+            buttonArray[newIndex].addClass('active');
+
+            if (newIndex > currentIndex) {
+                slideLeft = '100%';
+                animateLeft = '-100%';
+            } else {
+                slideLeft = '-100%';
+                animateLeft = '100%';
+            }
+
+            $slides.eq(newIndex).css({
+                left: slideLeft,
+                display: 'block'
+            });
+
+            $group.animate({left: animateLeft}, function() {
+                $slides.eq(currentIndex).css({display: 'none'});
+                $slides.eq(newIndex).css({left: 0});
+                $group.css({left: 0});
+                currentIndex = newIndex;
+            });
+        }
+
+        $.each($slides, function(index) {
+            var $button = $('<button type="button" class="slide-btn">&bull;</button>');
+            if (index === currentIndex) {
+                $button.addClass('active');
+            }
+            $button.on('click', function(){
+                move(index);
+            }).appendTo('.slide-buttons');
+            buttonArray.push($button);
+        });
+        })
+    }
+/*     function reloadList(){
 		var params=$("#actionForm").serialize();//form의 데이터를 문자열로 변환
 		
 		$.ajax({ //jquery의 ajax함수 호출
@@ -34,143 +107,138 @@
 				console.log(error);
 			}
 		});
-	}
-    function drawList(list){
+	} */
+    function drawList(){
 		var html ="";
 		
-		for(var data of list){
-		html+='		<article class="contents">                                                                                             '  ;
-	    html+='        <header class="top">                                                                                                '  ;
-	    html+='            <div class="user_container">                                                                                    '  ;
-	    html+='                <div class="profile_img">                                                                                   '  ;
-	    html+='                    <img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="프로필이미지">                               '  ;
-	    html+='                </div>                                                                                                      '  ;
-	    html+='                <div class="user_name">                                                                                     '  ;
-	    html+='                    <div class="nick_name m_text">KindTiger</div>                                                           '  ;
-	    html+='                    <div class="country s_text">Seoul, South Korea</div>                                                    '  ;
-	    html+='                </div>                                                                                                      '  ;
-	    html+='            </div>                                                                                                          '  ;
-	    html+='            <div class="sprite_more_icon" data-name="more">                                                                 '  ;
-	    html+='                <ul class="toggle_box">                                                                                     '  ;
-	    html+='                    <li><input type="submit" class="follow" value="팔로우" data-name="follow"></li>                         '  ;
-	    html+='                    <li>수정</li>                                                                                           '  ;
-	    html+='                    <li>삭제</li>                                                                                           '  ;
-	    html+='                </ul>                                                                                                       '  ;
-	    html+='            </div>                                                                                                          '  ;
-	    html+='        </header>                                                                                                           '  ;
-	    html+='                                                                                                                            '  ;
-	    html+='        <div class="img_section">                                                                                           '  ;
-	    html+='            <div class="trans_inner">                                                                                       '  ;
-	    html+='                <div class="slider">                                                                                        '  ;
-	    html+='                    <div class="slide-viewer">                                                                              '  ;
-	    html+='                      <div class="slide-group">                                                                             '  ;
-	    html+='                        <div class="slide slide-1">                                                                         '  ;
-	    html+='                            <img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="visual01">                           '  ;
-	    html+='                        </div>                                                                                              '  ;
-	    html+='                        <div class="slide slide-2">                                                                         '  ;
-	    html+='                            <img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="visual01">                           '  ;
-	    html+='                        </div>                                                                                              '  ;
-	    html+='                        <div class="slide slide-3">                                                                         '  ;
-	    html+='                            <img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="visual01">                           '  ;
-	    html+='                        </div>                                                                                              '  ;
-	    html+='                        <div class="slide slide-4">                                                                         '  ;
-	    html+='                            <img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="visual01">                           '  ;
-	    html+='                        </div>                                                                                              '  ;
-	    html+='                      </div>                                                                                                '  ;
-	    html+='                    </div>                                                                                                  '  ;
-	    html+='                    <div class="slide-nav">                                                                                 '  ;
-	    html+='                        <div class="prev"></div>                                                                            '  ;
-	    html+='                        <div class="next"></div>                                                                            '  ;
-	    html+='                      </div>                                                                                                '  ;
-	    html+='                    <div class="slide-buttons"></div>                                                                       '  ;
-	    html+='                </div>                                                                                                      '  ;
-	    html+='        </div>                                                                                                              '  ;
-	    html+='        <div class="bottom_icons">                                                                                          '  ;
-	    html+='            <div class="left_icons">                                                                                        '  ;
-	    html+='                <div class="heart_btn">                                                                                     '  ;
-	    html+='                    <div class="sprite_heart_icon_outline" name="39" data-name="heartbeat">                                 '  ;
-	    html+='                              <input type="checkbox" id="checkbox" />                                                       '  ;
-	    html+='                              <label for="checkbox">                                                                        '  ;
-	    html+='                                <svg id="heart-svg" viewBox="467 392 58 57" xmlns="http://www.w3.org/2000/svg">             '  ;
-	    html+='                                  <g id="Group" fill="none" fill-rule="evenodd" transform="translate(467 392)">             '  ;
-	    html+='                                    <path d="M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z" id="heart" stroke="#000000" stroke-width="3"  />';
-	    html+='                                    <circle id="main-circ" fill="#E2264D" opacity="0" cx="29.5" cy="29.5" r="1.5"/>        ' ;
-	    html+='                                                                                                                           ' ;
-	    html+='                                    <g id="grp7" opacity="0" transform="translate(7 6)">                                   ' ;
-	    html+='                                      <circle id="oval1" fill="#9CD8C3" cx="2" cy="6" r="2"/>                              ' ;
-	    html+='                                      <circle id="oval2" fill="#8CE8C3" cx="5" cy="2" r="2"/>                              ' ;
-	    html+='                                    </g>                                                                                   ' ;
-	    html+='                                                                                                                           ' ;
-	    html+='                                    <g id="grp6" opacity="0" transform="translate(0 28)">                                  ' ;
-	    html+='                                      <circle id="oval1" fill="#CC8EF5" cx="2" cy="7" r="2"/>                              ' ;
-	    html+='                                      <circle id="oval2" fill="#91D2FA" cx="3" cy="2" r="2"/>                              ' ;
-	    html+='                                    </g>                                                                                   ' ;
-	    html+='                                                                                                                           ' ;
-	    html+='                                    <g id="grp3" opacity="0" transform="translate(52 28)">                                 ' ;
-	    html+='                                      <circle id="oval2" fill="#9CD8C3" cx="2" cy="7" r="2"/>                              ' ;
-	    html+='                                      <circle id="oval1" fill="#8CE8C3" cx="4" cy="2" r="2"/>                              ' ;
-	    html+='                                    </g>                                                                                   ' ;
-	    html+='                                                                                                                           ' ;
-	    html+='                                    <g id="grp2" opacity="0" transform="translate(44 6)">                                  ' ;
-	    html+='                                      <circle id="oval2" fill="#CC8EF5" cx="5" cy="6" r="2"/>                              ' ;
-	    html+='                                      <circle id="oval1" fill="#CC8EF5" cx="2" cy="2" r="2"/>                              ' ;
-	    html+='                                    </g>                                                                                   ' ;
-	    html+='                                                                                                                           ' ;
-	    html+='                                    <g id="grp5" opacity="0" transform="translate(14 50)">                                 ' ;
-	    html+='                                      <circle id="oval1" fill="#91D2FA" cx="6" cy="5" r="2"/>                              ' ;
-	    html+='                                      <circle id="oval2" fill="#91D2FA" cx="2" cy="2" r="2"/>                              ' ;
-	    html+='                                    </g>                                                                                   ' ;
-	    html+='                                                                                                                           ' ;
-	    html+='                                    <g id="grp4" opacity="0" transform="translate(35 50)">                                 ' ;
-	    html+='                                      <circle id="oval1" fill="#F48EA7" cx="6" cy="5" r="2"/>                              ' ;
-	    html+='                                      <circle id="oval2" fill="#F48EA7" cx="2" cy="2" r="2"/>                              ' ;
-	    html+='                                    </g>                                                                                   ' ;
-	    html+='                                                                                                                           ' ;
-	    html+='                                    <g id="grp1" opacity="0" transform="translate(24)">                                    ' ;
-	    html+='                                      <circle id="oval1" fill="#9FC7FA" cx="2.5" cy="3" r="2"/>                            ' ;
-	    html+='                                      <circle id="oval2" fill="#9FC7FA" cx="7.5" cy="2" r="2"/>                            ' ;
-	    html+='                                    </g>                                                                                   ' ;
-	    html+='                                  </g>                                                                                     ' ;
-	    html+='                                </svg>                                                                                     ' ;
-	    html+='                              </label>                                                                                     ' ;
-	    html+='                    </div>                                                                                                 ' ;
-	    html+='                </div>                                                                                                     ' ;
-	    html+='                <div class="sprite_bubble_icon">                                                                           ' ;
-	    html+='                    <i class="far fa-comment f_size"></i>                                                                  ' ;
-	    html+='                </div>                                                                                                     ' ;
-	    html+='                <div class="sprite_share_icon" data-name="share">                                                          ' ;
-	    html+='                    <i class="far fa-paper-plane f_size"></i>                                                              ' ;
-	    html+='                </div>                                                                                                     ' ;
-	    html+='            </div>                                                                                                         ' ;
-	    html+='            <div class="right_icon">                                                                                       ' ;
-	    html+='                <div class="sprite_bookmark_outline" data-name="bookmark"></div>                                           ' ;
-	    html+='            </div>                                                                                                         ' ;
-	    html+='        </div>                                                                                                             ' ;
-	    html+='        <div class="likes m_text">                                                                                         ' ;
-	    html+='            좋아요                                                                                                         ' ;
-	    html+='            <span id="like-count-39">2,346</span>                                                                          ' ;
-	    html+='            <span id="bookmark-count-39"></span>                                                                           ' ;
-	    html+='            개                                                                                                             ' ;
-	    html+='        </div>                                                                                                             ' ;
-	    html+='        <div class="comment_container">                                                                                    ' ;
-	    html+='            <div class="comment" id="comment-list-ajax-post37">                                                            ' ;
-	    html+='                <div class="comment-detail">                                                                               ' ;
-	    html+='                    <div class="nick_name m_text">dongdong2</div>                                                          ' ;
-	    html+='                    <div>강아지가 너무 귀여워요~!</div>                                                                    ' ;
-	    html+='                </div>                                                                                                     ' ;
-	    html+='            </div>                                                                                                         ' ;
-	    html+='            <div class="small_heart">                                                                                      ' ;
-	    html+='                <div class="sprite_small_heart_icon_outline"></div>                                                        ' ;
-	    html+='            </div>                                                                                                         ';
-	    html+='        </div>                                                                                                             ';
-	    html+='        <div class="timer">1시간 전</div>                                                                                  ';
-	    html+='                                                                                                                           ';
-	    html+='        <div class="comment_field" id="add-comment-post37">                                                                ';
-	    html+='            <input type="text" placeholder="댓글달기...">                                                                  ';
-	    html+='            <div class="upload_btn m_text" data-name="comment">게시</div>                                                  ';
-	    html+='        </div>                                                                                                             ';
-	    html+='    </article>                                                                                                             ';
-		}
+		
+		html  +="	<article class=\"contents\">                                                                                     ";  
+	    html  +="      <header class=\"top\">                                                                                        ";    
+	    html  +="          <div class=\"user_container\">                                                                            ";    
+	    html  +="              <div class=\"profile_img\">                                                                           ";    
+	    html  +="                  <img src=\"resources/css/p_coronagram/imgs/thumb.jpeg\" alt=\"프로필이미지\">                       ";    
+	    html  +="              </div>                                                                                              ";    
+	    html  +="              <div class=\"user_name\">                                                                             ";    
+	    html  +="                  <div class=\"nick_name m_text\">KindTiger</div>                                                   ";    
+	    html  +="                  <div class=\"country s_text\">Seoul, South Korea</div>                                            ";    
+	    html  +="              </div>                                                                                              ";    
+	    html  +="          </div>                                                                                                  ";    
+	    html  +="          <div class=\"sprite_more_icon\" data-name=\"more\">                                                         ";    
+	    html  +="              <ul class=\"toggle_box\">                                                                             ";    
+	    html  +="                  <li><input type=\"submit\" class=\"follow\" value=\"팔로우\" data-name=\"follow\"></li>          ";    
+	    html  +="                  <li>수정</li>                                                                                   ";    
+	    html  +="                  <li>삭제</li>                                                                                   ";    
+	    html  +="              </ul>                                                                                               ";    
+	    html  +="          </div>                                                                                                  ";    
+	    html  +="      </header>                                                                                                   ";    
+	    html  +="                                                                                                                  ";    
+	    html  +="      <div class=\"img_section\">                                                                                   ";    
+	    html  +="          <div class=\"trans_inner\">                                                                               ";    
+	    html  +="              <div class=\"slider\">                                                                                ";    
+	    html  +="                  <div class=\"slide-viewer\">                                                                      ";    
+	    html  +="                    <div class=\"slide-group\">                                                                     ";    
+	    html  +="                      <div class=\"slide slide-1\">                                                                 ";    
+	    html  +="                          <img src=\"resources/css/p_coronagram/imgs/thumb.jpeg\" alt=\"visual01\">                   ";    
+	    html  +="                      </div>                                                                                      ";    
+	    html  +="                      <div class=\"slide slide-2\">                                                                 ";    
+	    html  +="                          <img src=\"resources/css/p_coronagram/imgs/thumb.jpeg\" alt=\"visual01\">                   ";    
+	    html  +="                      </div>                                                                                      ";    
+	    html  +="                      <div class=\"slide slide-3\">                                                                 ";    
+	    html  +="                          <img src=\"resources/css/p_coronagram/imgs/thumb.jpeg\" alt=\"visual01\">                   ";    
+	    html  +="                      </div>                                                                                      ";    
+	    html  +="                      <div class=\"slide slide-4\">                                                                 ";    
+	    html  +="                          <img src=\"resources/css/p_coronagram/imgs/thumb.jpeg\" alt=\"visual01\">                   ";    
+	    html  +="                      </div>                                                                                      ";    
+	    html  +="                    </div>                                                                                        ";    
+	    html  +="                  </div>                                                                                          ";    
+	    html  +="                  <div class=\"slide-nav\">                                                                         ";    
+	    html  +="                      <div class=\"prev\"></div>                                                                    ";    
+	    html  +="                      <div class=\"next\"></div>                                                                    ";    
+	    html  +="                    </div>                                                                                        ";    
+	    html  +="                  <div class=\"slide-buttons\"></div>                                                               ";    
+	    html  +="              </div>                                                                                              ";    
+	    html  +="      </div>                                                                                                      ";    
+	    html  +="      <div class=\"bottom_icons\">                                                                                  ";    
+	    html  +="          <div class=\"left_icons\">                                                                                ";    
+	    html  +="              <div class=\"heart_btn\">                                                                             ";    
+	    html  +="                  <div class=\"sprite_heart_icon_outline\" name=\"39\" data-name=\"heartbeat\">                         ";    
+	    html+="                                     <input type=\"checkbox\" name=\"checkbox\" id=\"checkbox\" >                ";
+	     html+="                                     <label for=\"checkbox\">                                                    ";
+	     html+="                                       <svg id=\"heart-svg\" viewBox=\"467 392 58 57\" xmlns=\"http://www.w3.org/2000/svg\"> ";
+	     html+="                                         <g id=\"Group\" fill=\"none\" fill-rule=\"evenodd\" transform=\"translate(467 392)\">";
+	     html+="                                           <path d=\"M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z\" id=\"heart\" stroke=\"#000000\" stroke-width=\"3\"></path>";
+	     html+="                                           <circle id=\"main-circ\" fill=\"#E2264D\" opacity=\"0\" cx=\"29.5\" cy=\"29.5\" r=\"1.5\"></circle>     ";
+	     html+="                                           <g id=\"grp7\" opacity=\"0\" transform=\"translate(7 6)\">                                              ";
+	     html+="                                             <circle id=\"oval1\" fill=\"#9CD8C3\" cx=\"2\" cy=\"6\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle id=\"oval2\" fill=\"#8CE8C3\" cx=\"5\" cy=\"2\" r=\"2\"></circle>                             ";
+	     html+="                                           </g>                                                                                                    ";
+	     html+="                                                                                                                                                   ";
+	     html+="                                           <g id=\"grp6\" opacity=\"0\" transform=\"translate(0 28)\">                                             ";
+	     html+="                                             <circle id=\"oval1\" fill=\"#CC8EF5\" cx=\"2\" cy=\"7\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle id=\"oval2\" fill=\"#91D2FA\" cx=\"3\" cy=\"2\" r=\"2\"></circle>                             ";
+	     html+="                                           </g>                                                                                                    ";
+	     html+="                                                                                                                                                   ";
+	     html+="                                           <g id=\"grp3\" opacity=\"0\" transform=\"translate(52 28)\">                                            ";
+	     html+="                                             <circle id=\"oval2\" fill=\"#9CD8C3\" cx=\"2\" cy=\"7\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle id=\"oval1\" fill=\"#8CE8C3\" cx=\"4\" cy=\"2\" r=\"2\"></circle>                             ";
+	     html+="                                           </g>                                                                                                    ";
+	     html+="                                                                                                                                                   ";
+	     html+="                                           <g id=\"grp2\" opacity=\"0\" transform=\"translate(44 6)\">                                             ";
+	     html+="                                             <circle id=\"oval2\" fill=\"#CC8EF5\" cx=\"5\" cy=\"6\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle id=\"oval1\" fill=\"#CC8EF5\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                             ";
+	     html+="                                           </g>                                                                                                    ";
+	     html+="                                           <g id=\"grp5\" opacity=\"0\" transform=\"translate(14 50)\">                                            ";
+	     html+="                                             <circle id=\"oval1\" fill=\"#91D2FA\" cx=\"6\" cy=\"5\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle id=\"oval2\" fill=\"#91D2FA\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                             ";
+	     html+="                                           </g>                                                                                                    ";
+	     html+="                                           <g id=\"grp4\" opacity=\"0\" transform=\"translate(35 50)\">                                            ";
+	     html+="                                             <circle id=\"oval1\" fill=\"#F48EA7\" cx=\"6\" cy=\"5\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle id=\"oval2\" fill=\"#F48EA7\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                             ";
+	     html+="                                           </g>                                                                                                    ";
+	     html+="                                           <g id=\"grp1\" opacity=\"0\" transform=\"translate(24)\">                                               ";
+	     html+="                                             <circle id=\"oval1\" fill=\"#9FC7FA\" cx=\"2.5\" cy=\"3\" r=\"2\"></circle>                           ";
+	     html+="                                             <circle id=\"oval2\" fill=\"#9FC7FA\" cx=\"7.5\" cy=\"2\" r=\"2\"></circle>                           ";
+	     html+="                                           </g>                                                                                                    ";
+	     html+="                                         </g>                                                                                                      ";
+	     html+="                                       </svg>                                                                                                      ";
+	     html+="                                     </label>                                                                                                      ";
+	    html  +="                  </div>                                                                                            ";
+	    html  +="              </div>                                                                                                ";
+	    html+="                       <div class=\"sprite_bubble_icon\">                                                                                          ";
+	     html+="                           <i class=\"far fa-comment f_size\"></i>                                                                                 ";
+	     html+="                       </div>                                                                                                                      ";
+	     html+="                       <div class=\"sprite_share_icon\" data-name=\"share\">                                                                       ";
+	     html+="                           <i class=\"far fa-paper-plane f_size\"></i>                                                                             ";
+	     html+="                       </div>                                                                                                                      ";
+	    html  +="          </div>                                                                                                    ";
+	    html  +="          <div class=\"right_icon\">                                                                                  ";
+	    html  +="              <div class=\"sprite_bookmark_outline\" data-name=\"bookmark\"></div>                                      ";
+	    html  +="          </div>                                                                                                    ";
+	    html  +="      </div>                                                                                                        ";
+	    html  +="      <div class=\"likes m_text\">                                                                                    ";
+	    html  +="          좋아요                                                                                                    ";
+	    html  +="          <span id=\"like-count-39\">2,346</span>                                                                     ";
+	    html  +="          <span id=\"bookmark-count-39\"></span>                                                                      ";
+	    html  +="          개                                                                                                        ";
+	    html  +="      </div>                                                                                                        ";
+	    html  +="      <div class=\"comment_container\">                                                                               ";
+	    html  +="          <div class=\"comment\" id=\"comment-list-ajax-post37\">                                                       ";
+	    html  +="              <div class=\"comment-detail\">                                                                          ";
+	    html  +="                  <div class=\"nick_name m_text\">dongdong2</div>                                                     ";
+	    html  +="                  <div>강아지가 너무 귀여워요~!</div>                                                               ";
+	    html  +="              </div>                                                                                                ";
+	    html  +="          </div>                                                                                                    ";
+	    html  +="          <div class=\"small_heart\">                                                                                 ";
+	    html  +="              <div class=\"sprite_small_heart_icon_outline\"></div>                                                   ";
+	    html  +="          </div>                                                                                                    ";
+	    html  +="      </div>                                                                                                        ";
+	    html  +="      <div class=\"timer\">1시간 전</div>                                                                             ";
+	    html  +="                                                                                                                    ";
+	    html  +="      <div class=\"comment_field\" id=\"add-comment-post37\">                                                           ";
+	    html  +="          <input type=\"text\" placeholder=\"댓글달기...\">                                                             ";
+	    html  +="          <div class=\"upload_btn m_text\" data-name=\"comment\">게시</div>                                             ";
+	    html  +="      </div>                                                                                                        ";
+	    html  +="  </article>                                                                                                        ";
 		
 		$("#contents_box").html(html);
 	}
