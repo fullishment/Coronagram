@@ -14,13 +14,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <title><%= request.getAttribute("nicknm") %>님 개인 페이지</title>
     <style>
-    	.img_size{
-    		width:500px;
-    		height:500px;
-    	}    	
-    	.nav_menu{
-    		height: 120px;
-    	}
+    	
     </style>
     <script>
         $(document).ready(function(){
@@ -665,9 +659,21 @@
                     <div class="profile-bio"></div>    
                 </div>
             </div>
+            <nav>
+            	<div class="nav_menu">
+	        	<div class="nav_line"></div>
+		        	<div class="nav_list">
+		        		<div class="nav_list_post">	        			
+		        			<div class="menu_post">
+		        				<i class="fas fa-camera-retro"></i>
+		        				<span>게시물</span>
+		        			</div>		        			
+		        		</div>
+		        	</div>
+	        	</div>
+            </nav>         
         </header>
-     	<main>
-	        <div class="nav_menu"></div>
+     	<main>        
 	        <div id="myModal" class="modal"></div>        
 	        <div class="container">
 	            <div id="gallery" class="gallery"></div>     
