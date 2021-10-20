@@ -262,13 +262,12 @@ $("input:radio[name='vec']").removeAttr("checked");
           <img for="photo-upload"  src="resources/images/edit_profile/edit_profile.png" /> 이미지그림 
         </div>
       </label> -->
-      <div class="qnaImg">
-		<input type="button" class="fileBtn" id="imgBtn" />
-		<span id="fileName"></span>		
-		<input type="hidden" name="imgFile" id="imgFile">							
-		<div id="preView">
+    <div class="qnaImg">
+		<input type="hidden"  name="imgFile" id="imgFile" >	
+		<div id="preView" class="img-wrap">
 			<img name="image" id="image" src="resources/images/edit_profile/${fn:replace(fn:replace(data.IMG_ADR, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
 		</div>
+		<input type="button" class="fileBtn" id="imgBtn" value="사진 변경"/>
 	</div>
 	
       <input type="hidden" id="no" name="no" value="${data.M_NO}">
