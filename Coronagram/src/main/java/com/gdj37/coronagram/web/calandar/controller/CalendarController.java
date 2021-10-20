@@ -71,16 +71,16 @@ public class CalendarController {
 		ObjectMapper mapper = new ObjectMapper();
 		
 		String sysdate = null;
-		int oldresult = Integer.parseInt("resultMap.size()");
+//		int oldresult = Integer.parseInt("resultMap.size()");
 		Map<String, Object> resultMap = null;
 		String result= "success";
 		try {
 			
 			resultMap = iCalendarService.insertSysdate(params);
 			//int cnt = iCalendarService.insertSysdate(params);
-			if( resultMap.size() == oldresult ) {
-				result="failed";
-			}
+			/*
+			 * if( resultMap.size() == oldresult ) { result="failed"; }
+			 */
 //			params.put( "userNO", "1" );
 //			sysdate = iCalendarService.getSysDate(params);
 //			resultMap.put("sysdate", sysdate);
