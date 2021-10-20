@@ -32,7 +32,7 @@ public class edit_profile {
 	       mav.addObject("data", data);
 	       mav.setViewName("edit_profile/edit_profile");
 	    }else {
-	       mav.setViewName("redirect:main_page");
+	       mav.setViewName("redirect:main");
 	    }
 	    
 	    return mav;

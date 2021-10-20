@@ -4,7 +4,7 @@
 
 	<!-- 불러오기 -->
 		<select id="getEditP" parameterType="hashmap" resultType="hashmap">
-			SELECT M_NO, M_NM, NICK_NM, M_PW, PHONE, EMAIL, VAC_YN, POST_NO, ADR, DTL_ADR
+			SELECT M_NO, M_NM, NICK_NM, M_PW, PHONE, EMAIL, VAC_YN, POST_NO, ADR, DTL_ADR, IMG_ADR
 			FROM M
 			WHERE M_NO = #{m_no}
 		</select>	
@@ -19,7 +19,8 @@
 		    			 vac_yn=#{vec},
 		    			 POST_NO = #{cm_postcode}, 
 		    			 ADR = #{cm_address},
-		    			 DTL_ADR = #{cm_detailAddress}
+		    			 DTL_ADR = #{cm_detailAddress},
+		    			 IMG_ADR = #{imgFile}
 			WHERE M_NO = #{no}
 		</update>
 	
