@@ -497,7 +497,6 @@
 				});
 	    	})	
 	    }
-	    
 	    function editProfile(){
 	    	$("#editBtn").on("click",function(){	   
 	  			  $("#editForm").attr("action","../edit_profile");
