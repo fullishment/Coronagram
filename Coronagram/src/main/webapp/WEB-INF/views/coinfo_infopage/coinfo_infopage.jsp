@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,9 +91,9 @@
     <main>
         <div class="header">
             <div class="header-banner">
-                <h1>${data.info_title}</h1>
+                <h1>${data.INFO_TITLE}</h1>
                 <div class="header-subtitle">
-                    <h5>${data.info_subhd}</h5>
+                    <h5>${data.INFO_SUBHD}</h5>
                 </div>
             </div>
             <div class="clear"></div>
@@ -107,13 +108,33 @@
         </div>
         <div class="main">
             <section class="content">
-            	<div class="infoimg" id="infoimg">
+            
+            
+            
+
+				날짜 : ${data.DT}<br/>
+				<div style="white-space:pre;">
+				내용 : ${data.CON}<br/>
+				</div>
+				<c:if test="${!empty data.REP_IMG}">
+				<img alt="" src="resources/upload/${data.REP_IMG}" /><br/>
+				</c:if>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+<%--             	<div class="infoimg" id="infoimg">
             		<c:if test="${!empty data.rep_img}">
 						<img src="resources/images/coinfo/coinfo_infopage/${data.rep_img}">
             		</c:if>
                 <article>
 					${data.con}
-                </article>
+                </article> --%>
 
             </section>
         </div>

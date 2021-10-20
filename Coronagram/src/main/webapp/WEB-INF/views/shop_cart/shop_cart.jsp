@@ -17,6 +17,7 @@
     <script type="text/javascript">
     $(document).ready(function(){
     	redrawCartList();
+    	console.log(parseInt($("#ono1").parent().children(".up_con3").children("#qt").html()))
     	$("#delBtn").on("click",function(){
     		delCart();
     	});
@@ -229,7 +230,8 @@
     			html+="<input type=\"hidden\" name=\"cno\" value=\""+data.CART_NO+"\" id=\"cno"+i+"\">";
     			html+="<input type=\"hidden\" name=\"pno\" value=\""+data.PROD_NO+"\" id=\"pno"+i+"\">";
     			html+="<input type=\"hidden\" name=\"ono\" value=\""+data.ORT_NO+"\" id=\"ono"+i+"\">";    			
-   				html+="<input type=\"checkbox\" name=\"cartCheck\" class=\"check_btn\" value=\""+data.CART_NO+"\">						";                    
+   				html+="<input type=\"checkbox\" name=\"cartCheck\" class=\"check_btn\" value=\""+data.CART_NO+"\" checked id=\"checkbox"+i+"\">						";
+   				html+="<label for=\"checkbox"+i+"\"></label>"
 				html+="<div class=\"up_con1\"><img alt=\"\" src=\""+data.FILE_ADDR+"\"></div>                                             ";
 				html+="<div class=\"up_con2\">                                                   ";
 				html+="   	<div class=\"con2_title\">"+data.PROD_NM+"</div>                   ";
@@ -258,6 +260,7 @@
     }
     
     </script>
+    
 </head>
 
 <body>

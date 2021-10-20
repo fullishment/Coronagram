@@ -8,20 +8,38 @@ html{
 	max-width: 800px;
 	margin: auto;
 	margin-top: 5%;
+	margin-bottom: 5%;
 	background: white;
-	padding: 10px;
+	border-radius: 10px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    padding-bottom: 20px;
+}
+
+.sc_head {
+	padding-top: 30px;
+	padding-left: 30px;
+	height: 140px;
+    background-size: cover;
+    border-radius: 10px 10px 0px 0px / 10px 10px 0px 0px ;
+	background-image: linear-gradient(rgba(255, 221, 196, 0.8),rgba(255, 221, 196, 0.8)), url("../../images/coinfo/coinfo_news/coinfo_news_resize.jpg");
 }
 
 .sc_name1 {
-	font-size: 15pt;
-	color: gray;
+	margin-bottom: 10px;
+}
+
+.sc_name1 h5{
+	font-size: 13pt;
+	color: #ffffff;
+	text-decoration-line: underline;
+	
 }
 
 .group {
 	box-shadow: 0 1px 6px 0 rgb(32 33 36/ 28%);
 	border-radius: 10px;
 	padding: 20px;
-	margin-top: 10px;
+	margin: 20px;
 	min-height: 400px;
 	overflow: hidden;
 }
@@ -57,3 +75,89 @@ html{
 	color: black;
 	text-decoration: none;
 }
+
+
+
+
+
+table {
+	border : 0px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 13px;
+}
+
+table a:link, a:visited, a:hover {
+	color : black;
+	text-decoration-line: none;
+	font-size : 18px;
+	font-weight : bold;
+}
+
+
+table .t1 {
+	padding-top: 10px;
+ 	height: 40px;
+}
+
+table .t2 {
+	color: #9f9f9f;
+	font-size: 12px;
+}
+
+table .t3 {
+	color: #444444;
+	font-size: 13px;
+	padding-bottom: 13px;
+	border-bottom: 1px solid #c0c0c0;
+}
+
+table .t4 {
+	height: 5px;
+}
+
+
+
+
+
+
+
+.paging_wrap {
+    position: relative;
+    clear: both;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+}
+
+
+.paging_wrap h3, .paging_wrap b, .paging_wrap p {
+    display: inline-block;
+    position: relative;
+    min-width: 28px;
+    padding: 6px 4px 7px;
+    border: 1px solid #fff;
+    font-size: 13px;
+    font-weight: normal;
+    color: #444;
+    line-height: 13px;
+    text-decoration: none;
+    vertical-align: top;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.paging_wrap h3:hover, .paging_wrap b {
+    border: 1px solid #e0e0e0;
+    color: #3f63bf;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.paging_wrap p:hover {
+	cursor: pointer;
+	color: #9f9f9f;	
+} 
+
+ 

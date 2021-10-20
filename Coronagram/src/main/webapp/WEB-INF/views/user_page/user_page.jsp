@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,43 +14,35 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <title><%= request.getAttribute("nicknm") %>님 개인 페이지</title>
     <style>
-    	.img_size{
-    		width:500px;
-    		height:500px;
-    	}
     	
     </style>
     <script>
         $(document).ready(function(){
-        	reloadList();
-        	$("#editBtn").on("click",function(){	   
-  			  $("#editForm").attr("action","../edit_profile");
-  			  $("#editForm").submit(); 
-  		   });
+        	reloadList();       	
         	
             $(document).on("click",".gallery-item",function(){
             	$("#myModal").val("");
             	$("#writingNo").val($(this).attr("wtno"));
-
+            	$("#writingNo2").val($(this).attr("wtno"));
             	modal.style.display="block";
-            	mdDraw();   
-            	
+            	mdDraw();          	
             });
-            var modal = document.getElementById('myModal');
             
-            $(".close").on("click",function(){
-            	document.getElementById("myModal").style.display="none";
-            	reloadList();
-            });
-
+            var modal = document.getElementById('myModal');  
+            
             window.onclick = function(event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
                     reloadList();
                 }
-            }
-            
+            }           
         });
+        function modalFunc(){
+            $(".close").on("click",function(){
+            	document.getElementById("myModal").style.display="none";
+            	reloadList();
+            });
+        }
         function reloadList(){
 			var params=$("#addrForm").serialize();		
 			$.ajax({ 
@@ -61,10 +52,15 @@
 				data:params,
 				success : function(res){
 					$("#myModal").val("");
-					drawList(res.list);
+					ProfileImg(res.intro);
+					imgList(res.list);
 					intro(res.intro);
-					introNm(res.intro);
+					introNm(res.intro);				
 					profileCnt(res.follow, res.following);
+					followArea();
+					editProfile();
+					addFollow();
+		        	delFollow();					
 				},
 				error : function(request,status,error){
 					console.log(error);
@@ -73,29 +69,28 @@
 		}
         function intro(intro){
         	var html ="";
-        	html+="<h1 id=\"mId\" class=\"profile-user-name\">"+intro.NICK_NM+"</h1>    ";
-        	$(".profile-user-setting").html(html);
-        	
+        		html+="<h1 id=\"mId\" class=\"profile-user-name\">"+intro.NICK_NM+"</h1> ";
+        		$(".profile-user-setting").html(html);      	
         }
-        function introNm(intro){
+        function introNm(data){
         	var html ="";
-        	html+="<span class=\"profile-real-name\">"+intro.M_NM+"</span>";
-        	html+="<div class=\"intro_con\">"+intro.INTRO_CON+"</div>";
-        	$(".profile-bio").html(html);
+	        	html+="<span class=\"profile-real-name\">"+data.M_NM+"</span>	";
+	        	html+="<div class=\"intro_con\">"+data.INTRO_CON+"</div>		";
+        		$(".profile-bio").html(html);
         }
         function profileCnt(data1,data2){
 			var html ="";
-			html +="<li><span class=\"profile-stat-count\"></span> posts</li>";
-		    html +="<li><span class=\"profile-stat-count\">"+data1+"</span>followers</li>";
-		    html +="<li><span class=\"profile-stat-count\">"+data2+"</span>following</li>";
-	    	$("#profile-stat").html(html);
+				html +="<li>게시물 <span class=\"profile-stat-count\"></span></li>";
+			    html +="<li>팔로워 <span class=\"profile-stat-count\">"+data1+"</span></li>";
+			    html +="<li>팔로우 <span class=\"profile-stat-count\">"+data2+"</span></li>";
+	    		$("#profile-stat").html(html);
         }
-	    function drawList(list){
-			var html ="";
-			
+        
+	    function imgList(list){
+			var html ="";			
 			for(var data of list){                                                                                    
 				html+= "<div class=\"gallery-item\" tabindex=\"0\" wtno=\""+data.WRITING_NO+"\" no=\""+data.M_NO+"\">               "; 
-			    html+= "    	<img src=\""+data.FILE_ADR+"\" class=\"gallery-image\" alt=\"\" />									"; 
+			    html+= "    	<img src=\"../"+data.FILE_ADR+"\" class=\"gallery-image\" alt=\"\" />									"; 
 				if(data.WCNT>1){
 				    html+= "	<div class=\"gallery-item-type\">																		";
 				    html+= "        <span class=\"visually-hidden\">Gallery</span><i class=\"fas fa-clone\" aria-hidden=\"true\"></i>	";
@@ -110,8 +105,7 @@
 			    html+= "        	</ul>                                                                                    ";
 			    html+= "    	</div>                                                                                       "; 
 		    	html+= "</div>                                                                                           	 "; 
-			}
-			
+			}			
 			$("#gallery").html(html);
 		}
 	    function mdDraw(){  	
@@ -125,34 +119,20 @@
 					$("#myModal").val("");
 					ModalContent(res.modalM);
 					ModalImg(res.md);
-					ModalCmt(res.modalCmt);	
+					modalFunc();
+					ModalCmt();
 					like();
 					slide();
 					heart(res.hcnt);
-					addH(res.result);
+					heartAD();
+					addModalCmt();				
 				},
 				error : function(request, status, error){
-					console.log("에러");
 					console.log(error);
 				}
 			});
 	    }
-		function like(){
-	    	var params = $("#modalForm").serialize();
-			$.ajax({
-				url : "likeCnt",
-				type : "post",
-				dataType : "json",
-				data : params,
-				success : function(res){
-					likeCnt(res.like);
-				},
-				error : function(request, status, error){
-					console.log("에러");
-					console.log(error);
-				}
-			});
-	    }	
+		
 	    function ModalContent(data){   
 	    	var html ="";
 	    		
@@ -175,6 +155,7 @@
 			     html+="               <span id=\"close\" class=\"close\">&times;</span>                                                 ";
 			     html+="               <div class=\"user_container\">                                                                    ";
 			     html+="                   <div class=\"profile_img\">                                                                   ";
+			     html+=" 						<img src=\"../"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 	 ";
 			     html+="                   </div>                                                                                        ";
 			     html+="                   <div class=\"user_name\">                                                                     ";
 			     html+="                       <div class=\"nick_name head_text\">"+data.NICK_NM+"</div>                                 ";
@@ -183,7 +164,9 @@
 			     html+="           </div>                                                                                                ";
 			     html+="           <div class=\"cmt_sec1\">                                                                              ";
 			     html+="               <div class=\"user_container\">                                                                	 ";
-			     html+="                   <div class=\"profile_img\"></div>                                                             ";
+			     html+="                   <div class=\"profile_img\">                                                                   ";
+			     html+=" 						<img src=\"../"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 ";
+			     html+="				   </div>																						 ";
 			     html+="                   <div class=\"user_name\">                                                                 	 ";
 			     html+="                        <div class=\"nick_name head_text\">"+data.NICK_NM+"</div>                             	 ";
 			     html+="                   </div>                                                                                    	 ";
@@ -252,22 +235,40 @@
 			     html+="               <div class=\"likes head_text\"></div>                                                                                               ";
 			     html+="           </div>                                                                                                                                  ";
 			     html+="           <div class=\"cmt_field\" id=\"cmt_field\">                                                                                              ";
-			     html+="               <textarea class=\"cmt_con\" placeholder=\"댓글 달기...\"></textarea>                                                                   ";
+			     html+="               <textarea id=\"cmt_con\" class=\"cmt_con\" placeholder=\"댓글 달기...\"></textarea>                                                                   ";
 			     html+="               <div class=\"m_text head_text\" id=\"add_cmt\">게시</div>                                                                             ";
 			     html+="           </div>                                                                                                                                   ";
 			     html+="       </div>                                                                                                                          				";
 			     html+="   </div>                                                                                                                              				";
 			     
 		    	 $("#myModal").html(html);
-	    }                        
-	    function ModalCmt(modalCmt){  
+	    }            
+	    function ModalCmt(){
+	    	var params = $("#modalForm").serialize();
+			$.ajax({
+				url : "modalCmt",
+				type : "post",
+				dataType : "json",
+				data : params,
+				success : function(res){
+					ModalArea(res.modalCmt);
+				},
+				error : function(request, status, error){
+					console.log(error);
+				}
+			});
+	    }	
+	    function ModalArea(data){  
 	    	var html ="";                                                                                                                                                                                                                                                                      
-			for(var list of modalCmt){                                                                                                                              				
+			for(var list of data){                                                                                                                              				
 			     html+="<div class=\"comment_container\">                               ";
 			     html+="   <div class=\"comment\" id=\"comment-list-ajax-post37\">      ";
 			     html+="       <div class=\"comment-detail\">                           ";
+			     html+="           <div class=\"profile_img\">                                                                   ";
+			     html+=" 				<img src=\"../"+data.IMG_ADR+"\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 ";
+			     html+="		   </div>																						 ";
 			     html+="           <div class=\"head_text\">"+list.NICK_NM+"</div>      ";
-			     html+="              <div>"+list.CMT_CON+"</div>                       ";
+			     html+="              <div class=\"ccon\">"+list.CMT_CON+"</div>                       ";
 			     html+="          </div>                                                ";
 			     html+="       </div>                                                	";
 			     html+="   </div>                                                       ";
@@ -276,45 +277,103 @@
 			
 			$(".modal_cmt").html(html);
 	    };
-	    function likeCnt(data){
+	    function addModalCmt(){
+	    	$("#add_cmt").on("click",function(){
+	    		if($("#cmt_con").val()==""){
+	    			alert("댓글 내용을 입력하세요.");
+	    		}
+	    		else{
+	    			$("#cmtVal").val($("#cmt_con").val());
+		    		var params = $("#modalCmtForm").serialize();
+					$.ajax({
+						url : "addModalCmt",
+						type : "post",
+						dataType : "json",
+						data : params,
+						success : function(res){
+							if(res.result=="success"){
+								ModalCmt();	
+								$("#cmt_con").val("");
+								$("#cmtVal").val("");
+							}else{							
+								alert("삭제실패");
+							}
+						},
+						error : function(request, status, error){
+							console.log(error);
+						}
+					});
+	    		}	
+	    	})	
+	    }
+	    function like(){
+	    	var params = $("#modalForm").serialize();
+			$.ajax({
+				url : "likeCnt",
+				type : "post",
+				dataType : "json",
+				data : params,
+				success : function(res){
+					likeArea(res.like);
+				},
+				error : function(request, status, error){
+					console.log(error);
+				}
+			});
+	    }	
+	    function likeArea(data){
 	       var html ="";    
 			   html+="좋아요<span id=\"like-count-39\">"+data+"</span>개";				   
 			   $(".likes").html(html);
 	    }
-	 /*    function timeForToday(value) {
+	    function timeForToday(value) {
 	        const today = new Date();
 	        const timeValue = new Date(value);
 
 	        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
 	        if (betweenTime < 1) return '방금전';
 	        if (betweenTime < 60) {
-	            return betweenTime '분전';
+	            return betweenTime+'분전';
 	        }
 
 	        const betweenTimeHour = Math.floor(betweenTime / 60);
 	        if (betweenTimeHour < 24) {
-	            return betweenTimeHour '시간전';
+	            return betweenTimeHour+'시간전';
 	        }
 
-	        const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
-	        if (betweenTimeDay < 365) {
-	            return betweenTimeDay '일전';
+	        const betweenTimeDay = Math.floor(betweenTimeHour / 24);
+	        if (betweenTimeDay < 7) {
+	            return betweenTimeDay+'일전';
 	        }
-
-	        return `${Math.floor(betweenTimeDay / 365)}년전`;
-	 	} */
+	        const betweenTimeWeek = Math.floor(betweenTimeDay / 7);
+	        if (betweenTimeWeek	< 5) {
+	            return betweenTimeWeek+'주전';
+	        }
+	        const betweenTimeMonth = Math.floor(betweenTimeDay / 30);
+	        if (betweenTimeMonth < 12) {
+	            return betweenTimeDay+'개월';
+	        }
+	        return Math.floor(betweenTimeDay / 365)+'년전';
+	 	}		
 	    function ModalImg(md){                                                                                                                         
 			var html ="";                                                                                                                                  
 			var i=1;                                                                                                                                       
 			for(var list of md){                                                                                                                              
 				
 				html+=" <div class=\"slide slide-"+i+"\">                                       ";
-                html+=" <img src=\""+list.FILE_ADR+"\" alt=\"\" />	   							    ";
+                html+=" <img src=\"../"+list.FILE_ADR+"\" alt=\"\" />	   						";
 	           	html+=" </div>                                                                  ";
 				i++;	
 			}
 			
 			$("#slide-group").html(html);
+		}
+	    function ProfileImg(data){                                                                                                                         
+			var html ="";
+				
+                html+=" <img src=\"../"+data.IMG_ADR+"\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />  ";
+					
+			$(".profile-image").html(html);
 		}
 	    function heart(data){
 	    	if( data == 1 ){
@@ -323,7 +382,7 @@
             	$("#checkbox").attr("checked",false);
 	    	}
 	    }
-	    function addH(){
+	    function heartAD(){
 	    	$("#checkbox").on("click",function(){
 	    		if($(this).is(":checked") == true) {
 		    		var params = $("#modalForm").serialize();
@@ -363,6 +422,94 @@
 	    			});
 	    		}
     		});	    		    		
+	    }
+	    function followArea(){
+        	var params = $("#modalForm").serialize();
+			$.ajax({
+				url : "followArea",
+				type : "post",
+				dataType : "json",
+				data : params,
+				success : function(res){
+					follows(res.fExist,res.fExist2);
+					editProfile();
+					addFollow();
+					delFollow();
+				},
+				error : function(request, status, error){
+					console.log(error);
+				}
+			});
+        }
+        
+        function follows(data1,data2){
+			var html ="";
+			if(data1 == 0 && data2 == 0){
+				html +="<button id=\"follow_btn\" class=\"follow_btn\">		";
+			    html +="팔로우<i class=\"fas fa-user-plus\"></i>				";
+			    html +="</button>											";
+			}
+			else if(data1 > 0 && data2 == 0){
+			    html +="<button id=\"unfollow_btn\" class=\"unfollow_btn\"> ";
+			    html +="<i class=\"fas fa-user-check\"></i>					";
+			    html +="</button>											";
+			}else if(data1 == 0 && data2 > 0){
+				html +="<button id=\"editBtn\" class=\"btn profile-edit-btn\">Edit Profile</button>";
+				html +="<button class=\"btn profile-settings-btn\" aria-label=\"profile settings\">";
+				html +="<i class=\"fas fa-cog\" aria-hidden=\"true\"></i>						   ";
+				html +="</button>															   	   ";
+			}else{
+				alert("error");
+			}		
+	    	$(".follow_area").html(html);
+        }
+	    function addFollow(){
+	    	$("#follow_btn").on("click",function(){
+	    		var params = $("#addrForm").serialize();
+	    		$.ajax({
+	    			url : "addFollow",
+	    			type : "post",
+	    			dataType : "json",
+	    			data : params,
+	    			success : function(res){
+	    				if(res.result=="success"){
+	    					followArea(); 						    					
+	    				}else{
+	    					alert("add실패");
+	    				}
+	    			},
+	    			error : function(request, status, error){
+	    				console.log(error);
+	    			}
+	    		});
+	    	});
+	    }
+	    function delFollow(){
+	    	$("#unfollow_btn").on("click",function(){
+	    		var params = $("#addrForm").serialize();
+				$.ajax({
+					url : "delFollow",
+					type : "post",
+					dataType : "json",
+					data : params,
+					success : function(res){
+						if(res.result=="success"){
+							followArea();						
+						}else{							
+							alert("삭제실패");
+						}
+					},
+					error : function(request, status, error){
+						console.log(error);
+					}
+				});
+	    	})	
+	    }
+	    function editProfile(){
+	    	$("#editBtn").on("click",function(){	   
+	  			  $("#editForm").attr("action","../edit_profile");
+	  			  $("#editForm").submit(); 
+	  		}); 
 	    }
 	    function slide(){
 	    	$('.slider').each(function(){
@@ -440,77 +587,71 @@
 	<header>
             <div class="cm_menuBar" id="cm_menuBar">
                 <div class="cm_menu__toggler"><span></span></div>
-                <a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
-                <a href="#" class="cm_home" id="cm_home">Home</a>
-                <a href="#" class="cm_msg" id="cm_msg">Message</a>
-                <a href="#" class="cm_cld" id="cm_cld">Calendar</a>
-                <div class="cm_dropdown">
-                    <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
-                    <ul class="cm_dropdown-content">
-                        <li>
-                            <a href="../logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
-                        </li>
-                        <li>
-                            <a href="#" class="cm_userinfo">개인정보수정</a>
-                        </li>
-                    </ul>
-                    </div>
-                    <div class="cm_user_name">
-						<c:if test="${!empty sMNo}">
-							${sMNm}님 어서오세요.
-						</c:if>
-					</div>
-                </div>
-        <div class="cm_menu" id="cm_menu">
-            <a href="#" class="cm_mLogo">Coronagram</a>
-            <a href="#" class="cm_mTitle" id="cm_mTitle">
-                <div class="cm_map"></div> Corona Map
-                <ul class="cm_mcon" id="cm_mcon">
-                    <a href="#">국내</a> <br>
-                    <a href="#">해외</a>
-                </ul>
-            </a>
-            <a href="#" class="cm_mTitle" id="cm_mTitle">
-                <div class="cm_info"></div>Corona Info
-                <ul class="cm_mcon" id="cm_mcon">
-                    <a href="#">관련 정보</a> <br>
-                    <a href="#">거리두기</a> <br>
-                    <a href="#">News</a>
-                </ul>
-            </a>
-            <a href="#" class="cm_sTitle">
-                <div class="cm_cam"></div>Coronagram
-            </a>
-            <a href="#" class="cm_mTitle" id="cm_mTitle">
-                <div class="cm_user"></div>My Page
-                <ul class="cm_mcon" id="cm_mcon">
-                    <a href="#">개인 페이지</a> <br>
-                    <a href="#">출석 체크</a> <br>
-                    <a href="#">Message</a>
-                </ul>
-            </a>
-            <a href="#" class="cm_mTitle" id="cm_mTitle">
-                <div class="cm_qna"></div>Service Center
-                <ul class="cm_mcon" id="cm_mcon">
-                    <a href="#">FAQ</a> <br>
-                    <a href="#">Q&A</a>
-                </ul>
-            </a>
-        </div>
-    </header>
-    <main>
-        <header>
+	                <a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
+	                <a href="#" class="cm_home" id="cm_home">Home</a>
+	                <a href="#" class="cm_msg" id="cm_msg">Message</a>
+	                <a href="#" class="cm_cld" id="cm_cld">Calendar</a>
+	                <div class="cm_dropdown">
+		                <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
+		                <ul class="cm_dropdown-content">
+		                    <li>
+		                        <a href="../logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
+		                    </li>
+		                    <li>
+		                        <a href="#" class="cm_userinfo">개인정보수정</a>
+		                    </li>
+		                </ul>
+                	</div>
+	                <div class="cm_user_name">
+					<c:if test="${!empty sMNo}">
+						${sMNm}님 어서오세요.
+					</c:if>
+				</div>
+            </div>
+	        <div class="cm_menu" id="cm_menu">
+	            <a href="#" class="cm_mLogo">Coronagram</a>
+	            <a href="#" class="cm_mTitle" id="cm_mTitle">
+	                <div class="cm_map"></div> Corona Map
+	                <ul class="cm_mcon" id="cm_mcon">
+	                    <a href="#">국내</a> <br>
+	                    <a href="#">해외</a>
+	                </ul>
+	            </a>
+	            <a href="#" class="cm_mTitle" id="cm_mTitle">
+	                <div class="cm_info"></div>Corona Info
+	                <ul class="cm_mcon" id="cm_mcon">
+	                    <a href="#">관련 정보</a> <br>
+	                    <a href="#">거리두기</a> <br>
+	                    <a href="#">News</a>
+	                </ul>
+	            </a>
+	            <a href="#" class="cm_sTitle">
+	                <div class="cm_cam"></div>Coronagram
+	            </a>
+	            <a href="#" class="cm_mTitle" id="cm_mTitle">
+	                <div class="cm_user"></div>My Page
+	                <ul class="cm_mcon" id="cm_mcon">
+	                    <a href="#">개인 페이지</a> <br>
+	                    <a href="#">출석 체크</a> <br>
+	                    <a href="#">Message</a>
+	                </ul>
+	            </a>
+	            <a href="#" class="cm_mTitle" id="cm_mTitle">
+	                <div class="cm_qna"></div>Service Center
+	                <ul class="cm_mcon" id="cm_mcon">
+	                    <a href="#">FAQ</a> <br>
+	                    <a href="#">Q&A</a>
+	                </ul>
+	            </a>
+	        </div>
             <div class="container">    
                 <div class="profile">   
-                    <div class="profile-image">
-                            <img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">    
+                    <div class="profile-image"> 
                     </div>    
                     <div class="profile-user-settings">    
                         <div class="profile-user-setting">
-                        </div>
-                        <button id="editBtn" class="btn profile-edit-btn">Edit Profile</button>    
-                        <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
-                        <button id="follow_btn" class="follow_btn">follow</button>    
+                        </div>                                                         
+                       	<div class="follow_area"></div>
                     </div>  
                     <div class="profile-stats">  
                         <ul id="profile-stat"></ul>   
@@ -518,14 +659,27 @@
                     <div class="profile-bio"></div>    
                 </div>
             </div>
+            <nav>
+            	<div class="nav_menu">
+	        	<div class="nav_line"></div>
+		        	<div class="nav_list">
+		        		<div class="nav_list_post">	        			
+		        			<div class="menu_post">
+		        				<i class="fas fa-camera-retro"></i>
+		        				<span>게시물</span>
+		        			</div>		        			
+		        		</div>
+		        	</div>
+	        	</div>
+            </nav>         
         </header>
-        <div id="myModal" class="modal"></div>
-        
-        <div class="container">
-            <div id="gallery" class="gallery"></div>     
-        </div>
-    </main>
+     	<main>        
+	        <div id="myModal" class="modal"></div>        
+	        <div class="container">
+	            <div id="gallery" class="gallery"></div>     
+	        </div>   
     		<form action="#" id="addrForm" method="post">
+    			<input type="hidden" name="m_no" value="${sMNo}"/>
     			<input type="hidden" name="nickNm" value="<%= request.getAttribute("nicknm") %>"/>
     		</form>
            <form action="#" id="editForm" method="post">
@@ -536,8 +690,12 @@
     	   	  <input type="hidden" name="writingNo" id="writingNo"/>
     	   	  <input type="hidden" name="nickNm" value="<%=request.getAttribute("nicknm")%>"/>
 		   </form>
-		   
-    <script src="../resources/script/menu_bar/menu_bar.js"></script>
-</body>
-
+		   <form action="#" id="modalCmtForm" method="post">
+           	  <input type="hidden" name="m_no" value="${sMNo}"/> 
+    	   	  <input type="hidden" name="writingNo" id="writingNo2"/>
+    	   	  <input type="hidden" name="cmt_con" id="cmtVal"/>
+		   </form>
+	 	</main>	   
+    	<script src="../resources/script/menu_bar/menu_bar.js"></script>
+	</body>
 </html>

@@ -6,6 +6,15 @@
 <html lang="ko" >
 <head>
   <meta charset="UTF-8">
+  <style>
+			#imgAtt{
+				display:none;
+			}
+			#preView{
+			width:200px;
+			hegiht:200px;
+			}
+  </style>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css'>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
@@ -24,6 +33,34 @@ $(document).ready(function(){
          return false;
       }
    });
+   $("#imgBtn").on("click",function(){
+		$("#imgAtt").click();
+	});
+
+	$("#imgAtt").on("change",function(){
+		$("#fileName").html($(this).val().substring($(this).val().lastIndexOf("\\")+1));
+		var imgForm = $("#imgForm");
+		
+		imgForm.ajaxForm({
+				success:function(res){
+				if(res.result=="SUCCESS"){
+					if(res.fileName.length > 0){
+						$("#imgFile").val(res.fileName[0]);
+						var imgAdr = res.fileName[0].replace('[', '%5B').replace(']', '%5D');
+						//$("#preView").attr("src", "resources/upload/"+imgAdr);
+						$("#preView").html("<img src=\"resources/images/edit_profile/"+imgAdr+"\" id=\"prevImg"+"\">");
+					}
+				}else{
+					alert("파일 업로드에 실패하였습니다.");
+				}
+			},
+			error:function(req,status,error){
+				console.log(error);
+				alert("파일 업로드중 문제가 발생하였습니다.");
+			}
+		});					
+		imgForm.submit();
+	});
    $("#updateBtn").on("click", function(){
       if($("#ocpw").val() != "") { //비밀번호를 변경할 경우
          if(checkVal("#ocpw")) { //기존 비밀번호 입력 여부
@@ -41,7 +78,7 @@ $(document).ready(function(){
             } else if(checkVal("#mNm")) {
                alert("이름을 입력해 주세요.");
                $("#mNm").focus();
-            } else {
+            }else {
                var params = $("#updateForm").serialize();
                
                $.ajax({
@@ -77,8 +114,19 @@ $(document).ready(function(){
       else if(checkVal("#mPhone")){
          alert("전화번호를 입력하세요.");
          $("#Phone").focus();
-      }
-       else {
+         
+      }else if(checkVal("#email")){
+          alert("이메일을 입력하세요.");
+          $("#email").focus();
+         
+      }else {
+    	   if(!checkVal("#mPw") && checkVal("#ocpw") ){
+
+   	       		alert("현재비밀번호를 입력해 주세요.");
+   	       		$("#ocpw").focus();
+    	   }
+    	   else{
+       		
          var params = $("#updateForm").serialize();
          
          $.ajax({
@@ -99,6 +147,7 @@ $(document).ready(function(){
                console.log(error);
             }
          });
+       	}
       }
    });
 });
@@ -111,7 +160,20 @@ function checkVal(sel){
          return false;
       }
    }
-
+$(function() {
+    $("#imgFile").on('change', function(){
+        readURL(this);
+    });
+});
+function readURL(input) {
+    if (input.files && input.files[0]) {
+       var reader = new FileReader();
+       reader.onload = function (e) {
+          $('#preImage').attr('src', e.target.result);
+       }
+       reader.readAsDataURL(input.files[0]);
+    }
+}
 $("input:radio[name='vec']:radio[value='y']").attr("checked",true); 
 $("input:radio[name='vec']").removeAttr("checked");
 </script>    
@@ -185,41 +247,50 @@ $("input:radio[name='vec']").removeAttr("checked");
     
   </header>
   <main>
-   <form action="main_page" id="backForm" method="post">
+   <form action="main" id="backForm" method="post">
       <input type="hidden" name="no" value="${param.no}" />
    </form>
    
 <div class="card">
+<form id="imgForm" action="fileUploadAjax" method="post" enctype="multipart/form-data">
+	<input type="file" name="imgAtt" id="imgAtt" >
+</form>
    <form action="#" id="updateForm" method="post">
     <div class="input_area">
-      <label for="photo-upload" class="custom-file-upload fas">
-        <div class="img-wrap img-upload">
-          <img for="photo-upload"  src="resources/images/edit_profile/edit_profile.png" />  
+      <!-- <label for="photo-upload" class="custom-file-upload fas">
+        <div class="img-wrap img-upload">호버그림
+          <img for="photo-upload"  src="resources/images/edit_profile/edit_profile.png" /> 이미지그림 
         </div>
-      </label>
-   <input type="file" id="photo-upload" class="img-wrap img-upload"><br>
-   <input type="hidden" id="no" name="no" value="${data.M_NO}">
-   <input type="hidden" name="no" value="${param.M_NO}" />
-   <input type="hidden" name="id" value="${param.M_ID}" />
-         
+      </label> -->
+      <div class="qnaImg">
+		<input type="button" class="fileBtn" id="imgBtn" />
+		<span id="fileName"></span>		
+		<input type="hidden" name="imgFile" id="imgFile">							
+		<div id="preView">
+			<img name="image" id="image" src="resources/images/edit_profile/${fn:replace(fn:replace(data.IMG_ADR, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
+		</div>
+	</div>
+	
+      <input type="hidden" id="no" name="no" value="${data.M_NO}">
+  	  <input type="hidden" name="no" value="${param.M_NO}" />
+ 	  <input type="hidden" name="id" value="${param.M_ID}" />
+ 	  
       <p>이름</p>
       <input type="text" id="mNm" name="mNm" value="${data.M_NM}"><br>
       <p>닉네임</p>
       <input type="text" id="nickNm" name="nickNm" value="${data.NICK_NM}"><br>
-      
-      <input type="text" id="opw" value="${data.M_PW}" />
-      
+      <input type="hidden" id="opw" value="${data.M_PW}" />
       <p>현재 비밀번호</p>
       <input type="password" id="ocpw" name="ocpw"><br>
       <p>변경 비밀번호</p>
       <input type="password" id="mPw" name="mPw"><br>
       <p>변경 비밀번호 확인</p>
       <input type="password" id="repw"><br>
-      <p>번호</p>
+      <p>전화번호</p>
       <input type="text" id="mPhone" name="mPhone" value="${data.PHONE}" onKeyup="inputTelNumber(this);" maxlength="13"><br>
       <p>이메일</p>
       <input type="text" id="email" name="email" value="${data.EMAIL}"><br>
-      백신 접종 여부 <label><input type="radio" id="vac_y" name="vec" value="y" checked> 예</label>
+      백신 접종 여부<label><input type="radio" id="vac_y" name="vec" value="y" checked> 예</label>
                 <label><input type="radio" id="vac_n" name="vec" value="n"> 아니오</label><br>
       <p>주소</p>
       <input type="text" id="cm_postcode" name="cm_postcode" class="post_num" value="${data.POST_NO}">
@@ -227,7 +298,7 @@ $("input:radio[name='vec']").removeAttr("checked");
       <input type="text" id="cm_address" name="cm_address" value="${data.ADR}"><br>
       <input type="text" id="cm_detailAddress" name="cm_detailAddress" value="${data.DTL_ADR}"><br>
         
-        </div>
+    </div><!-- input_area -->
     
     <button type="button" id="updateBtn" class="edit_btn">수정</button>
         <button type="button" id="cancelBtn" class="cancel_btn">취소</button>

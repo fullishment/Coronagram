@@ -12,7 +12,7 @@ public class main_page {
 	@Autowired
 	public IServiceMainPage iServiceMainPage;
 	
-	@RequestMapping(value="/main_page")
+	@RequestMapping(value="/main")
 	public ModelAndView main_page(ModelAndView mav) {
 		mav.setViewName("main_page/main_page");
 		return mav;

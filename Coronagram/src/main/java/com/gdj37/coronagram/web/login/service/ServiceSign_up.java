@@ -23,6 +23,11 @@ public class ServiceSign_up implements IServiceSign_up{
 		return iDaoSign_up.addSign(params);
 	}
 
+	@Override
+	public int getNickCheck(HashMap<String, String> params) throws Throwable {
+		return iDaoSign_up.getNickCheck(params);
+	}
+
 	
 
 

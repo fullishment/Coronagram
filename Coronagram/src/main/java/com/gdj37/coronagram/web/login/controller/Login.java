@@ -22,7 +22,7 @@ public class Login {
 	public ModelAndView mLogin (HttpSession session, 
 			ModelAndView mav)throws Throwable{
 		if(session.getAttribute("sMNo")!=null) {
-			mav.setViewName("redirect:main_page");
+			mav.setViewName("redirect:main");
 		}else {
 			mav.setViewName("login/login");
 		}
@@ -49,7 +49,7 @@ public class Login {
 			System.out.println(session.getAttribute("sMNo"));
 			System.out.println(session.getAttribute("sMNick"));
 			System.out.println(session.getAttribute("acctNo"));
-			mav.setViewName("redirect:main_page");
+			mav.setViewName("redirect:main");
 		}
 		else {
 			mav.addObject("msg","아이디나 비밀번호가 틀립니다.");

@@ -16,9 +16,12 @@ html {
   p{
     margin:0px auto;
   }
+  .checkSpan {
+  	font-size : 10pt;
+  }
   .box-form {
     margin: 0 auto;
-    width: 60%;
+    width: 50%;
     height: 90%;
     background: #FFFFFF;
     border-radius: 10px;

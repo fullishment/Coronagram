@@ -50,7 +50,8 @@ function getList() {
 }
 
 function drawList(list) {
-	 var html = "";
+	 var html = ""
+   //for(var i = list.length-1; i >= 0 ;i--){
      for(var i = 0; i < list.length ;i++){
 			html += "<tr><td class=\"t1\">" + "<a href =\"" + list[i]['주소'] + "\">" + list[i]['제목'] + "</a>" + "</td></tr>";
 			html += "<tr><td class=\"t2\">" + list[i]['일자'] + "</td></tr>";
@@ -84,30 +85,30 @@ function drawPaging(){
 	
 	var html = "";
 	
-	html += "<span page=\"1\">처음</span>     ";
+	html += "<span page=\"1\"><p>&nbsp<<&nbsp</p></span>     ";
 	
-	if($("#page").val() == "1"){
-		html += "<span page=\"1\">이전</span>     ";
+	if(page == 1){
+		html += "<span page=\"1\"><p><&nbsp이전&nbsp</p></span>     ";
 	} else {
-		html += "<span page=\"" + ($("#page").val() * 1 - 1) + "\">이전</span>   ";
+		html += "<span page=\"" + (page * 1 - 1) + "\"><p><&nbsp이전&nbsp</p></span>   ";
 	}
 	// *1을 하면 자동 숫자변환
 	
 	for(var i = startPcount ; i <= endPcount ; i++){
-		if($("#page").val() == i){
-			html += "<span page=\"" + i + "\"><b>" + i + "</b></span> ";
+		if(page == i){
+			html += "<span page=\"" + i + "\"><b>" + i + "</b></span>" ;
 		} else {
-			html += "<span page=\"" + i + "\">" + i + "</span>		  ";
+			html += "<span page=\"" + i + "\"><h3>" + i + "</h3></span>		  ";
 		}
 	}
 	
-	if($("#page").val() == maxP){
-		html += "<span page=\"" + maxP + "\">다음</span>     ";
+	if(page == maxP){
+		html += "<span page=\"" + maxP + "\"><p>다음&nbsp>&nbsp</p></span>     ";
 	} else {
-		html += "<span page=\"" + ($("#page").val() * 1 + 1) + "\">다음</span>     ";
+		html += "<span page=\"" + (page * 1 + 1) + "\"><p>다음&nbsp>&nbsp</p></span>     ";
 	}
 	
-	html += "<span page=\"" + maxP + "\">마지막</span>   ";
+	html += "<span page=\"" + maxP + "\"><p>&nbsp>>&nbsp</p></span>   ";
 	
 	$(".paging_wrap").html(html);
 }
@@ -203,11 +204,6 @@ function drawPaging(){
 							</thead>
 							<tbody>
 								<tr class="tr1"></tr>
-								<tr class="tr2"></tr>
-								<tr class="tr3"></tr>
-								<tr class="tr4"></tr>
-								<tr class="tr5"></tr>
-								<tr class="tr6"></tr>
 							</tbody>
 						</table>
 					</div>
