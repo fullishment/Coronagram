@@ -95,7 +95,7 @@
 			var html ="";			
 			for(var data of list){                                                                                    
 				html+= "<div class=\"gallery-item\" tabindex=\"0\" wtno=\""+data.WRITING_NO+"\" no=\""+data.M_NO+"\">               "; 
-			    html+= "    	<img src=\""+data.FILE_ADR+"\" class=\"gallery-image\" alt=\"\" />									"; 
+			    html+= "    	<img src=\"../"+data.FILE_ADR+"\" class=\"gallery-image\" alt=\"\" />									"; 
 				if(data.WCNT>1){
 				    html+= "	<div class=\"gallery-item-type\">																		";
 				    html+= "        <span class=\"visually-hidden\">Gallery</span><i class=\"fas fa-clone\" aria-hidden=\"true\"></i>	";
@@ -360,7 +360,7 @@
 			for(var list of md){                                                                                                                              
 				
 				html+=" <div class=\"slide slide-"+i+"\">                                       ";
-                html+=" <img src=\""+list.FILE_ADR+"\" alt=\"\" />	   							    ";
+                html+=" <img src=\"../"+list.FILE_ADR+"\" alt=\"\" />	   							    ";
 	           	html+=" </div>                                                                  ";
 				i++;	
 			}
