@@ -13,15 +13,21 @@ public class DaoAdminUser implements IDaoAdminUser{
 	public SqlSession sqlSession;
 
 	@Override
-	public List<HashMap<String, String>> getUserList(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("adminUser.getUserList", params);
+	public int getadminUserCnt(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectOne("adminUser.getadminUserCnt", params);
 	}
 
 	@Override
-	public int getAuCnt(HashMap<String, String> params) throws Throwable {
-		return sqlSession.selectOne("adminUser.getAuCnt", params);
+	public List<HashMap<String, String>> getadminUserList(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectList("adminUser.getadminUserList", params);
 	}
+
+	@Override
+	public HashMap<String, String> getAProfile(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectOne("adminUser.getAProfile", params);
+	}
+
+	
 	
 	
 }

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html lang="ko" >
 <head>
@@ -11,8 +13,22 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
   <link rel="stylesheet" href="resources/css/admin_profile/admin_profile.css">
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    
+  <script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="resources/script/jquery/jquery.form.js"></script>
+  <script type="text/javascript">
+  
+$(document).ready(function(){
+	$("#cancelBtn").on("click", function(){
+	      $("#backForm").submit();
+	   });
+	$("#updateForm").on("keypress", "input", function(event){
+	      if(event.keyCode == 13){
+	         return false;
+	      }
+	   });
+	
+});
+</script>
 </head>
 <body>
   <header>
@@ -77,9 +93,10 @@
       </a>
     </div>
   </header>
-<!-- 메뉴 여기까지 -->
-
-
+<main>
+<form action="main" id="backForm" method="post">
+      <input type="hidden" name="no" value="${param.no}" />
+</form>
 <div class="card">
   <form>
     <div class="input_area">
@@ -88,32 +105,33 @@
           <img for="photo-upload" src="https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"/>
         </div>
       </label>
+      <form action="#" id="actionForm" method="post">
+		   <input type="hidden" name="searchGbn" value="${param.searchGbn }" />
+		   <input type="hidden" name="searchTxt"  value="${param.searchTxt}" />
+		   <input type="hidden" name="page" value="${param.page}"  />
+		   <input type="hidden" name="no" value="${param.no}" />
+	  
+	  
     <input type="file" id="photo-upload" class="img-wrap img-upload"><br>
     <input type="hidden" name="id">
       <p>ID</p>
-      <input type="text"><br>
+      <input type="text" value="${data.M_ID}"><br>
       <p>이름</p>
-      <input type="text"><br>
+      <input type="text" id="mNm" name="mNm" value="${data.M_NM}"><br>
       <p>닉네임</p>
-      <input type="text"><br>
-      <p>현재 비밀번호</p>
-      <input type="text"><br>
-      <p>변경 비밀번호</p>
-      <input type="text"><br>
-      <p>변경 비밀번호 확인</p>
-      <input type="text"><br>
-      <p>번호</p>
-      <input type="text"><br>
+      <input type="text" id="nickNm" name="nickNm" value="${data.NICK_NM}"><br>
+       <p>전화번호</p>
+      <input type="text" id="mPhone" name="mPhone" value="${data.PHONE}" onKeyup="inputTelNumber(this);" maxlength="13"><br>
       <p>이메일</p>
-      <input type="text"><br>
+      <input type="text" id="email" name="email" value="${data.EMAIL}"><br>
       백신 접종 여부 <label><input type="radio" name="vec" value="y"> 예</label>
       <label><input type="radio" name="vec" value="n"> 아니오</label><br>
       <p>주소</p>
-      <input type="text" id="cm_postcode" class="post_num" placeholder="우편번호">
+      <input type="text" id="cm_postcode" name="cm_postcode" class="post_num" value="${data.POST_NO}">
       <button type="button" class="find_btn" onclick="cm_execDaumPostcode()">찾기</button><br>
-      <input type="text" id="cm_address" placeholder="주소"><br>
-      <input type="text" id="cm_detailAddress" placeholder="상세주소"><br>
-      <!-- 회원등급 -->
+      <input type="text" id="cm_address" name="cm_address" value="${data.ADR}"><br>
+      <input type="text" id="cm_detailAddress" name="cm_detailAddress" value="${data.DTL_ADR}"><br>mPhone
+<!-- 회원등급 -->
       <span class="title_Name">회원등급</span><br>
       <select class="user_tier" name="user_tier" >
         <option value="Bronze">Bronze</option>
@@ -123,14 +141,18 @@
         <option value="Diamond ">Diamond </option>
       </select>
       <br>
-      <!-- 포인트 -->
+<!-- 포인트 -->
       <span>포인트</span> <br>
-      <input type="text" class="point_con">P<br>
-        <button href="#" type="button" class="edit_btn">수정</button>
-        <button href="#" type="button" class="cancel_btn">취소</button>   
-        </div>
+      <input type="text" class="point_con" value="${data.POINT}">P<br>
+      
+        <button type="button" id="updateBtn" class="edit_btn">수정</button>
+        <!-- <button type="button" id="deleteBtn" class="delete_Btn">삭제</button> -->
+        <button type="button" id="cancelBtn" class="cancel_btn">취소</button>
+        </form>
+       </div>
     </form>
 </div>
+</main>
 <script src="resources/script/menu_bar/menu_bar.js"></script>
 <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> 
 <script>

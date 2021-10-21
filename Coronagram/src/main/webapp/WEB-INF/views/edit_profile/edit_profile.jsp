@@ -299,8 +299,8 @@ $("input:radio[name='vec']").removeAttr("checked");
         
     </div><!-- input_area -->
     
-    <button type="button" id="updateBtn" class="edit_btn">수정</button>
-        <button type="button" id="cancelBtn" class="cancel_btn">취소</button>
+	    <button type="button" id="updateBtn" class="edit_btn">수정</button>
+	    <button type="button" id="cancelBtn" class="cancel_btn">취소</button>
     </form>   
 </div>
 </main>

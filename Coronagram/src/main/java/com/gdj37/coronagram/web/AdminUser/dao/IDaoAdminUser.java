@@ -5,9 +5,11 @@ import java.util.List;
 
 public interface IDaoAdminUser {
 
-	List<HashMap<String, String>> getUserList(HashMap<String, String> params)throws Throwable;
+	public int getadminUserCnt(HashMap<String, String> params) throws Throwable;
 
-	public int getAuCnt(HashMap<String, String> params) throws Throwable;
+	public List<HashMap<String, String>> getadminUserList(HashMap<String, String> params) throws Throwable;
+
+	public HashMap<String, String> getAProfile(HashMap<String, String> params) throws Throwable;
 
 	
 

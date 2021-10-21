@@ -23,6 +23,7 @@ import com.gdj37.coronagram.web.admin_qna.service.IServiceAdmin_Qna;
 			public IServiceAdmin_Qna iServiceAdminQna;
 		@Autowired
 			public IPagingService iPagingService;	
+		
 //list
 		@RequestMapping(value ="/admin_qna")
 			public ModelAndView adminqna(@RequestParam HashMap<String, String> params,

@@ -10,79 +10,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<style>
-table {
-  width: 100%;
-  height: 100%;
-  display: block;
-  table-layout: fixed;
-  border-collapse: collapse;
-  position: relative;
-  margin-bottom: 68px;
-  text-align: center;
-}
-  tr:nth-child(even) td {
-    background: #e3e3e3;
-  }
-  
-  th {
-    border-bottom: 2px solid black;
-    background: #fff;
-  }
-  
-  tfoot td {
-    border-top: 1px solid black;
-  }
-  
-  th,
-  td {
-    text-align: center;
-    padding: 6px 10px;
-  }
-  
-  thead,
-  tbody > tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-  }
-  
-  tbody {
-    display: block;
-    transform: translate(0, 34px);
-    height: 104%;
-    margin-top: -35px;
-    border-bottom : 2px solid black;
-    border-collapse: collapse;
-  }
-
-
-	.paging {
-		float : left;
-	}
-	.paging_wrap {
-		margin: 40px 265px;
-	}
-	.qnaList2 {
-        height: 320px;
-     }
-     .ans_o {
-		color : green;
-	}
-	.ans_x {
-		color : red;
-		font-weight: 600;
-	}
-</style>
     <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
     <link rel="stylesheet" href="resources/css/admin_qna/admin_qna.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script>
-//페이징
 $(document).ready(function(){
 	reloadList();
+	
+//페이징
 	$(".paging_wrap").on("click","span",function(){
 		  $("#page").val($(this).attr("page"));
 		  $("#searchTxt").val($("#oldTxt").val());
@@ -96,15 +33,7 @@ $(document).ready(function(){
 		  $("#actionForm").submit();
 		  
 	  });
-////
-//공백만 넘어가는경우 방지
-function checkVal(sel) {
-	if($.trim($(sel).val())=="") { 
-		return true;
-	} else {
-		return false;
-	}
-}
+
 //데이터 취득
 	function reloadList(){
 		var params = $("#actionForm").serialize();
@@ -279,8 +208,8 @@ function checkVal(sel) {
                                 </table>
                                 </div>
                                 <div class="paging">
-                                   		<div class="paging_wrap"></div>
-                                   	</div>
+                                	<div class="paging_wrap"></div>
+                                </div>
                             </div>
                         </div>
                      </div><!-- sc-form -->

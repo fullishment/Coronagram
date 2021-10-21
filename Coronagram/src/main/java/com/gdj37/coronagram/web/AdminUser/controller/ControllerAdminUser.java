@@ -20,45 +20,63 @@ import com.gdj37.coronagram.web.AdminUser.service.IServiceAdminUser;
 @Controller
 public class ControllerAdminUser {
 	@Autowired
-	public IServiceAdminUser iServiceAdminUser;
-	
+		public IServiceAdminUser iServiceAdminUser;
 	@Autowired
-	public IPagingService iPagingService;
+		public IPagingService iPagingService;
 	
-	@RequestMapping(value = "/adminUser")   //add
-	public ModelAndView adminUser(@RequestParam HashMap<String, String> params, ModelAndView mav) {
+//list
+	@RequestMapping(value = "/adminUser")
+	public ModelAndView admin_user(@RequestParam HashMap<String, String> params,
+		ModelAndView mav) {
+		
 		int page = 1;
 		
 		if(params.get("page") != null) {
 			page = Integer.parseInt(params.get("page"));
 		}
-		
-		mav.addObject("page", page);
-		mav.setViewName("admin_user/admin_user");
+			mav.addObject("page", page);
+				
+			mav.setViewName("admin_user/admin_user");
 
 		return mav;
 	}
-	@RequestMapping(value="/adminUsers" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@RequestMapping(value = "/adminUserListAjax", method = RequestMethod.POST,
+			produces = "text/json;charset=UTF-8")
 	@ResponseBody
-	public String adminUsers(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
-		ObjectMapper mapper = new ObjectMapper();
-		Map<String,Object> modelMap= new HashMap<String,Object>();
-		
-		int page = Integer.parseInt(params.get("page"));
-		
-		int cnt = iServiceAdminUser.getAuCnt(params);
-		
-		PagingBean pb = iPagingService.getPagingBean(page, cnt, 5, 3);
-		
-		params.put("startCnt", Integer.toString(pb.getStartCount()));
-		params.put("endCnt", Integer.toString(pb.getEndCount()));
-		List<HashMap<String,String>> list = iServiceAdminUser.getUserList(params);
-		modelMap.put("list", list);
-		modelMap.put("pb", pb);
-		return mapper.writeValueAsString(modelMap);
-	}
-	
-	
+		public String adminUserListAjax(
+				@RequestParam HashMap<String, String> params) throws Throwable {
+					ObjectMapper mapper = new ObjectMapper();
+						
+				Map<String, Object> modelMap = new HashMap<String, Object>();
+						
+				int page = Integer.parseInt(params.get("page"));
+						
+				int cnt = iServiceAdminUser.getadminUserCnt(params);
+						
+				PagingBean pb = iPagingService.getPagingBean(page, cnt, 8, 5);
+						
+				params.put("startCnt", Integer.toString(pb.getStartCount()));
+				params.put("endCnt", Integer.toString(pb.getEndCount()));
+				
+				List<HashMap<String, String>> list = iServiceAdminUser.getadminUserList(params);
+						
+				modelMap.put("list", list);
+				modelMap.put("pb", pb);
+						
+				return mapper.writeValueAsString(modelMap);
+			}
+	//상세보기
+		@RequestMapping(value="/admin_profile")
+		public ModelAndView admin_profile(@RequestParam HashMap<String, String> params,
+								ModelAndView mav) throws Throwable {
+			HashMap<String, String> data = iServiceAdminUser.getAProfile(params);
+			
+			mav.addObject("data", data);
+			
+			mav.setViewName("admin_profile/admin_profile");
+			
+			return mav;
+		}
 	
 	
 	

@@ -14,15 +14,21 @@ public class ServiceAdminUser implements IServiceAdminUser{
 	public IDaoAdminUser iDaoAdminUser;
 
 	@Override
-	public List<HashMap<String, String>> getUserList(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return iDaoAdminUser.getUserList(params);
+	public int getadminUserCnt(HashMap<String, String> params) throws Throwable {
+		return iDaoAdminUser.getadminUserCnt(params);
 	}
 
 	@Override
-	public int getAuCnt(HashMap<String, String> params) throws Throwable {
-		return iDaoAdminUser.getAuCnt(params);
+	public List<HashMap<String, String>> getadminUserList(HashMap<String, String> params) throws Throwable {
+		return iDaoAdminUser.getadminUserList(params);
 	}
+
+	@Override
+	public HashMap<String, String> getAProfile(HashMap<String, String> params) throws Throwable {
+		return iDaoAdminUser.getAProfile(params);
+	}
+
+	
 	
 	
 }
