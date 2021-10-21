@@ -87,7 +87,7 @@ table {
 	padding-bottom: 13px;
 }
 
-table a:link, a:visited, a:hover {
+.tb_a:link, .tb_a:visited, .tb_a:hover {
 	color : black;
 	text-decoration-line: none;
 	font-size : 18px;

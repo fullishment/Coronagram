@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,50 +15,14 @@
   <script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
   <script type="text/javascript">
   $(document).ready(function() {
-
-		}
- 
-//	$("tbody").on("click", "tr", function() {
-//		$("#no").val($(this).attr("no"));
-//		
-//		$("#actionForm").attr("action", "testAB");
-//		$("#actionForm").submit();
-//	});
-//});
-  
-  
-  
-	// 데이터 취득
-	function reloadList() {
-		var params = $("#actionForm").serialize(); // form의 데이터를 문자열로 변환
 		
-		$.ajax({ // jquery의 ajax함수 호출
-			url : "coinfo_infolistAjex", // 접속 주소
-			type : "post", // 전송 방식
-			dataType : "json", // 받아올 데이터 형태
-			data : params, // 보낼 데이터(문자열 형태)
-			success : function(res) { // 성공(ajax통신 성공) 시 다음 함수 실행
-				drawList(res.list);
-				drawPaging(res.pb);
-			},
-			error : function(request, status, error) { // 실패 시 다음 함수 실행
-				console.log(error);
-			}
-		});
-	}
-	
-  
-  
-  function drawList(list) {
-		var html="";
+//상세보기 
+	$("#slide__text-link").on("click", function() {
+		$("#no").val($(this).attr("no"));
 		
-		for(var data of list){
-			html += "<h2>" + data.INFO_TITLE + "</h2>      ";
-			html += "<p>" + data.INFO_SUBHD + "</p>    ";
-		}
-		
-		$("tbody").html(html);
-	}
+		$("#actionForm").submit();
+	});
+});
 
   </script>
 </head>
@@ -67,7 +32,7 @@
     <div class="cm_menuBar" id="cm_menuBar">
         <div class="cm_menu__toggler"><span></span></div>
         <a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
-        <a href="#" class="cm_home" id="cm_home">Home</a>
+        <a href="#" class="cm_home" id="cm_home">Home</a>1
         <a href="#" class="cm_msg" id="cm_msg">Message</a>
         <a href="#" class="cm_cld" id="cm_cld">Calendar</a>
         <div class="cm_dropdown">
@@ -128,77 +93,37 @@
 
   <!-- main -->
 
-    <div class="slider-container">
-      <div class="slider-control left inactive"></div>
-      <div class="slider-control right"></div>
-      <ul class="slider-pagi"></ul>
-      <div class="slider">
-        <div class="slide slide-0 active">
-          <div class="slide__bg"></div>
-          <div class="slide__content">
-            <svg class="slide__overlay" viewBox="0 0 720 405" preserveAspectRatio="xMaxYMax slice">
-              <path class="slide__overlay-path" d="M0,0 150,0 500,405 0,405" />
-            </svg>
-            <div class="slide__text">
-              <h2 class="slide__text-heading">코로나좀</h2>
-              <p class="slide__text-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam
-                minus illo debitis nihil animi facere, doloremque voluptate tempore quia. Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque
-                voluptate tempore quia.</p>
-              <a class="slide__text-link">Project link</a>
-            </div>
-          </div>
-        </div>
-        <div class="slide slide-1 ">
-          <div class="slide__bg"></div>
-          <div class="slide__content">
-            <svg class="slide__overlay" viewBox="0 0 720 405" preserveAspectRatio="xMaxYMax slice">
-              <path class="slide__overlay-path" d="M0,0 150,0 500,405 0,405" />
-            </svg>
-            <div class="slide__text">
-              <h2 class="slide__text-heading">Project name 2</h2>
-              <p class="slide__text-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam
-                minus illo debitis nihil animi facere, doloremque voluptate tempore quia. Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque
-                voluptate tempore quia.</p>
-              <a class="slide__text-link">Project link</a>
-            </div>
-          </div>
-        </div>
-        <div class="slide slide-2">
-          <div class="slide__bg"></div>
-          <div class="slide__content">
-            <svg class="slide__overlay" viewBox="0 0 720 405" preserveAspectRatio="xMaxYMax slice">
-              <path class="slide__overlay-path" d="M0,0 150,0 500,405 0,405" />
-            </svg>
-            <div class="slide__text">
-              <h2 class="slide__text-heading">Project name 3</h2>
-              <p class="slide__text-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam
-                minus illo debitis nihil animi facere, doloremque voluptate tempore quia. Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque
-                voluptate tempore quia.</p>
-              <a class="slide__text-link">Project link</a>
-            </div>
-          </div>
-        </div>
-        <div class="slide slide-3">
-          <div class="slide__bg"></div>
-          <div class="slide__content">
-            <svg class="slide__overlay" viewBox="0 0 720 405" preserveAspectRatio="xMaxYMax slice">
-              <path class="slide__overlay-path" d="M0,0 150,0 500,405 0,405" />
-            </svg>
-            <div class="slide__text">
-              <h2 class="slide__text-heading">Project name 4</h2>
-              <p class="slide__text-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio veniam
-                minus illo debitis nihil animi facere, doloremque voluptate tempore quia. Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. Distinctio veniam minus illo debitis nihil animi facere, doloremque
-                voluptate tempore quia.</p>
-              <a class="slide__text-link">Project link</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+	<form action="coinfo_infopage" id="actionForm" method="post">
+		<input type="hidden" name="no" id="no" /> 
+	</form>
+
+
+	<div class="slider-container">
+		<div class="slider-control left inactive"></div>
+		<div class="slider-control right"></div>
+		<ul class="slider-pagi"></ul>
+		<div class="slider">
+
+			<c:forEach var="data" items="${list}">
+				<div class="slide slide-0 active">
+					<div class="slide__bg" style="background-image: url(resources/images/coinfo/coinfo_upload/${data.REP_IMG})"></div>
+					<div class="slide__content">
+						<svg class="slide__overlay" viewBox="0 0 720 405" preserveAspectRatio="xMaxYMax slice">
+			              <path class="slide__overlay-path"	d="M0,0 150,0 500,405 0,405" />
+			            </svg>
+						<div class="slide__text">
+							<h2 class="slide__text-heading">${data.INFO_TITLE}</h2>
+							<p class="slide__text-desc">${data.INFO_SUBHD}</p>
+							<a class="slide__text-link" id="slide__text-link">Project link</a>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+
+		</div>
+	</div>
+
+
 
   <!-- partial -->
   <script src="resources/script/coinfo_infolist/coinfo_infolist.js"></script> <!-- script -->

@@ -23,11 +23,13 @@ $(document).ready(function(){
 	$("#cancelBtn").on("click",function(){
 		$("#backForm").submit();
 	});
-	$("#addForm").on("keypress","input",function(event){
+	
+	$("#updateForm").on("keypress","input",function(event){
 		if(event.keyCode==13){
 			return false;
 		}
 	});
+	
 	$("#imgBtn").on("click",function(){
 		$("#imgAtt").click();
 	});
@@ -56,9 +58,11 @@ $(document).ready(function(){
 		imgForm.submit();
 	});
 	
-/* 	나중에 수정해서 추가!
+	
+	//++admin_add
+	
 	//첨부파일 삭제 버튼
-	$("#fileDelBtn").on("click", function(){
+	$("#imgDelBtn").on("click", function(){
 	   $("#fileName").html(""); 
 	   $("#mImage").html("");
 	   $("#mImage").val("");
@@ -68,10 +72,9 @@ $(document).ready(function(){
 	   $(this).remove();
 	});
 	
-	 */
 	
 	
-	$("#addBtn").on("click",function(){					
+	$("#updateBtn").on("click",function(){					
 		if(checkVal("#info_title")){
 			alert("제목을 입력해 주세요");
 			$("#info_title").focus();
@@ -85,29 +88,39 @@ $(document).ready(function(){
 			$("#con").focus();
 		}
 		else{
-			var params = $("#addForm").serialize();
-			$.ajax({
-				url:"coinfoAddAjax",
-				type:"post",
-				dataType:"json",
-				data:params,
-				success:function(res){
-					if(res.result=="success"){
-						location.href="coinfo_infolist";
-					}
-					else if(res.result=="failed"){
-						alert("작성에 실패하였습니다.");
-					}else{
-						alert("작성중 문제가 발생했습니다.");
-					}
-				},
-				error:function(request,status,error){
-					console.log(error);
-				}
-			});
+			updateAjax();
 		}
 	});
 });
+
+
+function updateAjax(){
+	//Ajax
+	var params = $("#updateForm").serialize();
+	
+	$.ajax({
+		url : "coinfo_updateAjax",
+		type : "post",
+		dataType : "json",
+		data : params,
+		success : function(res){
+			if(res.result == "success"){
+				$("#updateForm").attr("action","coinfo_infolist");
+				$("#updateForm").submit();
+			} else if(res.result == "failed"){
+				alert("수정에 실패하였습니다.");
+			} else {
+				alert("수정중 문제가 발생했습니다.");
+			}
+		},
+		error : function(request, status, error){
+			console.log(error);
+		}
+	});
+}
+
+
+
 function checkVal(sel){
 	if($.trim($(sel).val())==""){
 		return true;
@@ -210,7 +223,7 @@ function checkVal(sel){
                             	<form id="imgForm" action="fileUploadAjax" method="post" enctype="multipart/form-data">
 								<input type="file" name="imgAtt" id="imgAtt" accept="image/*" >
 							</form>
-                            	<form action="#" id="addForm" method="post">
+                            	<form action="#" id="updateForm" method="post">
                             		<input type="hidden" name="m_no" value="${sMNo}">
 	                                <div class="qnaTitle">
 	                                    <div class="qnaTitle1">
@@ -224,6 +237,44 @@ function checkVal(sel){
 	                                    <div class="qnaCon">
 	                                        <p>내용</p><textarea class="QCI" type="text" id="con" name="con" placeholder="내용을 입력하세요"></textarea>
 	                                    </div>
+	                                    
+	                                    
+	                                    
+	                                    		<c:choose>
+													<c:when test="${!empty data.M_IMG}">
+														<!-- 첨부파일이 있는경우 버튼을 숨긴다. -->
+														<input type="button" value="이미지파일선택" id="fileBtn" class="hide_Btn" />
+													</c:when>
+													<c:otherwise>
+														<input type="button" value="이미지파일선택" id="fileBtn" />
+													</c:otherwise>
+												</c:choose>
+												
+												<c:set var="len" value="${fn:length(data.M_IMG)}"></c:set>
+												
+												<span id="fileName">${fn:substring(data.M_IMG, 20, len)}</span>
+												
+												<c:choose>
+													<c:when test="${empty data.M_IMG}">
+														<input type="button" value="이미지파일삭제" id="fileDelBtn"
+															class="hide_Btn" />
+													</c:when>
+													<c:otherwise>
+														<input type="button" value="이미지파일삭제" id="fileDelBtn" />
+													</c:otherwise>
+												</c:choose>
+												
+												<input type="hidden" name="mImage" id="mImage" value="${data.M_IMG}"><br>
+												
+												<div id="image">
+													<img name="images" id="images"
+														src="resources/upload/${fn:replace(fn:replace(data.M_IMG, '[', '%5B'), ']', '%5D')}"
+														onerror="this.style.display='none'" />
+												</div>
+	                                    
+	                                    
+	                                    
+	                                    
 	                                    <div class="qnaImg">
 											<span>이미지</span><input type="button" value="file" class="fileBtn" id="imgBtn" />
 											<span id="fileName"></span>		
@@ -232,14 +283,19 @@ function checkVal(sel){
 										      <img src="resources/images/coinfo/coinfo_upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
 										   </div>
 										</div>
+										
+										
 	                              	  </div>
 	                               </form>
                                 <div class="qnaBtn">
-                                 	<input type="button" id="addBtn" class="qnaBtn1" value="저장" />
+                                 	<input type="button" id="updateBtn" class="qnaBtn1" value="저장" />
                                  	<input type="button" id="cancelBtn" class="qnaBtn2" value="취소" />
                                 </div>
                             </div>
                         </div>
+                        
+                        
+                        
                         <div class="scm2-htm">
                             <label for="user" class="sclabel">
                                 <p>거리두기 정보 단계 관리</p>
@@ -266,7 +322,7 @@ function checkVal(sel){
                                             <p>내용</p><textarea class="QCI" class="border" type="text" placeholder="내용을 입력하세요"></textarea>
                                         </div>
 	                                    <div class="qnaBtn">
-                                    		<input type="button" id="addBtnStep" class="qnaBtn1" value="저장" />
+                                    		<input type="button" id="updateBtnStep" class="qnaBtn1" value="저장" />
                                     		<input type="button" id="cancelBtnStep" class="qnaBtn2" value="취소" />
                                         </div>
                                     </div>

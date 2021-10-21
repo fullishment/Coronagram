@@ -53,7 +53,7 @@ function drawList(list) {
 	 var html = ""
    //for(var i = list.length-1; i >= 0 ;i--){
      for(var i = 0; i < list.length ;i++){
-			html += "<tr><td class=\"t1\">" + "<a href =\"" + list[i]['주소'] + "\">" + list[i]['제목'] + "</a>" + "</td></tr>";
+			html += "<tr><td class=\"t1\">" + "<a href =\"" + list[i]['주소'] + "\" class=\"tb_a\">" + list[i]['제목'] + "</a>" + "</td></tr>";
 			html += "<tr><td class=\"t2\">" + list[i]['일자'] + "</td></tr>";
 			html += "<tr><td class=\"t3\">" + list[i]['본문'] + "</td></tr";
 			html += "<tr><td class=\"t4\"></td></tr>";
@@ -194,21 +194,23 @@ function drawPaging(){
 				</div>
 			</div>
 			<!-- scHead -->
-			<div class="sc_main">
-				<div class="group">
-					<div>
-						<table>
-							<thead>
-								<tr>
-								</tr>
-							</thead>
-							<tbody>
-								<tr class="tr1"></tr>
-							</tbody>
-						</table>
+			<section>
+				<div class="sc_main">
+					<div class="group" id="group">
+						<div>
+							<table class="tb">
+								<thead>
+									<tr>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="tr1"></tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
-			</div>
+			</section>
 			<div class="paging_wrap"></div>
 			<!-- scMain -->
 		</div>

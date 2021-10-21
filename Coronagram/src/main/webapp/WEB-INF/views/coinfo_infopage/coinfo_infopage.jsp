@@ -16,6 +16,25 @@
 	<script type="text/javascript"
 		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#listBtn").on("click", function() {
+			$("#actionForm").attr("action", "coinfo_infolist");
+			$("#actionForm").submit();
+		}); 
+
+		//1.글수정
+		$("#updateBtn").on("click", function() {
+			$("#actionForm").attr("action", "coinfo_update");
+			$("#actionForm").submit();
+		});
+		
+		$("#deleteBtn").on("click", function() {
+			if(confirm("삭제하시겠습니까?")) {
+				$("#actionForm").attr("action", "coinfo_delete");
+				$("#actionForm").submit();
+			}
+		});
+	});
 	</script>
 </head>
 
@@ -89,6 +108,9 @@
     <!-- 메인 -->
     <!-- partial:index.partial.html -->
     <main>
+        <form action="#" id="actionForm" method="post">
+			<input type="hidden" name="no" id="no" value="${param.INFO_NO}" />						
+		</form>
         <div class="header">
             <div class="header-banner">
                 <h1>${data.INFO_TITLE}</h1>
@@ -98,45 +120,43 @@
             </div>
             <div class="clear"></div>
             <nav>
-                <div class="site-title">Corona News</div>
+                <div class="site-title">${data.INFO_TITLE}</div>
                 <ul>
-                    <li><a href="/archive">Archive</a></li>
-                    <li><a href="/events">Events</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                    <ul>
+                    <li><input type="button" value="목록 바로가기" id="listBtn"/></li>
+                </ul>
             </nav>
         </div>
         <div class="main">
             <section class="content">
-            
-            
-            
+            	<article>
+				
+            		<c:if test="${!empty data.REP_IMG}">
+						<img alt="" src="resources/images/coinfo/coinfo_upload/${data.REP_IMG}" /><br/>
+					</c:if>
 
-				날짜 : ${data.DT}<br/>
-				<div style="white-space:pre;">
-				내용 : ${data.CON}<br/>
-				</div>
-				<c:if test="${!empty data.REP_IMG}">
-				<img alt="" src="resources/upload/${data.REP_IMG}" /><br/>
-				</c:if>
+					<div>날짜 : ${data.DT}</div>
+      			
+					<div style="white-space:pre;">
+					내용 : ${data.CON}
+					</div>
+
+            	</article>
+            </section>
+            	
+            <section class="footer">
+	         	<c:if test="${acctNo == 6}">
+ 	               	<input type="button" value="수정" id="updateBtn"/>
+					<input type="button" value="삭제" id="deleteBtn"/>
+	             </c:if>
+	         </section>	
+
             
-            
-            
-            
-            
-            
-            
-            
-            
-<%--             	<div class="infoimg" id="infoimg">
+			<%-- <div class="infoimg" id="infoimg">
             		<c:if test="${!empty data.rep_img}">
 						<img src="resources/images/coinfo/coinfo_infopage/${data.rep_img}">
             		</c:if>
-                <article>
-					${data.con}
-                </article> --%>
+            --%>
 
-            </section>
         </div>
     </main>
     <!-- partial -->

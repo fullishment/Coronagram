@@ -1,21 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="coinfo">
+<!-- admin_add -->
 	<insert id="coinfoAdd" parameterType="hashmap">
-		INSERT INTO INFO(WRITER_NO, INFO_TITLE, INFO_SUBHD, CON, REP_IMG)
-		VALUES (#{m_no}, #{info_title}, #{info_subhd}, #{con}, #{imgFile})
+		INSERT INTO INFO(INFO_NO, WRITER_NO, INFO_TITLE, INFO_SUBHD, CON, REP_IMG)
+		VALUES (INFO_SEQ.NEXTVAL, #{m_no}, #{info_title}, #{info_subhd}, #{con}, #{imgFile})
 	</insert>
-<!-- 
+
+<!-- list -->
 	<select id="getInfolist" parameterType="hashmap" resultType="hashmap">
-		SELECT INFO_TITLE, INFO_SUBHD, TO_CHAR(DT, 'YYYY-MM-DD') AS DT, REP_IMG
+		SELECT INFO_NO, INFO_TITLE, INFO_SUBHD, REP_IMG
+		FROM INFO
+	</select>
+
+<!-- dtl -->
+	<select id="getInfopage" parameterType="hashmap" resultType="hashmap">
+		SELECT INFO_NO, INFO_TITLE, INFO_SUBHD, TO_CHAR(DT, 'YYYY-MM-DD') AS DT, REP_IMG, CON 
 		FROM INFO
 		WHERE INFO_NO = #{no}
 	</select>
- -->	
-	<select id="getInfopage" parameterType="hashmap" resultType="hashmap">
-		SELECT INFO_TITLE, INFO_SUBHD, TO_CHAR(DT, 'YYYY-MM-DD') AS DT, REP_IMG, CON 
+	
+	
+<!-- admin_dtl -->	
+	<select id="getCoinfo" parameterType="hashmap" resultType="hashmap">
+		SELECT INFO_NO, WRITER_NO, INFO_TITLE, INFO_SUBHD, CON, REP_IMG
 		FROM INFO
-		WHERE INFO_NO = 11
-	</select>
+		WHERE INFO_NO = #{no}
+	</select>	
+
+<!-- admin_update -->		
+	<update id="updateCoinfo" parameterType="hashmap">
+		UPDATE INFO SET INFO_TITLE = #{info_title},
+              INFO_SUBHD = #{info_subhd},
+              CON = #{con},
+              REP_IMG = #{imgFile}
+		WHERE INFO_NO = #{no}
+	</update>
+
+<!-- admin_del -->	
+	<delete id="deleteCoinfo" parameterType="hashmap">
+			UPDATE INFO SET DEL = 0
+			WHERE INFO_NO = #{no}
+	</delete>
+	
 
 </mapper>
