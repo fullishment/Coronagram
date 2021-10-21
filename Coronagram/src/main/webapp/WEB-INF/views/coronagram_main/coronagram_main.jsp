@@ -17,68 +17,67 @@
     <link rel="stylesheet" href="resources/css/p_coronagram/style.css">
     <script src="resources/script/coronagram_main/coronagram_main.js?after"></script>
     <script>
-    $(document).ready(function(){
-    	drawList();
-    	slide();
-    });
+	    $(document).ready(function(){
+	    	reloadList();
+	    });
     
-    	function slide(){
-    		$('.slider').each(function(){
-	         var $this = $(this);
-	         var $group = $this.find('.slide-group');
-	         var $slides = $this.find('.slide');
-	         var buttonArray = [];
-	         var currentIndex = 0;
-	
-	         var $nav = $('.slide-nav').find('div');
-     
-          	 $nav.on('click', function (event) {
-             event.preventDefault();
-             console.log($(this));
-             if ($(this).hasClass('next')) {
-                 if (currentIndex === $slides.length -1) {
-                     move(0);
-                 }
-                 move(currentIndex + 1);
-             } else {
-                 if (currentIndex === 0) {
-                     move($slides.length -1);
-                 }
-                 move(currentIndex - 1);
-             }
-         });
+	    function slide(){
+	    	$('.slider').each(function(){
+	            var $this = $(this);
+	            var $group = $(this).find('.slide-group');
+	            var $slides = $(this).find('.slide');
+	            var buttonArray = [];
+	            var currentIndex = 0;
 
-        function move(newIndex) {
-            var animateLeft, slideLeft;
+	            var $nav = $(this).children('.slide-nav').find('div');
+	        
+	             $nav.on('click', function (event) {
+	                event.preventDefault();
+	                console.log($(this));
+	                if ($(this).hasClass('next')) {
+	                    if (currentIndex === $slides.length -1) {
+	                        move(0);
+	                    }
+	                    move(currentIndex + 1);
+	                } else {
+	                    if (currentIndex === 0) {
+	                        move($slides.length -1);
+	                    }
+	                    move(currentIndex - 1);
+	                }
+	            });
 
-            if ($group.is(':animated') || currentIndex === newIndex) {
-                return;
-            }
+	        function move(newIndex) {
+	            var animateLeft, slideLeft;
 
-            buttonArray[currentIndex].removeClass('active');
-            buttonArray[newIndex].addClass('active');
+	            if ($group.is(':animated') || currentIndex === newIndex) {
+	                return;
+	            }
 
-            if (newIndex > currentIndex) {
-                slideLeft = '100%';
-                animateLeft = '-100%';
-            } else {
-                slideLeft = '-100%';
-                animateLeft = '100%';
-            }
+	            buttonArray[currentIndex].removeClass('active');
+	            buttonArray[newIndex].addClass('active');
 
-            $slides.eq(newIndex).css({
-                left: slideLeft,
-                display: 'block'
-            });
+	            if (newIndex > currentIndex) {
+	                slideLeft = '100%';
+	                animateLeft = '-100%';
+	            } else {
+	                slideLeft = '-100%';
+	                animateLeft = '100%';
+	            }
 
-            $group.animate({left: animateLeft}, function() {
-                $slides.eq(currentIndex).css({display: 'none'});
-                $slides.eq(newIndex).css({left: 0});
-                $group.css({left: 0});
-                currentIndex = newIndex;
-            });
+	            $slides.eq(newIndex).css({
+	                left: slideLeft,
+	                display: 'block'
+	            });
+
+	            $group.animate({left: animateLeft}, function() {
+	                $slides.eq(currentIndex).css({display: 'none'});
+	                $slides.eq(newIndex).css({left: 0});
+	                $group.css({left: 0});
+	                currentIndex = newIndex;
+	            });
 	        }
-	
+
 	        $.each($slides, function(index) {
 	            var $button = $('<button type="button" class="slide-btn">&bull;</button>');
 	            if (index === currentIndex) {
@@ -86,70 +85,68 @@
 	            }
 	            $button.on('click', function(){
 	                move(index);
-	            }).appendTo('.slide-buttons');
+	            }).appendTo($(this).children('.slide-buttons'));
 	            buttonArray.push($button);
 	        });
 	        })
 	    }
 	function reloadList(){
-		var params=$("#actionForm").serialize();//form의 데이터를 문자열로 변환
-		
-		$.ajax({ //jquery의 ajax함수 호출
-			url:"testMLists",//접속 주소
-			type:"post",//전송방식
-			dataType:"json",//받아올 데이터 형태 주로 json,xml,jsonp
-			data: params,//보낼 데이터(문자열 형태)
-			success : function(res){//성공(ajax통신 성공)시 다음 함수 실행
-				drawList(res.list);
-				drawPaging(res.pb);
+		var params=$("#postForm").serialize();	
+		$.ajax({ 
+			url:"crngPost",
+			type:"post",
+			dataType:"json",
+			data: params,
+			success : function(res){
+				crngPost(res.post);			
+				timeForToday();
+				slide();
 			},
-			error : function(request,status,error){//실패 시 다음 함수 실행
+			error : function(request,status,error){
 				console.log(error);
 			}
 		});
 	}
-    function drawList(){
-		var html ="";
+    function crngPost(list){
+		var html ="";	
 		
-		
-		html  +="	<article class=\"contents\">                                                                                     ";  
+	    
+		for(data of list){
+
+		html  +="	<article class=\"contents postNo\" wtno=\""+data.WRITING_NO+"\">                                                                                     ";  
 	    html  +="      <header class=\"top\">                                                                                        ";    
 	    html  +="          <div class=\"user_container\">                                                                            ";    
 	    html  +="              <div class=\"profile_img\">                                                                           ";    
-	    html  +="                  <img src=\"resources/css/p_coronagram/imgs/thumb.jpeg\" alt=\"프로필이미지\">                       ";    
+	    html  +=" 				   <img src=\""+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 ";    
 	    html  +="              </div>                                                                                              ";    
 	    html  +="              <div class=\"user_name\">                                                                             ";    
-	    html  +="                  <div class=\"nick_name m_text\">KindTiger</div>                                                   ";    
-	    html  +="                  <div class=\"country s_text\">Seoul, South Korea</div>                                            ";    
+	    html  +="                  <div class=\"nick_name m_text\">"+data.NICK_NM+"</div>                                                   ";    
+	    html  +="                  <div class=\"country s_text\">"+timeForToday(data.DT)+"</div>                                            ";    
 	    html  +="              </div>                                                                                              ";    
 	    html  +="          </div>                                                                                                  ";    
 	    html  +="          <div class=\"sprite_more_icon\" data-name=\"more\">                                                         ";    
 	    html  +="              <ul class=\"toggle_box\">                                                                             ";    
-	    html  +="                  <li><input type=\"submit\" class=\"follow\" value=\"팔로우\" data-name=\"follow\"></li>          ";    
-	    html  +="                  <li>수정</li>                                                                                   ";    
-	    html  +="                  <li>삭제</li>                                                                                   ";    
+	    if(data.M_NO == ${sMNo} ){
+	    	 html+="			   <i class=\"fas fa-ellipsis-h postMore\"></i>													 ";
+	    }	    
 	    html  +="              </ul>                                                                                               ";    
 	    html  +="          </div>                                                                                                  ";    
-	    html  +="      </header>                                                                                                   ";    
-	    html  +="                                                                                                                  ";    
+	    html  +="      </header>                                                                                                   ";     
 	    html  +="      <div class=\"img_section\">                                                                                   ";    
 	    html  +="          <div class=\"trans_inner\">                                                                               ";    
 	    html  +="              <div class=\"slider\">                                                                                ";    
 	    html  +="                  <div class=\"slide-viewer\">                                                                      ";    
-	    html  +="                    <div class=\"slide-group\">                                                                     ";    
-	    html  +="                      <div class=\"slide slide-1\">                                                                 ";    
-	    html  +="                          <img src=\"resources/css/p_coronagram/imgs/thumb.jpeg\" alt=\"visual01\">                   ";    
-	    html  +="                      </div>                                                                                      ";    
-	    html  +="                      <div class=\"slide slide-2\">                                                                 ";    
-	    html  +="                          <img src=\"resources/css/p_coronagram/imgs/thumb.jpeg\" alt=\"visual01\">                   ";    
-	    html  +="                      </div>                                                                                      ";    
-	    html  +="                      <div class=\"slide slide-3\">                                                                 ";    
-	    html  +="                          <img src=\"resources/css/p_coronagram/imgs/thumb.jpeg\" alt=\"visual01\">                   ";    
-	    html  +="                      </div>                                                                                      ";    
-	    html  +="                      <div class=\"slide slide-4\">                                                                 ";    
-	    html  +="                          <img src=\"resources/css/p_coronagram/imgs/thumb.jpeg\" alt=\"visual01\">                   ";    
-	    html  +="                      </div>                                                                                      ";    
-	    html  +="                    </div>                                                                                        ";    
+	    html  +="                    <div id=\"slide-group\" class=\"slide-group\">                                                                     ";
+	    var j=1;	    
+	    var fileAdr=data.FILE_ADRS;
+        var fileAdrSplit = fileAdr.split(',');
+        for ( var i = 0; i < fileAdrSplit.length; i++) {
+        	html+=" <div class=\"slide slide-"+j+"\">                                       ";
+            html+=" <img src=\""+fileAdrSplit[i]+"\" alt=\"\" />	   						";
+           	html+=" </div>                                                                  ";
+           	j++;        	
+        }	
+	    html  +="                    </div>                                                                     ";
 	    html  +="                  </div>                                                                                          ";    
 	    html  +="                  <div class=\"slide-nav\">                                                                         ";    
 	    html  +="                      <div class=\"prev\"></div>                                                                    ";    
@@ -216,32 +213,50 @@
 	    html  +="          </div>                                                                                                    ";
 	    html  +="      </div>                                                                                                        ";
 	    html  +="      <div class=\"likes m_text\">                                                                                    ";
-	    html  +="          좋아요                                                                                                    ";
-	    html  +="          <span id=\"like-count-39\">2,346</span>                                                                     ";
-	    html  +="          <span id=\"bookmark-count-39\"></span>                                                                      ";
-	    html  +="          개                                                                                                        ";
 	    html  +="      </div>                                                                                                        ";
 	    html  +="      <div class=\"comment_container\">                                                                               ";
-	    html  +="          <div class=\"comment\" id=\"comment-list-ajax-post37\">                                                       ";
-	    html  +="              <div class=\"comment-detail\">                                                                          ";
-	    html  +="                  <div class=\"nick_name m_text\">dongdong2</div>                                                     ";
-	    html  +="                  <div>강아지가 너무 귀여워요~!</div>                                                               ";
-	    html  +="              </div>                                                                                                ";
-	    html  +="          </div>                                                                                                    ";
-	    html  +="          <div class=\"small_heart\">                                                                                 ";
-	    html  +="              <div class=\"sprite_small_heart_icon_outline\"></div>                                                   ";
-	    html  +="          </div>                                                                                                    ";
 	    html  +="      </div>                                                                                                        ";
-	    html  +="      <div class=\"timer\">1시간 전</div>                                                                             ";
-	    html  +="                                                                                                                    ";
 	    html  +="      <div class=\"comment_field\" id=\"add-comment-post37\">                                                           ";
 	    html  +="          <input type=\"text\" placeholder=\"댓글달기...\">                                                             ";
 	    html  +="          <div class=\"upload_btn m_text\" data-name=\"comment\">게시</div>                                             ";
 	    html  +="      </div>                                                                                                        ";
 	    html  +="  </article>                                                                                                        ";
+	    
+		}
 		
 		$("#contents_box").html(html);
 	}
+    
+    
+    function timeForToday(value) {
+        const today = new Date();
+        const timeValue = new Date(value);
+
+        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+        if (betweenTime < 1) return '방금전';
+        if (betweenTime < 60) {
+            return betweenTime+'분전';
+        }
+
+        const betweenTimeHour = Math.floor(betweenTime / 60);
+        if (betweenTimeHour < 24) {
+            return betweenTimeHour+'시간전';
+        }
+
+        const betweenTimeDay = Math.floor(betweenTimeHour / 24);
+        if (betweenTimeDay < 7) {
+            return betweenTimeDay+'일전';
+        }
+        const betweenTimeWeek = Math.floor(betweenTimeDay / 7);
+        if (betweenTimeWeek	< 5) {
+            return betweenTimeWeek+'주전';
+        }
+        const betweenTimeMonth = Math.floor(betweenTimeDay / 30);
+        if (betweenTimeMonth < 12) {
+            return betweenTimeDay+'개월';
+        }
+        return Math.floor(betweenTimeDay / 365)+'년전';
+ 	}	
     </script>
 </head>
 
@@ -261,7 +276,7 @@
                     <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
                     <ul class="cm_dropdown-content">
                         <li>
-                            <a href="#" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
+                            <a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
                         </li>
                         <li>
                             <a href="#" class="cm_userinfo">개인정보수정</a>
@@ -457,7 +472,9 @@
             </div>
         </section>
     </section>
-
+			<form action="#" id="postForm" method="post">
+           	  <input type="hidden" name="m_no" value="${sMNo}"/> 
+		   </form>
     <script src="resources/script/menu_bar/menu_bar.js"></script> <!-- script-->
 </body>
 

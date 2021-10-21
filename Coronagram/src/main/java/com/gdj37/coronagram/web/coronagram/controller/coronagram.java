@@ -16,14 +16,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gdj37.coronagram.web.coronagram.service.IServiceCoronagram;
 
 @Controller
-public class coronagram_main {
+public class coronagram {
 	@Autowired
 	public IServiceCoronagram iServiceCoronagram;
 
 	@RequestMapping(value="/coronagram")
-	public ModelAndView coronagram(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+	public ModelAndView main(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
 		mav.setViewName("coronagram_main/coronagram_main");
 		return mav;
 	}
+	@RequestMapping(value="/crngPost" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String crngPost(ModelAndView mav,@RequestParam HashMap<String,String> params) throws Throwable {
+		System.out.println(params);
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
 
+		List<HashMap<String,String>> post = iServiceCoronagram.getPostList(params);
+		
+		modelMap.put("post", post);
+		
+		return mapper.writeValueAsString(modelMap);	
+	}
 }

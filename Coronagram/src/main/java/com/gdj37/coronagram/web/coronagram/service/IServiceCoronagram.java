@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface IServiceCoronagram {
 
+	public List<HashMap<String, String>> getPostList(HashMap<String, String> params)throws Throwable;
+	
 }

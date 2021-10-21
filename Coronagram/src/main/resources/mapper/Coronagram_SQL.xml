@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="crng">
+	<select id="getPostList" parameterType="hashmap" resultType="hashmap">
+		SELECT C.WRITING_NO, C.WRITER_NO, C.CON, M.M_NO ,M.M_NM, M.IMG_ADR, M.NICK_NM,CAA.FILE_ADRS
+		,TO_CHAR(C.DT, 'YYYY/MM/DD HH24:MI:SS') AS DT
+		FROM CRNG C
+		    JOIN M M
+		    ON C.WRITER_NO = M.M_NO
+		    INNER JOIN   (SELECT CA.WRITING_NO,SUBSTR(MAX(SYS_CONNECT_BY_PATH(FILE_ADR, ',')), 2) AS FILE_ADRS
+		                    FROM (SELECT WRITING_NO, FILE_ADR, ROW_NUMBER() OVER(PARTITION BY WRITING_NO ORDER BY ATTC_NO ASC) AS RNUM
+		                            FROM CRNG_ATTC
+		                            ORDER BY WRITING_NO DESC) CA
+		                  START WITH CA.RNUM = 1
+		                  CONNECT BY PRIOR CA.RNUM = CA.RNUM - 1
+		                  AND PRIOR CA.WRITING_NO = CA.WRITING_NO
+		                  GROUP BY CA.WRITING_NO) CAA
+		    ON CAA.WRITING_NO=C.WRITING_NO
+		WHERE C.WRITER_NO IN (SELECT RP_USER FROM FOLLOW WHERE RQ_USER=#{m_no})
+		ORDER BY C.DT DESC
+	</select>
+</mapper>
