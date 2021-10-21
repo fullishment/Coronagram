@@ -125,7 +125,9 @@
 					slide();
 					heart(res.hcnt);
 					heartAD();
-					addModalCmt();				
+					addModalCmt();
+					delModalCmt();
+					delPost();
 				},
 				error : function(request, status, error){
 					console.log(error);
@@ -136,7 +138,7 @@
 	    function ModalContent(data){   
 	    	var html ="";
 	    		
-				 html+="   	<div class=\"modal-content\">                                                                                ";
+				 html+="   	<div class=\"modal-content\" no=\""+data.WRITING_NO+"\">                                                     ";
 			     html+="       <div class=\"modal_img\">                                                                                 ";
 			     html+="           <div class=\"slider\">                                                                                ";
 			     html+="               <div class=\"slide-viewer\">                                                                      ";
@@ -151,8 +153,11 @@
 			     html+="           </div>                                                                                                ";
 			     html+="       </div>                                                                                                    ";
 			     html+="       <div class=\"modal_box\">                                                                                 ";
-			     html+="           <div class=\"cmt_head\">                                                                              ";
+			     html+="           <div class=\"cmt_head\">                                                                              ";			     		     
 			     html+="               <span id=\"close\" class=\"close\">&times;</span>                                                 ";
+			     if(data.M_NO == ${sMNo} ){
+			    	 html+="			   <i class=\"fas fa-ellipsis-h postMore\"></i>													 ";
+			     }	
 			     html+="               <div class=\"user_container\">                                                                    ";
 			     html+="                   <div class=\"profile_img\">                                                                   ";
 			     html+=" 						<img src=\"../"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 	 ";
@@ -235,7 +240,7 @@
 			     html+="               <div class=\"likes head_text\"></div>                                                                                               ";
 			     html+="           </div>                                                                                                                                  ";
 			     html+="           <div class=\"cmt_field\" id=\"cmt_field\">                                                                                              ";
-			     html+="               <textarea id=\"cmt_con\" class=\"cmt_con\" placeholder=\"댓글 달기...\"></textarea>                                                                   ";
+			     html+="               <textarea id=\"cmt_con\" class=\"cmt_con\" placeholder=\"댓글 달기...\"></textarea>                                                    ";
 			     html+="               <div class=\"m_text head_text\" id=\"add_cmt\">게시</div>                                                                             ";
 			     html+="           </div>                                                                                                                                   ";
 			     html+="       </div>                                                                                                                          				";
@@ -246,31 +251,35 @@
 	    function ModalCmt(){
 	    	var params = $("#modalForm").serialize();
 			$.ajax({
-				url : "modalCmt",
+				url : "mCmt",
 				type : "post",
 				dataType : "json",
 				data : params,
 				success : function(res){
-					ModalArea(res.modalCmt);
+					ModalCmtArea(res.mCmt, res.ModalCmtEx);
+					delModalCmt();
 				},
 				error : function(request, status, error){
 					console.log(error);
 				}
 			});
 	    }	
-	    function ModalArea(data){  
+	    function ModalCmtArea(data,data2){  
 	    	var html ="";                                                                                                                                                                                                                                                                      
 			for(var list of data){                                                                                                                              				
-			     html+="<div class=\"comment_container\">                               ";
+			     html+="<div class=\"comment_container\" no=\""+list.CMT_NO+"\">        ";
 			     html+="   <div class=\"comment\" id=\"comment-list-ajax-post37\">      ";
 			     html+="       <div class=\"comment-detail\">                           ";
-			     html+="           <div class=\"profile_img\">                                                                   ";
-			     html+=" 				<img src=\"../"+data.IMG_ADR+"\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 ";
-			     html+="		   </div>																						 ";
+			     html+="           <div class=\"profile_img\">                          ";
+			     html+=" 				<img src=\"../"+list.IMG_ADR+"\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 ";
+			     html+="		   </div>												";
 			     html+="           <div class=\"head_text\">"+list.NICK_NM+"</div>      ";
-			     html+="              <div class=\"ccon\">"+list.CMT_CON+"</div>                       ";
+			     html+="              <div class=\"ccon\">"+list.CMT_CON+"</div>        ";
 			     html+="          </div>                                                ";
 			     html+="       </div>                                                	";
+			     if(list.CMT_WRITER_NO == ${sMNo}){
+			    	 html+="	<i class=\"fas fa-ellipsis-h cmtMore\"></i>				";
+			     }			     
 			     html+="   </div>                                                       ";
 			     html+="<div class=\"timer\">"+timeForToday(list.DT)+"</div>           	";
 			}
@@ -296,7 +305,7 @@
 								$("#cmt_con").val("");
 								$("#cmtVal").val("");
 							}else{							
-								alert("삭제실패");
+								alert("추가실패");
 							}
 						},
 						error : function(request, status, error){
@@ -305,6 +314,54 @@
 					});
 	    		}	
 	    	})	
+	    }
+	    function delModalCmt(){ 	
+	    	$(".cmtMore").on("click",function(){
+	    		if(confirm("삭제하시겠습니까?")){
+	    			$("#cmtNo").val($(this).parent().attr("no"));
+	    			var params = $("#delMCmtForm").serialize();
+					$.ajax({
+						url : "delModal",
+						type : "post",
+						dataType : "json",
+						data : params,
+						success : function(res){
+							if(res.result=="success"){
+								ModalCmt();	
+							}else{							
+								alert("추가실패");
+							}
+						},
+						error : function(request, status, error){
+							console.log(error);
+						}
+					});
+	    		}		
+	    	});
+	    }
+	    function delPost(){ 	
+	    	$(".postMore").on("click",function(){
+	    		if(confirm("삭제하시겠습니까?")){
+	    			$("#writingNo3").val($(this).parent().parent().parent().attr("no"));
+	    			var params = $("#delPostForm").serialize();
+					$.ajax({
+						url : "delCrng",
+						type : "post",
+						dataType : "json",
+						data : params,
+						success : function(res){
+							if(res.result=="success"){
+								reloadList();
+							}else{							
+								alert("게시글 삭제 실패");
+							}
+						},
+						error : function(request, status, error){
+							console.log(error);
+						}
+					});
+	    		}		
+	    	});
 	    }
 	    function like(){
 	    	var params = $("#modalForm").serialize();
@@ -694,6 +751,12 @@
            	  <input type="hidden" name="m_no" value="${sMNo}"/> 
     	   	  <input type="hidden" name="writingNo" id="writingNo2"/>
     	   	  <input type="hidden" name="cmt_con" id="cmtVal"/>
+		   </form>
+		   <form action="#" id="delMCmtForm" method="post">
+    	   	  <input type="hidden" name="cmtNo" id="cmtNo"/>
+		   </form>
+		   <form action="#" id="delPostForm" method="post">
+    	   	  <input type="hidden" name="writingNo" id="writingNo3"/>
 		   </form>
 	 	</main>	   
     	<script src="../resources/script/menu_bar/menu_bar.js"></script>

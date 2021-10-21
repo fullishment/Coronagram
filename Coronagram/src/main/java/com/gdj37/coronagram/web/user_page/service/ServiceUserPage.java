@@ -107,6 +107,18 @@ public class ServiceUserPage implements IServiceUserPage{
 	public int addMCmt(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return iDaoUserPage.addMCmt(params);
-	}	
-	
+	}
+
+	@Override
+	public int delModalCmt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.delModalCmt(params);
+	}
+
+	@Override
+	public int delPost(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.delPost(params);
+	}
+
 }

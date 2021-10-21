@@ -110,4 +110,15 @@ public class DaoUserPage implements IDaoUserPage {
 		return sqlSession.insert("userPage.addMCmt",params);
 	}
 
+	@Override
+	public int delModalCmt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("userPage.delModalCmt",params);
+	}
+
+	@Override
+	public int delPost(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.update("userPage.delPost",params);
+	}
 }

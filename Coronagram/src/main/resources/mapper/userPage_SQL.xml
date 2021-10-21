@@ -28,7 +28,7 @@
 		 ]]>
 	</select>
 	<select id="getModalCmt" parameterType="hashmap" resultType="hashmap">
-			select cc.CMT_WRITER_NO,CC.WRITING_NO,cc.cmt_con,m.M_NO, m.m_nm, m.nick_nm,M.IMG_ADR
+			select CC.CMT_NO, CC.CMT_WRITER_NO,CC.WRITING_NO,cc.cmt_con,m.M_NO, m.m_nm, m.nick_nm,M.IMG_ADR
 	            ,TO_CHAR(cc.dt, 'YYYY/MM/DD HH24:MI:SS') as dt,
 	            ROW_NUMBER() OVER(ORDER BY cc.WRITING_NO DESC) AS RNUM
 	            from crng_cmt cc
@@ -38,12 +38,12 @@
                 ORDER BY RNUM DESC
 	</select>
 	<select id="getModalM" parameterType="hashmap" resultType="hashmap">
-		 select C.WRITER_NO, C.CON, M.M_NM, M.IMG_ADR, M.NICK_NM
+		 select C.WRITING_NO, C.WRITER_NO, C.CON,M.M_NO ,M.M_NM, M.IMG_ADR, M.NICK_NM
             from CRNG C
             INNER JOIN M M
                         ON C.WRITER_NO = M_NO
      
-            where del=1 
+            where m.del=1 
             and m.NICK_NM=#{nickNm}
             and C.writing_no = #{writingNo}
 	</select>
@@ -106,6 +106,12 @@
 	<insert id="addMCmt" parameterType="hashmap">
 		insert into crng_cmt(WRITING_NO, CMT_WRITER_NO, CMT_CON)
             values(#{writingNo},#{m_no},#{cmt_con})
-	</insert>      
-
+	</insert> 
+	<delete id="delModalCmt" parameterType="hashmap">
+		DELETE FROM CRNG_CMT 
+                WHERE CMT_NO = #{cmtNo}
+	</delete>
+	<update id="delPost" parameterType="hashmap">
+		UPDATE CRNG SET DEL = 0 WHERE WRITING_NO =#{writingNo}
+	</update>     
 </mapper>

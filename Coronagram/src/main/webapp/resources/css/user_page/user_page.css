@@ -494,6 +494,22 @@ svg {
 	 margin-left: 5px;
 	 padding-top:6px;
 }
+.postMore{
+	float: right;
+    padding: 26px 32px 0px 0px;
+    font-size: 13pt;
+    color: #aaa;
+}
+.postMore:hover{
+	color: rgb(38, 38, 38);
+}
+.cmtMore{
+	font-size: 13pt;
+    color: rgb(38, 38, 38);
+}
+.cmtMore:hover{
+	color: rgb(38, 38, 38);
+}
 .m_text{
     color:#3897f0;
     position: absolute;

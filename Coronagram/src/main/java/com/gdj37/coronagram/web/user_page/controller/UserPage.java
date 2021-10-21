@@ -164,15 +164,15 @@ public class UserPage {
 		modelMap.put("result", result);
 		return mapper.writeValueAsString(modelMap);
 	}
-	@RequestMapping(value="/coronagram/modalCmt",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@RequestMapping(value="/coronagram/mCmt",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
 	@ResponseBody
 	public String modalCmt (@RequestParam HashMap<String,String> params) throws Throwable {
 		ObjectMapper mapper = new ObjectMapper();
 		
 		Map<String,Object> modelMap = new HashMap<String,Object>();
-		List<HashMap<String,String>> modalCmt = iServiceUserPage.getModalCmt(params);
-		
-		modelMap.put("modalCmt", modalCmt);
+		List<HashMap<String,String>> mCmt = iServiceUserPage.getModalCmt(params);
+
+		modelMap.put("mCmt", mCmt);
 		return mapper.writeValueAsString(modelMap);
 	}
 	@RequestMapping(value="/coronagram/addModalCmt",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
@@ -192,6 +192,48 @@ public class UserPage {
 			result ="error";
 		}
 		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/coronagram/delModal" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String delModalCmt(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+						
+		String result ="success";
+		try {
+			int delModalCmt = iServiceUserPage.delModalCmt(params);
+			
+			if(delModalCmt==0) {
+				result="failed";
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			result ="error";
+		}
+		modelMap.put("result", result);
+		
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/coronagram/delCrng" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String delCrng(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+						
+		String result ="success";
+		try {
+			int delPost = iServiceUserPage.delPost(params);
+			
+			if(delPost==0) {
+				result="failed";
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			result ="error";
+		}
+		modelMap.put("result", result);
+		
 		return mapper.writeValueAsString(modelMap);
 	}
 }

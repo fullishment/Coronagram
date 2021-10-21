@@ -22,31 +22,31 @@
     	slide();
     });
     
-    function slide(){
-    	$('.slider').each(function(){
-            var $this = $(this);
-            var $group = $this.find('.slide-group');
-            var $slides = $this.find('.slide');
-            var buttonArray = [];
-            var currentIndex = 0;
-
-            var $nav = $('.slide-nav').find('div');
-        
-             $nav.on('click', function (event) {
-                event.preventDefault();
-                console.log($(this));
-                if ($(this).hasClass('next')) {
-                    if (currentIndex === $slides.length -1) {
-                        move(0);
-                    }
-                    move(currentIndex + 1);
-                } else {
-                    if (currentIndex === 0) {
-                        move($slides.length -1);
-                    }
-                    move(currentIndex - 1);
-                }
-            });
+    	function slide(){
+    		$('.slider').each(function(){
+	         var $this = $(this);
+	         var $group = $this.find('.slide-group');
+	         var $slides = $this.find('.slide');
+	         var buttonArray = [];
+	         var currentIndex = 0;
+	
+	         var $nav = $('.slide-nav').find('div');
+     
+          	 $nav.on('click', function (event) {
+             event.preventDefault();
+             console.log($(this));
+             if ($(this).hasClass('next')) {
+                 if (currentIndex === $slides.length -1) {
+                     move(0);
+                 }
+                 move(currentIndex + 1);
+             } else {
+                 if (currentIndex === 0) {
+                     move($slides.length -1);
+                 }
+                 move(currentIndex - 1);
+             }
+         });
 
         function move(newIndex) {
             var animateLeft, slideLeft;
@@ -77,21 +77,21 @@
                 $group.css({left: 0});
                 currentIndex = newIndex;
             });
-        }
-
-        $.each($slides, function(index) {
-            var $button = $('<button type="button" class="slide-btn">&bull;</button>');
-            if (index === currentIndex) {
-                $button.addClass('active');
-            }
-            $button.on('click', function(){
-                move(index);
-            }).appendTo('.slide-buttons');
-            buttonArray.push($button);
-        });
-        })
-    }
-/*     function reloadList(){
+	        }
+	
+	        $.each($slides, function(index) {
+	            var $button = $('<button type="button" class="slide-btn">&bull;</button>');
+	            if (index === currentIndex) {
+	                $button.addClass('active');
+	            }
+	            $button.on('click', function(){
+	                move(index);
+	            }).appendTo('.slide-buttons');
+	            buttonArray.push($button);
+	        });
+	        })
+	    }
+	function reloadList(){
 		var params=$("#actionForm").serialize();//form의 데이터를 문자열로 변환
 		
 		$.ajax({ //jquery의 ajax함수 호출
@@ -107,7 +107,7 @@
 				console.log(error);
 			}
 		});
-	} */
+	}
     function drawList(){
 		var html ="";
 		

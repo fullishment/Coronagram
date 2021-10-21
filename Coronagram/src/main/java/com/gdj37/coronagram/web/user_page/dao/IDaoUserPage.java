@@ -37,4 +37,8 @@ public interface IDaoUserPage {
 
 	public int addMCmt(HashMap<String, String> params)throws Throwable;
 
+	public int delModalCmt(HashMap<String, String> params)throws Throwable;
+
+	public int delPost(HashMap<String, String> params)throws Throwable;
+
 }
