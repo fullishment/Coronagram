@@ -186,6 +186,7 @@
         </div>
         <div class="top_text">
             <h2>회원관리</h2>
+            <div class="search_box">
             <form action="#" id="actionForm" method="post">
 				<input type="hidden" name="no" id="no" />
 				<input type="hidden" name="page" id="page" value="${page}" /> 
@@ -201,8 +202,9 @@
 				</select> 
 				<input type="text" id="searchTxt" name="searchTxt" value="${param.searchTxt}" />
 				<input type="hidden" id="oldTxt" value="${param.searchTxt}" />
-				<input type="button" id="searchBtn" value="검색" />
+				<input type="button" class="search_btn" id="searchBtn" value="검색" />
 			</form>
+			</div>
         </div>
         <div class="side_box">
             <table class="user_box">
