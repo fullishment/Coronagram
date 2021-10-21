@@ -10,5 +10,9 @@ public interface IServiceAdminUser {
 	public List<HashMap<String, String>> getadminUserList(HashMap<String, String> params)throws Throwable;
 
 	public HashMap<String, String> getAProfile(HashMap<String, String> params)throws Throwable;
+
+	public int getAProUps(HashMap<String, String> params)throws Throwable;
+
+	public int getAProDels(HashMap<String, String> params) throws Throwable;
 	
 }

@@ -37,6 +37,8 @@ public class edit_profile {
 	    
 	    return mav;
 	 }
+		
+//수정
 		@RequestMapping(value="/edit_profileUps",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
 		@ResponseBody
 		public String proUpdates (@RequestParam HashMap<String,String> params) throws Throwable {

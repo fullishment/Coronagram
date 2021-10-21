@@ -103,17 +103,20 @@ function checkVal(sel){
                 <a href="#" class="cm_msg" id="cm_msg">Message</a>
                 <a href="#" class="cm_cld" id="cm_cld">Calendar</a>
                 <div class="cm_dropdown">
-                    <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
-                    <ul class="cm_dropdown-content">
-                        <li>
-                            <a href="#" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
-                        </li>
-                        <li>
-                            <a href="#" class="cm_userinfo">개인정보수정</a>
-                        </li>
-                    </div>
-                </div>
-                
+			        <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
+			        <ul class="cm_dropdown-content">
+			          <li>
+			            <a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
+			          </li>
+			          <li>
+			            <a href="#" class="cm_userinfo">개인정보수정</a>
+			          </li>
+			    </div>
+			    <div class="cm_user_name">
+					<c:if test="${!empty sMNo}">
+						${sMNm}님 어서오세요.
+					</c:if>
+			    </div>
             </div>
         <div class="cm_menu" id="cm_menu">
             <a href="#" class="cm_mLogo">Coronagram</a>

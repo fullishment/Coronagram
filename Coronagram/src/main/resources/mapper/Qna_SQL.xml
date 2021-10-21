@@ -67,4 +67,7 @@
 			UPDATE QNA SET DEL = 0
 			WHERE QNA_NO = #{no}
 		</update>
+		
+		
+		
 </mapper>

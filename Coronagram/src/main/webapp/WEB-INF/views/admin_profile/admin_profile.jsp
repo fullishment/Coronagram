@@ -2,12 +2,20 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <!DOCTYPE html>
 <html lang="ko" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - React Profile Card with image upload</title>
+  <style>
+			#imgAtt{
+				display:none;
+			}
+			#preView{
+			width:200px;
+			hegiht:200px;
+			}
+  </style>
+  <title></title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css'>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
@@ -21,13 +29,135 @@ $(document).ready(function(){
 	$("#cancelBtn").on("click", function(){
 	      $("#backForm").submit();
 	   });
-	$("#updateForm").on("keypress", "input", function(event){
+	$("#actionForm").on("keypress", "input", function(event){
 	      if(event.keyCode == 13){
 	         return false;
 	      }
 	   });
-	
+//이미지
+	$("#imgBtn").on("click",function(){
+		$("#imgAtt").click();
+	});
+
+	$("#imgAtt").on("change",function(){
+		$("#fileName").html($(this).val().substring($(this).val().lastIndexOf("\\")+1));
+		var imgForm = $("#imgForm");
+		
+		imgForm.ajaxForm({
+				success:function(res){
+				if(res.result=="SUCCESS"){
+					if(res.fileName.length > 0){
+						$("#imgFile").val(res.fileName[0]);
+						var imgAdr = res.fileName[0].replace('[', '%5B').replace(']', '%5D');
+						//$("#preView").attr("src", "resources/upload/"+imgAdr);
+						$("#preView").html("<img src=\"resources/images/edit_profile/"+imgAdr+"\" id=\"prevImg"+"\">");
+					}
+				}else{
+					alert("파일 업로드에 실패하였습니다.");
+				}
+			},
+			error:function(req,status,error){
+				console.log(error);
+				alert("파일 업로드중 문제가 발생하였습니다.");
+			}
+		});					
+		imgForm.submit();
+	});
+//수정
+	$("#updateBtn").on("click", function(){
+	      if(checkVal("#mId")) {
+	         alert("ID를 입력해 주세요.");
+	         $("#mId").focus();
+	      }
+	      else if(checkVal("#mNm")){
+		         alert("이름을 입력하세요.");
+		         $("#mNm").focus();
+	      }
+	      else if(checkVal("#nickNm")){
+		         alert("닉네임을 입력하세요.");
+		         $("#nickNm").focus();
+	      }
+	      else if(checkVal("#mPhone")){
+	         alert("전화번호를 입력하세요.");
+	         $("#mPhone").focus();
+	         
+	      }else if(checkVal("#email")){
+	          alert("이메일을 입력하세요.");
+	          $("#email").focus();
+	         
+	      }else {
+	       		
+	         var params = $("#actionForm").serialize();
+	         
+	         $.ajax({
+	            url : "AProUps",
+	            type : "post",
+	            dataType : "json",
+	            data : params,
+	            success : function(res){
+	               if(res.result == "success"){
+	                  $("#backForm").submit();
+	               } else if(res.result == "failed"){
+	                  alert("수정에 실패하였습니다.");
+	               } else {
+	                  alert("수정중 문제가 발생했습니다.");
+	               }
+	            },
+	            error : function(request, status, error){
+	               console.log(error);
+	            }
+	        });
+		}
+	});
+//삭제
+	$("#deleteBtn").on("click",function(){
+		if(confirm("삭제하시겠습니까?")){
+			var params = $("#actionForm").serialize();
+			$.ajax({
+				url: "AProDels",
+				type: "post",
+				dataType: "json",
+				data: params,
+				success: function(res){
+					if(res.result== "success"){
+						location.href="adminUser";
+					}
+					else if(res.result== "failed"){
+						alert("삭제에 실패하였습니다.");
+					}else{
+						alert("삭제중 문제가 발생했습니다.");
+					}
+				},
+				error:function(request,status,error){
+					console.log(error);
+				}
+			});
+		}					
+	});
 });
+//공백함수
+function checkVal(sel){
+      if($.trim($(sel).val())==""){
+         return true;
+      }
+      else{
+         return false;
+      }
+   }
+$(function() {
+    $("#imgFile").on('change', function(){
+        readURL(this);
+    });
+});
+function readURL(input) {
+    if (input.files && input.files[0]) {
+       var reader = new FileReader();
+       reader.onload = function (e) {
+          $('#preImage').attr('src', e.target.result);
+       }
+       reader.readAsDataURL(input.files[0]);
+    }
+}
 </script>
 </head>
 <body>
@@ -49,13 +179,12 @@ $(document).ready(function(){
           </li>
       </div>
       <div class="cm_user_name">
-						<c:if test="${!empty sMNo}">
-							${sMNm}님 어서오세요.
-						</c:if>
-					</div>
+		<c:if test="${!empty sMNo}">
+			${sMNm}님 어서오세요.
+		</c:if>
+      </div>
     </div>
-
-    </div>
+    
     <div class="cm_menu" id="cm_menu">
       <a href="#" class="cm_mLogo">Coronagram</a>
       <a href="#" class="cm_mTitle" id="cm_mTitle">
@@ -94,18 +223,29 @@ $(document).ready(function(){
     </div>
   </header>
 <main>
-<form action="main" id="backForm" method="post">
+<form action="adminUser" id="backForm" method="post">
       <input type="hidden" name="no" value="${param.no}" />
 </form>
 <div class="card">
-  <form>
+<form id="imgForm" action="fileUploadAjax" method="post" enctype="multipart/form-data">
+	<input type="file" name="imgAtt" id="imgAtt" >
+</form>
+  <form action="#" id="actionForm" method="post">
     <div class="input_area">
-      <label for="photo-upload" class="custom-file-upload fas">
+      <!-- <label for="photo-upload" class="custom-file-upload fas">
         <div class="img-wrap img-upload">
           <img for="photo-upload" src="https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"/>
         </div>
-      </label>
-      <form action="#" id="actionForm" method="post">
+      </label> -->
+      
+    <div class="qnaImg">
+	<input type="hidden"  name="imgFile" id="imgFile" >	
+	<div id="preView" class="img-wrap">
+		<img name="image" id="image" src="resources/images/edit_profile/${fn:replace(fn:replace(data.IMG_ADR, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
+	</div>
+		<input type="button" class="fileBtn" id="imgBtn" value="사진 변경"/>
+	</div>
+	
 		   <input type="hidden" name="searchGbn" value="${param.searchGbn }" />
 		   <input type="hidden" name="searchTxt"  value="${param.searchTxt}" />
 		   <input type="hidden" name="page" value="${param.page}"  />
@@ -115,7 +255,7 @@ $(document).ready(function(){
     <input type="file" id="photo-upload" class="img-wrap img-upload"><br>
     <input type="hidden" name="id">
       <p>ID</p>
-      <input type="text" value="${data.M_ID}"><br>
+      <input type="text" id="mId" name="mId" value="${data.M_ID}"><br>
       <p>이름</p>
       <input type="text" id="mNm" name="mNm" value="${data.M_NM}"><br>
       <p>닉네임</p>
@@ -124,15 +264,17 @@ $(document).ready(function(){
       <input type="text" id="mPhone" name="mPhone" value="${data.PHONE}" onKeyup="inputTelNumber(this);" maxlength="13"><br>
       <p>이메일</p>
       <input type="text" id="email" name="email" value="${data.EMAIL}"><br>
-      백신 접종 여부 <label><input type="radio" name="vec" value="y"> 예</label>
-      <label><input type="radio" name="vec" value="n"> 아니오</label><br>
+      백신 접종 여부 <label><input type="radio" id="vec" name="vec" value="y" checked> 예</label>
+      <label><input type="radio" id="vec" name="vec" value="n"> 아니오</label><br>
       <p>주소</p>
       <input type="text" id="cm_postcode" name="cm_postcode" class="post_num" value="${data.POST_NO}">
       <button type="button" class="find_btn" onclick="cm_execDaumPostcode()">찾기</button><br>
       <input type="text" id="cm_address" name="cm_address" value="${data.ADR}"><br>
-      <input type="text" id="cm_detailAddress" name="cm_detailAddress" value="${data.DTL_ADR}"><br>mPhone
+      <input type="text" id="cm_detailAddress" name="cm_detailAddress" value="${data.DTL_ADR}"><br>
 <!-- 회원등급 -->
-      <span class="title_Name">회원등급</span><br>
+	  <p>회원등급</p>
+      <input type="text" id=acct_no name="acct_no" value="${data.ACCT_TYPE_NO}"><br>
+     <!--  <span class="title_Name">회원등급</span><br>
       <select class="user_tier" name="user_tier" >
         <option value="Bronze">Bronze</option>
         <option value="Sliver">Sliver</option>
@@ -140,15 +282,13 @@ $(document).ready(function(){
         <option value="Platinum ">Platinum </option>
         <option value="Diamond ">Diamond </option>
       </select>
-      <br>
+      <br> -->
 <!-- 포인트 -->
       <span>포인트</span> <br>
-      <input type="text" class="point_con" value="${data.POINT}">P<br>
-      
+      <input type="text" class="point_con" id="point" name="point" value="${data.POINT}">P<br>
         <button type="button" id="updateBtn" class="edit_btn">수정</button>
-        <!-- <button type="button" id="deleteBtn" class="delete_Btn">삭제</button> -->
+        <button type="button" id="deleteBtn" class="del_btn">삭제</button>
         <button type="button" id="cancelBtn" class="cancel_btn">취소</button>
-        </form>
        </div>
     </form>
 </div>

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gdj37.coronagram.common.bean.PagingBean;
 import com.gdj37.coronagram.common.service.IPagingService;
+import com.gdj37.coronagram.util.Utils;
 import com.gdj37.coronagram.web.AdminUser.service.IServiceAdminUser;
 
 @Controller
@@ -65,19 +66,62 @@ public class ControllerAdminUser {
 						
 				return mapper.writeValueAsString(modelMap);
 			}
-	//상세보기
-		@RequestMapping(value="/admin_profile")
-		public ModelAndView admin_profile(@RequestParam HashMap<String, String> params,
-								ModelAndView mav) throws Throwable {
-			HashMap<String, String> data = iServiceAdminUser.getAProfile(params);
-			
-			mav.addObject("data", data);
-			
-			mav.setViewName("admin_profile/admin_profile");
-			
-			return mav;
-		}
 	
+//상세보기 (admin_profile)
+	@RequestMapping(value="/admin_profile")
+	public ModelAndView admin_profile(@RequestParam HashMap<String, String> params,
+							ModelAndView mav) throws Throwable {
+		HashMap<String, String> data = iServiceAdminUser.getAProfile(params);
+		
+		mav.addObject("data", data);
+			
+		mav.setViewName("admin_profile/admin_profile");
+			
+		return mav;
+	}
+	
+//수정
+	@RequestMapping(value="/AProUps",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+		@ResponseBody
+		public String AProUps (@RequestParam HashMap<String,String> params) throws Throwable {
+
+			ObjectMapper mapper = new ObjectMapper();
+				Map<String,Object> modelMap = new HashMap<String,Object>();
+			String result ="success";
+			
+				int cnt =iServiceAdminUser.getAProUps(params);
+				if(cnt==0) {
+					result="failed";
+				}
+			
+			modelMap.put("result", result);
+			return mapper.writeValueAsString(modelMap);
+		}
+//삭제
+		@RequestMapping(value = "/AProDels", method = RequestMethod.POST,
+				produces = "text/json;charset=UTF-8")
+		@ResponseBody
+		public String AProDels(@RequestParam HashMap<String, String> params) throws Throwable {
+			ObjectMapper mapper = new ObjectMapper();
+				Map<String, Object> modelMap = new HashMap<String, Object>();
+			
+			String result = "success";
+			
+			try {
+				int cnt = iServiceAdminUser.getAProDels(params);
+				
+				if(cnt ==0) {
+					result = "failed";
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+				
+				result = "error";
+			}
+			modelMap.put("result", result);
+				
+			return mapper.writeValueAsString(modelMap);
+		}
 	
 	
 }

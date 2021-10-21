@@ -77,12 +77,34 @@
 		</if>
 	</select>
 	
-<!-- dtl -->
+<!-- 불러오기 -->
 	<select id="getAProfile" parameterType="hashmap" resultType="hashmap">
 		SELECT M_NO, M_ID, M_NM, NICK_NM, PHONE, EMAIL, VAC_YN, POST_NO, ADR, DTL_ADR, 
-				ACCT_TYPE_NO, POINT
+				ACCT_TYPE_NO, POINT, IMG_ADR
     	FROM M
 		WHERE M_NO = #{no}
 	</select>
+	
+<!-- update -->
+ 	<update id="getAProUps" parameterType="hashmap">
+	    UPDATE M SET M_ID = #{mId}, M_NM = #{mNm}, NICK_NM = #{nickNm},
+		    		 PHONE = #{mPhone}, EMAIL = #{email}, vac_yn=#{vec},
+		    		 POST_NO = #{cm_postcode}, 
+		   			 ADR = #{cm_address},
+		   			 DTL_ADR = #{cm_detailAddress},
+		   			 ACCT_TYPE_NO = #{acct_no},
+		   			 POINT = #{point},
+		   			 IMG_ADR = #{imgFile}
+		WHERE M_NO = #{no}
+	</update>
+	
+<!-- delete -->
+	<update id="getAProDels" parameterType="hashmap">
+		UPDATE M SET DEL = 0
+		WHERE M_NO = #{no}
+	</update>
+	
+	
+	
 	
 </mapper>

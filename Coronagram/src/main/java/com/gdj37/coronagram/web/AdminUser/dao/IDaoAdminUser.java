@@ -11,6 +11,10 @@ public interface IDaoAdminUser {
 
 	public HashMap<String, String> getAProfile(HashMap<String, String> params) throws Throwable;
 
+	public int getAProUps(HashMap<String, String> params) throws Throwable;
+
+	public int getAProDels(HashMap<String, String> params)throws Throwable;
+
 	
 
 }

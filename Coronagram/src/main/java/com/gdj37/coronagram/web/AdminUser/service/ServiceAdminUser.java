@@ -28,6 +28,16 @@ public class ServiceAdminUser implements IServiceAdminUser{
 		return iDaoAdminUser.getAProfile(params);
 	}
 
+	@Override
+	public int getAProUps(HashMap<String, String> params) throws Throwable {
+		return iDaoAdminUser.getAProUps(params);
+	}
+
+	@Override
+	public int getAProDels(HashMap<String, String> params) throws Throwable {
+		return iDaoAdminUser.getAProDels(params);
+	}
+
 	
 	
 	

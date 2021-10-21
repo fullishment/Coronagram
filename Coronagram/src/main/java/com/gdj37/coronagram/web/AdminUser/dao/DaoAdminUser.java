@@ -27,6 +27,16 @@ public class DaoAdminUser implements IDaoAdminUser{
 		return sqlSession.selectOne("adminUser.getAProfile", params);
 	}
 
+	@Override
+	public int getAProUps(HashMap<String, String> params) throws Throwable {
+		return sqlSession.update("adminUser.getAProUps",params);
+	}
+
+	@Override
+	public int getAProDels(HashMap<String, String> params) throws Throwable {
+		return sqlSession.update("adminUser.getAProDels", params);
+	}
+
 	
 	
 	

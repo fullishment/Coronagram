@@ -187,13 +187,12 @@ function checkVal(sel) {
           </li>
       </div>
       <div class="cm_user_name">
-						<c:if test="${!empty sMNo}">
-							${sMNm}님 어서오세요.
-						</c:if>
-					</div>
+		<c:if test="${!empty sMNo}">
+			${sMNm}님 어서오세요.
+		</c:if>
+	  </div>
     </div>
 
-    </div>
     <div class="cm_menu" id="cm_menu">
       <a href="#" class="cm_mLogo">Coronagram</a>
       <a href="#" class="cm_mTitle" id="cm_mTitle">
