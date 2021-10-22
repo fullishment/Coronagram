@@ -79,6 +79,7 @@
     <main>
     
 	    	<div class="con1">
+	    	   <img src="resources/images/icon/coronagram.png">
 			   <h2 class="subT">개인정보수정<h2>
 	    	   <div class="text1">
 	    		<p>사용자 닉네임:</p>

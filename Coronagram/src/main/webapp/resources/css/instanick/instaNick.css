@@ -25,6 +25,12 @@ main{
 	
 }
 
+.con1 img{
+	width: 234px;
+    height: 59px;
+    margin-left: -8px;
+}
+
 .subT{
 	font-size:45px;
 	padding-left: 18%;
@@ -88,7 +94,7 @@ main{
     height: 43px;
     border: none;
     border-radius: 7px;
-    margin-top: 7%;
+    margin-top: 1%;
     background: #0d6efd;
       }
 .login_btn:hover {
