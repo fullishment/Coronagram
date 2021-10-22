@@ -2,116 +2,128 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="userPage">
 	<select id="getMPostList" parameterType="hashmap" resultType="hashmap">
-		 <![CDATA[
-		 	SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON, C.DT, C.DEL, NVL(L.LCNT, 0) AS LCNT, NVL(CC.CCNT, 0) AS CCNT,NVL(CW.WCNT,0) AS WCNT, 
+		SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON, C.DT, C.DEL, NVL(L.LCNT, 0) AS LCNT, NVL(CC.CCNT, 0) AS CCNT,NVL(CW.WCNT,0) AS WCNT, 
        		ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
-			FROM CRNG C INNER JOIN M M
-                    ON C.WRITER_NO = M.M_NO
-                    AND M.NICK_NM = #{nickNm}
+			FROM CRNG C 
+			INNER JOIN M M
+                    	ON C.WRITER_NO = M.M_NO
+                    	AND M.NICK_NM = #{nickNm}
             INNER JOIN (SELECT WRITING_NO, FILE_ADR,
-                               RANK() OVER(PARTITION BY WRITING_NO ORDER BY ATTC_NO ASC) AS RNK
+                        RANK() OVER(PARTITION BY WRITING_NO ORDER BY ATTC_NO ASC) AS RNK
                         FROM CRNG_ATTC) CA
-                    ON C.WRITING_NO = CA.WRITING_NO
-                   AND CA.RNK = 1
-            left outer JOIN (SELECT WRITING_NO,NVL(count(*),0) AS WCNT
-                        FROM CRNG_ATTC group by WRITING_NO) CW
-                    ON C.WRITING_NO = CW.WRITING_NO
-             LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS CCNT
-                             FROM CRNG_CMT
-                             GROUP BY WRITING_NO) CC
-                         ON C.WRITING_NO = CC.WRITING_NO 
+                    	ON C.WRITING_NO = CA.WRITING_NO
+                   		AND CA.RNK = 1
+            LEFT OUTER JOIN (SELECT WRITING_NO,NVL(count(*),0) AS WCNT
+                        FROM CRNG_ATTC 
+                        GROUP BY WRITING_NO) CW
+                    	ON C.WRITING_NO = CW.WRITING_NO
+            LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS CCNT
+                        FROM CRNG_CMT
+                        GROUP BY WRITING_NO) CC
+                        ON C.WRITING_NO = CC.WRITING_NO 
             LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS LCNT
-                             FROM LK
-                             GROUP BY WRITING_NO) L
-                         ON C.WRITING_NO = L.WRITING_NO
+                        FROM LK
+                        GROUP BY WRITING_NO) L
+                        ON C.WRITING_NO = L.WRITING_NO
 			WHERE C.DEL = 1
-		 ]]>
 	</select>
 	<select id="getModalCmt" parameterType="hashmap" resultType="hashmap">
-			select CC.CMT_NO, CC.CMT_WRITER_NO,CC.WRITING_NO,cc.cmt_con,m.M_NO, m.m_nm, m.nick_nm,M.IMG_ADR
-	            ,TO_CHAR(cc.dt, 'YYYY/MM/DD HH24:MI:SS') as dt,
-	            ROW_NUMBER() OVER(ORDER BY cc.WRITING_NO DESC) AS RNUM
-	            from crng_cmt cc
-	            INNER JOIN M M
-	                    ON cc.CMT_WRITER_NO = m.m_no
-                        where CC.WRITING_NO= #{writingNo}
-                ORDER BY RNUM DESC
+		SELECT CC.CMT_NO, CC.CMT_WRITER_NO,CC.WRITING_NO,CC.CMT_CON,M.M_NO, M.M_NM, M.NICK_NM,M.IMG_ADR,
+            TO_CHAR(CC.DT, 'YYYY/MM/DD HH24:MI:SS') AS DT,
+            ROW_NUMBER() OVER(ORDER BY cc.WRITING_NO DESC) AS RNUM
+            FROM CRNG_CMT CC
+            INNER JOIN M M
+                    ON CC.CMT_WRITER_NO = M.M_NO
+                       WHERE CC.WRITING_NO= #{writingNo}
+            ORDER BY RNUM DESC
 	</select>
 	<select id="getModalM" parameterType="hashmap" resultType="hashmap">
-		 select C.WRITING_NO, C.WRITER_NO, C.CON,M.M_NO ,M.M_NM, M.IMG_ADR, M.NICK_NM
+	    SELECT C.WRITING_NO, C.WRITER_NO, C.CON,M.M_NO ,M.M_NM, M.IMG_ADR, M.NICK_NM
             from CRNG C
             INNER JOIN M M
-                        ON C.WRITER_NO = M_NO
-     
-            where m.del=1 
-            and m.NICK_NM=#{nickNm}
-            and C.writing_no = #{writingNo}
+                        ON C.WRITER_NO = M_NO   
+            WHERE M.DEL=1 
+            and M.NICK_NM=#{nickNm}
+            and C.WRITING_NO = #{writingNo}
 	</select>
 	<select id="getLkCnt" parameterType="hashmap" resultType="Integer">
-		select NVL(count(*),0) AS lkcnt from lk where WRITING_NO = #{writingNo}
+		SELECT NVL(COUNT(*),0) AS LKCNT 
+			FROM LK 
+			WHERE WRITING_NO = #{writingNo}
 	</select>
 	<select id="getIntroM" parameterType="hashmap" resultType="hashmap">
-		SELECT M_NO, IMG_ADR, M_NM, NICK_NM, INTRO_CON 
-        FROM M
-        WHERE NICK_NM = #{nickNm}
-	</select>
-	<select id="getFollow" parameterType="hashmap" resultType="Integer">
-		select NVL(count(*),0) fo from follow 
-   		where rp_user = (select m_no from m where nick_nm=#{nickNm})
-	</select>
-	<select id="getFollowing" parameterType="hashmap" resultType="Integer">
-		select NVL(count(*),0) fi from follow 
-   		where rq_user = (select m_no from m where nick_nm=#{nickNm})
-	</select>
-	
+        SELECT M.M_NO, M.IMG_ADR, M.M_NM, M.NICK_NM,M.INTRO_CON,
+            NVL(F1.FWER,0) AS FWER,NVL(F2.FWO,0) AS FWO,NVL(PCNT,0) AS PCNT
+            FROM M M
+            LEFT OUTER JOIN (SELECT RQ_USER, COUNT(*) AS FWER FROM FOLLOW
+                        GROUP BY RQ_USER) F1
+                        ON M.M_NO = F1.RQ_USER
+            LEFT OUTER JOIN (SELECT RP_USER, NVL(COUNT(*),0) AS FWO FROM FOLLOW
+                        GROUP BY RP_USER) F2
+                        ON M.M_NO = F2.RP_USER
+            LEFT OUTER JOIN (SELECT WRITER_NO, NVL(COUNT(*),0) AS PCNT FROM CRNG
+                        WHERE DEL=1
+                        GROUP BY WRITER_NO) C
+                        ON M.M_NO= C.WRITER_NO
+            WHERE M.NICK_NM = #{nickNm}
+	</select>	
 	<select id="getMDtlList" parameterType="hashmap" resultType="hashmap">
-		SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON, C.DT, C.DEL, 
-        ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
-		FROM CRNG C INNER JOIN M M
-                    ON C.WRITER_NO = M.M_NO
-                    AND M.M_NO =(select m_no from m where nick_nm=#{nickNm})
+	    SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON, C.DT, C.DEL, 
+	        ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
+			FROM CRNG C 
+			INNER JOIN M M
+                    	ON C.WRITER_NO = M.M_NO
+                    	AND M.M_NO =(SELECT M_NO FROM M WHERE NICK_NM=#{nickNm})
             INNER JOIN (SELECT WRITING_NO, FILE_ADR
                         FROM CRNG_ATTC) CA
                     	ON C.WRITING_NO = CA.WRITING_NO
-                    	AND ca.writing_no= #{writingNo}
+                    	AND CA.WRITING_NO = #{writingNo}
 			WHERE C.DEL = 1
-	</select>
-	
+	</select>	
 	<select id="getHeartCnt" parameterType="hashmap" resultType="Integer">
-		select nvl(count(*),0) as hc from lk where user_no =#{m_no} and writing_no = #{writingNo}
+		SELECT NVL(COUNT(*),0) AS HC 
+			FROM LK 
+			WHERE USER_NO = #{m_no} and WRITING_NO = #{writingNo}
 	</select>
 	<select id="getfollowEx" parameterType="hashmap" resultType="Integer">
-		SELECT  nvl(count(*),0) as fExist FROM FOLLOW WHERE RQ_USER = #{m_no} 
-            and RP_USER = (SELECT M_NO FROM M WHERE NICK_NM=#{nickNm})
+		SELECT NVL(COUNT(*),0) as FEXIST
+			FROM FOLLOW 
+			WHERE RQ_USER = #{m_no} 
+            AND RP_USER = (SELECT M_NO FROM M WHERE NICK_NM=#{nickNm})
 	</select>
 	<select id="getfollowEx2" parameterType="hashmap" resultType="Integer">
-		SELECT  nvl(count(*),0) as fExist2 FROM M WHERE M_NO= #{m_no} AND NICK_NM =#{nickNm}
+		SELECT  NVL(COUNT(*),0) AS FEXIST2 
+			FROM M 
+			WHERE M_NO= #{m_no} AND NICK_NM =#{nickNm}
 	</select>
 	<delete id="delHeart" parameterType="hashmap">
-		delete from lk where user_no =#{m_no} and writing_no= #{writingNo}
+		DELETE FROM LK 
+			WHERE USER_NO = #{m_no} 
+			AND WRITING_NO = #{writingNo}
 	</delete>
 	<insert id="addHeart" parameterType="hashmap">
-		insert into lk(user_no,writing_no) values ( #{m_no}, #{writingNo} )
-	</insert>
-    
+		INSERT INTO LK(USER_NO,WRITING_NO) 
+			VALUES (#{m_no}, #{writingNo})
+	</insert>    
     <insert id="addFollow" parameterType="hashmap">
-		insert into FOLLOW(RQ_USER,RP_USER) 
-		select #{m_no}, m_no from m where nick_nm = #{nickNm}
+		INSERT INTO FOLLOW(RQ_USER,RP_USER) 
+			SELECT #{m_no}, M_NO FROM M WHERE NICK_NM = #{nickNm}
 	</insert>
 	<delete id="delFollow" parameterType="hashmap">
-		 DELETE FROM FOLLOW 
-		 WHERE RQ_USER= #{m_no}
-         AND RP_USER = (SELECT M_NO FROM M WHERE NICK_NM = #{nickNm})
+		DELETE FROM FOLLOW 
+			WHERE RQ_USER= #{m_no}
+	        AND RP_USER = (SELECT M_NO FROM M WHERE NICK_NM = #{nickNm})
 	</delete>
 	<insert id="addMCmt" parameterType="hashmap">
-		insert into crng_cmt(WRITING_NO, CMT_WRITER_NO, CMT_CON)
-            values(#{writingNo},#{m_no},#{cmt_con})
+		INSERT INTO CRNG_CMT(WRITING_NO, CMT_WRITER_NO, CMT_CON)
+        	VALUES(#{writingNo}, #{m_no}, #{cmt_con})
 	</insert> 
 	<delete id="delModalCmt" parameterType="hashmap">
 		DELETE FROM CRNG_CMT 
-                WHERE CMT_NO = #{cmtNo}
+            WHERE CMT_NO = #{cmtNo}
 	</delete>
 	<update id="delPost" parameterType="hashmap">
-		UPDATE CRNG SET DEL = 0 WHERE WRITING_NO =#{writingNo}
+		UPDATE CRNG SET DEL = 0 
+			WHERE WRITING_NO =#{writingNo}
 	</update>     
 </mapper>

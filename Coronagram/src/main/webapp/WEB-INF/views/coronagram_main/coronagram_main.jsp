@@ -19,17 +19,20 @@
     <script>
 	    $(document).ready(function(){
 	    	reloadList();
+	    	
 	    });
-    
-	    function slide(){
+    	$(window).load(function(){
+    		
+    	});
+    	function slide(){
 	    	$('.slider').each(function(){
 	            var $this = $(this);
-	            var $group = $(this).find('.slide-group');
-	            var $slides = $(this).find('.slide');
+	            var $group = $this.find('.slide-group');
+	            var $slides = $this.find('.slide');
 	            var buttonArray = [];
 	            var currentIndex = 0;
 
-	            var $nav = $(this).children('.slide-nav').find('div');
+	            var $nav = $('.slide-nav').find('div');
 	        
 	             $nav.on('click', function (event) {
 	                event.preventDefault();
@@ -83,9 +86,9 @@
 	            if (index === currentIndex) {
 	                $button.addClass('active');
 	            }
-	            $button.on('click', function(){
+	            /* $button.on('click', function(){
 	                move(index);
-	            }).appendTo($(this).children('.slide-buttons'));
+	            }).appendTo('.slide-buttons'); */
 	            buttonArray.push($button);
 	        });
 	        })
@@ -98,7 +101,7 @@
 			dataType:"json",
 			data: params,
 			success : function(res){
-				crngPost(res.post);			
+				crngPost(res.post, res.postCmt,res.postLike, res.postTCmt);			
 				timeForToday();
 				slide();
 			},
@@ -107,121 +110,149 @@
 			}
 		});
 	}
-    function crngPost(list){
+    function crngPost(list,list2,list3,list4){
 		var html ="";	
 		
-	    
-		for(data of list){
+		var k=0;
+		 for(data of list){
 
-		html  +="	<article class=\"contents postNo\" wtno=\""+data.WRITING_NO+"\">                                                                                     ";  
-	    html  +="      <header class=\"top\">                                                                                        ";    
-	    html  +="          <div class=\"user_container\">                                                                            ";    
-	    html  +="              <div class=\"profile_img\">                                                                           ";    
-	    html  +=" 				   <img src=\""+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 ";    
-	    html  +="              </div>                                                                                              ";    
-	    html  +="              <div class=\"user_name\">                                                                             ";    
-	    html  +="                  <div class=\"nick_name m_text\">"+data.NICK_NM+"</div>                                                   ";    
-	    html  +="                  <div class=\"country s_text\">"+timeForToday(data.DT)+"</div>                                            ";    
-	    html  +="              </div>                                                                                              ";    
-	    html  +="          </div>                                                                                                  ";    
-	    html  +="          <div class=\"sprite_more_icon\" data-name=\"more\">                                                         ";    
-	    html  +="              <ul class=\"toggle_box\">                                                                             ";    
-	    if(data.M_NO == ${sMNo} ){
-	    	 html+="			   <i class=\"fas fa-ellipsis-h postMore\"></i>													 ";
-	    }	    
-	    html  +="              </ul>                                                                                               ";    
-	    html  +="          </div>                                                                                                  ";    
-	    html  +="      </header>                                                                                                   ";     
-	    html  +="      <div class=\"img_section\">                                                                                   ";    
-	    html  +="          <div class=\"trans_inner\">                                                                               ";    
-	    html  +="              <div class=\"slider\">                                                                                ";    
-	    html  +="                  <div class=\"slide-viewer\">                                                                      ";    
-	    html  +="                    <div id=\"slide-group\" class=\"slide-group\">                                                                     ";
-	    var j=1;	    
-	    var fileAdr=data.FILE_ADRS;
-        var fileAdrSplit = fileAdr.split(',');
-        for ( var i = 0; i < fileAdrSplit.length; i++) {
-        	html+=" <div class=\"slide slide-"+j+"\">                                       ";
-            html+=" <img src=\""+fileAdrSplit[i]+"\" alt=\"\" />	   						";
-           	html+=" </div>                                                                  ";
+		 html+="	<article class=\"contents postNo\" wtno=\""+data.WRITING_NO+"\">                                               ";  
+	     html+="      <header class=\"top\">                                                                                    ";    
+	     html+="          <div class=\"user_container\">                                                                        ";    
+	     html+="              <div class=\"profile_img\">                                                                       ";    
+	     html+=" 				   <img src=\""+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 ";    
+	     html+="              </div>                                                                                            ";    
+	     html+="              <div class=\"user_name\">                                                                         ";    
+	     html+="                  <div class=\"nick_name m_text\">                                        						";
+	     html+="					<a href=\"coronagram/"+data.NICK_NM+"\">"+data.NICK_NM+"</a> 								";
+	     html+="                  </div>                                        												";
+	     html+="                  <div class=\"country s_text\">"+timeForToday(data.DT)+"</div>                                 ";    
+	     html+="              </div>                                                                                            ";    
+	     html+="          </div>                                                                                                ";    
+	     html+="          <div class=\"sprite_more_icon\" data-name=\"more\">                                                   ";    
+	     html+="              <ul class=\"toggle_box\">                                                                         ";    
+	     if(data.M_NO == ${sMNo} ){
+	    	html+="			   <i class=\"fas fa-ellipsis-h postMore\"></i>													   ";
+	     }	    
+	     html+="              </ul>                                                                                             ";    
+	     html+="          </div>                                                                                                ";    
+	     html+="      </header>                                                                                                 ";     
+	     html+="      <div class=\"img_section\">                                                                               ";    
+	     html+="          <div class=\"trans_inner\">                                                                           ";    
+	     html+="              <div class=\"slider\">                                                                            ";    
+	     html+="                  <div class=\"slide-viewer\">                                                                  ";    
+	     html+="                    <div id=\"slide-group\" class=\"slide-group\">                                              ";
+	        var j=1;	    
+	        var fileAdr=data.FILE_ADRS;
+            var fileAdrSplit = fileAdr.split(',');
+            for ( var i = 0; i < fileAdrSplit.length; i++) {
+        	html+=" <div class=\"slide slide-"+j+"\">                                       									 ";
+            html+=" <img src=\""+fileAdrSplit[i]+"\" alt=\"\" />	   						   									 ";
+           	html+=" </div>                                                                  									 ";
            	j++;        	
-        }	
-	    html  +="                    </div>                                                                     ";
-	    html  +="                  </div>                                                                                          ";    
-	    html  +="                  <div class=\"slide-nav\">                                                                         ";    
-	    html  +="                      <div class=\"prev\"></div>                                                                    ";    
-	    html  +="                      <div class=\"next\"></div>                                                                    ";    
-	    html  +="                    </div>                                                                                        ";    
-	    html  +="                  <div class=\"slide-buttons\"></div>                                                               ";    
-	    html  +="              </div>                                                                                              ";    
-	    html  +="      </div>                                                                                                      ";    
-	    html  +="      <div class=\"bottom_icons\">                                                                                  ";    
-	    html  +="          <div class=\"left_icons\">                                                                                ";    
-	    html  +="              <div class=\"heart_btn\">                                                                             ";    
-	    html  +="                  <div class=\"sprite_heart_icon_outline\" name=\"39\" data-name=\"heartbeat\">                         ";    
-	    html+="                                     <input type=\"checkbox\" name=\"checkbox\" id=\"checkbox\" >                ";
-	     html+="                                     <label for=\"checkbox\">                                                    ";
+         }	
+	     html+="                    </div>                                                                     					 ";
+	     html+="                  </div>                                                                                         ";    
+	     html+="                  <div class=\"slide-nav\">                                                                      ";   
+	     if(fileAdrSplit.length > 1){
+	    	 html+="                      <div class=\"prev\"></div>                                                             ";    
+		     html+="                      <div class=\"next\"></div>                                                             "; 
+	     }     
+	     html+="                    </div>                                                                                       ";    
+	     html+="                  <div class=\"slide-buttons\"></div>                                                            ";    
+	     html+="              </div>                                                                                             ";    
+	     html+="      </div>                                                                                                     ";    
+	     html+="      <div class=\"bottom_icons\">                                                                               ";    
+	     html+="          <div class=\"left_icons\">                                                                             ";    
+	     html+="              <div class=\"heart_btn\">                                                                          ";    
+	     html+="                  <div class=\"sprite_heart_icon_outline\" name=\"39\" data-name=\"heartbeat\">                  "; 	     
+	     html+="                                     <input type=\"checkbox\" class=\"checkbox\" id=\"checkbox"+k+"\" >          ";
+	     html+="                                     <label for=\"checkbox"+k+"\" class=\"hLabel\">                              ";
+	     k++;
 	     html+="                                       <svg id=\"heart-svg\" viewBox=\"467 392 58 57\" xmlns=\"http://www.w3.org/2000/svg\"> ";
 	     html+="                                         <g id=\"Group\" fill=\"none\" fill-rule=\"evenodd\" transform=\"translate(467 392)\">";
-	     html+="                                           <path d=\"M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z\" id=\"heart\" stroke=\"#000000\" stroke-width=\"3\"></path>";
-	     html+="                                           <circle id=\"main-circ\" fill=\"#E2264D\" opacity=\"0\" cx=\"29.5\" cy=\"29.5\" r=\"1.5\"></circle>     ";
-	     html+="                                           <g id=\"grp7\" opacity=\"0\" transform=\"translate(7 6)\">                                              ";
-	     html+="                                             <circle id=\"oval1\" fill=\"#9CD8C3\" cx=\"2\" cy=\"6\" r=\"2\"></circle>                             ";
-	     html+="                                             <circle id=\"oval2\" fill=\"#8CE8C3\" cx=\"5\" cy=\"2\" r=\"2\"></circle>                             ";
+	     html+="                                           <path d=\"M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z\" class=\"heart\" stroke=\"#000000\" stroke-width=\"3\"></path>";
+	     html+="                                           <circle class=\"main-circ\" fill=\"#E2264D\" opacity=\"0\" cx=\"29.5\" cy=\"29.5\" r=\"1.5\"></circle>     ";
+	     html+="                                           <g class=\"grp7\" opacity=\"0\" transform=\"translate(7 6)\">                                              ";
+	     html+="                                             <circle class=\"oval1\" fill=\"#9CD8C3\" cx=\"2\" cy=\"6\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle class=\"oval2\" fill=\"#8CE8C3\" cx=\"5\" cy=\"2\" r=\"2\"></circle>                             ";
 	     html+="                                           </g>                                                                                                    ";
 	     html+="                                                                                                                                                   ";
 	     html+="                                           <g id=\"grp6\" opacity=\"0\" transform=\"translate(0 28)\">                                             ";
-	     html+="                                             <circle id=\"oval1\" fill=\"#CC8EF5\" cx=\"2\" cy=\"7\" r=\"2\"></circle>                             ";
-	     html+="                                             <circle id=\"oval2\" fill=\"#91D2FA\" cx=\"3\" cy=\"2\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle class=\"oval1\" fill=\"#CC8EF5\" cx=\"2\" cy=\"7\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle class=\"oval2\" fill=\"#91D2FA\" cx=\"3\" cy=\"2\" r=\"2\"></circle>                             ";
 	     html+="                                           </g>                                                                                                    ";
 	     html+="                                                                                                                                                   ";
 	     html+="                                           <g id=\"grp3\" opacity=\"0\" transform=\"translate(52 28)\">                                            ";
-	     html+="                                             <circle id=\"oval2\" fill=\"#9CD8C3\" cx=\"2\" cy=\"7\" r=\"2\"></circle>                             ";
-	     html+="                                             <circle id=\"oval1\" fill=\"#8CE8C3\" cx=\"4\" cy=\"2\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle class=\"oval2\" fill=\"#9CD8C3\" cx=\"2\" cy=\"7\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle class=\"oval1\" fill=\"#8CE8C3\" cx=\"4\" cy=\"2\" r=\"2\"></circle>                             ";
 	     html+="                                           </g>                                                                                                    ";
 	     html+="                                                                                                                                                   ";
 	     html+="                                           <g id=\"grp2\" opacity=\"0\" transform=\"translate(44 6)\">                                             ";
-	     html+="                                             <circle id=\"oval2\" fill=\"#CC8EF5\" cx=\"5\" cy=\"6\" r=\"2\"></circle>                             ";
-	     html+="                                             <circle id=\"oval1\" fill=\"#CC8EF5\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle class=\"oval2\" fill=\"#CC8EF5\" cx=\"5\" cy=\"6\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle class=\"oval1\" fill=\"#CC8EF5\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                             ";
 	     html+="                                           </g>                                                                                                    ";
 	     html+="                                           <g id=\"grp5\" opacity=\"0\" transform=\"translate(14 50)\">                                            ";
-	     html+="                                             <circle id=\"oval1\" fill=\"#91D2FA\" cx=\"6\" cy=\"5\" r=\"2\"></circle>                             ";
-	     html+="                                             <circle id=\"oval2\" fill=\"#91D2FA\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle class=\"oval1\" fill=\"#91D2FA\" cx=\"6\" cy=\"5\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle class=\"oval2\" fill=\"#91D2FA\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                             ";
 	     html+="                                           </g>                                                                                                    ";
 	     html+="                                           <g id=\"grp4\" opacity=\"0\" transform=\"translate(35 50)\">                                            ";
-	     html+="                                             <circle id=\"oval1\" fill=\"#F48EA7\" cx=\"6\" cy=\"5\" r=\"2\"></circle>                             ";
-	     html+="                                             <circle id=\"oval2\" fill=\"#F48EA7\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle class=\"oval1\" fill=\"#F48EA7\" cx=\"6\" cy=\"5\" r=\"2\"></circle>                             ";
+	     html+="                                             <circle class=\"oval2\" fill=\"#F48EA7\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                             ";
 	     html+="                                           </g>                                                                                                    ";
 	     html+="                                           <g id=\"grp1\" opacity=\"0\" transform=\"translate(24)\">                                               ";
-	     html+="                                             <circle id=\"oval1\" fill=\"#9FC7FA\" cx=\"2.5\" cy=\"3\" r=\"2\"></circle>                           ";
-	     html+="                                             <circle id=\"oval2\" fill=\"#9FC7FA\" cx=\"7.5\" cy=\"2\" r=\"2\"></circle>                           ";
+	     html+="                                             <circle class=\"oval1\" fill=\"#9FC7FA\" cx=\"2.5\" cy=\"3\" r=\"2\"></circle>                           ";
+	     html+="                                             <circle class=\"oval2\" fill=\"#9FC7FA\" cx=\"7.5\" cy=\"2\" r=\"2\"></circle>                           ";
 	     html+="                                           </g>                                                                                                    ";
 	     html+="                                         </g>                                                                                                      ";
 	     html+="                                       </svg>                                                                                                      ";
 	     html+="                                     </label>                                                                                                      ";
-	    html  +="                  </div>                                                                                            ";
-	    html  +="              </div>                                                                                                ";
-	    html+="                       <div class=\"sprite_bubble_icon\">                                                                                          ";
+	     html+="                           </div>                                                                                        						   ";
+	     html+="              		   </div>                                                                                                					   ";
+	     html+="                       <div class=\"sprite_bubble_icon\">                                                                                          ";
 	     html+="                           <i class=\"far fa-comment f_size\"></i>                                                                                 ";
 	     html+="                       </div>                                                                                                                      ";
 	     html+="                       <div class=\"sprite_share_icon\" data-name=\"share\">                                                                       ";
 	     html+="                           <i class=\"far fa-paper-plane f_size\"></i>                                                                             ";
 	     html+="                       </div>                                                                                                                      ";
-	    html  +="          </div>                                                                                                    ";
-	    html  +="          <div class=\"right_icon\">                                                                                  ";
-	    html  +="              <div class=\"sprite_bookmark_outline\" data-name=\"bookmark\"></div>                                      ";
-	    html  +="          </div>                                                                                                    ";
-	    html  +="      </div>                                                                                                        ";
-	    html  +="      <div class=\"likes m_text\">                                                                                    ";
-	    html  +="      </div>                                                                                                        ";
-	    html  +="      <div class=\"comment_container\">                                                                               ";
-	    html  +="      </div>                                                                                                        ";
-	    html  +="      <div class=\"comment_field\" id=\"add-comment-post37\">                                                           ";
-	    html  +="          <input type=\"text\" placeholder=\"댓글달기...\">                                                             ";
-	    html  +="          <div class=\"upload_btn m_text\" data-name=\"comment\">게시</div>                                             ";
-	    html  +="      </div>                                                                                                        ";
-	    html  +="  </article>                                                                                                        ";
-	    
+	     html+="          </div>                                                                                                    							   ";
+	     html+="          <div class=\"right_icon\">                                                                                  							   ";
+	     html+="              <div class=\"sprite_bookmark_outline\" data-name=\"bookmark\"></div>                                      						   ";
+	     html+="          </div>                                                                                                    							   ";
+	     html+="      </div>                                                                                                        							   ";
+	     html+="      <div class=\"likes head_text\">                                                                                    						   ";
+	     html+="			좋아요<span id=\"like-count-39\">"+data.LC+"</span>개																				       ";	
+	     html+="      </div>                                                                                                        							   ";
+	     html+="      <div class=\"comment_container\">                                                                               							   ";
+	     html+="      <div class=\"comment_cnt\"> ";
+	     html+="		<a href=\"\" class=\"total_cmt_cnt\">댓글"+data.CCNT+"개 모두 보기</a>																										";
+	     html+="	  </div>	";
+	     for(data2 of list2){
+	    	 if(data2.WRITING_NO == data.WRITING_NO){
+	    		 html+="<div class=\"cmt_area\"> ";
+	    		 html+="<div class=\"comment_container\" no=\""+data2.CMT_NO+"\">         ";
+			     html+="   <div class=\"comment\" id=\"comment-list-ajax-post37\">        ";
+			     html+="       <div class=\"comment-detail\">                             ";
+			     html+="           <div class=\"cmt_list head_text\">      						  ";
+			     html+="			<a href=\"coronagram/"+data2.NICK_NM+"\">"+data2.NICK_NM+"</a> ";
+			     html+="           </div>      											  ";
+			     html+="              <div class=\"ccon\">"+data2.CMT_CON+"</div>         ";
+			     html+="          </div>                                                  ";
+			     html+="       </div>                                                	  ";			     
+			     html+="   </div>                                                         ";
+			     html+="<div class=\"timer\">"+timeForToday(data2.DT)+"</div>             ";
+			     if(data2.CMT_WRITER_NO == ${sMNo}){
+			    	 html+="	<i class=\"fas fa-ellipsis-h cmtMore\"></i>				  ";
+			     }			     
+			     html+="</div>";
+		     }
+	     }    
+	     html+="      </div>                                                                                                        							   ";
+	     html+="      <div class=\"comment_field\" id=\"add-comment-post37\">                                                           						   ";
+	     html+="          <input type=\"text\" placeholder=\"댓글달기...\">                                                             							   ";
+	     html+="          <div class=\"upload_btn m_text\" data-name=\"comment\">게시</div>                                             							   ";
+	     html+="      </div>                                                                                                        							   ";
+	     html+="  </article>                                                                                                        							   ";
 		}
 		
 		$("#contents_box").html(html);

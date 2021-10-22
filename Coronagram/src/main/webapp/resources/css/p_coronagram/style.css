@@ -166,13 +166,17 @@ body{
     margin-bottom: 60px;
     background: white;
 }
-
+.cmt_area{
+	display: flex;
+    padding-left: 6px;
+}
 
 .contents .top{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.09);
 }
 
 
@@ -228,14 +232,26 @@ body{
 
 .contents .img_section img{
     width: 100%;
+    position: absolute;
+    bottom: 68px;
 }
-
-
+.hLabel{
+	display: inline-block;
+    height: 23px;
+    width: 20px;
+}
+.heart_btn{
+	padding-right: 13px;
+}
+.left_icons{
+	height: 23px;
+}
 .contents .bottom_icons{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 0px 0px 20px;
+    border-top:1px solid rgba(0,0,0,0.09);
 }
 
 .contents .bottom_icons .left_icons{
@@ -243,7 +259,6 @@ body{
 }
 
 .contents .bottom_icons .left_icons > div{
-    margin-right: 10px;
     cursor:pointer;
 }
 
@@ -254,24 +269,79 @@ body{
 .sprite_heart_icon_outline.on {
     background: url('../imgs/background01.png') no-repeat -26px -261px;
 }
+.total_cmt_cnt{
+	text-decoration: none;
+    padding-left: 12px;
+    color: #8e8e8e;
+    line-height: inherit;
+    font-size: 10pt;
+}
+.nick_name a:link{
+	text-decoration:none;
+	color:#262626;
+}
+.nick_name a:visited{
+	text-decoration:none;
+	color:#262626;
+}
+.nick_name a:hover{
+	text-decoration:underline;
+}
 
+.cmt_list a:link{
+	text-decoration:none;
+	color:#262626;
+}
+.cmt_list a:visited{
+	text-decoration:none;
+	color:#262626;
+}
+.cmt_list a:hover{
+	text-decoration:underline;
+}
+
+.total_cmt_cnt:link{
+	text-decoration: none;
+    color: #8e8e8e;
+}
+.total_cmt_cnt:visited{
+	text-decoration: none;
+    color: #8e8e8e;
+}
 
 .contents .likes{
     padding: 5px 20px;
     color:#262626;
 }
-
-
+.head_text{
+	font-size: 14px;
+    font-weight: bold;
+    padding-top: 6px;
+}
 .contents .comment_container{
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 20px;
+ 	display: flex;
+    align-items: flex-start;
+    padding: 0px 0px 7px 7px;
+    max-height: 100px;
+    flex-direction: column;
+}
+.cmtMore{
+	padding-top: 9px;
+    padding-left: 10px;
+    font-size: 13pt;
+    color: #aaa;
+}
+.cmtMore:hover{
+	color: rgb(38, 38, 38);
 }
 .contents .comment_container .comment{
     display:flex;
     flex-direction: column;
     font-size: 14px;
+}
+.ccon{
+	padding-left: 10px;
+    padding-top: 5px;
 }
 
 .contents .comment_container .comment-detail{
@@ -286,9 +356,8 @@ body{
 .contents .timer{
     font-size: 10px;
     letter-spacing: 0.2px;
-    color:#999;
-    border-bottom: 1px solid rgba(0,0,0,0.09);
-    padding: 10px 20px;
+    color: #999;
+    padding: 10px 0px 6px 10px;
 }
 
 
@@ -296,6 +365,7 @@ body{
     min-height:56px;
     padding: 0 20px;
     position: relative;
+    border-top: 1px solid rgba(0,0,0,0.09);
 }
 
 

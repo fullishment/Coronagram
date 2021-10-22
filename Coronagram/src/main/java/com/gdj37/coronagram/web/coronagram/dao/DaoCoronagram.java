@@ -18,4 +18,9 @@ public class DaoCoronagram implements IDaoCoronagram{
 		return sqlSession.selectList("crng.getPostList",params);
 	}
 
+	@Override
+	public List<HashMap<String, String>> getPostCmt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("crng.getPostCmt",params);
+	}
 }

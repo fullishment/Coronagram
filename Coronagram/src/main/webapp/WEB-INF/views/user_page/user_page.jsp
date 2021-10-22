@@ -33,14 +33,12 @@
             window.onclick = function(event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
-                    reloadList();
                 }
             }           
         });
         function modalFunc(){
             $(".close").on("click",function(){
             	document.getElementById("myModal").style.display="none";
-            	reloadList();
             });
         }
         function reloadList(){
@@ -52,11 +50,11 @@
 				data:params,
 				success : function(res){
 					$("#myModal").val("");
-					ProfileImg(res.intro);
-					imgList(res.list);
+					ProfileImg(res.intro);				
 					intro(res.intro);
 					introNm(res.intro);				
-					profileCnt(res.follow, res.following);
+					profileCnt(res.intro);
+					imgList(res.list);
 					followArea();
 					editProfile();
 					addFollow();
@@ -67,22 +65,55 @@
 				}
 			});
 		}
+        function reloadImgList(){
+			var params=$("#addrForm").serialize();		
+			$.ajax({ 
+				url:"userpages",
+				type:"post",
+				dataType:"json",
+				data:params,
+				success : function(res){		
+					profileCnt(res.intro);
+					imgList(res.list);			
+				},
+				error : function(request,status,error){
+					console.log(error);
+				}
+			});
+		}
+        function reloadFollowArea(){
+        	var params=$("#addrForm").serialize();		
+			$.ajax({ 
+				url:"userpages",
+				type:"post",
+				dataType:"json",
+				data:params,
+				success : function(res){			
+					profileCnt(res.intro);
+				},
+				error : function(request,status,error){
+					console.log(error);
+				}
+			});
+        }
         function intro(intro){
         	var html ="";
-        		html+="<h1 id=\"mId\" class=\"profile-user-name\">"+intro.NICK_NM+"</h1> ";
+        		html+="<h1 id=\"mId\" class=\"profile-user-name\">"+intro.NICK_NM+"</h1> 	  ";
         		$(".profile-user-setting").html(html);      	
         }
         function introNm(data){
         	var html ="";
-	        	html+="<span class=\"profile-real-name\">"+data.M_NM+"</span>	";
-	        	html+="<div class=\"intro_con\">"+data.INTRO_CON+"</div>		";
+	        	html+="<span class=\"profile-real-name\">"+data.M_NM+"</span>			 	  ";
+	        	if(data.INTRO_CON != '' && data.INTRO_CON != null){
+	        		html+="<div class=\"intro_con\">"+data.INTRO_CON+"</div>			 	  ";
+	        	}	        	
         		$(".profile-bio").html(html);
         }
-        function profileCnt(data1,data2){
+        function profileCnt(data){
 			var html ="";
-				html +="<li>게시물 <span class=\"profile-stat-count\"></span></li>";
-			    html +="<li>팔로워 <span class=\"profile-stat-count\">"+data1+"</span></li>";
-			    html +="<li>팔로우 <span class=\"profile-stat-count\">"+data2+"</span></li>";
+				html +="<li>게시물 <span class=\"profile-stat-count\">"+data.PCNT+"</span></li> ";
+			    html +="<li>팔로워 <span class=\"profile-stat-count\">"+data.FWER+"</span></li> ";
+			    html +="<li>팔로우 <span class=\"profile-stat-count\">"+data.FWO+"</span></li>  ";
 	    		$("#profile-stat").html(html);
         }
         
@@ -96,15 +127,15 @@
 				    html+= "        <span class=\"visually-hidden\">Gallery</span><i class=\"fas fa-clone\" aria-hidden=\"true\"></i>	";
 				    html+= "    </div>																						    		";
 				}
-			    html+= "    	<div class=\"gallery-item-info\">                                                            "; 
-			    html+= "        <ul>                                                                                     	 "; 
-			    html+= "            <li class=\"gallery-item-likes\"><span class=\"visually-hidden\">Likes:</span><i         "; 
-			    html+= "                    class=\"fas fa-heart\" aria-hidden=\"true\"></i>"+data.LCNT+"</li>               "; 
-			    html+= "            <li class=\"gallery-item-comments\"><span class=\"visually-hidden\">Comments:</span><i   "; 
-			    html+= "                    class=\"fas fa-comment\" aria-hidden=\"true\"></i>"+data.CCNT+"</li>             "; 
-			    html+= "        	</ul>                                                                                    ";
-			    html+= "    	</div>                                                                                       "; 
-		    	html+= "</div>                                                                                           	 "; 
+			    html+= "    	<div class=\"gallery-item-info\">                                                            			"; 
+			    html+= "        <ul>                                                                                     	 			"; 
+			    html+= "            <li class=\"gallery-item-likes\"><span class=\"visually-hidden\">Likes:</span><i         			"; 
+			    html+= "                    class=\"fas fa-heart\" aria-hidden=\"true\"></i>"+data.LCNT+"</li>               			"; 
+			    html+= "            <li class=\"gallery-item-comments\"><span class=\"visually-hidden\">Comments:</span><i   			"; 
+			    html+= "                    class=\"fas fa-comment\" aria-hidden=\"true\"></i>"+data.CCNT+"</li>             			"; 
+			    html+= "        </ul>                                                                                    	 			";
+			    html+= "    	</div>                                                                                       			"; 
+		    	html+= "</div>                                                                                           	 			"; 
 			}			
 			$("#gallery").html(html);
 		}
@@ -138,54 +169,54 @@
 	    function ModalContent(data){   
 	    	var html ="";
 	    		
-				 html+="   	<div class=\"modal-content\" no=\""+data.WRITING_NO+"\">                                                     ";
-			     html+="       <div class=\"modal_img\">                                                                                 ";
-			     html+="           <div class=\"slider\">                                                                                ";
-			     html+="               <div class=\"slide-viewer\">                                                                      ";
-			     html+="               <div id=\"slide-group\" class=\"slide-group\">                                                    ";	                                                                        
-			     html+="               </div>                                                                                            ";
-			     html+="               </div>                                                                                            ";
-			     html+="               <div class=\"slide-nav\">                                                                         ";
-			     html+="                   <div class=\"prev\"></div>                                                                    ";
-			     html+="                   <div class=\"next\"></div>                                                                    ";
-			     html+="               </div>                                                                                            ";
-			     html+="               <div class=\"slide-buttons\"></div>                                                               ";
-			     html+="           </div>                                                                                                ";
-			     html+="       </div>                                                                                                    ";
-			     html+="       <div class=\"modal_box\">                                                                                 ";
-			     html+="           <div class=\"cmt_head\">                                                                              ";			     		     
-			     html+="               <span id=\"close\" class=\"close\">&times;</span>                                                 ";
+				 html+="   	<div class=\"modal-content\" no=\""+data.WRITING_NO+"\">                                                    								   ";
+			     html+="       <div class=\"modal_img\">                                                                               									   ";
+			     html+="           <div class=\"slider\">                                                                              									   ";
+			     html+="               <div class=\"slide-viewer\">                                                                    									   ";
+			     html+="               <div id=\"slide-group\" class=\"slide-group\">                                                  									   ";	                                                                        
+			     html+="               </div>                                                                                          									   ";
+			     html+="               </div>                                                                                          									   ";
+			     html+="               <div class=\"slide-nav\">                                                                       									   ";
+			     html+="                   <div class=\"prev\"></div>                                                                 									   ";
+			     html+="                   <div class=\"next\"></div>                                                                  									   ";
+			     html+="               </div>                                                                                           								   ";
+			     html+="               <div class=\"slide-buttons\"></div>                                                             									   ";
+			     html+="           </div>                                                                                              									   ";
+			     html+="       </div>                                                                                                  									   ";
+			     html+="       <div class=\"modal_box\">                                                                               									   ";
+			     html+="           <div class=\"cmt_head\">                                                                            									   ";			     		     
+			     html+="               <span id=\"close\" class=\"close\">&times;</span>                                               									   ";
 			     if(data.M_NO == ${sMNo} ){
-			    	 html+="			   <i class=\"fas fa-ellipsis-h postMore\"></i>													 ";
+			    	 html+="			   <i class=\"fas fa-ellipsis-h postMore\"></i>													 								   ";
 			     }	
-			     html+="               <div class=\"user_container\">                                                                    ";
-			     html+="                   <div class=\"profile_img\">                                                                   ";
-			     html+=" 						<img src=\"../"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 	 ";
-			     html+="                   </div>                                                                                        ";
-			     html+="                   <div class=\"user_name\">                                                                     ";
-			     html+="                       <div class=\"nick_name head_text\">"+data.NICK_NM+"</div>                                 ";
-			     html+="                   </div>                                                                                        ";
-			     html+="               </div>                                                                                            ";
-			     html+="           </div>                                                                                                ";
-			     html+="           <div class=\"cmt_sec1\">                                                                              ";
-			     html+="               <div class=\"user_container\">                                                                	 ";
-			     html+="                   <div class=\"profile_img\">                                                                   ";
-			     html+=" 						<img src=\"../"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 ";
-			     html+="				   </div>																						 ";
-			     html+="                   <div class=\"user_name\">                                                                 	 ";
-			     html+="                        <div class=\"nick_name head_text\">"+data.NICK_NM+"</div>                             	 ";
-			     html+="                   </div>                                                                                    	 ";
-			     html+="               </div>                                                                                     	 	 ";
-			     html+="               <div class=\"modal_con\">"+data.CON+"</div>                                                   	 ";
-			     html+="               <div class=\"modal_cmt\"></div> 																 	 ";
-			     html+="           </div>                                                                                                ";
-			     html+="           <div class=\"cmt_sec2\">                                                                              ";
-			     html+="               <div class=\"bottom_icons\">                                                                      ";
-			     html+="                   <div class=\"left_icons\">                                                                    ";
-			     html+="                       <div class=\"heart_btn\">                                                                 ";
-			     html+="                           <div class=\"sprite_heart_icon_outline\" name=\"39\" data-name=\"heartbeat\">         ";			     											
-			     html+="                                     <input type=\"checkbox\" name=\"checkbox\" id=\"checkbox\" >                ";
-			     html+="                                     <label for=\"checkbox\">                                                    ";
+			     html+="               <div class=\"user_container\">                                                                  									   ";
+			     html+="                   <div class=\"profile_img\">                                                                 									   ";
+			     html+=" 						<img src=\"../"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 		   ";
+			     html+="                   </div>                                                                                      									   ";
+			     html+="                   <div class=\"user_name\">                                                                   									   ";
+			     html+="                       <div class=\"nick_name head_text\">"+data.NICK_NM+"</div>                               									   ";
+			     html+="                   </div>                                                                                       								   ";
+			     html+="               </div>                                                                                         									   ";
+			     html+="           </div>                                                                                             									   ";
+			     html+="           <div class=\"cmt_sec1\">                                                                            									   ";
+			     html+="               <div class=\"user_container\">                                                                									   ";
+			     html+="                   <div class=\"profile_img\">                                                                   								   ";
+			     html+=" 						<img src=\"../"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 	   ";
+			     html+="				   </div>																						 								   ";
+			     html+="                   <div class=\"user_name\">                                                                 	 								   ";
+			     html+="                        <div class=\"nick_name head_text\">"+data.NICK_NM+"</div>                             	 								   ";
+			     html+="                   </div>                                                                                    	 								   ";
+			     html+="               </div>                                                                                     	 	 								   ";
+			     html+="               <div class=\"modal_con\">"+data.CON+"</div>                                                   	 								   ";
+			     html+="               <div class=\"modal_cmt\"></div> 																 	 								   ";
+			     html+="           </div>                                                                                                								   ";
+			     html+="           <div class=\"cmt_sec2\">                                                                              								   ";
+			     html+="               <div class=\"bottom_icons\">                                                                      								   ";
+			     html+="                   <div class=\"left_icons\">                                                                    								   ";
+			     html+="                       <div class=\"heart_btn\">                                                                 								   ";
+			     html+="                           <div class=\"sprite_heart_icon_outline\" name=\"39\" data-name=\"heartbeat\">         								   ";			     											
+			     html+="                                     <input type=\"checkbox\" name=\"checkbox\" id=\"checkbox\" >                								   ";
+			     html+="                                     <label for=\"checkbox\">                                                    								   ";
 			     html+="                                       <svg id=\"heart-svg\" viewBox=\"467 392 58 57\" xmlns=\"http://www.w3.org/2000/svg\"> ";
 			     html+="                                         <g id=\"Group\" fill=\"none\" fill-rule=\"evenodd\" transform=\"translate(467 392)\">";
 			     html+="                                           <path d=\"M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z\" id=\"heart\" stroke=\"#000000\" stroke-width=\"3\"></path>";
@@ -241,7 +272,7 @@
 			     html+="           </div>                                                                                                                                  ";
 			     html+="           <div class=\"cmt_field\" id=\"cmt_field\">                                                                                              ";
 			     html+="               <textarea id=\"cmt_con\" class=\"cmt_con\" placeholder=\"댓글 달기...\"></textarea>                                                    ";
-			     html+="               <div class=\"m_text head_text\" id=\"add_cmt\">게시</div>                                                                             ";
+			     html+="               <div class=\"m_text head_text\" id=\"add_cmt\">게시</div>                                                                    			";
 			     html+="           </div>                                                                                                                                   ";
 			     html+="       </div>                                                                                                                          				";
 			     html+="   </div>                                                                                                                              				";
@@ -351,7 +382,8 @@
 						data : params,
 						success : function(res){
 							if(res.result=="success"){
-								reloadList();
+								document.getElementById('myModal').style.display = "none";
+								reloadImgList();								
 							}else{							
 								alert("게시글 삭제 실패");
 							}
@@ -428,7 +460,7 @@
 	    function ProfileImg(data){                                                                                                                         
 			var html ="";
 				
-                html+=" <img src=\"../"+data.IMG_ADR+"\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />  ";
+				html+=" <img src=\"../"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 		   ";
 					
 			$(".profile-image").html(html);
 		}
@@ -511,10 +543,9 @@
 			    html +="<i class=\"fas fa-user-check\"></i>					";
 			    html +="</button>											";
 			}else if(data1 == 0 && data2 > 0){
-				html +="<button id=\"editBtn\" class=\"btn profile-edit-btn\">Edit Profile</button>";
-				html +="<button class=\"btn profile-settings-btn\" aria-label=\"profile settings\">";
-				html +="<i class=\"fas fa-cog\" aria-hidden=\"true\"></i>						   ";
-				html +="</button>															   	   ";
+				html +="<button id=\"editBtn\" class=\"btn profile-edit-btn\">		         	   ";
+				html +="	Edit Profile <i class=\"fas fa-cog\" aria-hidden=\"true\"></i>		   ";
+				html +="</button>																   ";
 			}else{
 				alert("error");
 			}		
@@ -530,7 +561,8 @@
 	    			data : params,
 	    			success : function(res){
 	    				if(res.result=="success"){
-	    					followArea(); 						    					
+	    					followArea(); 	
+	    					reloadFollowArea();
 	    				}else{
 	    					alert("add실패");
 	    				}
@@ -551,7 +583,8 @@
 					data : params,
 					success : function(res){
 						if(res.result=="success"){
-							followArea();						
+							followArea();
+							reloadFollowArea();
 						}else{							
 							alert("삭제실패");
 						}

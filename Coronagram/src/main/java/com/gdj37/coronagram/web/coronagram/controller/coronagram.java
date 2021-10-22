@@ -33,8 +33,10 @@ public class coronagram {
 		Map<String,Object> modelMap= new HashMap<String,Object>();
 
 		List<HashMap<String,String>> post = iServiceCoronagram.getPostList(params);
+		List<HashMap<String,String>> postCmt = iServiceCoronagram.getPostCmt(params);
 		
 		modelMap.put("post", post);
+		modelMap.put("postCmt", postCmt);
 		
 		return mapper.writeValueAsString(modelMap);	
 	}

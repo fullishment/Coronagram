@@ -19,4 +19,9 @@ public class ServiceCoronagram implements IServiceCoronagram{
 		return iDaoCoronagrma.getPostList(params);
 	}
 
+	@Override
+	public List<HashMap<String, String>> getPostCmt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.getPostCmt(params);
+	}
 }

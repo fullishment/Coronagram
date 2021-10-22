@@ -44,22 +44,41 @@ public class ServiceUserPage implements IServiceUserPage{
 	}
 
 	@Override
-	public int getFollow(HashMap<String, String> params) throws Throwable {
+	public int getfollowEx2(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
-		return iDaoUserPage.getFollow(params);
+		return iDaoUserPage.getfollowEx2(params);
 	}
-
+	
 	@Override
-	public int getFollowing(HashMap<String, String> params) throws Throwable {
+	public int getfollowEx(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
-		return iDaoUserPage.getFollowing(params);
+		return iDaoUserPage.getfollowEx(params);
 	}
 
 	@Override
 	public int getHeartCnt(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return iDaoUserPage.getHeartCnt(params);
+	}	
+
+	@Override
+	public int delModalCmt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.delModalCmt(params);
 	}
+
+	@Override
+	public int addFollow(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.addFollow(params);
+	}
+
+	@Override
+	public int delFollow(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.delFollow(params);
+	}
+
 
 	@Override
 	public int addHeart(HashMap<String, String> params) throws Throwable {
@@ -77,42 +96,12 @@ public class ServiceUserPage implements IServiceUserPage{
 	public int getLkCnt(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return iDaoUserPage.getLkCnt(params);
-	}
-
-	@Override
-	public int getfollowEx(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return iDaoUserPage.getfollowEx(params);
-	}
-
-	@Override
-	public int getfollowEx2(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return iDaoUserPage.getfollowEx2(params);
-	}
-
-	@Override
-	public int addFollow(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return iDaoUserPage.addFollow(params);
-	}
-
-	@Override
-	public int delFollow(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return iDaoUserPage.delFollow(params);
-	}
+	}	
 
 	@Override
 	public int addMCmt(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return iDaoUserPage.addMCmt(params);
-	}
-
-	@Override
-	public int delModalCmt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return iDaoUserPage.delModalCmt(params);
 	}
 
 	@Override
