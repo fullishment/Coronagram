@@ -1,4 +1,4 @@
-package com.gdj37.coronagram.web.AdminUser.controller;
+	package com.gdj37.coronagram.web.AdminUser.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -72,9 +72,9 @@ public class ControllerAdminUser {
 	public ModelAndView admin_profile(@RequestParam HashMap<String, String> params,
 							ModelAndView mav) throws Throwable {
 		HashMap<String, String> data = iServiceAdminUser.getAProfile(params);
-		
+		List <HashMap<String, String >> list = iServiceAdminUser.getACCTList(params);
 		mav.addObject("data", data);
-			
+		mav.addObject("testList", list);
 		mav.setViewName("admin_profile/admin_profile");
 			
 		return mav;

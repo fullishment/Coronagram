@@ -38,6 +38,13 @@ public class ServiceAdminUser implements IServiceAdminUser{
 		return iDaoAdminUser.getAProDels(params);
 	}
 
+	@Override
+	public List<HashMap<String, String>> getACCTList(HashMap<String, String> params) throws Throwable {
+		return iDaoAdminUser.getACCTList(params);
+	}
+
+
+
 	
 	
 	

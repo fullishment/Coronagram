@@ -5,7 +5,7 @@ body{
   justify-content: center;
   background-position:  200% -40%;
   background-size: 80%;
-  overflow:auto; 
+  overflow-x:hidden
   
 }
 p{
@@ -22,7 +22,7 @@ p{
   /* position: fixed; */
   position:absolute;
   top: 85px;
-  right: 31%;
+  left: 35%;
   display: flex;
   justify-content: center;
   box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
@@ -71,8 +71,12 @@ label{
   border-radius: 50%;
 }
 
-
-
+.qnaImg{
+	position: absolute;
+    top: 21px;
+    left: 140px;
+    pointer-events: none;
+}
 .img-upload:before{
   content: "\f093";
   font-size: 90px;
@@ -97,6 +101,11 @@ label{
 img {
   width: auto;
   height: 100%;
+}
+.fileBtn {
+	border : none;
+	background : none;
+	margin-left: 70px;
 }
 input[type="file"] {
   display: none;

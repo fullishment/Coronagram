@@ -190,7 +190,7 @@
             <form action="#" id="actionForm" method="post">
 				<input type="hidden" name="no" id="no" />
 				<input type="hidden" name="page" id="page" value="${page}" /> 
-				<select id="searchGbn" name="searchGbn">
+				<select id="searchGbn" name="searchGbn" class="searchGbn">
 					<option value="0">회원번호</option>
 					<option value="1">ID</option>
 					<option value="2">이름</option>

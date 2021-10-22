@@ -7,7 +7,7 @@
 <head>
   <meta charset="UTF-8">
   <style>
-			#imgAtt{
+			#imgBtn{
 				display:none;
 			}
 			#preView{
@@ -257,11 +257,11 @@ $("input:radio[name='vec']").removeAttr("checked");
 </form>
    <form action="#" id="updateForm" method="post">
     <div class="input_area">
-      <!-- <label for="photo-upload" class="custom-file-upload fas">
-        <div class="img-wrap img-upload">호버그림
-          <img for="photo-upload"  src="resources/images/edit_profile/edit_profile.png" /> 이미지그림 
+      <label for="imgBtn" class="custom-file-upload fas">
+        <div class="img-wrap img-upload">
+          <img for="photo-upload" src="https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"/>
         </div>
-      </label> -->
+      </label> 
     <div class="qnaImg">
 		<input type="hidden"  name="imgFile" id="imgFile" >	
 		<div id="preView" class="img-wrap">
@@ -289,8 +289,17 @@ $("input:radio[name='vec']").removeAttr("checked");
       <input type="text" id="mPhone" name="mPhone" value="${data.PHONE}" onKeyup="inputTelNumber(this);" maxlength="13"><br>
       <p>이메일</p>
       <input type="text" id="email" name="email" value="${data.EMAIL}"><br>
-      백신 접종 여부<label><input type="radio" id="vac_y" name="vec" value="y" checked> 예</label>
-                <label><input type="radio" id="vac_n" name="vec" value="n"> 아니오</label><br>
+      백신 접종 여부
+      <c:choose>
+		<c:when test="${data.VAC_YN eq 'y'}">
+			<label><input type="radio" id="vec" name="vec" value="y" checked> 예</label>
+      		<label><input type="radio" id="vec" name="vec" value="n"> 아니오</label><br>
+		</c:when>
+		<c:otherwise>
+			<label><input type="radio" id="vec" name="vec" value="y" > 예</label>
+      		<label><input type="radio" id="vec" name="vec" value="n" checked> 아니오</label><br>
+		</c:otherwise>      
+      </c:choose>
       <p>주소</p>
       <input type="text" id="cm_postcode" name="cm_postcode" class="post_num" value="${data.POST_NO}">
       <button type="button" class="find_btn" onclick="cm_execDaumPostcode()">찾기</button><br>
