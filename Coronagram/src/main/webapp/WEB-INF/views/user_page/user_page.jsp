@@ -89,7 +89,7 @@
 	    function imgList(list){
 			var html ="";			
 			for(var data of list){                                                                                    
-				html+= "<div class=\"gallery-item\" tabindex=\"0\" wtno=\""+data.WRITING_NO+"\" no=\""+data.M_NO+"\">               "; 
+				html+= "<div class=\"gallery-item\" tabindex=\"0\" wtno=\""+data.WRITING_NO+"\" no=\""+data.M_NO+"\">                   "; 
 			    html+= "    	<img src=\"../"+data.FILE_ADR+"\" class=\"gallery-image\" alt=\"\" />									"; 
 				if(data.WCNT>1){
 				    html+= "	<div class=\"gallery-item-type\">																		";
