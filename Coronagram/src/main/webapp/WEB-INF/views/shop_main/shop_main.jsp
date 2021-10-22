@@ -34,10 +34,10 @@
 		html+= "<div class=\"card\" no=\""+data.PROD_NO+"\">                                                                                          ";
         html+= "<div class=\"top-bar\">                                                                                       ";
         html+= "  <i class=\"fab fa-apple\"></i>                                                                              ";
-        html+= "  <em class=\"stocks\">Elec</em>                                                                              ";
+        html+= "  <em class=\"stocks\">"+data.CAT_NO+"</em>                                                                              ";
         html+= "</div>                                                                                                      ";
         html+= "<div class=\"img-container\">                                                                                 ";
-        html+= "  <img class=\"product-img\" src=\"https://purepng.com/public/uploads/large/apple-watch-pcq.png\" alt=\"\">       ";
+        html+= "  <img class=\"product-img\" src=\""+data.FILE_ADDR+"\" alt=\"\">       ";
         html+= "</div>                                                                                                      ";
         html+= "<div class=\"details\">                                                                                       ";
         html+= "  <div class=\"name-fav\">                                                                                    ";
@@ -53,8 +53,7 @@
         html+= "    <p class=\"product-price\">"+data.POINT+"포인트</p>                                                                    ";
         html+= "    <span class=\"btn-add\">                                                                                  ";
         html+= "<div>                                                                                                 ";
-        html+= "<button class=\"add-btn\" id=\"detailBtn\">detail <i class=\"fas fa-chevron-down\"></i></button>                         ";
-        html+= "<button class=\"add-btn\" id=\"addBtn\">Add <i class=\"fas fa-chevron-right\"></i></button>                           ";
+        html+= "<button class=\"add-btn\" id=\"detailBtn\">자세히보기 <i class=\"fas fa-chevron-right\"></i></button>                           ";
         html+= "</div>                                                                                                ";
         html+= "</span>                                                                                                 ";
         html+= "</div>                                                                                                    ";

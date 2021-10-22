@@ -3,6 +3,7 @@ package com.gdj37.coronagram.web.shop.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpSession;
 
@@ -85,9 +86,7 @@ public class ShopController {
 		
 		return mav;
 	}
-	
-	
-	
+
 	@RequestMapping(value="/shopCarts" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
 	@ResponseBody
 	public String cartList(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
@@ -95,6 +94,8 @@ public class ShopController {
 		Map<String,Object> modelMap= new HashMap<String,Object>();
 		List<HashMap<String,String>> list = iServiceShop.getCartList(params);
 		HashMap<String,String> cnt = iServiceShop.getCartCnt(params);
+		HashMap<String,String> mP = iServiceShop.getPoint(params);
+		modelMap.put("mP", mP);
 		modelMap.put("cnt", cnt);
 		modelMap.put("list", list);
 		return mapper.writeValueAsString(modelMap);
@@ -129,35 +130,73 @@ public class ShopController {
 		String result="success";
 		try {
 			int addO = iServiceShop.addOrder(params);
-			if(addO==0) {
+			if(addO!=0) { 
+				
 				result="failed";
+				
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			result="error";
-		}
-
-		modelMap.put("result", result);
-		return mapper.writeValueAsString(modelMap);
-	}
-	@RequestMapping(value="/ordPAdd" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
-	@ResponseBody
-	public String ordPAdd(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
-		ObjectMapper mapper = new ObjectMapper();
-		Map<String,Object> modelMap= new HashMap<String,Object>();
-		String result="success";
-		try {
-			int cnt = iServiceShop.addOrdP(params);
-			if(cnt==0) {
-				result="failed";
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			result="error";
 		}
 		
 		modelMap.put("result", result);
 		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/orderAdds" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String orderAdds(ModelAndView mav, @RequestParam HashMap<String,String> paramss) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		String result="success";
+		int addOP = iServiceShop.addOrdP(paramss);
+		if(addOP==0) {
+			result="failed";
+		}
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}  
+	
+	@RequestMapping(value="/cartAllDel" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String cartAllDel(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		String result="success";
+		int cartAllDel = iServiceShop.cartAllDel(params);
+		int pointM = iServiceShop.pointMinus(params);
+		if(cartAllDel==0 || pointM==0) {
+			result="failed";
+		}
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}
+	
+	
+	
+	
+	@RequestMapping(value="/prodShipping")
+	public ModelAndView prodShipping(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		mav.setViewName("prod_shipping/prod_shipping");
+		return mav;
+	}
+	@RequestMapping(value="/prodSpList" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String prodSpList(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		List<HashMap<String,String>> list = iServiceShop.getOrdList(params);
+		modelMap.put("list", list);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/adminShopAdd")
+	public ModelAndView adminShopAdd(ModelAndView mav) throws Throwable {
+		mav.setViewName("shop_add/shop_add");
+		return mav;
+	}
+	@RequestMapping(value="/adminShopMgt")
+	public ModelAndView adminShopMgt(ModelAndView mav) throws Throwable {
+		mav.setViewName("admin_shop_mgt/admin_shop_mgt");
+		return mav;
 	}
 }

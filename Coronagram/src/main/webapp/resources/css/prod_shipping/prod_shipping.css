@@ -103,6 +103,10 @@ th{
       margin-left: 15px;
       background: white;
   }
+  .btn :hover{
+  	opacity : 0.4;
+  	cursor : pointer;
+  }
   .btn p {
             display: block;
             background: black;

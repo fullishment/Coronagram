@@ -17,7 +17,6 @@
     <script type="text/javascript">
     $(document).ready(function(){
     	redrawCartList();
-    	console.log(parseInt($("#ono1").parent().children(".up_con3").children("#qt").html()))
     	$("#delBtn").on("click",function(){
     		delCart();
     	});
@@ -49,27 +48,115 @@
     	
     	$("#cartList").on("click",".qt-plus",function(){
     	   var qt = parseInt($(this).prev().html());
-    	   
+    	   var no = parseInt($(this).prev().attr("no"));
     	   $(this).prev().html(qt + 1);
-    	   
+    	   $(this).prev().attr("no",no+1);
     	   var total = parseInt($("#totalP").html());
     	   $("#totalP").html( total + (parseInt($(this).parent().next().children().html())));
-    	   
+    	   $("#totalPInp").val(parseInt($("#totalP").html()));
     	   
     	   
    	   	});
     	
    	   	$("#cartList").on("click",".qt-minus",function(){
    	   		var qt = parseInt($(this).next().html());
+   	   		var no = parseInt($(this).next().attr("no"));
+   	   		
    	   		if(qt > 1){ 
-	   	   		$(this).next().html(qt - 1);	
+	   	   		$(this).next().html(qt - 1);
+	   	   		$(this).next().attr("no",no-1);
    	   		}
    	   		var total = parseInt($("#totalP").html());
  	   		$("#totalP").html( total - (parseInt($(this).parent().next().children().html())));
+ 	   		
+ 	   		$("#totalPInp").val(parseInt($("#totalP").html()));
     	});
     	   
     	   
     	
+   
+    
+    
+    $("#orderBtn").click(function(){
+    	$("#totalPInp").val(parseInt($("#totalP").html()));
+    	var totalP= $("#totalPInp").val();
+    	var mP= parseInt($("#mPoint").html());
+    	var resultP= mP-totalP;
+    	console.log(resultP);
+    	$("#totalPInp").val(resultP);
+		if(checkVal("#cm_postcode")){
+			alert("우편번호를 입력해주세요");
+		}else if(checkVal("#cm_address")){
+			alert("주소를 입력해주세요");
+		}else if(checkVal("#cm_detailAddress")){
+			alert("상세주소를 입력해주세요");
+		}else if(resultP<0){
+			alert("보유한 포인트가 부족합니다.");
+		}else if(confirm("주문하시겠습니까?")){
+			var sccnt = 0;
+    		var cnt = parseInt($("#totalCnt").html());
+    		var flag = 0;
+   			for(var i=0; i<cnt; i++){
+ 						var params=$("#orderForm").serialize();
+ 				    	$.ajax({ 
+ 							url : "orderAdd",
+ 							type : "post",
+ 							dataType : "json",
+ 							data : params,
+ 							success : function(res){
+ 								sccnt++;
+ 								if(sccnt==cnt){
+ 						 			var rescnt=0;
+ 						 			for(var j=0;j<cnt;j++){
+ 						 				$("#noIndex").val(cnt-j);
+	 						 			$("#pNoIn").val($("#pno"+j).val());
+	 			 						$("#optNoIn").val($("#ono"+j).val());
+	 			 						$("#qNoIn").val($("#qt"+j).attr("no"));
+	 			 						var paramss=$("#orderForm").serialize();
+	 						 			$.ajax({ 
+	 							    		url : "orderAdds",
+	 							    		type : "post",
+	 							    		dataType : "json",
+	 							    		data : paramss,
+	 							    		success : function(res){
+	 							    			if(res.result == "success"){
+	 							    				rescnt++;
+	 							    				if(rescnt==cnt){
+	 							    					$.ajax({
+	 							    						url : "cartAllDel",
+	 				 							    		type : "post",
+	 				 							    		dataType : "json",
+	 				 							    		data : params,
+	 				 							    		success : function(res){
+	 				 							    			location.href="prodShipping";
+	 				 							    		},
+	 				 							   			error : function(request, status, error){
+	 				 							       			console.log(error);
+	 				 							       		}
+	 							    					});
+	 							    				}
+	 							    			}
+	 							    		},
+	 							   			error : function(request, status, error){
+	 							       			console.log(error);
+	 							       		}
+	 						   			});
+ 						 				
+ 						 			}
+ 					   			}
+ 							},
+ 							error : function(request, status, error){
+ 				   				console.log(error);
+ 				   			}
+ 						});
+   				
+
+			}
+   			
+   			
+		}
+    });
+});
     function checkVal(sel){
     	if($.trim($(sel).val())==""){
     		return true;
@@ -112,52 +199,6 @@
             } 
         }).open();
     }
-    
-    
-    $("#orderBtn").click(function(){
-		if(checkVal("#cm_postcode")){
-			alert("우편번호를 입력해주세요");
-		}else if(checkVal("#cm_address")){
-			alert("주소를 입력해주세요");
-		}else if(checkVal("#cm_detailAddress")){
-			alert("상세주소를 입력해주세요");
-		}else if(confirm("주문하시겠습니까?")){
-    		var cnt = parseInt($("#totalCnt").html());
-   			var params=$("#orderForm").serialize();
-        	$.ajax({ 
-    			url : "orderAdd",
-    			type : "post",
-    			dataType : "json",
-    			data : params,
-    			success : function(res){
-    				for(var i=0; i<cnt; i++){
-    	    			var qt = parseInt($("#ono"+i).parent().children(".up_con3").children("#qt").html());
-    	    			$("#oNoIn").val($("#ono"+i));
-    	    			$("#pNoIn").val($("#pno"+i));
-    	    			$("#oNoIn").val($("#ono"+i));
-    	    			$("#qNoIn").val(qt);
-    	    			params = $("#orderFrom").serialize();
-    	    			$.ajax({
-    	    				url : "ordPAdd",
-    	    				type :"post",
-    	    				dataType : "json",
-    	    				data : params,
-    	    				success : function(res){
-    	    					
-    	    				},
-    	    				error : function(request, status, error){
-    	        				console.log(error);
-    	        			}
-    	    			});
-    				}
-    			},
-    			error : function(request, status, error){
-    				console.log(error);
-    			}
-    		});
-		}
-	});
-});
     function delCart(){
     	var valueArr = new Array();
     	var inp = $("input[name=\"cartCheck\"]");
@@ -205,7 +246,7 @@
 			dataType : "json",
 			data : params,
 			success : function(res){
-				drawCartList(res.list,res.cnt);
+				drawCartList(res.list,res.cnt,res.mP);
 			},
 			error : function(request, status, error){
 				console.log(error);
@@ -220,16 +261,16 @@
 	    
     	
     } 
-    function drawCartList(list,cnt){
+    function drawCartList(list,cnt,mP){
     	var html="";
     	var total=0;
     	var totalhtml = "";
  		var i=0;
     	for(var data of list){
     			html+="<div class=\"lcon2_up\">								";
-    			html+="<input type=\"hidden\" name=\"cno\" value=\""+data.CART_NO+"\" id=\"cno"+i+"\">";
-    			html+="<input type=\"hidden\" name=\"pno\" value=\""+data.PROD_NO+"\" id=\"pno"+i+"\">";
-    			html+="<input type=\"hidden\" name=\"ono\" value=\""+data.ORT_NO+"\" id=\"ono"+i+"\">";    			
+    			html+="<input type=\"hidden\" name=\"cno"+i+"\" value=\""+data.CART_NO+"\" id=\"cno"+i+"\">";
+    			html+="<input type=\"hidden\" name=\"pno"+i+"\" value=\""+data.PROD_NO+"\" id=\"pno"+i+"\">";
+    			html+="<input type=\"hidden\" name=\"ono"+i+"\" value=\""+data.OPT_NO+"\" id=\"ono"+i+"\">";    			
    				html+="<input type=\"checkbox\" name=\"cartCheck\" class=\"check_btn\" value=\""+data.CART_NO+"\" checked id=\"checkbox"+i+"\">						";
    				html+="<label for=\"checkbox"+i+"\"></label>"
 				html+="<div class=\"up_con1\"><img alt=\"\" src=\""+data.FILE_ADDR+"\"></div>                                             ";
@@ -241,7 +282,7 @@
 				html+="	</div>                                                              ";
 				html+="	<div class=\"up_con3\">                                               ";
 				html+="		<span class=\"qt-minus\">-</span>                                     ";
-				html+="		<span class=\"qt\" id =\"qt\">1</span>                                           ";
+				html+="		<span class=\"qt\" id =\"qt"+i+"\" no=\"1\">1</span>                                           ";
 				html+="		<span class=\"qt-plus\">+</span>                                      ";
 				html+="	</div>                                                                  ";
 				html+="		<div class=\"up_con4\">                                               ";
@@ -253,7 +294,9 @@
     	}
     	totalhtml +="<div class=\"entire_item\"><span>전체 상품</span><span id=\"totalCnt\">"+cnt.CNT+"개</span></div>";
 	    totalhtml +="<div class=\"order_price\"><span>주문 금액</span><span id=\"totalP\">"+total+"</span></div>";
-	    totalhtml +="<div class=\"order_price\"><span>보유 포인트</span><span>"+cnt.POINT+"P</span></div>";
+	    totalhtml +="<div class=\"order_price\"><span>보유 포인트</span><span id=\"mPoint\">"+mP.POINT+"P</span></div>";
+	    
+	    $("#totalPInp").val(total);
 	    
     	$("#rcon2_con2").html(totalhtml);
     	$("#cartList").html(html);
@@ -364,10 +407,12 @@
 				            <input type="text" id="cm_address" name="adr" placeholder="주소"><br>
 				            <input type="text" id="cm_detailAddress" name="dtlAdr"  placeholder="상세주소"><br>
 				            <input type="hidden" name="sMNo" id="sMNo" value="${sMNo}" />
-				            <input type="hidden" name="oNo" id="oNoIn" value="" />
-				            <input type="hidden" name="pNo" id="pNoIn" value="" />
-				            <input type="hidden" name="qNo" id="qNoIn" value="" />
-				            <input type="hidden" name="cNo" id="cNoIn" value="" />
+				            <input type="hidden" name="oNoI" id="optNoIn" value="" />
+				            <input type="hidden" name="pNoI" id="pNoIn" value="" />
+				            <input type="hidden" name="qNoI" id="qNoIn" value="" />
+				            <input type="hidden" name="totalPInp" id="totalPInp" value=""/>
+				            <input type="hidden" name="noIndex" id="noIndex" value=""/>
+				            
                         </form>
                         <button class="addr_btn" id="addr_btn">배송지 등록</button>
                     </div>

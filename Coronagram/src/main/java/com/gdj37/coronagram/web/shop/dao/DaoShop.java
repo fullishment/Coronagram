@@ -74,7 +74,7 @@ public class DaoShop implements IDaoShop {
 
 
 	@Override
-	public Integer getOrdNo(HashMap<String, String> params) throws Throwable {
+	public int getOrdNo(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("shop.getOrdNo",params);
 	}
@@ -84,6 +84,30 @@ public class DaoShop implements IDaoShop {
 	public int addOrdP(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("shop.addOrdP",params);
+	}
+
+	@Override
+	public int cartAllDel(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("shop.cartAllDel", params);
+	}
+
+	@Override
+	public int pointMinus(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.update("shop.pointMinus", params);
+	}
+
+	@Override
+	public HashMap<String, String> getPoint(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shop.getPoint",params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getOrdList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("shop.getOrdList",params);
 	}
 
 

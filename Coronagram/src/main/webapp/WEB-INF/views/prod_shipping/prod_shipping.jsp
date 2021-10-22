@@ -14,7 +14,55 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
+	<script type="text/javascript">
+		$(document).ready(function(){
+			if($("#sMNo").val() != null && $("#sMNo").val() != ""){
+				redrawList();
+			}
+			$("#dataBtn").on("click",function(){
+				var endDate = $("#order_list2").val();
+				$("#startDate").val($("#order_list1").val());
+				
+				$("#endDate").val($("#order_list2").val());
+				console.log($("#startDate").val());
+				console.log($("#endDate").val());
+				redrawList();
+			});
+		});
+	function redrawList(){
+		var params = $("#actionForm").serialize();
+		$.ajax({
+			url : "prodSpList",
+			type : "post",
+			dataType : "json",
+			data : params,
+			success : function(res){
+				drawList(res.list);
+			},
+			error : function(request, status, error){
+				console.log(error);
+			}
+		});
+	}
+	function drawList(list){
+		var html="";
+		for(var data of list){
+		html+="<tr>                  ";
+        html+="<td>"+data.CAT_NO+"</td>      ";
+        html+="<td>"+data.PROD_NO+"</td>      ";
+        html+="<td>"+data.PROD_NM+"</td>  ";
+        html+="<td>"+data.USER_NO+"</td>      ";
+        html+="<td>"+data.POST_NO+"</br>      ";
+        html+=""+data.ADR+"</br>      ";
+        html+=""+data.DTL_ADR+"</td>      ";
+        html+="<td>"+data.ORD_DT+"</td>      ";
+        html+="<td>"+data.ORD_STAT+"</td>      ";
+        
+        html+="</tr>                 ";
+		}
+		$("tbody").html(html);
+	}
+	</script>
 </head>
 
 <body>
@@ -81,6 +129,11 @@
     </div>
   </header>
     <main>
+    <form action="#" id="actionForm">
+    	<input type="hidden" name="sMNo" id="sMNo" value="${sMNo}">
+    	<input type="hidden" name="startDate" id="startDate" value="">
+    	<input type="hidden" name="endDate" id="endDate" value="">
+    </form>
         <nav>
             <div class="top_text">
                 <h1>주문/배송 조회</h1>
@@ -99,10 +152,11 @@
             <div class="order_box">
                 <div class="cancel_select">
                     <div class="order_list">
-                        <input type="date" id="order_list1">
+
+                        <input type="date" id="order_list1" name="date1" >
                         <span>&nbsp;&nbsp;~&nbsp;&nbsp;</span>
-                        <input type="date" id="order_list2">
-                        <button class="btn"><p>조회</p></button>
+                        <input type="date" id="order_list2" name="date2" >
+                    <button class="btn" id="dataBtn"><p>조회</p></button>
                     </div>
                     <br>
                     <span><h3>주문 내역</h3></span>
@@ -112,51 +166,19 @@
                 <table class="user_box">
                         <thead>
                             <tr>
-                                <th>선택</th>
                                 <th>카테고리 번호</th>
                                 <th>상품번호</th>
                                 <th>상품명</th>
                                 <th>주문 회원번호</th>
-                                <th>전화번호</th>
                                 <th>주소</th>
                                 <th>구매일</th>
                                 <th>배송 상태</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><input type="checkbox" class="chk"></td>
-                                <td>Ipsum</td>
-                                <td>Dolor</td>
-                                <td>Lorem</td>
-                                <td>Ipsum</td>
-                                <td>Dolor</td>
-                                <td>Lorem</td>
-                                <td>Lorem</td>
-                                <td>결제 완료</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="chk"></td>
-                                <td>Ipsum</td>
-                                <td>Dolor</td>
-                                <td>Lorem</td>
-                                <td>Ipsum</td>
-                                <td>Dolor</td>
-                                <td>Lorem</td>
-                                <td>Lorem</td>
-                                <td>배송 완료</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="chk"></td>
-                                <td>Ipsum</td>
-                                <td>Dolor</td>
-                                <td>Lorem</td>
-                                <td>Ipsum</td>
-                                <td>Dolor</td>
-                                <td>Lorem</td>
-                                <td>Lorem</td>
-                                <td>배송 완료</td>
-                            </tr>
+                           <div class="notlogin">
+                           		<p>로그인 이후 사용가능합니다</p>
+                           </div>
                         </tbody>
                 </table>
             </div>

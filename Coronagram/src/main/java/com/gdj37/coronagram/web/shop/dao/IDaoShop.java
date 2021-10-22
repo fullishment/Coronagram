@@ -26,9 +26,17 @@ public interface IDaoShop {
 	public int addOrder(HashMap<String, String> params)throws Throwable;
 
 
-	public Integer getOrdNo(HashMap<String, String> params)throws Throwable;
+	public int getOrdNo(HashMap<String, String> params)throws Throwable;
 
 	public int addOrdP(HashMap<String, String> params)throws Throwable;
+
+	public int cartAllDel(HashMap<String, String> params)throws Throwable;
+
+	public int pointMinus(HashMap<String, String> params)throws Throwable;
+
+	public HashMap<String, String> getPoint(HashMap<String, String> params)throws Throwable;
+
+	public List<HashMap<String, String>> getOrdList(HashMap<String, String> params)throws Throwable;
 
 
 

@@ -3,10 +3,14 @@
 <mapper namespace="shop">
 
 	<select id="getProdList" parameterType="hashmap" resultType="hashmap">
-		SELECT PROD_NO,REG_NO,CAT_NO,PROD_NM,POINT,CON,SALE_STAT,PROD_DT,DEL
-		FROM PRODUCT
-		WHERE 1=1
-	</select>
+		SELECT P.PROD_NO,REG_NO,CAT_NO,PROD_NM,POINT,CON,SALE_STAT,PROD_DT,PA.FILE_ADDR
+		FROM PRODUCT P
+    		JOIN (SELECT PROD_NO,FILE_ADDR,RANK() OVER(PARTITION BY PROD_NO ORDER BY ATTC_NO ASC) AS RNK
+                FROM PROD_ATTC) PA
+            ON P.PROD_NO = PA.PROD_NO
+            AND RNK = 1
+		WHERE DEL=0
+	</select> 
 	<select id="getProd" parameterType="hashmap" resultType="hashmap">
 		SELECT PROD_NO,REG_NO,CAT_NO,PROD_NM,POINT,CON,SALE_STAT,PROD_DT,DEL
 		FROM PRODUCT
@@ -29,7 +33,7 @@
 		WHERE PROD_NO= #{prodNo} AND PRICE = #{price} AND UNIT=#{unit}
 	</insert>
 	<select id="getCartList" parameterType="hashmap" resultType="hashmap">
-		SELECT C.CART_NO, C.M_NO,C.OPT_NO,O.PRICE,O.UNIT,P.CON,P.PROD_NM,P.POINT,PA.FILE_ADDR,P.PROD_NO
+		SELECT C.CART_NO, C.M_NO,O.OPT_NO,O.PRICE,O.UNIT,P.CON,P.PROD_NM,P.POINT,PA.FILE_ADDR,P.PROD_NO
 		FROM CART C 
 		JOIN PRODUCT P
 		    ON C.PROD_NO = P.PROD_NO
@@ -42,32 +46,63 @@
 		WHERE C.M_NO = #{sMNo}
 	</select>
 	<select id="getCartCnt" parameterType="hashmap" resultType="hashmap">
-		SELECT COUNT(C.PROD_NO) AS CNT ,SUM(P.POINT) AS SUM,SUM(M.POINT) AS POINT
+		SELECT COUNT(C.PROD_NO) AS CNT ,NVL(SUM(P.POINT),0) AS SUM
 		FROM CART C
 		JOIN PRODUCT P
 		    ON C.PROD_NO= P.PROD_NO
-        INNER JOIN M M
-        ON M.M_NO = C.M_NO
-		WHERE C.M_NO = 6
+		WHERE C.M_NO = #{sMNo}
 	</select>
 	<delete id="cartDel" parameterType="Integer" >
 		DELETE
 		FROM CART
 		WHERE CART_NO = #{cartList}
 	</delete>
-	<insert id="addOrder" parameterType="hashmap">
+	<insert id="addOrder" parameterType="hashmap" >
 		INSERT INTO ORD (ORD_NO,USER_NO,ORD_STAT,POST_NO,ADR,DTL_ADR)
 		VALUES (ORD_SEQ.NEXTVAL,#{sMNo},1,#{postNo},#{adr},#{dtlAdr})
 	</insert>
-	<select id="getOrd" parameterType="hashmap" resultType="Integer">
+	<select id="getOrdNo" parameterType="hashmap" resultType="Integer">
 		SELECT O.ORD_NO as ORD_NO
-		FROM (SELECT ORD_NO,USER_NO,RANK() OVER(PARTITION BY USER_NO ORDER BY ORD_DT DESC) RNK
+		FROM (SELECT ORD_NO,USER_NO,RANK() OVER(PARTITION BY USER_NO ORDER BY ORD_NO DESC) RNK
         		FROM ORD) O
     		  WHERE USER_NO = #{sMNo}
-   		AND RNK= 1;
+   		AND RNK= 1
 	</select>
 	<insert id="addOrdP" parameterType="hashmap">
+		        
 		INSERT INTO ORDER_PROD(ORDER_NO,PROD_NO,OPT_NO,QTY)
-		VALUES(#{ono},#{pno},#{ono},#{qt})
+		SELECT O.ORD_NO as ORD_NO ,#{pNoI},#{oNoI},#{qNoI}
+		FROM (SELECT ORD_NO,USER_NO,RANK() OVER(PARTITION BY USER_NO ORDER BY ORD_NO DESC) RNK
+		        		FROM ORD )O
+		WHERE USER_NO = #{sMNo}
+		AND RNK= #{noIndex}
+		
 	</insert>
+	<delete id="cartAllDel" parameterType="hashmap">
+		DELETE
+		FROM CART
+		WHERE M_NO = #{sMNo}
+	</delete>
+	<update id="pointMinus" parameterType="hashmap">
+		UPDATE M SET POINT = #{totalPInp}
+		WHERE M_NO= #{sMNo}
+	</update>
+	<select id="getPoint" parameterType="hashmap" resultType="hashmap">
+		SELECT POINT
+		FROM M
+		WHERE M_NO = #{sMNo}
+	</select>
+	<select id="getOrdList" parameterType="hashmap" resultType="hashmap">
+		SELECT P.CAT_NO,P.PROD_NO,P.PROD_NM,O.USER_NO,O.POST_NO,O.ADR,O.DTL_ADR,TO_CHAR(O.ORD_DT,'YYYY-MM-DD') AS ORD_DT,O.ORD_STAT
+		FROM ORD O
+		    INNER JOIN ORDER_PROD OP
+		    ON O.ORD_NO = OP.ORDER_NO
+		    INNER JOIN PRODUCT P
+		    ON OP.PROD_NO = P.PROD_NO
+		WHERE O.USER_NO=#{sMNo}
+		<if test = "startDate != null and startDate !='' and endDate != null and endDate !=''"  >
+				AND TO_CHAR(O.ORD_DT,'YYYY-MM-DD') BETWEEN #{startDate} AND #{endDate}+1
+		</if>
+		ORDER BY O.ORD_NO
+	</select>
 </mapper>

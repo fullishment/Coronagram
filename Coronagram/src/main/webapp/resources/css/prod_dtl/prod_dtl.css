@@ -195,10 +195,13 @@ p {
             color: #fff;
             cursor: pointer;
         }
-
+		
 
         
         /* 구매버튼 */
+        .otherLinksCont{
+        	display:flex;
+        }
         .otherLinksCont ul.otherLinks {
             width: 100%;
             float: left;
