@@ -61,11 +61,4 @@ public class ServiceCoronagram implements IServiceCoronagram{
 		return iDaoCoronagrma.FollowAdd(params);
 	}
 
-	@Override
-	public int FollowDel(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return iDaoCoronagrma.FollowDel(params);
-	}
-
-
 }

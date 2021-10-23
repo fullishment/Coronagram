@@ -506,9 +506,8 @@ body{
     flex-direction: column;
 }
 .rec_follow{
-	position: fixed;
-    right: 160px;
-	
+	position: absolute;
+    right: 25px;
 }
 .fospan{
 	color:#0095f6;

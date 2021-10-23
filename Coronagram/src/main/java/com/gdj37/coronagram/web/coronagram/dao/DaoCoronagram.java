@@ -65,12 +65,4 @@ public class DaoCoronagram implements IDaoCoronagram{
 		// TODO Auto-generated method stub
 		return sqlSession.insert("crng.FollowAdd",params);
 	}
-
-	@Override
-	public int FollowDel(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
-		return sqlSession.delete("crng.FollowDel",params);
-	}
-
-
 }

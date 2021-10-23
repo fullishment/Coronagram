@@ -23,9 +23,10 @@
             LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS CCNT FROM CRNG_CMT
                             GROUP BY WRITING_NO) CN
                             ON C.WRITING_no = CN.WRITING_NO
-            LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS LEX FROM LK
-                                GROUP BY WRITING_NO) LX
+            LEFT OUTER JOIN (SELECT WRITING_NO,USER_NO,NVL(COUNT(*),0) AS LEX FROM LK
+                                GROUP BY WRITING_NO,USER_NO) LX
                                 ON C.WRITING_NO = LX.WRITING_NO
+                                AND LX.USER_NO =#{m_no}
 			WHERE C.WRITER_NO IN (SELECT RP_USER FROM FOLLOW WHERE RQ_USER=#{m_no})
 			ORDER BY C.DT DESC
 	</select>
@@ -81,9 +82,4 @@
 		INSERT INTO FOLLOW(RQ_USER,RP_USER) 
 			SELECT #{m_no}, M_NO FROM M WHERE M_NO = #{m_no2}
 	</insert>
-	<delete id="FollowDel" parameterType="hashmap">
-		DELETE FROM FOLLOW 
-			WHERE RQ_USER= #{m_no}
-	        AND RP_USER = (SELECT M_NO FROM M WHERE M_NO = #{m_no2})
-	</delete>
 </mapper>

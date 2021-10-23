@@ -20,7 +20,4 @@ public interface IServiceCoronagram {
 	public List<HashMap<String, String>> getNotFollow(HashMap<String, String> params)throws Throwable;
 
 	public int FollowAdd(HashMap<String, String> params)throws Throwable;
-
-	public int FollowDel(HashMap<String, String> params)throws Throwable;
-
 }

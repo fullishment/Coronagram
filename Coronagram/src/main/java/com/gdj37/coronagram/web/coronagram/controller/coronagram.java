@@ -123,24 +123,4 @@ public class coronagram {
 		
 		return mapper.writeValueAsString(modelMap);
 	}
-	
-	@RequestMapping(value="/FollowDel",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
-	@ResponseBody
-	public String FollowDel (@RequestParam HashMap<String,String> params) throws Throwable {
-		ObjectMapper mapper = new ObjectMapper();
-		Map<String,Object> modelMap = new HashMap<String,Object>();
-		String result ="success";
-		try {
-			int FollowD = iServiceCoronagram.FollowDel(params);
-			if(FollowD==0) {
-				result="failed";
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-			result ="error";
-		}	
-		modelMap.put("result", result);
-		
-		return mapper.writeValueAsString(modelMap);
-	}
 }
