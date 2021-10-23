@@ -15,11 +15,9 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> <!-- jquery-->
     <link rel="stylesheet" href="resources/css/p_coronagram/common.css?after">
     <link rel="stylesheet" href="resources/css/p_coronagram/style.css">
-    <script src="resources/script/coronagram_main/coronagram_main.js?after"></script>
     <script>
 	    $(document).ready(function(){
 	    	reloadList();
-	    	
 	    });
     	$(window).load(function(){
     		
@@ -86,9 +84,9 @@
 	            if (index === currentIndex) {
 	                $button.addClass('active');
 	            }
-	            /* $button.on('click', function(){
+	            $button.on('click', function(){
 	                move(index);
-	            }).appendTo('.slide-buttons'); */
+	            }).appendTo('.slide-buttons');
 	            buttonArray.push($button);
 	        });
 	        })
@@ -101,8 +99,11 @@
 			dataType:"json",
 			data: params,
 			success : function(res){
-				crngPost(res.post, res.postCmt,res.postLike, res.postTCmt);			
+				crngPost(res.post, res.postCmt);			
 				timeForToday();
+				heart(res.post);
+				heartAD();
+				addPostCmt();
 				slide();
 			},
 			error : function(request,status,error){
@@ -110,7 +111,7 @@
 			}
 		});
 	}
-    function crngPost(list,list2,list3,list4){
+    function crngPost(list,list2){
 		var html ="";	
 		
 		var k=0;
@@ -164,11 +165,12 @@
 	     html+="      </div>                                                                                                     ";    
 	     html+="      <div class=\"bottom_icons\">                                                                               ";    
 	     html+="          <div class=\"left_icons\">                                                                             ";    
-	     html+="              <div class=\"heart_btn\">                                                                          ";    
+	     html+="              <div class=\"heart_btn\">                                                                          ";
+	     
 	     html+="                  <div class=\"sprite_heart_icon_outline\" name=\"39\" data-name=\"heartbeat\">                  "; 	     
 	     html+="                                     <input type=\"checkbox\" class=\"checkbox\" id=\"checkbox"+k+"\" >          ";
 	     html+="                                     <label for=\"checkbox"+k+"\" class=\"hLabel\">                              ";
-	     k++;
+	     k++; 
 	     html+="                                       <svg id=\"heart-svg\" viewBox=\"467 392 58 57\" xmlns=\"http://www.w3.org/2000/svg\"> ";
 	     html+="                                         <g id=\"Group\" fill=\"none\" fill-rule=\"evenodd\" transform=\"translate(467 392)\">";
 	     html+="                                           <path d=\"M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z\" class=\"heart\" stroke=\"#000000\" stroke-width=\"3\"></path>";
@@ -253,12 +255,96 @@
 	     html+="          <div class=\"upload_btn m_text\" data-name=\"comment\">게시</div>                                             							   ";
 	     html+="      </div>                                                                                                        							   ";
 	     html+="  </article>                                                                                                        							   ";
+	     
 		}
 		
 		$("#contents_box").html(html);
 	}
-    
-    
+    function addPostCmt(){
+    	$(".upload_btn").on("click",function(){
+    		if($(this).prev().val()==""){
+    			alert("댓글 내용을 입력하세요.");
+    		}
+    		else{
+    			$("#cmtVal").val($(this).prev().val());
+    			$("#writingNo2").val($(this).parent().parent().parent().attr('wtno'));
+	    		var params = $("#addCmtForm").serialize();
+				$.ajax({
+					url : "addPostCmt",
+					type : "post",
+					dataType : "json",
+					data : params,
+					success : function(res){
+						if(res.result=="success"){
+							reloadList();	
+							$(this).prev().val("");
+							$("#cmtVal").val("");
+						}else{							
+							alert("추가실패");
+						}
+					},
+					error : function(request, status, error){
+						console.log(error);
+					}
+				});
+    		}	
+    	})	
+    }
+    function heart(data){
+    	var i=0;  	
+    	for(list1 of data){
+    		var chk = "#checkbox"+i;
+    		if( list1.LEX == 1 ){
+    			$(chk).attr("checked",true);
+        	}else{
+            	$(chk).attr("checked",false);
+        	}
+    		i++;
+    	}
+    	
+    }
+    function heartAD(){
+    	$(".checkbox").on("click",function(){
+    		$("#writingNo").val($(this).parent().parent().parent().parent().parent().parent().attr('wtno'));
+    		if($(this).is(":checked") == true) {   					
+	    		var params = $("#heartForm").serialize();
+	    		$.ajax({
+	    			url : "aHeart",
+	    			type : "post",
+	    			dataType : "json",
+	    			data : params,
+	    			success : function(res){
+	    				if(res.result=="success"){
+	    					reloadList();
+	    				}else{
+	    					alert("add실패");
+	    				}
+	    			},
+	    			error : function(request, status, error){
+	    				console.log(error);
+	    			}
+	    		});
+    		}else{
+	    		var params = $("#heartForm").serialize();
+    			$.ajax({
+    				url : "dHeart",
+    				type : "post",
+    				dataType : "json",
+    				data : params,
+    				success : function(res){
+    					if(res.result=="success"){
+    						reloadList();
+    					}else{
+    						alert("삭제실패");
+    					}
+    				},
+    				error : function(request, status, error){
+    					console.log(error);
+    				}
+    			});
+    		}	    		    		
+		});	    		    		
+    }
     function timeForToday(value) {
         const today = new Date();
         const timeValue = new Date(value);
@@ -505,6 +591,15 @@
     </section>
 			<form action="#" id="postForm" method="post">
            	  <input type="hidden" name="m_no" value="${sMNo}"/> 
+		   </form>
+		   <form action="#" id="heartForm" method="post">
+           	  <input type="hidden" name="m_no" value="${sMNo}"/>
+           	  <input type="hidden" name="writingNo" id="writingNo"/> 
+		   </form>
+		   <form action="#" id="addCmtForm" method="post">
+           	  <input type="hidden" name="m_no" value="${sMNo}"/> 
+    	   	  <input type="hidden" name="writingNo" id="writingNo2"/>
+    	   	  <input type="hidden" name="cmt_con" id="cmtVal"/>
 		   </form>
     <script src="resources/script/menu_bar/menu_bar.js"></script> <!-- script-->
 </body>

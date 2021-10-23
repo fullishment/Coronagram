@@ -23,4 +23,28 @@ public class DaoCoronagram implements IDaoCoronagram{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("crng.getPostCmt",params);
 	}
+
+	@Override
+	public int aHeart(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("crng.aHeart",params);
+	}
+
+	@Override
+	public int dHeart(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("crng.dHeart",params);
+	}
+
+	@Override
+	public int getHeartChk(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("crng.getHeartChk",params);
+	}
+
+	@Override
+	public int addPostCmt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("crng.addPostCmt",params);
+	}
 }

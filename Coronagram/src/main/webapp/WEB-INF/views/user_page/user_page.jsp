@@ -298,21 +298,21 @@
 	    function ModalCmtArea(data,data2){  
 	    	var html ="";                                                                                                                                                                                                                                                                      
 			for(var list of data){                                                                                                                              				
-			     html+="<div class=\"comment_container\" no=\""+list.CMT_NO+"\">        ";
-			     html+="   <div class=\"comment\" id=\"comment-list-ajax-post37\">      ";
-			     html+="       <div class=\"comment-detail\">                           ";
-			     html+="           <div class=\"profile_img\">                          ";
+			     html+="<div class=\"comment_container\" no=\""+list.CMT_NO+"\">       														 ";
+			     html+="   <div class=\"comment\" id=\"comment-list-ajax-post37\">     														 ";
+			     html+="       <div class=\"comment-detail\">                          														 ";
+			     html+="           <div class=\"profile_img\">                          													 ";
 			     html+=" 				<img src=\"../"+list.IMG_ADR+"\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 ";
-			     html+="		   </div>												";
-			     html+="           <div class=\"head_text\">"+list.NICK_NM+"</div>      ";
-			     html+="              <div class=\"ccon\">"+list.CMT_CON+"</div>        ";
-			     html+="          </div>                                                ";
-			     html+="       </div>                                                	";
+			     html+="		   </div>																									 ";
+			     html+="           <div class=\"head_text\">"+list.NICK_NM+"</div>      													 ";
+			     html+="              <div class=\"ccon\">"+list.CMT_CON+"</div>        													 ";
+			     html+="          </div>                                                													 ";
+			     html+="       </div>                                                														 ";
 			     if(list.CMT_WRITER_NO == ${sMNo}){
-			    	 html+="	<i class=\"fas fa-ellipsis-h cmtMore\"></i>				";
+			    	 html+="	<i class=\"fas fa-ellipsis-h cmtMore\"></i>																	 ";
 			     }			     
-			     html+="   </div>                                                       ";
-			     html+="<div class=\"timer\">"+timeForToday(list.DT)+"</div>           	";
+			     html+="   </div>                                                      														 ";
+			     html+="<div class=\"timer\">"+timeForToday(list.DT)+"</div>           														 ";
 			}
 			
 			$(".modal_cmt").html(html);
@@ -459,9 +459,22 @@
 		}
 	    function ProfileImg(data){                                                                                                                         
 			var html ="";
-				
-				html+=" <img src=\"../"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 		   ";
-					
+			
+				html+=" <div class=\"pGradient0\"> 																								   			";
+				html+="<svg class=\"pGradient\" width=\"453\" height=\"453\" viewBox=\"0 0 453 453\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">	";
+				html+="	 <defs>																															 	";
+				html+="	        <linearGradient id=\"MyGradient\">																							";
+				html+="	          <stop offset=\"5%\" stop-color=\"#F9913F\" />																				";				
+				html+="	          <stop offset=\"40%\" stop-color=\"#e01b6a\" />																			";
+				html+="	          <stop offset=\"80%\" stop-color=\"#CD51A4\" />																			";
+				html+="	        </linearGradient>																											";
+				html+="	      </defs>																														";
+				html+="<circle cx=\"226.5\" cy=\"226.5\" r=\"216.5\" stroke=\"url(#MyGradient)\" stroke-width=\"10\"/>										";
+				html+="</svg>																																";
+				html+=" <div class=\"pGradient2\"> 																								   			";
+				html+=" <img src=\"../"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 		   			";
+				html+=" </div> 																								   					   			";
+				html+=" </div>																								   					   			";	
 			$(".profile-image").html(html);
 		}
 	    function heart(data){

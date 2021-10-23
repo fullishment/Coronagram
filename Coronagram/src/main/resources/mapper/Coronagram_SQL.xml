@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="crng">
 	<select id="getPostList" parameterType="hashmap" resultType="hashmap">
-		SELECT C.WRITING_NO, C.WRITER_NO, C.CON, M.M_NO ,M.M_NM, M.IMG_ADR, M.NICK_NM,CAA.FILE_ADRS,L.LC,CN.CCNT
+		SELECT C.WRITING_NO, C.WRITER_NO, C.CON, M.M_NO ,M.M_NM, M.IMG_ADR, M.NICK_NM,CAA.FILE_ADRS,
+        NVL(L.LC,0) AS LC, NVL(CN.CCNT,0) AS CCNT, NVL(LX.LEX,0) AS LEX
 		,TO_CHAR(C.DT, 'YYYY/MM/DD HH24:MI:SS') AS DT
 		FROM CRNG C
 		    INNER JOIN M M
@@ -16,27 +17,46 @@
 		                  AND PRIOR CA.WRITING_NO = CA.WRITING_NO
 		                  GROUP BY CA.WRITING_NO) CAA
 		    ON CAA.WRITING_NO=C.WRITING_NO
-            INNER JOIN (SELECT WRITING_NO, COUNT(*) AS LC FROM LK
+            LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS LC FROM LK
                             GROUP BY WRITING_NO) L
                             ON C.WRITING_NO = L.WRITING_NO
-            INNER JOIN (SELECT WRITING_NO, COUNT(*) AS CCNT FROM CRNG_CMT
+            LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS CCNT FROM CRNG_CMT
                             GROUP BY WRITING_NO) CN
                             ON C.WRITING_no = CN.WRITING_NO
-		WHERE C.WRITER_NO IN (SELECT RP_USER FROM FOLLOW WHERE RQ_USER=#{m_no})
-		ORDER BY C.DT DESC
+            LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS LEX FROM LK
+                                GROUP BY WRITING_NO) LX
+                                ON C.WRITING_NO = LX.WRITING_NO
+			WHERE C.WRITER_NO IN (SELECT RP_USER FROM FOLLOW WHERE RQ_USER=#{m_no})
+			ORDER BY C.DT DESC
 	</select>
 	<select id="getPostCmt" parameterType="hashmap" resultType="hashmap">
-		SELECT CC.CMT_NO, CC.WRITING_NO, CC.CMT_WRITER_NO, CC.NICK_NM, CC.CMT_CON, CC.DT
+		 SELECT CC.CMT_NO, CC.WRITING_NO, CC.CMT_WRITER_NO, CC.NICK_NM, CC.CMT_CON, CC.DT
 		FROM (SELECT CC.CMT_NO, CC.WRITING_NO, CC.CMT_WRITER_NO, M.NICK_NM, CC.CMT_CON, CC.DT, ROW_NUMBER() OVER(PARTITION BY CC.WRITING_NO ORDER BY CC.CMT_NO DESC) AS RNUM
-        FROM CRNG_CMT CC INNER JOIN M M
+        FROM CRNG_CMT CC 
+                        INNER JOIN M M
                                  ON CC.CMT_WRITER_NO = M.M_NO
-        				 WHERE CC.DEL = 1) CC INNER JOIN (SELECT C.WRITING_NO, ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
-                                         FROM CRNG C INNER JOIN FOLLOW F
+        				 WHERE CC.DEL = 1) CC 
+                         INNER JOIN (SELECT C.WRITING_NO, ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
+                                         FROM CRNG C 
+                                         INNER JOIN FOLLOW F
                                                              ON C.WRITER_NO = F.RP_USER
-                                                            AND F.RQ_USER=#{m_no}
+                                                             AND F.RQ_USER=#{m_no}                                                            
                                          WHERE C.DEL = 1) C
                                      ON CC.WRITING_NO = C.WRITING_NO
                                      AND C.RNUM BETWEEN 1 AND 10
 		WHERE CC.RNUM BETWEEN 1 AND 2
 	</select>
+	<insert id="aHeart" parameterType="hashmap">
+		INSERT INTO LK(USER_NO,WRITING_NO) 
+			VALUES (#{m_no}, #{writingNo})
+	</insert> 
+	<delete id="dHeart" parameterType="hashmap">
+		DELETE FROM LK 
+			WHERE USER_NO = #{m_no} 
+			AND WRITING_NO = #{writingNo}
+	</delete>	
+	<insert id="addPostCmt" parameterType="hashmap">
+		INSERT INTO CRNG_CMT(WRITING_NO, CMT_WRITER_NO, CMT_CON)
+        	VALUES(#{writingNo}, #{m_no}, #{cmt_con})
+	</insert>
 </mapper>

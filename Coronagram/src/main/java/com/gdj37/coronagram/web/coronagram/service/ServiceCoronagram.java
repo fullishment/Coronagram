@@ -24,4 +24,22 @@ public class ServiceCoronagram implements IServiceCoronagram{
 		// TODO Auto-generated method stub
 		return iDaoCoronagrma.getPostCmt(params);
 	}
+
+	@Override
+	public int aHeart(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.aHeart(params);
+	}
+
+	@Override
+	public int dHeart(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.dHeart(params);
+	}
+
+	@Override
+	public int addPostCmt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.addPostCmt(params);
+	}
 }

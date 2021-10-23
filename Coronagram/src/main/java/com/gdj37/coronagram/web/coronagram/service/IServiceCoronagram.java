@@ -9,4 +9,10 @@ public interface IServiceCoronagram {
 
 	public List<HashMap<String, String>> getPostCmt(HashMap<String, String> params)throws Throwable;
 
+	public int aHeart(HashMap<String, String> params)throws Throwable;
+
+	public int dHeart(HashMap<String, String> params)throws Throwable;
+
+	public int addPostCmt(HashMap<String, String> params)throws Throwable;
+
 }

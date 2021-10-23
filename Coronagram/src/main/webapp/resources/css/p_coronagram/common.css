@@ -110,9 +110,8 @@ body {
   svg .main-circ {
     transform-origin: 29.5px 29.5px;
   }
-  
-  .checkbox {
-    display: none;
+  .checkbox{
+  	display:none;
   }
   
   .checkbox:checked + label svg .heart {
