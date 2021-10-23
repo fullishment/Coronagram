@@ -17,4 +17,12 @@ public interface IDaoCoronagram {
 
 	public int addPostCmt(HashMap<String, String> params)throws Throwable;
 
+	public List<HashMap<String, String>> getListFollow(HashMap<String, String> params)throws Throwable;
+
+	public List<HashMap<String, String>> getNotFollow(HashMap<String, String> params)throws Throwable;
+
+	public int FollowAdd(HashMap<String, String> params)throws Throwable;
+
+	public int FollowDel(HashMap<String, String> params)throws Throwable;
+
 }

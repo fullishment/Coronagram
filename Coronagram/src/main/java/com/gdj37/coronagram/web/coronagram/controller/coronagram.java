@@ -35,9 +35,13 @@ public class coronagram {
 		List<HashMap<String,String>> post = iServiceCoronagram.getPostList(params);
 		List<HashMap<String,String>> postCmt = iServiceCoronagram.getPostCmt(params);
 		
+		List<HashMap<String,String>> listFo = iServiceCoronagram.getListFollow(params);
+		List<HashMap<String,String>> notFo = iServiceCoronagram.getNotFollow(params);		
 		
 		modelMap.put("post", post);
 		modelMap.put("postCmt", postCmt);
+		modelMap.put("notFo", notFo);
+		modelMap.put("listFo", listFo);
 		
 		return mapper.writeValueAsString(modelMap);	
 	}
@@ -96,6 +100,45 @@ public class coronagram {
 			e.printStackTrace();
 			result ="error";
 		}
+		modelMap.put("result", result);
+		
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/FollowAdd",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String FollowAdd (@RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		String result ="success";
+		try {
+			int FollowA = iServiceCoronagram.FollowAdd(params);
+			if(FollowA==0) {
+				result="failed";
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			result ="error";
+		}		
+		modelMap.put("result", result);
+		
+		return mapper.writeValueAsString(modelMap);
+	}
+	
+	@RequestMapping(value="/FollowDel",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String FollowDel (@RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		String result ="success";
+		try {
+			int FollowD = iServiceCoronagram.FollowDel(params);
+			if(FollowD==0) {
+				result="failed";
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			result ="error";
+		}	
 		modelMap.put("result", result);
 		
 		return mapper.writeValueAsString(modelMap);

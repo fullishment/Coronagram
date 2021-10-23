@@ -9,12 +9,13 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Title</title>
-    <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css"><!-- css-->
+    <link rel="stylesheet" href="resources/css/p_coronagram/menu_bar.css"><!-- css-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"> <!-- font-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> <!-- jquery-->
     <link rel="stylesheet" href="resources/css/p_coronagram/common.css?after">
     <link rel="stylesheet" href="resources/css/p_coronagram/style.css">
+    <link rel="stylesheet" href="resources/css/p_coronagram/coronagram.css">
     <script>
 	    $(document).ready(function(){
 	    	reloadList();
@@ -105,6 +106,10 @@
 				heartAD();
 				addPostCmt();
 				slide();
+				followList(res.listFo);
+				notFollowList(res.notFo);
+				followAdd();
+				followDel();
 			},
 			error : function(request,status,error){
 				console.log(error);
@@ -117,9 +122,21 @@
 		var k=0;
 		 for(data of list){
 
-		 html+="	<article class=\"contents postNo\" wtno=\""+data.WRITING_NO+"\">                                               ";  
-	     html+="      <header class=\"top\">                                                                                    ";    
-	     html+="          <div class=\"user_container\">                                                                        ";    
+		 html+="	<article class=\"contents postNo\" wtno=\""+data.WRITING_NO+"\">                                               								";  
+	     html+="      <header class=\"top\">                                                                                    								";    
+	     html+="          <div class=\"user_container\">                                                                       									";  
+		 html+="		  <div class=\"pGradient1\"> 																								   			";
+		 html+="			  <svg class=\"pGradient2\" width=\"453\" height=\"453\" viewBox=\"0 0 453 453\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">	";
+		 html+="			  	<defs>																															";
+		 html+="	   				<linearGradient id=\"MyGradient\">																							";
+		 html+="	        			<stop offset=\"5%\" stop-color=\"#F9913F\" />																			";				
+		 html+="	        			<stop offset=\"40%\" stop-color=\"#e01b6a\" />																			";
+		 html+="	        			<stop offset=\"80%\" stop-color=\"#CD51A4\" />																			";
+		 html+="	        		</linearGradient>																											";
+		 html+="	 		  	</defs>																															";
+		 html+="			  <circle cx=\"226.5\" cy=\"226.5\" r=\"216.5\" stroke=\"url(#MyGradient)\" stroke-width=\"30\"/>									";
+		 html+="			  </svg>																															";
+		     
 	     html+="              <div class=\"profile_img\">                                                                       ";    
 	     html+=" 				   <img src=\""+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 ";    
 	     html+="              </div>                                                                                            ";    
@@ -129,12 +146,10 @@
 	     html+="                  </div>                                        												";
 	     html+="                  <div class=\"country s_text\">"+timeForToday(data.DT)+"</div>                                 ";    
 	     html+="              </div>                                                                                            ";    
-	     html+="          </div>                                                                                                ";    
+	     html+="          </div>                                                                                                "; 
+	     html+="          </div>                                                                                            	";
 	     html+="          <div class=\"sprite_more_icon\" data-name=\"more\">                                                   ";    
 	     html+="              <ul class=\"toggle_box\">                                                                         ";    
-	     if(data.M_NO == ${sMNo} ){
-	    	html+="			   <i class=\"fas fa-ellipsis-h postMore\"></i>													   ";
-	     }	    
 	     html+="              </ul>                                                                                             ";    
 	     html+="          </div>                                                                                                ";    
 	     html+="      </header>                                                                                                 ";     
@@ -143,14 +158,14 @@
 	     html+="              <div class=\"slider\">                                                                            ";    
 	     html+="                  <div class=\"slide-viewer\">                                                                  ";    
 	     html+="                    <div id=\"slide-group\" class=\"slide-group\">                                              ";
-	        var j=1;	    
-	        var fileAdr=data.FILE_ADRS;
-            var fileAdrSplit = fileAdr.split(',');
-            for ( var i = 0; i < fileAdrSplit.length; i++) {
-        	html+=" <div class=\"slide slide-"+j+"\">                                       									 ";
-            html+=" <img src=\""+fileAdrSplit[i]+"\" alt=\"\" />	   						   									 ";
-           	html+=" </div>                                                                  									 ";
-           	j++;        	
+         var j=1;	    
+         var fileAdr=data.FILE_ADRS;
+         var fileAdrSplit = fileAdr.split(',');
+         for ( var i = 0; i < fileAdrSplit.length; i++) {
+       	 	 html+=" <div class=\"slide slide-"+j+"\">                                       									 ";
+           	 html+=" <img src=\""+fileAdrSplit[i]+"\" alt=\"\" />	   						   									 ";
+          	 html+=" </div>                                                                  									 ";
+          	 j++;        	
          }	
 	     html+="                    </div>                                                                     					 ";
 	     html+="                  </div>                                                                                         ";    
@@ -165,8 +180,7 @@
 	     html+="      </div>                                                                                                     ";    
 	     html+="      <div class=\"bottom_icons\">                                                                               ";    
 	     html+="          <div class=\"left_icons\">                                                                             ";    
-	     html+="              <div class=\"heart_btn\">                                                                          ";
-	     
+	     html+="              <div class=\"heart_btn\">                                                                          ";	     
 	     html+="                  <div class=\"sprite_heart_icon_outline\" name=\"39\" data-name=\"heartbeat\">                  "; 	     
 	     html+="                                     <input type=\"checkbox\" class=\"checkbox\" id=\"checkbox"+k+"\" >          ";
 	     html+="                                     <label for=\"checkbox"+k+"\" class=\"hLabel\">                              ";
@@ -260,6 +274,56 @@
 		
 		$("#contents_box").html(html);
 	}
+    function followList(list){
+		var html ="";	
+		
+		 for(data of list){
+			 	html+="<div class=\"pGradient0\"> 																								   				";
+				html+="		<svg class=\"pGradient\" width=\"453\" height=\"453\" viewBox=\"0 0 453 453\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">	";
+				html+="			<defs>																															";
+				html+="	   			<linearGradient id=\"MyGradient\">																							";
+				html+="	        		<stop offset=\"5%\" stop-color=\"#F9913F\" />																			";				
+				html+="	        		<stop offset=\"40%\" stop-color=\"#e01b6a\" />																			";
+				html+="	        		<stop offset=\"80%\" stop-color=\"#CD51A4\" />																			";
+				html+="	        	</linearGradient>																											";
+				html+="	 		</defs>																															";
+				html+="			<circle cx=\"226.5\" cy=\"226.5\" r=\"216.5\" stroke=\"url(#MyGradient)\" stroke-width=\"20\"/>									";
+				html+="		</svg>																																";
+				html+="		<div class=\"user\">																												";
+				html+="      	<div class=\"thumb_img\" fono=\""+data.M_NO+"\">																				";
+				html+=" 			<img src=\""+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 		   			";
+				html+="			</div>																															";
+				html+="       	<div class=\"id\">																												";
+				html+="				<a href=\"coronagram/"+data.NICK_NM+"\" class=\"fo_id\">"+data.NICK_NM+"</a>												";
+				html+="			</div>																															";
+				html+="   	</div>																																";
+				html+="</div>																																	";
+				
+		 }
+		 $(".scroll_inner").html(html);
+    }	
+    
+    function notFollowList(list){
+		var html ="";	
+		
+		 for(data of list){
+			 	
+			 	html+="<div class=\"rec_user\" nfo=\""+data.M_NO+"\">";
+				html+="		<div class=\"profile_thumb\">";
+				html+=" 		<img src=\""+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 "; 
+				html+="		</div>";
+				html+="		<div class=\"detail\">";
+				html+="			<div class=\"rec_id\">"+data.NICK_NM+"</div>";			
+				html+="		</div>";
+				html+="			<div class=\"rec_follow\">";
+				html+="				<span class=\"follow_submit fospan\">팔로우</span>";
+				html+="			</div>";
+				html+="</div>";
+		 }
+		 $(".rec_area").html(html);
+    }
+    
+    	
     function addPostCmt(){
     	$(".upload_btn").on("click",function(){
     		if($(this).prev().val()==""){
@@ -345,6 +409,52 @@
     		}	    		    		
 		});	    		    		
     }
+    function followAdd(){
+    	$(".fospan").on("click",function(){
+    		$("#m_no2").val($(this).parent().parent().attr("nfo"));
+    		var params = $("#delAddFoForm").serialize();
+    		$.ajax({
+    			url : "FollowAdd",
+    			type : "post",
+    			dataType : "json",
+    			data : params,
+    			success : function(res){
+    				if(res.result=="success"){
+    					$(this).removeClass("fospan");
+    					$(this).addClass("fispan");
+    				}else{
+    					alert("add실패");
+    				}
+    			},
+    			error : function(request, status, error){
+    				console.log(error);
+    			}
+    		});
+    	});
+    }
+    function followDel(){
+    	$(".fispan").on("click",function(){
+    		$("#m_no2").val($(this).parent().parent().attr("nfo"));
+    		var params = $("#delAddFoForm").serialize();
+			$.ajax({
+				url : "FollowDel",
+				type : "post",
+				dataType : "json",
+				data : params,
+				success : function(res){
+					if(res.result=="success"){
+						$(this).parent().html("");
+						$(this).parent().html("<span class=\"follow_submit fospan\">팔로우</span>");
+					}else{							
+						alert("삭제실패");
+					}
+				},
+				error : function(request, status, error){
+					console.log(error);
+				}
+			});
+    	})	
+    }
     function timeForToday(value) {
         const today = new Date();
         const timeValue = new Date(value);
@@ -374,15 +484,20 @@
         }
         return Math.floor(betweenTimeDay / 365)+'년전';
  	}	
+    function ScrollNext() {
+    	  var _scrollX = $('.scroll_inner').scrollLeft();
+    	  $('.scroll_inner').scrollLeft(_scrollX + 600);
+    };
+    function ScrollPrev() {
+  	  var _scrollX = $('.scroll_inner').scrollLeft();
+  	  $('.scroll_inner').scrollLeft(_scrollX - 600);
+  };
     </script>
 </head>
 
 <body>
 
-
-    <section id="container">
-
-        <header>
+<header>
             <div class="cm_menuBar" id="cm_menuBar">
                 <div class="cm_menu__toggler"><span></span></div>
                 <a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
@@ -439,55 +554,17 @@
                 </a>
             </div>
         </header>
-        <div class="hidden_menu">
-            <div class="scroll_inner">
-                <div class="user">
-                    <div class="thumb_img"><img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="프로필사진"></div>
-                    <div class="id">kindtigerrr</div>
-                </div>
-
-                <div class="user">
-                    <div class="thumb_img"><img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="프로필사진"></div>
-                    <div class="id">kindtigerrr</div>
-                </div>
-                <div class="user">
-                    <div class="thumb_img"><img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="프로필사진"></div>
-                    <div class="id">kindtigerrr</div>
-                </div>
-                <div class="user">
-                    <div class="thumb_img"><img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="프로필사진"></div>
-                    <div class="id">kindtigerrr</div>
-                </div>
-                <div class="user">
-                    <div class="thumb_img"><img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="프로필사진"></div>
-                    <div class="id">kindtigerrr</div>
-                </div>
-                <div class="user">
-                    <div class="thumb_img"><img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="프로필사진"></div>
-                    <div class="id">kindtigerrr</div>
-                </div>
-                <div class="user">
-                    <div class="thumb_img"><img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="프로필사진"></div>
-                    <div class="id">kindtigerrr</div>
-                </div>
-                <div class="user">
-                    <div class="thumb_img"><img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="프로필사진"></div>
-                    <div class="id">kindtigerrr</div>
-                </div>
-                <div class="user">
-                    <div class="thumb_img"><img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="프로필사진"></div>
-                    <div class="id">kindtigerrr</div>
-                </div>
-                <div class="user">
-                    <div class="thumb_img"><img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="프로필사진"></div>
-                    <div class="id">kindtigerrr</div>
-                </div>
-
-            </div>
-        </div>
-
-
+    <section id="container">
+    	<section class="head_container">
+				<div class="hidden_menu">
+						<div class="follow_prev" onclick="ScrollPrev()"></div>
+		            	<div class="follow_next" onclick="ScrollNext()"></div>
+		            <div class="scroll_inner">
+		            </div>
+		        </div>    
+        </section>
         <section id="main_container">
+        
             <div class="inner">
                 <div id="contents_box" class="contents_box">               
                 </div>
@@ -505,85 +582,12 @@
                         </div>
                     </div>
 
-                    <article class="story">
-                        <header class="story_header">
-                            <div>스토리</div>
-                            <div class="more">모두 보기</div>
-                        </header>
-
-                        <div class="scroll_inner">
-                            <div class="thumb_user">
-                                <div class="profile_thumb">
-                                    <img src="resources/css/p_coronagram/imgs/thumb02.jpg" alt="프로필사진">
-                                </div>
-                                <div class="detail">
-                                    <div class="id">kind_tigerrrr</div>
-                                    <div class="time">1시간 전</div>
-                                </div>
-                            </div>
-                            <div class="thumb_user">
-                                <div class="profile_thumb">
-                                    <img src="resources/css/p_coronagram/imgs/thumb02.jpg" alt="프로필사진">
-                                </div>
-                                <div class="detail">
-                                    <div class="id">kind_tigerrrr</div>
-                                    <div class="time">1시간 전</div>
-                                </div>
-                            </div>
-                            <div class="thumb_user">
-                                <div class="profile_thumb">
-                                    <img src="resources/css/p_coronagram/imgs/thumb02.jpg" alt="프로필사진">
-                                </div>
-                                <div class="detail">
-                                    <div class="id">kind_tigerrrr</div>
-                                    <div class="time">1시간 전</div>
-                                </div>
-                            </div>
-                            <div class="thumb_user">
-                                <div class="profile_thumb">
-                                    <img src="resources/css/p_coronagram/imgs/thumb02.jpg" alt="프로필사진">
-                                </div>
-                                <div class="detail">
-                                    <div class="id">kind_tigerrrr</div>
-                                    <div class="time">1시간 전</div>
-                                </div>
-                            </div>
-                            <div class="thumb_user">
-                                <div class="profile_thumb">
-                                    <img src="resources/css/p_coronagram/imgs/thumb02.jpg" alt="프로필사진">
-                                </div>
-                                <div class="detail">
-                                    <div class="id">kind_tigerrrr</div>
-                                    <div class="time">1시간 전</div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
                     <article class="recommend">
                         <header class="reco_header">
                             <div>회원님을 위한 추천</div>
                             <div class="more">모두 보기</div>
                         </header>
-
-                        <div class="thumb_user">
-                            <div class="profile_thumb">
-                                <img src="resources/css/p_coronagram/imgs/thumb02.jpg" alt="프로필사진">
-                            </div>
-                            <div class="detail">
-                                <div class="id">kind_tigerrrr</div>
-                                <div class="time">1시간 전</div>
-                            </div>
-                        </div>
-                        <div class="thumb_user">
-                            <div class="profile_thumb">
-                                <img src="resources/css/p_coronagram/imgs/thumb02.jpg" alt="프로필사진">
-                            </div>
-                            <div class="detail">
-                                <div class="id">kind_tigerrrr</div>
-                                <div class="time">1시간 전</div>
-                            </div>
-                        </div>
+						<div class="rec_area"></div>                
                     </article>
                 </div>
             </div>
@@ -591,6 +595,10 @@
     </section>
 			<form action="#" id="postForm" method="post">
            	  <input type="hidden" name="m_no" value="${sMNo}"/> 
+		   </form>
+		   <form action="#" id="delAddFoForm" method="post">
+           	  <input type="hidden" name="m_no" value="${sMNo}"/>
+           	  <input type="hidden" name="m_no2" id="m_no2"/> 
 		   </form>
 		   <form action="#" id="heartForm" method="post">
            	  <input type="hidden" name="m_no" value="${sMNo}"/>

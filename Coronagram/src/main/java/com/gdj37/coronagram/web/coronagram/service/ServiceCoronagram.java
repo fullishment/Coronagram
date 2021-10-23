@@ -42,4 +42,30 @@ public class ServiceCoronagram implements IServiceCoronagram{
 		// TODO Auto-generated method stub
 		return iDaoCoronagrma.addPostCmt(params);
 	}
+
+	@Override
+	public List<HashMap<String, String>> getListFollow(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.getListFollow(params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getNotFollow(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.getNotFollow(params);
+	}
+
+	@Override
+	public int FollowAdd(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.FollowAdd(params);
+	}
+
+	@Override
+	public int FollowDel(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.FollowDel(params);
+	}
+
+
 }

@@ -94,13 +94,12 @@ body {
   color: #0095f6;
   cursor: pointer;
 }
-  svg {
+  #heart-svg {
     cursor: pointer;
     overflow: visible;
     width: 38px;
-    left: 3;
     position: relative;
-    right: 10px;
+    left: -12px;
     bottom: 8px;
   }
   svg .heart {
@@ -452,7 +451,7 @@ body {
 
 #main_container {
     /*height: 100vh;*/
-    padding-top: 135px;
+    padding-top: 75px;
     display: flex;
     justify-content: center;
     order: 1;
