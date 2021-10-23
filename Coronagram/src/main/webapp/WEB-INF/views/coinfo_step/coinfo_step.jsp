@@ -15,7 +15,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <style>
 	html {
-	overflow-x: hidden;
+	overflow-x: auto;
 	min-height: 3030px;
 	}
 	table {
