@@ -19,4 +19,46 @@ public class ServiceCoronagram implements IServiceCoronagram{
 		return iDaoCoronagrma.getPostList(params);
 	}
 
+	@Override
+	public List<HashMap<String, String>> getPostCmt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.getPostCmt(params);
+	}
+
+	@Override
+	public int aHeart(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.aHeart(params);
+	}
+
+	@Override
+	public int dHeart(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.dHeart(params);
+	}
+
+	@Override
+	public int addPostCmt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.addPostCmt(params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getListFollow(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.getListFollow(params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getNotFollow(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.getNotFollow(params);
+	}
+
+	@Override
+	public int FollowAdd(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.FollowAdd(params);
+	}
+
 }

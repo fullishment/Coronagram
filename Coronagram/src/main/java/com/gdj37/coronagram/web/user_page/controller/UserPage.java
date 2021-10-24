@@ -37,13 +37,10 @@ public class UserPage {
 
 		List<HashMap<String,String>> list = iServiceUserPage.getMPostList(params);
 		HashMap<String,String> intro = iServiceUserPage.getIntroM(params);
-		int follow = iServiceUserPage.getFollow(params);
-		int following = iServiceUserPage.getFollowing(params);
 		
 		modelMap.put("intro", intro);
 		modelMap.put("list", list);
-		modelMap.put("follow", follow);
-		modelMap.put("following", following);
+		
 		return mapper.writeValueAsString(modelMap);	
 	}
 	@RequestMapping(value="/coronagram/modalpages" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
@@ -60,7 +57,6 @@ public class UserPage {
 		modelMap.put("hcnt", hcnt);
 		modelMap.put("md", md);
 		modelMap.put("modalM", modalM);
-		
 		
 		return mapper.writeValueAsString(modelMap);
 	}
@@ -112,6 +108,7 @@ public class UserPage {
 		}
 		
 		modelMap.put("result", result);
+		
 		return mapper.writeValueAsString(modelMap);
 	}
 	@RequestMapping(value="/coronagram/followArea",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
@@ -125,6 +122,7 @@ public class UserPage {
 		
 		modelMap.put("fExist", fExist);
 		modelMap.put("fExist2", fExist2);
+		
 		return mapper.writeValueAsString(modelMap);
 	}
 	@RequestMapping(value="/coronagram/addFollow",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
@@ -143,6 +141,7 @@ public class UserPage {
 			result ="error";
 		}		
 		modelMap.put("result", result);
+		
 		return mapper.writeValueAsString(modelMap);
 	}
 	
@@ -162,6 +161,7 @@ public class UserPage {
 			result ="error";
 		}	
 		modelMap.put("result", result);
+		
 		return mapper.writeValueAsString(modelMap);
 	}
 	@RequestMapping(value="/coronagram/mCmt",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
@@ -173,6 +173,7 @@ public class UserPage {
 		List<HashMap<String,String>> mCmt = iServiceUserPage.getModalCmt(params);
 
 		modelMap.put("mCmt", mCmt);
+		
 		return mapper.writeValueAsString(modelMap);
 	}
 	@RequestMapping(value="/coronagram/addModalCmt",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
@@ -192,6 +193,7 @@ public class UserPage {
 			result ="error";
 		}
 		modelMap.put("result", result);
+		
 		return mapper.writeValueAsString(modelMap);
 	}
 	@RequestMapping(value="/coronagram/delModal" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")

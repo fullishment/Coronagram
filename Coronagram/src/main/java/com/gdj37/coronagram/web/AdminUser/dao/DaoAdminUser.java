@@ -37,6 +37,11 @@ public class DaoAdminUser implements IDaoAdminUser{
 		return sqlSession.update("adminUser.getAProDels", params);
 	}
 
+	@Override
+	public List<HashMap<String, String>> getACCTList(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectList("adminUser.getACCTList", params);
+	}
+
 	
 	
 	

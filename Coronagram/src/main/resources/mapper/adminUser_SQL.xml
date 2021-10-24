@@ -3,108 +3,113 @@
 <mapper namespace="adminUser">
 
 <!-- list -->
-	<select id="getadminUserList" parameterType="hashmap" resultType="hashmap">
-		SELECT M.M_NO, M.M_ID, M.M_NM, M.PHONE, M.EMAIL, M.M_DT, M.POINT, M.ACCT_TYPE_NO
-		FROM (	SELECT M_NO, M_ID, M_NM, PHONE, EMAIL,
-				TO_CHAR(M_DT,'yyyy-mm-dd') AS M_DT, POINT, ACCT_TYPE_NO,
-				ROW_NUMBER() OVER(ORDER BY M_NO DESC) AS RNUM
-			FROM M
-			WHERE DEL = 1
-			<if test="searchTxt != null and searchTxt != ''">
-				<choose>
-					<when test="searchGbn eq 0">
-						AND M_NO LIKE '%' || #{searchTxt} || '%'
-					</when>
-					<when test="searchGbn eq 1">
-						AND M_ID LIKE '%' || #{searchTxt} || '%'
-					</when>
-					<when test="searchGbn eq 2">
-						AND M_NM LIKE '%' || #{searchTxt} || '%'
-					</when>
-					<when test="searchGbn eq 3">
-						AND PHONE LIKE '%' || #{searchTxt} || '%'
-					</when>
-					<when test="searchGbn eq 4">
-						AND EMAIL LIKE '%' || #{searchTxt} || '%'
-					</when>
-					<when test="searchGbn eq 5">
-						AND M_DT LIKE '%' || #{searchTxt} || '%'
-					</when>
-					<when test="searchGbn eq 6">
-						AND POINT LIKE '%' || #{searchTxt} || '%'
-					</when>
-					<when test="searchGbn eq 7">
-						AND ACCT_TYPE_NO LIKE '%' || #{searchTxt} || '%'
-					</when>
-				</choose>
-			</if>
-		) M
-		WHERE M.RNUM BETWEEN #{startCnt} AND #{endCnt}
-	</select>
-	
+   <select id="getadminUserList" parameterType="hashmap" resultType="hashmap">
+      SELECT M.M_NO, M.M_ID, M.M_NM, M.PHONE, M.EMAIL, M.M_DT, M.POINT, M.ACCT_TYPE_NO
+      FROM (   SELECT M_NO, M_ID, M_NM, PHONE, EMAIL,
+            TO_CHAR(M_DT,'yyyy-mm-dd') AS M_DT, POINT, ACCT_TYPE_NO,
+            ROW_NUMBER() OVER(ORDER BY M_NO DESC) AS RNUM
+         FROM M
+         WHERE DEL = 1
+         <if test="searchTxt != null and searchTxt != ''">
+            <choose>
+               <when test="searchGbn eq 0">
+                  AND M_NO LIKE '%' || #{searchTxt} || '%'
+               </when>
+               <when test="searchGbn eq 1">
+                  AND M_ID LIKE '%' || #{searchTxt} || '%'
+               </when>
+               <when test="searchGbn eq 2">
+                  AND M_NM LIKE '%' || #{searchTxt} || '%'
+               </when>
+               <when test="searchGbn eq 3">
+                  AND PHONE LIKE '%' || #{searchTxt} || '%'
+               </when>
+               <when test="searchGbn eq 4">
+                  AND EMAIL LIKE '%' || #{searchTxt} || '%'
+               </when>
+               <when test="searchGbn eq 5">
+                  AND M_DT LIKE '%' || #{searchTxt} || '%'
+               </when>
+               <when test="searchGbn eq 6">
+                  AND POINT LIKE '%' || #{searchTxt} || '%'
+               </when>
+               <when test="searchGbn eq 7">
+                  AND ACCT_TYPE_NO LIKE '%' || #{searchTxt} || '%'
+               </when>
+            </choose>
+         </if>
+      ) M
+      WHERE M.RNUM BETWEEN #{startCnt} AND #{endCnt}
+   </select>
+   
 <!-- paging -->
-	<select id="getadminUserCnt" parameterType="hashmap" resultType="Integer">
-		SELECT COUNT(*) AS CNT
-		FROM M
-		WHERE DEL = 1
-		<if test="searchTxt != null and searchTxt != ''">
-		 	<choose>
-		 		<when test="searchGbn eq 0">
-						AND M_NO LIKE '%' || #{searchTxt} || '%'
-					</when>
-					<when test="searchGbn eq 1">
-						AND M_ID LIKE '%' || #{searchTxt} || '%'
-					</when>
-					<when test="searchGbn eq 2">
-						AND M_NM LIKE '%' || #{searchTxt} || '%'
-					</when>
-					<when test="searchGbn eq 3">
-						AND PHONE LIKE '%' || #{searchTxt} || '%'
-					</when>
-					<when test="searchGbn eq 4">
-						AND EMAIL LIKE '%' || #{searchTxt} || '%'
-					</when>
-					<when test="searchGbn eq 5">
-						AND M_DT LIKE '%' || #{searchTxt} || '%'
-					</when>
-					<when test="searchGbn eq 6">
-						AND POINT LIKE '%' || #{searchTxt} || '%'
-					</when>
-					<when test="searchGbn eq 7">
-						AND ACCT_TYPE_NO LIKE '%' || #{searchTxt} || '%'
-					</when>
-		 	</choose>
-		</if>
-	</select>
-	
+   <select id="getadminUserCnt" parameterType="hashmap" resultType="Integer">
+      SELECT COUNT(*) AS CNT
+      FROM M
+      WHERE DEL = 1
+      <if test="searchTxt != null and searchTxt != ''">
+          <choose>
+             <when test="searchGbn eq 0">
+                  AND M_NO LIKE '%' || #{searchTxt} || '%'
+               </when>
+               <when test="searchGbn eq 1">
+                  AND M_ID LIKE '%' || #{searchTxt} || '%'
+               </when>
+               <when test="searchGbn eq 2">
+                  AND M_NM LIKE '%' || #{searchTxt} || '%'
+               </when>
+               <when test="searchGbn eq 3">
+                  AND PHONE LIKE '%' || #{searchTxt} || '%'
+               </when>
+               <when test="searchGbn eq 4">
+                  AND EMAIL LIKE '%' || #{searchTxt} || '%'
+               </when>
+               <when test="searchGbn eq 5">
+                  AND M_DT LIKE '%' || #{searchTxt} || '%'
+               </when>
+               <when test="searchGbn eq 6">
+                  AND POINT LIKE '%' || #{searchTxt} || '%'
+               </when>
+               <when test="searchGbn eq 7">
+                  AND ACCT_TYPE_NO LIKE '%' || #{searchTxt} || '%'
+               </when>
+          </choose>
+      </if>
+   </select>
+   
 <!-- 불러오기 -->
-	<select id="getAProfile" parameterType="hashmap" resultType="hashmap">
-		SELECT M_NO, M_ID, M_NM, NICK_NM, PHONE, EMAIL, VAC_YN, POST_NO, ADR, DTL_ADR, 
-				ACCT_TYPE_NO, POINT, IMG_ADR
-    	FROM M
-		WHERE M_NO = #{no}
-	</select>
-	
+   <select id="getAProfile" parameterType="hashmap" resultType="hashmap">
+      SELECT M_NO, M_ID, M_NM, NICK_NM, PHONE, EMAIL, VAC_YN, POST_NO, ADR, DTL_ADR, 
+            ACCT_TYPE_NO, POINT, IMG_ADR
+       FROM M
+      WHERE M_NO = #{no}
+   </select>
+   
 <!-- update -->
- 	<update id="getAProUps" parameterType="hashmap">
-	    UPDATE M SET M_ID = #{mId}, M_NM = #{mNm}, NICK_NM = #{nickNm},
-		    		 PHONE = #{mPhone}, EMAIL = #{email}, vac_yn=#{vec},
-		    		 POST_NO = #{cm_postcode}, 
-		   			 ADR = #{cm_address},
-		   			 DTL_ADR = #{cm_detailAddress},
-		   			 ACCT_TYPE_NO = #{acct_no},
-		   			 POINT = #{point},
-		   			 IMG_ADR = #{imgFile}
-		WHERE M_NO = #{no}
-	</update>
-	
+    <update id="getAProUps" parameterType="hashmap">
+       UPDATE M SET M_ID = #{mId}, M_NM = #{mNm}, NICK_NM = #{nickNm},
+                 PHONE = #{mPhone}, EMAIL = #{email}, vac_yn=#{vec},
+                 POST_NO = #{cm_postcode}, 
+                   ADR = #{cm_address},
+                   DTL_ADR = #{cm_detailAddress},
+                   ACCT_TYPE_NO = #{user_tier},
+                   POINT = #{point},
+                   IMG_ADR = #{imgFile}
+      WHERE M_NO = #{no}
+   </update>
+   
 <!-- delete -->
-	<update id="getAProDels" parameterType="hashmap">
-		UPDATE M SET DEL = 0
-		WHERE M_NO = #{no}
-	</update>
-	
-	
-	
-	
+   <update id="getAProDels" parameterType="hashmap">
+      UPDATE M SET DEL = 0
+      WHERE M_NO = #{no}
+   </update>
+   
+   <select id="getACCTList" parameterType="hashmap" resultType="hashmap">
+      SELECT TYPE_NM, TYPE_NO
+      FROM ACCT_TYPE
+      
+   </select>
+   
+       
+   
 </mapper>

@@ -22,26 +22,34 @@ input[type="file"] {
   overflow: hidden;
   border-radius: 50%;
 }
+
+.qnaImg{
+	position: absolute;
+    top: 21px;
+    left: 140px;
+    pointer-events: none;
+}
 .card{
-    width: 500px;
-    height: 900px;
-    padding: 15px;
-    /* margin-top: 56px; */
-    border-radius: 25px;
-    position: fixed;
-    top: 45px;
-    right: 38%;
-    display: flex;
-    justify-content: center;
-    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-    background: #fff;
-    background-image: url(https://github.com/OlgaKoplik/CodePen/blob/master/leaf2.png?raw=true), url(https://github.com/OlgaKoplik/CodePen/blob/master/leaf.png?raw=true);
-    background-repeat: no-repeat, no-repeat;
-    background-position: 120% -5%, 200% -40%;
-    background-size: 40%, 80%;
-    -webkit-animation: open .5s;
-    animation: open .5s;
-    font-family: "Noto Sans KR", sans-serif;
+  width: 500px;
+  height: 910px;
+  padding: 15px;
+  /* margin-top: 56px; */
+  border-radius: 25px;
+  /* position: fixed; */
+  position:absolute;
+  top: 85px;
+  left: 35%;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+  background: #fff;
+  background-image: url(https://github.com/OlgaKoplik/CodePen/blob/master/leaf2.png?raw=true), url(https://github.com/OlgaKoplik/CodePen/blob/master/leaf.png?raw=true);
+  background-repeat: no-repeat, no-repeat;
+  background-position: 120% -5%, 200% -40%;
+  background-size: 40%, 80%;
+  -webkit-animation: open .5s;
+  animation: open .5s;
+  font-family: "Noto Sans KR", sans-serif;
 }
 .input_area{
     margin-left:70px;
@@ -72,12 +80,7 @@ input[type="file"] {
   border-radius: 50%;
   
 }
-.img-wrap img{
-	padding-left: 32px;
-    padding-top: 27px;
-    width: 194px;
-    height: 176px;
-}
+
 .img-upload:before{
   content: "\f093"; /* 화살표 이미지 */
   font-size: 90px;

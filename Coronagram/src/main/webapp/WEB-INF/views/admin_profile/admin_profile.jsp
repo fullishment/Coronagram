@@ -7,7 +7,7 @@
 <head>
   <meta charset="UTF-8">
   <style>
-			#imgAtt{
+			#imgBtn{
 				display:none;
 			}
 			#preView{
@@ -232,11 +232,11 @@ function readURL(input) {
 </form>
   <form action="#" id="actionForm" method="post">
     <div class="input_area">
-      <!-- <label for="photo-upload" class="custom-file-upload fas">
+      <label for="imgBtn" class="custom-file-upload fas">
         <div class="img-wrap img-upload">
           <img for="photo-upload" src="https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"/>
         </div>
-      </label> -->
+      </label> 
       
     <div class="qnaImg">
 	<input type="hidden"  name="imgFile" id="imgFile" >	
@@ -251,7 +251,6 @@ function readURL(input) {
 		   <input type="hidden" name="page" value="${param.page}"  />
 		   <input type="hidden" name="no" value="${param.no}" />
 	  
-	  
     <input type="file" id="photo-upload" class="img-wrap img-upload"><br>
     <input type="hidden" name="id">
       <p>ID</p>
@@ -264,25 +263,42 @@ function readURL(input) {
       <input type="text" id="mPhone" name="mPhone" value="${data.PHONE}" onKeyup="inputTelNumber(this);" maxlength="13"><br>
       <p>이메일</p>
       <input type="text" id="email" name="email" value="${data.EMAIL}"><br>
-      백신 접종 여부 <label><input type="radio" id="vec" name="vec" value="y" checked> 예</label>
-      <label><input type="radio" id="vec" name="vec" value="n"> 아니오</label><br>
+      백신 접종 여부
+      <c:choose>
+		<c:when test="${data.VAC_YN eq 'y'}">
+			<label><input type="radio" id="vec" name="vec" value="y" checked> 예</label>
+      		<label><input type="radio" id="vec" name="vec" value="n"> 아니오</label><br>
+		</c:when>
+		<c:otherwise>
+			<label><input type="radio" id="vec" name="vec" value="y" > 예</label>
+      		<label><input type="radio" id="vec" name="vec" value="n" checked> 아니오</label><br>
+		</c:otherwise>      
+      </c:choose>
       <p>주소</p>
       <input type="text" id="cm_postcode" name="cm_postcode" class="post_num" value="${data.POST_NO}">
       <button type="button" class="find_btn" onclick="cm_execDaumPostcode()">찾기</button><br>
       <input type="text" id="cm_address" name="cm_address" value="${data.ADR}"><br>
       <input type="text" id="cm_detailAddress" name="cm_detailAddress" value="${data.DTL_ADR}"><br>
 <!-- 회원등급 -->
-	  <p>회원등급</p>
-      <input type="text" id=acct_no name="acct_no" value="${data.ACCT_TYPE_NO}"><br>
-     <!--  <span class="title_Name">회원등급</span><br>
+	       <p>회원등급</p>
+      <%-- <input type="text" id=acct_no name="acct_no" value="${data.ACCT_TYPE_NO}"><br> --%>
+<!--  <span class="title_Name">회원등급</span><br>-->
+   <c:if test="${!empty testList}">
       <select class="user_tier" name="user_tier" >
-        <option value="Bronze">Bronze</option>
-        <option value="Sliver">Sliver</option>
-        <option value="Gold ">Gold </option>
-        <option value="Platinum ">Platinum </option>
-        <option value="Diamond ">Diamond </option>
+       <c:forEach var="testList" items="${testList}" varStatus="i">
+       <c:choose>
+       <c:when test="${data.ACCT_TYPE_NO == testList.TYPE_NO }">
+          <option value="${testList.TYPE_NO}" selected >${testList.TYPE_NM}</option>
+       </c:when>
+       <c:otherwise>
+          <option value="${testList.TYPE_NO}" >${testList.TYPE_NM}</option>
+       </c:otherwise>
+         
+         </c:choose>
+      </c:forEach>
       </select>
-      <br> -->
+      </c:if>
+      <br>
 <!-- 포인트 -->
       <span>포인트</span> <br>
       <input type="text" class="point_con" id="point" name="point" value="${data.POINT}">P<br>
