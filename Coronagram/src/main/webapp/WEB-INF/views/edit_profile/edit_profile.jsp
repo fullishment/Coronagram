@@ -386,7 +386,9 @@ $("input:radio[name='vec']").removeAttr("checked");
       <button type="button" class="find_btn" onclick="cm_execDaumPostcode()">찾기</button><br>
       <input type="text" id="cm_address" name="cm_address" value="${data.ADR}"><br>
       <input type="text" id="cm_detailAddress" name="cm_detailAddress" value="${data.DTL_ADR}"><br>
-        
+<!-- 자기소개 -->
+      <p>자기소개</p>
+      <input type="text" id="intCon" name="intCon" value="${data.INTRO_CON}"><br>  
     </div><!-- input_area -->
     
 	    <button type="button" id="updateBtn" class="edit_btn">수정</button>

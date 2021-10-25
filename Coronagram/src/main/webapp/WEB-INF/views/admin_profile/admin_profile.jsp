@@ -383,6 +383,9 @@ function readURL(input) {
 <!-- 포인트 -->
       <span>포인트</span> <br>
       <input type="text" class="point_con" id="point" name="point" value="${data.POINT}">P<br>
+<!-- 자기소개 -->
+      <p>자기소개</p>
+      <input type="text" id="intCon" name="intCon" value="${data.INTRO_CON}"><br>  
         <button type="button" id="updateBtn" class="edit_btn">수정</button>
         <button type="button" id="deleteBtn" class="del_btn">삭제</button>
         <button type="button" id="cancelBtn" class="cancel_btn">취소</button>

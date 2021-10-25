@@ -80,7 +80,7 @@
 <!-- 불러오기 -->
    <select id="getAProfile" parameterType="hashmap" resultType="hashmap">
       SELECT M_NO, M_ID, M_NM, NICK_NM, PHONE, EMAIL, VAC_YN, POST_NO, ADR, DTL_ADR, 
-            ACCT_TYPE_NO, POINT, IMG_ADR
+            ACCT_TYPE_NO, POINT, IMG_ADR, INTRO_CON
        FROM M
       WHERE M_NO = #{no}
    </select>
@@ -94,7 +94,8 @@
                    DTL_ADR = #{cm_detailAddress},
                    ACCT_TYPE_NO = #{user_tier},
                    POINT = #{point},
-                   IMG_ADR = #{imgFile}
+                   IMG_ADR = #{imgFile},
+                   INTRO_CON = #{intCon}
       WHERE M_NO = #{no}
    </update>
    
