@@ -15,7 +15,9 @@ table {
   tr:nth-child(even) td {
     background: #e3e3e3;
   }
-  
+  tr:hover{
+	opacity:.4;
+}  
   th {
     border-bottom: 2px solid black;
     background: #fff;

@@ -32,7 +32,7 @@
     <div class="cm_menuBar" id="cm_menuBar">
         <div class="cm_menu__toggler"><span></span></div>
         <a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
-        <a href="#" class="cm_home" id="cm_home">Home</a>1
+        <a href="#" class="cm_home" id="cm_home">Home</a>
         <a href="#" class="cm_msg" id="cm_msg">Message</a>
         <a href="#" class="cm_cld" id="cm_cld">Calendar</a>
         <div class="cm_dropdown">
@@ -59,7 +59,7 @@
         <ul class="cm_mcon" id="cm_mcon">
             <a href="#">국내</a> <br>
             <a href="#">해외</a>
-        </ul>
+        </ul>	
     </a>
     <a href="#" class="cm_mTitle" id="cm_mTitle">
         <div class="cm_info"></div>Corona Info
@@ -98,7 +98,7 @@
 	</form>
 
 
-	<div class="slider-container">
+<%-- 	<div class="slider-container">
 		<div class="slider-control left inactive"></div>
 		<div class="slider-control right"></div>
 		<ul class="slider-pagi"></ul>
@@ -121,6 +121,50 @@
 			</c:forEach>
 
 		</div>
+	</div> --%>
+	
+	
+	<div class="slider">
+
+	
+	
+	
+		<c:forEach var="data" items="${list}">
+			<!-- fade css -->
+			<div class="myslide fade">
+				<div class="overlay"></div>
+					<div class="txt">
+						<h1>${data.INFO_TITLE}</h1>
+						<p>${data.INFO_SUBHD}</p>
+						<a class="slide__text-link" id="slide__text-link">Project link</a>
+					</div>
+				<img src="resources/images/coinfo/coinfo_news/covidnews1.jpg" style="width: 100%; height: 100%;">
+				<%-- src="resources/upload/${data.REP_IMG}" --%>
+			</div>
+
+		</c:forEach>
+		
+					
+			<!-- onclick js -->
+			<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+	  		<a class="next" onclick="plusSlides(1)">&#10095;</a>
+	  		
+	  		<div class="dotsbox" style="text-align:center">
+	  			<c:forEach var="data" items="${list}">
+					<span class="dot" onclick="currentSlide"></span>
+				</c:forEach>
+			</div>
+	  		
+
+	  		
+<!-- 	  	<div>
+			<ul class="slider-pagi"> </ul>
+		</div>
+	  		 -->
+
+			
+
+			<!-- /onclick js -->
 	</div>
 
 

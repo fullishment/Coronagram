@@ -8,7 +8,7 @@ header a {
 .cm_menuBar {
 	display: flex;
 	flex-wrap: nowrap;
-	width: 101vw;
+	width: 100%;
 	height: 50px;
 	margin-top: -10px;
 	padding: 5px;
@@ -362,6 +362,276 @@ a.cm_userinfo {
 }
 
 /* MAIN */
+
+
+
+/* 2 */
+.slider{
+	position: relative;
+	width: 100%;
+	background: #2c3e50; /* darckblue */
+}
+.myslide{
+	height: 96vh;
+	display: none;
+	overflow: hidden;
+}
+
+.prev, .next{
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
+	font-size: 50px;
+	padding: 15px;
+	cursor: pointer;
+	color: #fff;
+	transition: 0.1s;
+	user-select: none;
+	z-index: 2;
+}
+.prev:hover, .next:hover{
+	color: #00a7ff; /* blue */
+}
+.next{
+	right: 0;
+}
+.dotsbox{
+	position: relative;
+	display: inline;
+/* 	left: 50%;
+	transform: translate(-50%); */
+	bottom: 40px;
+	height: 0px; 
+	cursor: pointer;
+	display: flex;
+
+	justify-content: center;
+	align-items: center;
+}
+.dot{
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	border: 3px solid #fff;
+	border-radius: 50%;
+	margin: 0 10px;
+	cursor: pointer;
+}
+/* /2 */
+
+
+
+/* javascript */
+.active, .dot:hover{
+	border-color: #00a7ff; /* blue */
+}
+/* /javascript */
+
+
+
+/* muslide add fade */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: 0.8}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: 0.8}
+  to {opacity: 1}
+}
+/* /muslide add fade */
+
+
+
+/* 3 */
+.overlay {
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
+	height: 400px;
+	width: 100%;
+	opacity: 0.3;
+/* 	transform: translateX(0); */
+	background: #ffffff;
+	z-index: 1;
+}
+
+
+
+
+.txt{
+	position: absolute;
+	color: #fff;
+	letter-spacing: 2px;
+	line-height: 35px;
+	top: 50%;
+	left: 15%;
+	transform: translate(0, -50%);
+	-webkit-animation-name: posi;
+  	-webkit-animation-duration: 2s;
+  	animation-name: posi;
+  	animation-duration: 2s;
+	z-index: 1;
+}
+
+@-webkit-keyframes posi {
+  from {left: 25%;}
+  to {left: 15%;}
+}
+
+
+@keyframes posi {
+  from {left: 25%;}
+  to {left: 15%;}
+}
+
+.txt h1{
+	color: #00a7ff; /* blue */
+	text-shadow: 1px 1px 2px rgb(255, 255, 255);
+	font-size: 50px;
+	margin-bottom: 20px;
+}
+.txt p{
+	font-weight: bold;
+	font-size: 20px;
+}
+/* /3 */
+
+
+
+/* 4 */
+img{
+	transform: scale(1.2, 1.2);
+	-webkit-animation-name: zoomin;
+  	-webkit-animation-duration: 25s;
+  	animation-name: zoomin;
+  	animation-duration: 25s;
+}
+@-webkit-keyframes zoomin {
+  from {transform: scale(1, 1);}
+  to {transform: scale(1.2, 1.2);}
+}
+
+
+@keyframes zoomin {
+  from {transform: scale(1, 1);}
+  to {transform: scale(1.2, 1.2);}
+}
+/* /4 */
+
+
+
+/* 5 */
+@media screen and (max-width: 800px){
+	.myslide{
+		height: 100%;
+	}
+	.txt{
+		letter-spacing: 2px;
+		line-height: 25px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		-webkit-animation-name: posi2;
+		-webkit-animation-duration: 2s;
+		animation-name: posi2;
+		animation-duration: 2s;
+	}
+
+	@-webkit-keyframes posi2 {
+	  from {top: 35%;}
+	  to {top: 50%;}
+	}
+
+
+	@keyframes posi2 {
+	  from {top: 35%;}
+	  to {top: 50%;}
+	}
+
+	.txt h1{
+		font-size: 40px;
+	}
+	.txt p{
+		font-size: 13px;
+	}
+
+}
+/* /5 */
+
+/* 6 */
+@media screen and (max-width: 520px){
+	.txt h1{
+		font-size: 30px;
+		margin-bottom: 20px;
+	}
+	.sign{
+		margin-right: 20px;
+	}
+	.sign a{
+		font-size: 12px;
+	}
+}
+/* /6 */
+
+
+.slide__text-link {
+	z-index: 5;
+	display: inline-block;
+	position: relative;
+	padding: 0.5rem;
+	cursor: pointer;
+	font-family: "Open Sans", Helvetica, Arial, sans-serif;
+	font-size: 2.3rem;
+	perspective: 1000px;
+}
+
+.slide__text-link:before {
+	z-index: -1;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	transform-origin: 50% 100%;
+	transform: rotateX(-85deg);
+	transition: transform 0.3s;
+	will-change: transform;
+}
+
+.slide__text-link:hover:before {
+	transform: rotateX(0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
 @font-face {
 	src:
 		url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/polar.otf");
@@ -695,4 +965,4 @@ svg {
 
 .slide__text-link:hover:before {
 	transform: rotateX(0);
-}
+} */

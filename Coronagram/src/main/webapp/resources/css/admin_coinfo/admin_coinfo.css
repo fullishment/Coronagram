@@ -12,10 +12,10 @@ p {
 input,select,textarea{
     border-radius: 15px;
 }
-#imgAtt{
+#imgAtt, #imgAtt2{
 				display:none;
 			}
-#preView{
+#preView, #preView2{
 	width:200px;
 	hegiht:200px;
 }

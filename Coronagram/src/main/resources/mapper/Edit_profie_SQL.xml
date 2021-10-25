@@ -4,7 +4,8 @@
 
 	<!-- 불러오기 -->
 		<select id="getEditP" parameterType="hashmap" resultType="hashmap">
-			SELECT M_NO, M_NM, NICK_NM, M_PW, PHONE, EMAIL, VAC_YN, POST_NO, ADR, DTL_ADR, IMG_ADR
+			SELECT M_NO, M_NM, NICK_NM, M_PW, PHONE, EMAIL, VAC_YN,
+			POST_NO, ADR, DTL_ADR, IMG_ADR, INTRO_CON
 			FROM M
 			WHERE M_NO = #{m_no}
 		</select>	
@@ -20,7 +21,10 @@
 		    			 POST_NO = #{cm_postcode}, 
 		    			 ADR = #{cm_address},
 		    			 DTL_ADR = #{cm_detailAddress},
-		    			 IMG_ADR = #{imgFile}
+		    			 <if test = "imgFile != null and imgFile != ''">
+							IMG_ADR = #{imgFile},
+						 </if>
+						 INTRO_CON = #{intCon}
 			WHERE M_NO = #{no}
 		</update>
 	

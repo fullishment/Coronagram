@@ -48,18 +48,17 @@ document.addEventListener('DOMContentLoaded', function() {
 										
 										calendar.addEvent({
 											start : res.ATT_DT,
-											title : res.TITLE
+											title : res.TITLE,													
 										});
-										
-										$(".fc-checkAtt-button").prop('disabled', true);
+
 										alert("출석완료");
-//										location.reload(true);
+										location.reload(true);
+//										$(".fc-checkAtt-button").prop('disabled', true);
 										calendar.render();
 									},
 									error : function(data) {
 										alert('데이터 불러오기 실패');
 									}
-									
 								});
 								
 							}
@@ -83,19 +82,19 @@ document.addEventListener('DOMContentLoaded', function() {
 					type : 'POST',
 					dataType : 'json',
 					data : params
-
 					,
 					success : function(data) {
 						successCallback(data.data);
+						
 						calendar.render();
 					}
 				});
 			},
-			color : 'yellow',
-			textColor : 'black'
+			color : '#B8860B',
+			textColor : 'black',
 
 		} ],
-		select: function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
+	/*	select: function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
 			var title = prompt('할일 입력:');
 			if (title) {
 			calendar.addEvent({
@@ -106,7 +105,10 @@ document.addEventListener('DOMContentLoaded', function() {
 			})
 			}
 			calendar.unselect()
-			},
+			},*/
+			eventRender: function(event, eventElement) { 
+				if (event.imageurl) { eventElement.find("div.fc-event-inner").prepend("<img src='check.png' width='12' height='12'>"); } },
+
 
 
 		initialView : 'dayGridMonth',
