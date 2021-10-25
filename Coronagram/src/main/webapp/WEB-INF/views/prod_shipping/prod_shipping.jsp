@@ -17,6 +17,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			if($("#sMNo").val() != null && $("#sMNo").val() != ""){
+				$(".notlogin").remove();
 				redrawList();
 			}
 			$("#dataBtn").on("click",function(){
@@ -45,18 +46,20 @@
 		});
 	}
 	function drawList(list){
+		var stat = new Array('주문접수','상품 준비중','배송 준비중','배송중','배송 완료');
+		
 		var html="";
 		for(var data of list){
 		html+="<tr>                  ";
         html+="<td>"+data.CAT_NO+"</td>      ";
         html+="<td>"+data.PROD_NO+"</td>      ";
         html+="<td>"+data.PROD_NM+"</td>  ";
-        html+="<td>"+data.USER_NO+"</td>      ";
+        html+="<td>"+data.M_NM+"</td>      ";
         html+="<td>"+data.POST_NO+"</br>      ";
         html+=""+data.ADR+"</br>      ";
         html+=""+data.DTL_ADR+"</td>      ";
         html+="<td>"+data.ORD_DT+"</td>      ";
-        html+="<td>"+data.ORD_STAT+"</td>      ";
+        html+="<td>"+stat[data.ORD_STAT-1]+"</td>      ";
         
         html+="</tr>                 ";
 		}
@@ -169,7 +172,7 @@
                                 <th>카테고리 번호</th>
                                 <th>상품번호</th>
                                 <th>상품명</th>
-                                <th>주문 회원번호</th>
+                                <th>주문자명</th>
                                 <th>주소</th>
                                 <th>구매일</th>
                                 <th>배송 상태</th>

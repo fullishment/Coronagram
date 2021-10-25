@@ -173,7 +173,7 @@ $(document).ready(function() {
                                     <c:if test="${!empty data.REP_IMG}}">
 										<div id="image">
 											<img name="images" id="images"
-												src="resources/upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}"
+												src="resources/upload/${data.REP_IMG}"
 												onerror="this.style.display='none'" />
 										</div>
 									</c:if>

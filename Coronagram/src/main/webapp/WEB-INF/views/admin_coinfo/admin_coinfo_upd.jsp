@@ -107,7 +107,7 @@ $(document).ready(function(){
 function updateAjax(){
 	//Ajax
 	var params = $("#updateForm").serialize();
-	
+	console.log(params);
 	$.ajax({
 		url : "adminCoinfoUpdAjax",
 		type : "post",
@@ -241,6 +241,7 @@ function checkVal(sel){
 							</form>
 							
                             	<form action="#" id="updateForm" method="post">
+                            	<input type="hidden" name="imgFile" id="imgFile" value="${data.REP_IMG}">
                             		<input type="hidden" name="m_no" value="${sMNo}">
 	                                <div class="qnaTitle">
 	                                    <div class="qnaTitle1">
@@ -273,15 +274,15 @@ function checkVal(sel){
 												
 												<c:choose>
 													<c:when test="${empty data.REP_IMG}">
-														<input type="button" value="이미지파일삭제" id="fileDelBtn"
+														<input type="button" value="이미지파일삭제" id="imgDelBtn"
 															class="hide_Btn" />
 													</c:when>
 													<c:otherwise>
-														<input type="button" value="이미지파일삭제" id="fileDelBtn" />
+														<input type="button" value="이미지파일삭제" id="imgDelBtn" />
 													</c:otherwise>
 												</c:choose>
 												
-												<input type="hidden" name="imgFile" id="imgFile" value="${data.REP_IMG}"><br>
+												
 												
 												<div id="image">
 													<img name="images" id="images"

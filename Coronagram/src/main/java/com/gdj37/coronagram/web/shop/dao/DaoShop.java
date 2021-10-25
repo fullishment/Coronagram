@@ -110,6 +110,66 @@ public class DaoShop implements IDaoShop {
 		return sqlSession.selectList("shop.getOrdList",params);
 	}
 
+	@Override
+	public List<HashMap<String, String>> getShopList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("shop.getShopList",params);
+	}
+
+	@Override
+	public HashMap<String, String> getProdInfo(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shop.getProdInfo",params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getProdAttcList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("shop.getProdAttcList", params);
+	}
+
+	@Override
+	public int prodAttcAdd(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("shop.prodAttcAdd",params);
+	}
+
+	@Override
+	public int prodU(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.update("shop.prodU", params);
+	}
+
+	@Override
+	public HashMap<String, String> getPAttcNo(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shop.getPAttcNo",params);
+	}
+
+	@Override
+	public int prodAttcDel(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("shop.prodAttcDel", params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getProdCatList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("shop.getProdCatList", params);
+	}
+
+	@Override
+	public HashMap<String, String> getProdNextNo(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shop.getProdNextNo",params);
+	}
+
+	@Override
+	public int prodAdd(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("shop.prodAdd",params);
+	}
+
 
 
 

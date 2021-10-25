@@ -189,11 +189,102 @@ public class ShopController {
 		modelMap.put("list", list);
 		return mapper.writeValueAsString(modelMap);
 	}
-	@RequestMapping(value="/adminShopAdd")
-	public ModelAndView adminShopAdd(ModelAndView mav) throws Throwable {
-		mav.setViewName("shop_add/shop_add");
+	@RequestMapping(value="/adminShopList")
+	public ModelAndView adminShopList(ModelAndView mav) throws Throwable {
+		mav.setViewName("shop_list/shop_list");
 		return mav;
 	}
+	@RequestMapping(value="/adminShopLists" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String adminShopLists(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		List<HashMap<String,String>> list = iServiceShop.getShopList(params);
+		modelMap.put("list", list);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/prodInfo")
+	public ModelAndView prodInfo(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		HashMap<String,String> data = iServiceShop.getProdInfo(params);
+		List<HashMap<String,String>> list = iServiceShop.getProdAttcList(params);
+		List<HashMap<String,String>> catlist = iServiceShop.getProdCatList(params);
+		mav.addObject("data", data);
+		mav.addObject("list", list);
+		mav.addObject("catList", catlist);
+		mav.setViewName("prod_info/prod_info");
+		return mav;
+	}
+	@RequestMapping(value="/prodAttcAdd" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String prodAttcAdd(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		String result="success";
+		int prodAttcAdd = iServiceShop.prodAttcAdd(params);
+		if(prodAttcAdd ==0) {
+			result="failed";
+		}else {
+			HashMap<String, String> pAttcNo = iServiceShop.getPAttcNo(params);
+			modelMap.put("pANo", pAttcNo);
+		}
+		
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/prodAttcDel" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String prodAttcDel(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		String result="success";
+		int prodAttcAdd = iServiceShop.prodAttcDel(params);
+		if(prodAttcAdd ==0) {
+			result="failed";
+		}
+		
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/prodU" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String prodU(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		String result="success";
+		int prodAttcAdd = iServiceShop.prodU(params);
+		if(prodAttcAdd ==0) {
+			result="failed";
+		}
+		
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}
+	
+	
+	@RequestMapping(value="/prodAdd")
+	public ModelAndView prodAdd(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		List<HashMap<String,String>> catlist = iServiceShop.getProdCatList(params);
+		HashMap<String,String> nextPNo = iServiceShop.getProdNextNo(params);
+		mav.addObject("catList", catlist);
+		mav.addObject("nextPNo", nextPNo);
+		mav.setViewName("prod_add/prod_add");
+		return mav;
+	}
+	@RequestMapping(value="/prodAdds" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String prodAdds(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		String result="success";
+		int prodAttcAdd = iServiceShop.prodAdd(params);
+		if(prodAttcAdd ==0) {
+			result="failed";
+		}
+		
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}
+	
 	@RequestMapping(value="/adminShopMgt")
 	public ModelAndView adminShopMgt(ModelAndView mav) throws Throwable {
 		mav.setViewName("admin_shop_mgt/admin_shop_mgt");

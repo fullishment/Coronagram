@@ -112,6 +112,66 @@ public class ServiceShop implements IServiceShop{
 		return iDaoShop.getOrdList(params);
 	}
 
+	@Override
+	public List<HashMap<String, String>> getShopList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.getShopList(params);
+	}
+
+	@Override
+	public HashMap<String, String> getProdInfo(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.getProdInfo(params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getProdAttcList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.getProdAttcList(params);
+	}
+
+	@Override
+	public int prodAttcAdd(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.prodAttcAdd(params);
+	}
+
+	@Override
+	public int prodU(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.prodU(params);
+	}
+
+	@Override
+	public HashMap<String, String> getPAttcNo(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.getPAttcNo(params);
+	}
+
+	@Override
+	public int prodAttcDel(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.prodAttcDel(params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getProdCatList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.getProdCatList(params);
+	}
+
+	@Override
+	public HashMap<String, String> getProdNextNo(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.getProdNextNo(params);
+	}
+
+	@Override
+	public int prodAdd(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.prodAdd(params);
+	}
+
 
 
 	

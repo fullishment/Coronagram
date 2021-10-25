@@ -12,6 +12,61 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src="resources/script/menu_bar/menu_bar.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		reDraw();
+    		
+    		$("#addBtn").click(function(){
+    			if(${sMNo} != null){
+	    			location.href="prodAdd";    				
+    			}else{
+    				alert("로그인 이후 가능합니다");
+    			}
+    		});
+    		$("#findBtn").on("click",function(){
+    			$("#searchGbn").val($("#searchGbnInp").val());
+    			$("#searchTxt").val($("#searchInp").val());
+    			reDraw();
+    		});
+    		$("tbody").on("click","#dtlBtn",function(){
+    			$("#no").val($(this).parent().parent().attr("no"));
+    			$("#actionForm").attr("action","prodInfo");
+    			$("#actionForm").submit();
+    		});
+    	});
+    	function reDraw(){
+    		var params=$("#actionForm").serialize();
+    		$.ajax({
+    			url : "adminShopLists",
+    			type : "post",
+    			dataType : "json",
+    			data : params,
+    			success : function(res){
+    				drawList(res.list);
+    			},
+    			error : function(request, status, error){
+    				console.log(error);
+    			}
+    		});
+    	}
+    	function drawList(list){
+    		var html ="";
+    		for(var data of list){
+    		html+="<tr no=\""+data.PROD_NO+"\">                     ";
+            html+="<td>"+data.PROD_NO+"</td>        ";
+            html+="<td>"+data.M_NM+"</td>        ";
+            html+="<td>"+data.CAT_NM+"</td>        ";
+            html+="<td>"+data.PROD_NM+"</td>        ";
+            html+="<td>"+data.POINT+"P</td>        ";
+            html+="<td>"+data.SALE_STAT+"</td>        ";
+            html+="<td>"+data.PROD_DT+"</td>        ";
+            html+="<td><input type=\"button\"  value=\"수정\" id=\"dtlBtn\"></td>        ";
+            
+            html+="</tr>                    ";
+    		}
+    		$("tbody").html(html);
+    	}
+    </script>
     <style>
         html {
             background: #ecf0f1;
@@ -26,9 +81,9 @@
         }
 
         .searchCon {
-            margin-left: 330px;
+            margin-left: 20vw;
             margin-top: 100px;
-            width: 1250px;
+            width: 60vw;
             height: 20px;
             display: flex;
             justify-content: space-between;
@@ -40,24 +95,21 @@
 
         .con1 {
             background-color: white;
-            width: 1250px;
-            min-height: 360px;
+            width: 60vw;
             border-radius: 15px;
             border: 1px solid white;
             box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-            margin: 30px;
-            margin-left: 330px;
-            margin-top: 40px;
+            margin: 40px 20vw;
+           
         }
 
         .user_box {
             border: solid 1px grey;
-            min-height: 300px;
-            min-width: 1185px;
+            width: 90%;
             text-align: center;
             border-collapse: collapse;
             padding: 0;
-            margin: 30px;
+            margin: 20px auto;
 
 
         }
@@ -69,6 +121,7 @@
         tr,
         td,
         th {
+        	
             border: 1px solid grey;
             padding: 4px;
         }
@@ -76,12 +129,12 @@
             height:50px;
             font-size:20px;
         }
-        .th-1,.th-2,.th-5,.th-6 {
+        .th-1,.th-5,.th-6, .th-8 {
             width:10%;
         }
         
-        .th-3,.th-4, .th-7{
-            width:20%;
+        .th-3, .th-2,.th-4, .th-7{
+            width:15%; 
         }
 
         .find_btn {
@@ -166,210 +219,44 @@
 </header>
 
 <body>
+	<form action="#" id="actionForm" method="post">
+		<input type="hidden" name="searchGbn" id="searchGbn" value="${param.searchGbn}" />
+		<input type="hidden" name="searchTxt" id="searchTxt" value="${param.searchTxt}" />
+		<input type="hidden" name="no" id="no" value="" />
+	</form>
     <main>
         <div class="searchCon">
             <h1>상품 리스트</h1>
             <div class="searchbox">
-                <input type="text" /> <button class="find_btn">검색</button>
+            	<input type="button"  value="등록" class="find_btn" id="addBtn"/>
+            	<select id="searchGbnInp" name="searchGbnInp">
+            		<option value="0">상품번호</option>
+            		<option value="1">카테고리명</option>
+            		<option value="2">상품명</option>
+            		<option value="3">판매상태</option>
+            	</select>
+                <input type="text" id="searchInp" value="${param.searchGbn}"/> <button class="find_btn" id="findBtn">검색</button>
             </div>
         </div>
         <div class="con1">
             <table class="user_box">
-                <c:forEach items="" var="member">
+               
                     <thead>
                         <tr class="thList">
                             <th class="th-1">상품번호</th>
-                            <th class="th-2">등록자번호</th>
-                            <th class="th-3">카테고리번호</th>
+                            <th class="th-2">등록자 이름</th>
+                            <th class="th-3">카테고리명</th>
                             <th class="th-4">상품명</th>
-                            <th class="th-5">포인트</th>
+                            <th class="th-5">가격</th>
                             <th class="th-6">판매상태</th>
                             <th class="th-7">등록일</th>
+                            <th class="th-8">수정</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
-                        <tr>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                            <td>Ipsum</td>
-                            <td>Dolor</td>
-                            <td>Lorem</td>
-                        </tr>
+                        
                     </tbody>
-                </c:forEach>
+                
             </table>
         </div>
     </main>

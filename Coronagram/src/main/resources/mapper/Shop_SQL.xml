@@ -9,7 +9,7 @@
                 FROM PROD_ATTC) PA
             ON P.PROD_NO = PA.PROD_NO
             AND RNK = 1
-		WHERE DEL=0
+		WHERE DEL=1 
 	</select> 
 	<select id="getProd" parameterType="hashmap" resultType="hashmap">
 		SELECT PROD_NO,REG_NO,CAT_NO,PROD_NM,POINT,CON,SALE_STAT,PROD_DT,DEL
@@ -93,16 +93,95 @@
 		WHERE M_NO = #{sMNo}
 	</select>
 	<select id="getOrdList" parameterType="hashmap" resultType="hashmap">
-		SELECT P.CAT_NO,P.PROD_NO,P.PROD_NM,O.USER_NO,O.POST_NO,O.ADR,O.DTL_ADR,TO_CHAR(O.ORD_DT,'YYYY-MM-DD') AS ORD_DT,O.ORD_STAT
+		SELECT P.CAT_NO,P.PROD_NO,P.PROD_NM,M.M_NM,O.POST_NO,O.ADR,O.DTL_ADR,TO_CHAR(O.ORD_DT,'YYYY-MM-DD') AS ORD_DT,O.ORD_STAT
 		FROM ORD O
 		    INNER JOIN ORDER_PROD OP
 		    ON O.ORD_NO = OP.ORDER_NO
 		    INNER JOIN PRODUCT P
 		    ON OP.PROD_NO = P.PROD_NO
+		    INNER JOIN M 
+            ON M.M_NO = O.USER_NO
 		WHERE O.USER_NO=#{sMNo}
 		<if test = "startDate != null and startDate !='' and endDate != null and endDate !=''"  >
-				AND TO_CHAR(O.ORD_DT,'YYYY-MM-DD') BETWEEN #{startDate} AND #{endDate}+1
+				AND TO_CHAR(O.ORD_DT,'YYYY-MM-DD') BETWEEN #{startDate} AND #{endDate} 
 		</if>
 		ORDER BY O.ORD_NO
 	</select>
+	
+	<select id="getShopList" parameterType="hashmap" resultType="hashmap">
+		SELECT P.PROD_NO,M.M_NM,PC.CAT_NM,P.PROD_NM,P.POINT,P.SALE_STAT,TO_CHAR(P.PROD_DT,'YYYY-MM-DD') AS PROD_DT 
+		FROM PRODUCT P
+		    INNER JOIN PROD_CAT PC
+		    ON P.CAT_NO = PC.CAT_NO
+		    INNER JOIN M M
+		    ON P.REG_NO = M.M_NO
+		WHERE P.DEL = 1
+		<if test="searchTxt != null and searchTxt != ''">
+					<choose>
+						<when test="searchGbn eq 0">
+							AND P.PROD_NO = #{searchTxt}
+						</when>
+						<when test="searchGbn eq 1">
+							AND PC.CAT_NM LIKE '%' || #{searchTxt} || '%'
+						</when>
+						<when test="searchGbn eq 2">
+							AND P.PROD_NM LIKE '%' || #{searchTxt} || '%'
+						</when>
+						<when test="searchGbn eq 3">
+							AND P.SALE_STAT  = #{searchTxt}
+						</when>
+					</choose>
+				</if>
+	</select>
+	<select id="getProdInfo" parameterType="hashmap" resultType="hashmap">
+		SELECT P.PROD_NO,P.PROD_NM,PC.CAT_NM,P.POINT,P.SALE_STAT ,P.CON
+		FROM PRODUCT P 
+		    INNER JOIN PROD_CAT PC
+		    ON P.CAT_NO = PC.CAT_NO
+		WHERE P.PROD_NO = #{no}
+	</select>
+	<select id="getProdAttcList"  parameterType="hashmap" resultType="hashmap">
+		SELECT PA.FILE_ADDR ,PA.ATTC_NO 
+		FROM PRODUCT P
+		    INNER JOIN PROD_ATTC PA
+		    ON P.PROD_NO=PA.PROD_NO
+		WHERE P.PROD_NO = #{no}
+	</select>
+	<insert id="prodAttcAdd" parameterType="hashmap">
+		INSERT INTO PROD_ATTC (ATTC_NO, PROD_NO, FILE_ADDR)
+		VALUES (PROD_ATTC_SEQ.NEXTVAL, #{pNo}, #{bFile}) 
+	</insert>
+	<update id="prodU" parameterType="hashmap" >
+		UPDATE PRODUCT SET PROD_NM = #{prodNm}, 
+		                   CAT_NO = #{catNo},
+		                   POINT = #{price},
+		                   CON = #{con},
+		                   SALE_STAT = #{saleStat}
+		WHERE PROD_NO = #{pNo}
+	</update>
+	<select id="getPAttcNo" parameterType="hashmap" resultType="hashmap">
+		SELECT PA.ATTC_NO
+		FROM (SELECT ATTC_NO, ROW_NUMBER() OVER(PARTITION BY PROD_NO ORDER BY ATTC_NO DESC) AS RNK
+		      FROM PROD_ATTC
+		      WHERE PROD_NO = #{pNo}) PA
+		WHERE PA.RNK = 1
+	</select>
+	<delete id="prodAttcDel" parameterType="hashmap">
+		DELETE 
+		FROM PROD_ATTC
+		WHERE ATTC_NO = #{aNo}
+	</delete>
+	<select id="getProdCatList" parameterType="hashmap" resultType="hashmap">
+		SELECT CAT_NO,CAT_NM
+		FROM PROD_CAT
+		WHERE DEL = 1
+	</select>
+	<select id="getProdNextNo" parameterType="hashmap" resultType="hashmap">
+		SELECT PROD_SEQ.NEXTVAL
+		FROM PRODUCT
+	</select>
+	<insert id="prodAdd"  parameterType="hashmap" >
+		INSERT INTO PRODUCT (PROD_NO,REG_NO,CAT_NO,PROD_NM,POINT,CON,SALE_STAT)
+		VALUES (#{pNo},#{sMNo},#{catNo},#{prodNm},#{price},#{con},#{saleStat})
+	</insert>
 </mapper>

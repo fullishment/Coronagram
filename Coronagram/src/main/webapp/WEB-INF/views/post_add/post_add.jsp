@@ -115,8 +115,8 @@
             </div>
         </div>
     
-    <script src="../../resources/script/menu_bar/menu_bar.js"></script>
-    <script src="../../resources/script/post_add/post_add.js"></script>
+    <script src="resources/script/menu_bar/menu_bar.js"></script>
+    <script src="resources/script/post_add/post_add.js"></script>
 </main>
 </body>
 

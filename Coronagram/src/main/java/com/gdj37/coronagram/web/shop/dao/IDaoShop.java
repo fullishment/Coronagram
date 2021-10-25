@@ -25,7 +25,6 @@ public interface IDaoShop {
 
 	public int addOrder(HashMap<String, String> params)throws Throwable;
 
-
 	public int getOrdNo(HashMap<String, String> params)throws Throwable;
 
 	public int addOrdP(HashMap<String, String> params)throws Throwable;
@@ -37,6 +36,26 @@ public interface IDaoShop {
 	public HashMap<String, String> getPoint(HashMap<String, String> params)throws Throwable;
 
 	public List<HashMap<String, String>> getOrdList(HashMap<String, String> params)throws Throwable;
+
+	public List<HashMap<String, String>> getShopList(HashMap<String, String> params)throws Throwable;
+
+	public HashMap<String, String> getProdInfo(HashMap<String, String> params)throws Throwable;
+
+	public List<HashMap<String, String>> getProdAttcList(HashMap<String, String> params)throws Throwable;
+
+	public int prodAttcAdd(HashMap<String, String> params)throws Throwable;
+
+	public int prodU(HashMap<String, String> params)throws Throwable;
+
+	public HashMap<String, String> getPAttcNo(HashMap<String, String> params)throws Throwable;
+
+	public int prodAttcDel(HashMap<String, String> params)throws Throwable;
+
+	public List<HashMap<String, String>> getProdCatList(HashMap<String, String> params)throws Throwable;
+
+	public HashMap<String, String> getProdNextNo(HashMap<String, String> params)throws Throwable;
+
+	public int prodAdd(HashMap<String, String> params)throws Throwable;
 
 
 

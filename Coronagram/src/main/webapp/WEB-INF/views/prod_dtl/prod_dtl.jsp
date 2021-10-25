@@ -91,7 +91,7 @@
     	for(var data of list){
 	    	html+="<li>                                                      ";
 	    	html+="	<a href=\"#abc\" >             ";
-	        html+="		<img src=\""+data.FILE_ADDR+"\" alt=\"\" />  ";
+	        html+="		<img src=\"resources/upload/"+data.FILE_ADDR+"\" alt=\"\" />  ";
 	        html+="	</a>                                                    ";
 	        html+="</li>                                                     ";
     	}
