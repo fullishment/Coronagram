@@ -1,6 +1,8 @@
 package com.gdj37.coronagram.web.login.controller;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gdj37.coronagram.util.ScriptUtils;
-import com.gdj37.coronagram.util.Utils;
 import com.gdj37.coronagram.web.login.VO.MemberVO;
 import com.gdj37.coronagram.web.login.service.IServiceFind_Idpw;
 
@@ -32,15 +33,23 @@ public class Find_Idpw {
 	}
 	
 	@RequestMapping(value="/find_idpws")
-	public ModelAndView find_idpw(HttpServletResponse response,ModelAndView mav,HttpSession session,@RequestParam HashMap<String,String> params) throws Throwable{	
+	public ModelAndView find_idpw(HttpServletResponse response, ModelAndView mav, HttpSession session, @RequestParam HashMap<String,String> params) throws Throwable{	
 		System.out.println(params.get("m_nm"));
 		System.out.println(params.get("email"));
-		String id = iServiceFind_Idpw.findId(params);
+		List <HashMap<String, String>> id = iServiceFind_Idpw.findId(params);
 		System.out.println(id);
-		if(id != null) {
-			ScriptUtils.alert(response, id);
+		
+		PrintWriter out = response.getWriter();
+
+		String result = "";
+		
+		if( id.size() > 0 ) {
+			for ( int i = 0 ; i < id.size() ; i++ ) {
+				result += id.get(i).get("M_ID").toString() +"\\n";
+			}
+			ScriptUtils.alert(response,"찾으시는 아이디는"+"\\n" + result + "입니다");
 		}else {
-			ScriptUtils.alert(response, "입력한 값이 틀립니다.");
+			ScriptUtils.alert(response, "잘못 입력 하셨습니다.");
 		}
 		
 		session.setAttribute("id",id);

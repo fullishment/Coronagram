@@ -1,6 +1,7 @@
 package com.gdj37.coronagram.web.login.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,8 @@ public class DaoFind_Idpw implements IDaoFind_Idpw{
 	public SqlSession sqlSession;
 
 	@Override
-	public String findId(HashMap<String, String> params) throws Throwable {
-		return sqlSession.selectOne("find_id.findId", params);
+	public List<HashMap<String, String>> findId(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectList("find_id.findId", params);
 	}
 
 	/*

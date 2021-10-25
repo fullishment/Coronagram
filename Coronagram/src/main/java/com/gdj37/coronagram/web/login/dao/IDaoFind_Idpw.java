@@ -1,12 +1,13 @@
 package com.gdj37.coronagram.web.login.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.gdj37.coronagram.web.login.VO.MemberVO;
 
 public interface IDaoFind_Idpw {
 	
-	public String findId(HashMap<String, String> params) throws Throwable;
+	public List<HashMap<String, String>> findId(HashMap<String, String> params) throws Throwable;
 	
 	/*
 	 * public String find_pws(HashMap<String, String> params) throws Throwable;

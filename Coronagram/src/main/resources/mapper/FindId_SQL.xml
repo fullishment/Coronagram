@@ -2,10 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="find_id">
 
-	<select id="findId" parameterType="hashmap" resultType="String">
+	<select id="findId" parameterType="hashmap" resultType="hashmap">
 		select m_id
 		from m
-		where m_nm = #{m_nm} and email = #{email}
+		where m_nm = #{m_nm} 
+	      and email= #{email}
 	</select>
 	
 <!-- 	<select id="find_pws" parameterType="hashmap" resultType="String">

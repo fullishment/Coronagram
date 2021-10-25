@@ -66,7 +66,7 @@
             <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">PW 찾기</label>
           <div class="login-form">
             <div class="sign-in-htm">
-            <form action="find_idpws" id="FindForm" method="post" accept-charset="utf-8">>
+            <form action="find_idpws" id="FindForm" method="post" accept-charset="utf-8">
               <div class="group">
                 <label for="user" class="label">이름</label><br>
                 <input type="text" id="m_nm" name="m_nm" placeholder="이름을 입력하세요"><br>
@@ -81,9 +81,7 @@
               <div class="hr"></div>
             </div>
             <div class="sign-up-htm">
-       	     <!-- <form action="findpw" id="FindPwForm" method="post"> -->
               <div class="group">
-                <!-- <label for="user" class="label">이름</label><br>
                 <input type="text" name ="m_nm" id="m_nm" placeholder="이름을 입력하세요"><br> -->
                 <label for="user" class="label">ID</label><br>
                 <input type="text" name="m_id" id="m_id" placeholder="ID를 입력하세요"><br>
@@ -95,7 +93,6 @@
                  
                   <button type="button" onclick="history.go(-1);" class="cancel_btn">취소</button>
               </div>  
-               <!-- </form>  -->
               <div class="hr"></div>
             </div>
           </div>

@@ -2,6 +2,7 @@ package com.gdj37.coronagram.web.login.service;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +25,7 @@ public class ServiceFind_Idpw implements IServiceFind_Idpw {
 	public JavaMailSender mailSender;
 
 	@Override
-	public String findId(HashMap<String, String> params) throws Throwable {
+	public List<HashMap<String, String>> findId(HashMap<String, String> params) throws Throwable {
 		return iDaoFind_Idpw.findId(params);
 	}
 

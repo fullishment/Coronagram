@@ -1,6 +1,7 @@
 package com.gdj37.coronagram.web.login.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,7 +9,7 @@ import com.gdj37.coronagram.web.login.VO.MemberVO;
 
 public interface IServiceFind_Idpw {
 
-	public String findId(HashMap<String, String> params) throws Throwable;
+	public List<HashMap<String, String>> findId(HashMap<String, String> params) throws Throwable;
 	
 	/*
 	 * public String find_pws(HashMap<String, String> params) throws Throwable; //
