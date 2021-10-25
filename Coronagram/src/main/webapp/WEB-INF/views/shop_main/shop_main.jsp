@@ -14,12 +14,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  
   <link rel="stylesheet" href="resources/css/shop_main/headercss.css">
   <link rel="stylesheet" href="resources/css/shop_main/maincss.css">
   <link rel="stylesheet" href="resources/css/shop_main/slide.css">
 	<script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
+	 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  <script src="resources/script/shop_main/header_script.js"></script>
+  <script src="resources/script/shop_main/main_script.js"></script>
+  <script src="resources/script/shop_main/slide.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js'></script>
   <script type="text/javascript">
+  
   $(document).ready(function(){
 	  reloadList();
 	  $("#main_cart").on("click","#detailBtn",function(){
@@ -34,10 +41,10 @@
 		html+= "<div class=\"card\" no=\""+data.PROD_NO+"\">                                                                                          ";
         html+= "<div class=\"top-bar\">                                                                                       ";
         html+= "  <i class=\"fab fa-apple\"></i>                                                                              ";
-        html+= "  <em class=\"stocks\">Elec</em>                                                                              ";
+        html+= "  <em class=\"stocks\">"+data.CAT_NO+"</em>                                                                              ";
         html+= "</div>                                                                                                      ";
         html+= "<div class=\"img-container\">                                                                                 ";
-        html+= "  <img class=\"product-img\" src=\"https://purepng.com/public/uploads/large/apple-watch-pcq.png\" alt=\"\">       ";
+        html+= "  <img class=\"product-img\" src=\""+data.FILE_ADDR+"\" alt=\"\">       ";
         html+= "</div>                                                                                                      ";
         html+= "<div class=\"details\">                                                                                       ";
         html+= "  <div class=\"name-fav\">                                                                                    ";
@@ -53,8 +60,7 @@
         html+= "    <p class=\"product-price\">"+data.POINT+"포인트</p>                                                                    ";
         html+= "    <span class=\"btn-add\">                                                                                  ";
         html+= "<div>                                                                                                 ";
-        html+= "<button class=\"add-btn\" id=\"detailBtn\">detail <i class=\"fas fa-chevron-down\"></i></button>                         ";
-        html+= "<button class=\"add-btn\" id=\"addBtn\">Add <i class=\"fas fa-chevron-right\"></i></button>                           ";
+        html+= "<button class=\"add-btn\" id=\"detailBtn\">자세히보기 <i class=\"fas fa-chevron-right\"></i></button>                           ";
         html+= "</div>                                                                                                ";
         html+= "</span>                                                                                                 ";
         html+= "</div>                                                                                                    ";
@@ -390,11 +396,7 @@
     </footer>
  
   <!-- partial -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script src='https://use.fontawesome.com/8ae46bccf5.js'></script>
-  <script src="resources/script/shop_main/header_script.js"></script>
-  <script src="resources/script/shop_main/main_script.js"></script>
-  <script src="resources/script/shop_main/slide.js"></script>
+ 
  
 </body>
 

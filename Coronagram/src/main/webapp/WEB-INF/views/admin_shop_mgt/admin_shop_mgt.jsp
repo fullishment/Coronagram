@@ -263,21 +263,7 @@
             <button href="#" type="button" class="edit_btn">수정</button>
         </div>
        </section>
-        <!-- <table>
-            <c:forEach items = "${}" var = "member">
-               <tr>
-                 <td>${}</td>
-                 <td>${}</td>
-                 <td>${}</td>
-                 <td>${}</td>
-                 <td>${}</td>
-                 <td>${}</td>
-                 <td>${}</td>
-                 <td>${}</td>
-                 <td>${}</td>
-               </tr>
-            </c:forEach>
-        </table> -->
+        
     </main>
 
     <script src="resources/script/menu_bar/menu_bar.js"></script>

@@ -33,29 +33,34 @@
 	       
 	   });
     	$("#cartBtn").click(function(){
-    		$("#priceInp").val($("#color").val());
-    		$("#unitInp").val($(".color_L p").html());
-    		$("#qtInp").val($("#qt").html());
-    		var params = $("#addForm").serialize();
-			$.ajax({ 
-				url : "cartAdd", 
-				type : "post", 
-				dataType : "json", 
-				data : params, 
-				success : function(res){ 
-					if(res.result == "success"){
-						location.href="shopCart";
-					}else if(res.result == "failed"){
-						alert("장바구니 담기 에 실패했습니다");
-					}else {
-						alert("장바구니 담기 중 문제가 발생했습니다");
-						console.log(result);
+    		if($("#sMNo").val() != null && $("#sMNo").val() != ""){
+	    		$("#priceInp").val($("#color").val());
+	    		$("#unitInp").val($(".color_L p").html());
+	    		$("#qtInp").val($("#qt").html());
+	    		var params = $("#addForm").serialize();
+				$.ajax({ 
+					url : "cartAdd", 
+					type : "post", 
+					dataType : "json", 
+					data : params, 
+					success : function(res){ 
+						if(res.result == "success"){
+							location.href="shopCart";
+						}else if(res.result == "failed"){
+							alert("장바구니 담기 에 실패했습니다");
+						}else {
+							alert("장바구니 담기 중 문제가 발생했습니다");
+							console.log(result);
+						}
+					},
+					error : function(request, status, error){ 
+						console.log(error);
 					}
-				},
-				error : function(request, status, error){ 
-					console.log(error);
-				}
-			});
+				});
+    		}else{
+    			alert("로그인 이후 이용가능합니다");
+    			location.href("login");
+    		}
    		});
     	
     	$("#imgBox").on("mouseover","img",function(){
@@ -86,7 +91,7 @@
     	for(var data of list){
 	    	html+="<li>                                                      ";
 	    	html+="	<a href=\"#abc\" >             ";
-	        html+="		<img src=\""+data.FILE_ADDR+"\" alt=\"\" />  ";
+	        html+="		<img src=\"resources/upload/"+data.FILE_ADDR+"\" alt=\"\" />  ";
 	        html+="	</a>                                                    ";
 	        html+="</li>                                                     ";
     	}
@@ -125,6 +130,12 @@
     	return html;
     }
     </script>
+    <style type="text/css">
+    	#noticelogin {
+    		margin : 0 auto;
+    		
+    	}
+    </style>
 </head>
 
 <body>
@@ -144,6 +155,7 @@
           <li>
             <a href="#" class="cm_userinfo">개인정보수정</a>
           </li>
+         </ul>
       </div>
       <div class="cm_user_name">
 						<c:if test="${!empty sMNo}">
@@ -152,7 +164,6 @@
 					</div>
     </div>
 
-    </div>
     <div class="cm_menu" id="cm_menu">
       <a href="#" class="cm_mLogo">Coronagram</a>
       <a href="#" class="cm_mTitle" id="cm_mTitle">
@@ -193,7 +204,7 @@
     <!-- 메인 -->
     <main>
         <div class="wrapper">
-            <div class="mainContent">
+            <div class="mainContent"><
                 <div class="firstCont">
                     <div class="thumbsCont">
                         <ul class="thumbs" id="imgBox">
@@ -255,24 +266,22 @@
                         	<input type="hidden" name="qt" id="qtInp">             
                         </form>
                         <div class="otherLinksCont">
-                        	<ul class="otherLinks">
-                               	<li class="btn_L" id="cartBtn"><a href="#"><p>장바구니</p></a></li>
-                                <li class="btn_R" id="buyBtn"><a href="#"><p>바로구매</p></a></li>
-                            </ul>
-                        	<%-- <c:choose>
+                        	
+                        	 <c:choose>
                         	<c:when test="${!empty sMNo}">
                         		<ul class="otherLinks">
-                               	<li class="btn_L"><a href="#"><p>장바구니</p></a></li>
+                               	<li class="btn_L" id="cartBtn"><a href="#"><p>장바구니 담기</p></a></li>
                                 <li class="btn_R"><a href="#"><p>바로구매</p></a></li>
                             </ul>
                             </c:when>
-	                        	<c:otherwise>
-		                           	<div class="loginBtn">로그인</div>
-	                        	</c:otherwise>
-                        	</c:choose> --%>
+	                        <c:otherwise>
+		                           	<p id="noticelogin"> 로그인 이후 구매 가능합니다</p>
+	                        </c:otherwise>
+                        	</c:choose> 
                         </div>
-
                     </div>
+                </div>
+                </div>
                 </div>
     </main>
    	<script src="resources/script/prod_dtl/prod_dtl.js"></script>

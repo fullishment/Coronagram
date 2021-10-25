@@ -63,7 +63,7 @@
               INFO_SUBHD = #{info_subhd},
               CON = #{con},
               REP_IMG = #{imgFile}
-		WHERE INFO_NO = #{no}
+		WHERE INFO_NO = #{m_no}
 	</update>
 
 

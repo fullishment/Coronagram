@@ -42,8 +42,8 @@ body {
   }
   
   .bc .bc_item:after {
-    counter-increment: breadcrumb;
-    content: counter(breadcrumb);
+    /*counter-increment: breadcrumb;
+    content: counter(breadcrumb);*/
     position: absolute;
     top: 0px;
     left: calc(50% - 45px);
@@ -102,6 +102,10 @@ th{
       border: none;
       margin-left: 15px;
       background: white;
+  }
+  .btn :hover{
+  	opacity : 0.4;
+  	cursor : pointer;
   }
   .btn p {
             display: block;
