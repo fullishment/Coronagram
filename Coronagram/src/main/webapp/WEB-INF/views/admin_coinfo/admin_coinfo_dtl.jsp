@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -19,126 +20,41 @@
 <script type="text/javascript"
 		src = "resources/script/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-  	CKEDITOR.replace("con", {
-		resize_enabled : false,
-		language : "ko",
-		enterMode : "2"
-	});
-
-	$("#cancelBtn").on("click",function(){
-		$("#backForm").submit();
+$(document).ready(function() {
+	$("#listBtn").on("click", function(){
+		$("#actionForm").attr("action", "admin_coinfo_list");
+		$("#actionForm").submit();
 	});
 	
-	$("#updateForm").on("keypress","input",function(event){
-		if(event.keyCode==13){
-			return false;
-		}
+	$("#updateBtn").on("click", function(){
+		$("#actionForm").attr("action", "admin_coinfo_upd");
+		$("#actionForm").submit();
 	});
-	
-/* 	$("#imgBtn").on("click",function(){
-		$("#imgAtt").click();
-	});
- */
-	$("#imgAtt").on("change",function(){
-		$("#fileName").html($(this).val().substring($(this).val().lastIndexOf("\\")+1));
-		var imgForm = $("#imgForm");
-		imgForm.ajaxForm({
-				success:function(res){
-				if(res.result=="SUCCESS"){
-					if(res.fileName.length > 0){
-						$("#imgFile").val(res.fileName[0]);
-						var imgRep = res.fileName[0].replace('[', '%5B').replace(']', '%5D');
-						//$("#preView").attr("src", "resources/upload/"+imgRep);
-						$("#image").html("<img src=\"resources/upload/"+imgRep+"\" id=\"prevImg"+"\">");
+	$("#deleteBtn").on("click", function(){
+		if(confirm("삭제하시겠습니까?")){
+		var params = $("#actionForm").serialize();
+			
+			$.ajax({
+				url : "admin_coinfo_del",
+				type : "post",
+				dataType : "json",
+				data : params,
+				success : function(res){
+					if(res.result == "success"){
+						location.href="admin_coinfo_list";
+					} else if(res.result == "failed"){
+						alert("삭제에 실패하였습니다.");
+					} else {
+						alert("삭제중 문제가 발생했습니다.");
 					}
-				}else{
-					alert("파일 업로드에 실패하였습니다.");
+				},
+				error : function(request, status, error){
+					console.log(error);
 				}
-			},
-			error:function(req,status,error){
-				console.log(error);
-				alert("파일 업로드중 문제가 발생하였습니다.");
-			}
-		});					
-		imgForm.submit();
-	});
-	
-	//첨부 파일 버튼
-	   $("#fileBtn").on("click",function(){
-		      $("#imgAtt").click();
-	});
-	
-	//첨부파일 삭제 버튼
-	$("#imgDelBtn").on("click", function(){
-	   $("#fileName").html(""); 
-	   $("#imgFile").html("");
-	   $("#imgFile").val("");
-	   $("#fileBtn").attr("class","");
-	   $("#image").html("");
-	   $("#images").val("");
-	   $(this).remove();
-	});
-	
-	
-	
-	$("#updateBtn").on("click",function(){	
-		$("#con").val(CKEDITOR.instances['con'].getData());
-		
-		if(checkVal("#info_title")){
-			alert("제목을 입력해 주세요");
-			$("#info_title").focus();
-		}
-		else if(checkVal("#info_subhd")){
-			alert("소제목을 입력해 주세요");
-			$("#info_subhd").focus();
-		}
-		else if(checkVal("#con")){
-			alert("내용을 입력해 주세요");
-			$("#con").focus();
-		}
-		else{
-			updateAjax();
+			});		
 		}
 	});
 });
-
-
-function updateAjax(){
-	//Ajax
-	var params = $("#updateForm").serialize();
-	
-	$.ajax({
-		url : "adminCoinfoUpdAjax",
-		type : "post",
-		dataType : "json",
-		data : params,
-		success : function(res){
-			if(res.result == "success"){
-				$("#updateForm").attr("action","admin_coinfo_list");
-				$("#updateForm").submit();
-			} else if(res.result == "failed"){
-				alert("수정에 실패하였습니다.");
-			} else {
-				alert("수정중 문제가 발생했습니다.");
-			}
-		},
-		error : function(request, status, error){
-			console.log(error);
-		}
-	});
-}
-
-
-
-function checkVal(sel){
-	if($.trim($(sel).val())==""){
-		return true;
-	}
-	else{
-		return false;
-	}
-}
 	
 	</script>
 </head>
@@ -225,89 +141,59 @@ function checkVal(sel){
                     <input id="tab-2" type="radio" name="tab" class="scm2">
                     <label for="tab-2" class="tab">단계 변경</label>
                     <div class="sc-form">
+                    
+                    
                         <div class="scm1-htm">
                             <label for="user" class="sclabel">
                                 <p>코로나 관련 정보 관리</p>
                             </label>
                             <div class="group">
-                            	<form id="imgForm" action="fileUploadAjax" method="post" enctype="multipart/form-data">
-								<input type="file" name="imgAtt" id="imgAtt" accept="image/*" >
-							</form>
-							<form action="admin_coinfo_dtl" id="backForm" method="post">
-								<input type="hidden" name="searchGbn" value="${param.searchGbn}" />
-								<input type="hidden" name="searchTxt" value="${param.searchTxt}" />
-								<input type="hidden" name="page" value="${param.page}" />
-								<input type="hidden" name="no" value="${param.no}" />
-							</form>
-							
-                            	<form action="#" id="updateForm" method="post">
-                            		<input type="hidden" name="m_no" value="${sMNo}">
-	                                <div class="qnaTitle">
-	                                    <div class="qnaTitle1">
-	                                        <span>제목</span><input type="text" class="border" id="info_title" name="info_title" value="${data.INFO_TITLE}">
-	                                    </div>
-	                                    <div class="qnaTitle2">
-	                                        <span>소제목</span><input type="text" class="border" id="info_subhd" name="info_subhd" value="${data.INFO_SUBHD}">
-	                                    </div>
-	                               	 </div>
-	                              	 <div class="qnaMain">
-	                                    <div class="qnaCon">
-	                                        <p>내용</p><textarea class="QCI" type="text" id="con" name="con" value="${data.CON}"></textarea>
-	                                    </div>
-	                                    
-	                                    
-	                                    
-	                                    		<c:choose>
-													<c:when test="${!empty data.REP_IMG}">
-														<!-- 첨부파일이 있는경우 버튼을 숨긴다. -->
-														<input type="button" value="이미지파일선택" id="fileBtn" class="hide_Btn" />
-													</c:when>
-													<c:otherwise>
-														<input type="button" value="이미지파일선택" id="fileBtn" />
-													</c:otherwise>
-												</c:choose>
-												
-												<c:set var="len" value="${fn:length(data.REP_IMG)}"></c:set>
-												
-												<span id="fileName">${fn:substring(data.REP_IMG, 20, len)}</span>
-												
-												<c:choose>
-													<c:when test="${empty data.REP_IMG}">
-														<input type="button" value="이미지파일삭제" id="fileDelBtn"
-															class="hide_Btn" />
-													</c:when>
-													<c:otherwise>
-														<input type="button" value="이미지파일삭제" id="fileDelBtn" />
-													</c:otherwise>
-												</c:choose>
-												
-												<input type="hidden" name="imgFile" id="imgFile" value="${data.REP_IMG}"><br>
-												
-												<div id="image">
-													<img name="images" id="images"
-														src="resources/upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}"
-														onerror="this.style.display='none'" />
-												</div>
-	                                    
-	                                    
-	                                    
-	                                    
-	<%--                                     <div class="qnaImg">
-											<span>이미지</span><input type="button" value="file" class="fileBtn" id="imgBtn" />
-											<span id="fileName"></span>		
-											<input type="hidden" name="imgFile" id="imgFile">							
-										   <div id="preView">
-										      <img src="resources/upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
-										   </div>
-										</div> --%>
-										
-										
-	                              	  </div>
-	                               </form>
-                                <div class="qnaBtn">
-                                 	<input type="button" id="updateBtn" class="qnaBtn1" value="수정" />
-                                 	<input type="button" id="cancelBtn" class="qnaBtn2" value="취소" />
-                                </div>
+                            	<form action="#" id="actionForm" method="post">
+									<input type="hidden" name="searchGbn" value="${param.searchGbn}" />
+									<input type="hidden" name="searchTxt" value="${param.searchTxt}" />
+									<input type="hidden" name="page" value="${param.page}" />
+									<input type="hidden" name="no" value="${param.no}" />
+								</form>
+                                <div class="qnaTitle">
+                                    <div class="qnaTitle1">
+                                        <span>제목</span>
+                                        <span>${data.INFO_TITLE}</span>
+                                    </div>
+                                    <div class="qnaTitle2">
+                                        <span>소제목</span>
+                                        <span>${data.INFO_SUBHD}</span>
+                                    </div>
+                               	 </div>
+                              	 <div class="qnaMain">
+                                    <div class="qnaCon">
+                                        <p>내용</p>
+                                        <div class="atc_con" style="white-space:pre-line;">${data.CON}</div>
+                                    </div>
+                                    
+                                    <c:if test="${!empty data.REP_IMG}}">
+										<div id="image">
+											<img name="images" id="images"
+												src="resources/upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}"
+												onerror="this.style.display='none'" />
+										</div>
+									</c:if>
+									<input type="button" value="수정" id="updateBtn" />
+									<input type="button" value="삭제" id="deleteBtn" />
+									<input type="button" value="목록" id="listBtn" />
+                                    
+                                    
+
+
+<%-- 									<c:if test="${data.M_NO eq sMNo}">
+										<input type="button" value="수정" id="updateBtn" />
+										<input type="button" value="삭제" id="deleteBtn" />
+									</c:if> --%>
+<%-- 											<c:set var="len" value="${fn:length(data.M_IMG)}"></c:set>
+											
+											<span id="fileName">${fn:substring(data.M_IMG, 20, len)}</span> --%>
+
+											
+                              	  </div>
                             </div>
                         </div>
                         

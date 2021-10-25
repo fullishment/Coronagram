@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminfo">
+
+	<insert id="admIAdd" parameterType="hashmap">
+		INSERT INTO INFO(WRITER_NO, INFO_TITLE, INFO_SUBHD, CON, REP_IMG, REP_BGIMG)
+		VALUES  (#{m_no}, #{info_title}, #{info_subhd}, #{con}, #{imgFile}, #{imgFile2})
+	</insert>
+	
+	
+	<select id = "getAdinfoCnt" parameterType="hashmap" resultType = "Integer">
+	 	SELECT COUNT(*) AS CNT
+		FROM INFO
+		WHERE DEL = 1
+		<if test="searchTxt != null and searchTxt != ''">
+			<choose>
+				<when test="searchGbn eq 0">
+					AND INFO_TITLE LIKE '%' || #{searchTxt} || '%'
+				</when>
+				<when test="searchGbn eq 1">
+					AND INFO_SUBHD LIKE '%' || #{searchTxt} || '%'
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	
+	
+	<select id="getAdinfoList" parameterType="hashmap" resultType="hashmap"> 
+ 		SELECT INFO.INFO_NO, INFO.INFO_TITLE, INFO.INFO_SUBHD, INFO.DT, INFO.DISP
+		FROM (  SELECT INFO_NO, INFO_TITLE, INFO_SUBHD, DISP,
+		        TO_CHAR(DT, 'YYYY-MM-DD') AS DT,
+		        ROW_NUMBER() OVER(ORDER BY INFO_NO DESC) AS RNUM
+		        FROM INFO
+		        WHERE DEL = 1
+				<if test="searchTxt != null and searchTxt != ''">
+					<choose>
+						<when test="searchGbn eq 0">
+							AND INFO_TITLE LIKE '%' || #{searchTxt} || '%'
+						</when>
+						<when test="searchGbn eq 1">
+							AND INFO_SUBHD LIKE '%' || #{searchTxt} || '%'
+						</when>
+					</choose>
+				</if>
+		        ) INFO
+		WHERE INFO.RNUM BETWEEN #{startCnt} AND #{endCnt}
+	</select>
+	
+
+	
+	<select id="getAdinfo" parameterType="hashmap" resultType="hashmap">
+ 		SELECT INFO_NO, INFO_TITLE, INFO_SUBHD, CON, REP_IMG,
+		       TO_CHAR(DT, 'YYYY-MM-DD') AS DT, DISP
+		FROM INFO
+		WHERE INFO_NO = #{no}
+	</select>
+
+
+	
+	<update id="updateAdinfo" parameterType="hashmap">
+		UPDATE INFO SET INFO_TITLE = #{info_title},
+              INFO_SUBHD = #{info_subhd},
+              CON = #{con},
+              REP_IMG = #{imgFile}
+		WHERE INFO_NO = #{no}
+	</update>
+
+
+	<delete id="deleteAdinfo" parameterType="hashmap">
+			UPDATE INFO SET DEL = 0
+			WHERE INFO_NO = #{no}
+	</delete>
+</mapper>

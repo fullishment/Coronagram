@@ -16,7 +16,7 @@ public class coinfo_infopage {
 	public IServiceCoinfo_Infopage iServiceCoinfo_Infopage;
 	
 	@RequestMapping(value="/coinfo_infopage")
-	public ModelAndView coinfo_infopage(@RequestParam HashMap<String, String> params,
+	public ModelAndView coinfoinfopage(@RequestParam HashMap<String, String> params,
             ModelAndView mav) throws Throwable {
 		
 		HashMap<String, String> data = iServiceCoinfo_Infopage.getInfopage(params);

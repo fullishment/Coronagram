@@ -21,7 +21,7 @@ public class coinfo_infolist {
 	public IServiceCoinfo_Infolist iServiceCoinfo_Infolist;
 
 	@RequestMapping(value="/coinfo_infolist")
-	public ModelAndView coinfo_infolist(
+	public ModelAndView coinfoinfolist(
 			@RequestParam HashMap<String, String> params, 
 			ModelAndView mav) throws Throwable {
 		
@@ -64,77 +64,7 @@ public class coinfo_infolist {
 		}
 
 		
-		
-		@RequestMapping(value = "/coinfo_update")
-		public ModelAndView testUpdate(@RequestParam HashMap<String, String> params, ModelAndView mav)
-				throws Throwable {
-
-			HashMap<String, String> data = iServiceCoinfo_Infolist.getCoinfo(params);
-
-			mav.addObject("data", data);
-
-			mav.setViewName("admin_coinfo/admin_coinfo_upd");
-
-			return mav;
-		}
-
-		
-		
-		   @RequestMapping(value = "/coinfo_updateAjax", method = RequestMethod.POST,
-			         produces = "text/json;charset=UTF-8")
-			   @ResponseBody
-			   public String coinfo_updateAjax(@RequestParam HashMap<String, String> params) throws Throwable {
-			      ObjectMapper mapper = new ObjectMapper();
-
-			      Map<String, Object> modelMap = new HashMap<String, Object>();
-			      
-			      String result = "success";
-			      
-			      try {
-			         int cnt = iServiceCoinfo_Infolist.updateCoinfo(params);
-
-			         if(cnt ==0) {
-							result = "failed";
-						}
-					}catch (Exception e) {
-						e.printStackTrace();
-						
-						result = "error";
-					}
-			      modelMap.put("result", result);
-			      
-			      return mapper.writeValueAsString(modelMap);
-			   }
-
-
-	
-//삭제
-		@RequestMapping(value = "/coinfo_delete", method = RequestMethod.POST, produces = "text/json;charset=UTF-8")
-		@ResponseBody
-		public String coinfo_delete(@RequestParam HashMap<String, String> params) throws Throwable {
-			ObjectMapper mapper = new ObjectMapper();
-
-			Map<String, Object> modelMap = new HashMap<String, Object>();
-
-			String result = "success";
-
-			try {
-				int cnt = iServiceCoinfo_Infolist.deleteCoinfo(params);
-
-				if (cnt == 0) {
-					result = "failed";
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-
-				result = "error";
-			}
-			modelMap.put("result", result);
-
-			return mapper.writeValueAsString(modelMap);
-		}
-
-	}
+}	
 
 
 

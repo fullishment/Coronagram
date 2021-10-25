@@ -31,6 +31,105 @@
 
 // main
 
+
+
+
+
+
+
+
+const myslide = document.querySelectorAll('.myslide'),
+	  dot = document.querySelectorAll('.dot');
+let counter = 1;
+slidefun(counter);
+
+let timer = setInterval(autoSlide, 8000);
+function autoSlide() {
+	counter += 1;
+	slidefun(counter);
+}
+function plusSlides(n) {
+	counter += n;
+	slidefun(counter);
+	resetTimer();
+}
+function currentSlide() {
+	counter = n;
+	slidefun(counter);
+	resetTimer();
+}
+function resetTimer() {
+	clearInterval(timer);
+	timer = setInterval(autoSlide, 8000);
+}
+
+function slidefun(n) {
+	
+	let i;
+	for(i = 0;i<myslide.length;i++){
+		myslide[i].style.display = "none";
+	}
+	for(i = 0;i<dot.length;i++) {
+		dot[i].className = dot[i].className.replace(' active', '');
+	}
+	if(n > myslide.length){
+	   counter = 1;
+	   }
+	if(n < 1){
+	   counter = myslide.length;
+	   }
+	myslide[counter - 1].style.display = "block";
+	dot[counter - 1].className += " active";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*$(document).ready(function() {
+
+createBullets()
+
+});
+
+
+
+
+    function createBullets() {
+      for (var i = 0; i <myslide.length+1; i++) {
+        var $li = $("<li class='dot_elem'></li>");
+        $li.addClass("dot_elem-"+i).data("page", i);
+        if (!i) $li.addClass("active");
+        dot.append($li);
+      }
+          };
+    
+    createBullets();
+
+
+
+
+
+    $(document).on("click", ".dot_elem", function() {
+      curSlide = $(this).data("page");
+      changeSlides();
+    });
+*/
+
+
+
+
+
+
+
+/*
 $(document).ready(function() {
   
     var $slider = $(".slider"),
@@ -41,7 +140,7 @@ $(document).ready(function() {
         animating = false,
         animTime = 500,
         autoSlideTimeout,
-        autoSlideDelay = 6000,
+        autoSlideDelay = 4000,
         $pagination = $(".slider-pagi");
     
     function createBullets() {
@@ -153,4 +252,4 @@ $(document).ready(function() {
       changeSlides();
     });
     
-  });
+  });*/

@@ -17,12 +17,17 @@
 		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function() {
-		$("#listBtn").on("click", function() {
+		$("#backBtn").on("click", function() {
 			$("#actionForm").attr("action", "coinfo_infolist");
 			$("#actionForm").submit();
 		}); 
+		
+		$("#rewindBtn").on("click", function() {
+			$("#actionForm").attr("action", "coinfo_main");
+			$("#actionForm").submit();
+		}); 
 
-		//1.글수정
+/* 		//1.글수정
 		$("#updateBtn").on("click", function() {
 			$("#actionForm").attr("action", "coinfo_update");
 			$("#actionForm").submit();
@@ -33,7 +38,7 @@
 				$("#actionForm").attr("action", "coinfo_delete");
 				$("#actionForm").submit();
 			}
-		});
+		}); */
 	});
 	</script>
 </head>
@@ -109,7 +114,7 @@
     <!-- partial:index.partial.html -->
     <main>
         <form action="#" id="actionForm" method="post">
-			<input type="hidden" name="no" id="no" value="${param.INFO_NO}" />						
+			<input type="hidden" name="no" id="no" <%-- value="${param.INFO_NO}" --%> />						
 		</form>
         <div class="header">
             <div class="header-banner">
@@ -121,34 +126,42 @@
             <div class="clear"></div>
             <nav>
                 <div class="site-title">${data.INFO_TITLE}</div>
-                <ul>
-                    <li><input type="button" value="목록 바로가기" id="listBtn"/></li>
+                <ul class="title_btn_group">
+                    <li><button type="button" value="rewindBtn" id="rewindBtn" class="title_btn" >
+                    		<img src="resources/images/coinfo/coinfo_infopage/rewind.png" 
+                    			 style="width:15px; height:15px;">
+                    		<span>Info메인</span></button></li>
+                    <li><button type="button" value="backBtn" id="backBtn" class="title_btn" >
+                    		<img src="resources/images/coinfo/coinfo_infopage/back.png" 
+                    			 style="width:15px; height:15px">
+                    		<span>Info목록</span></button></li>
                 </ul>
             </nav>
         </div>
         <div class="main">
             <section class="content">
-            	<article>
-				
+            	<article>  	
+	
             		<c:if test="${!empty data.REP_IMG}">
-						<img alt="" src="resources/images/coinfo/coinfo_upload/${data.REP_IMG}" /><br/>
+						<img alt="" src="resources/upload/${data.REP_IMG}" /><br/>
 					</c:if>
 
-					<div>날짜 : ${data.DT}</div>
-      			
-					<div style="white-space:pre;">
-					내용 : ${data.CON}
-					</div>
+      				<div class="atc_con" style="white-space:pre-line;">${data.CON}</div>
+      				
+      				<div class="atc_date">게시일자 ( ${data.DT} )</div>
 
             	</article>
+            	<section class="footer">
+            	<input value="top_button" type="image" src="resources/images/coinfo/coinfo_infopage/up-arrow.png" style="width:35px; height:35px" onClick="javascript:window.scrollTo(0,0)" alt="맨위로" />
+				</section>            
             </section>
             	
-            <section class="footer">
+<%--             <section class="footer">
 	         	<c:if test="${acctNo == 6}">
  	               	<input type="button" value="수정" id="updateBtn"/>
 					<input type="button" value="삭제" id="deleteBtn"/>
 	             </c:if>
-	         </section>	
+	         </section>	 --%>
 
             
 			<%-- <div class="infoimg" id="infoimg">

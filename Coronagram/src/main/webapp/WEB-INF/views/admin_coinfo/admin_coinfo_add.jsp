@@ -19,19 +19,28 @@
 		src = "resources/script/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+  	CKEDITOR.replace("con", {
+		resize_enabled : false,
+		language : "ko",
+		enterMode : "2"
+	});
 
 	$("#cancelBtn").on("click",function(){
 		$("#backForm").submit();
 	});
+	
 	$("#addForm").on("keypress","input",function(event){
 		if(event.keyCode==13){
 			return false;
 		}
 	});
+	
 	$("#imgBtn").on("click",function(){
 		$("#imgAtt").click();
 	});
-
+/* 	$("#imgBtn2").on("click",function(){
+		$("#imgAtt2").click();
+	}); */
 	$("#imgAtt").on("change",function(){
 		$("#fileName").html($(this).val().substring($(this).val().lastIndexOf("\\")+1));
 		var imgForm = $("#imgForm");
@@ -42,7 +51,7 @@ $(document).ready(function(){
 						$("#imgFile").val(res.fileName[0]);
 						var imgRep = res.fileName[0].replace('[', '%5B').replace(']', '%5D');
 						//$("#preView").attr("src", "resources/upload/"+imgRep);
-						$("#preView").html("<img src=\"resources/images/coinfo/coinfo_upload/"+imgRep+"\" id=\"prevImg"+"\">");
+						$("#preView").html("<img src=\"resources/upload/"+imgRep+"\" id=\"prevImg"+"\">");
 					}
 				}else{
 					alert("파일 업로드에 실패하였습니다.");
@@ -55,6 +64,31 @@ $(document).ready(function(){
 		});					
 		imgForm.submit();
 	});
+/* 	
+	$("#imgAtt2").on("change",function(){
+		$("#fileName2").html($(this).val().substring($(this).val().lastIndexOf("\\")+1));
+		var imgForm2 = $("#imgForm2");
+		imgForm2.ajaxForm({
+				success:function(res){
+				if(res.result=="SUCCESS"){
+					if(res.fileName.length > 0){
+						$("#imgFile2").val(res.fileName[0]);
+						var imgRep = res.fileName[0].replace('[', '%5B').replace(']', '%5D');
+						//$("#preView").attr("src", "resources/upload/"+imgRep);
+						$("#preView2").html("<img src=\"resources/images/coinfo/coinfo_upload/"+imgRep+"\" id=\"prevImg2"+"\">");
+					}
+				}else{
+					alert("파일 업로드에 실패하였습니다.");
+				}
+			},
+			error:function(req,status,error){
+				console.log(error);
+				alert("파일 업로드중 문제가 발생하였습니다.");
+			}
+		});					
+		imgForm2.submit();
+	});
+	 */
 	
 /* 	나중에 수정해서 추가!
 	//첨부파일 삭제 버튼
@@ -71,7 +105,9 @@ $(document).ready(function(){
 	 */
 	
 	
-	$("#addBtn").on("click",function(){					
+	$("#addBtn").on("click",function(){	
+ 		$("#con").val(CKEDITOR.instances['con'].getData());
+		
 		if(checkVal("#info_title")){
 			alert("제목을 입력해 주세요");
 			$("#info_title").focus();
@@ -93,7 +129,7 @@ $(document).ready(function(){
 				data:params,
 				success:function(res){
 					if(res.result=="success"){
-						location.href="coinfo_infolist";
+						location.href="admin_coinfo_list";
 					}
 					else if(res.result=="failed"){
 						alert("작성에 실패하였습니다.");
@@ -108,6 +144,7 @@ $(document).ready(function(){
 		}
 	});
 });
+
 function checkVal(sel){
 	if($.trim($(sel).val())==""){
 		return true;
@@ -207,9 +244,15 @@ function checkVal(sel){
                                 <p>코로나 관련 정보 관리</p>
                             </label>
                             <div class="group">
+                            <!-- 내용이미지 -->
                             	<form id="imgForm" action="fileUploadAjax" method="post" enctype="multipart/form-data">
-								<input type="file" name="imgAtt" id="imgAtt" accept="image/*" >
-							</form>
+									<input type="file" name="imgAtt" id="imgAtt" accept="image/*" >
+								</form>
+							<!-- 배경 이미지  -->
+<!-- 								<form id="imgForm2" action="fileUploadAjax" method="post" enctype="multipart/form-data">
+									<input type="file" name="imgAtt2" id="imgAtt2" accept="image/*" >
+								</form> -->
+								
                             	<form action="#" id="addForm" method="post">
                             		<input type="hidden" name="m_no" value="${sMNo}">
 	                                <div class="qnaTitle">
@@ -228,9 +271,15 @@ function checkVal(sel){
 											<span>이미지</span><input type="button" value="file" class="fileBtn" id="imgBtn" />
 											<span id="fileName"></span>		
 											<input type="hidden" name="imgFile" id="imgFile">							
-										   <div id="preView">
-										      <img src="resources/images/coinfo/coinfo_upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
-										   </div>
+										    <div id="preView">
+										       <img src="resources/upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
+										    </div>
+										    <%-- <span>이미지</span><input type="button" value="file2" class="fileBtn2" id="imgBtn2" />
+											<span id="fileName2"></span>		
+											<input type="hidden" name="imgFile2" id="imgFile2">							
+										    <div id="preView2">
+										       <img src="resources/images/coinfo/coinfo_upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
+										    </div> --%>
 										</div>
 	                              	  </div>
 	                               </form>
