@@ -239,7 +239,7 @@ function readURL(input) {
       </label> 
       
     <div class="qnaImg">
-	<input type="hidden"  name="imgFile" id="imgFile" >	
+	<input type="hidden"  name="imgFile" id="imgFile" value="${data.IMG_ADR}">
 	<div id="preView" class="img-wrap">
 		<img name="image" id="image" src="resources/images/edit_profile/${fn:replace(fn:replace(data.IMG_ADR, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
 	</div>
@@ -281,8 +281,8 @@ function readURL(input) {
       <input type="text" id="cm_detailAddress" name="cm_detailAddress" value="${data.DTL_ADR}"><br>
 <!-- 회원등급 -->
 	       <p>회원등급</p>
-      <%-- <input type="text" id=acct_no name="acct_no" value="${data.ACCT_TYPE_NO}"><br> --%>
-<!--  <span class="title_Name">회원등급</span><br>-->
+      	<%-- <input type="text" id=acct_no name="acct_no" value="${data.ACCT_TYPE_NO}"><br> --%>
+		<!--  <span class="title_Name">회원등급</span><br>-->
    <c:if test="${!empty testList}">
       <select class="user_tier" name="user_tier" >
        <c:forEach var="testList" items="${testList}" varStatus="i">

@@ -253,7 +253,7 @@ $("input:radio[name='vec']").removeAttr("checked");
    
 <div class="card">
 <form id="imgForm" action="fileUploadAjax" method="post" enctype="multipart/form-data">
-	<input type="file" name="imgAtt" id="imgAtt" >
+	<input type="file" name="imgAtt" id="imgAtt">
 </form>
    <form action="#" id="updateForm" method="post">
     <div class="input_area">
@@ -263,7 +263,7 @@ $("input:radio[name='vec']").removeAttr("checked");
         </div>
       </label> 
     <div class="qnaImg">
-		<input type="hidden"  name="imgFile" id="imgFile" >	
+		<input type="hidden"  name="imgFile" id="imgFile" value="${data.IMG_ADR}">	
 		<div id="preView" class="img-wrap">
 			<img name="image" id="image" src="resources/images/edit_profile/${fn:replace(fn:replace(data.IMG_ADR, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
 		</div>

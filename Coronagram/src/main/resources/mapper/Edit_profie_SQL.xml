@@ -20,7 +20,9 @@
 		    			 POST_NO = #{cm_postcode}, 
 		    			 ADR = #{cm_address},
 		    			 DTL_ADR = #{cm_detailAddress},
-		    			 IMG_ADR = #{imgFile}
+		    			 <if test = "imgFile != null and imgFile != ''">
+							IMG_ADR = #{imgFile}
+						 </if>
 			WHERE M_NO = #{no}
 		</update>
 	
