@@ -582,7 +582,7 @@ img{
 /* /6 */
 
 
-.slide__text-link {
+.slide_link {
 	z-index: 5;
 	display: inline-block;
 	position: relative;
@@ -593,7 +593,7 @@ img{
 	perspective: 1000px;
 }
 
-.slide__text-link:before {
+.slide_link:before {
 	z-index: -1;
 	content: "";
 	position: absolute;
@@ -608,7 +608,7 @@ img{
 	will-change: transform;
 }
 
-.slide__text-link:hover:before {
+.slide_link:hover:before {
 	transform: rotateX(0);
 }
 

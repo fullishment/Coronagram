@@ -17,7 +17,7 @@
   $(document).ready(function() {
 		
 //상세보기 
-	$("#slide__text-link").on("click", function() {
+	$(".slider").on("click", "#text_link", function() {
 		$("#no").val($(this).attr("no"));
 		
 		$("#actionForm").submit();
@@ -136,7 +136,7 @@
 					<div class="txt">
 						<h1>${data.INFO_TITLE}</h1>
 						<p>${data.INFO_SUBHD}</p>
-						<a class="slide__text-link" id="slide__text-link">Project link</a>
+						<a class="slide_link" id="text_link" no="${data.INFO_NO}">Project link</a>
 					</div>
 				<img src="resources/images/coinfo/coinfo_news/covidnews1.jpg" style="width: 100%; height: 100%;">
 				<%-- src="resources/upload/${data.REP_IMG}" --%>
@@ -150,8 +150,8 @@
 	  		<a class="next" onclick="plusSlides(1)">&#10095;</a>
 	  		
 	  		<div class="dotsbox" style="text-align:center">
-	  			<c:forEach var="data" items="${list}">
-					<span class="dot" onclick="currentSlide"></span>
+	  			<c:forEach var="data" items="${list}" varStatus="status">
+					<span class="dot" onclick="currentSlide(${status.count})"></span>
 				</c:forEach>
 			</div>
 	  		
