@@ -107,7 +107,7 @@ $(document).ready(function(){
 function updateAjax(){
 	//Ajax
 	var params = $("#updateForm").serialize();
-	console.log(params);
+
 	$.ajax({
 		url : "adminCoinfoUpdAjax",
 		type : "post",
@@ -237,12 +237,16 @@ function checkVal(sel){
 								<input type="hidden" name="searchGbn" value="${param.searchGbn}" />
 								<input type="hidden" name="searchTxt" value="${param.searchTxt}" />
 								<input type="hidden" name="page" value="${param.page}" />
-								<input type="hidden" name="no" value="${param.no}" />
+								<input type="hidden" name="no" value="${param.INFO_NO}" />
 							</form>
 							
                             	<form action="#" id="updateForm" method="post">
                             	<input type="hidden" name="imgFile" id="imgFile" value="${data.REP_IMG}">
-                            		<input type="hidden" name="m_no" value="${sMNo}">
+                            	<input type="hidden" name="m_no" value="${sMNo}">
+                            	<input type="hidden" name="searchGbn" value="${param.searchGbn}" />
+								<input type="hidden" name="searchTxt" value="${param.searchTxt}" />
+								<input type="hidden" name="page" value="${param.page}" />
+                            		<input type="hidden" name="no" value="${param.no}" />
 	                                <div class="qnaTitle">
 	                                    <div class="qnaTitle1">
 	                                        <span>제목</span><input type="text" class="border" id="info_title" name="info_title" value="${data.INFO_TITLE}">
