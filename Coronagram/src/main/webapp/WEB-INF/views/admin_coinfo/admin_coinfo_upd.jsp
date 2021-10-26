@@ -253,11 +253,8 @@ function checkVal(sel){
 	                               	 </div>
 	                              	 <div class="qnaMain">
 	                                    <div class="qnaCon">
-	                                        <p>내용</p><textarea class="QCI" type="text" id="con" name="con" value="${data.CON}"></textarea>
+	                                        <p>내용</p><textarea class="QCI" type="text" id="con" name="con">${data.CON}</textarea>
 	                                    </div>
-	                                    
-	                                    
-	                                    
 	                                    		<c:choose>
 													<c:when test="${!empty data.REP_IMG}">
 														<!-- 첨부파일이 있는경우 버튼을 숨긴다. -->

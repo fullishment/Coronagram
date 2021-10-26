@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gdj37.coronagram.util.ScriptUtils;
 import com.gdj37.coronagram.web.calandar.service.ICalendarService;
 
 @Controller
@@ -25,16 +27,14 @@ public class CalendarController {
 
 	@RequestMapping(value = "/calendar", method = RequestMethod.GET, produces = "text/json;charset=UTF-8")
 //	@ResponseBody
-	public ModelAndView calendar(@RequestParam HashMap<String, String> params, ModelAndView mav)throws Throwable {
+	public ModelAndView calendar(HttpServletResponse response, HttpSession session, @RequestParam HashMap<String, String> params, ModelAndView mav)throws Throwable {
+		if(session.getAttribute("sMNo") != null) {
+			mav.setViewName("co_calendar/co_calendar");
+		} else {
+			ScriptUtils.alert(response, "로그인이 필요한 페이지 입니다.");
+			mav.setViewName("login/login");
+		}
 		
-//		Calendar cal = iCalendarService.getCalendarByDate(params);
-	 
-//		boolean isCheck = cal.getCreateAt != Timestamp.valueOf(LocalDateTime.now()) ? true : false;
-		
-//		System.out.println(isCheck);
-		
-//		mav.addObject("isCheck", isCheck);  
-		mav.setViewName("co_calendar/co_calendar");
 		return mav;
 	}
 	

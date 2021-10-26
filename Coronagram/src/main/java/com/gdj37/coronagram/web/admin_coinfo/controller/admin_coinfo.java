@@ -28,14 +28,11 @@ public class admin_coinfo {
 	public IPagingService iPagingService;	
 	
 	@RequestMapping(value = "/admin_coinfo_list")
-	public ModelAndView admin_coinfo_list(@RequestParam HashMap<String,String> params,
-									ModelAndView mav) {
-
-	
-		String page = "1";
+	public ModelAndView admin_coinfo_list(@RequestParam HashMap<String,String> params, ModelAndView mav) {
+		int page = 1;
 		
 		if(params.get("page") != null) {
-			page = params.get("page");
+			page = Integer.parseInt(params.get("page"));
 		}
 		
 		mav.addObject("page", page);

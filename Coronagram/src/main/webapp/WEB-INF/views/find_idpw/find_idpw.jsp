@@ -82,7 +82,6 @@
             </div>
             <div class="sign-up-htm">
               <div class="group">
-                <input type="text" name ="m_nm" id="m_nm" placeholder="이름을 입력하세요"><br> -->
                 <label for="user" class="label">ID</label><br>
                 <input type="text" name="m_id" id="m_id" placeholder="ID를 입력하세요"><br>
                 <label for="user" class="label">E-mail</label><br>

@@ -3,15 +3,28 @@
 <mapper namespace="adminfo">
 
 	<insert id="admIAdd" parameterType="hashmap">
-		INSERT INTO INFO(WRITER_NO, INFO_TITLE, INFO_SUBHD, CON, REP_IMG, REP_BGIMG)
-		VALUES  (#{m_no}, #{info_title}, #{info_subhd}, #{con}, #{imgFile}, #{imgFile2})
+		INSERT INTO INFO(INFO_NO
+					   , WRITER_NO
+					   , INFO_TITLE
+					   , INFO_SUBHD
+					   , CON
+					   , REP_IMG
+					   )
+				  VALUES(INFO_SEQ.NEXTVAL
+				       , #{m_no}
+				       , #{info_title}
+				       , #{info_subhd}
+				       , #{con}
+				       , #{imgFile}
+				       )
 	</insert>
 	
 	
 	<select id = "getAdinfoCnt" parameterType="hashmap" resultType = "Integer">
 	 	SELECT COUNT(*) AS CNT
-		FROM INFO
-		WHERE DEL = 1
+		FROM INFO I JOIN M M
+		  ON I.WRITER_NO = M.M_NO
+		WHERE I.DEL = 1
 		<if test="searchTxt != null and searchTxt != ''">
 			<choose>
 				<when test="searchGbn eq 0">
@@ -63,7 +76,7 @@
               INFO_SUBHD = #{info_subhd},
               CON = #{con},
               REP_IMG = #{imgFile}
-		WHERE INFO_NO = #{m_no}
+		WHERE  WRITER_NO = #{m_no}
 	</update>
 
 

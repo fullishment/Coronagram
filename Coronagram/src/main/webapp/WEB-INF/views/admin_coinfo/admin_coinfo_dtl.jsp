@@ -4,18 +4,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
-<html lang="ko">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<!-- <style>
+	#images{
+	width:200px;
+	height:250px;
+	}
+</style> -->
     <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css?after">
     <link rel="stylesheet" href="resources/css/admin_coinfo/admin_coinfo.css?after">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
-<script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="resources/script/jquery/jquery.form.js"></script>
 <script type="text/javascript"
 		src = "resources/script/ckeditor/ckeditor.js"></script>
@@ -168,15 +173,18 @@ $(document).ready(function() {
                                     <div class="qnaCon">
                                         <p>내용</p>
                                         <div class="atc_con" style="white-space:pre-line;">${data.CON}</div>
-                                    </div>
-                                    
-                                    <c:if test="${!empty data.REP_IMG}}">
-										<div id="image">
-											<img name="images" id="images"
-												src="resources/upload/${data.REP_IMG}"
-												onerror="this.style.display='none'" />
+										<c:if test="${!empty data.REP_IMG}">
+										<div>
+										<c:set var="len" value="${fn:length(data.REP_IMG)}"></c:set>
+										이미지파일 : 
+										<a href="resources/upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" download="${fn:substring(data.REP_IMG, 20, len)}" >
+										${fn:substring(data.REP_IMG, 20, len)}
+										</a>
+											<img name="images" id="images" src="resources/upload/${data.REP_IMG}">
 										</div>
 									</c:if>
+                                    </div>
+                                    
 									<input type="button" value="수정" id="updateBtn" />
 									<input type="button" value="삭제" id="deleteBtn" />
 									<input type="button" value="목록" id="listBtn" />

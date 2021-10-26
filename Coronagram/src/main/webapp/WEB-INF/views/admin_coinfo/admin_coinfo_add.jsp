@@ -50,7 +50,7 @@ $(document).ready(function(){
 					if(res.fileName.length > 0){
 						$("#imgFile").val(res.fileName[0]);
 						var imgRep = res.fileName[0].replace('[', '%5B').replace(']', '%5D');
-						//$("#preView").attr("src", "resources/upload/"+imgRep);
+
 						$("#preView").html("<img src=\"resources/upload/"+imgRep+"\" id=\"prevImg"+"\">");
 					}
 				}else{
@@ -111,16 +111,13 @@ $(document).ready(function(){
 		if(checkVal("#info_title")){
 			alert("제목을 입력해 주세요");
 			$("#info_title").focus();
-		}
-		else if(checkVal("#info_subhd")){
+		}else if(checkVal("#info_subhd")){
 			alert("소제목을 입력해 주세요");
 			$("#info_subhd").focus();
-		}
-		else if(checkVal("#con")){
+		}else if(checkVal("#con")){
 			alert("내용을 입력해 주세요");
 			$("#con").focus();
-		}
-		else{
+		}else{
 			var params = $("#addForm").serialize();
 			$.ajax({
 				url:"coinfoAddAjax",

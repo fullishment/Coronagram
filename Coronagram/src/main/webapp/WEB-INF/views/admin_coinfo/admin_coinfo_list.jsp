@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -19,6 +20,9 @@
 		src = "resources/script/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	if("${param.searchGbn}" !=""){
+		$("#searchGbn").val("${param.searchGbn}");
+	}
 	reloadList();
 
 	//글작성
@@ -222,12 +226,7 @@ $(document).ready(function(){
 							<label for="user" class="sclabel">
 								<p>코로나 관련 정보 관리</p>
 							</label>
-
 							<div class="group">
-
-
-
-
 								<div>
 									<form action="#" id="actionForm" method="post">
 										<select name="searchGbn" id="searchGbn">
