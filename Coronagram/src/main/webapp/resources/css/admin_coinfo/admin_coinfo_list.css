@@ -1,0 +1,381 @@
+@charset "UTF-8";
+html{
+    background: #ecf0f1;
+}
+/* main */
+main{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+p {
+    font-family: "Noto Sans KR", sans-serif;
+}
+input,select,textarea{
+    border-radius: 15px;
+}
+#imgAtt, #imgAtt2{
+				display:none;
+			}
+#preView, #preView2{
+	width:200px;
+	hegiht:200px;
+}
+.sc {
+    max-width: 800px;
+    margin: auto;
+    margin-top: 5%;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+}
+.scHead {
+    padding-bottom: 10px;
+}
+.scHead h4{
+    font-size: 15pt;
+    color: gray;
+}
+
+.sc-html .scm1-htm,
+.sc-html .scm2-htm{
+top:10px;
+left:0;
+right:0;
+bottom:0;
+position:absolute;
+transform:rotateY(180deg); /* 다른창 가림*/
+backface-visibility:hidden; /*다른창 가림*/
+/* transition:all .4s linear; 빙글도는액션 */
+}
+.sc-html .scm1,
+.sc-html .scm2,
+.sc-form .group :checked{
+display:none;
+}
+
+.sc-html .tab{
+display:inline-block;
+border-bottom:2px solid transparent;
+}
+
+#tab-1{
+float: left;
+}
+.sc-html .scm1:checked + .tab,
+.sc-html .scm2:checked + .tab{
+color:grey;
+border-color:#1161ee;
+}
+.sc-form{
+min-height:25px;
+position:relative;
+perspective:1000px;
+transform-style:preserve-3d;
+}
+.sc-form .group .sclabel,
+.sc-form .group .input,
+.sc-form .group .button{
+display:inline-block;
+}
+
+.sc-html .scm1:checked + .tab + .scm2 +  .tab +.sc-form .scm1-htm{
+transform:rotate(0);
+}
+.sc-html .scm2:checked  + .tab + .sc-form .scm2-htm{
+transform:rotate(0);
+}
+
+
+.group {
+    padding: 20px;
+    margin-top: 10px;
+    min-height: 400px;
+    min-width: 800px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    background: white;
+    margin-left: -10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+	display: inline-block;
+}
+
+
+/* .adList {
+	height: 400px;
+}
+ */
+
+
+/* adInput */
+
+.adInput {
+	margin-bottom: 13px;
+}
+
+.searchGbn {
+	border: 0px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    padding: 2px;
+}
+
+.searchTxt {
+	border: 0px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    padding: 2px;
+}
+
+
+
+/* table */
+
+table {
+  width: 100%;
+  height: 100%;
+  display: block;
+  table-layout: fixed;
+  border-collapse: collapse;
+  position: relative;
+  margin-bottom: 68px;
+  text-align: center;
+  font-size: 15px;
+}
+  tr:nth-child(even) td {
+    background: #e3e3e3;
+  }
+    tr:hover{
+	opacity:.4;
+}
+  th {
+    border-bottom: 2px solid black;
+    background: #fff;
+  }
+  
+  th:nth-child(1), td:nth-child(1) {
+  	width: 50px;
+  }
+  
+  th:nth-child(2), td:nth-child(2) {
+  	width: 30%;
+  }
+  
+  th:nth-child(3), td:nth-child(3) {
+  	width: 35%;
+  }
+  
+  tfoot td {
+    border-top: 1px solid black;
+  }
+  
+  th,
+  td {
+    text-align: center;
+    padding: 6px 10px;
+  }
+  
+  thead,
+  tbody > tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  tbody {
+    display: block;
+    transform: translate(0, 34px);
+    margin-top: -35px;
+    border-bottom : 2px solid black;
+    border-collapse: collapse;
+  }
+
+
+
+/* Q&A */
+
+.qnaTitle {
+    margin-bottom: 0px;
+}
+
+.qnaTitle div{
+    margin-right: 40px;
+    margin-bottom: 15px;
+}
+
+.qnaTitle input {
+        height: 25px;
+        width: 500px;
+}
+
+.qnaTitle1 input {
+	margin-left: 22px;
+}
+
+.qnaTitle2 input {
+	margin-left: 8px;
+}
+
+
+.qnaImg {
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.dbox {
+    margin-left: 10px;
+    border: none;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+}
+select:focus{
+    outline: none;
+    border: 2px solid #64d488;
+  }
+
+input:focus{
+    outline: none;
+    border: 2px solid #64d488;
+  }
+  textarea:focus{
+    outline: none;
+    border: 2px solid #64d488;
+  }
+
+
+.QCI{
+    padding: 10px;
+    width: 100%;
+    height: 250px;
+    border: 0px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+}
+
+.border{
+    border: 0px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    padding: 10px;
+}
+
+
+
+textarea {
+    resize: none;
+}
+
+
+/* 작성버튼 */
+.qnaBtn1 {
+    display: inline-block;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.5s;
+            cursor: pointer;
+            width: 60px;
+            height: 30px;
+            border: none;
+            border-radius: 7px;
+            background: #0d6efd;
+            /* 추가 */
+            float: right;
+            margin-top: 10px;
+}
+
+.qnaBtn1:hover{
+    opacity: .8;
+  }
+
+/* 취소버튼 */
+.qnaBtn2 {
+    display: inline-block;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.5s;
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+    border: none;
+    border-radius: 7px;
+    background: gray;
+    /* 추가 */
+    float: right;
+    margin-left: 10px;
+    margin: 10px;
+}
+.qnaBtn2:hover{
+    opacity: .8;
+  }
+
+
+
+/*검색, 작성 버튼*/
+.searchBtn, .addBtn {
+    color: black;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.5s;
+    cursor: pointer;
+    width: 40px;
+    height: 20px;
+    border: none;
+    border-radius: 10px;
+    background: #cfcfcf;
+    margin-left: 5px;
+}
+.searchBtn:hover, .addBtn:hover {
+    opacity: .8;
+}
+
+
+/* 반응형 */
+@media (max-width: 980px) {
+    .scImg {
+        display: none;
+    }
+    .scMain {
+        width: 100%;
+    }
+}
+
+
+
+/* 페이징 */
+
+
+.paging_wrap {
+    position: relative;
+    clear: both;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+}
+
+
+.paging_wrap h3, .paging_wrap b, .paging_wrap p {
+    display: inline-block;
+    position: relative;
+    min-width: 28px;
+    padding: 6px 4px 7px;
+    border: 1px solid #fff;
+    font-size: 13px;
+    font-weight: normal;
+    color: #444;
+    line-height: 13px;
+    text-decoration: none;
+    vertical-align: top;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.paging_wrap h3:hover, .paging_wrap b {
+    border: 1px solid #e0e0e0;
+    color: #3f63bf;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.paging_wrap p:hover {
+	cursor: pointer;
+	color: #9f9f9f;	
+} 

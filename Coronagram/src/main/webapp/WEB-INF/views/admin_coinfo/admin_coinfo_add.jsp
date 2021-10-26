@@ -265,11 +265,11 @@ function checkVal(sel){
 	                                        <p>내용</p><textarea class="QCI" type="text" id="con" name="con" placeholder="내용을 입력하세요"></textarea>
 	                                    </div>
 	                                    <div class="qnaImg">
-											<span>이미지</span><input type="button" value="file" class="fileBtn" id="imgBtn" />
+											<span>배경이미지</span><input type="button" value="file" class="fileBtn" id="imgBtn" />
 											<span id="fileName"></span>		
 											<input type="hidden" name="imgFile" id="imgFile">							
 										    <div id="preView">
-										       <img src="resources/upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
+										       <img src="resources/upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" max-width="760px" height="auto" />
 										    </div>
 										    <%-- <span>이미지</span><input type="button" value="file2" class="fileBtn2" id="imgBtn2" />
 											<span id="fileName2"></span>		

@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css?after">
-    <link rel="stylesheet" href="resources/css/admin_coinfo/admin_coinfo.css?after">
+    <link rel="stylesheet" href="resources/css/admin_coinfo/admin_coinfo_list.css?after">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
 <script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
@@ -109,29 +109,29 @@ $(document).ready(function(){
 	function drawPaging(pb) {
 		var html = "";
 		
-		html += "<span page =\"1\">처음</span>      ";
+		html += "<span page =\"1\"><p>&nbsp<<&nbsp</p></span>      ";
 		
 		if($("#page").val() == "1") {
-			html += "<span page=\"1\">이전</span>    ";
+			html += "<span page=\"1\"><p><&nbsp이전&nbsp</p></span>    ";
 		} else {
-			html += "<span page=\""+($("#page").val() * 1 -1) + "\">이전</span>	";  //-1(자동숫자변환)
+			html += "<span page=\""+($("#page").val() * 1 -1) + "\"><p><&nbsp이전&nbsp</p></span>	";  //-1(자동숫자변환)
 		}
 		
 		for(var i = pb.startPcount ; i<= pb.endPcount ; i++) {
 			if($("#page").val() == i) {
 				html += "<span page=\"" + i + "\"><b>" + i + "</b></span> ";
 			}else {
-				html += "<span page=\"" + i + "\">" +i + "</span> ";
+				html += "<span page=\"" + i + "\"><h3>" + i + "</h3></span> ";
 			}
 		}
 		
 		if($("#page").val()== pb.maxPcount) {
-			html += "<span page=\"" + pb.maxPcount + "\">다음</span>      ";
+			html += "<span page=\"" + pb.maxPcount + "\"><p>다음&nbsp>&nbsp</p></span>      ";
 		} else {
-			html += "<span page=\"" + ($("#page").val()* 1 + 1) + "\">다음</span>      ";
+			html += "<span page=\"" + ($("#page").val()* 1 + 1) + "\"><p>다음&nbsp>&nbsp</p></span>      ";
 		}
 		
-		html += "<span page=\"" + pb.maxPcount+"\">마지막</span>    ";
+		html += "<span page=\"" + pb.maxPcount+"\"><p>&nbsp>>&nbsp</p></span>    ";
 		
 		$(".paging_wrap").html(html);
 	}
@@ -227,24 +227,24 @@ $(document).ready(function(){
 								<p>코로나 관련 정보 관리</p>
 							</label>
 							<div class="group">
-								<div>
+								<div class="adInput">
 									<form action="#" id="actionForm" method="post">
-										<select name="searchGbn" id="searchGbn">
+										<select name="searchGbn" id="searchGbn" class="searchGbn">
 											<option value="0">제목</option>
 											<option value="1">소제목</option>
 										</select>
-										<input type="text" name="searchTxt" id="searchTxt" value="${param.searchTxt}" />
+										<input type="text" name="searchTxt" class="searchTxt" id="searchTxt" value="${param.searchTxt}" />
 										<input type="hidden" id="oldTxt"  value="${param.searchTxt}" />
 										<input type="hidden" name="page" id="page" value="${page}" />
 										<input type="hidden" name="no" id="no" />
-										<input type="button" value="검색" id="searchBtn" />
+										<input type="button" value="검색" id="searchBtn" class="searchBtn" />
 										<c:if test="${!empty sMNo}">
-											<input type="button" value="작성" id="addBtn" />
+											<input type="button" value="작성" id="addBtn" class="addBtn"/>
 										</c:if>
 									</form>
 								</div>
 								<div class="adList">
-									<table border="1";>
+									<table>
 										<thead>
 											<tr>
 												<th>번호</th>

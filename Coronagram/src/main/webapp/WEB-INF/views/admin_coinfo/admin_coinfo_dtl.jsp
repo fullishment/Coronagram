@@ -17,7 +17,7 @@
 	}
 </style> -->
     <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css?after">
-    <link rel="stylesheet" href="resources/css/admin_coinfo/admin_coinfo.css?after">
+    <link rel="stylesheet" href="resources/css/admin_coinfo/admin_coinfo_dtl.css?after">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
 	<script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
@@ -162,11 +162,11 @@ $(document).ready(function() {
                                 <div class="qnaTitle">
                                     <div class="qnaTitle1">
                                         <span>제목</span>
-                                        <span>${data.INFO_TITLE}</span>
+                                        <div class="border1">${data.INFO_TITLE}</div>
                                     </div>
                                     <div class="qnaTitle2">
                                         <span>소제목</span>
-                                        <span>${data.INFO_SUBHD}</span>
+                                        <div class="border2">${data.INFO_SUBHD}</div>
                                     </div>
                                	 </div>
                               	 <div class="qnaMain">
@@ -184,10 +184,11 @@ $(document).ready(function() {
 										</div>
 									</c:if>
                                     </div>
-                                    
-									<input type="button" value="수정" id="updateBtn" />
-									<input type="button" value="삭제" id="deleteBtn" />
-									<input type="button" value="목록" id="listBtn" />
+                                    <input type="button" value="목록" id="listBtn" class="listBtn" />
+                                    <input type="button" value="삭제" id="deleteBtn" class="deleteBtn" />
+									<input type="button" value="수정" id="updateBtn" class="updateBtn" />
+									
+									
                                     
                                     
 
