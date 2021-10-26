@@ -64,9 +64,9 @@
       <p class="r_title">Login</p>
       <form action="logins" id="loginForm" method="post">
       <div class="inputs">
-        <span class="title_Name">아이디</span><br>
+        <span class="title_ID">아이디</span><br>
         <input type="text" id="m_id" placeholder="아이디를 입력하세요" name="m_id"><br>
-        <span class="title_Name" >패스워드</span><br>
+        <span class="title_PW" >패스워드</span><br>
         <input type="password" id="m_pw" placeholder="패스워드를 입력하세요" name="m_pw"><br><br>
       </div>
     </form>

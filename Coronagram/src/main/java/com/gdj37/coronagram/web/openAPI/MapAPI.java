@@ -1,13 +1,14 @@
 package com.gdj37.coronagram.web.openAPI;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class MapAPI {
 	@RequestMapping(value = "/mapDataApiAjax", method = RequestMethod.POST, produces = "text/xml;charset=UTF-8")
 	@ResponseBody
 	public String mapDataApiAjax() throws Throwable {
-		LocalDate now = LocalDate.now();
+		LocalDate now = LocalDate.now().minusDays(1);
 
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
 
@@ -89,5 +90,13 @@ public class MapAPI {
 
 		return sb.toString();
 	}
+	
+	
+	/*
+	 * public static void main(String[] ar) { Map<String,String> map=new HashMap();
+	 * map.put("nationNmEn","id");
+	 * 
+	 * System.out.println(map.get("nationNmEn")); }
+	 */
 
 }

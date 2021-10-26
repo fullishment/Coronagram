@@ -2,23 +2,99 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript"
 		src="resources/script/jquery/jquery-1.12.4.min.js"></script>
-<script>
-var totCnt = 0;
-
-var page = 1;
-var maxP = 0;
-
-$(document).ready(function () {
-	
-		getList();
 		
-});
+<!-- API불러오기 -->
+<!-- <script src="resources/script/openAPI/MapAPI.js"></script> -->  
+
+<!-- map -->
+<script src="resources/script/highcharts_map/highmaps.js"></script>
+<script src="resources/script/highcharts_map/modules/data.js"></script>
+<script src="resources/script/highcharts_map/modules/exporting.js"></script>
+<script src="resources/script/highcharts_map/modules/offline-exporting.js"></script>
+<script src="resources/script/highcharts_map/mapdata/world.js"></script>
+<script>
+/* var data = [{},{}]; */
+/* var data = [{
 	
+	"z": 'natDefCnt',
+	"d": 'natDeathCnt',
+	"c": 'stdDay',	    //  "z" 하고 "code"는 있어야함
+	"code": "JP"
+}];  */ 
+
+/*  var nation = {};
+var data = [{},{}]; */
+/* var data = [{
+	"z": 100,
+"d": 3,
+"c": 2,
+	"code": "KR"
+},
+{
+	"z": 10000,
+"d": 300,
+"c": 2,
+	"code": "JP"
+}];
+ */
+ 
+ var dataArray =new Array();
+
+
+$(document).ready(function() {
+	
+	getList();
+	Highcharts.mapChart('container', {
+	    chart: {
+	        borderWidth: 1,
+	        map: 'custom/world'
+	    },
+	
+	    title: {
+	        text: 'Coronamap'
+	    },
+	
+	    subtitle: {
+	        text: 'in world'
+	    },
+	
+	    legend: {
+	        enabled: false
+	    },
+	
+	    mapNavigation: {
+	        enabled: true,
+	        buttonOptions: {
+	            verticalAlign: 'bottom'
+	        }
+	    },
+	
+	    series: [{
+	        name: 'Countries',
+	        color: '#E0E0E0',
+	        enableMouseTracking: false
+	    }, {
+	        type: 'mapbubble',
+	        name: 'COVID-19',
+	        joinBy: ['iso-a2', 'code'],
+	        color: "#E00000",
+	        data: dataArray,
+	        minSize: 4,
+	        maxSize: '4%',
+	        tooltip: {
+	            pointFormat: '{point.properties.name}: {point.z} people<br/> death : {point.d} people <br/> {point.사망자수}'
+	        }
+	    }]
+	    
+	   
+	});
+});
+
 function getList(){
 	$.ajax({
 		type: 'POST', //통신 방식을 지정합니다
@@ -35,84 +111,54 @@ function getList(){
 
 function drawList(data) {
 	var html = "";
+	
 	$(data).find('item').each(function(index, item){
 			html += "<div>"
 				//html += "<item>" + $(this).find('areaNm').text() + "</item>       "; //지역명        
 				//html += "<item>" + $(this).find('areaNmEn').text() + "</item>     "; //지역명(영문)
+				var data =  ({
+					"z" : $(this).find('natDefCnt').text(),
+					"d" : $(this).find('natDeathCnt').text(),
+					"c" : 2,
+					"code" : $(this).find('nationNmEn').text()
+				});
+				
+				dataArray.put(data);
+				console.log(data);
+				//html += "<item>" + $(this).find('stdDay').text() + "</item>       "; //기준일시
+				//html += "<item>" + $(this).find('nationNmEn').text() + "</item>   "; //국가명(영문)
+				//html += "<item>" + $(this).find('natDefCnt').text() + "</item>    "; //국가별 확진자 수
+				//html += "<item>" + $(this).find('natDeathCnt').text() + "</item>  "; //국가별 사망자 수
+				
 				//html += "<item>" + $(this).find('createDt').text() + "</item>     "; //등록일시분초
-				html += "<item>" + $(this).find('nationNmEn').text() + "</item>   "; //국가명(영문)
-				html += "<item>" + $(this).find('stdDay').text() + "</item>       "; //기준일시
-				html += "<item>" + $(this).find('natDefCnt').text() + "</item>    "; //국가별 확진자 수
-				html += "<item>" + $(this).find('natDeathCnt').text() + "</item>  "; //국가별 사망자 수
+				//html += "<item>" + $(this).find('UPDATE_DT').text() + "</item>    "; //수정일시분초
+			
+				//html += "<item>" + $(this).find('resultCode').text() + "</item>     "; //결과코드
+				//html += "<item>" + $(this).find('resultMsg').text() + "</item>     "; //결과메시지
+				
 				//html += "<item>" + $(this).find('natDeathRate').text() + "</item> "; //확진률 대비 사망률
 				//html += "<item>" + $(this).find('nationNm').text() + "</item>     "; //국가명			
 				//html += "<item>" + $(this).find('seq').text() + "</item>          "; //게시글번호(국외발생현황고유값)				
-				//html += "<item>" + $(this).find('UPDATE_DT').text() + "</item>    "; //수정일시분초
-			html += "</div>"
+			
+			
 			
 		});
-		$('.con1').html(html);
 		
-		drawPaging()
+		
+		
 	}
-
-
-
-
-function drawPaging(){
-	
-	var startPcount = 0;
-	
-	if(page % 10 == 0 ) {
-		startPcount = page - 10 + 1;
-	} else {
-		startPcount = (Math.floor(page / 10) * 10) + 1;
-	}
-
-	var endPcount = 0;
-	
-	
-	endPcount = startPcount + 10 - 1;
-	
-	if(endPcount >= maxP){
-		endPcount = maxP;
-	}
-	
-	var html = "";
-	
-	html += "<span page=\"1\">처음</span>     ";
-	
-	if($("#page").val() == "1"){
-		html += "<span page=\"1\">이전</span>     ";
-	} else {
-		html += "<span page=\"" + ($("#page").val() * 1 - 1) + "\">이전</span>   ";
-	}
-	// *1을 하면 자동 숫자변환
-	
-	for(var i = startPcount ; i <= endPcount ; i++){
-		if($("#page").val() == i){
-			html += "<span page=\"" + i + "\"><b>" + i + "</b></span> ";
-		} else {
-			html += "<span page=\"" + i + "\">" + i + "</span>		  ";
-		}
-	}
-	
-	if($("#page").val() == maxP){
-		html += "<span page=\"" + maxP + "\">다음</span>     ";
-	} else {
-		html += "<span page=\"" + ($("#page").val() * 1 + 1) + "\">다음</span>     ";
-	}
-	
-	html += "<span page=\"" + maxP + "\">마지막</span>   ";
-	
-	$(".paging_wrap").html(html);
-}
-
-	
-
 </script>
+
+<style>
+	#container{
+		height: 90vh;  width: 90vw; /* min-width: 310px; max-width: 800px; */ margin: 0 auto;
+	}
+</style>
 </head>
-<body>
-<div class="con1"></div>
+<body>	
+<!-- api목록 -->
+<!--  <div class="ㅋcon1"></div>   --> 
+ <!-- 세계지도 -->
+  <div id="container" ></div> 
 </body>
 </html>
