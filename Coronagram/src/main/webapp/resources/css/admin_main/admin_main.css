@@ -193,4 +193,32 @@
     text-decoration: underline;
   }
   
+  .adminUser{
+  	 width: 80%;
+    border: 1px solid #444444;
+     border-collapse: collapse;
+  }
+  
+  th,td{
+  	border: 1px solid #444444;
+  	padding: 10px;
+  }
+  
+ 
+  .newqna{
+  	display:inline-block;
+  	width:30%;
+  	height:100%;
+  	border:1px solid #ccc;
+  	border-radius:50%;
+  }
+  
+  .qnalist{
+  	display:inline-block;
+  	width:60%;
+  	height:100%;
+  	border:1px solid #ccc;
+  }
+  
+  
   
