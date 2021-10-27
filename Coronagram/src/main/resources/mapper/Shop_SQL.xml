@@ -169,7 +169,7 @@
 	<delete id="prodAttcDel" parameterType="hashmap">
 		DELETE 
 		FROM PROD_ATTC
-		WHERE ATTC_NO = #{aNo}
+		WHERE PROD_NO = #{pNo}
 	</delete>
 	<select id="getProdCatList" parameterType="hashmap" resultType="hashmap">
 		SELECT CAT_NO,CAT_NM

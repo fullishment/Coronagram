@@ -20,106 +20,125 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script type="text/javascript" src="resources/script/jquery/jquery.form.js"></script>
     <script type="text/javascript">
-    $(document).ready(function(){
-    	$("#cancleBtn").click(function(){
-    		if(confirm("수정내용을 취소하시겠습니까?")){
-    			history.back();
-    		}
-    	});
-    	$("#addBtn").click(function(){
-    		var params = $("#productForm").serialize();
-    		$.ajax({
-				url : "prodAdds",
-    			type : "post",
-    			dataType : "json",
-    			data : params,
-    			success : function(res){
-    				history.back();
-    			},
-    			error : function(request, status, error){
-    				console.log(error);
-    			}
-			});
-    	});
-    	$("td").on("click","img",function(){
-    		if($(this).is("#plusImg") ==false){
-    			$("#aNo").val($(this).attr("no"));
-    			if(confirm("선택한 이미지를 삭제하시겠습니까?")){
-    				
-	    			var params = $("#productForm").serialize();
-	    			$.ajax({
-	    				url : "prodAttcDel",
+    	var cnt=0;
+        $(document).ready(function(){
+        	$("#cancleBtn").click(function(){
+        		if(confirm("작성내용을 취소하시겠습니까?")){
+        			history.back();
+        		}
+        	});
+        	$("#addBtn").click(function(){
+        		if(checkVal("#prodNm")){
+        			alert("상품명이 입력되지않았습니다");
+        			$("#prodNm").focus();
+        		}else if(checkVal("#price")){
+        			alert("가격이 입력되지않았습니다");
+        			$("#price").focus();
+        		}else if(checkVal("#text_field")){
+        			alert("내용이 입력되지않았습니다");
+        			$("#text_field").focus();
+        		}else{
+      
+	        		var srcArray = new Array();
+	        		var imgA = $("img[alt=\"thumbnail\"]"); 
+	        		for(var i=0;i<imgA.length;i++){
+	    				srcArray.push(imgA[i].src.substring(imgA[i].src.lastIndexOf("/")+1));
+	        		}
+	
+	        		
+	        		var params = $("#productForm").serialize();
+	        		console.log(params);
+	        		$.ajax({
+	    				url : "prodAdds",
 	        			type : "post",
 	        			dataType : "json",
-	        			data : params,
+	        			data : params, 
 	        			success : function(res){
-	        				alert("선택한 이미지가 삭제되었습니다.");
+	        				for(var i =0;i<imgA.length ;i++){
+	        					attcAjax(srcArray,i);
+	        					if(i==cnt){
+	        						location.href="adminShopList";
+	        					}
+	        				}
 	        			},
 	        			error : function(request, status, error){
 	        				console.log(error);
 	        			}
 	    			});
-	    			$(this).remove();
-    			}
-    		}else {
-    			if($("td img").length >5){
-    				alert("이미지 등록 최대갯수를 초과하셨습니다.");
-    			}else {
-	    			$("#att").click();
-    				
-    			}
-    		}
-    	});
-    	$("td").on("mouseover","img",function(){
-    		if($(this).is("#plusImg") ==false){
-    			var html = "<img src="+$(this).attr("src")+"  alt=\"preview\">";
-    			$(".upload").html(html);
-    		}
-    	});
-    	
-    	$("#fileForm").on("change","input[type='file']",function(){
-    		var fileForm = $("#fileForm");
-    		fileForm.ajaxForm({
+        		}
+        		
+        	});
+        	$("td").on("click","img",function(){
+        		if($(this).is("#plusImg") ==false){
+        			$("#aNo").val($(this).attr("no"));
+        			if(confirm("선택한 이미지를 삭제하시겠습니까?")){
+    	    			$(this).remove();
+        			}
+        		}else {
+        			if($("td img").length >5){
+        				alert("이미지 등록 최대갯수를 초과하셨습니다.");
+        			}else {
+    	    			$("#att").click();
+        				
+        			}
+        		}
+        	});
+        	$("td").on("mouseover","img",function(){
+        		if($(this).is("#plusImg") ==false){
+        			var html = "<img src="+$(this).attr("src")+"  alt=\"preview\">";
+        			$(".upload").html(html);
+        		}
+        	});
+        	
+        	$("#fileForm").on("change","input[type='file']",function(){
+        		var fileForm = $("#fileForm");
+        		fileForm.ajaxForm({
+        			success : function(res){
+        				if(res.result == "SUCCESS"){
+        					//업로드 파일명 적용
+        					if(res.fileName.length > 0){
+        						$("#bFile").val(res.fileName[0]);
+        						var html = " <img src=\"resources/upload/"+$("#bFile").val()+"\" class=\"thumbnailImg\" alt=\"thumbnail\" id=\"preview\" >";
+        						$("#plusImg").before(html);
+        					}
+        				}else{
+        					alert("파일 업로드에 실패했습니다.");
+        				}
+        			},
+        			error : function(req, status, error){
+        				console.log(error);
+        				alert("파일 업로드중 문제가 발생했습니다.")
+        			}
+        		});
+        		fileForm.submit();
+        	});
+        	
+        });
+        
+        function attcAjax(srcArray,i){
+        	console.log("aaa");
+        	$("#bFile").val(srcArray[i]);
+        	var params = $("#productForm").serialize();
+    		$.ajax({
+    			url : "prodAttcAdd",
+    			type : "post",
+    			dataType : "json",
+    			data : params,
     			success : function(res){
-    				if(res.result == "SUCCESS"){
-    					//업로드 파일명 적용
-    					if(res.fileName.length > 0){
-    						$("#bFile").val(res.fileName[0]);
-    						console.log($("#bFile").val());
-    						
-    						attcAjax();
-    					}
-    				}else{
-    					alert("파일 업로드에 실패했습니다.");
-    				}
+    				cnt++;
     			},
-    			error : function(req, status, error){
+    			error : function(request, status, error){
     				console.log(error);
-    				alert("파일 업로드중 문제가 발생했습니다.")
     			}
     		});
-    		fileForm.submit();
-    	});
-    	
-    });
-    
-    function attcAjax(){
-    	var params = $("#productForm").serialize();
-		$.ajax({
-			url : "prodAttcAdd",
-			type : "post",
-			dataType : "json",
-			data : params,
-			success : function(res){
-				var html = " <img src=\"resources/upload/"+$("#bFile").val()+"\" class=\"thumbnailImg\" alt=\"thumbnail\" id=\"preview\" no=\""+res.pANo.ATTC_NO+"\">";
-				$("#plusImg").before(html);
-			},
-			error : function(request, status, error){
-				console.log(error);
-			}
-		});
-    }
-    
+        }
+        function checkVal(sel){
+        	if($.trim($(sel).val())==""){
+        		return true;
+        	}else{
+        		return false;
+        	}
+        };
    
     
     </script>
@@ -223,11 +242,9 @@
                 </div>
                 
                 <p>
-                	<input type="hidden" id="fileName" name="fileName" />
                 	<input type="hidden" id="pNo" name="pNo" value="${nextPNo.NEXTVAL}" />
                 	<input type="hidden" id="sMNo" name="sMNo" value="${sMNo}" />
                     <input type="hidden" name="bFile" id="bFile" value=""/>
-                    <input type="hidden" name="aNo" id="aNo" value=""/>
                     <label for="price" class="pri_label">상품명 : </label><input type="text" name="prodNm" id="prodNm" class="pri_input" value=""> <br/>
                     <label for="price" class="pri_label">카테고리명 : </label>
                     <select name="catNo" id="catNo">
@@ -247,7 +264,7 @@
                 </p>
                 </form>
                 <div class="btn_area">
-                    <input class="add_btn" type="button" value="수정" id="addBtn">
+                    <input class="add_btn" type="button" value="추가" id="addBtn">
                     <input class="cancel_btn" type="button" value="취소" id="cancleBtn">
                 </div>
             
