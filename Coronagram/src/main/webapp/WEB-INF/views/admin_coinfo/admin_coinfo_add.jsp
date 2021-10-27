@@ -253,6 +253,26 @@ function checkVal(sel){
                             	<form action="#" id="addForm" method="post">
                             		<input type="hidden" name="m_no" value="${sMNo}">
 	                                <div class="qnaTitle">
+	                                
+	                                	<div>
+			                                <c:if test="${!empty testList}">
+												<select class="user_tier" name="user_tier">
+													<c:forEach var="testList" items="${testList}" varStatus="i">
+														<c:choose>
+															<c:when test="${data.ACCT_TYPE_NO == testList.TYPE_NO }">
+																<option value="${testList.TYPE_NO}" selected>${testList.TYPE_NM}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${testList.TYPE_NO}">${testList.TYPE_NM}</option>
+															</c:otherwise>
+		
+														</c:choose>
+													</c:forEach>
+												</select>
+											</c:if>
+	                                	</div>
+	                                
+	                                
 	                                    <div class="qnaTitle1">
 	                                        <span>제목</span><input type="text" class="border" id="info_title" name="info_title" placeholder="내용을 입력하세요">
 	                                    </div>

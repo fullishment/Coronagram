@@ -93,8 +93,8 @@ $(document).ready(function(){
 		html += "<td>"+data.INFO_TITLE+"</td>";
 		html += "<td>"+data.INFO_SUBHD+"</td>";
 		html += "<td>"+data.DT+"</td>";
- 		html += "<td>"+data.DISP+
-/* 		if(data.DISP !=null){
+ 		html += "<td>"+data.DISP_YN+
+/* 		if(data.DISP_YN==Y){
 			html += "<div class=\"disp_o\">" + "노출" + "</div>";
 		} else {
 			html += "<div class=\"disp_x\">" + "숨김" + "</div>";

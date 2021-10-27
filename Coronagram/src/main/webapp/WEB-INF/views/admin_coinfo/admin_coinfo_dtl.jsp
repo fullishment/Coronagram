@@ -160,7 +160,11 @@ $(document).ready(function() {
 									<input type="hidden" name="no" value="${param.no}" />
 								</form>
                                 <div class="qnaTitle">
-                                    <div class="qnaTitle1">
+                                	<div class="disp">
+                                		<span>노출여부</span>
+                                		<div class="border">${data.DISP_YN}</div>
+									</div>
+									<div class="qnaTitle1">
                                         <span>제목</span>
                                         <div class="border1">${data.INFO_TITLE}</div>
                                     </div>

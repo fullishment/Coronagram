@@ -29,11 +29,18 @@
         </property>
     </bean>
     
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <!-- 이게 기존에 있던것 주석처리함 -->
+    <!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> --> 
+    <!-- 변경사항1 :  class에 SqlSessionFactoryBean 대신에 RefreshableSqlSessionFactoryBean 위치로 변경-->
+    <bean id="sqlSessionFactory" class="com.gdj37.coronagram.common.bean.RefreshableSqlSessionFactoryBean">
+    	<!-- /변경사항1 끝 -->
     	<property name="configLocation" value="classpath:mybatis-config.xml" />
         <!-- <property name="dataSource" ref="dataSource" /> -->
         <property name="dataSource" ref="dataSourceLog" />
         <property name="mapperLocations" value="classpath*:mapper/**/*_SQL.xml" />
+        <!-- 변경사항2 : 한줄 추가 : 1초마다 refresh 해줘서 변경사항 적용시키겠다는 뜻 -->
+        <property name="interval" value="1000" />
+        <!-- /변경사항2 끝 -->
     </bean>
     
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">

@@ -9,6 +9,7 @@
 					   , INFO_SUBHD
 					   , CON
 					   , REP_IMG
+					   , DISP_YN
 					   )
 				  VALUES(INFO_SEQ.NEXTVAL
 				       , #{m_no}
@@ -16,6 +17,7 @@
 				       , #{info_subhd}
 				       , #{con}
 				       , #{imgFile}
+				       , #{disp_yn}
 				       )
 	</insert>
 	
@@ -40,8 +42,8 @@
 	
 	
 	<select id="getAdinfoList" parameterType="hashmap" resultType="hashmap"> 
- 		SELECT INFO.INFO_NO, INFO.INFO_TITLE, INFO.INFO_SUBHD, INFO.DT, INFO.DISP
-		FROM (  SELECT INFO_NO, INFO_TITLE, INFO_SUBHD, DISP,
+ 		SELECT INFO.INFO_NO, INFO.INFO_TITLE, INFO.INFO_SUBHD, INFO.DT, INFO.DISP_YN
+		FROM (  SELECT INFO_NO, INFO_TITLE, INFO_SUBHD, DISP_YN,
 		        TO_CHAR(DT, 'YYYY-MM-DD') AS DT,
 		        ROW_NUMBER() OVER(ORDER BY INFO_NO DESC) AS RNUM
 		        FROM INFO
@@ -60,11 +62,9 @@
 		WHERE INFO.RNUM BETWEEN #{startCnt} AND #{endCnt}
 	</select>
 	
-
-	
 	<select id="getAdinfo" parameterType="hashmap" resultType="hashmap">
  		SELECT INFO_NO, INFO_TITLE, INFO_SUBHD, CON, REP_IMG,
-		       TO_CHAR(DT, 'YYYY-MM-DD') AS DT, DISP
+		       TO_CHAR(DT, 'YYYY-MM-DD') AS DT, DISP_YN
 		FROM INFO
 		WHERE INFO_NO = #{no}
 	</select>
@@ -75,7 +75,8 @@
 		UPDATE INFO SET INFO_TITLE = #{info_title},
               INFO_SUBHD = #{info_subhd},
               CON = #{con},
-              REP_IMG = #{imgFile}
+              REP_IMG = #{imgFile},
+              DISP_YN = #{disp_yn}
 		WHERE  INFO_NO = #{no}
 	</update>
 

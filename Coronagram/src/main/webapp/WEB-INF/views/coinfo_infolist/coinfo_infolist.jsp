@@ -128,18 +128,24 @@
 
 	
 	
+	<%-- style="background-image: url(resources/upload/${data.REP_IMG}); 
+											 background-size: cover;
+								 			 background-repeat: no-repeat;
+								 			 background-position: center center;
+								  			 overflow: hidden;" --%>
+	
 	
 		<c:forEach var="data" items="${list}">
 			<!-- fade css -->
-			<div class="myslide fade">
+			<div class="myslide fade" >
 				<div class="overlay"></div>
 					<div class="txt">
 						<h1>${data.INFO_TITLE}</h1>
 						<p>${data.INFO_SUBHD}</p>
 						<a class="slide_link" id="text_link" no="${data.INFO_NO}">Project link</a>
 					</div>
-				<img src="resources/images/coinfo/coinfo_news/covidnews1.jpg" style="width: 100%; height: 100%;">
-				<%-- src="resources/upload/${data.REP_IMG}" --%>
+				<!-- <img src="resources/images/coinfo/coinfo_news/covidnews1.jpg" style="width: 100%; height: 100%;"> -->
+				<img src="resources/upload/${data.REP_IMG}" style="width: 100%; height: 100%;" class="bgimg">
 			</div>
 
 		</c:forEach>
