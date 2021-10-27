@@ -203,132 +203,126 @@
       <div class="news-slider">
         <div class="news-slider__wrp swiper-wrapper">
           <div class="news-slider__item swiper-slide">
-            <a href="#" class="news__item">
-              <div class="news-date">
-                <span class="news-date__title">24</span>
-                <span class="news-date__txt">May</span>
-              </div>
-              <div class="news__title">
-                Lorem Ipsum Dolor Sit Amed
-              </div>
-
-              <p class="news__txt">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s...
-              </p>
-
-              <div class="news__img">
-                <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1537132205/news-slider/item-2.jpg"
-                  alt="news">
-              </div>
-            </a>
-          </div>
-
-          <div class="news-slider__item swiper-slide">
-            <a href="#" class="news__item">
-              <div class="news-date">
-                <span class="news-date__title">25</span>
-                <span class="news-date__txt">May</span>
-              </div>
-              <div class="news__title">
-                Lorem Ipsum Dolor Sit Amed
-              </div>
-
-              <p class="news__txt">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s...
-              </p>
-
-              <div class="news__img">
-                <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1537132205/news-slider/item-3.jpg"
-                  alt="news">
-              </div>
-            </a>
-          </div>
-
-          <div class="news-slider__item swiper-slide">
-            <a href="#" class="news__item">
-              <div class="news-date">
-                <span class="news-date__title">26</span>
-                <span class="news-date__txt">May</span>
-              </div>
-              <div class="news__title">
-                Lorem Ipsum Dolor Sit Amed
-              </div>
-
-              <p class="news__txt">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s...
-              </p>
-
-              <div class="news__img">
-                <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1537132205/news-slider/item-4.jpg"
-                  alt="news">
-              </div>
-            </a>
-          </div>
-
-          <div class="news-slider__item swiper-slide">
-            <a href="#" class="news__item">
+            <a href="https://www.hani.co.kr/arti/international/international_general/1016927.html" class="news__item">
               <div class="news-date">
                 <span class="news-date__title">27</span>
-                <span class="news-date__txt">May</span>
+                <span class="news-date__txt">Oct</span>
               </div>
               <div class="news__title">
-                Lorem Ipsum Dolor Sit Amed
+                미국 제약사 머크, ‘먹는 코로나 치료제’ 복제약 허용
               </div>
 
               <p class="news__txt">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s...
+                미국 제약사 머크가 27일(현지시각) 자사의 먹는 코로나19 바이러스 억제제를 제3세계 등에 보급하기 위해 복제약 제조를 허용하기로 했다고 <아에프페>(AFP) 통신 등이 보도했다. 유엔의 후원을...
               </p>
 
               <div class="news__img">
-                <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1537132205/news-slider/item-2.jpg"
+                <img src="https://flexible.img.hani.co.kr/flexible/normal/730/486/imgdb/original/2021/1027/20211027503752.jpg"
                   alt="news">
               </div>
             </a>
           </div>
 
           <div class="news-slider__item swiper-slide">
-            <a href="#" class="news__item">
+            <a href="https://www.joongang.co.kr/article/25018405" class="news__item">
               <div class="news-date">
-                <span class="news-date__title">28</span>
-                <span class="news-date__txt">May</span>
+                <span class="news-date__title">27</span>
+                <span class="news-date__txt">Oct</span>
               </div>
               <div class="news__title">
-                Lorem Ipsum Dolor Sit Amed
+                美, 한국 여행경보 3단계로 상향···"코로나 확산, 여행재고"
               </div>
 
               <p class="news__txt">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s...
+                미국 국무부가 최근 한국에 대한 여행경보를 3단계인 여행재고로 상향했다. 26일(현지시간) 국무부 홈페이지에 따르면 한국에 대한 여행경보가 지난 12일 자로 여행재고로 한 단계 올라갔다. 국무부의...
               </p>
 
               <div class="news__img">
-                <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1537132205/news-slider/item-5.jpg"
+                <img src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202110/27/d0a1dde5-3c09-4dea-b6e7-260f4dd43e35.jpg"
                   alt="news">
               </div>
             </a>
           </div>
 
           <div class="news-slider__item swiper-slide">
-            <a href="#" class="news__item">
+            <a href="https://newsis.com/view/?id=NISX20211026_0001627182&cID=10401&pID=10400" class="news__item">
               <div class="news-date">
-                <span class="news-date__title">29</span>
-                <span class="news-date__txt">May</span>
+                <span class="news-date__title">26</span>
+                <span class="news-date__txt">Oct</span>
               </div>
               <div class="news__title">
-                Lorem Ipsum Dolor Sit Amed
+                코로나 여파에 비정규직 800만 명 첫 돌파…비중도 역대 최고
               </div>
 
               <p class="news__txt">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s...
+                 코로나19 여파로 비정규직 근로자가 급증하면서 지난 8월 기준 사상 처음으로 800만명을 넘어선 것으로 집계됐다. 전체 임금근로자 가운데 비정규직 근로자가 차지하는 비중도 역대 가장 컸다....
               </p>
 
               <div class="news__img">
-                <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1537132205/news-slider/item-4.jpg"
+                <img src="https://image.newsis.com/2021/10/21/NISI20211021_0018069114_web.jpg?rnd=20211021122925"
+                  alt="news">
+              </div>
+            </a>
+          </div>
+
+          <div class="news-slider__item swiper-slide">
+            <a href="https://www.yna.co.kr/view/AKR20211026057451530?input=1195m" class="news__item">
+              <div class="news-date">
+                <span class="news-date__title">26</span>
+                <span class="news-date__txt">Oct</span>
+              </div>
+              <div class="news__title">
+                백신패스 목적 코로나 검사 당분간 무료…급증시 유료화
+              </div>
+
+              <p class="news__txt">
+                '백신 패스'(접종증명·음성확인제) 도입으로 내달부터 다중이용시설 이용 목적의 '음성확인서' 발급을 위한 PCR(유전자증폭) 진단검사 수요가 늘어날 것으로 보인다. 방역당국은...
+              </p>
+
+              <div class="news__img">
+                <img src="https://img0.yna.co.kr/photo/yna/YH/2021/07/13/PYH2021071304520001300_P4.jpg"
+                  alt="news">
+              </div>
+            </a>
+          </div>
+
+          <div class="news-slider__item swiper-slide">
+            <a href="https://www.hankyung.com/society/article/2021102511967" class="news__item">
+              <div class="news-date">
+                <span class="news-date__title">25</span>
+                <span class="news-date__txt">Oct</span>
+              </div>
+              <div class="news__title">
+                내달 1일부터 '위드 코로나'…식당-카페 영업제한 풀린다
+              </div>
+
+              <p class="news__txt">
+                다음달부터 신종 코로나바이러스 감염증(코로나19) 방역체계가 '위드(with) 코로나'(단계적 일상회복)로 전환되면서 다중이용시설에 적용됐던 운영시간 제한 규제가 완화된다. 유흥시설과 콜라텍,...
+              </p>
+
+              <div class="news__img">
+                <img src="https://img.hankyung.com/photo/202110/ZA.27863480.1.jpg"
+                  alt="news">
+              </div>
+            </a>
+          </div>
+
+          <div class="news-slider__item swiper-slide">
+            <a href="https://www.sedaily.com/NewsView/22SWJK55Z4" class="news__item">
+              <div class="news-date">
+                <span class="news-date__title">27</span>
+                <span class="news-date__txt">Oct</span>
+              </div>
+              <div class="news__title">
+                백신패스 없으면 이틀에 한번 코로나 검사?···미접종자 '혼란'
+              </div>
+
+              <p class="news__txt">
+                내달 1일 '백신패스'(접종증명·음성확인제) 도입을 앞두고 여러 이유로 접종을 하지 않은 사람들 사이에 혼란이 가중되고 있다. 이들의 경우 내달부터 실내체육시설이나 목욕탕 등 다중이용시설에...
+              </p>
+
+              <div class="news__img">
+                <img src="https://newsimg.sedaily.com/2021/10/27/22SWJK55Z4_1.jpg"
                   alt="news">
               </div>
             </a>

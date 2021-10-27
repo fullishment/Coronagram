@@ -1,4 +1,7 @@
 /* main */
+html {
+    background: #ecf0f1;
+}
 a {
     text-decoration: none;
 }
@@ -92,7 +95,6 @@ tr:nth-child(even) {
     max-width: 800px;
     margin: auto;
     margin-top: 5%;
-    background: white;
     padding: 10px;
 }
 
@@ -161,6 +163,7 @@ transform:rotate(0);
 }
 .group {
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    background-color: white;
     padding: 20px;
     margin-top: 10px;
     min-height: 450px;
