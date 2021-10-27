@@ -187,11 +187,13 @@ html {
         }
         .QTI {
             height: 30px;
+            width: 100%;
         }
         .QCI{
             height: 245px;
             margin-top: 10px;
             margin-bottom: 10px;
+            width: 100%;
         }
         .qnaBtn {
             float: right;

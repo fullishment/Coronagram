@@ -20,6 +20,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script type="text/javascript" src="resources/script/jquery/jquery.form.js"></script>
     <script type="text/javascript">
+    var cnt=0;
     $(document).ready(function(){
     	$("#cancleBtn").click(function(){
     		if(confirm("수정내용을 취소하시겠습니까?")){
@@ -27,42 +28,38 @@
     		}
     	});
     	$("#updateBtn").click(function(){
-    		console.log("aaaa");
+    		var srcArray = new Array();
+    		var imgA = $("img[alt=\"thumbnail\"]"); 
+    		for(var i=0;i<imgA.length;i++){
+				srcArray.push(imgA[i].src.substring(imgA[i].src.lastIndexOf("/")+1));
+    		}
+
+    		
     		var params = $("#productForm").serialize();
     		console.log(params);
     		$.ajax({
 				url : "prodU",
     			type : "post",
     			dataType : "json",
-    			data : params,
+    			data : params, 
     			success : function(res){
-    				history.back();
+    				for(var i =0;i<imgA.length ;i++){
+    					attcAjax(srcArray,i);
+    					if(i==cnt){
+    						location.href="adminShopList";
+    					}
+    				}
     			},
     			error : function(request, status, error){
     				console.log(error);
     			}
 			});
-    		console.log("test");
     		
     	});
     	$("td").on("click","img",function(){
     		if($(this).is("#plusImg") ==false){
     			$("#aNo").val($(this).attr("no"));
     			if(confirm("선택한 이미지를 삭제하시겠습니까?")){
-    				
-	    			var params = $("#productForm").serialize();
-	    			$.ajax({
-	    				url : "prodAttcDel",
-	        			type : "post",
-	        			dataType : "json",
-	        			data : params,
-	        			success : function(res){
-	        				alert("선택한 이미지가 삭제되었습니다.");
-	        			},
-	        			error : function(request, status, error){
-	        				console.log(error);
-	        			}
-	    			});
 	    			$(this).remove();
     			}
     		}else {
@@ -89,8 +86,8 @@
     					//업로드 파일명 적용
     					if(res.fileName.length > 0){
     						$("#bFile").val(res.fileName[0]);
-    						console.log($("#bFile").val());
-    						attcAjax();
+    						var html = " <img src=\"resources/upload/"+$("#bFile").val()+"\" class=\"thumbnailImg\" alt=\"thumbnail\" id=\"preview\" >";
+    						$("#plusImg").before(html);
     					}
     				}else{
     					alert("파일 업로드에 실패했습니다.");
@@ -106,7 +103,9 @@
     	
     });
     
-    function attcAjax(){
+    function attcAjax(srcArray,i){
+    	console.log("aaa");
+    	$("#bFile").val(srcArray[i]);
     	var params = $("#productForm").serialize();
 		$.ajax({
 			url : "prodAttcAdd",
@@ -114,8 +113,7 @@
 			dataType : "json",
 			data : params,
 			success : function(res){
-				var html = " <img src=\"resources/upload/"+$("#bFile").val()+"\" class=\"thumbnailImg\" alt=\"thumbnail\" id=\"preview\" no=\""+res.pANo.ATTC_NO+"\">";
-				$("#plusImg").before(html);
+				cnt++;
 			},
 			error : function(request, status, error){
 				console.log(error);
@@ -231,10 +229,8 @@
                 </div>
                 
                 <p>
-                	<input type="hidden" id="fileName" name="fileName" />
                     <input type="hidden" id="pNo" name="pNo" value="${data.PROD_NO}" />
                     <input type="hidden" name="bFile" id="bFile" value=""/>
-                    <input type="hidden" name="aNo" id="aNo" value=""/>
                     <label for="price" class="pri_label">상품명 : </label><input type="text" name="prodNm" id="prodNm" class="pri_input" value="${data.PROD_NM}"> <br/>
                     <label for="price" class="pri_label">카테고리명 : </label>
                     <select name="catNo" id="catNo">

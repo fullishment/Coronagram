@@ -223,9 +223,6 @@ public class ShopController {
 		int prodAttcAdd = iServiceShop.prodAttcAdd(params);
 		if(prodAttcAdd ==0) {
 			result="failed";
-		}else {
-			HashMap<String, String> pAttcNo = iServiceShop.getPAttcNo(params);
-			modelMap.put("pANo", pAttcNo);
 		}
 		
 		modelMap.put("result", result);
@@ -237,8 +234,8 @@ public class ShopController {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String,Object> modelMap= new HashMap<String,Object>();
 		String result="success";
-		int prodAttcAdd = iServiceShop.prodAttcDel(params);
-		if(prodAttcAdd ==0) {
+		int prodAttcDel = iServiceShop.prodAttcDel(params);
+		if(prodAttcDel ==0) {
 			result="failed";
 		}
 		
@@ -252,22 +249,32 @@ public class ShopController {
 		Map<String,Object> modelMap= new HashMap<String,Object>();
 		String result="success";
 		int prodAttcAdd = iServiceShop.prodU(params);
+		
 		if(prodAttcAdd ==0) {
 			result="failed";
+		}else {
+			int prodAttcDel = iServiceShop.prodAttcDel(params);
+			if(prodAttcDel ==0) {
+				result="failed";
+			}
 		}
-		
 		modelMap.put("result", result);
 		return mapper.writeValueAsString(modelMap);
 	}
 	
 	
 	@RequestMapping(value="/prodAdd")
-	public ModelAndView prodAdd(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+	public ModelAndView prodAdd(ModelAndView mav, @RequestParam HashMap<String,String> params,HttpSession session) throws Throwable {
 		List<HashMap<String,String>> catlist = iServiceShop.getProdCatList(params);
 		HashMap<String,String> nextPNo = iServiceShop.getProdNextNo(params);
 		mav.addObject("catList", catlist);
 		mav.addObject("nextPNo", nextPNo);
-		mav.setViewName("prod_add/prod_add");
+		if(session.getAttribute("sMNo")!=null) {
+			mav.setViewName("prod_add/prod_add");
+		}else {
+			mav.setViewName("login/login");
+		}
+		
 		return mav;
 	}
 	@RequestMapping(value="/prodAdds" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")

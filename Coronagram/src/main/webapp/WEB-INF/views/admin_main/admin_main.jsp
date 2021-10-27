@@ -85,50 +85,61 @@
             <h2><p>메인 페이지</p></h2>
         </div>
     </div>
-    <article class="version">
-        <section class="page-header">
-          <h1 class="page-title">User</h1>
-          <div class="button-group">
-            <button type="button" class="btn btn-primary">+</button>
-          </div>
-        </section>
-      </article>
-      
-      <article class="version">
-        <section class="page-header">
-          <h1 class="page-title">Chart</h1>
-          <div class="button-group">
-            <button type="button" class="btn btn-primary">+</button>
-          </div>
-        </section>
-      </article>
-      
-      <article class="version">
-        <section class="page-header">
-          <h1 class="page-title">Coinfo</h1>
-          <div class="button-group">
-            <button type="button" class="btn btn-primary">+</button>
-          </div>
-        </section>
-      </article>
-      
-      <article class="version">
-        <section class="page-header">
-          <h1 class="page-title">Shop</h1>
-          <div class="button-group">
-            <button type="button" class="btn btn-primary">+</button>
-          </div>
-        </section>
-      </article>
-      
-      <article class="version">
-        <section class="page-header">
-          <h1 class="page-title">Q&A</h1>
-          <div class="button-group">
-            <button type="button" class="btn btn-primary">+</button>
-          </div>
-        </section>
-      </article>
+      <div class="boxcon">
+	    <article class="version">
+	        <section class="page-header">
+	          <h1 class="page-title">오늘의 방문자</h1>
+	          <div class="button-group">
+	            <button type="button" class="btn btn-primary">+</button>
+	          </div>
+	        </section>
+	      </article>
+	      
+	      <article class="version">
+	        <section class="page-header">
+	          <h1 class="page-title">회원관리</h1>
+	          <div class="button-group">
+	            <button type="button" class="btn btn-primary">+</button>
+	          </div>
+	        </section>
+	      </article>
+	      
+	      <article class="version">
+	        <section class="page-header">
+	          <h1 class="page-title">통계</h1>
+	          <div class="button-group">
+	            <button type="button" class="btn btn-primary">+</button>
+	          </div>
+	        </section>
+	      </article>
+	      
+	      <article class="version">
+	        <section class="page-header">
+	          <h1 class="page-title">Q&A</h1>
+	          <div class="button-group">
+	            <button type="button" class="btn btn-primary">+</button>
+	          </div>
+	        </section>
+	      </article>
+	      
+	      <article class="version">
+	        <section class="page-header">
+	          <h1 class="page-title">코로나 info 관리</h1>
+	          <div class="button-group">
+	            <button type="button" class="btn btn-primary">+</button>
+	          </div>
+	        </section>
+	      </article>
+	      
+	      <article class="version">
+	        <section class="page-header">
+	          <h1 class="page-title">포인트 샵 관리</h1>
+	          <div class="button-group">
+	            <button type="button" class="btn btn-primary">+</button>
+	          </div>
+	        </section>
+	      </article>
+	    </div>  
     </div>
 </main>
 	<script src="resources/script/admin_qna/admin_Qna.js"></script>
