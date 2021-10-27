@@ -28,6 +28,16 @@ public class ServiceSign_up implements IServiceSign_up{
 		return iDaoSign_up.getNickCheck(params);
 	}
 
+	@Override
+	public int crngSet(HashMap<String, String> params) throws Throwable {
+		return iDaoSign_up.crngSet(params);
+	}
+
+	@Override
+	public HashMap<String, String> lastNum(HashMap<String, String> params) throws Throwable {
+		return iDaoSign_up.lastNum(params);
+	}
+
 	
 
 

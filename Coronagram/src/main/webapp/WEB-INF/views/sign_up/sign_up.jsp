@@ -76,7 +76,6 @@
   			alert("아이디를 입력해 주세요.");
   			$("#m_id").focus();
   		
-			
   		} else if (checkVal("#m_nm")){
   			alert("이름을 입력해 주세요.");
   			$("#m_nm").focus();
@@ -150,8 +149,10 @@
       
         <div class="inputs">
         <form action="mAdds" id="addForm" method="post">
-      <input type="hidden" id="checkId" value="false" />
-      <input type="hidden" id="checknick" value="false" />
+	      <input type="hidden" id="checkId" value="false" />
+	      <input type="hidden" id="checknick" value="false" />
+	      <input type="hidden" id="crngSet" name="crngSet" value="${last.LAST_NUMBER}">
+	      
           <p class="r_title"><b>Sign Up</b></p>
           
           <span class="title_Name">아이디</span><br>
@@ -195,6 +196,7 @@
             <input type="text" id="cm_detailAddress" name="dtl_adr"  placeholder="상세주소"><br>  
           </div>
           </form>
+          
           <button id="add_btn" class="add_btn">가입</button>
           <button id="cancel_btn" class="cancel_btn">취소</button>
         </div>

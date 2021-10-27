@@ -10,4 +10,8 @@ public interface IDaoSign_up {
 
 	public int getNickCheck(HashMap<String, String> params) throws Throwable;
 
+	public int crngSet(HashMap<String, String> params)throws Throwable;
+
+	public HashMap<String, String> lastNum(HashMap<String, String> params)throws Throwable;
+
 }

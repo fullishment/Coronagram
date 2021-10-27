@@ -37,6 +37,14 @@
 		WHERE NICK_NM = #{nick_nm}	
 	</select>
 	
-
+	<insert id="crngSet" parameterType="hashmap">
+		insert into crng_setting(m_no) values(#{crngSet})
+	</insert> 
+	
+	<select id="lastNum" parameterType="hashmap" resultType="hashmap">
+		SELECT LAST_NUMBER 
+		FROM USER_SEQUENCES 
+		WHERE SEQUENCE_NAME = 'M_SEQ'
+	</select> 
 
 </mapper>

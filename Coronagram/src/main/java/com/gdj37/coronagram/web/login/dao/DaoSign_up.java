@@ -28,4 +28,14 @@ public class DaoSign_up implements IDaoSign_up{
 		return sqlSession.selectOne("signup.getNickCheck", params);
 	}
 
+	@Override
+	public int crngSet(HashMap<String, String> params) throws Throwable {
+		return sqlSession.insert("signup.crngSet", params);
+	}
+
+	@Override
+	public HashMap<String, String> lastNum(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectOne("signup.lastNum", params);
+	}
+
 }

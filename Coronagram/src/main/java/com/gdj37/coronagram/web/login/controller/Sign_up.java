@@ -21,11 +21,13 @@ public class Sign_up {
 	public IServiceSign_up iServiceSign_up;    
 	
 	@RequestMapping(value = "/sign_up")   //add
-	public ModelAndView sign_up(ModelAndView mav) {
-		mav.setViewName("sign_up/sign_up");
+	   public ModelAndView sign_up(@RequestParam HashMap<String,String> params,ModelAndView mav) throws Throwable{
+	      HashMap<String,String> last = iServiceSign_up.lastNum(params);
+	      mav.addObject("last",last);
+	      mav.setViewName("sign_up/sign_up");
 
-		return mav;
-	}
+	      return mav;
+	   }
 	
 	@RequestMapping(value = "/mAdds")
 	public ModelAndView mAdds(@RequestParam HashMap<String, String> params, ModelAndView mav) throws Throwable {
@@ -39,7 +41,8 @@ public class Sign_up {
 			params.put("m_pw",m_pw);
 			
 			int cnt = iServiceSign_up.addSign(params);    
-
+			int crngSet = iServiceSign_up.crngSet(params);
+			
 			if (cnt > 0) {
 				mav.setViewName("redirect:login");
 				
