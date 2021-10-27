@@ -15,75 +15,96 @@ p {
     background: white;
 }
 table {
-  width: 100%;
-  height: 370px;
-  display: block;
-  table-layout: fixed;
-  border-collapse: collapse;
-  position: relative;
-  margin-bottom: 68px;
-  text-align: center;
+  border-collapse:collapse;
+  box-shadow: 0 5px 10px #e1e5ee;
+  background-color:white;
+  text-align:left;
+  overflow:hidden;
+  width : 100%;
 }
-  tr:nth-child(even) td {
-    background: #e3e3e3;
-  }
-    tr:hover{
+thead {
+	box-shadow:0 5px 10px #e1e5ee;
+}
+th {
+	padding :1rem 2rem;
+	text-transform:uppercase;
+	letter-spacing:0.1rem;
+	font-size:0.7rem;
+	font-weight:900;
+	text-align:center;
+}
+td {
+	padding : 1rem 2rem;
+	font-size:0.7rem;
+	text-align:center;
+}
+tr:nth-child(even) {
+	background-color: #f4f6fb;
+}
+  tr:hover{
 	opacity:.4;
+}  
+.ans_o {
+	border-radius:0.2rem;
+	background-color: #c8e6c9;
+	color : #388e3c;
+	padding:0.2rem 1rem;
+	width:80px;
+	margin: auto;
 }
-  th {
-    border-bottom: 2px solid black;
-    background: #fff;
-  }
-  
-  tfoot td {
-    border-top: 1px solid black;
-  }
-  
-  th,
-  td {
-    text-align: center;
-    padding: 6px 10px;
-  }
-  
-  thead,
-  tbody > tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-  }
-  
-  tbody {
-    display: block;
-    transform: translate(0, 34px);
-    height : 333px;
-    margin-top: -35px;
-    border-bottom : 2px solid black;
-    border-collapse: collapse;
-  }
-
-
-	.paging {
-		float : left;
-	}
-	.paging_wrap {
-		margin: 40px 265px;
-	}
-	.qnaList2 {
-        height: 320px;
-     }
-     .ans_o {
-		color : green;
-	}
-	.ans_x {
-		color : red;
-		font-weight: 600;
-	}
+.ans_x {
+	border-radius:0.2rem;
+	background-color : #ffcdd2;
+	color : #c62828;
+	padding:0.2rem 1rem;
+	width:80px;
+	margin: auto;
+}
 .paging {
 	float : left;
 }
 .paging_wrap {
-	margin: 60px 265px;
+    position: relative;
+    clear: both;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    margin: 60px 74%;
 }
+
+.paging_wrap h3, .paging_wrap b, .paging_wrap p {
+    display: inline-block;
+    position: relative;
+    min-width: 28px;
+    padding: 6px 4px 7px;
+    border: 1px solid #fff;
+    font-size: 13px;
+    font-weight: normal;
+    color: #444;
+    line-height: 13px;
+    text-decoration: none;
+    vertical-align: top;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.paging_wrap h3:hover, .paging_wrap b {
+    border: 1px solid #e0e0e0;
+    color: #3f63bf;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.paging_wrap p:hover {
+	cursor: pointer;
+	color: #9f9f9f;	
+} 
+	.qnaList2 {
+        height: 320px;
+     }
+
+
 .sc {
     max-width: 800px;
     margin: auto;

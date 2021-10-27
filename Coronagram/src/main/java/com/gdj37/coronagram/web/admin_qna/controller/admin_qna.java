@@ -55,7 +55,7 @@ import com.gdj37.coronagram.web.admin_qna.service.IServiceAdmin_Qna;
 					
 					int cnt = iServiceAdminQna.getadminQnaCnt(params);
 					
-					PagingBean pb = iPagingService.getPagingBean(page, cnt, 10, 5);
+					PagingBean pb = iPagingService.getPagingBean(page, cnt, 6, 5);
 					
 					params.put("startCnt", Integer.toString(pb.getStartCount()));
 					params.put("endCnt", Integer.toString(pb.getEndCount()));
