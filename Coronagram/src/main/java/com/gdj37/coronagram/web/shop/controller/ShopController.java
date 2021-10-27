@@ -247,14 +247,32 @@ public class ShopController {
 	}
 	@RequestMapping(value="/prodU" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
 	@ResponseBody
-	public String prodU(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+	public String prodU(ModelAndView mav, @RequestParam HashMap<String,String> params,@RequestParam(value="srcArray[]") List<String> srcArray) throws Throwable {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String,Object> modelMap= new HashMap<String,Object>();
 		String result="success";
-		int prodAttcAdd = iServiceShop.prodU(params);
+		/*int prodAttcAdd = iServiceShop.prodU(params);
 		if(prodAttcAdd ==0) {
 			result="failed";
-		}
+		}*/
+		
+			try {
+				for(int i=0;i<srcArray.size();i++) {
+					params.put("bFile", srcArray.get(i));
+					if(params.get("bFile") != null) {
+						int cartDel = iServiceShop.prodAttcAdd(params);
+						if(cartDel==0) {
+							result="failed";
+						}
+					}
+				
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+				
+			
+			
 		
 		modelMap.put("result", result);
 		return mapper.writeValueAsString(modelMap);

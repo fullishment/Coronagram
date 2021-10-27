@@ -17,11 +17,9 @@
     		reDraw();
     		
     		$("#addBtn").click(function(){
-    			if(${sMNo} != null){
+    			
 	    			location.href="prodAdd";    				
-    			}else{
-    				alert("로그인 이후 가능합니다");
-    			}
+    			
     		});
     		$("#findBtn").on("click",function(){
     			$("#searchGbn").val($("#searchGbnInp").val());

@@ -27,22 +27,30 @@
     		}
     	});
     	$("#updateBtn").click(function(){
-    		console.log("aaaa");
+    		var srcArray = new Array();
+    		var imgA = $("img[alt=\"thumbnail\"]"); 
+    		for(var i=0;i<imgA.length;i++){
+				srcArray.push(imgA[i].src.substring(imgA[i].src.lastIndexOf("/")+1));
+    		}
+
+    		
     		var params = $("#productForm").serialize();
     		console.log(params);
     		$.ajax({
 				url : "prodU",
     			type : "post",
     			dataType : "json",
-    			data : params,
+    			data : {
+    				params:params,
+    				srcArray : srcArray
+    			}, 
     			success : function(res){
-    				history.back();
+    				console.log(res.test);
     			},
     			error : function(request, status, error){
     				console.log(error);
     			}
 			});
-    		console.log("test");
     		
     	});
     	$("td").on("click","img",function(){
@@ -50,7 +58,7 @@
     			$("#aNo").val($(this).attr("no"));
     			if(confirm("선택한 이미지를 삭제하시겠습니까?")){
     				
-	    			var params = $("#productForm").serialize();
+/* 	    			var params = $("#productForm").serialize();
 	    			$.ajax({
 	    				url : "prodAttcDel",
 	        			type : "post",
@@ -62,7 +70,7 @@
 	        			error : function(request, status, error){
 	        				console.log(error);
 	        			}
-	    			});
+	    			}); */
 	    			$(this).remove();
     			}
     		}else {
@@ -89,8 +97,8 @@
     					//업로드 파일명 적용
     					if(res.fileName.length > 0){
     						$("#bFile").val(res.fileName[0]);
-    						console.log($("#bFile").val());
-    						attcAjax();
+    						var html = " <img src=\"resources/upload/"+$("#bFile").val()+"\" class=\"thumbnailImg\" alt=\"thumbnail\" id=\"preview\" >";
+    						$("#plusImg").before(html);
     					}
     				}else{
     					alert("파일 업로드에 실패했습니다.");
