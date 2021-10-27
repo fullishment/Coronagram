@@ -82,9 +82,11 @@
 			            if (index === currentIndex) {
 			                $button.addClass('active');
 			            }
+
 			            $button.on('click', function(){
 			                move(index);
-			            }).appendTo('.slide-buttons');
+			            }).appendTo($(this).parent().parent().parent().children(".slide-buttons"));
+			            
 			            buttonArray.push($button);
 			        });
 		        })
@@ -102,10 +104,11 @@
 						heart(res.post);
 						heartAD();
 						addPostCmt();
-						slide();
 						followList(res.listFo);
 						notFollowList(res.notFo);
-						followAdd();
+						followAdd();						
+						modalMover();
+						modalMover2();
 					},
 					error : function(request,status,error){
 						console.log(error);
@@ -116,6 +119,7 @@
 				var html ="";	
 				
 				var k=0;
+				var u=0;
 				 for(data of list){
 		
 				 html+="	<article class=\"contents postNo\" wtno=\""+data.WRITING_NO+"\">                                               								";  
@@ -158,7 +162,7 @@
 		         var fileAdrSplit = fileAdr.split(',');
 		         for ( var i = 0; i < fileAdrSplit.length; i++) {
 		       	 	 html+=" <div class=\"slide slide-"+j+"\">                                       									 								";
-		           	 html+=" <img src=\""+fileAdrSplit[i]+"\" alt=\"\" />	   						   									 								";
+		           	 html+=" <img class=\"p_img\" src=\""+fileAdrSplit[i]+"\" alt=\"\" />	   						   									 				";
 		          	 html+=" </div>                                                                  									 								";
 		          	 j++;        	
 		         }	
@@ -238,37 +242,197 @@
 			     html+="      <div class=\"comment_cnt\"> 																												";
 			     html+="		<a href=\"\" class=\"total_cmt_cnt\">댓글"+data.CCNT+"개 모두 보기</a>																		";
 			     html+="	  </div>																																	";
-			     for(data2 of list2){
+			     var m = 1;
+			     var q = 2;
+			     for(data2 of list2){			    	 
 			    	 if(data2.WRITING_NO == data.WRITING_NO){
 			    		 html+="<div class=\"cmt_area\"> ";
-			    		 html+="<div class=\"comment_container\" no=\""+data2.CMT_NO+"\">         ";
-					     html+="   <div class=\"comment\" id=\"comment-list-ajax-post37\">        ";
-					     html+="       <div class=\"comment-detail\">                             ";
-					     html+="           <div class=\"cmt_list head_text\">      						  ";
-					     html+="			<a href=\"coronagram/"+data2.NICK_NM+"\">"+data2.NICK_NM+"</a> ";
-					     html+="           </div>      											  ";
-					     html+="              <div class=\"ccon\">"+data2.CMT_CON+"</div>         ";
-					     html+="          </div>                                                  ";
-					     html+="       </div>                                                	  ";			     
-					     html+="   </div>                                                         ";
-					     html+="<div class=\"timer\">"+timeForToday(data2.DT)+"</div>             ";
+			    		 html+="<div class=\"comment_container\" no=\""+data2.CMT_WRITER_NO+"\">         																";
+					     html+="   <div class=\"comment\" id=\"comment-list-ajax-post37\">        																		";
+					     html+="       <div class=\"comment-detail\">                             																		";
+					     html+="           	  <div class=\"cmt_list"+m+" head_text\">      						 														";				     
+					     html+="					<a href=\"coronagram/"+data2.NICK_NM+"\">"+data2.NICK_NM+"</a> 														";
+					     html+="  	  				<div id=\"m_info"+u+"\" class=\"modal_info_area"+q+"\"></div>    			  										";
+					     html+="           	  </div>      											  																	";
+					     html+="              <div class=\"ccon\">"+data2.CMT_CON+"</div>         																		";
+					     html+="          </div>                                                  																		";
+					     html+="       </div>                                                	  																		";			     
+					     html+="   </div>                                                         																		";
+					     html+="<div class=\"timer\">"+timeForToday(data2.DT)+"</div>             																		";
 					     if(data2.CMT_WRITER_NO == ${sMNo}){
-					    	 html+="	<i class=\"fas fa-ellipsis-h cmtMore\"></i>				  ";
+					    	 html+="	<i class=\"fas fa-ellipsis-h cmtMore\"></i>				  																		";
 					     }			     
-					     html+="</div>";
-				     }
+					     html+="</div>";					     
+					     m++;
+					     q++;
+					     u++;
+				     }			    	 
 			     }    
-			     html+="      </div>                                                                                                        							   ";
-			     html+="      <div class=\"comment_field\" id=\"add-comment-post37\">                                                           						   ";
-			     html+="          <input type=\"text\" placeholder=\"댓글달기...\">                                                             							   ";
-			     html+="          <div class=\"upload_btn m_text\" data-name=\"comment\">게시</div>                                             							   ";
-			     html+="      </div>                                                                                                        							   ";
-			     html+="  </article>                                                                                                        							   ";
-			     
+			     html+="      </div>                                                                                                        							";
+			     html+="      <div class=\"comment_field\" id=\"add-comment-post37\">                                                           						";
+			     html+="          <input type=\"text\" placeholder=\"댓글달기...\">                                                             							";
+			     html+="          <div class=\"upload_btn m_text\" data-name=\"comment\">게시</div>                                             							";
+			     html+="      </div>                                                                                                        							";
+			     html+="  </article>                                                                                                        							";
+			    
 				}
 				
 				$("#contents_box").html(html);
+				
+				slide();
 			}
+		    function modalMover(){
+		    	$(".cmt_list1").mouseover(function(){	    		
+		    		$("#m_no3").val($(this).parent().parent().parent().attr('no'));
+		    		var params = $("#modalInfoForm").serialize();
+		    		$(this).children('.modal_info_area2').css("display","block");
+		    		$.ajax({
+		    			url : "mInfo",
+		    			type : "post",
+		    			dataType : "json",
+		    			data : params,
+		    			success : function(res){	    				
+		    				modalInfo(res.mInfo);
+		    				modalInfoImg(res.mImg);
+		    				modalMLeave();
+		    			},
+		    			error : function(request, status, error){
+		    				console.log(error);
+		    			}
+		    		});
+		    	})
+		    }
+		    function modalMLeave(){
+		    	$(".cmt_list1").mouseleave(function(){
+		    		$(this).children('.modal_info_area2').css("display","none");
+		    	});
+		    }
+		    function modalInfo(data){
+		    		 var html = "";
+		    		
+		    		  	 html+="           	  	<div class=\"modal_info_top2\" mdno=\""+data.M_NO+"\">      																							";
+					     html+="					<div class=\"modal_info_sec2\">																								";
+					     html+="						<div class=\"modal_info_head2\">																						";
+					     html+="							<div class=\"pro_area\">																							";								     
+						 html+="								<div class=\"pro_thumb\">																						";						                 
+						 html+=" 				   					<img class=\"pro_img\" src=\""+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 				";      
+						 html+="								</div>																											";						                 
+						 html+="								<div class=\"pro_dtl\">																							";					                 
+						 html+="									<div class=\"m_nick\">"+data.NICK_NM+"</div>																";		                     
+						 html+="									<div class=\"m_name\">"+data.M_NM+"</div>																	";						                    
+						 html+="								</div>																											";							                 
+						 html+="							</div>																												";			             	
+					     html+="           	  			</div>      																											";
+					     html+="						<div class=\"modal_info_mid2\">																							";
+					     html+="							<div class=\"modal_mid_box\">																						";
+					     html+="           	  					<div class=\"m_name\">게시글</div>     																			";
+					     html+="           	  					<div class=\"m_nick\">"+data.WC+"</div>      																	";
+					     html+="           	  				</div>      																										";
+					     html+="							<div class=\"modal_mid_box\">																						";
+					     html+="           	  					<div class=\"m_name\">팔로우</div>     																			";
+					     html+="           	  					<div class=\"m_nick\">"+data.PC+"</div>      																	";
+					     html+="           	  				</div>      																										";
+					     html+="							<div class=\"modal_mid_box\">																						";	
+					     html+="           	  					<div class=\"m_name\">팔로워</div>     																			";
+					     html+="           	  					<div class=\"m_nick\">"+data.QC+"</div>      																	";
+					     html+="           	  				</div>      																										";
+					     html+="           	  			</div>      																											";
+					     html+="						<div class=\"modal_info_img2\">																							";					     
+					     html+="           	  			</div>      																											";
+					     html+="						<div class=\"modal_info_follow2\">																						";
+					     html+="           	  			</div>      																											";
+					     html+="           	  		</div>      																												";
+					     html+="           	  	</div>      																													";
+				     
+				     	$(".modal_info_area2").html(html);
+		    }
+		    function modalInfoImg(list){
+		    	var html = "";
+		    	for(data of list){
+		    		 html+="<div pi=\""+data.M_NO+"\"> ";
+			    	 html+=" <img class=\"modal_img_box\" src=\""+data.FILE_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	"; 
+			    	 html+="</div>";
+		    	}
+		    	$(".modal_info_img2").html(html);
+		    }
+		   	    
+		    function modalMover2(){
+		    	$(".cmt_list2").mouseover(function(){	    		
+		    		$("#m_no3").val($(this).parent().parent().parent().attr('no'));
+		    		var params = $("#modalInfoForm").serialize();
+		    		$(this).children('.modal_info_area3').attr("style","display:block;");
+		    		$.ajax({
+		    			url : "mInfo",
+		    			type : "post",
+		    			dataType : "json",
+		    			data : params,
+		    			success : function(res){		    				
+		    				modalInfo2(res.mInfo);
+		    				modalInfoImg2(res.mImg);
+		    				modalMLeave2();
+		    			},
+		    			error : function(request, status, error){
+		    				console.log(error);
+		    			}
+		    		});
+		    	})
+		    }
+		    function modalMLeave2(){
+		    	$(".cmt_list2").mouseleave(function(){
+		    		$(this).children('.modal_info_area3').attr("style","display:none;");
+		    	});
+		    }
+		    function modalInfo2(data){
+	    		 var html = "";
+	    		
+	    		  	 html+="           	  	<div class=\"modal_info_top3\" mdno=\""+data.M_NO+"\">      																							";
+				     html+="					<div class=\"modal_info_sec3\">																								";
+				     html+="						<div class=\"modal_info_head3\">																						";
+				     html+="							<div class=\"pro_area\">																							";								     
+					 html+="								<div class=\"pro_thumb\">																						";						                 
+					 html+=" 				   					<img class=\"pro_img\" src=\""+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 				";      
+					 html+="								</div>																											";						                 
+					 html+="								<div class=\"pro_dtl\">																							";					                 
+					 html+="									<div class=\"m_nick\">"+data.NICK_NM+"</div>																		";		                     
+					 html+="									<div class=\"m_name\">"+data.M_NM+"</div>																			";						                    
+					 html+="								</div>																											";							                 
+					 html+="							</div>																												";			             	
+				     html+="           	  			</div>      								";
+				     html+="						<div class=\"modal_info_mid3\">				";
+				     html+="							<div class=\"modal_mid_box\">				";
+				     html+="           	  					<div class=\"m_name\">게시글</div>     ";
+				     html+="           	  					<div class=\"m_nick\">"+data.WC+"</div>      						";
+				     html+="           	  				</div>      								";
+				     html+="							<div class=\"modal_mid_box\">				";
+				     html+="           	  					<div class=\"m_name\">팔로우</div>     ";
+				     html+="           	  					<div class=\"m_nick\">"+data.PC+"</div>      						";
+				     html+="           	  				</div>      								";
+				     html+="							<div class=\"modal_mid_box\">				";	
+				     html+="           	  					<div class=\"m_name\">팔로워</div>     ";
+				     html+="           	  					<div class=\"m_nick\">"+data.QC+"</div>      						";
+				     html+="           	  				</div>      								";
+				     html+="           	  			</div>      								";
+				     html+="						<div class=\"modal_info_img3\">				";					     
+				     html+="           	  			</div>      								";
+				     html+="						<div class=\"modal_info_follow3\">			";
+				     html+="           	  			</div>      								";
+				     html+="           	  		</div>      									";
+				     html+="           	  	</div>      										";
+			     
+			     $(".modal_info_area3").html(html);
+	    	}
+		    function modalInfoImg2(list){
+		    	var html = "";
+		    	for(data of list){
+		    		 html+="<div pi=\""+data.M_NO+"\"> ";
+			    	 html+=" <img class=\"modal_img_box\" src=\""+data.FILE_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	"; 
+			    	 html+="</div>";
+		    	}
+		    	$(".modal_info_img3").html(html);
+		    }
+		    
+		    
+		    
 		    function followList(list){
 				var html ="";	
 				
@@ -544,15 +708,7 @@
 	                </div>	                
 	                <input type="hidden" id="page" value="1">            
 	                <div class="side_box">
-	                    <div class="user_profile">
-	                        <div class="profile_thumb">
-	                            <img src="resources/css/p_coronagram/imgs/thumb.jpeg" alt="프로필사진">
-	                        </div>
-	                        <div class="detail">
-	                            <div class="id m_text">KindTiger</div>
-	                            <div class="ko_name">심선범</div>
-	                        </div>
-	                    </div>
+	                    
 	                    <article class="recommend">
 	                        <header class="reco_header">
 	                            <div>회원님을 위한 추천</div>
@@ -577,9 +733,12 @@
 	      </form>
 	      <form action="#" id="addCmtForm" method="post">
           	  <input type="hidden" name="m_no" value="${sMNo}"/> 
-   	   	  <input type="hidden" name="writingNo" id="writingNo2"/>
-   	   	  <input type="hidden" name="cmt_con" id="cmtVal"/>
-	   </form>
+	   	   	  <input type="hidden" name="writingNo" id="writingNo2"/>
+	   	   	  <input type="hidden" name="cmt_con" id="cmtVal"/>
+	   	  </form>
+	   	  <form action="#" id="modalInfoForm" method="post">
+          	  <input type="hidden" name="m_no3" id="m_no3"/> 
+	   	  </form>
 	</main>
     <script src="resources/script/menu_bar/menu_bar.js"></script>
 </body>

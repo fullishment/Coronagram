@@ -61,4 +61,16 @@ public class ServiceCoronagram implements IServiceCoronagram{
 		return iDaoCoronagrma.FollowAdd(params);
 	}
 
+	@Override
+	public HashMap<String, String> ModalInfo(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.ModalInfo(params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getMimg(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.getMimg(params);
+	}
+
 }

@@ -65,4 +65,16 @@ public class DaoCoronagram implements IDaoCoronagram{
 		// TODO Auto-generated method stub
 		return sqlSession.insert("crng.FollowAdd",params);
 	}
+
+	@Override
+	public HashMap<String, String> ModalInfo(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("crng.ModalInfo",params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getMimg(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("crng.getMimg",params);
+	}
 }

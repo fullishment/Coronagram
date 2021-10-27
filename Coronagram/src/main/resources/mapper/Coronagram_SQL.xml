@@ -82,4 +82,40 @@
 		INSERT INTO FOLLOW(RQ_USER,RP_USER) 
 			SELECT #{m_no}, M_NO FROM M WHERE M_NO = #{m_no2}
 	</insert>
+	<select id="ModalInfo" parameterType="hashmap" resultType="hashmap">
+	 	SELECT M.M_NO, M.M_NM, M.NICK_NM, M.IMG_ADR, 
+	        NVL(W.WC,0) AS WC, NVL(P.PC,0) AS PC, NVL(Q.QC,0) AS QC
+	        FROM M M
+	        LEFT OUTER JOIN (SELECT WRITER_NO, NVL(COUNT(*),0) AS WC
+	                            FROM CRNG 
+	                            GROUP BY WRITER_NO) W
+	                            ON M.M_NO = W.WRITER_NO
+	        LEFT OUTER JOIN (SELECT RP_USER, NVL(COUNT(*),0) AS PC
+	                            FROM FOLLOW
+	                            GROUP BY RP_USER) P
+	                            ON M.M_NO = P.RP_USER
+	        LEFT OUTER JOIN (SELECT RQ_USER, NVL(COUNT(*),0) AS QC
+	                            FROM FOLLOW
+	                            GROUP BY RQ_USER) Q
+	                            ON M.M_NO = Q.RQ_USER
+	        WHERE M.M_NO = #{m_no3}
+	</select>
+	<select id="getMimg" parameterType="hashmap" resultType="hashmap">
+		SELECT I.M_NO,I.FILE_ADR,I.DT,I.RNUM 
+            FROM (SELECT M.M_NO, CA.FILE_ADR, C.DT
+            ,ROW_NUMBER() OVER(PARTITION BY M.M_NO ORDER BY C.DT DESC) AS RNUM
+            FROM CRNG C  
+            INNER JOIN M M
+                        ON C.WRITER_NO = M.M_NO
+            INNER JOIN (SELECT WRITING_NO, FILE_ADR,
+                        RANK() OVER(PARTITION BY WRITING_NO ORDER BY ATTC_NO ASC) AS RNK
+                        FROM CRNG_ATTC ) CA
+                        ON C.WRITING_NO = CA.WRITING_NO
+                        AND CA.RNK = 1
+            WHERE C.DEL = 1 
+            AND M.M_NO = #{m_no3}) I
+            <![CDATA[
+			WHERE RNUM<=3
+			]]>
+	</select>
 </mapper>

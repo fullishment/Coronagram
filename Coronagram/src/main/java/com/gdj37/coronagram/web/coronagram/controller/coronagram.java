@@ -123,4 +123,20 @@ public class coronagram {
 		
 		return mapper.writeValueAsString(modelMap);
 	}
+	@RequestMapping(value="/mInfo" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String ModalInfo(ModelAndView mav,@RequestParam HashMap<String,String> params) throws Throwable {
+		System.out.println(params);
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+
+		List<HashMap<String,String>> mImg = iServiceCoronagram.getMimg(params);
+		HashMap<String,String> mInfo = iServiceCoronagram.ModalInfo(params);	
+		
+		modelMap.put("mImg", mImg);
+		modelMap.put("mInfo", mInfo);
+		
+		
+		return mapper.writeValueAsString(modelMap);	
+	}
 }
