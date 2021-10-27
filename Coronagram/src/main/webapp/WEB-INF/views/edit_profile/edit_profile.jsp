@@ -142,6 +142,31 @@ $(document).ready(function(){
 		});					
 		imgForm.submit();
 	});
+	$("#nickNm").on("change", function(){
+		//Ajax
+		var params = $("#updateForm").serialize();
+		
+		$.ajax({
+			url: "nickCheckAjax",
+			type : "post",
+			dataType:"json",
+			data: params,
+			success: function(res) {
+				if(res.cnt > 0) {  
+					$("#check").html("중복된 닉네임이 있습니다.");
+					$("#check").css("color", "red");
+					$("#checkNick").val("false");
+				} else {
+					$("#check").html("사용 가능한 닉네임 입니다.");
+					$("#check").css("color", "green");
+					$("#checkNick").val("true");
+				}
+			},
+			error:function(request, status, error) {
+				console.log(error);
+			}
+		});
+	});
    $("#updateBtn").on("click", function(){
       if($("#ocpw").val() != "") { //비밀번호를 변경할 경우
          if(checkVal("#ocpw")) { //기존 비밀번호 입력 여부
@@ -190,9 +215,12 @@ $(document).ready(function(){
       } else if(checkVal("#mNm")) {
          alert("이름을 입력해 주세요.");
          $("#mNm").focus();
-      }
+         
+      /* }else if($("#checkNick").val() == "false") {
+			alert("닉네임 중복 체크를 해주세요.");
+			$("#nickNm").focus(); */
       
-      else if(checkVal("#mPhone")){
+      }else if(checkVal("#mPhone")){
          alert("전화번호를 입력하세요.");
          $("#Phone").focus();
          
@@ -354,11 +382,12 @@ $("input:radio[name='vec']").removeAttr("checked");
       <input type="hidden" id="no" name="no" value="${data.M_NO}">
   	  <input type="hidden" name="no" value="${param.M_NO}" />
  	  <input type="hidden" name="id" value="${param.M_ID}" />
+ 	  <input type="hidden" id="checkNick" value="false" />
  	  
       <p>이름</p>
       <input type="text" id="mNm" name="mNm" value="${data.M_NM}"><br>
-      <p>닉네임</p>
-      <input type="text" id="nickNm" name="nickNm" value="${data.NICK_NM}"><br>
+      <p>닉네임 <span id="check"></span></p>
+      <input type="text" id="nickNm" name="nickNm" value="${data.NICK_NM}"><br/>
       <input type="hidden" id="opw" value="${data.M_PW}" />
       <p>현재 비밀번호</p>
       <input type="password" id="ocpw" name="ocpw"><br>

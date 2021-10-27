@@ -23,4 +23,10 @@ public class DaoEdit_profile implements IDaoEdit_profile{
 	}
 
 
+	@Override
+	public int getNickCheck(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectOne("editProfile.getNickCheck", params);
+	}
+
+
 }

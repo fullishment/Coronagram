@@ -27,7 +27,12 @@
 						 INTRO_CON = #{intCon}
 			WHERE M_NO = #{no}
 		</update>
-	
+	<!-- 닉네임체크 -->
+		<select id="getNickCheck" parameterType="hashmap" resultType="Integer">
+			SELECT COUNT(*) AS CNT
+			FROM M
+			WHERE NICK_NM = #{nickNm}
+		</select>
 
 
 </mapper>

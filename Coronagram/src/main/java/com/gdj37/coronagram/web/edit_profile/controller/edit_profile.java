@@ -37,7 +37,21 @@ public class edit_profile {
 	    
 	    return mav;
 	 }
-		
+//ID체크
+		@RequestMapping(value = "/nickCheckAjax", method = RequestMethod.POST,
+				produces = "text/json;charset=UTF-8")
+		@ResponseBody
+		public String nickCheckAjax(@RequestParam HashMap<String, String> params) throws Throwable {
+			ObjectMapper mapper = new ObjectMapper();
+
+			Map<String, Object> modelMap = new HashMap<String, Object>();
+			
+			int cnt = iServiceEdit_profile.getNickCheck(params);
+			
+			modelMap.put("cnt", cnt);
+			
+			return mapper.writeValueAsString(modelMap);
+		}
 //수정
 		@RequestMapping(value="/edit_profileUps",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
 		@ResponseBody

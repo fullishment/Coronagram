@@ -25,6 +25,12 @@ public class ServiceEdit_profile implements IServiceEdit_profile {
 	}
 
 
+	@Override
+	public int getNickCheck(HashMap<String, String> params) throws Throwable {
+		return iDaoEdit_profile.getNickCheck(params);
+	}
+
+
 
 	
 }
