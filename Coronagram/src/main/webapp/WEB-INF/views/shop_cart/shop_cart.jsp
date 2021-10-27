@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
-    <link rel="stylesheet" href="resources/css/shop_cart/shop_cart.css">
+    <link rel="stylesheet" href="resources/css/shop_cart/shop_cart.css?after">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
@@ -271,9 +271,9 @@
     			html+="<input type=\"hidden\" name=\"cno"+i+"\" value=\""+data.CART_NO+"\" id=\"cno"+i+"\">";
     			html+="<input type=\"hidden\" name=\"pno"+i+"\" value=\""+data.PROD_NO+"\" id=\"pno"+i+"\">";
     			html+="<input type=\"hidden\" name=\"ono"+i+"\" value=\""+data.OPT_NO+"\" id=\"ono"+i+"\">";    			
-   				html+="<input type=\"checkbox\" name=\"cartCheck\" class=\"check_btn\" value=\""+data.CART_NO+"\" checked id=\"checkbox"+i+"\">						";
+   				html+="<input type=\"checkbox\" name=\"cartCheck\" class=\"check_btn\" value=\""+data.CART_NO+"\"id=\"checkbox"+i+"\">						";
    				html+="<label for=\"checkbox"+i+"\"></label>"
-				html+="<div class=\"up_con1\"><img alt=\"\" src=\""+data.FILE_ADDR+"\"></div>                                             ";
+				html+="<div class=\"up_con1\"><img alt=\"\" src=\"resources/upload/"+data.FILE_ADDR+"\"></div>                                             ";
 				html+="<div class=\"up_con2\">                                                   ";
 				html+="   	<div class=\"con2_title\">"+data.PROD_NM+"</div>                   ";
 				html+="		<div class=\"con2_subtitle\">"+data.CON+"</div>                       ";
@@ -292,9 +292,9 @@
 				total += data.POINT;
 				i++;
     	}
-    	totalhtml +="<div class=\"entire_item\"><span>전체 상품</span><span id=\"totalCnt\">"+cnt.CNT+"개</span></div>";
-	    totalhtml +="<div class=\"order_price\"><span>주문 금액</span><span id=\"totalP\">"+total+"</span></div>";
-	    totalhtml +="<div class=\"order_price\"><span>보유 포인트</span><span id=\"mPoint\">"+mP.POINT+"P</span></div>";
+    	totalhtml +="<div class=\"entire_item\"><span>Total Product</span><span id=\"totalCnt\">"+cnt.CNT+"개</span></div>";
+	    totalhtml +="<div class=\"order_price\"><span>Order Price</span><span id=\"totalP\">"+total+"</span></div>";
+	    totalhtml +="<div class=\"order_price\"><span>Point</span><span id=\"mPoint\">"+mP.POINT+"P</span></div>";
 	    
 	    $("#totalPInp").val(total);
 	    
@@ -401,7 +401,6 @@
                 </div>
                 <div class="rcon2">
                     <div class="rcon2_con1">
-                        <p>배송지를 등록해 주세요.</p><br>
                         <form action="#" id="orderForm" method="post">
 	                        <input type="text" id="cm_postcode" name="postNo" class="post_num" placeholder="우편번호">
 				            <input type="text" id="cm_address" name="adr" placeholder="주소"><br>

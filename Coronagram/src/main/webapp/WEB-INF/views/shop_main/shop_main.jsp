@@ -41,10 +41,10 @@
 		html+= "<div class=\"card\" no=\""+data.PROD_NO+"\">                                                                                          ";
         html+= "<div class=\"top-bar\">                                                                                       ";
         html+= "  <i class=\"fab fa-apple\"></i>                                                                              ";
-        html+= "  <em class=\"stocks\">"+data.CAT_NO+"</em>                                                                              ";
+        html+= "  <em class=\"stocks\">"+data.CAT_NM+"</em>                                                                              ";
         html+= "</div>                                                                                                      ";
         html+= "<div class=\"img-container\">                                                                                 ";
-        html+= "  <img class=\"product-img\" src=\""+data.FILE_ADDR+"\" alt=\"\">       ";
+        html+= "  <img class=\"product-img\" src=\"resources/upload/"+data.FILE_ADDR+"\" alt=\"\">       ";
         html+= "</div>                                                                                                      ";
         html+= "<div class=\"details\">                                                                                       ";
         html+= "  <div class=\"name-fav\">                                                                                    ";

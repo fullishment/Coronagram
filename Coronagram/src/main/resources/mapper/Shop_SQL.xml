@@ -3,18 +3,24 @@
 <mapper namespace="shop">
 
 	<select id="getProdList" parameterType="hashmap" resultType="hashmap">
+		SELECT P.PROD_NO,REG_NO,PC.CAT_NM,PROD_NM,POINT,CON,SALE_STAT,PROD_DT,PA.FILE_ADDR
+		FROM PRODUCT P
+    		INNER JOIN (SELECT PROD_NO,FILE_ADDR,RANK() OVER(PARTITION BY PROD_NO ORDER BY ATTC_NO ASC) AS RNK
+                FROM PROD_ATTC) PA
+            ON P.PROD_NO = PA.PROD_NO
+            AND RNK = 1
+            INNER JOIN PROD_CAT PC
+            ON P.CAT_NO = PC.CAT_NO
+		WHERE P.DEL=1 
+	</select> 
+	<select id="getProd" parameterType="hashmap" resultType="hashmap">
 		SELECT P.PROD_NO,REG_NO,CAT_NO,PROD_NM,POINT,CON,SALE_STAT,PROD_DT,PA.FILE_ADDR
 		FROM PRODUCT P
     		JOIN (SELECT PROD_NO,FILE_ADDR,RANK() OVER(PARTITION BY PROD_NO ORDER BY ATTC_NO ASC) AS RNK
                 FROM PROD_ATTC) PA
             ON P.PROD_NO = PA.PROD_NO
             AND RNK = 1
-		WHERE DEL=1 
-	</select> 
-	<select id="getProd" parameterType="hashmap" resultType="hashmap">
-		SELECT PROD_NO,REG_NO,CAT_NO,PROD_NM,POINT,CON,SALE_STAT,PROD_DT,DEL
-		FROM PRODUCT
-		WHERE PROD_NO = #{prodNo}
+		WHERE P.PROD_NO = #{prodNo} 
 	</select>
 	<select id="getOptList" parameterType="hashmap" resultType="hashmap" >
 		SELECT OPT_NO, PROD_NO, PRICE, UNIT

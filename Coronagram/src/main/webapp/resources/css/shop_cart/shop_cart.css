@@ -205,8 +205,7 @@
 
 .rcon2_con1{
     height: 30%;
-    background-color: #ccc;
-    opacity: 0.5;
+    background-color: #ddd;
     padding: 10px;
     width:100%;
     border-bottom: 1px solid black;
@@ -234,12 +233,13 @@
 
 
 .rcon2_con2{
+	padding : 15px;
     border-bottom: 1px solid black;
     height: 29%;
 }
 .entire_item, .order_price,.discount_price {
+	font-family : 'LobSter';
     height: 25%;
-    color: #ccc;
     display: flex;
     justify-content: space-between;
 }
@@ -250,10 +250,9 @@
 
 
 .rcon2_con3{
-    height: 30%;
+    height: 20%;
     display: flex;
     flex-direction: column;
-    padding-top: 10px;
 }
 .due_price{
     display: flex;
@@ -316,4 +315,18 @@
 	
 	.lcon2_up input[type="checkbox"]:checked + label:after {
 	  opacity: 1;
-}
+	}
+	.lcon2_up img {
+		width:15vw;
+		height : 15vh;
+	}
+
+
+	#orderForm input[type="text"]{
+	border: 0;
+    border-radius: 15px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+	width:100%;
+	padding :5px;
+	margin-bottom: 5px;
+	}

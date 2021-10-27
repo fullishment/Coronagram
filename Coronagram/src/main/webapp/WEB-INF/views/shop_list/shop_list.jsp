@@ -58,7 +58,7 @@
             html+="<td>"+data.POINT+"P</td>        ";
             html+="<td>"+data.SALE_STAT+"</td>        ";
             html+="<td>"+data.PROD_DT+"</td>        ";
-            html+="<td><input type=\"button\"  value=\"수정\" id=\"dtlBtn\"></td>        ";
+            html+="<td><input type=\"button\"  value=\"수정\" id=\"edit_btn\"> <input type=\"button\"  value=\"삭제\" id=\"del_btn\"> </td>        ";
             
             html+="</tr>                    ";
     		}
@@ -70,30 +70,37 @@
             background: #ecf0f1;
             width: 100%;
             height: 100%;
+            
+        }
+        body{
+        	
         }
 
         main {
             font-family: "Noto Sans KR", sans-serif;
             width: 100%;
             height: 100%;
+            
         }
 
         .searchCon {
             margin-left: 20vw;
             margin-top: 100px;
             width: 60vw;
+            min-width:800px;
             height: 20px;
             display: flex;
             justify-content: space-between;
 
         }
         .searchbox{
-            padding-top: 15px;
+            padding-top: 11px;
         }
 
         .con1 {
             background-color: white;
             width: 60vw;
+            min-width:800px;
             border-radius: 15px;
             border: 1px solid white;
             box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
@@ -127,14 +134,62 @@
             height:50px;
             font-size:20px;
         }
-        .th-1,.th-5,.th-6, .th-8 {
+        .th-1,.th-5,.th-6  {
             width:10%;
         }
         
         .th-3, .th-2,.th-4, .th-7{
-            width:15%; 
+            width:14%; 
         }
-
+        .th-8{
+        	width:14%;
+        	min-width:135px;
+        }
+        
+        
+		#searchGbnInp{
+			height:26px;	
+			border: 2px solid #b7b7b7;
+			border-radius: 15px;
+		}
+		
+		#searchGbnInp:focus {
+			height:26px;	
+			outline: none;
+  			border: 2px solid #64d488;
+		}
+		
+		#searchInp{
+			height:26px;	
+			border: 2px solid #b7b7b7;
+			border-radius: 15px;
+			 font-size: 12px;
+		}
+		
+		#searchInp:focus {
+			height:26px;	
+			outline: none;
+  			border: 2px solid #64d488;		
+		}
+		
+		.add_btn {
+            display: inline-block;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.5s;
+            cursor: pointer;
+            width: 60px;
+            height: 30px;
+            border: none;
+            border-radius: 7px;
+            background: #0d6efd;
+        }
+        .add_btn:hover {
+            opacity: .8;
+        }
+		
         .find_btn {
             display: inline-block;
             color: black;
@@ -151,6 +206,44 @@
         }
 
         .find_btn:hover {
+            opacity: .8;
+        }
+        
+         #edit_btn {
+            display: inline-block;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.5s;
+            cursor: pointer;
+            width: 45px;
+    		height: 27px;
+            border: none;
+            border-radius: 7px;
+            background: #64d488;
+            
+            margin-bottom: 3px;
+        }
+        #edit_btn:hover {
+            opacity: .8;
+        }
+
+        #del_btn {
+            display: inline-block;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.5s;
+            cursor: pointer;
+             width: 45px;
+    		height: 27px;
+            border: none;
+            border-radius: 7px;
+            background: #dc3545;
+        }
+        #del_btn:hover {
             opacity: .8;
         }
     </style>
@@ -226,14 +319,15 @@
         <div class="searchCon">
             <h1>상품 리스트</h1>
             <div class="searchbox">
-            	<input type="button"  value="등록" class="find_btn" id="addBtn"/>
             	<select id="searchGbnInp" name="searchGbnInp">
             		<option value="0">상품번호</option>
             		<option value="1">카테고리명</option>
             		<option value="2">상품명</option>
             		<option value="3">판매상태</option>
             	</select>
-                <input type="text" id="searchInp" value="${param.searchGbn}"/> <button class="find_btn" id="findBtn">검색</button>
+                <input type="text" id="searchInp" value="${param.searchGbn}"/> 
+                <input type="button"  value="등록" class="add_btn" id="addBtn"/>
+                <button class="find_btn" id="findBtn">검색</button>
             </div>
         </div>
         <div class="con1">

@@ -204,7 +204,7 @@
     <!-- 메인 -->
     <main>
         <div class="wrapper">
-            <div class="mainContent"><
+            <div class="mainContent">
                 <div class="firstCont">
                     <div class="thumbsCont">
                         <ul class="thumbs" id="imgBox">
@@ -215,7 +215,7 @@
                 <div class="leftCont">
                     <div class="imagesCont">
                         <div class="mainImageCont">
-                            <img id="mainImage" src="resources/images/etc/msk1.jpg" alt="">
+                            <img id="mainImage" src="resources/upload/${data.FILE_ADDR}" alt=""> 
                         </div>
                     </div>
                 </div>
@@ -271,7 +271,6 @@
                         	<c:when test="${!empty sMNo}">
                         		<ul class="otherLinks">
                                	<li class="btn_L" id="cartBtn"><a href="#"><p>장바구니 담기</p></a></li>
-                                <li class="btn_R"><a href="#"><p>바로구매</p></a></li>
                             </ul>
                             </c:when>
 	                        <c:otherwise>
