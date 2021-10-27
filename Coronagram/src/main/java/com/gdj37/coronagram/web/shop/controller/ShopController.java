@@ -265,11 +265,11 @@ public class ShopController {
 	
 	@RequestMapping(value="/prodAdd")
 	public ModelAndView prodAdd(ModelAndView mav, @RequestParam HashMap<String,String> params,HttpSession session) throws Throwable {
+		List<HashMap<String,String>> catlist = iServiceShop.getProdCatList(params);
+		HashMap<String,String> nextPNo = iServiceShop.getProdNextNo(params);
+		mav.addObject("catList", catlist);
+		mav.addObject("nextPNo", nextPNo);
 		if(session.getAttribute("sMNo")!=null) {
-			List<HashMap<String,String>> catlist = iServiceShop.getProdCatList(params);
-			HashMap<String,String> nextPNo = iServiceShop.getProdNextNo(params);
-			mav.addObject("catList", catlist);
-			mav.addObject("nextPNo", nextPNo);
 			mav.setViewName("prod_add/prod_add");
 		}else {
 			mav.setViewName("login/login");

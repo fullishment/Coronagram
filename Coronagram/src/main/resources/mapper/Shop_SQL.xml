@@ -178,7 +178,7 @@
 	</select>
 	<select id="getProdNextNo" parameterType="hashmap" resultType="hashmap">
 		SELECT PROD_SEQ.NEXTVAL
-		FROM PRODUCT
+		FROM DUAL 
 	</select>
 	<insert id="prodAdd"  parameterType="hashmap" >
 		INSERT INTO PRODUCT (PROD_NO,REG_NO,CAT_NO,PROD_NM,POINT,CON,SALE_STAT)
