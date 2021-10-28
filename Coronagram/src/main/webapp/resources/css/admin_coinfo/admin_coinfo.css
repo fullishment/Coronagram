@@ -106,7 +106,7 @@ transform:rotate(0);
 .disp_yn {
 	border: 0px;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-    padding: 2px;
+    padding: 5px;
 }
 
 
@@ -171,10 +171,25 @@ input:focus{
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
 }
 
-.border{
+
+.border1 {
+	border-radius: 15px;
     border: 0px;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
     padding: 10px;
+    display : inline-block;
+    width : 50px;
+    margin-left: 5px;
+    margin-bottom: 20px;
+}
+
+
+.border{
+    border: 0px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    padding: 15px;
+    margin-left: 5px;
+    margin-bottom: 20px;
 }
 
 
@@ -185,7 +200,7 @@ textarea {
 
 
 /* 작성버튼 */
-.qnaBtn1 {
+.addBtn {
     display: inline-block;
             color: white;
             font-size: 1rem;
@@ -203,13 +218,13 @@ textarea {
             margin-top: 10px;
 }
 
-.qnaBtn1:hover{
+.addBtn:hover{
     opacity: .8;
   }
 
 /* 취소버튼 */
-.qnaBtn2 {
-    display: inline-block;
+.cancelBtn, .cancelBtnStep {
+    display: block;
     color: white;
     font-size: 1rem;
     font-weight: 600;
@@ -223,12 +238,39 @@ textarea {
     background: gray;
     /* 추가 */
     float: right;
-    margin-left: 10px;
-    margin: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
-.qnaBtn2:hover{
+.cancelBtn:hover, .cancelBtnStep:hover {
     opacity: .8;
   }
+
+/* 수정버튼 */
+
+.updateBtn, .updateBtnStep {
+    display: block;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.5s;
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+    border: none;
+    border-radius: 7px;
+    background: #64d488;
+    /* 추가 */
+    float: right;
+    margin: 10px;
+} 
+.updateBtn:hover, .updateBtnStep:hover {
+    opacity: .8;
+}
+
+
+
+
 
 /*file 버튼*/
 .fileBtn {
@@ -281,3 +323,8 @@ textarea {
         width: 100%;
     }
 }
+
+
+
+
+/* ADadd, ADupd, STupd */

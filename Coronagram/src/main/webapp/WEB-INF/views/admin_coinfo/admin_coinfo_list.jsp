@@ -285,19 +285,19 @@ $(document).ready(function(){
 										<select name="searchGbn" id="searchGbn" class="searchGbn">
 											<option value="0">제목</option>
 											<option value="1">소제목</option>
-										</select>
-										<input type="text" name="searchTxt" class="searchTxt" id="searchTxt" value="${param.searchTxt}" />
-										<input type="hidden" id="oldTxt"  value="${param.searchTxt}" />
-										<input type="hidden" name="page" id="page" value="${page}" />
-										<input type="hidden" name="no" id="no" />
+										</select> 
+										<input type="text" name="searchTxt" class="searchTxt" id="searchTxt" value="${param.searchTxt}" /> 
+										<input type="hidden" id="oldTxt" value="${param.searchTxt}" /> 
+										<input type="hidden" name="page" id="page" value="${page}" /> 
+										<input type="hidden" name="no" id="no" /> 
 										<input type="button" value="검색" id="searchBtn" class="searchBtn" />
 										<c:if test="${!empty sMNo}">
-											<input type="button" value="작성" id="addBtn" class="addBtn"/>
+											<input type="button" value="작성" id="addBtn" class="addBtn" />
 										</c:if>
 									</form>
 								</div>
 								<div class="adList">
-									<table>
+									<table class="adListTb">
 										<thead>
 											<tr>
 												<th>번호</th>
@@ -310,56 +310,9 @@ $(document).ready(function(){
 										<tbody id="tbody"></tbody>
 									</table>
 								</div>
-								<div class="paging_wrap">
-								</div>
-
-
-
-<%-- 								<form id="imgForm" action="fileUploadAjax" method="post"
-									enctype="multipart/form-data">
-									<input type="file" name="imgAtt" id="imgAtt" accept="image/*">
-								</form>
-								
-								<form action="#" id="addForm" method="post">
-									<input type="hidden" name="m_no" value="${sMNo}">
-									
-									<div class="qnaTitle">
-										<div class="qnaTitle1">
-											<span>제목</span><input type="text" class="border"
-												id="info_title" name="info_title" placeholder="내용을 입력하세요">
-										</div>
-										<div class="qnaTitle2">
-											<span>소제목</span><input type="text" class="border"
-												id="info_subhd" name="info_subhd" placeholder="내용을 입력하세요">
-										</div>
-									</div>
-									
-									<div class="qnaMain">
-										<div class="qnaCon">
-											<p>내용</p>
-											<textarea class="QCI" type="text" id="con" name="con"
-												placeholder="내용을 입력하세요"></textarea>
-										</div>
-										<div class="qnaImg">
-											<span>이미지</span><input type="button" value="file"
-												class="fileBtn" id="imgBtn" /> <span id="fileName"></span>
-											<input type="hidden" name="imgFile" id="imgFile">
-											<div id="preView">
-												<img
-													src="resources/images/coinfo/coinfo_upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}"
-													onerror="this.style.display='none'" />
-											</div>
-										</div>
-									</div>
-								</form>
-								
-								<div class="qnaBtn">
-									<input type="button" id="addBtn" class="qnaBtn1" value="저장" />
-									<input type="button" id="cancelBtn" class="qnaBtn2" value="취소" />
-								</div> --%>
+							<div class="paging_wrap"></div>
 							</div>
 						</div>
-
 
 
 
@@ -374,7 +327,7 @@ $(document).ready(function(){
 									</form>
 								</div>
 								<div class="stList">
-									<table>
+									<table class="stListTb">
 										<thead>
 											<tr>
 												<th>지역</th>

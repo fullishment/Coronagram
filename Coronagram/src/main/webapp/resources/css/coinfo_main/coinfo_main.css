@@ -414,17 +414,17 @@ html, body {
   background-color: rgba(0, 0, 0, 0.3);
 }
 .background:first-child {
-  background-image: url(https://i.postimg.cc/kXq9Qmnj/bgd1.jpg);
+  background-image: url("../../images/coinfo/coinfo_main/1_coinfo.jpg");
   transform: translateY(-15vh);
 }
 .background:first-child .content-wrapper {
   transform: translateY(15vh);
 }
 .background:nth-child(2) {
-  background-image: url(https://i.postimg.cc/W14vywqg/photo-1424746219973-8fe3bd07d8e3.jpg);
+  background-image: url("../../images/coinfo/coinfo_main/2_costep.jpg");
 }
 .background:nth-child(3) {
-  background-image: url(https://i.postimg.cc/TY0xQ41T/photo-1433840496881-cbd845929862.jpg);
+  background-image: url("../../images/coinfo/coinfo_main/3_conews.jpg");
 }
 
 /* Set stacking context of slides */
@@ -458,6 +458,12 @@ html, body {
 .content-title {
   font-size: 12vh;
   line-height: 1.4;
+  background-color:  rgba(0, 0, 0, 0.3);
+  border-radius: 100px;
+  width : 60vw;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
 }
 
 .background.up-scroll {
@@ -495,7 +501,7 @@ html, body {
     margin-left: auto;
     margin-right: auto;
     background: rgba(0,0,0,0);
-    margin-top: 30px;
+    margin-top: 25px;
 	transition: 0.3s;
 	opacity: 0.8;
 }

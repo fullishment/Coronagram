@@ -88,7 +88,7 @@
       <section class="background">
         <div class="content-wrapper">
           <p class="content-title">코로나 관련정보</p>
-          <p class="content-subtitle">Scroll Down or Up</p>
+          <p class="content-subtitle">Scroll Down</p>
           <div id="mouse-scroll">
             <div class="mouse">
               <div class="mouse-in"></div>

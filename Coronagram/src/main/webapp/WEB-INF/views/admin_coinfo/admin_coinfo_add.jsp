@@ -38,9 +38,7 @@ $(document).ready(function(){
 	$("#imgBtn").on("click",function(){
 		$("#imgAtt").click();
 	});
-/* 	$("#imgBtn2").on("click",function(){
-		$("#imgAtt2").click();
-	}); */
+
 	$("#imgAtt").on("change",function(){
 		$("#fileName").html($(this).val().substring($(this).val().lastIndexOf("\\")+1));
 		var imgForm = $("#imgForm");
@@ -64,45 +62,7 @@ $(document).ready(function(){
 		});					
 		imgForm.submit();
 	});
-/* 	
-	$("#imgAtt2").on("change",function(){
-		$("#fileName2").html($(this).val().substring($(this).val().lastIndexOf("\\")+1));
-		var imgForm2 = $("#imgForm2");
-		imgForm2.ajaxForm({
-				success:function(res){
-				if(res.result=="SUCCESS"){
-					if(res.fileName.length > 0){
-						$("#imgFile2").val(res.fileName[0]);
-						var imgRep = res.fileName[0].replace('[', '%5B').replace(']', '%5D');
-						//$("#preView").attr("src", "resources/upload/"+imgRep);
-						$("#preView2").html("<img src=\"resources/images/coinfo/coinfo_upload/"+imgRep+"\" id=\"prevImg2"+"\">");
-					}
-				}else{
-					alert("파일 업로드에 실패하였습니다.");
-				}
-			},
-			error:function(req,status,error){
-				console.log(error);
-				alert("파일 업로드중 문제가 발생하였습니다.");
-			}
-		});					
-		imgForm2.submit();
-	});
-	 */
-	
-/* 	나중에 수정해서 추가!
-	//첨부파일 삭제 버튼
-	$("#fileDelBtn").on("click", function(){
-	   $("#fileName").html(""); 
-	   $("#mImage").html("");
-	   $("#mImage").val("");
-	   $("#fileBtn").attr("class","");
-	   $("#image").html("");
-	   $("#images").val("");
-	   $(this).remove();
-	});
-	
-	 */
+
 	
 	
 	$("#addBtn").on("click",function(){	
@@ -231,79 +191,75 @@ function checkVal(sel){
             </div>
             <div>
                 <div class="sc-html">
-                    <input id="tab-1" type="radio" name="tab" class="scm1" checked>
-                    <label for="tab-1" class="tab">코로나 정보 관리</label>
-                    <input id="tab-2" type="radio" name="tab" class="scm2">
-                    <label for="tab-2" class="tab">단계 변경</label>
+                    <input id="tab-2" type="radio" name="tab" class="scm2" checked>
+                    <label for="tab-2" class="tab">코로나 정보 관리</label>
                     <div class="sc-form">
-                        <div class="scm1-htm">
+                    
+                        <div class="scm2-htm">
                             <label for="user" class="sclabel">
                                 <p>코로나 관련 정보 관리</p>
                             </label>
                             <div class="group">
+                            
                             	<form action="admin_coinfo_list" id="backForm" method="post">
 									<input type="hidden" name="searchGbn" value="${param.searchGbn}" />
 									<input type="hidden" name="searchTxt" value="${param.searchTxt}" />
 									<input type="hidden" name="page" value="${param.page}" />
 								</form>
+								
                             <!-- 내용이미지 -->
                             	<form id="imgForm" action="fileUploadAjax" method="post" enctype="multipart/form-data">
 									<input type="file" name="imgAtt" id="imgAtt" accept="image/*" >
 								</form>
-							<!-- 배경 이미지  -->
-<!-- 								<form id="imgForm2" action="fileUploadAjax" method="post" enctype="multipart/form-data">
-									<input type="file" name="imgAtt2" id="imgAtt2" accept="image/*" >
-								</form> -->
 								
                             	<form action="#" id="addForm" method="post">
-                            		<input type="hidden" name="m_no" value="${sMNo}">
-	                                <div class="qnaTitle">
-	                                
-	                                   	<div class="qnaTitle0">
-	                                		<span>노출여부</span>
-											<select class="disp_yn" name="disp_yn">
-														<option value="Y">노출</option>
-														<option value="N">숨김</option>
-											</select>
-	                                	</div>                                
-	                                
-	                                    <div class="qnaTitle1">
-	                                        <span>제목</span><input type="text" class="border" id="info_title" name="info_title" placeholder="내용을 입력하세요">
-	                                    </div>
-	                                    <div class="qnaTitle2">
-	                                        <span>소제목</span><input type="text" class="border" id="info_subhd" name="info_subhd" placeholder="내용을 입력하세요">
-	                                    </div>
-	                               	 </div>
-	                              	 <div class="qnaMain">
-	                                    <div class="qnaCon">
-	                                        <p>내용</p><textarea class="QCI" type="text" id="con" name="con" placeholder="내용을 입력하세요"></textarea>
-	                                    </div>
-	                                    <div class="qnaImg">
-											<span>배경이미지</span><input type="button" value="file" class="fileBtn" id="imgBtn" />
-											<span id="fileName"></span>		
-											<input type="hidden" name="imgFile" id="imgFile">							
-										    <div id="preView">
-										       <img src="resources/upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" max-width="760px" height="auto" />
-										    </div>
-										    <%-- <span>이미지</span><input type="button" value="file2" class="fileBtn2" id="imgBtn2" />
-											<span id="fileName2"></span>		
-											<input type="hidden" name="imgFile2" id="imgFile2">							
-										    <div id="preView2">
-										       <img src="resources/images/coinfo/coinfo_upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
-										    </div> --%>
-										</div>
-	                              	  </div>
-	                               </form>
+                           		<input type="hidden" name="m_no" value="${sMNo}">
+                               
+                                <div class="qnaTitle">
+                                   	<div class="qnaTitle0">
+                                		<span>노출여부</span>
+										<select class="disp_yn" name="disp_yn">
+													<option value="Y">노출</option>
+													<option value="N">숨김</option>
+										</select>
+                                	</div>                                
+                                
+                                    <div class="qnaTitle1">
+                                        <span>제목</span><input type="text" class="border" id="info_title" name="info_title" placeholder="내용을 입력하세요">
+                                    </div>
+                                    <div class="qnaTitle2">
+                                        <span>소제목</span><input type="text" class="border" id="info_subhd" name="info_subhd" placeholder="내용을 입력하세요">
+                                    </div>
+                               	 </div>
+                               	 
+                              	 <div class="qnaMain">
+                                    <div class="qnaCon">
+                                        <p>내용</p><textarea class="QCI" type="text" id="con" name="con" placeholder="내용을 입력하세요"></textarea>
+                                    </div>
+                                    <div class="qnaImg">
+										<span>배경이미지</span><input type="button" value="file" class="fileBtn" id="imgBtn" />
+										<span id="fileName"></span>		
+										<input type="hidden" name="imgFile" id="imgFile">							
+									    <div id="preView">
+									       <img src="resources/upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" max-width="760px" height="auto" />
+									    </div>
+									</div>
+                              	  </div>
+                              	  
+                               </form>
+	                               
                                 <div class="qnaBtn">
-                                 	<input type="button" id="addBtn" class="qnaBtn1" value="저장" />
-                                 	<input type="button" id="cancelBtn" class="qnaBtn2" value="취소" />
+                                 	<input type="button" id="addBtn" class="addBtn" value="저장" />
+                                 	<input type="button" id="cancelBtn" class="cancelBtn" value="취소" />
                                 </div>
+                                
                             </div>
                         </div>
                     </div><!-- sc-html -->
                 </div> <!-- sc-form -->
             </div>
         </div>
+        
     </main>
 
     <script src="resources/script/menu_bar/menu_bar.js"></script>

@@ -457,7 +457,7 @@ a.cm_userinfo {
 	transform: translate(0, -50%);
 	height: 400px;
 	width: 100%;
-	opacity: 0.3;
+	opacity: 0.4;
 /* 	transform: translateX(0); */
 	background: #ffffff;
 	z-index: 1;
@@ -493,14 +493,17 @@ a.cm_userinfo {
 }
 
 .txt h1{
-	color: #00a7ff; /* blue */
+	color:  #000000; /* blue */
 	text-shadow: 1px 1px 2px rgb(255, 255, 255);
-	font-size: 50px;
+	font-size: 70px;
 	margin-bottom: 20px;
 }
 .txt p{
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 30px;
+	text-shadow: 1px 1px 2px rgb(0, 0, 0);
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 /* /3 */
 

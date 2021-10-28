@@ -141,14 +141,12 @@ $(document).ready(function() {
             </div>
             <div>
                 <div class="sc-html">
-                    <input id="tab-1" type="radio" name="tab" class="scm1" checked>
-                    <label for="tab-1" class="tab">코로나 정보 관리</label>
-                    <input id="tab-2" type="radio" name="tab" class="scm2">
-                    <label for="tab-2" class="tab">단계 변경</label>
+                    <input id="tab-2" type="radio" name="tab" class="scm2" checked>
+                    <label for="tab-2" class="tab">코로나 정보 관리</label>
                     <div class="sc-form">
                     
                     
-                        <div class="scm1-htm">
+                        <div class="scm2-htm">
                             <label for="user" class="sclabel">
                                 <p>코로나 관련 정보 관리</p>
                             </label>
@@ -200,11 +198,6 @@ $(document).ready(function() {
                                     <input type="button" value="목록" id="listBtn" class="listBtn" />
                                     <input type="button" value="삭제" id="deleteBtn" class="deleteBtn" />
 									<input type="button" value="수정" id="updateBtn" class="updateBtn" />
-									
-									
-                                    
-                                    
-
 
 <%-- 									<c:if test="${data.M_NO eq sMNo}">
 										<input type="button" value="수정" id="updateBtn" />
@@ -214,46 +207,9 @@ $(document).ready(function() {
 											
 											<span id="fileName">${fn:substring(data.M_IMG, 20, len)}</span> --%>
 
-											
-                              	  </div>
+                              	</div>
                             </div>
                         </div>
-                        
-                        
-                        
-                        <div class="scm2-htm">
-                            <label for="user" class="sclabel">
-                                <p>거리두기 정보 단계 관리</p>
-                            </label>
-                            <div class="group">
-                                <div class="qnaMain">
-                                    <div class="QnaTitle" id="">
-                                        <div>
-                                            <span>지역</span>
-                                            <select  name="dropbox" class="dbox">
-                                                <option value="서울">서울</option>
-                                                <option value="서울">서울</option>
-                                                <option value="서울">서울</option>
-                                                <option value="서울">서울</option>
-                                                <option value="서울">서울</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <span>단계 &nbsp;</span><input class="border" type="text" placeholder="내용을 입력하세요">
-                                        </div>
-                                    </div>
-                                    <div class="qnaMain">
-                                        <div>
-                                            <p>내용</p><textarea class="QCI" class="border" type="text" placeholder="내용을 입력하세요"></textarea>
-                                        </div>
-	                                    <div class="qnaBtn">
-                                    		<input type="button" id="updateBtnStep" class="qnaBtn1" value="저장" />
-                                    		<input type="button" id="cancelBtnStep" class="qnaBtn2" value="취소" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- sc-form -->
                     </div><!-- sc-html -->
                 </div> <!-- sc-form -->
             </div>

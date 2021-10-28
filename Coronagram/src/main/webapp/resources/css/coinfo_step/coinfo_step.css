@@ -98,9 +98,24 @@ th {
     height: 435px;
     border-radius: 10px;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-    padding: 25px;
+    padding: 30px;
 	color: #5a5a5a;
 }
+
+.map_dtl p{
+	font-size:10pt;
+	color: #808080; 
+	font-weight: 100;
+	padding-bottom: 10px;
+	border-bottom: solid 1px #d9d9d9;
+	margin-bottom: 20px;
+}
+
+.map_dtl p img{
+	width: 13px;
+	height: auto;
+}
+
 .map{
     width: 500px;
     height: 500px;
@@ -132,6 +147,7 @@ th {
     height: 60px;
     background-color: rgba(255, 255, 255);
     color:black;
+    opacity: .85;
 }
 
 .local_link {
@@ -142,6 +158,11 @@ th {
 .local_link:link, .local_link:visited, .local_link:hover {
 	text-decoration: none;
 	color : black;
+}
+
+.local_step {
+	color: #e4630c;
+	font-weight: 500;
 }
 
 /* Q&A */

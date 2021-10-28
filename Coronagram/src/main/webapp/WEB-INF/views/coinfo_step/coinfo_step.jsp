@@ -29,10 +29,10 @@ $(document).ready(function(){
 	$('.step_dtl div').hide();
     $(".local_link").click (function(e){
         e.preventDefault();
-        
+/*         
         var getText = $(this).text();
         alert(getText);
-        
+   */      
         $('.step_dtl div').hide();
         $('#' + $(this).data('rel')).show();
     });
@@ -392,6 +392,7 @@ $(document).on('click', '.local_link', function(e){
                                         </div>                              
                                 </div>
 								<div class="map_dtl">
+									<p><img src="resources/images/coinfo/information.png">시도를 선택하면 상세 현황을 확인 할 수 있습니다.</p>
 									<div class="step_dtl">
 										<c:forEach var="data" items="${list}">
 											<div id="step_con" style="white-space:pre-line;">${data.CON}</div>

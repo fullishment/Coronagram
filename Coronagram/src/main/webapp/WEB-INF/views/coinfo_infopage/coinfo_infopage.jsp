@@ -142,9 +142,9 @@
             <section class="content">
             	<article>  	
 	
-            		<c:if test="${!empty data.REP_IMG}">
+<%--             	<c:if test="${!empty data.REP_IMG}">
 						<img alt="" src="resources/upload/${data.REP_IMG}" /><br/>
-					</c:if>
+					</c:if> --%>
 
       				<div class="atc_con" style="white-space:pre-line;">${data.CON}</div>
       				

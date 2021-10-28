@@ -183,35 +183,38 @@ function checkVal(sel){
                             <div class="group">
                             
 
-							<form action="admin_coinfo_list" id="backForm" method="post">
-								<input type="hidden" name="mgt_no" value="${param.mgt_no}" />
-							</form>
-							
-                           	<form action="#" id="updateForm" method="post">
-                            	<input type="hidden" name="m_no" value="${sMNo}">
-                           		<input type="hidden" name="mgt_no" value="${param.mgt_no}" />
-	                               
+								<form action="admin_coinfo_list" id="backForm" method="post">
+									<input type="hidden" name="mgt_no" value="${param.mgt_no}" />
+								</form>
+								
+	                           	<form action="#" id="updateForm" method="post">
+	                            	<input type="hidden" name="m_no" value="${sMNo}">
+	                           		<input type="hidden" name="mgt_no" value="${param.mgt_no}" />
+		                               
+		                                
+	                                <div class="QnaTitle" id="">
+	                                    <div>
+	                                        <span>지역</span>
+	                                        <div class="border1">${data.AREA_NM}</div> 
+	                                    </div>
+	                                    <div>
+	                                        <span>단계</span><input type="text" class="border" id="step_no" name="step_no" value="${data.STEP_NO}">
+	                                    </div>
+	                                </div>
 	                                
-                                <div class="QnaTitle" id="">
-                                    <div>
-                                        <span>지역</span>
-                                        <div class="border1">${data.AREA_NM}</div> 
-                                    </div>
-                                    <div>
-                                        <span>단계</span><input type="text" class="border" id="step_no" name="step_no" value="${data.STEP_NO}">
-                                    </div>
-                                </div>
-                                <div class="qnaMain">
-                                    <div>
-                                        <p>내용</p><textarea class="QCI" type="text" id="con" name="con">${data.CON}</textarea>
-                                    </div>
-                                </div>
-                              </form> 
-                                        
-                              <div class="qnaBtn">
+	                                <div class="qnaMain">
+	                                    <div>
+	                                        <p>내용</p><textarea class="QCI" type="text" id="con" name="con">${data.CON}</textarea>
+	                                    </div>
+	                                </div>
+	                                
+	                              </form> 
+	                                        
+	                              <div class="qnaBtn">
                              		<input type="button" id="updateBtnStep" class="updateBtnStep" value="수정" />
                              		<input type="button" id="cancelBtnStep" class="cancelBtnStep" value="취소" />
                                  </div>
+                                 
                              </div>
                          </div>
                      </div>
