@@ -11,7 +11,7 @@
 
 <!--Q&A list -->
 		<select id="getadminQnaList" parameterType="hashmap" resultType="hashmap">
-			SELECT I.QNA_NO,I.M_NM,I.TITLE,I.IMG_ADR,I.Q_DT, I.DEL, I.ANS_CON
+			SELECT I.QNA_NO,I.M_NM,I.TITLE,I.IMG_ADR, TO_CHAR(I.Q_DT,'YYYY-MM-DD')AS Q_DT, I.DEL, I.ANS_CON
         	FROM (SELECT Q.QNA_NO,M.M_NM,Q.TITLE, M.IMG_ADR, Q.Q_DT, Q.DEL, Q.ANS_CON
 	            ,ROW_NUMBER() OVER(ORDER BY Q.Q_DT DESC) AS RNUM
 	            FROM M M

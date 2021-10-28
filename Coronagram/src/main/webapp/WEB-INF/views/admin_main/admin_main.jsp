@@ -124,7 +124,7 @@ $("#tbody").html(html);
 					<section class="page-header">
 						<h1 class="page-title">회원관리</h1>
 						<div class="button-group">
-							<button type="button" class="btn btn-primary">+</button>
+							<a href="adminUser"><button type="button" class="btn btn-primary">+</button></a>
 						</div>
 					</section>
 					<section class="page-body">
