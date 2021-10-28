@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"> <!-- font-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> <!-- jquery-->
-    <link rel="stylesheet" href="resources/css/p_coronagram/common.css?after">
     <link rel="stylesheet" href="resources/css/p_coronagram/style.css">
     <link rel="stylesheet" href="resources/css/p_coronagram/coronagram.css">
 	    <script>
 		    $(document).ready(function(){
 		    	reloadList();
+		    	
 		    });
 	    	$(window).load(function(){
 	    		
@@ -30,7 +30,7 @@
 		            var buttonArray = [];
 		            var currentIndex = 0;
 	
-		            var $nav = $('.slide-nav').find('div');
+		            var $nav = $(this).children('.slide-nav').find('div');
 		        
 		             $nav.on('click', function (event) {
 		                event.preventDefault();
@@ -106,9 +106,36 @@
 						addPostCmt();
 						followList(res.listFo);
 						notFollowList(res.notFo);
-						followAdd();						
+						followAdd();			
+						followDel();
 						modalMover();
 						modalMover2();
+						slide();
+						
+					},
+					error : function(request,status,error){
+						console.log(error);
+					}
+				});
+			}
+			function reloadPart1(){
+				var params=$("#postForm").serialize();	
+				$.ajax({ 
+					url:"crngPost",
+					type:"post",
+					dataType:"json",
+					data: params,
+					success : function(res){
+						crngPost(res.post, res.postCmt);			
+						timeForToday();
+						heart(res.post);
+						heartAD();
+						addPostCmt();
+						followList(res.listFo);
+						modalMover();
+						modalMover2();
+						slide();
+						LkModal();
 					},
 					error : function(request,status,error){
 						console.log(error);
@@ -180,11 +207,11 @@
 			     html+="      <div class=\"bottom_icons\">                                                                               								";    
 			     html+="          <div class=\"left_icons\">                                                                             								";    
 			     html+="              <div class=\"heart_btn\">                                                                          								";	     
-			     html+="                  <div class=\"sprite_heart_icon_outline\" name=\"39\" data-name=\"heartbeat\">                  								"; 	     
+			     html+="                  <div class=\"sprite_heart_icon_outline\">                  																	"; 	     
 			     html+="                                     <input type=\"checkbox\" class=\"checkbox\" id=\"checkbox"+k+"\" >          								";
 			     html+="                                     <label for=\"checkbox"+k+"\" class=\"hLabel\">                              								";
 			     k++; 
-			     html+="                                       <svg id=\"heart-svg\" viewBox=\"467 392 58 57\" xmlns=\"http://www.w3.org/2000/svg\">					";
+			     html+="                                       <svg class=\"heart-svg\" viewBox=\"467 392 58 57\" xmlns=\"http://www.w3.org/2000/svg\">					";
 			     html+="                                         <g id=\"Group\" fill=\"none\" fill-rule=\"evenodd\" transform=\"translate(467 392)\">					";
 			     html+="                                           <path d=\"M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z\" class=\"heart\" stroke=\"#000000\" stroke-width=\"3\"></path>";
 			     html+="                                           <circle class=\"main-circ\" fill=\"#E2264D\" opacity=\"0\" cx=\"29.5\" cy=\"29.5\"r=\"1.5\"></circle>";
@@ -193,29 +220,29 @@
 			     html+="                                             <circle class=\"oval2\" fill=\"#8CE8C3\" cx=\"5\" cy=\"2\" r=\"2\"></circle>                       ";
 			     html+="                                           </g>                                                                                                 ";
 			     html+="                                                                                                                                                ";
-			     html+="                                           <g id=\"grp6\" opacity=\"0\" transform=\"translate(0 28)\">                                          ";
+			     html+="                                           <g class=\"grp6\" opacity=\"0\" transform=\"translate(0 28)\">                                       ";
 			     html+="                                             <circle class=\"oval1\" fill=\"#CC8EF5\" cx=\"2\" cy=\"7\" r=\"2\"></circle>                       ";
 			     html+="                                             <circle class=\"oval2\" fill=\"#91D2FA\" cx=\"3\" cy=\"2\" r=\"2\"></circle>                       ";
 			     html+="                                           </g>                                                                                                 ";
 			     html+="                                                                                                                                                ";
-			     html+="                                           <g id=\"grp3\" opacity=\"0\" transform=\"translate(52 28)\">                                         ";
+			     html+="                                           <g class=\"grp3\" opacity=\"0\" transform=\"translate(52 28)\">                                      ";
 			     html+="                                             <circle class=\"oval2\" fill=\"#9CD8C3\" cx=\"2\" cy=\"7\" r=\"2\"></circle>                       ";
 			     html+="                                             <circle class=\"oval1\" fill=\"#8CE8C3\" cx=\"4\" cy=\"2\" r=\"2\"></circle>                       ";
 			     html+="                                           </g>                                                                                                 ";
 			     html+="                                                                                                                                                ";
-			     html+="                                           <g id=\"grp2\" opacity=\"0\" transform=\"translate(44 6)\">                                          ";
+			     html+="                                           <g class=\"grp2\" opacity=\"0\" transform=\"translate(44 6)\">                                       ";
 			     html+="                                             <circle class=\"oval2\" fill=\"#CC8EF5\" cx=\"5\" cy=\"6\" r=\"2\"></circle>                       ";
 			     html+="                                             <circle class=\"oval1\" fill=\"#CC8EF5\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                       ";
 			     html+="                                           </g>                                                                                                 ";
-			     html+="                                           <g id=\"grp5\" opacity=\"0\" transform=\"translate(14 50)\">                                         ";
+			     html+="                                           <g class=\"grp5\" opacity=\"0\" transform=\"translate(14 50)\">                                      ";
 			     html+="                                             <circle class=\"oval1\" fill=\"#91D2FA\" cx=\"6\" cy=\"5\" r=\"2\"></circle>                       ";
 			     html+="                                             <circle class=\"oval2\" fill=\"#91D2FA\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                       ";
 			     html+="                                           </g>                                                                                                 ";
-			     html+="                                           <g id=\"grp4\" opacity=\"0\" transform=\"translate(35 50)\">                                         ";
+			     html+="                                           <g class=\"grp4\" opacity=\"0\" transform=\"translate(35 50)\">                                      ";
 			     html+="                                             <circle class=\"oval1\" fill=\"#F48EA7\" cx=\"6\" cy=\"5\" r=\"2\"></circle>                       ";
 			     html+="                                             <circle class=\"oval2\" fill=\"#F48EA7\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                       ";
 			     html+="                                           </g>                                                                                                 ";
-			     html+="                                           <g id=\"grp1\" opacity=\"0\" transform=\"translate(24)\">                                            ";
+			     html+="                                           <g class=\"grp1\" opacity=\"0\" transform=\"translate(24)\">                                         ";
 			     html+="                                             <circle class=\"oval1\" fill=\"#9FC7FA\" cx=\"2.5\" cy=\"3\" r=\"2\"></circle>                     ";
 			     html+="                                             <circle class=\"oval2\" fill=\"#9FC7FA\" cx=\"7.5\" cy=\"2\" r=\"2\"></circle>                     ";
 			     html+="                                           </g>                                                                                                 ";
@@ -236,7 +263,8 @@
 			     html+="          </div>                                                                                                    							";
 			     html+="      </div>                                                                                                        							";
 			     html+="      <div class=\"likes head_text\">                                                                                    						";
-			     html+="			좋아요<span id=\"like-count-39\">"+data.LC+"</span>개																				    ";	
+			     html+="			좋아요<span id=\"like-count-39\">"+data.LC+"</span>개																				    ";
+			     
 			     html+="      </div>                                                                                                        							";
 			     html+="      <div class=\"comment_container\">                                                                               							";
 			     html+="      <div class=\"comment_cnt\"> 																												";
@@ -279,7 +307,7 @@
 				
 				$("#contents_box").html(html);
 				
-				slide();
+				
 			}
 		    function modalMover(){
 		    	$(".cmt_list1").mouseover(function(){	    		
@@ -345,6 +373,11 @@
 					     html+="           	  	</div>      																													";
 				     
 				     	$(".modal_info_area2").html(html);
+		    }
+		    function LkModal(){
+		    	$(".likes").on("click",function(){
+		    		$('.lk_modal').css("display","block");
+		    	});
 		    }
 		    function modalInfoImg(list){
 		    	var html = "";
@@ -453,7 +486,14 @@
 						html+=" 			<img src=\""+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 		   			";
 						html+="			</div>																															";
 						html+="       	<div class=\"id\">																												";
-						html+="				<a href=\"coronagram/"+data.NICK_NM+"\" class=\"fo_id\">"+data.NICK_NM+"</a>												";
+						if(data.NICK_NM.length<9){
+							html+="				<a href=\"coronagram/"+data.NICK_NM+"\" class=\"fo_id\">"+data.NICK_NM+"</a>											";
+						}
+						else{
+							var str = data.NICK_NM;
+							html+="				<a href=\"coronagram/"+data.NICK_NM+"\" class=\"fo_id\">"+str.substr(0,8)+"...</a>									";
+						}
+						
 						html+="			</div>																															";
 						html+="   	</div>																																";
 						html+="</div>																																	";
@@ -481,8 +521,60 @@
 				 }
 				 $(".rec_area").html(html);
 		    }
-		    
-		    	
+		    function followAdd(){
+		    	$(".fospan").on("click",function(){
+		    		$("#m_no2").val($(this).parent().parent().attr("nfo"));
+		    		var params = $("#AddDelFoForm").serialize();
+		    		$.ajax({
+		    			url : "FollowAdd",
+		    			type : "post",
+		    			dataType : "json",
+		    			data : params,
+		    			context: this,
+		    			success : function(res){
+		    				if(res.result=="success"){
+		    					var html ="";
+		    					html+="<span class=\"follow_submit fispan\">팔로잉</span>";
+		    					$(this).parent('.rec_follow').html(html);
+		    					reloadPart1();									
+								followDel();
+		    				}else{
+		    					alert("add실패");
+		    				}
+		    			},
+		    			error : function(request, status, error){
+		    				console.log(error);
+		    			}
+		    		});
+		    	});
+		    }
+		    function followDel(){
+		    	$(".fispan").on("click",function(){
+		    		$("#m_no2").val($(this).parent().parent().attr("nfo"));
+		    		var params = $("#AddDelFoForm").serialize();
+		    		$.ajax({
+		    			url : "followDel",
+		    			type : "post",
+		    			dataType : "json",
+		    			data : params,
+		    			context: this,
+		    			success : function(res){
+		    				if(res.result=="success"){
+		    					var html ="";
+		    					html+="<span class=\"follow_submit fospan\">팔로우</span>";
+		    					$(this).parent('.rec_follow').html(html);
+		    					reloadPart1();
+		    					followAdd();	
+		    				}else{
+		    					alert("add실패");
+		    				}
+		    			},
+		    			error : function(request, status, error){
+		    				console.log(error);
+		    			}
+		    		});
+		    	});
+		    }	
 		    function addPostCmt(){
 		    	$(".upload_btn").on("click",function(){
 		    		if($(this).prev().val()==""){
@@ -568,31 +660,34 @@
 		    		}	    		    		
 				});	    		    		
 		    }
-		    function followAdd(){
-		    	$(".fospan").on("click",function(){
-		    		if(confirm("팔로우 하시겠습니까?")){
-			    		$("#m_no2").val($(this).parent().parent().attr("nfo"));
-			    		var params = $("#AddFoForm").serialize();
-			    		$.ajax({
-			    			url : "FollowAdd",
-			    			type : "post",
-			    			dataType : "json",
-			    			data : params,
-			    			success : function(res){
-			    				if(res.result=="success"){
-			    					reloadList();
-			    					alert("팔로워가 되었습니다.");
-			    				}else{
-			    					alert("add실패");
-			    				}
-			    			},
-			    			error : function(request, status, error){
-			    				console.log(error);
-			    			}
-			    		});
-		    		}
+		    function LkList(){
+		    	$(".likes head_text").on("click",function(){
+		    		$(this).parent().parent().attr("wtno");
+		    		var params = $("#AddDelFoForm").serialize();
+		    		$.ajax({
+		    			url : "LkList",
+		    			type : "post",
+		    			dataType : "json",
+		    			data : params,
+		    			success : function(res){
+		    				LkUsers(res.lkUser);
+		    			},
+		    			error : function(request, status, error){
+		    				console.log(error);
+		    			}
+		    		});
 		    	});
 		    }
+		    function LkUsers(list){
+		    	html="";
+		    	for(data of list){
+		    		html+="<div class=\"lk_modal_content\">";
+		    		html+="</div>";
+		    	}
+		    	$(".lk_modal").html(html);
+		    }
+		    
+		    
 		    function timeForToday(value) {
 		        const today = new Date();
 		        const timeValue = new Date(value);
@@ -694,7 +789,9 @@
         </div>
     </header>
     <main>
+    	
 	    <section id="container">
+		   																															
 	    	<section class="head_container">
 					<div class="hidden_menu">
 							<div class="follow_prev" onclick="ScrollPrev()"></div>
@@ -702,7 +799,10 @@
 			            <div class="scroll_inner"></div>
 			        </div>    
 	        </section>
-	        <section id="main_container">     
+	        <section id="main_container"> 
+	        	 <div class="lk_modal">																											
+			  		<div class="lk_modal_body"></div>																								
+ 				</div>	    	
 	            <div class="inner">
 	                <div id="contents_box" class="contents_box">               
 	                </div>	                
@@ -723,7 +823,7 @@
 		  <form action="#" id="postForm" method="post">
           	  <input type="hidden" name="m_no" value="${sMNo}"/> 
 	      </form>
-	      <form action="#" id="AddFoForm" method="post">
+	      <form action="#" id="AddDelFoForm" method="post">
           	  <input type="hidden" name="m_no" value="${sMNo}"/>
           	  <input type="hidden" name="m_no2" id="m_no2"/> 
 	      </form>
@@ -738,6 +838,9 @@
 	   	  </form>
 	   	  <form action="#" id="modalInfoForm" method="post">
           	  <input type="hidden" name="m_no3" id="m_no3"/> 
+	   	  </form>
+	   	  <form action="#" id="LkForm" method="post">
+          	  <input type="hidden" name="writingNo2" id="writingNo3"/> 
 	   	  </form>
 	</main>
     <script src="resources/script/menu_bar/menu_bar.js"></script>

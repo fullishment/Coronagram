@@ -77,4 +77,28 @@ public class DaoCoronagram implements IDaoCoronagram{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("crng.getMimg",params);
 	}
+	
+	@Override
+	public int followDel(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("crng.followDel",params);
+	}
+
+	@Override
+	public HashMap<String, String> getLastAcctNum(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("crng.getLastAcctNum",params);
+	}
+
+	@Override
+	public int postAdd(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("crng.postAdd",params);
+	}
+
+	@Override
+	public int postAcctAdd(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("crng.postAcctAdd",params);
+	}
 }

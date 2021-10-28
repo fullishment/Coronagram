@@ -123,6 +123,25 @@ public class coronagram {
 		
 		return mapper.writeValueAsString(modelMap);
 	}
+	@RequestMapping(value="/followDel",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String followDel (@RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		String result ="success";
+		try {
+			int followD = iServiceCoronagram.followDel(params);
+			if(followD==0) {
+				result="failed";
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			result ="error";
+		}		
+		modelMap.put("result", result);
+		
+		return mapper.writeValueAsString(modelMap);
+	}
 	@RequestMapping(value="/mInfo" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
 	@ResponseBody
 	public String ModalInfo(ModelAndView mav,@RequestParam HashMap<String,String> params) throws Throwable {
@@ -138,5 +157,44 @@ public class coronagram {
 		
 		
 		return mapper.writeValueAsString(modelMap);	
+	}
+	@RequestMapping(value ="/coronagram/crngAdd")
+	public ModelAndView crng_add(@RequestParam HashMap<String,String> params, ModelAndView mav)throws Throwable {
+		HashMap<String,String> lastAcct = iServiceCoronagram.getLastAcctNum(params);
+
+		mav.addObject("lastAcct", lastAcct);	
+		
+		mav.setViewName("coronagram_add/coronagram_add");
+		
+		return mav;
+	}
+	@RequestMapping(value="/coronagram/crngAdds")
+	@ResponseBody
+	public String crngAdds(ModelAndView mav, @RequestParam HashMap<String,String> params)throws Throwable{
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		String result="success";
+		int postAdd = iServiceCoronagram.postAdd(params);
+		if(postAdd ==0) {
+			result="failed";
+		}
+		
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+		
+	}
+	@RequestMapping(value="/coronagram/postAcctAdd" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String postAcctAdd(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		String result="success";
+		int postAcctAdd = iServiceCoronagram.postAcctAdd(params);
+		if(postAcctAdd ==0) {
+			result="failed";
+		}
+		
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
 	}
 }

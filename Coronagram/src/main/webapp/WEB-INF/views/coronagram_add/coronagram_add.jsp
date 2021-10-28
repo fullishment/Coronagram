@@ -12,7 +12,197 @@
     <link rel="stylesheet" href="../resources/css/coronagram_add/coronagram_add.css?after">
     <link rel="stylesheet" href="../resources/css/menu_bar/menu_bar.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script type="text/javascript" src="../resources/script/jquery/jquery.form.js"></script>
+    <script>
+    var cnt=0;
+    $(document).ready(function(){
+    		$(".upload_area").on("dragenter", function(e){
+    			  e.stopPropagation();
+    	          e.preventDefault();
+    		});
+    		$(".upload_area").on("dragleave", function(e){
+  			  e.stopPropagation();
+  	          e.preventDefault();
+  			});
+    		$(".upload_area").on("dragover", function(e){
+    			  e.stopPropagation();
+    	          e.preventDefault();
+    		});
+    		$(".upload_area").on("drop", function(e){
+    				e.preventDefault();
+    				var files = e.originalEvent.dataTransfer.files;	
+    				var file = files[0]; 
+    				
+    				var formData = new FormData();    
+    				formData.append("file", file);
+
+    				$.ajax({
+    					url : "fileUploadAjax2",
+    					type : "post",
+    					dataType : "text",
+    					processData:false,	
+    					contentType:false,	
+    					data : formData,
+    					success : function(res){
+    						if(res.result == "SUCCESS"){
+            					//업로드 파일명 적용
+            					if(res.fileName.length > 0){
+            						$("#CrngImgFile").val(res.fileName[0]);
+            						var html="";
+            						html+="<li class=\"preview\">																						  	 ";
+            						html+="		<img src=\"../resources/upload/"+$("#CrngImgFile").val()+"\" class=\"CrngPrevImg\" alt=\"thumbnail\" id=\"preview\" >";
+            						html+=" 	<i class=\"fas fa-times-circle close_prev\"></i>															 ";
+            						html+="</li>																											 ";
+            						$("#preview_area").append(html);
+            						imgMouseOver();
+            					}
+            				}else{
+            					alert("파일 업로드에 실패했습니다.");
+            				}
+    					},
+    					error : function(request, status, error){
+    						console.log(error);
+    					}
+    				});
+  			});
+      		
+    		
+    		$("#cancel_btn").click(function(){
+	    		if(confirm("작성내용을 취소하시겠습니까?")){
+	    			history.back();
+	    		}
+    		});
+    		$("#add_btn").click(function(){
+    			var CrngArray = new Array();
+        		var Crngimg = $("img[class=\"CrngPrevImg\"]"); 
+        		if(checkVal("#post_cont")){
+        			alert("내용이 입력되지않았습니다");
+        			$("#post_cont").focus();
+        		}else if(Crngimg.length==0){
+        			alert("사진이 첨부 되지 않았습니다");
+        		}
+        		else{     	        		
+	        		for(var i=0;i<Crngimg.length;i++){
+	        			CrngArray.push(Crngimg[i].src.substring(Crngimg[i].src.lastIndexOf("/")+1));
+	        		}
+	
+	        		
+	        		var params = $("#postForm").serialize();
+	        		console.log(params);
+	        		$.ajax({
+	    				url : "crngAdds",
+	        			type : "post",
+	        			dataType : "json",
+	        			data : params, 
+	        			success : function(res){
+	        				for(var i =0;i<Crngimg.length ;i++){
+	        					CrngAttcAjax(CrngArray,i);
+	        					if(i==cnt){
+	        						location.href="../coronagram/${sMNick}";
+	        					}
+	        				}
+	        			},
+	        			error : function(request, status, error){
+	        				console.log(error);
+	        			}
+	    			});
+        		}
+        	});
+    		function imgMouseOver(){
+    			$("li").on("click","i",function(){
+            		if($(this).is("#preview_area") ==false){
+            			$("#aNo").val($(this).attr("no"));
+            			if(confirm("선택한 이미지를 삭제하시겠습니까?")){
+        	    			$(this).parent().remove();
+            			}
+            		}else {
+            			if($("li img").length >5){
+            				alert("이미지 등록 최대갯수를 초과하셨습니다.");
+            			}else {
+        	    			$("#att").click();   				
+            			}
+            		}
+            	});
+    			$("li").on("mouseover","img",function(){
+            		if($(this).is("#preview_area") ==false){
+            			var html = "<img src="+$(this).attr("src")+" class=\"prev_area_img\" alt=\"preview\">";
+            			$(".upload_area").html(html);
+            		}
+            	});
+    			$("li").on("mouseleave","img",function(){
+            		if($(this).is("#preview_area") ==false){
+            			var html = "";
+		            		html+="<div class=\"plus_icon\">";
+		            		html+="		<span></span>";
+		            		html+="		<span></span>";
+		            		html+="</div>";
+		            		html+="<div class=\"upload_text\">";
+		            		html+=" 	사진 및 동영상 파일을 끌어다 놓으세요";
+		            		html+="</div>";
+		            		
+            			$(".upload_area").html(html);
+            		}
+            	});
+    		}    		
+    		$(".upload_area").on("click",function(){
+    			$("#att").click();   
+    		});
+        	
+        	$("#fileForm").on("change","input[type='file']",function(){
+        		var fileForm = $("#fileForm");
+        		fileForm.ajaxForm({
+        			success : function(res){
+        				if(res.result == "SUCCESS"){
+        					//업로드 파일명 적용
+        					if(res.fileName.length > 0){
+        						$("#CrngImgFile").val(res.fileName[0]);
+        						var html="";
+        						html+="<li class=\"preview\">																						  	 ";
+        						html+="		<img src=\"../resources/upload/"+$("#CrngImgFile").val()+"\" class=\"CrngPrevImg\" alt=\"thumbnail\" id=\"preview\" >";
+        						html+=" 	<i class=\"fas fa-times-circle close_prev\"></i>															 ";
+        						html+="</li>																											 ";
+        						$("#preview_area").append(html);
+        						imgMouseOver();
+        					}
+        				}else{
+        					alert("파일 업로드에 실패했습니다.");
+        				}
+        			},
+        			error : function(req, status, error){
+        				console.log(error);
+        				alert("파일 업로드중 문제가 발생했습니다.")
+        			}
+        		});
+        		fileForm.submit();
+        	});
+        	
+    });
+    function CrngAttcAjax(CrngArray,i){
+    	$("#CrngImgFile").val(CrngArray[i]);
+    	var params = $("#postForm").serialize();
+		$.ajax({
+			url : "postAcctAdd",
+			type : "post",
+			dataType : "json",
+			data : params,
+			success : function(res){
+				cnt++;
+			},
+			error : function(request, status, error){
+				console.log(error);
+			}
+		});
+    }
+    function checkVal(sel){
+    	if($.trim($(sel).val())==""){
+    		return true;
+    	}else{
+    		return false;
+    	}
+    };
+    </script>
 </head>
 <body>
     <header>
@@ -26,7 +216,7 @@
                 <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
                 <ul class="cm_dropdown-content">
                     <li>
-                        <a href="#" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
+                        <a href="../logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
                     </li>
                     <li>
                         <a href="#" class="cm_userinfo">개인정보수정</a>
@@ -72,62 +262,54 @@
         </div>
     </header>
         <section class="upload_sec">
-            <div class ="upload_content">
-                <div class="upload_area">
-                    <div class="plus_icon">
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <div class="upload_text">
-                        사진 및 동영상 파일을 끌어다 놓으세요
-                    </div>
-                </div>
-            </div>
-            <div class="input_sec">
-                <div class="input_cont">
-                    <div class="page_title">
-                        <div class="page_cat cat_nm">
-                            <i class="fas fa-user-alt"></i>
-                            <span>게시판</span>
-                        </div>
-                        <div class="page_nm">
-                            <span>게시물 추가하기</span>
-                        </div>
-                    </div>
-                    <div class="input_area">
-                        <div class="title_area">
-                            <p class="title_nm add_text">제목</p>
-                            <input type="text" id="post_title" class="post_title">
-                        </div>
-                        <div class="cont_area">
-                            <p class="add_text">내용</p>
-                            <textarea class="post_cont"></textarea>
-                        </div>
-                        
-                        <div class="preview_sec">
-                            <p class="add_text">미리보기</p>
-                            <div class="preview_area">
-                                <div class="preview">
-                                    <i class="fas fa-times-circle close_prev"></i>
-                                </div>
-                                <div class="preview">
-                                    <i class="fas fa-times-circle close_prev"></i>
-                                </div>
-                                <div class="preview">
-                                    <i class="fas fa-times-circle close_prev"></i>
-                                </div>
-                                <div class="preview">
-                                    <i class="fas fa-times-circle close_prev"></i>
-                                </div>
-                            </div>                        
-                        </div>
-                        <div class="btn_area">
-                            <button href="#" type="button" class="add_btn">작성</button>
-                            <button href="#" type="button" class="cancel_btn">취소</button>
-                        </div>                      
-                    </div> 
-                </div>
-            </div>
+        	<form action="#" class="post_form" id="postForm">
+	            <div class ="upload_content">
+	                <div class="upload_area">
+	                    <div class="plus_icon">
+	                        <span></span>
+	                        <span></span>
+	                    </div>
+	                    <div class="upload_text">
+	                        사진 및 동영상 파일을 끌어다 놓으세요
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="input_sec">
+	                <div class="input_cont">
+	                    <div class="page_title">
+	                        <div class="page_cat cat_nm">
+	                            <i class="fas fa-user-alt"></i>
+	                            <span>게시판</span>
+	                        </div>
+	                        <div class="page_nm">
+	                            <span>게시물 추가하기</span>
+	                        </div>
+	                    </div>
+	                    <div class="input_area">
+	                        <div class="cont_area">
+	                            <p class="add_text">내용</p>
+	                            <textarea id="post_cont" class="post_cont" cols="50" rows="5" name="con"></textarea>
+	                        </div>
+	                        
+	                        <div class="preview_sec">
+	                            <p class="add_text">미리보기</p>
+	                            <ul id="preview_area" class="preview_area">                        
+	                            </ul>                        
+	                        </div>
+	                        <div class="btn_area">
+	                            <button type="button" id="add_btn" class="add_btn">작성</button>
+	                            <button type="button" id="cancel_btn" class="cancel_btn">취소</button>
+	                        </div>                      
+	                    </div> 
+	                </div>
+	            </div>
+	            <input type="hidden" id="last_no" name="last_no" value="${lastAcct.LAST_NUMBER}"/>
+	            <input type="hidden" id="m_no" name="m_no" value="${sMNo}" />
+	            <input type="hidden" name="CrngImgFile" id="CrngImgFile" value=""/>	            
+            </form>
+            <form action="fileUploadAjax2" method="post" enctype="multipart/form-data" id="fileForm">
+				<input type="file" name="att" id="att">
+			</form>	
         </section>
     <script src="../resources/script/menu_bar/menu_bar.js"></script>
 </body>

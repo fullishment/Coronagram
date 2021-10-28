@@ -24,4 +24,12 @@ public interface IServiceCoronagram {
 	public HashMap<String, String> ModalInfo(HashMap<String, String> params)throws Throwable;
 
 	public List<HashMap<String, String>> getMimg(HashMap<String, String> params)throws Throwable;
+	
+	public int followDel(HashMap<String, String> params)throws Throwable;
+
+	public HashMap<String, String> getLastAcctNum(HashMap<String, String> params)throws Throwable;
+
+	public int postAdd(HashMap<String, String> params)throws Throwable;
+
+	public int postAcctAdd(HashMap<String, String> params)throws Throwable;
 }

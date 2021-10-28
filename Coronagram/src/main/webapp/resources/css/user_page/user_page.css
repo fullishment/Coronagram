@@ -194,8 +194,8 @@ svg {
    }    	
    .nav_menu{
     	height: 120px;
-		padding-left: 500px;
-		padding-right: 500px;
+		padding-left: 15%;
+		padding-right: 15%;
    }
    .nav_list{
    		display: flex;

@@ -624,7 +624,7 @@
 	            var buttonArray = [];
 	            var currentIndex = 0;
 
-	            var $nav = $('.slide-nav').find('div');
+	            var $nav = $(this).children('.slide-nav').find('div');
 	        
 	             $nav.on('click', function (event) {
 	                event.preventDefault();

@@ -66,6 +66,7 @@
             INNER JOIN FOLLOW F
                 ON M.M_NO = F.RP_USER
                 AND RQ_USER = #{m_no}
+            ORDER BY F.FOLLOW_DT DESC
 	</select>
 	<select id="getNotFollow" parameterType="hashmap" resultType="hashmap">
 		SELECT M.M_NO,M.NICK_NM, M.IMG_ADR,RANK() OVER(ORDER BY M_NO DESC) FROM 
@@ -118,4 +119,27 @@
 			WHERE RNUM<=3
 			]]>
 	</select>
+	<delete id="followDel" parameterType="hashmap">
+		DELETE FROM FOLLOW WHERE RQ_USER = #{m_no} AND RP_USER = #{m_no2}
+	</delete>
+	<select id="getLkList" parameterType="hashmap" resultType="hashmap">
+		SELECT M.M_NO, M.NICK_NM, M.IMG_ADR 
+                FROM M M
+                INNER JOIN LK L
+                    ON M.M_NO = L.USER_NO
+       			WHERE WRITING_NO = #{writing_no2}
+	</select>
+	<select id="getLastAcctNum" parameterType="hashmap" resultType="hashmap">
+		SELECT LAST_NUMBER 
+      			FROM USER_SEQUENCES 
+      			WHERE SEQUENCE_NAME = 'WRITING_SEQ'
+	</select>
+	<insert id="postAdd" parameterType="hashmap">
+		INSERT INTO CRNG(WRITER_NO,CON) 
+				VALUES (#{m_no},#{con})
+	</insert>
+	<insert id="postAcctAdd" parameterType="hashmap">
+		INSERT INTO CRNG_ATTC(ATTC_NO,WRITING_NO,FILE_ADR)
+				VALUES(ACCT_SEQ.NEXTVAL,#{last_no},#{CrngImgFile})
+	</insert>
 </mapper>

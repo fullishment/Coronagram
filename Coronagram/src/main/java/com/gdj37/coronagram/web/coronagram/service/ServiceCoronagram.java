@@ -73,4 +73,28 @@ public class ServiceCoronagram implements IServiceCoronagram{
 		return iDaoCoronagrma.getMimg(params);
 	}
 
+	@Override
+	public int followDel(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.followDel(params);
+	}
+
+	@Override
+	public HashMap<String, String> getLastAcctNum(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.getLastAcctNum(params);
+	}
+
+	@Override
+	public int postAdd(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.postAdd(params);
+	}
+
+	@Override
+	public int postAcctAdd(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.postAcctAdd(params);
+	}
+
 }
