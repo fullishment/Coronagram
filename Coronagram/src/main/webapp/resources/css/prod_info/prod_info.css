@@ -4,6 +4,15 @@ body{
     background-color: #ecf0f1;
     font-family: "Noto Sans KR", sans-serif;
 }
+
+select {
+	border:0px;
+	box-shadow: 0 1px 6px 0 rgb(32 33 36/ 28%);
+	border-radius: 5px;
+	height: 25px;
+	padding:5px;
+}
+
 #imageCanvas{
     position: absolute;
     left: 0;
@@ -170,7 +179,7 @@ body{
     border: 0px;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
     border-radius: 5px;
-    height: 30px;
+    height: 25px;
     margin: 5px;
 }
 .temporaryFile {
@@ -181,7 +190,7 @@ body{
     width: 48px;
     height: 48px;
     border-radius: 10px;
-    border: 1px solid #CCCCCC;
+
 }
 
 .upload img{
