@@ -91,6 +91,7 @@ transform:rotate(0);
     margin-top: 10px;
     min-height: 400px;
     min-width: 800px;
+    max-width: 800px;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
     background: white;
     margin-left: -10px;
@@ -165,6 +166,7 @@ textarea {
     border: 0px;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
     margin-top: 10px;
+    margin-bottom: 25px;
 }
 
 .border {
@@ -187,11 +189,11 @@ textarea {
 }
 
 .border1 {
-	margin-left: 23px;
+	margin-left: 30px;
 }
 
 .border2{
-	margin-left: 8px;
+	margin-left: 15px;
 }
 
 

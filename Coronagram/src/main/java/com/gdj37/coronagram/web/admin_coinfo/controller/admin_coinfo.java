@@ -148,7 +148,7 @@ public class admin_coinfo {
 		HashMap<String, String> data = iServiceAdmin_Coinfo.getAdinfo(params);
 	
 		mav.addObject("data", data);
-	
+
 		mav.setViewName("admin_coinfo/admin_coinfo_upd");
 	
 		return mav;
@@ -210,5 +210,80 @@ public class admin_coinfo {
 	
 		return mapper.writeValueAsString(modelMap);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/adminStepListAjax", method = RequestMethod.POST,
+			produces = "text/json;charset=UTF-8")
+	@ResponseBody 
+	public String adminStepListAjax(@RequestParam HashMap<String, String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper(); 
+		
+		Map<String, Object> modelMap = new HashMap<String, Object>(); 
+		
+				
+		List<HashMap<String, String>> list = iServiceAdmin_Coinfo.getSTList(params);
+		
+		modelMap.put("list", list);
+		
+		return mapper.writeValueAsString(modelMap);
+		
+	}
+	
+	
+	
+	@RequestMapping(value = "/admin_step_upd")
+	public ModelAndView admin_step_upd(@RequestParam HashMap<String, String> params, ModelAndView mav)
+			throws Throwable {
+	
+		HashMap<String, String> data = iServiceAdmin_Coinfo.getSTinfo(params);
+	
+		mav.addObject("data", data);
+
+		mav.setViewName("admin_coinfo/admin_step_upd");
+	
+		return mav;
+	}
+	
+	
+	
+   @RequestMapping(value = "/adminStepUpdAjax", method = RequestMethod.POST,
+	         produces = "text/json;charset=UTF-8")
+	   @ResponseBody
+	   public String adminStepUpdAjax(@RequestParam HashMap<String, String> params) throws Throwable {
+	      ObjectMapper mapper = new ObjectMapper();
+
+	      Map<String, Object> modelMap = new HashMap<String, Object>();
+	      
+	      String result = "success";
+	      
+	      try {
+	         int cnt = iServiceAdmin_Coinfo.updateSTinfo(params);
+
+	         if(cnt ==0) {
+					result = "failed";
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+				
+				result = "error";
+			}
+	      modelMap.put("result", result);
+	      
+	      return mapper.writeValueAsString(modelMap);
+	   }
+
 
 }

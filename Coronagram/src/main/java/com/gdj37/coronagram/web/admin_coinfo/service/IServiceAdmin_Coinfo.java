@@ -17,4 +17,9 @@ public interface IServiceAdmin_Coinfo {
 
 	public int deleteAdinfo(HashMap<String, String> params) throws Throwable;
 
+	public List<HashMap<String, String>> getSTList(HashMap<String, String> params) throws Throwable;
+
+	public HashMap<String, String> getSTinfo(HashMap<String, String> params) throws Throwable;
+
+	public int updateSTinfo(HashMap<String, String> params) throws Throwable;
 }

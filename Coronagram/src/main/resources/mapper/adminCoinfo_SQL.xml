@@ -85,4 +85,34 @@
 			UPDATE INFO SET DEL = 0
 			WHERE INFO_NO = #{no}
 	</delete>
+	
+	
+
+
+	
+	
+	
+	<select id="getSTList" parameterType="hashmap" resultType="hashmap"> 
+		SELECT MGT_NO, A.AREA_NO, STEP_NO, CON, TO_CHAR(DT, 'YYYY-MM-DD') AS DT, AREA_NM
+		FROM STEP_MGT S JOIN AREA A
+		                ON (S.AREA_NO = A.AREA_NO)
+		WHERE S.DEL = 1
+	</select>
+	
+	
+	<select id="getSTinfo" parameterType="hashmap" resultType="hashmap">
+		SELECT MGT_NO, A.AREA_NO, STEP_NO, CON, TO_CHAR(DT, 'YYYY-MM-DD') AS DT, AREA_NM
+		FROM STEP_MGT S JOIN AREA A
+		                ON (S.AREA_NO = A.AREA_NO)
+		WHERE S.DEL = 1 AND MGT_NO = #{mgt_no}
+	</select>
+
+	
+	<update id="updateSTinfo" parameterType="hashmap">
+		UPDATE STEP_MGT SET STEP_NO = #{step_no},
+				CON = #{con},
+				DT = SYSDATE
+		WHERE MGT_NO = #{mgt_no}
+	</update>
+	
 </mapper>

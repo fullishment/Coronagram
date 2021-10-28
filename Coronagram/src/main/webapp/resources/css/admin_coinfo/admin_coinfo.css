@@ -91,6 +91,7 @@ transform:rotate(0);
     margin-top: 10px;
     min-height: 400px;
     min-width: 800px;
+    max-width: 800px;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
     background: white;
     margin-left: -10px;
@@ -101,6 +102,13 @@ transform:rotate(0);
 
 
 /* Q&A */
+
+.disp_yn {
+	border: 0px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    padding: 2px;
+}
+
 
 .qnaTitle {
     margin-bottom: 0px;
@@ -117,11 +125,16 @@ transform:rotate(0);
 }
 
 .qnaTitle1 input {
-	margin-left: 22px;
+	margin-left: 30px;
 }
 
 .qnaTitle2 input {
-	margin-left: 8px;
+	margin-left: 15px;
+}
+
+
+.qnaCon {
+	margin-bottom: 15px;
 }
 
 
@@ -235,6 +248,28 @@ textarea {
 .fileBtn:hover {
     opacity: .8;
 }
+
+
+/* 이미지파일선택, 삭제 버튼 */
+
+#fileBtn, #imgDelBtn {
+    color: black;
+    font-weight: 600;
+    text-align: center;
+    transition: 0.5s;
+    cursor: pointer;
+    width: 110px;
+    height: 20px;
+    border: none;
+    border-radius: 10px;
+    background: #cfcfcf;
+    margin-left: 5px;
+}
+#fileBtn:hover, #imgDelBtn:hover {
+    opacity: .8;
+}
+
+
 
 
 /* 반응형 */

@@ -57,7 +57,7 @@ $(document).ready(function(){
 	   });
 	
 	//상세보기
-		$("tbody").on("click","tr",function(){
+		$("#tbody").on("click","tr",function(){
 			  $("#no").val($(this).attr("no"));
 			  
 			  $("#actionForm").attr("action","admin_coinfo_dtl");
@@ -74,9 +74,11 @@ $(document).ready(function(){
 			type:"post", //전송 방식
 			dataType:"json", // 받아올 데이터 형태
 			data:params, // 보낼 데이터(문자열 형태)
+			async:false,
 			success:function(res){ //성공(ajax통신 성공) 시 다음 함수 실행
 				drawList(res.list);
 				drawPaging(res.pb);
+				reloadList2();
 			},
 			error:function(request, status, error){ //실패시 다음 함수 실행
 				console.log(error);
@@ -93,13 +95,13 @@ $(document).ready(function(){
 		html += "<td>"+data.INFO_TITLE+"</td>";
 		html += "<td>"+data.INFO_SUBHD+"</td>";
 		html += "<td>"+data.DT+"</td>";
- 		html += "<td>"+data.DISP_YN+
-/* 		if(data.DISP_YN==Y){
-			html += "<div class=\"disp_o\">" + "노출" + "</div>";
+ 		html += "<td>"/* +data.DISP_YN+ */
+ 		if(data.DISP_YN == "Y"){
+			html += "<div class=\"disp_y\">" + "노출" + "</div>";
 		} else {
-			html += "<div class=\"disp_x\">" + "숨김" + "</div>";
+			html += "<div class=\"disp_n\">" + "숨김" + "</div>";
 		}
-		html +=  */"</td>";
+		html += "</td>";
 		html += "</tr>";
 	}
 	$("#tbody").html(html);
@@ -135,6 +137,57 @@ $(document).ready(function(){
 		
 		$(".paging_wrap").html(html);
 	}
+	
+	
+	
+	
+	
+	// 단계변경 리스트
+	
+	// 단계변경 상세보기
+	$("#st_tbody").on("click","tr",function(){
+		  $("#mgt_no").val($(this).attr("mgt_no"));
+		  
+		  $("#st_actionForm").attr("action","admin_step_upd");
+		  $("#st_actionForm").submit();
+		  
+	  });
+	
+	//데이터 취득
+	function reloadList2(){
+		var params = $("#st_actionForm").serialize();
+		
+		$.ajax({ //jquery의 ajax함수 호출
+			url: "adminStepListAjax", //접속 주소
+			type:"post", //전송 방식
+			dataType:"json", // 받아올 데이터 형태
+			data:params, // 보낼 데이터(문자열 형태)
+			async:false,	
+			success:function(res){ //성공(ajax통신 성공) 시 다음 함수 실행
+				drawList2(res.list);
+			},
+			error:function(request, status, error){ //실패시 다음 함수 실행
+				console.log(error);
+			}
+		});
+	}
+	
+	//목록 그리기
+		function drawList2(list) {
+		var html = "";
+		
+		for(var data of list) {
+			html += "<tr mgt_no=\"" + data.MGT_NO+"\">";
+			html += "<td>"+data.AREA_NM+"</td>";
+			html += "<td>"+data.STEP_NO+"</td>";
+			html += "<td>"+data.CON+"</td>";
+			html += "<td>"+data.DT+"</td>";
+			html += "</tr>";
+		}
+		$("#st_tbody").html(html);
+	
+	}
+
 });
 	
 	</script>
@@ -315,32 +368,24 @@ $(document).ready(function(){
                                 <p>거리두기 정보 단계 관리</p>
                             </label>
                             <div class="group">
-                                <div class="qnaMain">
-                                    <div class="QnaTitle" id="">
-                                        <div>
-                                            <span>지역</span>
-                                            <select  name="dropbox" class="dbox">
-                                                <option value="서울">서울</option>
-                                                <option value="서울">서울</option>
-                                                <option value="서울">서울</option>
-                                                <option value="서울">서울</option>
-                                                <option value="서울">서울</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <span>단계 &nbsp;</span><input class="border" type="text" placeholder="내용을 입력하세요">
-                                        </div>
-                                    </div>
-                                    <div class="qnaMain">
-                                        <div>
-                                            <p>내용</p><textarea class="QCI" class="border" type="text" placeholder="내용을 입력하세요"></textarea>
-                                        </div>
-	                                    <div class="qnaBtn">
-                                    		<input type="button" id="addBtnStep" class="qnaBtn1" value="저장" />
-                                    		<input type="button" id="cancelBtnStep" class="qnaBtn2" value="취소" />
-                                        </div>
-                                    </div>
-                                </div>
+                                <div class="stInput">
+									<form action="#" id="st_actionForm" method="post">
+										<input type="hidden" name="mgt_no" id="mgt_no" />
+									</form>
+								</div>
+								<div class="stList">
+									<table>
+										<thead>
+											<tr>
+												<th>지역</th>
+												<th>단계</th>
+												<th>상세현황</th>
+												<th>수정날짜</th>
+											</tr>
+										</thead>
+										<tbody id="st_tbody"></tbody>
+									</table>
+								</div>
                             </div>
                         </div><!-- sc-form -->
                     </div><!-- sc-html -->

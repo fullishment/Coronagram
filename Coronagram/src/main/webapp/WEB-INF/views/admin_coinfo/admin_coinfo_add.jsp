@@ -25,7 +25,7 @@ $(document).ready(function(){
 		enterMode : "2"
 	});
 
-	$("#cancelBtn").on("click",function(){
+	$("#cancelBtn").on("click", function(){
 		$("#backForm").submit();
 	});
 	
@@ -241,6 +241,11 @@ function checkVal(sel){
                                 <p>코로나 관련 정보 관리</p>
                             </label>
                             <div class="group">
+                            	<form action="admin_coinfo_list" id="backForm" method="post">
+									<input type="hidden" name="searchGbn" value="${param.searchGbn}" />
+									<input type="hidden" name="searchTxt" value="${param.searchTxt}" />
+									<input type="hidden" name="page" value="${param.page}" />
+								</form>
                             <!-- 내용이미지 -->
                             	<form id="imgForm" action="fileUploadAjax" method="post" enctype="multipart/form-data">
 									<input type="file" name="imgAtt" id="imgAtt" accept="image/*" >
@@ -254,24 +259,13 @@ function checkVal(sel){
                             		<input type="hidden" name="m_no" value="${sMNo}">
 	                                <div class="qnaTitle">
 	                                
-	                                	<div>
-			                                <c:if test="${!empty testList}">
-												<select class="user_tier" name="user_tier">
-													<c:forEach var="testList" items="${testList}" varStatus="i">
-														<c:choose>
-															<c:when test="${data.ACCT_TYPE_NO == testList.TYPE_NO }">
-																<option value="${testList.TYPE_NO}" selected>${testList.TYPE_NM}</option>
-															</c:when>
-															<c:otherwise>
-																<option value="${testList.TYPE_NO}">${testList.TYPE_NM}</option>
-															</c:otherwise>
-		
-														</c:choose>
-													</c:forEach>
-												</select>
-											</c:if>
-	                                	</div>
-	                                
+	                                   	<div class="qnaTitle0">
+	                                		<span>노출여부</span>
+											<select class="disp_yn" name="disp_yn">
+														<option value="Y">노출</option>
+														<option value="N">숨김</option>
+											</select>
+	                                	</div>                                
 	                                
 	                                    <div class="qnaTitle1">
 	                                        <span>제목</span><input type="text" class="border" id="info_title" name="info_title" placeholder="내용을 입력하세요">
@@ -306,42 +300,10 @@ function checkVal(sel){
                                 </div>
                             </div>
                         </div>
-                        <div class="scm2-htm">
-                            <label for="user" class="sclabel">
-                                <p>거리두기 정보 단계 관리</p>
-                            </label>
-                            <div class="group">
-                                <div class="qnaMain">
-                                    <div class="QnaTitle" id="">
-                                        <div>
-                                            <span>지역</span>
-                                            <select  name="dropbox" class="dbox">
-                                                <option value="서울">서울</option>
-                                                <option value="서울">서울</option>
-                                                <option value="서울">서울</option>
-                                                <option value="서울">서울</option>
-                                                <option value="서울">서울</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <span>단계 &nbsp;</span><input class="border" type="text" placeholder="내용을 입력하세요">
-                                        </div>
-                                    </div>
-                                    <div class="qnaMain">
-                                        <div>
-                                            <p>내용</p><textarea class="QCI" class="border" type="text" placeholder="내용을 입력하세요"></textarea>
-                                        </div>
-	                                    <div class="qnaBtn">
-                                    		<input type="button" id="addBtnStep" class="qnaBtn1" value="저장" />
-                                    		<input type="button" id="cancelBtnStep" class="qnaBtn2" value="취소" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- sc-form -->
                     </div><!-- sc-html -->
                 </div> <!-- sc-form -->
             </div>
+        </div>
     </main>
 
     <script src="resources/script/menu_bar/menu_bar.js"></script>

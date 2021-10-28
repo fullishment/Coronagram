@@ -42,4 +42,19 @@ public class DaoAdmin_Coinfo implements IDaoAdmin_Coinfo {
 		return sqlSession.update("adminfo.deleteAdinfo", params);
 	}
 
+	@Override
+	public List<HashMap<String, String>> getSTList(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectList("adminfo.getSTList", params);
+	}
+
+	@Override
+	public HashMap<String, String> getSTinfo(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectOne("adminfo.getSTinfo", params);
+	}
+
+	@Override
+	public int updateSTinfo(HashMap<String, String> params) throws Throwable {
+		return sqlSession.update("adminfo.updateSTinfo", params);
+	}
+
 }
