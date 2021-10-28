@@ -74,6 +74,7 @@ p {
 }
 
 .page-title {
+	float : left;
 	font-size: 18pt;
 	line-height: 1.0;
 	font-weight: normal;
@@ -105,7 +106,7 @@ p {
 	background-color: #fd1d1dea;
 	border-color: none;
 	font-size: 13pt;
-	padding: 7px 10px;
+	padding: 5px 8px;
 }
 
 .btn-icon {
@@ -245,13 +246,42 @@ p {
 }  
 
 .newqna {
-	display: inline-block;
-	border: 2px solid #ccc;
-	width:30%;
+	float : right;
+	border-radius:0.2rem;
+	background-color : #ffcdd2;
+	color : #c62828;
+	padding:0.2rem 1rem;
+	width:130px;
+	margin: auto;
 }
 
-.qnaList {
-	display: inline-block;
-   border: 2px solid #ccc;
-   width:60%;
+.qnaList table {
+  border-collapse:collapse;
+  box-shadow: 0 5px 10px #e1e5ee;
+  background-color:white;
+  text-align:left;
+  overflow:hidden;
+  width : 100%;
 }
+.qnaList thead {
+   box-shadow:0 5px 10px #e1e5ee;
+}
+.qnaList th {
+   padding :1rem 2rem;
+   text-transform:uppercase;
+   letter-spacing:0.1rem;
+   font-size:0.7rem;
+   font-weight:900;
+   text-align:center;
+}
+.qnaList td {
+   padding : 1rem 2rem;
+   font-size:0.7rem;
+   text-align:center;
+}
+.qnaList tr:nth-child(even) {
+   background-color: #f4f6fb;
+}
+ .qnaList tr:hover{
+   opacity:.4;
+}  

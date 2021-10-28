@@ -21,14 +21,15 @@ public class admin_main {
 			ModelAndView mav)throws Throwable {
 		//회원관리
 		HashMap<String, String> data = iServiceAdminMain.getadmin_main(params);
+		HashMap<String, String> data1 = iServiceAdminMain.getNewQ(params);
 		//Q&A 
 		List<HashMap<String, String>> list = iServiceAdminMain.getadminQnaList(params);
 		mav.addObject("data", data);
+		mav.addObject("data1", data1);
 		mav.addObject("list", list);
 		mav.setViewName("admin_main/admin_main");
 		
 		return mav;
 	}
-	
 
 }
