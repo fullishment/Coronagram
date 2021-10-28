@@ -3,20 +3,21 @@
 <mapper namespace="adminMain">
 <!--회원관리 list 불러오기 -->
 	<select id="getAdminM" parameterType="hashmap" resultType="hashmap">
-			SELECT COUNT(*) AS TOTALCOUNT
-       			, COUNT(CASE WHEN TO_CHAR(M_DT,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD') THEN 1 END) AS DAYCOUNT 
-       			, COUNT(CASE WHEN ACCT_TYPE_NO=6 THEN 1 END)ADMINCOUNT
-				FROM M
+			SELECT COUNT(*) AS TOTALCOUNT, COUNT(CASE WHEN TO_CHAR(M_DT,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD') THEN 1 END) AS DAYCOUNT ,COUNT(CASE WHEN  M_DT between to_date(add_months(sysdate, -1)) and sysdate THEN 1 END) AS MONTHU
+
+FROM M M1
 	</select>
 
-<!--Q&A list -->
+<!--Q&A -->
+	<!-- list -->
 		<select id="getadminQnaList" parameterType="hashmap" resultType="hashmap">
-			SELECT QNA.QNA_NO, QNA.TITLE, QNA.Q_DT
+			SELECT QNA.QNA_NO, QNA.TITLE, QNA.Q_DT, QNA.ANS_CON
 			FROM (	
-					SELECT QNA_NO, TITLE, TO_CHAR(Q_DT,'yyyy-mm-dd') AS Q_DT,
+					SELECT QNA_NO, TITLE, TO_CHAR(Q_DT,'yyyy-mm-dd') AS Q_DT, ANS_CON,
 					ROW_NUMBER() OVER(ORDER BY QNA_NO DESC) AS RNUM
 					FROM QNA
 					WHERE DEL = 1
 				) QNA
+
 		</select>	
 </mapper>

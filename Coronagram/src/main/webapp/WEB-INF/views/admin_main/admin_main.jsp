@@ -141,14 +141,14 @@ $("#tbody2").html(html);
 										<tr>
 											<th>총 회원수</th>
 											<th>신규 회원수</th>
-											<th>관리자 수</th>
+											<th>한달간 가입자수</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
 											<td>${data.TOTALCOUNT}</td>
 											<td>${data.DAYCOUNT}</td>
-											<td>${data.ADMINCOUNT}</td>
+											<td>${data.MONTHU}</td>
 										</tr>
 									</tbody>
 								</table>
@@ -175,21 +175,32 @@ $("#tbody2").html(html);
 					</section>
 					<section class="page-body">
 						<div class="newqna">몇명?</div>
-						<div class="qnalist">
-							<div class="qnaList2">
-								<table>
-									<thead>
-										<tr>
-											<th><p>번호</p></th>
-											<th><p>제목</p></th>
-											<th><p>등록일</p></th>
-											<th><p>기능</p></th>
-										</tr>
-									</thead>
-									<tbody id="tbody2"></tbody>
-								</table>
-							</div>
+						
+						<div class="qnaList">
+							<table>
+								 <thead>
+									<tr>
+										<th><p>번호</p></th>
+										<th><p>제목</p></th>
+										<th><p>등록일</p></th>
+										<th><p>기능</p></th>
+									</tr>
+								</thead> 
+								<tbody id="tbody2">
+									${list[0].QNA_NO} ,${list[0].TITLE},${list[0].Q_DT}</br>
+									${list[1].QNA_NO} ,${list[1].TITLE},${list[1].Q_DT}</br>
+									${list[2].QNA_NO} ,${list[2].TITLE},${list[2].Q_DT}</br>
+									<%-- <c:forEach var="item" items="${list}" begin=0 end=3 step=1 varStatus="status">
+									    번호 : ${QNA_NO.count}
+									    제목 : ${TITLE.name}
+									    날짜 : ${Q_DT.date}
+									    답변 : ${ANS_CON.addr}
+									</c:forEach> --%>
+
+								</tbody>
+							</table>
 						</div>
+						
 					</section>
 				</article>
 

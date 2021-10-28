@@ -1,224 +1,257 @@
 @charset "UTF-8";
 /* Use this markup as a guide for spacing and font sizes, not necessarily as a guide for how to mark up these headers.  */
+@font-face {
+	font-family: "Proxima Nova";
+	src:
+		url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/370426/ProximaNova-Reg-webfont.ttf)
+		format("ttf");
+}
 
 @font-face {
-    font-family: "Proxima Nova";
-    src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/370426/ProximaNova-Reg-webfont.ttf) format("ttf");
-  }
-  
-  @font-face {
-    font-family: "Proxima Nova-Bold";
-    src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/370426/ProximaNova-Bold-webfont.ttf) format("ttf");
-  }
-  
-  *, *:before, *:after {
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-  }
-  
-  body {
-    font-family: "Proxima Nova", "Helvetica Nueue", Helvetica, Arial, sans-serif;
-    background: #ecf0f1;
-    overflow-x: hidden;
-  }
-  p {
-    font-family: "Noto Sans KR", sans-serif;
-  }
-  .sc {
-    max-width: 2000px;
-    margin: auto;
-    margin-top: 5%;
-    padding: 10px;
+	font-family: "Proxima Nova-Bold";
+	src:
+		url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/370426/ProximaNova-Bold-webfont.ttf)
+		format("ttf");
+}
+
+*, *:before, *:after {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+body {
+	font-family: "Proxima Nova", "Helvetica Nueue", Helvetica, Arial,
+		sans-serif;
+	background: #ecf0f1;
+	overflow-x: hidden;
+}
+
+p {
+	font-family: "Noto Sans KR", sans-serif;
+}
+
+.sc {
+	max-width: 2000px;
+	margin: auto;
+	margin-top: 5%;
+	padding: 10px;
 }
 
 .scHead {
-	padding-left:70px;
-}
-  .scName1 {
-    font-size: 15pt;
-    color: gray;
+	padding-left: 70px;
 }
 
+.scName1 {
+	font-size: 15pt;
+	color: gray;
+}
+
+/* Used for presentation purposes */
+.boxcon {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.version {
+	width: 800px;
+	height: 250px;
+	margin: 30px auto;
+	box-shadow: 0 1px 6px 0 rgb(32 33 36/ 28%);
+	background: white;
+}
+
+.page-header {
+	position: relative;
+	padding: 20px 0px 30px 0px;
+	margin: 0px 20px;
+	border-bottom: 1px solid #ccc;
+	height:20%;
+}
+
+.page-header.page-header--with-nav {
+	padding-bottom: 0px;
+	border-bottom: none;
+}
+
+.page-title {
+	font-size: 18pt;
+	line-height: 1.0;
+	font-weight: normal;
+	margin: 0px;
+}
+
+.button-group {
+	position: absolute;
+	top: 20px;
+	right: 0px;
+}
+
+.btn {
+	-webkit-appearance: none;
+	background-color: #fff;
+	font-family: "Proxima Nova-Bold", "Proxima Nova", "Helvetica Nueue",
+		Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 1.0;
+	text-transform: uppercase;
+	border: 1px solid #ccc;
+	padding: 12px;
+}
+
+.btn-primary {
+	color: white;
+	font-weight: 800;
+	background-color: #fd1d1dea;
+	border-color: none;
+	font-size: 13pt;
+	padding: 7px 10px;
+}
+
+.btn-icon {
+	position: relative;
+	width: 38px;
+	height: 38px;
+}
+
+.btn-icon:before {
+	content: " ";
+	position: asbolute;
+	left: 0px;
+	top: 0px;
+	width: 12px;
+	height: 12px;
+	border-radius: 100%;
+	background-color: blue;
+}
+
+.button-group .btn {
+	margin-right: 0px;
+	vertical-align: top;
+}
+
+.group-segment {
+	position: relative;
+	display: inline-block;
+	height: 32px;
+	width: 1px;
+	margin: 4px 12px;
+	background-color: #ccc;
+}
+
+.indicator-group {
+	position: relative;
+	margin-top: 6px;
+}
+
+.indicator {
+	font-size: 12px;
+	line-height: 1.0;
+	position: relative;
+	padding-left: 20px;
+}
+
+.indicator:before {
+	content: " ";
+	position: absolute;
+	left: 0px;
+	top: 2px;
+	width: 10px;
+	height: 10px;
+	border-radius: 100%;
+	background-color: #00e7b2;
+}
+
+.page-header--with-nav .nav {
+	margin-top: 30px;
+}
+
+.nav-list {
+	padding: 0px;
+	margin: 0px;
+	font-size: 0px;
+	border-bottom: 1px solid #ccc;
+}
+
+.nav-list li {
+	list-style-type: none;
+	display: inline-block;
+	font-size: 14px;
+	margin-right: 20px;
+	padding-bottom: 10px;
+}
+
+.nav-list li.active {
+	border-bottom: 3px solid #00e7b2;
+}
+
+.breadcrumb {
+	background-color: #333;
+	color: #fff;
+	padding: 12px 20px;
+	font-family: "Proxima Nova-Bold", "Proxima Nova", "Helvetica Nueue",
+		Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 12px;
+}
+
+.breadcrumb a {
+	color: #00e7b2;
+	text-decoration: underline;
+}
+
+.page-body {
+	width: 100%;
+	height: 80%;
+}
+
+.adminUser table {
+	border-collapse:collapse;
+  box-shadow: 0 5px 10px #e1e5ee;
+  background-color:white;
+  text-align:left;
+  overflow:hidden;
+  width : 100%;
+}
+.adminUser thead {
+   box-shadow:0 5px 10px #e1e5ee;
+}
+
+/* border: 1 px solid #444444; 
+	border-radius:15px; */
+.adminUser th {
+   padding :1rem 2rem;
+   text-transform:uppercase;
+   letter-spacing:0.1rem;
+   font-size:1.0rem;
+   font-weight:900;
+   text-align:center;
+}
+
+.adminUser  td {
+   padding : 1rem 2rem;
+   font-size:1.0rem;
+   text-align:center;
+}
+
+.adminUser tr:nth-child(even) {
+   background-color: #f4f6fb;
+}
 
 
-  /* Used for presentation purposes */
-  .boxcon{
-  	display:flex;
-  	flex-wrap: wrap;
-  }
-  
-  .version {
-    width: 800px;
-    height: 250px;
-    margin: 30px auto;
-    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-    background: white;
-  }
-  
-  .page-header {
-    position: relative;
-    padding: 20px 0px 30px 0px;
-    margin: 0px 20px;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .page-header.page-header--with-nav {
-    padding-bottom: 0px;
-    border-bottom: none;
-  }
-  
-  .page-title {
-    font-size: 18pt;
-    line-height: 1.0;
-    font-weight: normal;
-    margin: 0px; 
-  }
-  
-  .button-group {
-    position: absolute;
-    top: 20px;
-    right: 0px;
-  }
-  
-  .btn {
-    -webkit-appearance: none;
-    background-color: #fff;
-    font-family: "Proxima Nova-Bold", "Proxima Nova", "Helvetica Nueue", Helvetica, Arial, sans-serif;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 1.0;
-    text-transform: uppercase;
-    border: 1px solid #ccc;
-    padding: 12px;
-  }
-  
-  .btn-primary {
-    color: white;
-    font-weight: 800;
-    background-color: #fd1d1dea;
-    border-color: none;
-    font-size: 13pt;
-    padding: 7px 10px
-;
-  }
-  
-  .btn-icon {
-    position: relative;
-    width: 38px;
-    height: 38px;
-  }
-  
-  .btn-icon:before {
-    content: " ";
-    position: asbolute;
-    left: 0px;
-    top: 0px;
-    width: 12px;
-    height: 12px;
-    border-radius: 100%;
-    background-color: blue;
-  }
-  
-  .button-group .btn {
-    margin-right: 0px;
-    vertical-align: top;
-  }
-  
-  .group-segment {
-    position: relative;
-    display: inline-block;
-    height: 32px;
-    width: 1px;
-    margin: 4px 12px;
-    background-color: #ccc;
-  }
-  
-  .indicator-group {
-    position: relative;
-    margin-top: 6px;
-  }
-  
-  .indicator {
-    font-size: 12px;
-    line-height: 1.0;
-    position: relative;
-    padding-left: 20px;
-  }
-  
-  .indicator:before {
-    content: " ";
-    position: absolute;
-    left: 0px;
-    top: 2px;
-    width: 10px;
-    height: 10px;
-    border-radius: 100%;
-    background-color: #00e7b2;
-  }
-  
-  .page-header--with-nav .nav {
-    margin-top: 30px;
-  }
-  
-  .nav-list {
-    padding: 0px;
-    margin: 0px;
-    font-size: 0px;
-    border-bottom: 1px solid #ccc;
-  }
-  .nav-list li {
-    list-style-type: none;
-    display: inline-block;
-    font-size: 14px;
-    margin-right: 20px;
-    padding-bottom: 10px;
-  }
-  
-  .nav-list li.active {
-    border-bottom: 3px solid #00e7b2;
-  }
-  
-  .breadcrumb {
-    background-color: #333;
-    color: #fff;
-    padding: 12px 20px;
-    font-family: "Proxima Nova-Bold", "Proxima Nova", "Helvetica Nueue", Helvetica, Arial, sans-serif;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 12px;
-  }
-  
-  .breadcrumb a {
-    color: #00e7b2;
-    text-decoration: underline;
-  }
-  
-  .adminUser{
-  	 width: 80%;
-    border: 1px solid #444444;
-     border-collapse: collapse;
-  }
-  
-  th,td{
-  	border: 1px solid #444444;
-  	padding: 10px;
-  }
-  
- 
-  .newqna{
-  	display:inline-block;
-  	width:30%;
-  	height:100%;
-  	border:1px solid #ccc;
-  	border-radius:50%;
-  }
-  
-  .qnalist{
-  	display:inline-block;
-  	width:60%;
-  	height:100%;
-  	border:1px solid #ccc;
-  }
-  
-  
-  
+.adminUser tr:hover{
+   opacity:.4;
+}  
+
+.newqna {
+	display: inline-block;
+	border: 2px solid #ccc;
+	width:30%;
+}
+
+.qnaList {
+	display: inline-block;
+   border: 2px solid #ccc;
+   width:60%;
+}
