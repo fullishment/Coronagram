@@ -26,7 +26,7 @@
     			$("#searchTxt").val($("#searchInp").val());
     			reDraw();
     		});
-    		$("tbody").on("click","#dtlBtn",function(){
+    		$("tbody").on("click","#edit_btn",function(){
     			$("#no").val($(this).parent().parent().attr("no"));
     			$("#actionForm").attr("action","prodInfo");
     			$("#actionForm").submit();

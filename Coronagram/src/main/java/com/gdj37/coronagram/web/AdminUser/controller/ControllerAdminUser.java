@@ -54,7 +54,7 @@ public class ControllerAdminUser {
 						
 				int cnt = iServiceAdminUser.getadminUserCnt(params);
 						
-				PagingBean pb = iPagingService.getPagingBean(page, cnt, 8, 5);
+				PagingBean pb = iPagingService.getPagingBean(page, cnt, 6, 5);
 						
 				params.put("startCnt", Integer.toString(pb.getStartCount()));
 				params.put("endCnt", Integer.toString(pb.getEndCount()));

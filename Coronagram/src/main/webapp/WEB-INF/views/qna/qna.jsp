@@ -140,29 +140,29 @@ function checkVal(sel) {
 	function drawPaging(pb) {
 		var html = "";
 		
-		html += "<span page =\"1\">처음</span>      ";
+		html += "<span page =\"1\"><p>처음</p></span>      ";
 		
 		if($("#page").val() == "1") {
-			html += "<span page=\"1\">이전</span>    ";
+			html += "<span page=\"1\"><p><&nbsp이전&nbsp</p></span>    ";
 		} else {
-			html += "<span page=\""+($("#page").val() * 1 -1) + "\">이전</span>	";  //-1(자동숫자변환)
+			html += "<span page=\"" + (page * 1 - 1) + "\"><p><&nbsp이전&nbsp</p></span>	";  //-1(자동숫자변환)
 		}
 		
 		for(var i = pb.startPcount ; i<= pb.endPcount ; i++) {
 			if($("#page").val() == i) {
 				html += "<span page=\"" + i + "\"><b>" + i + "</b></span> ";
 			}else {
-				html += "<span page=\"" + i + "\">" +i + "</span> ";
+				html += "<span page=\"" + i + "\"><h3>" + i + "</h3></span> ";
 			}
 		}
 		
 		if($("#page").val()== pb.maxPcount) {
-			html += "<span page=\"" + pb.maxPcount + "\">다음</span>      ";
+			html += "<span page=\"" + maxP + "\"><p>다음&nbsp>&nbsp</p></span>      ";
 		} else {
-			html += "<span page=\"" + ($("#page").val()* 1 + 1) + "\">다음</span>      ";
+			html += "<span page=\"" + (page * 1 + 1) + "\"><p>다음&nbsp>&nbsp</p></span>      ";
 		}
 		
-		html += "<span page=\"" + pb.maxPcount+"\">마지막</span>    ";
+		html += "<span page=\"" + pb.maxPcount+"\"><p>마지막</p></span>    ";
 		
 		$(".paging_wrap").html(html);
 	}
