@@ -215,10 +215,6 @@ $(document).ready(function(){
       } else if(checkVal("#mNm")) {
          alert("이름을 입력해 주세요.");
          $("#mNm").focus();
-         
-      /* }else if($("#checkNick").val() == "false") {
-			alert("닉네임 중복 체크를 해주세요.");
-			$("#nickNm").focus(); */
       
       }else if(checkVal("#mPhone")){
          alert("전화번호를 입력하세요.");
@@ -283,8 +279,6 @@ function readURL(input) {
        reader.readAsDataURL(input.files[0]);
     }
 }
-$("input:radio[name='vec']:radio[value='y']").attr("checked",true); 
-$("input:radio[name='vec']").removeAttr("checked");
 </script>    
 
 </head>
@@ -380,6 +374,7 @@ $("input:radio[name='vec']").removeAttr("checked");
 	</div>
 	
       <input type="hidden" id="no" name="no" value="${data.M_NO}">
+      <input type="hidden" id="smno" name="smno" value="${data.M_NO}">
   	  <input type="hidden" name="no" value="${param.M_NO}" />
  	  <input type="hidden" name="id" value="${param.M_ID}" />
  	  <input type="hidden" id="checkNick" value="false" />
@@ -408,6 +403,17 @@ $("input:radio[name='vec']").removeAttr("checked");
 		<c:otherwise>
 			<label><input type="radio" id="vec" name="vec" value="y" > 예</label>
       		<label><input type="radio" id="vec" name="vec" value="n" checked> 아니오</label><br>
+		</c:otherwise>      
+      </c:choose>
+      좋아요 유형
+      <c:choose>
+		<c:when test="${data.SET1 == 0}">
+			<label><input type="radio" id="like" name="like" value="0" checked> 간략</label>
+      		<label><input type="radio" id="like" name="like" value="1"> 길게</label><br>
+		</c:when>
+		<c:otherwise>
+			<label><input type="radio" id="like" name="like" value="0" > 간략</label>
+      		<label><input type="radio" id="like" name="like" value="1" checked> 길게</label><br>
 		</c:otherwise>      
       </c:choose>
       <p>주소</p>

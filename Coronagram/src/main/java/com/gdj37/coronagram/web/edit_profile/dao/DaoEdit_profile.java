@@ -29,4 +29,10 @@ public class DaoEdit_profile implements IDaoEdit_profile{
 	}
 
 
+	@Override
+	public int crngSetting(HashMap<String, String> params) throws Throwable {
+		return sqlSession.update("editProfile.crngSetting",params);
+	}
+
+
 }

@@ -31,6 +31,12 @@ public class ServiceEdit_profile implements IServiceEdit_profile {
 	}
 
 
+	@Override
+	public int crngSetting(HashMap<String, String> params) throws Throwable {
+		return iDaoEdit_profile.crngSetting(params);
+	}
+
+
 
 	
 }

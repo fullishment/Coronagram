@@ -16,5 +16,7 @@ public interface IServiceAdminUser {
 	public int getAProDels(HashMap<String, String> params) throws Throwable;
 
 	public List<HashMap<String, String>> getACCTList(HashMap<String, String> params)throws Throwable;
+
+	public int AcrngSetting(HashMap<String, String> params) throws Throwable;
 	
 }

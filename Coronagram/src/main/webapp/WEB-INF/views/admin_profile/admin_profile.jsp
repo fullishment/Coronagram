@@ -331,6 +331,8 @@ function readURL(input) {
 		   <input type="hidden" name="searchTxt"  value="${param.searchTxt}" />
 		   <input type="hidden" name="page" value="${param.page}"  />
 		   <input type="hidden" name="no" value="${param.no}" />
+		   <input type="hidden" id="no" name="no" value="${data.M_NO}">
+		   <input type="hidden" id="smno" name="smno" value="${data.M_NO}">
 	  
     <input type="file" id="photo-upload" class="img-wrap img-upload"><br>
     <input type="hidden" name="id">
@@ -353,6 +355,17 @@ function readURL(input) {
 		<c:otherwise>
 			<label><input type="radio" id="vec" name="vec" value="y" > 예</label>
       		<label><input type="radio" id="vec" name="vec" value="n" checked> 아니오</label><br>
+		</c:otherwise>      
+      </c:choose>
+      좋아요 유형
+      <c:choose>
+		<c:when test="${data.SET1 == 0}">
+			<label><input type="radio" id="like" name="like" value="0" checked> 간략</label>
+      		<label><input type="radio" id="like" name="like" value="1"> 길게</label><br>
+		</c:when>
+		<c:otherwise>
+			<label><input type="radio" id="like" name="like" value="0" > 간략</label>
+      		<label><input type="radio" id="like" name="like" value="1" checked> 길게</label><br>
 		</c:otherwise>      
       </c:choose>
       <p>주소</p>

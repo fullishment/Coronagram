@@ -5,8 +5,9 @@
 	<!-- 불러오기 -->
 		<select id="getEditP" parameterType="hashmap" resultType="hashmap">
 			SELECT M_NO, M_NM, NICK_NM, M_PW, PHONE, EMAIL, VAC_YN,
-			POST_NO, ADR, DTL_ADR, IMG_ADR, INTRO_CON
-			FROM M
+	         POST_NO, ADR, DTL_ADR, IMG_ADR, INTRO_CON, C.SM_NO, C.SET1
+	         FROM M M JOIN CRNG_SETTING C
+            ON (M.M_NO = C.SM_NO)
 			WHERE M_NO = #{m_no}
 		</select>	
 	
@@ -33,6 +34,10 @@
 			FROM M
 			WHERE NICK_NM = #{nickNm}
 		</select>
-
+	<!-- 좋아요유형 -->
+ 		<update id="crngSetting" parameterType="hashmap">
+		    UPDATE CRNG_SETTING SET SET1 = #{like} 
+		    WHERE SM_NO =#{smno}
+		</update>
 
 </mapper>

@@ -43,6 +43,11 @@ public class ServiceAdminUser implements IServiceAdminUser{
 		return iDaoAdminUser.getACCTList(params);
 	}
 
+	@Override
+	public int AcrngSetting(HashMap<String, String> params) throws Throwable {
+		return iDaoAdminUser.AcrngSetting(params);
+	}
+
 
 
 	

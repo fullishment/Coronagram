@@ -11,4 +11,6 @@ public interface IServiceEdit_profile {
 
 	public int getNickCheck(HashMap<String, String> params)throws Throwable;
 
+	public int crngSetting(HashMap<String, String> params)throws Throwable;
+
 }

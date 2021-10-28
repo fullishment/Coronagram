@@ -65,6 +65,8 @@ public class edit_profile {
 				params.put("mPw",mPw);
 
 				int cnt =iServiceEdit_profile.getprofileUp(params);
+				iServiceEdit_profile.crngSetting(params);
+				
 				if(cnt==0) {
 					result="failed";
 				}

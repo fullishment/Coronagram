@@ -90,6 +90,7 @@ public class ControllerAdminUser {
 			String result ="success";
 			
 				int cnt =iServiceAdminUser.getAProUps(params);
+				iServiceAdminUser.AcrngSetting(params);
 				if(cnt==0) {
 					result="failed";
 				}

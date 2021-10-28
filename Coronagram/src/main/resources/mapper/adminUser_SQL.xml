@@ -80,9 +80,10 @@
 <!-- 불러오기 -->
    <select id="getAProfile" parameterType="hashmap" resultType="hashmap">
       SELECT M_NO, M_ID, M_NM, NICK_NM, PHONE, EMAIL, VAC_YN, POST_NO, ADR, DTL_ADR, 
-            ACCT_TYPE_NO, POINT, IMG_ADR, INTRO_CON
-       FROM M
-      WHERE M_NO = #{no}
+            ACCT_TYPE_NO, POINT, IMG_ADR, INTRO_CON, C.SM_NO, C.SET1
+      		FROM M M JOIN CRNG_SETTING C
+            ON (M.M_NO = C.SM_NO)
+			WHERE M_NO = #{no}
    </select>
    
 <!-- update -->
@@ -110,7 +111,11 @@
       FROM ACCT_TYPE
       
    </select>
-   
+   <!-- 좋아요유형 -->
+ 		<update id="AcrngSetting" parameterType="hashmap">
+		    UPDATE CRNG_SETTING SET SET1 = #{like} 
+		    WHERE SM_NO =#{smno}
+		</update>
        
    
 </mapper>
