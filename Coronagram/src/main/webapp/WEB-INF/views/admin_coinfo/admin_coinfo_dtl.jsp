@@ -162,7 +162,16 @@ $(document).ready(function() {
                                 <div class="qnaTitle">
                                 	<div class="disp">
                                 		<span>노출여부</span>
-                                		<div class="border">${data.DISP_YN}</div>
+                                		<div class="border">
+	                                		<c:choose>
+	                                			<c:when test="${data.DISP_YN eq 'Y'}">
+													<span>노출</span>
+												</c:when>
+												<c:otherwise>
+													<span>숨김</span>
+	                                			</c:otherwise>
+	                                		</c:choose>
+										</div>
 									</div>
 									<div class="qnaTitle1">
                                         <span>제목</span>

@@ -237,17 +237,34 @@ function checkVal(sel){
 								<input type="hidden" name="searchGbn" value="${param.searchGbn}" />
 								<input type="hidden" name="searchTxt" value="${param.searchTxt}" />
 								<input type="hidden" name="page" value="${param.page}" />
-								<input type="hidden" name="no" value="${param.INFO_NO}" />
+								<input type="hidden" name="no" value="${param.no}" />
 							</form>
 							
                             	<form action="#" id="updateForm" method="post">
-                            	<input type="hidden" name="imgFile" id="imgFile" value="${data.REP_IMG}">
-                            	<input type="hidden" name="m_no" value="${sMNo}">
-                            	<input type="hidden" name="searchGbn" value="${param.searchGbn}" />
-								<input type="hidden" name="searchTxt" value="${param.searchTxt}" />
-								<input type="hidden" name="page" value="${param.page}" />
+	                            	<input type="hidden" name="imgFile" id="imgFile" value="${data.REP_IMG}">
+	                            	<input type="hidden" name="m_no" value="${sMNo}">
+	                            	<input type="hidden" name="searchGbn" value="${param.searchGbn}" />
+									<input type="hidden" name="searchTxt" value="${param.searchTxt}" />
+									<input type="hidden" name="page" value="${param.page}" />
                             		<input type="hidden" name="no" value="${param.no}" />
 	                                <div class="qnaTitle">
+
+	                                	<div class="qnaTitle0">
+	                                		<span>노출여부</span>
+											<select class="disp_yn" name="disp_yn">
+													<c:choose>
+		                                			<c:when test="${data.DISP_YN eq 'Y'}">
+														<option value="Y" selected>노출</option>
+														<option value="N">숨김</option>
+													</c:when>
+													<c:otherwise>
+														<option value="Y">노출</option>
+														<option value="N" selected>숨김</option>
+		                                			</c:otherwise>
+		                                		</c:choose>
+											</select>
+	                                	</div>
+
 	                                    <div class="qnaTitle1">
 	                                        <span>제목</span><input type="text" class="border" id="info_title" name="info_title" value="${data.INFO_TITLE}">
 	                                    </div>
@@ -262,10 +279,10 @@ function checkVal(sel){
 	                                    		<c:choose>
 													<c:when test="${!empty data.REP_IMG}">
 														<!-- 첨부파일이 있는경우 버튼을 숨긴다. -->
-														<input type="button" value="이미지파일선택" id="fileBtn" class="hide_Btn" />
+														<input type="button" value="배경이미지선택" id="fileBtn" class="hide_Btn" />
 													</c:when>
 													<c:otherwise>
-														<input type="button" value="이미지파일선택" id="fileBtn" />
+														<input type="button" value="배경이미지선택" id="fileBtn" />
 													</c:otherwise>
 												</c:choose>
 												
@@ -275,11 +292,10 @@ function checkVal(sel){
 												
 												<c:choose>
 													<c:when test="${empty data.REP_IMG}">
-														<input type="button" value="이미지파일삭제" id="imgDelBtn"
-															class="hide_Btn" />
+														<input type="button" value="배경이미지삭제" id="imgDelBtn" class="hide_Btn" />
 													</c:when>
 													<c:otherwise>
-														<input type="button" value="이미지파일삭제" id="imgDelBtn" />
+														<input type="button" value="배경이미지삭제" id="imgDelBtn" />
 													</c:otherwise>
 												</c:choose>
 												

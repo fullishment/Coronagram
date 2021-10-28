@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,23 +15,38 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<style>
-	html {
-	overflow-x: auto;
-	min-height: 3030px;
-	}
-	table {
-		box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-		border: 0px seashell;
-		text-align: center;
-	}
-	td {
-		font-size: 9pt;
-	}
-	th {
-		background: #e3e3e3;
-	}
-</style>
+<script>
+/* $(document).ready(function(){
+    $(".local_active").click (function(){
+        var getID = $(this).children(":nth-child(1)");
+        var getText = $(getID).text();
+        alert(getID);
+        alert(getText);
+    });
+}); */
+
+$(document).ready(function(){
+	$('.step_dtl div').hide();
+    $(".local_link").click (function(e){
+        e.preventDefault();
+        
+        var getText = $(this).text();
+        alert(getText);
+        
+        $('.step_dtl div').hide();
+        $('#' + $(this).data('rel')).show();
+    });
+});
+
+$(document).on('click', '.local_link', function(e){
+    e.preventDefault();  
+    $(this).css('background-color', 'rgba(0,0,0,0.4)');
+    $(this).css('color', 'white');
+    $(".local_link").not($(this)).css('background-color', 'rgba(255,255,255,0.8)');
+    $(".local_link").not($(this)).css('color', 'black');
+});
+
+</script>
 </head>
 
 <body>
@@ -151,120 +168,237 @@
                                       
                                           <path id="sejong" class="local_nm" d="m 309.28023,486.01769 -7.03,-4.811 -3.025,-4.724 -1.554,-6.834 0.817,-7.381 0.736,-8.568 -5.314,-2.874 -6.213,-8.321 1.799,-5.547 -0.817,-7.454 -3.434,-3.467 2.289,-4.507 6.049,-0.347 11.608,7.281 5.722,-0.173 0.654,2.947 h 2.126 l -0.654,5.374 -3.597,2.6 1.635,4.161 2.616,3.294 v 5.547 l 4.414,1.907 5.632,2.508 2.271,2.85 -1.199,7.167 1.199,2.773 -2.734,1.624 0.676,5.695 -2.247,5.813 -4.905,5.374 -5.068,0.173 -2.452,-2.08 z"  style="fill: #ff922c;stroke:white"/>
                                         </svg>
-                                        <div class="local_info  local_active" id="34" style="left: 290.883331px;top: 200.435425px;">
-                                            <a class="local_link">
-                                                <strong class="local_name">경북</strong>
-                                                <p class="population_number">3</p>
-                                            </a>
-                                        </div>
-                                        <div class="local_info  local_active" id="33" style="left: 230.883331px;top: 190.435425px;">
-                                            <a class="local_link">
-                                                <strong class="local_name">충북</strong>
-                                                <p class="population_number">3</p>
-                                            </a>
-                                        </div>
-                                        <div class="local_info  local_active" id="32" style="left: 250.883331px;top: 110.435425px;">
-                                            <a class="local_link">
-                                                <strong class="local_name">강원</strong>
-                                                <p class="population_number">3</p>
-                                            </a>
-                                        </div>
-                                        <div class="local_info  local_active" id="32" style="left: 250.883331px;top: 110.435425px;">
-                                            <a class="local_link">
-                                                <strong class="local_name">강원</strong>
-                                                <p class="population_number">3</p>
-                                            </a>
-                                        </div>
-                                        <div class="local_info  local_active" id="31" style="left: 150.883331px;top: 110.435425px;">
-                                            <a class="local_link">
-                                                <strong class="local_name">경기</strong>
-                                                <p class="population_number">4</p>
-                                            </a>
-                                        </div>
+                                        
                                         <div class="local_info  local_active" id="30" style="left: 170.883331px;top: 177.435425px;">
-                                            <a class="local_link">
-                                                <strong class="local_name">서울</strong>
-                                                <p class="population_number num">4</p>
-                                                <input type="hidden" class="hval" id="p30" value="4">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(1)">
+                                               <strong class="local_name">서울</strong>
+                                               	<c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 1}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>
+                                                <!-- <input type="hidden" class="hval" id="p30" value="4"> -->
                                             </a>
                                         </div>
+                                        
                                         <div class="local_info  local_active" id="29" style="left: 90.883331px;top: 146.435425px;">
-                                            <a class="local_link">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(2)">
                                                 <strong class="local_name">인천</strong>
-                                                <p class="population_number">4</p>
+                                               	<c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 2}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>                                                
                                             </a>
                                         </div>
+                                        
+                                        <div class="local_info  local_active" id="31" style="left: 150.883331px;top: 110.435425px;">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(3)">
+                                                <strong class="local_name">경기</strong>
+                                               	<c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 3}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>
+                                            </a>
+                                        </div>                                        
+
+                                        <div class="local_info  local_active" id="32" style="left: 250.883331px;top: 110.435425px;">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(4)">
+                                                <strong class="local_name">강원</strong>
+                                               	<c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 4}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>
+                                            </a>
+                                        </div>
+
                                         <div class="local_info  local_active" id="28" style="left: 150.883331px;top: 246.435425px;">
-                                            <a class="local_link">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(5)">
                                                 <strong class="local_name">세종</strong>
-                                                <p class="population_number">3</p>
+                                               	<c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 5}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>
                                             </a>
                                         </div>
-                                        <div class="local_info  local_active" id="27" style="left: 90.883331px;top: 226.435425px;">
-                                            <a class="local_link">
-                                                <strong class="local_name">충남</strong>
-                                                <p class="population_number">3</p>
-                                            </a>
-                                        </div>
+                                        
                                         <div class="local_info  local_active" id="26" style="left: 210.883331px;top: 257.435425px;">
-                                            <a class="local_link">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(6)">
                                                 <strong class="local_name">대전</strong>
-                                            <p class="population_number">3</p>
+                                                 <c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 6}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>
+                                            </a>
+                                        </div>                                        
+
+                                        <div class="local_info  local_active" id="33" style="left: 230.883331px;top: 190.435425px;">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(7)">
+                                                <strong class="local_name">충북</strong>
+                                               	<c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 7}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>
                                             </a>
                                         </div>
-                                        <div class="local_info  local_active" id="25" style="left: 270.883331px;top: 270.435425px;">
-                                            <a class="local_link">
-                                                <strong class="local_name">대구</strong>
-                                                <p class="population_number">3</p>
+
+                                        <div class="local_info  local_active" id="27" style="left: 90.883331px;top: 226.435425px;">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(8)">
+                                                <strong class="local_name">충남</strong>
+                                               	<c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 8}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>
                                             </a>
                                         </div>
-                                        <div class="local_info  local_active" id="24" style="left: 330.883331px;top: 310.435425px;">
-                                            <a class="local_link">
-                                                <strong class="local_name">울산</strong>
-                                                <p class="population_number">3</p>
-                                            </a>
-                                        </div>
-                                        <div class="local_info  local_active" id="23" style="left: 150.883331px;top: 316.435425px;">
-                                            <a class="local_link">
-                                                <strong class="local_name">전북</strong>
-                                            <p class="population_number">3</p>
-                                            </a>
-                                        </div>
+                                        
                                         <div class="local_info  local_active" id="22" style="left: 170.883331px;top: 396.435425px;">
-                                            <a class="local_link">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(9)">
                                                 <strong class="local_name">광주</strong>
-                                                <p class="population_number">3</p>
+                                               	<c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 9}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>
                                             </a>
                                         </div>
+                                        
+                                        <div class="local_info  local_active" id="23" style="left: 150.883331px;top: 316.435425px;">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(10)">
+                                                <strong class="local_name">전북</strong>
+                                               	<c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 10}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>
+                                            </a>
+                                        </div>
+
                                         <div class="local_info  local_active" id="21" style="left: 110.883331px;top: 396.435425px;">
-                                            <a class="local_link">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(11)">
                                                 <strong class="local_name">전남</strong>
-                                                <p class="population_number">3</p>
+                                               	<c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 11}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>
+                                            </a>
+                                        </div>                                                                                
+
+                                        <div class="local_info  local_active" id="25" style="left: 270.883331px;top: 270.435425px;">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(12)">
+                                                <strong class="local_name">대구</strong>
+                                               	<c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 12}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>
                                             </a>
                                         </div>
+                                                                                
+                                        <div class="local_info  local_active" id="34" style="left: 290.883331px;top: 200.435425px;">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(13)">
+                                                <strong class="local_name">경북</strong>
+                                               	<c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 13}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>
+                                            </a>
+                                        </div>
+
+                                        <div class="local_info  local_active" id="19" style="left: 270.883331px;top: 340.435425px;">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(14)">
+                                                <strong class="local_name">부산</strong>
+                                               	<c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 14}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>
+                                            </a>
+                                        </div>
+
+                                        <div class="local_info  local_active" id="24" style="left: 330.883331px;top: 310.435425px;">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(15)">
+                                                <strong class="local_name">울산</strong>
+                                               	<c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 15}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>
+                                            </a>
+                                        </div>
+
                                         <div class="local_info  local_active" id="20" style="left: 210.883331px;top: 327.435425px;">
-                                            <a class="local_link">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(16)">
                                                 <strong class="local_name">경남</strong>
-                                            <p class="population_number num">3</p>
+                                               	<c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 16}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>
                                             </a>
                                         </div>  
-                                        <div class="local_info  local_active" id="19" style="left: 270.883331px;top: 340.435425px;">
-                                            <a class="local_link">
-                                                <strong class="local_name">부산</strong>
-                                            <p class="population_number">3</p>
-                                            </a>
-                                        </div>
+
                                         <div class="local_info  local_active" id="18" style="left: 140.883331px;top: 476.435425px;">
-                                            <a class="local_link">
+                                            <a class="local_link" href="#" data-rel="step_con:nth-child(17)">
                                                 <strong class="local_name">제주</strong>
-                                                <p class="population_number">3</p>
+                                               	<c:forEach var="data" items="${list}">
+													<c:if test="${data.AREA_NO == 17}">
+														<div>
+															<p class="local_step">${data.STEP_NO}</p>
+														</div>
+													</c:if>
+												</c:forEach>
                                             </a>
                                         </div>                              
                                 </div>
-                                <div class="map_dtl">
-                                    
-                                </div>
-                            </div>
+								<div class="map_dtl">
+									<div class="step_dtl">
+										<c:forEach var="data" items="${list}">
+											<div id="step_con" style="white-space:pre-line;">${data.CON}</div>
+										</c:forEach>
+									</div>
+								</div>
+							</div>
                         </div>
                         <div class="scm2-htm">
                             <label for="user" class="sclabel">
@@ -735,23 +869,7 @@
     </main>
 
     <script src="resources/script/menu_bar/menu_bar.js"></script>
-    <script>
-        $(document).ready(function(){
-            $(".local_active").click (function(){
-                var getID = $(this).children(":nth-child(1)");
-                var getText = $(getID).text();
-                alert(getID);
-                alert(getText);
-            });
-        });
-        $(document).on('click', '.local_link', function(e){
-            e.preventDefault();  
-            $(this).css('background-color', 'rgba(0,0,0,0.4)');
-            $(this).css('color', 'white');
-            $(".local_link").not($(this)).css('background-color', 'rgba(255,255,255,0.8)');
-            $(".local_link").not($(this)).css('color', 'black');
-        });
-    </script>
+
 </body>
 
 </html>

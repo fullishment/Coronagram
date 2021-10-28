@@ -71,11 +71,35 @@ transform:rotate(0);
 transform:rotate(0);
 }
 
+
+/* 단계수칙 */
+html {
+overflow-x: auto;
+min-height: 3030px;
+}
+table {
+	box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+	border: 0px seashell;
+	text-align: center;
+}
+td {
+	font-size: 9pt;
+}
+th {
+	background: #e3e3e3;
+}
+
+
+
+
+/* 거리두기단계 */
 .map_dtl{
     width: 300px;
     height: 435px;
     border-radius: 10px;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    padding: 25px;
+	color: #5a5a5a;
 }
 .map{
     width: 500px;
@@ -108,6 +132,16 @@ transform:rotate(0);
     height: 60px;
     background-color: rgba(255, 255, 255);
     color:black;
+}
+
+.local_link {
+	text-decoration: none;
+	color : black;
+}	
+
+.local_link:link, .local_link:visited, .local_link:hover {
+	text-decoration: none;
+	color : black;
 }
 
 /* Q&A */

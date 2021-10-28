@@ -43,4 +43,19 @@ public class ServiceAdmin_Coinfo implements IServiceAdmin_Coinfo {
 		return iDaoAdmin_Coinfo.deleteAdinfo(params);
 	}
 
+	@Override
+	public List<HashMap<String, String>> getSTList(HashMap<String, String> params) throws Throwable {
+		return iDaoAdmin_Coinfo.getSTList(params);
+	}
+
+	@Override
+	public HashMap<String, String> getSTinfo(HashMap<String, String> params) throws Throwable {
+		return iDaoAdmin_Coinfo.getSTinfo(params);
+	}
+
+	@Override
+	public int updateSTinfo(HashMap<String, String> params) throws Throwable {
+		return iDaoAdmin_Coinfo.updateSTinfo(params);
+	}
+
 }

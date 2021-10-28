@@ -190,6 +190,15 @@ table {
     border-bottom : 2px solid black;
     border-collapse: collapse;
   }
+  
+  
+  .disp_y {
+  	color: #0411ff
+  }
+  
+  .disp_n {
+  	color: #ff5b5b
+  }
 
 
 

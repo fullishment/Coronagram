@@ -293,6 +293,13 @@ $('.chart1').easyPieChart({
     onStop: $.noop
 });
 
+
 $("#cartIcon").on("click",function(){
 	location.href="shopCart";
+});
+$("#qnaIcon").on("click",function(){
+	location.href="qna";
+});
+$("#zoomIcon").on("click",function(){
+	location.href="zoom";
 });

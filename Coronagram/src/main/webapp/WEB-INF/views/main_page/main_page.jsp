@@ -37,13 +37,13 @@
 
   <div id="STATICMENU">
     <aside>
-      <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-53e157058ac55ba046aa84778fca5e7e-user.png">
+      <a href="coronagram/${sMNick}"><img src="http://www.myiconfinder.com/uploads/iconsets/256-256-53e157058ac55ba046aa84778fca5e7e-user.png"></a>
       <p></p>
       <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-5eea0c1930aab7916cc960e027d032db.png" id="cartIcon">
       <p></p>
-      <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-b8bd8c49060ab11be6d0ec4067506019.png">
+      <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-b8bd8c49060ab11be6d0ec4067506019.png" id="qnaIcon">
       <p></p>
-      <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-1946ae1aa4487a7b9fa115d13220714c-talk.png">
+      <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-1946ae1aa4487a7b9fa115d13220714c-talk.png" id="zoomIcon">
     </aside>
   </div>
   <!-- 기본 틀 -->
