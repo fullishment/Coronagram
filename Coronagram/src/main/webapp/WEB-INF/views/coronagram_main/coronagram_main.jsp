@@ -262,10 +262,35 @@
 			     html+="              <div class=\"sprite_bookmark_outline\" data-name=\"bookmark\"></div>                                      						";
 			     html+="          </div>                                                                                                    							";
 			     html+="      </div>                                                                                                        							";
-			     html+="      <div class=\"likes head_text\">                                                                                    						";
-			     html+="			좋아요<span id=\"like-count-39\">"+data.LC+"</span>개																				    ";
-			     
-			     html+="      </div>                                                                                                        							";
+				if(data.SET1 == 0){
+			    	 html+="      <div class=\"likes head_text\">                                                                                    					";
+				     html+="			좋아요<span class=\"lk_font\">"+data.LC+"</span>개																					";			     
+				     html+="      </div>                                                                                                        						";
+			     }			
+				 else{
+					 if(data.CMT_NICK != 0){
+						 if(data.LC == 0){
+							 html+="      <div class=\"likes head_text\">                                                                                    					";
+						     html+="			좋아요<span class=\"lk_font\">"+data.LC+"</span>개																					";			     
+						     html+="      </div>                                                                                                        						";
+						 }
+						 else if(data.LC == 1){
+							 html+="      <div class=\"likes head_text\">                                                                                    					";
+							 html+="			<span class=\"lk_font\">"+data.CMT_NICK+"</span>님이 좋아합니다.																		";		     
+						     html+="      </div>                                                                                                        						";
+						 }
+						 else{
+					    	 var lc = data.LC - 1;
+					    	 html+="      <div class=\"likes head_text\">                                                                                    					";
+						     html+="			<span class=\"lk_font\">"+data.CMT_NICK+"</span>님<span class=\"lk_font\"> 외 "+lc+" 명</span>이 좋아합니다.							";			     
+						     html+="      </div>                                                                                                        						";
+					     }				 
+					 }else{
+				    	 html+="      <div class=\"likes head_text\">                                                                                    					";
+					     html+="			좋아요<span class=\"lk_font\">"+data.LC+"</span>개																					";			     
+					     html+="      </div>                                                                                                        						";
+					 }				
+				 }			 		     
 			     html+="      <div class=\"comment_container\">                                                                               							";
 			     html+="      <div class=\"comment_cnt\"> 																												";
 			     html+="		<a href=\"\" class=\"total_cmt_cnt\">댓글"+data.CCNT+"개 모두 보기</a>																		";
