@@ -9,4 +9,6 @@ public interface IDaoAdminMain {
 
 	public List<HashMap<String, String>> getadminQnaList(HashMap<String, String> params)throws Throwable;
 
+	public HashMap<String, String> getNewQ(HashMap<String, String> params)throws Throwable;
+
 }

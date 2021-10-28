@@ -61,7 +61,7 @@
             <a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
           </li>
           <li>
-            <a href="#" class="cm_userinfo">개인정보수정</a>
+            <a href="coronagram/${sMNick}" class="cm_userinfo"> 개인정보수정</a>
           </li>
       </div>
       <div class="cm_user_name">

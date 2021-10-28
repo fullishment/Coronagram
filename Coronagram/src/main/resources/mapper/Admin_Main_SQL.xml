@@ -11,12 +11,21 @@
 
 <!--Q&A list -->
 		<select id="getadminQnaList" parameterType="hashmap" resultType="hashmap">
-			SELECT QNA.QNA_NO, QNA.TITLE, QNA.Q_DT
-			FROM (	
-					SELECT QNA_NO, TITLE, TO_CHAR(Q_DT,'yyyy-mm-dd') AS Q_DT,
-					ROW_NUMBER() OVER(ORDER BY QNA_NO DESC) AS RNUM
-					FROM QNA
-					WHERE DEL = 1
-				) QNA
-		</select>	
+			SELECT I.QNA_NO,I.M_NM,I.TITLE,I.IMG_ADR, TO_CHAR(I.Q_DT,'YYYY-MM-DD')AS Q_DT, I.DEL, I.ANS_CON
+        	FROM (SELECT Q.QNA_NO,M.M_NM,Q.TITLE, M.IMG_ADR, Q.Q_DT, Q.DEL, Q.ANS_CON
+	            ,ROW_NUMBER() OVER(ORDER BY Q.Q_DT DESC) AS RNUM
+	            FROM M M
+	            INNER JOIN QNA Q
+	            ON M.M_NO = Q.WRITER_NO) I
+	             <![CDATA[
+	            WHERE I.RNUM <10 
+	            ]]>
+	            AND i.del=1 AND I.ANS_CON IS NULL
+	            ORDER BY I.Q_DT DESC
+		</select>
+<!-- 새 질문 -->
+		<select id="getNewQ" parameterType="hashmap" resultType="hashmap">
+			SELECT COUNT(CASE WHEN ans_con is null and del=1 THEN 1 END) AS newQ
+			FROM qna
+		</select>
 </mapper>

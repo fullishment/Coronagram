@@ -259,9 +259,16 @@
         a.cm_logout {
             border-left: 5px solid #cf2130;
         }
-
+		.cm_icon-userinfo {
+			position: absolute;
+            width: 20px;
+            height: 20px;
+            background-size: cover;
+            background-image: url("../../images/icon/mypage.png");
+			background-color : black;
+		}
         a.cm_userinfo {
-            border-left: 5px solid #008747
+            border-left: 5px solid #008747;            
         }
 
         .cm_dropdown-content li span {

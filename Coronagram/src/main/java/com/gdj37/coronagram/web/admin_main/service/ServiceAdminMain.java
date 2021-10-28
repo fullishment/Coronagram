@@ -22,4 +22,9 @@ public class ServiceAdminMain implements IServiceAdminMain{
 	public List<HashMap<String, String>> getadminQnaList(HashMap<String, String> params) throws Throwable {
 		return iDaoAdminMain.getadminQnaList(params);
 	}
+
+	@Override
+	public HashMap<String, String> getNewQ(HashMap<String, String> params) throws Throwable {
+		return iDaoAdminMain.getNewQ(params);
+	}
 }

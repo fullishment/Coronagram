@@ -262,11 +262,12 @@
                     <textarea name="con" id="text_field" cols="50" rows="5"
                         placeholder="140자 까지 등록 가능합니다. #태그명 을 통해서 검색 태그를 등록할 수 있습니다. 예시 : I # love # insta!"  ></textarea>
                 </p>
-                </form>
                 <div class="btn_area">
                     <input class="add_btn" type="button" value="추가" id="addBtn">
                     <input class="cancel_btn" type="button" value="취소" id="cancleBtn">
                 </div>
+                </form>
+                
             
         </div>
     </div>

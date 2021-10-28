@@ -23,18 +23,12 @@ var html = "";
 for(var data of list) {
 	html += "<tr no=\"" + data.QNA_NO+"\">";
 	html += "<td>"+data.QNA_NO+"</td>";
+	html += "<td>"+data.M_NM+"</td>";
 	html += "<td>"+data.TITLE+"</td>";
 	html += "<td>"+data.Q_DT+"</td>";
-	html += "<td>"
-	if(data.ANS_CON !=null){
-		html += "<div class=\"ans_o\">" + "답변완료" + "</div>";
-	} else {
-		html += "<div class=\"ans_x\">" + "답변하기" + "</div>";
-	}
-	html += "</td>";
 	html += "</tr>";
 }
-$("#tbody2").html(html);
+$("#tbody").html(html);
 
 }
 	
@@ -130,7 +124,7 @@ $("#tbody2").html(html);
 					<section class="page-header">
 						<h1 class="page-title">회원관리</h1>
 						<div class="button-group">
-							<button type="button" class="btn btn-primary">+</button>
+							<a href="adminUser"><button type="button" class="btn btn-primary">+</button></a>
 						</div>
 					</section>
 					<section class="page-body">
@@ -141,7 +135,7 @@ $("#tbody2").html(html);
 										<tr>
 											<th>총 회원수</th>
 											<th>신규 회원수</th>
-											<th>관리자 수</th>
+											<th>한달간 가입자수</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -168,28 +162,45 @@ $("#tbody2").html(html);
 
 				<article class="version">
 					<section class="page-header">
-						<h1 class="page-title">Q&A</h1>
+						<h1 class="page-title">Q&A</h1><p class="newqna">새 질문 : ${data1.NEWQ}</p>
 						<div class="button-group">
-							<button type="button" class="btn btn-primary">+</button>
+							<a href="admin_qna"><button type="button" class="btn btn-primary">+</button></a>
 						</div>
 					</section>
 					<section class="page-body">
-						<div class="newqna">몇명?</div>
-						<div class="qnalist">
-							<div class="qnaList2">
-								<table>
-									<thead>
-										<tr>
-											<th><p>번호</p></th>
-											<th><p>제목</p></th>
-											<th><p>등록일</p></th>
-											<th><p>기능</p></th>
-										</tr>
-									</thead>
-									<tbody id="tbody2"></tbody>
-								</table>
-							</div>
+						<div class="qnaList">
+							<table>
+								 <thead>
+									<tr>
+										<th><p>번호</p></th>
+										<th><p>작성자</p></th>
+										<th><p>제목</p></th>
+										<th><p>날짜</p></th>
+									</tr>
+								</thead> 
+								<tbody>
+									<tr>
+										<td>${list[0].QNA_NO}</td>
+										<td>${list[0].M_NM}</td>
+										<td>${list[0].TITLE}</td>
+										<td>${list[0].Q_DT}</td>
+									</tr>
+									<tr>
+										<td>${list[1].QNA_NO}</td>
+										<td>${list[1].M_NM}</td>
+										<td>${list[1].TITLE}</td>
+										<td>${list[1].Q_DT}</td>
+									</tr>
+									<tr>
+										<td>${list[2].QNA_NO}</td>
+										<td>${list[2].M_NM}</td>
+										<td>${list[2].TITLE}</td>
+										<td>${list[2].Q_DT}</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
+						
 					</section>
 				</article>
 
