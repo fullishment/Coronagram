@@ -223,7 +223,7 @@ tr:hover {
 
 .find_btn {
 	display: inline-block;
-	color: black;
+	color: white;
 	font-size: 1rem;
 	font-weight: 600;
 	text-align: center;
