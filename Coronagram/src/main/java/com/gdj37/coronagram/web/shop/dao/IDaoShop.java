@@ -57,6 +57,8 @@ public interface IDaoShop {
 
 	public int prodAdd(HashMap<String, String> params)throws Throwable;
 
+	public List<HashMap<String, String>> getProdTopList(HashMap<String, String> params)throws Throwable;
+
 
 
 }

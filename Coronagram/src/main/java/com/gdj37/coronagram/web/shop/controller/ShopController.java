@@ -25,6 +25,7 @@ public class ShopController {
 	
 	@RequestMapping(value="/shop")
 	public ModelAndView shopMain(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		List<HashMap<String,String>> list = iServiceShop.getProdTopList(params);
 		mav.setViewName("shop_main/shop_main");
 		return mav;
 	}

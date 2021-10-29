@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shop">
-
+	<select id="getProdTopList" parameterType="hashmap" resultType="hashmap" >
+		SELECT P.PROD_NO,P.PROD_NM, CNT , RNK
+		FROM PRODUCT P
+		    INNER JOIN (SELECT PROD_NO,RANK()OVER (ORDER BY CNT DESC) AS RNK,CNT
+		                FROM (SELECT PROD_NO,COUNT(*) AS CNT
+		                      FROM ORDER_PROD
+		                      GROUP BY PROD_NO) OP) ROP
+		    ON P.PROD_NO = ROP.PROD_NO
+		WHERE <![CDATA[ ROP.RNK <= 3 ]]>
+	</select>
 	<select id="getProdList" parameterType="hashmap" resultType="hashmap">
 		SELECT P.PROD_NO,REG_NO,PC.CAT_NM,PROD_NM,POINT,CON,SALE_STAT,PROD_DT,PA.FILE_ADDR
 		FROM PRODUCT P
