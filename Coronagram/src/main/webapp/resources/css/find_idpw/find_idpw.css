@@ -1,228 +1,258 @@
 @charset "UTF-8";
 
 html {
-  height: 100%;
-  font-family: "Noto Sans KR", sans-serif;
+	height: 100%;
+	font-family: "Noto Sans KR", sans-serif;
 }
 
 body {
-  /* background-image: linear-gradient(135deg, #FAB2FF 10%, #1904E5 100%); */
-  background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    font-family: "Noto Sans KR", sans-serif;
-    color: #333333;
-    height: 100%;
+	/* background-image: linear-gradient(135deg, #FAB2FF 10%, #1904E5 100%); */
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	font-family: "Noto Sans KR", sans-serif;
+	color: #333333;
+	height: 100%;
 }
 
 .box-form {
-  margin: 0 auto;
-    width: 50%;
-    height: 90%;
-    background: #FFFFFF;
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    flex: 1 1 100%;
-    align-items: stretch;
-    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-    position: relative;
-    top: 5%;
+	margin: 0 auto;
+	width: 963px;
+	height: 90%;
+	background: #FFFFFF;
+	border-radius: 10px;
+	overflow: hidden;
+	display: flex;
+	flex: 1 1 100%;
+	align-items: stretch;
+	box-shadow: 0 1px 6px 0 rgb(32 33 36/ 28%);
+	position: relative;
+	top: 6%;
 }
 
-
 .box-form .left {
-   color: #FFFFFF;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-image: url(../../images/main_page/insta_bg.jpg);
-    overflow: hidden;
+	color: #FFFFFF;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-image: url(../../images/main_page/insta_bg.jpg);
+	overflow: hidden;
+	width: 65%;
 }
 
 .box-form .left .overlay {
-  padding: 30px;
-  width: 100%;
-  height: 100%;
-  background: rgb(89 97 249 / 30%);
-  overflow: hidden;
-  box-sizing: border-box;
+	padding: 30px;
+	width: 100%;
+	height: 100%;
+	background: rgb(89 97 249/ 30%);
+	overflow: hidden;
+	box-sizing: border-box;
 }
 
 .box-form .left .overlay h1 {
-  font-size: 4vmax;
-    line-height: 1;
-    font-weight: 900;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    padding-right: 50px;
+	font-size: 4vmax;
+	line-height: 2;
+	font-weight: 700;
+
 }
 
-.login-html{
-padding:20%;
+.login-html {
+	padding: 17%;
 }
 
 .box-form .right {
-  width: 450px;
-    overflow-x:hidden; 
- 	overflow-y:auto; 
+	width: 457px;
+	overflow-x: hidden;
+	overflow-y: hidden;
 }
 
-
 .box-form .right .title {
-  font-size: 6vmax;
-  line-height: 0;
+	font-size: 6vmax;
+	line-height: 0;
 }
 
 .box-form .right label {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #B0B3B9;
+	margin-top: 10px;
+	font-size: 20px;
+	color: #B0B3B9;
 }
 
-
-.login-html .sign-in-htm,
-.login-html .sign-up-htm {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: absolute;
-  transform: rotateY(180deg);
-  backface-visibility: hidden;
-  /* transition: all .4s linear; */
+.login-html .sign-in-htm, .login-html .sign-up-htm {
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	transform: rotateY(180deg);
+	backface-visibility: hidden;
+	/* transition: all .4s linear; */
 }
 
-.login-html .sign-in,
-.login-html .sign-up {
-  display: none;
+.login-html .sign-in, .login-html .sign-up {
+	display: none;
 }
 
-.r_title{
-  font-size: 30pt !important;
-  color: #B0B3B9;
+.r_title {
+	font-size: 30pt !important;
+	font-weight: 800;
+	color: #B0B3B9;
+	width: 300px;
 }
 
 /* 인풋 */
-.group{
-  margin-top: 20px;
+.group {
+	margin-top: 20px;
 }
 
 .group input {
-  padding: 10px;
-  font-size: 12px;
-  border-radius: 15px;
-  display: inline-block;
-  border: 2px solid #b7b7b7;
-  padding: 5px 5px 5px 10px;
-  font-size: 18px;
-  transition: 0.2s;
-  width:270px;
-  overflow: auto;
-}
-.group input:focus{
-  outline: none;
-  border: 2px solid #64d488;
+	padding: 10px;
+	font-size: 12px;
+	border-radius: 15px;
+	display: inline-block;
+	border: 2px solid #b7b7b7;
+	padding: 5px 5px 5px 10px;
+	font-size: 18px;
+	transition: 0.2s;
+	width: 270px;
+	overflow: auto;
 }
 
-
-
-
+.group input:focus {
+	outline: none;
+	border: 2px solid #64d488;
+}
 
 .login-html .tab {
-  display: inline-block;
-  border-bottom: 2px solid transparent;
+	display: inline-block;
+	border-bottom: 2px solid transparent;
 }
 
 #tab-1 {
-  float: left;
+	float: left;
 }
 
-.login-html .sign-in:checked+.tab,
-.login-html .sign-up:checked+.tab {
-  color: grey;
-  border-color: #1161ee;
+.login-html .sign-in:checked+.tab, .login-html .sign-up:checked+.tab {
+	color: grey;
+	border-color: #1161ee;
 }
 
 .login-form {
-  min-height: 345px;
-  position: relative;
-  perspective: 1000px;
-  transform-style: preserve-3d;
+	min-height: 345px;
+	position: relative;
+	perspective: 1000px;
+	transform-style: preserve-3d;
 }
 
-.login-form .group .label,
-.login-form .group .input,
-.login-form .group .button {
-  display: inline-block;
+.login-form .group .label, .login-form .group .input, .login-form .group .button
+	{
+	display: inline-block;
 }
 
-.btn_con{
-  margin-left: 58%;
-  padding-top: 30px;
-  display: inline-block;
-  width:80%;
+.btn_con {
+	margin-left: 53%;
+	padding-top: 30px;
+	display: inline-block;
+	width: 80%;
 }
-
-
 
 #pass {
-  border-radius: 15px 15px 15px 15px;
-  border-color: royalblue;
-  color: royalblue;
+	border-radius: 15px 15px 15px 15px;
+	border-color: royalblue;
+	color: royalblue;
 }
 
-
-
-
-
-
-
-.login-html .sign-in:checked+.tab+.sign-up+.tab+.login-form .sign-in-htm {
-  transform: rotate(0);
+.login-html .sign-in:checked+.tab+.sign-up+.tab+.login-form .sign-in-htm
+	{
+	transform: rotate(0);
 }
 
 .login-html .sign-up:checked+.tab+.login-form .sign-up-htm {
-  transform: rotate(0);
+	transform: rotate(0);
 }
 
 /* 버튼 */
 .search_btn {
-  display: inline-block;
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            text-align: center;
-            transition: 0.5s;
-            cursor: pointer;
-            width: 60px;
-            height: 30px;
-            border: none;
-            border-radius: 7px;
-            background: #ffc107;
+	display: inline-block;
+	color: white;
+	font-size: 1rem;
+	font-weight: 600;
+	text-align: center;
+	transition: 0.5s;
+	cursor: pointer;
+	width: 60px;
+	height: 30px;
+	border: none;
+	border-radius: 7px;
+	background: #ffc107;
 }
 
 .search_btn:hover {
-  opacity: .8;
+	opacity: .8;
 }
 
 .cancel_btn {
-  display: inline-block;
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            text-align: center;
-            transition: 0.5s;
-            cursor: pointer;
-            width: 60px;
-            height: 30px;
-            border: none;
-            border-radius: 7px;
-            background: gray;
+	display: inline-block;
+	color: white;
+	font-size: 1rem;
+	font-weight: 600;
+	text-align: center;
+	transition: 0.5s;
+	cursor: pointer;
+	width: 60px;
+	height: 30px;
+	border: none;
+	border-radius: 7px;
+	background: gray;
 }
 
 .cancel_btn:hover {
-  opacity: .8;
+	opacity: .8;
 }
 
-
-
+/*미디어쿼리*/
+@media screen and (max-width:1340px) {
+	.box-form {
+		display: flex;
+		flex-direction: column;
+		width: 450px;
+		height: 90%;
+	}
+	.box-form .left .overlay h1 {
+		font-size: 60px;
+		line-height: 72px;
+		font-weight: 700;
+		padding-top: 8%;
+	}
+	/* .left{
+		display:flex;
+		    flex-direction: column;		
+	
+		width: 100%;
+		height:50%;
+	} */
+	.box-form .left {
+		color: #FFFFFF;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-image: url(../../images/main_page/insta_bg.jpg);
+		overflow: hidden;
+		height: 50%;
+		width: 100%;
+	}
+	.login-html {
+		padding: 7% 16% 19% 30%;
+	}
+	.box-form .right {
+		display: flex;
+		width: 100%;
+		overflow-x: hidden;
+		overflow-y: hidden;
+		padding-left: 34 px;
+		height: 50%;
+	}
+	.btn_con {
+		margin-left: 90%;
+		padding-top: 30 px;
+		display: inline-block;
+		width: 87%;
+	}
+}

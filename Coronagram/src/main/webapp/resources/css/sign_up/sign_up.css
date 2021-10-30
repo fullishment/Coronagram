@@ -21,7 +21,7 @@ html {
   }
   .box-form {
     margin: 0 auto;
-    width: 50%;
+    width: 963px;
     height: 90%;
     background: #FFFFFF;
     border-radius: 10px;
@@ -44,6 +44,7 @@ html {
     background-repeat: no-repeat;
     background-image: url(../../images/main_page/insta_bg.jpg);
     overflow: hidden;
+    width:65%;
   }
 
   .box-form .left .overlay {
@@ -84,7 +85,7 @@ html {
   }
 
   .box-form .right {
-    width: 450px;
+    width: 457px;
     overflow-x:hidden; 
  	overflow-y:auto; 
 
@@ -255,3 +256,53 @@ html {
 .post_num{
   width: 155px;
 }
+
+
+/*미디어쿼리*/
+@media screen and (max-width:1020px) {
+	.box-form {
+		display: flex;
+		flex-direction: column;
+		width: 500px;
+		height: 90%;
+	}
+	
+	.box-form .left {
+    color: #FFFFFF;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(../../images/main_page/insta_bg.jpg);
+    overflow: hidden;
+    width: 100%;
+    height:54%;
+    text-align:center;
+}
+	.box-form .left .overlay h1 {
+		font-size: 60px;
+		line-height: 72px;
+		font-weight: 700;
+	}
+.box-form .right {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+     padding-left:47px; 
+   
+}
+
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
