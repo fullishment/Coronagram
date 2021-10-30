@@ -177,6 +177,75 @@ public class FileUploadController {
 	
 	return mapper.writeValueAsString(modelMap);
 	}
+	
+	@RequestMapping(value = "/coronagram/fileUploadAjax3", method = RequestMethod.POST, 
+			produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String fileUploadAjax3(HttpServletRequest request, 
+							 ModelAndView modelAndView) throws Throwable {
+	ObjectMapper mapper = new ObjectMapper();
+	HashMap<String, Object> modelMap = new HashMap<String, Object>();
+	
+	/* File Upload Logic */
+	MultipartHttpServletRequest multipartRequest 
+				= (MultipartHttpServletRequest) request;
+	
+	String uploadExts = CommonProperties.VIDEO_EXT;
+	String uploadPath = CommonProperties.FILE_UPLOAD_PATH;
+	String fileFullName = "";
+	
+	File folder = new File(uploadPath);
+	
+	if (!folder.exists()) { // 폴더 존재여부
+		folder.mkdir(); // 폴더 생성
+	}
+	
+	List<String> fileNames = new ArrayList<String>();
+	try {
+		@SuppressWarnings("rawtypes")
+		final Map files = multipartRequest.getFileMap();//파일들을 취득<key,value> 파일명,파일
+		Iterator<String> iterator = multipartRequest.getFileNames();//파일명 취득
+		
+		while (iterator.hasNext()) {//다음값 존재 여부 확인
+			String key = iterator.next();//다음 값(파일명) 취득
+			MultipartFile file = (MultipartFile) files.get(key);//해당 파일명의 파일 취득
+			if (file.getSize() > 0) {
+				String fileRealName = file.getOriginalFilename(); // 실제파일명
+				String fileTmpName = Utils.getPrimaryKey(); // 고유 날짜키 받기
+				// 파일 확장자 추출
+				String fileExt = FilenameUtils.getExtension(
+									file.getOriginalFilename()).toLowerCase(); // 
+				
+	
+				if (uploadExts.toLowerCase().indexOf(fileExt) < 0) {
+					throw new Exception("Not allowded file extension : " 
+											+ fileExt.toLowerCase());
+				} else {
+					// 물리적으로 저장되는 파일명(실제파일명을 그대로 저장할지 rename해서 저장할지는 협의 필요)
+					fileFullName = fileTmpName + fileRealName;
+					//File(경로) - 폴더
+					//File(경로, 파일명) - 파일
+					// new File(new File(uploadPath), fileFullName)
+					// uploadPath경로의 폴더에 fileFullName 이름의 파일
+					// 파일.transferTo(새파일) - 새파일에 파일의 내용을 전송
+					file.transferTo(new File(new File(uploadPath), fileFullName));
+	
+					fileNames.add(fileFullName);
+				}
+			}
+		}
+	
+		modelMap.put("result", CommonProperties.RESULT_SUCCESS);
+	} catch (Exception e) {
+		// 공통 Exception 처리
+		e.printStackTrace();
+		modelMap.put("result", CommonProperties.RESULT_ERROR);
+	}
+	
+	modelMap.put("fileName", fileNames);
+	
+	return mapper.writeValueAsString(modelMap);
+	}
 	@RequestMapping(value = "/imageUpload", method = RequestMethod.POST)
 	public void editorImageUpload(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam MultipartFile upload, ModelAndView modelAndView) throws Throwable {

@@ -111,7 +111,8 @@
 						modalMover();
 						modalMover2();
 						slide();
-						
+						LkModal();
+						LkModalAjax();
 					},
 					error : function(request,status,error){
 						console.log(error);
@@ -136,6 +137,7 @@
 						modalMover2();
 						slide();
 						LkModal();
+						LkModalAjax();
 					},
 					error : function(request,status,error){
 						console.log(error);
@@ -164,7 +166,7 @@
 				 html+="			  <circle cx=\"226.5\" cy=\"226.5\" r=\"216.5\" stroke=\"url(#MyGradient)\" stroke-width=\"30\"/>									";
 				 html+="			  </svg>																															";	     
 			     html+="              <div class=\"profile_img\">                                                                       				 				";    
-			     html+=" 				   <img src=\""+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 				";    
+			     html+=" 				   <img src=\"resources/images/edit_profile/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 				";    
 			     html+="              </div>                                                                                            								";    
 			     html+="              <div class=\"user_name\">                                                                         								";    
 			     html+="                  <div class=\"nick_name m_text\">                                        														";
@@ -189,7 +191,7 @@
 		         var fileAdrSplit = fileAdr.split(',');
 		         for ( var i = 0; i < fileAdrSplit.length; i++) {
 		       	 	 html+=" <div class=\"slide slide-"+j+"\">                                       									 								";
-		           	 html+=" <img class=\"p_img\" src=\""+fileAdrSplit[i]+"\" alt=\"\" />	   						   									 				";
+		           	 html+=" <img class=\"p_img\" src=\"resources/images/userpage/"+fileAdrSplit[i]+"\" alt=\"\" />	   						   									 				";
 		          	 html+=" </div>                                                                  									 								";
 		          	 j++;        	
 		         }	
@@ -264,30 +266,30 @@
 			     html+="      </div>                                                                                                        							";
 				if(data.SET1 == 0){
 			    	 html+="      <div class=\"likes head_text\">                                                                                    					";
-				     html+="			좋아요<span class=\"lk_font\">"+data.LC+"</span>개																					";			     
+			    	 html+="			<span class=\"lk_font nick_modal2\">좋아요 "+data.LC+"개</span>																	";			     
 				     html+="      </div>                                                                                                        						";
 			     }			
 				 else{
 					 if(data.CMT_NICK != 0){
 						 if(data.LC == 0){
 							 html+="      <div class=\"likes head_text\">                                                                                    					";
-						     html+="			좋아요<span class=\"lk_font\">"+data.LC+"</span>개																					";			     
+							 html+="			<span class=\"lk_font nick_modal2\">좋아요 "+data.LC+"개</span>																	";				     
 						     html+="      </div>                                                                                                        						";
 						 }
 						 else if(data.LC == 1){
 							 html+="      <div class=\"likes head_text\">                                                                                    					";
-							 html+="			<span class=\"lk_font\">"+data.CMT_NICK+"</span>님이 좋아합니다.																		";		     
+							 html+="			<a href=\"coronagram/"+data.CMT_NICK+"\" class=\"lk_font nick_modal\">"+data.CMT_NICK+"</a>님이 좋아합니다.																		";		     
 						     html+="      </div>                                                                                                        						";
 						 }
 						 else{
 					    	 var lc = data.LC - 1;
 					    	 html+="      <div class=\"likes head_text\">                                                                                    					";
-						     html+="			<span class=\"lk_font\">"+data.CMT_NICK+"</span>님<span class=\"lk_font\"> 외 "+lc+" 명</span>이 좋아합니다.							";			     
+						     html+="			<a href=\"coronagram/"+data.CMT_NICK+"\" class=\"lk_font nick_modal\">"+data.CMT_NICK+"</a>님 <span class=\"lk_font nick_modal2\">외 "+lc+"명</span>이 좋아합니다.							";			     
 						     html+="      </div>                                                                                                        						";
 					     }				 
 					 }else{
 				    	 html+="      <div class=\"likes head_text\">                                                                                    					";
-					     html+="			좋아요<span class=\"lk_font\">"+data.LC+"</span>개																					";			     
+					     html+="			<span class=\"lk_font nick_modal2\">좋아요 "+data.LC+"개</span>																	";			     
 					     html+="      </div>                                                                                                        						";
 					 }				
 				 }			 		     
@@ -299,7 +301,7 @@
 			     var q = 2;
 			     for(data2 of list2){			    	 
 			    	 if(data2.WRITING_NO == data.WRITING_NO){
-			    		 html+="<div class=\"cmt_area\"> ";
+			    		 html+="<div class=\"cmt_area\"> 																												";
 			    		 html+="<div class=\"comment_container\" no=\""+data2.CMT_WRITER_NO+"\">         																";
 					     html+="   <div class=\"comment\" id=\"comment-list-ajax-post37\">        																		";
 					     html+="       <div class=\"comment-detail\">                             																		";
@@ -368,7 +370,7 @@
 					     html+="						<div class=\"modal_info_head2\">																						";
 					     html+="							<div class=\"pro_area\">																							";								     
 						 html+="								<div class=\"pro_thumb\">																						";						                 
-						 html+=" 				   					<img class=\"pro_img\" src=\""+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 				";      
+						 html+=" 				   					<img class=\"pro_img\" src=\"resources/images/edit_profile/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 				";      
 						 html+="								</div>																											";						                 
 						 html+="								<div class=\"pro_dtl\">																							";					                 
 						 html+="									<div class=\"m_nick\">"+data.NICK_NM+"</div>																";		                     
@@ -400,15 +402,78 @@
 				     	$(".modal_info_area2").html(html);
 		    }
 		    function LkModal(){
-		    	$(".likes").on("click",function(){
+		    	$(".nick_modal2").on("click",function(){
 		    		$('.lk_modal').css("display","block");
+		    		$('body').css("overflow","hidden");
+		    		$("#writingNo4").val($(this).parent().parent().parent().attr('wtno'));
+		    		LkModalAjax();
+		    		var modal = document.getElementById('lk_modal');  		            
+		            window.onclick = function(event) {
+		                if (event.target == modal) {
+		                    modal.style.display = "none";
+		                    $('body').css("overflow","auto");
+		                }
+		            }
+		            $(".lk_modal_close").on("click",function(){
+		            	modal.style.display="none";
+		            	$('body').css("overflow","auto");
+		            });	            
 		    	});
+		    }
+		    function LkModalAjax(){
+		    	
+		    	var params = $("#modalLkForm").serialize();
+	    		$.ajax({
+	    			url : "lkModalList",
+	    			type : "post",
+	    			dataType : "json",
+	    			data : params,
+	    			success : function(res){		    				
+	    				LkModalList(res.lkMList);
+	    				followAdd();
+	    				followDel();
+	    			},
+	    			error : function(request, status, error){
+	    				console.log(error);
+	    			}
+	    		});
+		    }
+		    function LkModalList(list){
+		    	var html = "";
+		    	for(data of list){
+		    		html+="<div class=\"rec_user\" nfo=\""+data.M_NO+"\">																		 ";
+					html+="		<div class=\"profile_thumb\">																					 ";
+					html+=" 		<img src=\"resources/images/edit_profile/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 "; 
+					html+="		</div>																											 ";
+					html+="		<div class=\"detail\">																							 ";
+					html+="			<a href=\"coronagram/"+data.NICK_NM+"\" class=\"modal_nick\">"+data.NICK_NM+"</a>																 ";			
+					html+="		</div>																											 ";
+					if(data.M_NO == ${sMNo}){
+						
+					}
+					else{
+						if(data.CNTF == 1){
+							html+="			<div class=\"rec_follow\">																					 ";
+							html+="				<span class=\"modal_follow1 fispan\">팔로잉</span>														 ";
+							html+="			</div>																										 ";
+						}
+						else if(data.CNTF == 0){
+							html+="			<div class=\"rec_follow\">																					 ";
+							html+="				<span class=\"modal_follow2 fospan\">팔로우</span>														 ";
+							html+="			</div>																										 ";
+						}
+					}				
+					html+="</div>																												 ";
+		    	}
+		    	
+				
+				$(".lk_modal_main").html(html);
 		    }
 		    function modalInfoImg(list){
 		    	var html = "";
 		    	for(data of list){
 		    		 html+="<div pi=\""+data.M_NO+"\"> ";
-			    	 html+=" <img class=\"modal_img_box\" src=\""+data.FILE_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	"; 
+			    	 html+=" <img class=\"modal_img_box\" src=\"resources/images/userpage/"+data.FILE_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	"; 
 			    	 html+="</div>";
 		    	}
 		    	$(".modal_info_img2").html(html);
@@ -448,7 +513,7 @@
 				     html+="						<div class=\"modal_info_head3\">																						";
 				     html+="							<div class=\"pro_area\">																							";								     
 					 html+="								<div class=\"pro_thumb\">																						";						                 
-					 html+=" 				   					<img class=\"pro_img\" src=\""+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 				";      
+					 html+=" 				   					<img class=\"pro_img\" src=\"resources/images/edit_profile"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 				";      
 					 html+="								</div>																											";						                 
 					 html+="								<div class=\"pro_dtl\">																							";					                 
 					 html+="									<div class=\"m_nick\">"+data.NICK_NM+"</div>																		";		                     
@@ -483,7 +548,7 @@
 		    	var html = "";
 		    	for(data of list){
 		    		 html+="<div pi=\""+data.M_NO+"\"> ";
-			    	 html+=" <img class=\"modal_img_box\" src=\""+data.FILE_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	"; 
+			    	 html+=" <img class=\"modal_img_box\" src=\"resources/images/userpage/"+data.FILE_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	"; 
 			    	 html+="</div>";
 		    	}
 		    	$(".modal_info_img3").html(html);
@@ -508,7 +573,7 @@
 						html+="		</svg>																																";
 						html+="		<div class=\"user\">																												";
 						html+="      	<div class=\"thumb_img\" fono=\""+data.M_NO+"\">																				";
-						html+=" 			<img src=\""+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 		   			";
+						html+=" 			<img src=\"resources/images/edit_profile/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 		   			";
 						html+="			</div>																															";
 						html+="       	<div class=\"id\">																												";
 						if(data.NICK_NM.length<9){
@@ -534,7 +599,7 @@
 					 	
 					 	html+="<div class=\"rec_user\" nfo=\""+data.M_NO+"\">																		 ";
 						html+="		<div class=\"profile_thumb\">																					 ";
-						html+=" 		<img src=\""+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 "; 
+						html+=" 		<img src=\"resources/images/edit_profile/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 "; 
 						html+="		</div>																											 ";
 						html+="		<div class=\"detail\">																							 ";
 						html+="			<div class=\"rec_id\">"+data.NICK_NM+"</div>																 ";			
@@ -563,6 +628,7 @@
 		    					$(this).parent('.rec_follow').html(html);
 		    					reloadPart1();									
 								followDel();
+								LkModalAjax();
 		    				}else{
 		    					alert("add실패");
 		    				}
@@ -589,7 +655,8 @@
 		    					html+="<span class=\"follow_submit fospan\">팔로우</span>";
 		    					$(this).parent('.rec_follow').html(html);
 		    					reloadPart1();
-		    					followAdd();	
+		    					followAdd();
+		    					LkModalAjax();
 		    				}else{
 		    					alert("add실패");
 		    				}
@@ -816,7 +883,19 @@
     <main>
     	
 	    <section id="container">
-		   																															
+    		<section>
+	    		<div id="lk_modal" class="lk_modal">																											
+					<div class="lk_modal_body">
+						<div class="lk_modal_header">
+							좋아요
+						<i class="fas fa-times lk_modal_close"></i>
+						</div>
+						<div class="lk_modal_main">
+							
+						</div>
+					</div>																								
+	 			</div>
+    		</section>	   																															
 	    	<section class="head_container">
 					<div class="hidden_menu">
 							<div class="follow_prev" onclick="ScrollPrev()"></div>
@@ -824,10 +903,7 @@
 			            <div class="scroll_inner"></div>
 			        </div>    
 	        </section>
-	        <section id="main_container"> 
-	        	 <div class="lk_modal">																											
-			  		<div class="lk_modal_body"></div>																								
- 				</div>	    	
+	        <section id="main_container"> 	        	 	    	
 	            <div class="inner">
 	                <div id="contents_box" class="contents_box">               
 	                </div>	                
@@ -866,6 +942,10 @@
 	   	  </form>
 	   	  <form action="#" id="LkForm" method="post">
           	  <input type="hidden" name="writingNo2" id="writingNo3"/> 
+	   	  </form>
+	   	  <form action="#" id="modalLkForm" method="post">
+	   	  	  <input type="hidden" name="m_no4" id="m_no4" value="${sMNo}"/>
+          	  <input type="hidden" name="writingNo3" id="writingNo4"/> 
 	   	  </form>
 	</main>
     <script src="resources/script/menu_bar/menu_bar.js"></script>

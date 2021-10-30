@@ -58,7 +58,9 @@
 					followArea();
 					editProfile();
 					addFollow();
-		        	delFollow();					
+		        	delFollow();	
+		        	mInfo(res.intro);
+		        	mInfoClick();
 				},
 				error : function(request,status,error){
 					console.log(error);
@@ -96,11 +98,30 @@
 				}
 			});
         }
-        function intro(intro){
+        function intro(data){
         	var html ="";
-        		html+="<h1 id=\"mId\" class=\"profile-user-name\">"+intro.NICK_NM+"</h1> 	  ";
+        		html+="<h1 id=\"mId\" class=\"profile-user-name\">"+data.NICK_NM+"</h1> 	  ";
         		$(".profile-user-setting").html(html);      	
         }
+        function mInfoClick(){
+        	$("#photo_add").on("click",function(){
+        		$("#addCrngForm").submit();
+        	});
+        }
+        function mInfo(data){
+        	var html="";
+        		if(data.NICK_NM == "${sMNick}"){
+        			html+="<div class=\"btn_area\">										";
+            		html+="		<div id=\"photo_add\" class=\"photo_add\">  			";
+            		html+="			<i class=\"far fa-plus-square\"></i>				";
+            		html+="			<span class=\"btn_font\">&nbsp;새 컬렉션</span>		";
+            		html+="		</div>													";
+            		html+="</div>														";
+        		}else{
+        			
+        		}       		
+        		$(".nav_line").html(html);      	
+        }        
         function introNm(data){
         	var html ="";
 	        	html+="<span class=\"profile-real-name\">"+data.M_NM+"</span>			 	  ";
@@ -123,7 +144,7 @@
 			var html ="";			
 			for(var data of list){                                                                                    
 				html+= "<div class=\"gallery-item\" tabindex=\"0\" wtno=\""+data.WRITING_NO+"\" no=\""+data.M_NO+"\">                   "; 
-			    html+= "    	<img src=\"../"+data.FILE_ADR+"\" class=\"gallery-image\" alt=\"\" />									"; 
+			    html+= "    	<img src=\"../resources/images/userpage/"+data.FILE_ADR+"\" class=\"gallery-image\" alt=\"\" />									"; 
 				if(data.WCNT>1){
 				    html+= "	<div class=\"gallery-item-type\">																		";
 				    html+= "        <span class=\"visually-hidden\">Gallery</span><i class=\"fas fa-clone\" aria-hidden=\"true\"></i>	";
@@ -193,7 +214,7 @@
 			     }	
 			     html+="               <div class=\"user_container\">                                                                  									   ";
 			     html+="                   <div class=\"profile_img\">                                                                 									   ";
-			     html+=" 						<img src=\"../"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 		   ";
+			     html+=" 						<img src=\"../resources/images/edit_profile/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 		   ";
 			     html+="                   </div>                                                                                      									   ";
 			     html+="                   <div class=\"user_name\">                                                                   									   ";
 			     html+="                       <div class=\"nick_name head_text\">"+data.NICK_NM+"</div>                               									   ";
@@ -203,7 +224,7 @@
 			     html+="           <div class=\"cmt_sec1\">                                                                            									   ";
 			     html+="               <div class=\"user_container\">                                                                									   ";
 			     html+="                   <div class=\"profile_img\">                                                                   								   ";
-			     html+=" 						<img src=\"../"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 	   ";
+			     html+=" 						<img src=\"../resources/images/edit_profile/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 	   ";
 			     html+="				   </div>																						 								   ";
 			     html+="                   <div class=\"user_name\">                                                                 	 								   ";
 			     html+="                        <div class=\"nick_name head_text\">"+data.NICK_NM+"</div>                             	 								   ";
@@ -304,7 +325,7 @@
 			     html+="   <div class=\"comment\" id=\"comment-list-ajax-post37\">     														 ";
 			     html+="       <div class=\"comment-detail\">                          														 ";
 			     html+="           <div class=\"profile_img\">                          													 ";
-			     html+=" 				<img src=\"../"+list.IMG_ADR+"\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 ";
+			     html+=" 				<img src=\"../resources/images/edit_profile/"+list.IMG_ADR+"\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 ";
 			     html+="		   </div>																									 ";
 			     html+="           <div class=\"head_text\">"+list.NICK_NM+"</div>      													 ";
 			     html+="              <div class=\"ccon\">"+list.CMT_CON+"</div>        													 ";
@@ -452,7 +473,7 @@
 			for(var list of md){                                                                                                                              
 				
 				html+=" <div class=\"slide slide-"+i+"\">                                       ";
-                html+=" <img src=\"../"+list.FILE_ADR+"\" alt=\"\" />	   						";
+                html+=" <img src=\"../resources/images/userpage/"+list.FILE_ADR+"\" alt=\"\" />	   						";
 	           	html+=" </div>                                                                  ";
 				i++;	
 			}
@@ -474,7 +495,7 @@
 				html+="			<circle cx=\"226.5\" cy=\"226.5\" r=\"216.5\" stroke=\"url(#MyGradient)\" stroke-width=\"10\"/>									";
 				html+="		</svg>																																";
 				html+=" 	<div class=\"pGradient2\"> 																								   			";
-				html+=" 		<img src=\"../"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 		   		";
+				html+=" 		<img src=\"../resources/images/edit_profile/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 		   		";
 				html+=" 	</div> 																								   					   			";
 				html+=" </div>																								   					   				";	
 			$(".profile-image").html(html);
@@ -766,7 +787,7 @@
             </div>
             <nav>
             	<div class="nav_menu">
-	        	<div class="nav_line"></div>
+            		<hr class="nav_hr">	        		
 		        	<div class="nav_list">
 		        		<div class="nav_list_post">	        			
 		        			<div class="menu_post">
@@ -774,6 +795,9 @@
 		        				<span>게시물</span>
 		        			</div>		        			
 		        		</div>
+		        	</div>
+		        	<div class="nav_line">
+		        		      		
 		        	</div>
 	        	</div>
             </nav>         
@@ -805,6 +829,9 @@
 		   </form>
 		   <form action="#" id="delPostForm" method="post">
     	   	  <input type="hidden" name="writingNo" id="writingNo3"/>
+		   </form>
+		   <form action="crngAdd" id="addCrngForm" method="post">
+    	   	  <input type="hidden" name="m_no" value="${sMNo}"/>
 		   </form>
 	 	</main>	   
     	<script src="../resources/script/menu_bar/menu_bar.js"></script>

@@ -97,4 +97,10 @@ public class ServiceCoronagram implements IServiceCoronagram{
 		return iDaoCoronagrma.postAcctAdd(params);
 	}
 
+	@Override
+	public List<HashMap<String, String>> getLkMList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.getLkMList(params);
+	}
+
 }

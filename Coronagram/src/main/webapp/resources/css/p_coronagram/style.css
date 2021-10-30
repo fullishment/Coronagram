@@ -14,15 +14,23 @@
 body{
     background:#fafafa;
 }
+.lk_modal_header{
+	height:100px;
+}
+.lk_modal_main{
+	max-height: 500px;
+    overflow: auto;
+}
 
 .lk_modal{
-	position:absolute; 
+	position:fixed; 
 	width:100%; 
 	height:100%; 
+	top:0px;
+	left:0px;
 	background: 
-	rgba(0,0,0,0.4); 
-	top:0; 
-	left:0; 
+	rgba(0,0,0,0.4);
+	margin:0 auto; 
 	z-index:10;
 	display:none;
 }
@@ -32,7 +40,6 @@ body{
 	left: 50%; 
 	width: 400px; 
 	height: 600px; 
-	padding: 40px; 
 	text-align: center; 
 	background-color: 
 	rgb(255, 255, 255); 
@@ -692,6 +699,25 @@ body{
     font-weight: bold;
     padding-top: 6px;
 }
+.nick_modal{
+	color: #262626;
+}
+.nick_modal:link{
+	color: #262626;
+	text-decoration: none;
+}
+.nick_modal:visited{
+	color: #262626;
+	text-decoration: none;
+}
+.nick_modal:hover{
+	color: #262626;
+	text-decoration: underline;
+}
+.nick_modal2:hover{
+	cursor:pointer;
+	text-decoration: underline;
+}
 .contents .comment_container{
  	display: flex;
     align-items: flex-start;
@@ -808,43 +834,63 @@ body{
     padding: 10px 20px;
 }
 
-.follow_thumb .profile_thumb{
+.profile_thumb{
     width: 34px;
     height: 34px;
 }
 
 
-.follow_thumb .time{
+.time{
     font-size: 10px;
     letter-spacing: 0.2px;
     color:#999;
 }
 
-.side_box .profile_thumb{
+ .profile_thumb{
     width: 50px;
     height: 50px;
     border-radius: 50%;
     overflow:hidden;
     margin-right: 10px;
 }
-
-
-.side_box .profile_thumb img{
+.lk_modal_main{
+	display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
+.lk_modal_header{
+	font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13pt;
+    border-bottom: 1px solid rgba(0,0,0,0.09);
+}
+.lk_modal_close{
+	position: absolute;
+    right: 40px;
+}
+.lk_modal_close:hover{
+	color:#aaa;
+	position: absolute;
+    right: 40px;
+}
+.profile_thumb img{
     width: 100%;
     height:100%;
 }
 
-.side_box .user_profile{
+ .user_profile{
     display: flex;
     align-items: center;
     font-size: 14px;
     color:#262626;
 }
-.side_box .detail .rec_id .fo_id{
+ .detail .rec_id .fo_id{
     margin-bottom: 5px;
 }
 
-.side_box .detail .ko_name{
+ .detail .ko_name{
     font-size: 12px;
     color:#999;
 }
@@ -890,6 +936,40 @@ body{
 }
 .fispan{
 	color:#aaa;
+}
+.modal_follow1{
+	cursor : pointer;
+	padding: 7px 10px 7px 10px;
+    background: white;
+    color: #262626;
+    font-weight: bold;
+    border: 1px solid #dbdbdb;
+    border-radius: 7px;
+}
+.modal_follow2{
+	cursor : pointer;
+	padding: 7px 10px 7px 10px;
+	color: white !important;
+	font-weight: bold;
+	border-radius: 7px;
+	background: #0095f6;
+}
+.modal_nick{
+	color: #262626;
+    font-weight: bold;
+}
+.modal_nick:hover{
+	cursor : pointer;
+	color: #262626;
+	text-decoration: underline;
+}
+.modal_nick:link{
+	color: #262626;
+	text-decoration : none;
+}
+.modal_nick:visited{
+	color: #262626;
+	text-decoration : none;
 }
 .rec_user{
 	display:inline-flex;

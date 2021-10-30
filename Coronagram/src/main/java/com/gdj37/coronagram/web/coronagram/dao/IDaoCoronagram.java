@@ -34,4 +34,6 @@ public interface IDaoCoronagram {
 	public int postAdd(HashMap<String, String> params)throws Throwable;
 
 	public int postAcctAdd(HashMap<String, String> params)throws Throwable;
+
+	public List<HashMap<String, String>> getLkMList(HashMap<String, String> params)throws Throwable;
 }

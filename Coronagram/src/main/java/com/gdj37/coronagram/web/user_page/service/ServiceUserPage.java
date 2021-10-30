@@ -109,5 +109,4 @@ public class ServiceUserPage implements IServiceUserPage{
 		// TODO Auto-generated method stub
 		return iDaoUserPage.delPost(params);
 	}
-
 }

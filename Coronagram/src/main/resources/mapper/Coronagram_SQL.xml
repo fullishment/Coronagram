@@ -154,4 +154,20 @@
 		INSERT INTO CRNG_ATTC(ATTC_NO,WRITING_NO,FILE_ADR)
 				VALUES(ACCT_SEQ.NEXTVAL,#{last_no},#{CrngImgFile})
 	</insert>
+	<select id="getLkMList" parameterType="hashmap" resultType="hashmap">
+		SELECT M.M_NO, M.NICK_NM, M.IMG_ADR , NVL(FT.CNTF,0) AS CNTF
+    		FROM LK L
+        	INNER JOIN M M
+            ON L.USER_NO = M.M_NO
+        	LEFT OUTER JOIN (SELECT RQ_USER,RP_USER, NVL(COUNT(*),0) AS CNTF 
+                                FROM FOLLOW
+                                WHERE RQ_USER = #{m_no4}           
+                                AND RQ_USER != RP_USER
+                                GROUP BY RQ_USER,RP_USER
+                        )FT
+                        ON FT.RP_USER = M.M_NO
+        	WHERE L.WRITING_NO = #{writingNo3}
+        	ORDER BY DECODE(M.M_NO,#{m_no4},1),
+        	L.LK_DT DESC
+	</select>
 </mapper>

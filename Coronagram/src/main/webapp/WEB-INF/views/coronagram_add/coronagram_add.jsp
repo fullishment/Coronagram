@@ -52,7 +52,7 @@
             						$("#CrngImgFile").val(res.fileName[0]);
             						var html="";
             						html+="<li class=\"preview\">																						  	 ";
-            						html+="		<img src=\"../resources/upload/"+$("#CrngImgFile").val()+"\" class=\"CrngPrevImg\" alt=\"thumbnail\" id=\"preview\" >";
+            						html+="		<img src=\"../resources/images/userpage/"+$("#CrngImgFile").val()+"\" class=\"CrngPrevImg\" alt=\"thumbnail\" id=\"preview\" >";
             						html+=" 	<i class=\"fas fa-times-circle close_prev\"></i>															 ";
             						html+="</li>																											 ";
             						$("#preview_area").append(html);
@@ -160,7 +160,7 @@
         						$("#CrngImgFile").val(res.fileName[0]);
         						var html="";
         						html+="<li class=\"preview\">																						  	 ";
-        						html+="		<img src=\"../resources/upload/"+$("#CrngImgFile").val()+"\" class=\"CrngPrevImg\" alt=\"thumbnail\" id=\"preview\" >";
+        						html+="		<img src=\"../resources/images/userpage/"+$("#CrngImgFile").val()+"\" class=\"CrngPrevImg\" alt=\"thumbnail\" id=\"preview\" >";
         						html+=" 	<i class=\"fas fa-times-circle close_prev\"></i>															 ";
         						html+="</li>																											 ";
         						$("#preview_area").append(html);

@@ -101,4 +101,10 @@ public class DaoCoronagram implements IDaoCoronagram{
 		// TODO Auto-generated method stub
 		return sqlSession.insert("crng.postAcctAdd",params);
 	}
+
+	@Override
+	public List<HashMap<String, String>> getLkMList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("crng.getLkMList",params);
+	}
 }

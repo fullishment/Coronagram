@@ -171,14 +171,59 @@ svg {
   #checkbox {
     display: none;
   }
+  .nav_line{
+  	display: flex;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+  }
+  .btn_area{
+  	width: 900px;
+  }
+  .photo_add{
+  	display: flex;
+    width: 100px;
+    height: 35px;
+    background: #0095f6;
+    float: right;
+    outline: none;
+    border: 0px;
+    border-radius: 7px;
+    color: white;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;   
+  }
+  .photo_add:hover{
+  	cursor:pointer;
+  	opacity:.6;
+  }
+  .photo_add:active{
+  	cursor:pointer;
+  	opacity:.4;
+  }
+  .btn_font{
+  	font-size:12pt;
+  }
+  .fa-plus-square{
+  	font-size:15pt;
+  }
+  .nav_hr{
+  	border-bottom:0px;
+  	color:#dbdbdb;
+  	width:900px;
+  	text-align:center;
+  	margin: 0px auto;
+  }
   .nav_line {
     height: 60px;
-    border-bottom : 1px solid #dbdbdb;
   }
   .nav_list_post{
+  	position: relative;
+    bottom: 2px;
   	font-size:12pt;
   	font-weight:600;
-  	border-top: 1px solid #262626;
+  	border-top: 2px solid #262626;
   	padding-top:10px;
   }
   .nav_list_post:link {	
@@ -194,8 +239,6 @@ svg {
    }    	
    .nav_menu{
     	height: 120px;
-		padding-left: 15%;
-		padding-right: 15%;
    }
    .nav_list{
    		display: flex;
@@ -935,6 +978,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
         grid-gap: 2rem;
+        grid-template-columns: 1fr 1fr 1fr;
     }
 
     .profile-image,
