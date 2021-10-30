@@ -224,6 +224,7 @@
     </section>
     <section class="slideshow">
         <div class="slideshow-inner">
+        
           <div class="slides">
             <div class="slide is-active ">
               <div class="slide-content">
@@ -241,6 +242,25 @@
                 <img src="https://www.alixbdanthenay.fr/wp-content/uploads/2015/07/Indispensable-1.jpg" alt="" class="image" />
               </div>
             </div>
+            <c:forEach var="data" items="${list}" begin="1"> 
+	        	<div class="slide">
+	              <div class="slide-content">
+	                <div class="caption">
+	                  <div class="title">Slide title 2</div>
+	                  <div class="text">
+	                    <p>Slide description 2</p>
+	                  </div> 
+	                  <a href="#" class="btn">
+	                    <span class="btn-inner">Learn More</span>
+	                  </a>
+	                </div>
+	              </div>
+	              <div class="image-container">
+	                <img src="https://www.alixbdanthenay.fr/wp-content/uploads/2015/07/Indispensable-4-1.jpg" alt="" class="image" />
+	              </div>
+	            </div>
+	        
+	        </c:forEach>
             <div class="slide">
               <div class="slide-content">
                 <div class="caption">

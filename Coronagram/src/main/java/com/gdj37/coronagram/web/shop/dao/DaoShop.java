@@ -170,6 +170,12 @@ public class DaoShop implements IDaoShop {
 		return sqlSession.insert("shop.prodAdd",params);
 	}
 
+	@Override
+	public List<HashMap<String, String>> getProdTopList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("shop.getProdTopList", params);
+	}
+
 
 
 

@@ -5,7 +5,8 @@ body{
   justify-content: center;
   background-position:  200% -40%;
   background-size: 80%;
-  overflow-x:hidden
+  overflow-x:hidden;
+  background: #ecf0f1;
   
 }
 p{
@@ -25,7 +26,6 @@ p{
   justify-content: center;
   box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
   background: #fff;
-  background-image: url(https://github.com/OlgaKoplik/CodePen/blob/master/leaf2.png?raw=true), url(https://github.com/OlgaKoplik/CodePen/blob/master/leaf.png?raw=true);
   background-repeat: no-repeat, no-repeat;
   background-position: 120% -5%, 200% -40%;
   background-size: 40%, 80%;
@@ -57,7 +57,7 @@ label{
   position: relative;
   padding: 6px;
   cursor: pointer;
-  background: linear-gradient(270deg, #3fa1a9, #79f1a4);
+  background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
   margin-bottom: 25px;
 }
 
@@ -80,13 +80,13 @@ label{
   font-size: 90px;
   position: absolute;
   padding-top: 80px;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: #63d3a6;
-  width: 200px;
-  height: 200px;
+  color: #fd1d1d;
+  width: 230px;
+  height: 230px;
   border-radius: 50%;
   opacity: 0;
   transition: .5s ease;

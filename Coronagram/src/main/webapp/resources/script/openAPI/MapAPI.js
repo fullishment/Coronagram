@@ -22,13 +22,7 @@ function getList(){
 	});
 	
 }
-function findCode(name){
-	for(var i=0; i<allCountry.length;i++){
-		if(allCountry[i].name == name){
-			return allCountry[i].code;
-		}
-	}
-}
+
 function drawList(z) {
 	//var html = "";
 	
@@ -40,9 +34,9 @@ function drawList(z) {
 				 var tmp =  {
 					"z" : parseInt($(this).find('natDefCnt').text()),
 					"d" : parseInt($(this).find('natDeathCnt').text()),
-					"c" : 2,
+					"c" :  $(this).find('stdDay').text(),
 					"name" : $(this).find('nationNmEn').text(),
-					"date" : $(this).find('stdDay').text()
+					
 				}; 
 				
 			
@@ -103,7 +97,7 @@ function drawList(z) {
 		        name: 'COVID-19',
 		        joinBy: ['name', 'name'],
 		        color: "#E00000",
-		        data: data,
+		        data: dataArray,
 		        minSize: 8,
 		        maxSize: '15%',
 		        tooltip: {

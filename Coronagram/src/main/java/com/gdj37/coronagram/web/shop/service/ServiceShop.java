@@ -172,6 +172,12 @@ public class ServiceShop implements IServiceShop{
 		return iDaoShop.prodAdd(params);
 	}
 
+	@Override
+	public List<HashMap<String, String>> getProdTopList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.getProdTopList(params);
+	}
+
 
 
 	

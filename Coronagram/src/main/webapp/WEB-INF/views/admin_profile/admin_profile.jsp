@@ -315,7 +315,7 @@ function readURL(input) {
     <div class="input_area">
       <label for="imgBtn" class="custom-file-upload fas">
         <div class="img-wrap img-upload">
-          <img for="photo-upload" src="https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"/>
+          <img for="photo-upload" src="https://as2.ftcdn.net/v2/jpg/02/17/34/67/500_F_217346782_7XpCTt8bLNJqvVAaDZJwvZjm0epQmj6j.jpg"/>
         </div>
       </label> 
       

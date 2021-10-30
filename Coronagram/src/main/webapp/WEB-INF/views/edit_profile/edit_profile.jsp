@@ -107,7 +107,7 @@
 	}
 $(document).ready(function(){
    $("#cancelBtn").on("click", function(){
-      $("#backForm").submit();
+      history.back();
    });
    $("#updateForm").on("keypress", "input", function(event){
       if(event.keyCode == 13){
@@ -195,6 +195,7 @@ $(document).ready(function(){
                   success : function(res){
                      if(res.result == "success"){
                         $("#backForm").submit();
+                        location.href="../coronagram/${sMNick}";
                      } else if(res.result == "failed"){
                         alert("수정에 실패하였습니다.");
                      } else {
@@ -350,7 +351,7 @@ function readURL(input) {
     
   </header>
   <main>
-   <form action="main" id="backForm" method="post">
+   <form action="#" id="backForm" method="post">
       <input type="hidden" name="no" value="${param.no}" />
    </form>
    
@@ -362,7 +363,7 @@ function readURL(input) {
     <div class="input_area">
       <label for="imgBtn" class="custom-file-upload fas">
         <div class="img-wrap img-upload">
-          <img for="photo-upload" src="https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true"/>
+          <img for="photo-upload" src="https://as2.ftcdn.net/v2/jpg/02/17/34/67/500_F_217346782_7XpCTt8bLNJqvVAaDZJwvZjm0epQmj6j.jpg"/>
         </div>
       </label> 
     <div class="qnaImg">
