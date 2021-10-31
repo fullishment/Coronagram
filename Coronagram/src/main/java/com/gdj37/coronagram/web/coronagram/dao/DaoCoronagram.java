@@ -107,4 +107,10 @@ public class DaoCoronagram implements IDaoCoronagram{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("crng.getLkMList",params);
 	}
+
+	@Override
+	public HashMap<String, String> getCrngDtl(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("crng.getCrngDtl",params);
+	}
 }

@@ -210,7 +210,7 @@ svg {
   }
   .nav_hr{
   	border-bottom:0px;
-  	color:#dbdbdb;
+  	background-color:#dbdbdb !important;
   	width:900px;
   	text-align:center;
   	margin: 0px auto;
@@ -220,14 +220,28 @@ svg {
   }
   .nav_list_post{
   	position: relative;
-    bottom: 2px;
+  	display: flex;
+    bottom: 11px;
   	font-size:12pt;
   	font-weight:600;
-  	border-top: 2px solid #262626;
+  	flex-direction: row;
   	padding-top:10px;
+  	font-size: 11pt;
+  }
+  .menu_post{
+  	cursor:pointer;
+  	border-top: 2px solid #262626; 	
+  	padding-top: 10px;
+  	color: #262626;
+  }
+  .menu_post2{
+  	cursor:pointer;
+  	margin-left: 60px;
+  	padding-top: 10px;
+  	color:#8e8e8e;
   }
   .nav_list_post:link {	
-  	color:#8e8e8e;
+  	color:#dbdbdb;
   }
   .nav_list_post:visited {
 	color: #262626;
@@ -521,12 +535,52 @@ svg {
     border: 1px solid white;
     width: 340px;
     height: 50px;
-    padding-top: 18px;
+}
+.emoji_area{
+	display: none;
+	position: absolute;
+    width: 400px;
+    height: 300px;
+    background: white;
+    border: 1px solid #dbdbdb;
+    border-radius: 10px;
+    bottom: 60px;
+    overflow: auto;
+}
+.emoji_container{
+	display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    overflow: auto;
+}
+.emoji_title{
+	font-size: 11pt;
+    font-weight: bold;
+    padding: 10px;
+}
+.emo{
+	cursor:pointer;
+	font-size: 20pt;
+}
+.emoji{
+	width: 100%;
+    height: 600px;
+    display: grid;
+    grid-gap: 2px;
+    grid-template-columns: repeat(8, 1fr);
 }
 .cmt_field{
-    padding: 0 20px;
+    padding: 0 10px;
     position: relative;
-    min-height:56px;
+    min-height: 56px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.fa-smile{
+	font-size: 25pt;
+    margin-right: 10px;
 }
 .head_text{
     font-size: 14px;
@@ -586,7 +640,6 @@ svg {
     height: 100%;
     display: none;
     position: absolute;
-    margin-top: 5rem;
     }
 
 .slide:first-child {
@@ -596,11 +649,9 @@ svg {
     width: 100%;
     width: 100%;
 	height: 100%;
-
 	position: absolute;
-
-	bottom: 53px;
-	border-radius: 15px 00px 0px 9px;
+    bottom: 3px;
+    border-radius: 13px 0px 0px 8px;
 }
 
     /* slide-nav */
@@ -731,12 +782,13 @@ svg {
       }
  }
 .pGradient2{
-	    position: absolute;
+	position: absolute;
     width: 179px;
+    height: 179px;
     background-color: white;
     padding: 6px;
     border-radius: 70%;
-    top: 83px;
+    top: 82px;
     margin-left: 11px;
 }
 .profile-user-settings,
@@ -757,14 +809,17 @@ svg {
 }
 
 .profile-edit-btn {
-    font-size: 1.4rem;
-    line-height: 1.8;
-    border: 0.1rem solid #dbdbdb;
-    border-radius: 0.3rem;
-    padding: 0 2.4rem;
-    margin-left: 2rem;
+    border: 1px solid #dbdbdb;
+    padding: 3px 10px 3px 10px;
+    border-radius: 7px;
+    margin-left: 15px;
+    font-size: 11pt;
+    font-weight: bold;
 }
-
+video{
+	width: 100%;
+    height: 100%;
+}
 .profile-settings-btn {
     font-size: 2rem;
     margin-left: 1rem;
@@ -960,7 +1015,79 @@ The following code will only run if your browser supports CSS grid.
 Remove or comment-out the code block below to see how the browser will fall-back to flexbox & floated styling. 
 
 */
-
+/* style.css */ /* 숨기려는 버튼을 골라서 쓰자 */ /* 전체화면 버튼 */ 
+video::-webkit-media-controls-fullscreen-button {
+	display: none !important; 
+} 
+/* 일시정지, 재생 버튼 */ 
+video::-webkit-media-controls-play-button {
+	display: none !important; 
+} 
+/* 재생 슬라이드..? */
+video::-webkit-media-controls-timeline {
+	display: none !important; 
+} 
+/* 현재 진행 시간 */ 
+video::-webkit-media-controls-current-time-display{
+	display: none !important; 
+} 
+/* 전체 시간 */ 
+video::-webkit-media-controls-time-remaining-display {
+	display: none !important; 
+} 
+/* 음소거 버튼 */ 
+video::-webkit-media-controls-mute-button {
+	display: none !important; 
+} 
+/* 볼륨 조절 슬라이드 */ 
+video::-webkit-media-controls-volume-slider {
+	display: none !important; 
+} 
+/* 괄호에 display: none !important; 를 추가하면된다. 예 ) 전체화면 전환 버튼을 숨긴다. 다만 더블클릭으로 전체화면이 되는 기능등은 그대로고 단지 버튼만 없앤다. */ 
+video::-webkit-media-controls-fullscreen-button { 
+	display: none !important; 
+}
+::-webkit-media-controls {
+    display:none !important;
+}
+video::-webkit-media-controls {
+    display:none !important;
+}
+video::-webkit-media-controls-enclosure {
+    display:none !important;
+}
+video::-webkit-media-controls-fullscreen-button {
+    display:none !important;
+}
+.muted_btn{
+	position: absolute;
+    bottom: 20px;
+    right: 15px;
+    font-size: 13pt;
+    background: black;
+    width: 30px;
+    padding: 6px;
+    height: 30px;
+    border-radius: 70%;
+    color: white;
+}
+.play_btn{
+	position: absolute;
+    /* top: 45%; */
+    top: 0;
+    width: 0%;
+    height: 0%;
+    left: 0;
+    font-size: 80pt;
+    color: black;
+    text-shadow: -3px 6px 0px rgb(0 0 0 / 25%);
+}
+.fa-play1{
+	position:absolute;
+	top:45%;
+	left:45%;
+	color:white;
+}
 @supports (display: grid) {
     .profile {
         display: grid;
@@ -979,6 +1106,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
         grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
         grid-gap: 2rem;
         grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 300px 300px 300px;
     }
 
     .profile-image,

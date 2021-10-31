@@ -24,7 +24,7 @@ public class UserPage {
 	@RequestMapping(value="/coronagram/{nicknm}" ,method = RequestMethod.GET)
 	public ModelAndView userpage(ModelAndView mav, @PathVariable("nicknm") String nicknm) throws Throwable{
 		System.out.println(nicknm);
-
+		
 		mav.setViewName("user_page/user_page");
 		return mav;
 	}
@@ -43,6 +43,21 @@ public class UserPage {
 		
 		return mapper.writeValueAsString(modelMap);	
 	}
+	@RequestMapping(value="/coronagram/videoList" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String videoList(ModelAndView mav,@RequestParam HashMap<String,String> params) throws Throwable {
+		System.out.println(params);
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+
+		List<HashMap<String,String>> video = iServiceUserPage.getVideoList(params);
+		HashMap<String,String> intro = iServiceUserPage.getIntroM(params);
+		
+		modelMap.put("intro", intro);
+		modelMap.put("video", video);
+		
+		return mapper.writeValueAsString(modelMap);	
+	}
 	@RequestMapping(value="/coronagram/modalpages" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
 	@ResponseBody
 	public String modalpages(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
@@ -51,7 +66,7 @@ public class UserPage {
 		
 		HashMap<String,String> modalM = iServiceUserPage.getModalM(params);
 		List<HashMap<String,String>> md = iServiceUserPage.getMDtlList(params);
-				
+			
 		int hcnt = iServiceUserPage.getHeartCnt(params);
 				
 		modelMap.put("hcnt", hcnt);
@@ -60,7 +75,18 @@ public class UserPage {
 		
 		return mapper.writeValueAsString(modelMap);
 	}
-	
+	@RequestMapping(value="/coronagram/emoji" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String emoji(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+
+		List<HashMap<String,String>> emoji = iServiceUserPage.getEmojiList(params);
+
+		modelMap.put("emoji", emoji);
+		
+		return mapper.writeValueAsString(modelMap);
+	}
 	@RequestMapping(value="/coronagram/likeCnt",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
 	@ResponseBody
 	public String likeCnt (@RequestParam HashMap<String,String> params) throws Throwable {

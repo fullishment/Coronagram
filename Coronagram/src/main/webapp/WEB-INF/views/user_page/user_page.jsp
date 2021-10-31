@@ -33,12 +33,16 @@
             window.onclick = function(event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
+                    const player = document.getElementById("player");
+                    player.muted = true;
                 }
             }           
         });
         function modalFunc(){
             $(".close").on("click",function(){
             	document.getElementById("myModal").style.display="none";
+            	const player = document.getElementById("player");
+            	player.muted = true;
             });
         }
         function reloadList(){
@@ -61,6 +65,7 @@
 		        	delFollow();	
 		        	mInfo(res.intro);
 		        	mInfoClick();
+		        	videoListBtn();
 				},
 				error : function(request,status,error){
 					console.log(error);
@@ -92,6 +97,57 @@
 				data:params,
 				success : function(res){			
 					profileCnt(res.intro);
+				},
+				error : function(request,status,error){
+					console.log(error);
+				}
+			});
+        }
+        function videoListBtn(){
+        	$(".menu_post2").on("click",function(){
+        		$(".menu_post2").css({
+        			"color":"#262626",
+        			"border-top":"2px solid #262626"
+        		});
+        		$(".menu_post").css({
+        			"color":"#8e8e8e",
+        			"border-top":"2px"
+        		});
+        		reloadVideo();
+        	});
+        	$(".menu_post").on("click",function(){
+        		$(".menu_post").css({
+        			"color":"#262626",
+        			"border-top":"2px solid #262626"
+        		});
+        		$(".menu_post2").css({
+        			"color":"#8e8e8e",
+        			"border-top":"2px"
+        		});
+        		reloadList();
+        	});
+        }
+        function reloadVideo(){
+        	var params=$("#addrForm").serialize();		
+			$.ajax({ 
+				url:"videoList",
+				type:"post",
+				dataType:"json",
+				data:params,
+				success : function(res){
+					$("#myModal").val("");
+					imgList(res.video);
+					ProfileImg(res.intro);				
+					intro(res.intro);
+					introNm(res.intro);				
+					profileCnt(res.intro);
+					mInfo(res.intro);
+					followArea();
+					editProfile();
+					addFollow();
+		        	delFollow();
+		        	videoListBtn();
+		        	
 				},
 				error : function(request,status,error){
 					console.log(error);
@@ -143,11 +199,26 @@
 	    function imgList(list){
 			var html ="";			
 			for(var data of list){                                                                                    
-				html+= "<div class=\"gallery-item\" tabindex=\"0\" wtno=\""+data.WRITING_NO+"\" no=\""+data.M_NO+"\">                   "; 
-			    html+= "    	<img src=\"../resources/images/userpage/"+data.FILE_ADR+"\" class=\"gallery-image\" alt=\"\" />									"; 
+				html+= "<div class=\"gallery-item\" tabindex=\"0\" wtno=\""+data.WRITING_NO+"\" no=\""+data.M_NO+"\">                   ";
+				var fileLen = data.FILE_ADR.length;
+				var ExtensionNm = data.FILE_ADR.lastIndexOf('.')+1;
+				var fileExt = data.FILE_ADR.substring(ExtensionNm, fileLen).toLowerCase();			
+				if(fileExt=="mp4" || fileExt=="mov"){
+					html+= "			<video class=\"gallery-image\">";
+					html+= " 				<source src=\"../resources/upload/"+data.FILE_ADR+"\" type=\"video/mp4\"></source>			";
+					html+= "			</video>";
+				}
+				else{
+					html+= "    	<img src=\"../resources/upload/"+data.FILE_ADR+"\" class=\"gallery-image\" alt=\"\" />				";
+				}		   
 				if(data.WCNT>1){
 				    html+= "	<div class=\"gallery-item-type\">																		";
-				    html+= "        <span class=\"visually-hidden\">Gallery</span><i class=\"fas fa-clone\" aria-hidden=\"true\"></i>	";
+				    html+= "        <i class=\"fas fa-clone\"></i>																		";
+				    html+= "    </div>																						    		";
+				}
+				else if(fileExt=="mp4" || fileExt=="mov"){
+					html+= "	<div class=\"gallery-item-type\">																		";
+				    html+= "        <i class=\"fas fa-play\"></i>																		";
 				    html+= "    </div>																						    		";
 				}
 			    html+= "    	<div class=\"gallery-item-info\">                                                            			"; 
@@ -159,9 +230,11 @@
 			    html+= "        </ul>                                                                                    	 			";
 			    html+= "    	</div>                                                                                       			"; 
 		    	html+= "</div>                                                                                           	 			"; 
+		    	
 			}			
 			$("#gallery").html(html);
 		}
+
 	    function mdDraw(){  	
 	    	var params = $("#modalForm").serialize();
 			$.ajax({
@@ -182,6 +255,11 @@
 					addModalCmt();
 					delModalCmt();
 					delPost();
+					mediaControl();
+					mediaControl2();
+					mediaControl3();
+					mediaControl4();
+					emojiAreaClick();					
 				},
 				error : function(request, status, error){
 					console.log(error);
@@ -214,7 +292,7 @@
 			     }	
 			     html+="               <div class=\"user_container\">                                                                  									   ";
 			     html+="                   <div class=\"profile_img\">                                                                 									   ";
-			     html+=" 						<img src=\"../resources/images/edit_profile/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 		   ";
+			     html+=" 						<img src=\"../resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 		   ";
 			     html+="                   </div>                                                                                      									   ";
 			     html+="                   <div class=\"user_name\">                                                                   									   ";
 			     html+="                       <div class=\"nick_name head_text\">"+data.NICK_NM+"</div>                               									   ";
@@ -224,7 +302,7 @@
 			     html+="           <div class=\"cmt_sec1\">                                                                            									   ";
 			     html+="               <div class=\"user_container\">                                                                									   ";
 			     html+="                   <div class=\"profile_img\">                                                                   								   ";
-			     html+=" 						<img src=\"../resources/images/edit_profile/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 	   ";
+			     html+=" 						<img src=\"../resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 	   ";
 			     html+="				   </div>																						 								   ";
 			     html+="                   <div class=\"user_name\">                                                                 	 								   ";
 			     html+="                        <div class=\"nick_name head_text\">"+data.NICK_NM+"</div>                             	 								   ";
@@ -294,6 +372,8 @@
 			     html+="               <div class=\"likes head_text\"></div>                                                                                               ";
 			     html+="           </div>                                                                                                                                  ";
 			     html+="           <div class=\"cmt_field\" id=\"cmt_field\">                                                                                              ";
+			     html+="			   <div class=\"emoji_area\"></div>																										   ";			    
+			     html+="			   <i class=\"far fa-smile\"></i>																										";
 			     html+="               <textarea id=\"cmt_con\" class=\"cmt_con\" placeholder=\"댓글 달기...\"></textarea>                                                    ";
 			     html+="               <div class=\"m_text head_text\" id=\"add_cmt\">게시</div>                                                                    			";
 			     html+="           </div>                                                                                                                                   ";
@@ -301,7 +381,101 @@
 			     html+="   </div>                                                                                                                              				";
 			     
 		    	 $("#myModal").html(html);
-	    }            
+	    }
+	    function emojiAreaClick(){
+	    	$(".fa-smile").on("click",function(){	   
+	    		$(this).prev().css("display","block");
+	    		emojiArea();
+	    		var params = $("#modalForm").serialize();
+				$.ajax({
+					url : "emoji",
+					type : "post",
+					dataType : "json",
+					data : params,
+					success : function(res){						    		
+			    		emojiList1(res.emoji);
+						emojiList2(res.emoji);
+						emojiList3(res.emoji);
+						emojiList4(res.emoji);
+						emojiList5(res.emoji);
+						emojiClick();
+					},
+					error : function(request, status, error){
+						console.log(error);
+					}
+				});
+	    	});    	
+	    }
+	    function emojiArea(){
+	    	 var html="";
+	    	
+	    	 html+="					<div class=\"emoji_container\" >       																			 			   ";
+		     html+="						<div class=\"emoji_title\"><span>웃는 얼굴 및 사람</span></div>																	";
+		     html+="						<div class=\"first emoji\"></div>																							";
+		     html+="						<div class=\"emoji_title\"><span>웃는 얼굴 및 사람</span></div>																	";
+		     html+="						<div class=\"second emoji\"></div>																						   	";
+		     html+="						<div class=\"emoji_title\"><span>웃는 얼굴 및 사람</span></div>																	";
+		     html+="						<div class=\"third emoji\"></div>																						   	";
+		     html+="						<div class=\"emoji_title\"><span>웃는 얼굴 및 사람</span></div>																	";
+		     html+="						<div class=\"fourth emoji\"></div>																						   	";
+		     html+="						<div class=\"emoji_title\"><span>웃는 얼굴 및 사람</span></div>																	";
+		     html+="						<div class=\"fifth emoji\"></div>																						   	";
+		     html+="			   		</div>																														   ";
+		     
+		     $(".emoji_area").html(html);
+	    }
+	    function emojiList1(list){
+	    	var html ="";                                                                                                                                                                                                                                                                      
+			for(var data of list){  
+				if(data.EMO_CAT_NO ==1){
+					html+="<div class=\"emo\" emo=\""+data.EMOJI+"\">"+data.EMOJI+"</div>";					
+				}	
+			}	
+			$(".first").html(html);
+	    }
+	    function emojiList2(list){
+	    	var html ="";                                                                                                                                                                                                                                                                      
+			for(var data of list){  
+				if(data.EMO_CAT_NO ==2){
+					html+="<div class=\"emo\" emo=\""+data.EMOJI+"\">"+data.EMOJI+"</div>";					
+				}
+			}	
+			$(".second").html(html);
+	    }
+	    function emojiList3(list){
+	    	var html ="";                                                                                                                                                                                                                                                                      
+			for(var data of list){  
+				if(data.EMO_CAT_NO ==3){
+					html+="<div class=\"emo\" emo=\""+data.EMOJI+"\">"+data.EMOJI+"</div>";					
+				}
+			}	
+			$(".third").html(html);
+	    }
+	    function emojiList4(list){
+	    	var html ="";                                                                                                                                                                                                                                                                      
+			for(var data of list){  
+				if(data.EMO_CAT_NO ==4){
+					html+="<div class=\"emo\" emo=\""+data.EMOJI+"\">"+data.EMOJI+"</div>";					
+				}			
+			}	
+			$(".fourth").html(html);
+	    }
+	    function emojiList5(list){
+	    	var html ="";                                                                                                                                                                                                                                                                      
+			for(var data of list){  
+				if(data.EMO_CAT_NO ==5){
+					html+="<div class=\"emo\" emo=\""+data.EMOJI+"\">"+data.EMOJI+"</div>";					
+				}			
+			}	
+			$(".fifth").html(html);
+	    }
+	    function emojiClick(){
+	    	$(".emo").on("click",function(){
+	    		var textVal = $(this).parent().parent().parent().next().next().val();
+	    		var newText = textVal + $(this).attr("emo");
+	    		var emoText = $(this).parent().parent().parent().next().next().val(newText);
+	    	});
+	    }
 	    function ModalCmt(){
 	    	var params = $("#modalForm").serialize();
 			$.ajax({
@@ -318,24 +492,24 @@
 				}
 			});
 	    }	
-	    function ModalCmtArea(data,data2){  
+	    function ModalCmtArea(list,data2){  
 	    	var html ="";                                                                                                                                                                                                                                                                      
-			for(var list of data){                                                                                                                              				
-			     html+="<div class=\"comment_container\" no=\""+list.CMT_NO+"\">       														 ";
-			     html+="   <div class=\"comment\" id=\"comment-list-ajax-post37\">     														 ";
-			     html+="       <div class=\"comment-detail\">                          														 ";
-			     html+="           <div class=\"profile_img\">                          													 ";
-			     html+=" 				<img src=\"../resources/images/edit_profile/"+list.IMG_ADR+"\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 ";
-			     html+="		   </div>																									 ";
-			     html+="           <div class=\"head_text\">"+list.NICK_NM+"</div>      													 ";
-			     html+="              <div class=\"ccon\">"+list.CMT_CON+"</div>        													 ";
-			     html+="          </div>                                                													 ";
-			     html+="       </div>                                                														 ";
-			     if(list.CMT_WRITER_NO == ${sMNo}){
-			    	 html+="	<i class=\"fas fa-ellipsis-h cmtMore\"></i>																	 ";
+			for(var data of list){                                                                                                                              				
+			     html+="<div class=\"comment_container\" no=\""+data.CMT_NO+"\">       																			 ";
+			     html+="   <div class=\"comment\" id=\"comment-list-ajax-post37\">     														 					 ";
+			     html+="       <div class=\"comment-detail\">                          														 					 ";
+			     html+="           <div class=\"profile_img\">                          													 					 ";
+			     html+=" 				<img src=\"../resources/upload/"+data.IMG_ADR+"\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />	 ";
+			     html+="		   </div>																									 					 ";
+			     html+="           <div class=\"head_text\">"+data.NICK_NM+"</div>      													 					 ";
+			     html+="              <div class=\"ccon\">"+data.CMT_CON+"</div>        													 					 ";
+			     html+="          </div>                                                													 					 ";
+			     html+="       </div>                                                														 					 ";
+			     if(data.CMT_WRITER_NO == ${sMNo}){
+			    	 html+="	<i class=\"fas fa-ellipsis-h cmtMore\"></i>																	 					 ";
 			     }			     
-			     html+="   </div>                                                      														 ";
-			     html+="<div class=\"timer\">"+timeForToday(list.DT)+"</div>           														 ";
+			     html+="   </div>                                                      														 					 ";
+			     html+="<div class=\"timer\">"+timeForToday(data.DT)+"</div>           														 					 ";
 			}
 			
 			$(".modal_cmt").html(html);
@@ -467,19 +641,86 @@
 	        }
 	        return Math.floor(betweenTimeDay / 365)+'년전';
 	 	}		
-	    function ModalImg(md){                                                                                                                         
+	    function ModalImg(list){                                                                                                                         
 			var html ="";                                                                                                                                  
 			var i=1;                                                                                                                                       
-			for(var list of md){                                                                                                                              
+			for(var data of list){                                                                                                                              
+				var fileLen = data.FILE_ADR.length;
+				var ExtensionNm = data.FILE_ADR.lastIndexOf('.')+1;
+				var fileExt = data.FILE_ADR.substring(ExtensionNm, fileLen).toLowerCase();
 				
-				html+=" <div class=\"slide slide-"+i+"\">                                       ";
-                html+=" <img src=\"../resources/images/userpage/"+list.FILE_ADR+"\" alt=\"\" />	   						";
-	           	html+=" </div>                                                                  ";
-				i++;	
+				if(fileExt=="mp4" || fileExt=="mov"){
+					html+=" <div class=\"slide slide-"+i+"\">                                       					";
+					html+="		<video id=\"player\" controls playsinline autoplay muted loop>							";
+	                html+=" 		<source src=\"../resources/upload/"+data.FILE_ADR+"\" alt=\"\" /></source>	   		";
+	                html+="		</video>																				"; 
+	                html+=" 	<div class=\"play_btn\">																";
+	                html+=" 	</div>																					";
+	                html+=" 	<div class=\"muted_btn\">																";
+	                html+="			<i class=\"fas fa-volume-mute\"></i>												";
+	                html+=" 	</div>																					";
+		           	html+=" </div>                                                                  					";
+				}
+				else{
+					html+=" <div class=\"slide slide-"+i+"\">                                       ";
+	                html+=" <img src=\"../resources/upload/"+data.FILE_ADR+"\" alt=\"\" />	   		";
+		           	html+=" </div>                                                                  ";						
+				}	
+				i++;
 			}
 			
 			$("#slide-group").html(html);
 		}
+	    function mediaControl(){
+			$(".fa-volume-mute").on("click",function(){
+				
+				const player = document.getElementById("player");
+				player.muted = false;
+							
+				var html="";
+				html+="<i class=\"fas fa-volume-up\"></i>";
+				$(".muted_btn").html(html);
+				mediaControl2();
+			});
+			
+		}
+	    function mediaControl2(){
+	    	$(".fa-volume-up").on("click",function(){
+	    		
+				const player = document.getElementById("player");
+				player.muted = true;
+				
+				var html="";
+				html+="<i class=\"fas fa-volume-mute\"></i>";
+				$(".muted_btn").html(html);
+				mediaControl();
+			});
+	    }
+	    function mediaControl3(){
+	    	$("#player").on("click",function(){
+	    		const player = document.getElementById("player");
+				player.pause();
+				$(".play_btn").css("width", "100%");
+				$(".play_btn").css("height", "100%");
+				var html="";
+				html+="<i class=\"fas fa-play fa-play1\"></i>";
+				$(".play_btn").html(html);
+				mediaControl4();
+	    	});	    	
+	    }
+	    function mediaControl4(){
+    		$(".play_btn").on("click",function(){
+	    		const player = document.getElementById("player");
+				player.play();
+				mediaControl3();
+				$(".play_btn").css("width", 0);
+				$(".play_btn").css("height", 0);
+				var html="";
+				html+=" ";
+				$(".play_btn").html(html);
+				mediaControl3();
+	    	});
+	    }
 	    function ProfileImg(data){                                                                                                                         
 			var html ="";
 			
@@ -495,7 +736,7 @@
 				html+="			<circle cx=\"226.5\" cy=\"226.5\" r=\"216.5\" stroke=\"url(#MyGradient)\" stroke-width=\"10\"/>									";
 				html+="		</svg>																																";
 				html+=" 	<div class=\"pGradient2\"> 																								   			";
-				html+=" 		<img src=\"../resources/images/edit_profile/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 		   		";
+				html+=" 		<img src=\"../resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 		   		";
 				html+=" 	</div> 																								   					   			";
 				html+=" </div>																								   					   				";	
 			$(".profile-image").html(html);
@@ -580,7 +821,7 @@
 			    html +="</button>											";
 			}else if(data1 == 0 && data2 > 0){
 				html +="<button id=\"editBtn\" class=\"btn profile-edit-btn\">		         	   ";
-				html +="	Edit Profile <i class=\"fas fa-cog\" aria-hidden=\"true\"></i>		   ";
+				html +="	프로필 편집 <i class=\"fas fa-cog\" aria-hidden=\"true\"></i>		   ";
 				html +="</button>																   ";
 			}else{
 				alert("error");
@@ -793,6 +1034,10 @@
 		        			<div class="menu_post">
 		        				<i class="fas fa-camera-retro"></i>
 		        				<span>게시물</span>
+		        			</div>
+		        			<div class="menu_post2">
+		        				<i class="fas fa-video"></i>
+		        				<span>동영상</span>
 		        			</div>		        			
 		        		</div>
 		        	</div>
@@ -831,6 +1076,9 @@
     	   	  <input type="hidden" name="writingNo" id="writingNo3"/>
 		   </form>
 		   <form action="crngAdd" id="addCrngForm" method="post">
+    	   	  <input type="hidden" name="m_no" value="${sMNo}"/>
+		   </form>
+		   <form action="crngVideoAdd" id="addCrngVideoForm" method="post">
     	   	  <input type="hidden" name="m_no" value="${sMNo}"/>
 		   </form>
 	 	</main>	   

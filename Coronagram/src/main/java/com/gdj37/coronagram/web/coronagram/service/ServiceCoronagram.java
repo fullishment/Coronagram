@@ -103,4 +103,10 @@ public class ServiceCoronagram implements IServiceCoronagram{
 		return iDaoCoronagrma.getLkMList(params);
 	}
 
+	@Override
+	public HashMap<String, String> getCrngDtl(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.getCrngDtl(params);
+	}
+
 }

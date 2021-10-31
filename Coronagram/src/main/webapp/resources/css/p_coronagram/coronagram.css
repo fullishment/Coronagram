@@ -11,6 +11,78 @@ body {
 .f_size{
     font-size: 21px;
 }
+video::-webkit-media-controls-fullscreen-button {
+	display: none !important; 
+} 
+/* 일시정지, 재생 버튼 */ 
+video::-webkit-media-controls-play-button {
+	display: none !important; 
+} 
+/* 재생 슬라이드..? */
+video::-webkit-media-controls-timeline {
+	display: none !important; 
+} 
+/* 현재 진행 시간 */ 
+video::-webkit-media-controls-current-time-display{
+	display: none !important; 
+} 
+/* 전체 시간 */ 
+video::-webkit-media-controls-time-remaining-display {
+	display: none !important; 
+} 
+/* 음소거 버튼 */ 
+video::-webkit-media-controls-mute-button {
+	display: none !important; 
+} 
+/* 볼륨 조절 슬라이드 */ 
+video::-webkit-media-controls-volume-slider {
+	display: none !important; 
+} 
+/* 괄호에 display: none !important; 를 추가하면된다. 예 ) 전체화면 전환 버튼을 숨긴다. 다만 더블클릭으로 전체화면이 되는 기능등은 그대로고 단지 버튼만 없앤다. */ 
+video::-webkit-media-controls-fullscreen-button { 
+	display: none !important; 
+}
+::-webkit-media-controls {
+    display:none !important;
+}
+video::-webkit-media-controls {
+    display:none !important;
+}
+video::-webkit-media-controls-enclosure {
+    display:none !important;
+}
+video::-webkit-media-controls-fullscreen-button {
+    display:none !important;
+}
+.muted_btn{
+	position: absolute;
+    bottom: 20px;
+    right: 15px;
+    font-size: 13pt;
+    background: black;
+    width: 30px;
+    padding: 3px 0px 0px 6px;
+    height: 30px;
+    border-radius: 70%;
+    color: white;
+}
+.play_btn{
+	position: absolute;
+    /* top: 45%; */
+    top: 0;
+    width: 0%;
+    height: 0%;
+    left: 0;
+    font-size: 80pt;
+    color: black;
+    text-shadow: -3px 6px 0px rgb(0 0 0 / 25%);
+}
+.fa-play1{
+	position:absolute;
+	top:45%;
+	left:45%;
+	color:white;
+}
 .slider {
     position: relative;
   }
@@ -31,7 +103,6 @@ body {
     height: 100%;
     display: none;
     position: absolute;
-    margin-top: 5rem;
     }
 
 .slide:first-child {

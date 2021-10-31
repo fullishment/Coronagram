@@ -109,4 +109,16 @@ public class ServiceUserPage implements IServiceUserPage{
 		// TODO Auto-generated method stub
 		return iDaoUserPage.delPost(params);
 	}
+
+	@Override
+	public List<HashMap<String, String>> getVideoList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.getVideoList(params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getEmojiList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoUserPage.getEmojiList(params);
+	}
 }

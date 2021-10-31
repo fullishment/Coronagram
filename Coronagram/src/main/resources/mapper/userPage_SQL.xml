@@ -26,6 +26,34 @@
                         GROUP BY WRITING_NO) L
                         ON C.WRITING_NO = L.WRITING_NO
 			WHERE C.DEL = 1
+			AND LOWER(SUBSTR(CA.FILE_ADR,INSTR(CA.FILE_ADR,'.',-1)+1)) IN('jpg','jpeg','png','gif')
+	</select>
+	<select id="getVideoList" parameterType="hashmap" resultType="hashmap">
+		SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON, C.DT, C.DEL, NVL(L.LCNT, 0) AS LCNT, NVL(CC.CCNT, 0) AS CCNT,NVL(CW.WCNT,0) AS WCNT, 
+       		ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
+			FROM CRNG C 
+			INNER JOIN M M
+                    	ON C.WRITER_NO = M.M_NO
+                    	AND M.NICK_NM = #{nickNm}
+            INNER JOIN (SELECT WRITING_NO, FILE_ADR,
+                        RANK() OVER(PARTITION BY WRITING_NO ORDER BY ATTC_NO ASC) AS RNK
+                        FROM CRNG_ATTC) CA
+                    	ON C.WRITING_NO = CA.WRITING_NO
+                   		AND CA.RNK = 1
+            LEFT OUTER JOIN (SELECT WRITING_NO,NVL(count(*),0) AS WCNT
+                        FROM CRNG_ATTC 
+                        GROUP BY WRITING_NO) CW
+                    	ON C.WRITING_NO = CW.WRITING_NO
+            LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS CCNT
+                        FROM CRNG_CMT
+                        GROUP BY WRITING_NO) CC
+                        ON C.WRITING_NO = CC.WRITING_NO 
+            LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS LCNT
+                        FROM LK
+                        GROUP BY WRITING_NO) L
+                        ON C.WRITING_NO = L.WRITING_NO
+			WHERE C.DEL = 1
+			AND LOWER(SUBSTR(CA.FILE_ADR,INSTR(CA.FILE_ADR,'.',-1)+1)) IN('mp4','mov')
 	</select>
 	<select id="getModalCmt" parameterType="hashmap" resultType="hashmap">
 		SELECT CC.CMT_NO, CC.CMT_WRITER_NO,CC.WRITING_NO,CC.CMT_CON,M.M_NO, M.M_NM, M.NICK_NM,M.IMG_ADR,
@@ -68,13 +96,13 @@
             WHERE M.NICK_NM = #{nickNm}
 	</select>	
 	<select id="getMDtlList" parameterType="hashmap" resultType="hashmap">
-	    SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON, C.DT, C.DEL, 
-	        ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
+	    SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON,TO_CHAR(C.DT,'YYYY-MM-DD HH24:MI:SS') AS DT, C.DEL, 
+	        ROW_NUMBER() OVER(ORDER BY CA.ATTC_NO) AS RNUM
 			FROM CRNG C 
 			INNER JOIN M M
                     	ON C.WRITER_NO = M.M_NO
-                    	AND M.M_NO =(SELECT M_NO FROM M WHERE NICK_NM=#{nickNm})
-            INNER JOIN (SELECT WRITING_NO, FILE_ADR
+                    	AND M.M_NO =(SELECT M_NO FROM M WHERE NICK_NM= #{nickNm})
+            INNER JOIN (SELECT ATTC_NO,WRITING_NO, FILE_ADR
                         FROM CRNG_ATTC) CA
                     	ON C.WRITING_NO = CA.WRITING_NO
                     	AND CA.WRITING_NO = #{writingNo}
@@ -114,6 +142,9 @@
 			WHERE RQ_USER= #{m_no}
 	        AND RP_USER = (SELECT M_NO FROM M WHERE NICK_NM = #{nickNm})
 	</delete>
+	<select id="getEmojiList" parameterType="hashmap" resultType="hashmap">
+		 SELECT EMO_CAT_NO,EMOJI FROM CRNG_EMOJI
+	</select>
 	<insert id="addMCmt" parameterType="hashmap">
 		INSERT INTO CRNG_CMT(WRITING_NO, CMT_WRITER_NO, CMT_CON)
         	VALUES(#{writingNo}, #{m_no}, #{cmt_con})

@@ -113,6 +113,11 @@
 						slide();
 						LkModal();
 						LkModalAjax();
+						crngDtl();
+						mediaControl();
+						mediaControl2();
+						mediaControl3();
+						mediaControl4();
 					},
 					error : function(request,status,error){
 						console.log(error);
@@ -138,6 +143,11 @@
 						slide();
 						LkModal();
 						LkModalAjax();
+						crngDtl();
+						mediaControl();
+						mediaControl2();
+						mediaControl3();
+						mediaControl4();
 					},
 					error : function(request,status,error){
 						console.log(error);
@@ -166,7 +176,7 @@
 				 html+="			  <circle cx=\"226.5\" cy=\"226.5\" r=\"216.5\" stroke=\"url(#MyGradient)\" stroke-width=\"30\"/>									";
 				 html+="			  </svg>																															";	     
 			     html+="              <div class=\"profile_img\">                                                                       				 				";    
-			     html+=" 				   <img src=\"resources/images/edit_profile/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 				";    
+			     html+=" 				   <img src=\"resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 				";    
 			     html+="              </div>                                                                                            								";    
 			     html+="              <div class=\"user_name\">                                                                         								";    
 			     html+="                  <div class=\"nick_name m_text\">                                        														";
@@ -190,9 +200,26 @@
 		         var fileAdr=data.FILE_ADRS;
 		         var fileAdrSplit = fileAdr.split(',');
 		         for ( var i = 0; i < fileAdrSplit.length; i++) {
-		       	 	 html+=" <div class=\"slide slide-"+j+"\">                                       									 								";
-		           	 html+=" <img class=\"p_img\" src=\"resources/images/userpage/"+fileAdrSplit[i]+"\" alt=\"\" />	   						   									 				";
-		          	 html+=" </div>                                                                  									 								";
+		        	 var fileLen = fileAdrSplit[i].length;
+					 var ExtensionNm = fileAdrSplit[i].lastIndexOf('.')+1;
+					 var fileExt = fileAdrSplit[i].substring(ExtensionNm, fileLen).toLowerCase();
+					 if(fileExt=="mp4" || fileExt=="mov"){
+						 html+=" <div class=\"slide slide-"+j+"\">                                       									 								";
+						 html+="	<video class=\"p_img\" playsinline autoplay muted loop>																	";
+			           	 html+=" 		<source src=\"resources/upload/"+fileAdrSplit[i]+"\" alt=\"\" type=\"video/mp4\"/></source>	   						   				";
+			           	 html+="	</video>																																";
+			           	 html+=" 	<div class=\"play_btn\">																												";
+		                 html+=" 	</div>																																	";
+		                 html+=" 	<div class=\"muted_btn\">																												";
+		                 html+="			<i class=\"fas fa-volume-mute\"></i>																							";
+		                 html+=" 	</div>																																	";
+			          	 html+=" </div>                                                                  									 								";
+					 }
+					 else{
+						 html+=" <div class=\"slide slide-"+j+"\">                                       									 								";
+			           	 html+=" 	<img class=\"p_img\" src=\"resources/upload/"+fileAdrSplit[i]+"\" alt=\"\" />	   						   								";
+			          	 html+=" </div>                                                                  									 								";
+					 }	          	 
 		          	 j++;        	
 		         }	
 			     html+="                    </div>                                                                     					 								";
@@ -362,6 +389,48 @@
 		    		$(this).children('.modal_info_area2').css("display","none");
 		    	});
 		    }
+		    function mediaControl(){
+				$(".fa-volume-mute").on("click",function(){
+					$(this).parent().prev().prev().prop("muted",false);
+					var html="";
+					html+="<i class=\"fas fa-volume-up\"></i>";
+					$(this).parent().html(html);
+					mediaControl2();
+				});
+				
+			}
+		    function mediaControl2(){
+		    	$(".fa-volume-up").on("click",function(){
+		    		$(this).parent().prev().prev().prop("muted",true);
+					var html="";
+					html+="<i class=\"fas fa-volume-mute\"></i>";
+					$(this).parent().html(html);
+					mediaControl();
+				});
+		    }
+		    function mediaControl3(){
+		    	$(".p_img").on("click",function(){
+		    		$(this).get(0).pause();
+					$(this).next().css("width", "100%");
+					$(this).next().css("height", "100%");
+					var html="";
+					html+="<i class=\"fas fa-play fa-play1\"></i>";
+					$(this).next().html(html);
+					mediaControl4();
+		    	});	    	
+		    }
+		    function mediaControl4(){
+	    		$(".play_btn").on("click",function(){
+		    		$(this).prev().get(0).play();
+					mediaControl3();
+					$(this).css("width", 0);
+					$(this).css("height", 0);
+					var html="";
+					html+=" ";
+					$(this).html(html);
+					mediaControl3();
+		    	});
+		    }
 		    function modalInfo(data){
 		    		 var html = "";
 		    		
@@ -370,7 +439,7 @@
 					     html+="						<div class=\"modal_info_head2\">																						";
 					     html+="							<div class=\"pro_area\">																							";								     
 						 html+="								<div class=\"pro_thumb\">																						";						                 
-						 html+=" 				   					<img class=\"pro_img\" src=\"resources/images/edit_profile/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 				";      
+						 html+=" 				   					<img class=\"pro_img\" src=\"resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 				";      
 						 html+="								</div>																											";						                 
 						 html+="								<div class=\"pro_dtl\">																							";					                 
 						 html+="									<div class=\"m_nick\">"+data.NICK_NM+"</div>																";		                     
@@ -400,6 +469,12 @@
 					     html+="           	  	</div>      																													";
 				     
 				     	$(".modal_info_area2").html(html);
+		    }
+		    function crngDtl(){
+		    	$(".sprite_bubble_icon").on("click",function(){
+		    		$("#writingNo5").val($(this).parent().parent().parent().parent().attr("wtno"));
+		    		$("#crngDtlForm").submit();
+		    	});
 		    }
 		    function LkModal(){
 		    	$(".nick_modal2").on("click",function(){
@@ -443,7 +518,7 @@
 		    	for(data of list){
 		    		html+="<div class=\"rec_user\" nfo=\""+data.M_NO+"\">																		 ";
 					html+="		<div class=\"profile_thumb\">																					 ";
-					html+=" 		<img src=\"resources/images/edit_profile/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 "; 
+					html+=" 		<img src=\"resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 "; 
 					html+="		</div>																											 ";
 					html+="		<div class=\"detail\">																							 ";
 					html+="			<a href=\"coronagram/"+data.NICK_NM+"\" class=\"modal_nick\">"+data.NICK_NM+"</a>																 ";			
@@ -473,7 +548,7 @@
 		    	var html = "";
 		    	for(data of list){
 		    		 html+="<div pi=\""+data.M_NO+"\"> ";
-			    	 html+=" <img class=\"modal_img_box\" src=\"resources/images/userpage/"+data.FILE_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	"; 
+			    	 html+=" <img class=\"modal_img_box\" src=\"resources/upload/"+data.FILE_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	"; 
 			    	 html+="</div>";
 		    	}
 		    	$(".modal_info_img2").html(html);
@@ -513,7 +588,7 @@
 				     html+="						<div class=\"modal_info_head3\">																						";
 				     html+="							<div class=\"pro_area\">																							";								     
 					 html+="								<div class=\"pro_thumb\">																						";						                 
-					 html+=" 				   					<img class=\"pro_img\" src=\"resources/images/edit_profile"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 				";      
+					 html+=" 				   					<img class=\"pro_img\" src=\"resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 				";      
 					 html+="								</div>																											";						                 
 					 html+="								<div class=\"pro_dtl\">																							";					                 
 					 html+="									<div class=\"m_nick\">"+data.NICK_NM+"</div>																		";		                     
@@ -548,7 +623,7 @@
 		    	var html = "";
 		    	for(data of list){
 		    		 html+="<div pi=\""+data.M_NO+"\"> ";
-			    	 html+=" <img class=\"modal_img_box\" src=\"resources/images/userpage/"+data.FILE_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	"; 
+			    	 html+=" <img class=\"modal_img_box\" src=\"resources/upload/"+data.FILE_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	"; 
 			    	 html+="</div>";
 		    	}
 		    	$(".modal_info_img3").html(html);
@@ -573,7 +648,7 @@
 						html+="		</svg>																																";
 						html+="		<div class=\"user\">																												";
 						html+="      	<div class=\"thumb_img\" fono=\""+data.M_NO+"\">																				";
-						html+=" 			<img src=\"resources/images/edit_profile/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 		   			";
+						html+=" 			<img src=\"resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 		   			";
 						html+="			</div>																															";
 						html+="       	<div class=\"id\">																												";
 						if(data.NICK_NM.length<9){
@@ -599,7 +674,7 @@
 					 	
 					 	html+="<div class=\"rec_user\" nfo=\""+data.M_NO+"\">																		 ";
 						html+="		<div class=\"profile_thumb\">																					 ";
-						html+=" 		<img src=\"resources/images/edit_profile/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 "; 
+						html+=" 		<img src=\"resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 "; 
 						html+="		</div>																											 ";
 						html+="		<div class=\"detail\">																							 ";
 						html+="			<div class=\"rec_id\">"+data.NICK_NM+"</div>																 ";			
@@ -946,6 +1021,10 @@
 	   	  <form action="#" id="modalLkForm" method="post">
 	   	  	  <input type="hidden" name="m_no4" id="m_no4" value="${sMNo}"/>
           	  <input type="hidden" name="writingNo3" id="writingNo4"/> 
+	   	  </form>
+	   	  <form action="crngDtl" id="crngDtlForm" method="post">
+	   	  	  <input type="hidden" name="m_no5" id="m_no5" value="${sMNo}"/>
+          	  <input type="hidden" name="writingNo4" id="writingNo5"/> 
 	   	  </form>
 	</main>
     <script src="resources/script/menu_bar/menu_bar.js"></script>

@@ -37,4 +37,8 @@ public interface IDaoUserPage {
 
 	public int delPost(HashMap<String, String> params)throws Throwable;
 
+	public List<HashMap<String, String>> getVideoList(HashMap<String, String> params)throws Throwable;
+
+	public List<HashMap<String, String>> getEmojiList(HashMap<String, String> params)throws Throwable;
+
 }

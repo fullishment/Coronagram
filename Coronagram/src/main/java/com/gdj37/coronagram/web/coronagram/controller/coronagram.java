@@ -25,6 +25,14 @@ public class coronagram {
 		mav.setViewName("coronagram_main/coronagram_main");
 		return mav;
 	}
+	/*
+	 * @RequestMapping(value="/crngDtl") public ModelAndView crngDtl(ModelAndView
+	 * mav, @RequestParam HashMap<String,String> params) throws Throwable {
+	 * HashMap<String,String> data = iServiceCoronagram.getCrngDtl(params);
+	 * mav.addObject("data",data);
+	 * 
+	 * mav.setViewName("coronagram_dtl/coronagram_dtl"); return mav; }
+	 */
 	@RequestMapping(value="/crngPost" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
 	@ResponseBody
 	public String crngPost(ModelAndView mav,@RequestParam HashMap<String,String> params) throws Throwable {

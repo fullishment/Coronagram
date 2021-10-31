@@ -103,4 +103,16 @@ public class DaoUserPage implements IDaoUserPage {
 	public int delPost(HashMap<String, String> params) throws Throwable {
 		return sqlSession.update("userPage.delPost",params);
 	}
+
+	@Override
+	public List<HashMap<String, String>> getVideoList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("userPage.getVideoList",params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getEmojiList(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("userPage.getEmojiList",params);
+	}
 }

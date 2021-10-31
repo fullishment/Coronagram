@@ -34,4 +34,6 @@ public interface IServiceCoronagram {
 	public int postAcctAdd(HashMap<String, String> params)throws Throwable;
 
 	public List<HashMap<String, String>> getLkMList(HashMap<String, String> params)throws Throwable;
+
+	public HashMap<String, String> getCrngDtl(HashMap<String, String> params)throws Throwable;
 }
