@@ -322,3 +322,37 @@ p {
  .coinfoList tr:hover{
    opacity:.4;
 }  
+
+
+/* Shop table */
+
+.shopList table {
+  border-collapse:collapse;
+  box-shadow: 0 5px 10px #e1e5ee;
+  background-color:white;
+  text-align:left;
+  overflow:hidden;
+  width : 100%;
+}
+.shopList thead {
+   box-shadow:0 5px 10px #e1e5ee;
+}
+.shopList th {
+   padding :1rem 2rem;
+   text-transform:uppercase;
+   letter-spacing:0.1rem;
+   font-size:0.7rem;
+   font-weight:900;
+   text-align:center;
+}
+.shopList td {
+   padding : 1rem 2rem;
+   font-size:0.7rem;
+   text-align:center;
+}
+.shopList tr:nth-child(even) {
+   background-color: #f4f6fb;
+}
+ .shopList tr:hover{
+   opacity:.4;
+}  

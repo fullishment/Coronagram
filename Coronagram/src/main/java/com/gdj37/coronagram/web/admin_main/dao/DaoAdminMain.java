@@ -31,4 +31,9 @@ public class DaoAdminMain implements IDaoAdminMain{
 	public List<HashMap<String, String>> getAdinfoList(HashMap<String, String> params) throws Throwable {
 		return sqlSession.selectList("adminMain.getAdinfoList", params);
 	}
+
+	@Override
+	public List<HashMap<String, String>> getShopList(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectList("adminMain.getShopList", params);
+	}
 }

@@ -262,30 +262,42 @@ $("#tbody").html(html);
 							<table>
 								 <thead>
 									<tr>
-										<th><p>번호</p></th>
-										<th><p>제목</p></th>
-										<th><p>소제목</p></th>
-										<th><p>작성일</p></th>
+										<th><p>상품번호</p></th>
+										<th><p>등록자 이름</p></th>
+										<th><p>카테고리명</p></th>
+										<th><p>상품명</p></th>
+										<th><p>가격</p></th>
+										<th><p>판매상태</p></th>
+										<th><p>등록일</p></th>
 									</tr>
 								</thead> 
 								<tbody>
 									<tr>
-										<td>${list1[0].INFO_NO}</td>
-										<td>${list1[0].INFO_TITLE}</td>
-										<td>${list1[0].INFO_SUBHD}</td>
-										<td>${list1[0].DT}</td>
+										<td>${list2[0].PROD_NO}</td>
+										<td>${list2[0].M_NM}</td>
+										<td>${list2[0].CAT_NM}</td>
+										<td>${list2[0].PROD_NM}</td>
+										<td>${list2[0].POINT}</td>
+										<td>${list2[0].SALE_STAT}</td>
+										<td>${list2[0].PROD_DT}</td>
 									</tr>
 									<tr>
-										<td>${list1[1].INFO_NO}</td>
-										<td>${list1[1].INFO_TITLE}</td>
-										<td>${list1[1].INFO_SUBHD}</td>
-										<td>${list1[1].DT}</td>
+										<td>${list2[1].PROD_NO}</td>
+										<td>${list2[1].M_NM}</td>
+										<td>${list2[1].CAT_NM}</td>
+										<td>${list2[1].PROD_NM}</td>
+										<td>${list2[1].POINT}</td>
+										<td>${list2[1].SALE_STAT}</td>
+										<td>${list2[1].PROD_DT}</td>
 									</tr>
 									<tr>
-										<td>${list1[2].INFO_NO}</td>
-										<td>${list1[2].INFO_TITLE}</td>
-										<td>${list1[2].INFO_SUBHD}</td>
-										<td>${list1[2].DT}</td>
+										<td>${list2[2].PROD_NO}</td>
+										<td>${list2[2].M_NM}</td>
+										<td>${list2[2].CAT_NM}</td>
+										<td>${list2[2].PROD_NM}</td>
+										<td>${list2[2].POINT}</td>
+										<td>${list2[2].SALE_STAT}</td>
+										<td>${list2[2].PROD_DT}</td>
 									</tr>
 								</tbody>
 							</table>

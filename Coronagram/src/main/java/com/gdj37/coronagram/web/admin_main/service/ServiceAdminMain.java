@@ -32,4 +32,9 @@ public class ServiceAdminMain implements IServiceAdminMain{
 	public List<HashMap<String, String>> getAdinfoList(HashMap<String, String> params) throws Throwable {
 		return iDaoAdminMain.getAdinfoList(params);
 	}
+
+	@Override
+	public List<HashMap<String, String>> getShopList(HashMap<String, String> params) throws Throwable {
+		return iDaoAdminMain.getShopList(params);
+	}
 }

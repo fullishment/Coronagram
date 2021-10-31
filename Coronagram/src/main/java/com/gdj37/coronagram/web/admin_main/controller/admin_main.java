@@ -25,10 +25,12 @@ public class admin_main {
 		//Q&A 
 		List<HashMap<String, String>> list = iServiceAdminMain.getadminQnaList(params);
 		List<HashMap<String, String>> list1 = iServiceAdminMain.getAdinfoList(params);
+		List<HashMap<String, String>> list2 = iServiceAdminMain.getShopList(params);
 		mav.addObject("data", data);
 		mav.addObject("data1", data1);
 		mav.addObject("list", list);
 		mav.addObject("list1", list1);
+		mav.addObject("list2", list2);
 		
 		mav.setViewName("admin_main/admin_main");
 

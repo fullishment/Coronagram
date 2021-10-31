@@ -47,15 +47,20 @@
 
 <!--point shop list -->
 	<select id="getShopList" parameterType="hashmap" resultType="hashmap">
-		SELECT
-		FROM (	SELECT P.PROD_NO,M.M_NM,PC.CAT_NM,P.PROD_NM,P.POINT,P.SALE_STAT,TO_CHAR(P.PROD_DT,'YYYY-MM-DD') AS PROD_DT 
+		SELECT S.PROD_NO, S.M_NM, S.CAT_NM, S.PROD_NM, S.POINT, S.SALE_STAT, TO_CHAR(S.PROD_DT,'YYYY-MM-DD') AS PROD_DT
+		FROM (	SELECT P.PROD_NO, M.M_NM, PC.CAT_NM, P.PROD_NM, P.POINT, P.SALE_STAT, P.PROD_DT AS PROD_DT,
+				ROW_NUMBER() OVER(ORDER BY P.PROD_NO DESC) AS RNUM 
 				FROM PRODUCT P
 				    INNER JOIN PROD_CAT PC
 				    ON P.CAT_NO = PC.CAT_NO
 				    INNER JOIN M M
 				    ON P.REG_NO = M.M_NO
 				WHERE P.DEL = 1
-				) SHOP
+				) S
+			<![CDATA[
+            WHERE S.RNUM <10 
+            ]]>
+            ORDER BY S.PROD_DT DESC
 
 	</select>
 		
