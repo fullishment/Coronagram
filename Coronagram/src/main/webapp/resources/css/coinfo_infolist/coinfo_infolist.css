@@ -497,6 +497,7 @@ a.cm_userinfo {
 	text-shadow: 1px 1px 2px rgb(255, 255, 255);
 	font-size: 70px;
 	margin-bottom: 20px;
+	width:900px;
 }
 .txt p{
 	font-weight: bold;
@@ -533,7 +534,28 @@ img{
 
 /* 5 */
 @media screen and (max-width: 800px){
-	.myslide{
+	.txt h1 {
+		color:#000000;
+		text-shadow:1px 1px 2px rgb(255 255 255);
+		font-size:60px;
+		margin-bottom:20px;
+		min-width:800px;
+	}
+	.txt p {
+		font-weight: bold;
+		font-size:23px;
+		text-shadow:1px 1px 2px rgb(0 0 0);
+		margin-top: 20px;
+		margin-bottom:20px;
+		max-width:427px;
+	}
+
+}
+	
+	
+	
+	
+	/* .myslide{
 		height: 100%;
 	}
 	.txt{
@@ -565,8 +587,8 @@ img{
 	.txt p{
 		font-size: 13px;
 	}
+ */
 
-}
 /* /5 */
 
 /* 6 */
