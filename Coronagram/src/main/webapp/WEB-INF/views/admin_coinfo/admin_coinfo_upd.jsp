@@ -302,7 +302,7 @@ function checkVal(sel){
 												<div id="image">
 													<img name="images" id="images"
 														src="resources/upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}"
-														onerror="this.style.display='none'" />
+														onerror="this.style.display='none'" style="max-width:760px; height:auto;" />
 												</div>
 	                                    
 	<%--                                     <div class="qnaImg">

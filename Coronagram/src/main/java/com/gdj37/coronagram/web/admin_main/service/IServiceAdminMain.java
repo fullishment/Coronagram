@@ -10,4 +10,7 @@ public interface IServiceAdminMain {
 	public List<HashMap<String, String>> getadminQnaList(HashMap<String, String> params)throws Throwable;
 
 	public HashMap<String, String> getNewQ(HashMap<String, String> params)throws Throwable;
+
+	public List<HashMap<String, String>> getAdinfoList(HashMap<String, String> params) throws Throwable;
+
 }

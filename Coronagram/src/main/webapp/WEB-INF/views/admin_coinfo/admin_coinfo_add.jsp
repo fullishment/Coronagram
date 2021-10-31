@@ -241,7 +241,7 @@ function checkVal(sel){
 										<span id="fileName"></span>		
 										<input type="hidden" name="imgFile" id="imgFile">							
 									    <div id="preView">
-									       <img src="resources/upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" max-width="760px" height="auto" />
+									       <img src="resources/upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
 									    </div>
 									</div>
                               	  </div>

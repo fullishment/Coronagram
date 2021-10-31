@@ -24,12 +24,16 @@ public class admin_main {
 		HashMap<String, String> data1 = iServiceAdminMain.getNewQ(params);
 		//Q&A 
 		List<HashMap<String, String>> list = iServiceAdminMain.getadminQnaList(params);
+		List<HashMap<String, String>> list1 = iServiceAdminMain.getAdinfoList(params);
 		mav.addObject("data", data);
 		mav.addObject("data1", data1);
 		mav.addObject("list", list);
-		mav.setViewName("admin_main/admin_main");
+		mav.addObject("list1", list1);
 		
+		mav.setViewName("admin_main/admin_main");
+
 		return mav;
 	}
+	
 
 }

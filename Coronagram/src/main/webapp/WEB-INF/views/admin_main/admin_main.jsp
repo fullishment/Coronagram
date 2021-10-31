@@ -211,6 +211,42 @@ $("#tbody").html(html);
 							<button type="button" class="btn btn-primary">+</button>
 						</div>
 					</section>
+					
+					<section class="page-body">
+						<div class="coinfoList">
+							<table>
+								 <thead>
+									<tr>
+										<th><p>번호</p></th>
+										<th><p>제목</p></th>
+										<th><p>소제목</p></th>
+										<th><p>작성일</p></th>
+									</tr>
+								</thead> 
+								<tbody>
+									<tr>
+										<td>${list1[0].INFO_NO}</td>
+										<td>${list1[0].INFO_TITLE}</td>
+										<td>${list1[0].INFO_SUBHD}</td>
+										<td>${list1[0].DT}</td>
+									</tr>
+									<tr>
+										<td>${list1[1].INFO_NO}</td>
+										<td>${list1[1].INFO_TITLE}</td>
+										<td>${list1[1].INFO_SUBHD}</td>
+										<td>${list1[1].DT}</td>
+									</tr>
+									<tr>
+										<td>${list1[2].INFO_NO}</td>
+										<td>${list1[2].INFO_TITLE}</td>
+										<td>${list1[2].INFO_SUBHD}</td>
+										<td>${list1[2].DT}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</section>
+					
 				</article>
 
 				<article class="version">
@@ -220,6 +256,42 @@ $("#tbody").html(html);
 							<button type="button" class="btn btn-primary">+</button>
 						</div>
 					</section>
+					
+					<section class="page-body">
+						<div class="shopList">
+							<table>
+								 <thead>
+									<tr>
+										<th><p>번호</p></th>
+										<th><p>제목</p></th>
+										<th><p>소제목</p></th>
+										<th><p>작성일</p></th>
+									</tr>
+								</thead> 
+								<tbody>
+									<tr>
+										<td>${list1[0].INFO_NO}</td>
+										<td>${list1[0].INFO_TITLE}</td>
+										<td>${list1[0].INFO_SUBHD}</td>
+										<td>${list1[0].DT}</td>
+									</tr>
+									<tr>
+										<td>${list1[1].INFO_NO}</td>
+										<td>${list1[1].INFO_TITLE}</td>
+										<td>${list1[1].INFO_SUBHD}</td>
+										<td>${list1[1].DT}</td>
+									</tr>
+									<tr>
+										<td>${list1[2].INFO_NO}</td>
+										<td>${list1[2].INFO_TITLE}</td>
+										<td>${list1[2].INFO_SUBHD}</td>
+										<td>${list1[2].DT}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</section>
+					
 				</article>
 			</div>
 		</div>

@@ -10,9 +10,9 @@
 	</select>
 
 <!--Q&A list -->
-		<select id="getadminQnaList" parameterType="hashmap" resultType="hashmap">
+	<select id="getadminQnaList" parameterType="hashmap" resultType="hashmap">
 			SELECT I.QNA_NO,I.M_NM,I.TITLE,I.IMG_ADR, TO_CHAR(I.Q_DT,'YYYY-MM-DD')AS Q_DT, I.DEL, I.ANS_CON
-        	FROM (SELECT Q.QNA_NO,M.M_NM,Q.TITLE, M.IMG_ADR, Q.Q_DT, Q.DEL, Q.ANS_CON
+	       	FROM (SELECT Q.QNA_NO,M.M_NM,Q.TITLE, M.IMG_ADR, Q.Q_DT, Q.DEL, Q.ANS_CON
 	            ,ROW_NUMBER() OVER(ORDER BY Q.Q_DT DESC) AS RNUM
 	            FROM M M
 	            INNER JOIN QNA Q
@@ -20,12 +20,44 @@
 	             <![CDATA[
 	            WHERE I.RNUM <10 
 	            ]]>
-	            AND i.del=1 AND I.ANS_CON IS NULL
-	            ORDER BY I.Q_DT DESC
+		            AND i.del=1 AND I.ANS_CON IS NULL
+		            ORDER BY I.Q_DT DESC
 		</select>
+		
 <!-- 새 질문 -->
-		<select id="getNewQ" parameterType="hashmap" resultType="hashmap">
+	<select id="getNewQ" parameterType="hashmap" resultType="hashmap">
 			SELECT COUNT(CASE WHEN ans_con is null and del=1 THEN 1 END) AS newQ
 			FROM qna
-		</select>
+	</select>
+		
+<!--coinfo list -->
+	<select id="getAdinfoList" parameterType="hashmap" resultType="hashmap">
+	 		SELECT INFO.INFO_NO, INFO.INFO_TITLE, INFO.INFO_SUBHD, INFO.DT, INFO.DISP_YN
+			FROM (  SELECT INFO_NO, INFO_TITLE, INFO_SUBHD, DISP_YN,
+			        TO_CHAR(DT, 'YYYY-MM-DD') AS DT,
+			        ROW_NUMBER() OVER(ORDER BY INFO_NO DESC) AS RNUM
+			        FROM INFO
+			        WHERE DEL = 1
+			        ) INFO
+			<![CDATA[
+            WHERE INFO.RNUM <10 
+            ]]>
+            ORDER BY INFO.DT DESC
+	</select>
+
+<!--point shop list -->
+	<select id="getShopList" parameterType="hashmap" resultType="hashmap">
+		SELECT
+		FROM (	SELECT P.PROD_NO,M.M_NM,PC.CAT_NM,P.PROD_NM,P.POINT,P.SALE_STAT,TO_CHAR(P.PROD_DT,'YYYY-MM-DD') AS PROD_DT 
+				FROM PRODUCT P
+				    INNER JOIN PROD_CAT PC
+				    ON P.CAT_NO = PC.CAT_NO
+				    INNER JOIN M M
+				    ON P.REG_NO = M.M_NO
+				WHERE P.DEL = 1
+				) SHOP
+
+	</select>
+		
+		
 </mapper>

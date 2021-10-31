@@ -26,4 +26,9 @@ public class DaoAdminMain implements IDaoAdminMain{
 	public HashMap<String, String> getNewQ(HashMap<String, String> params) throws Throwable {
 		return sqlSession.selectOne("adminMain.getNewQ", params);
 	}
+
+	@Override
+	public List<HashMap<String, String>> getAdinfoList(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectList("adminMain.getAdinfoList", params);
+	}
 }

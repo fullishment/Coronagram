@@ -390,7 +390,7 @@ a.cm_userinfo {
 	z-index: 2;
 }
 .prev:hover, .next:hover{
-	color: #00a7ff; /* blue */
+	color: #ff8375; /* blue */
 }
 .next{
 	right: 0;
@@ -423,7 +423,7 @@ a.cm_userinfo {
 
 /* javascript */
 .active, .dot:hover{
-	border-color: #00a7ff; /* blue */
+	border-color: #ff8375; /* blue */
 }
 /* /javascript */
 

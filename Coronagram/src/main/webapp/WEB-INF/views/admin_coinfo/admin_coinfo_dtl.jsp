@@ -187,11 +187,11 @@ $(document).ready(function() {
 										<c:if test="${!empty data.REP_IMG}">
 										<div>
 										<c:set var="len" value="${fn:length(data.REP_IMG)}"></c:set>
-										이미지파일 : 
+										<span>배경이미지파일 :</span> 
 										<a href="resources/upload/${fn:replace(fn:replace(data.REP_IMG, '[', '%5B'), ']', '%5D')}" download="${fn:substring(data.REP_IMG, 20, len)}" >
 										${fn:substring(data.REP_IMG, 20, len)}
 										</a>
-											<img name="images" id="images" src="resources/upload/${data.REP_IMG}">
+											<img name="images" id="images" src="resources/upload/${data.REP_IMG}" style="max-width:760px; height:auto;" >
 										</div>
 									</c:if>
                                     </div>

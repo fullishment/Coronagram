@@ -27,4 +27,9 @@ public class ServiceAdminMain implements IServiceAdminMain{
 	public HashMap<String, String> getNewQ(HashMap<String, String> params) throws Throwable {
 		return iDaoAdminMain.getNewQ(params);
 	}
+
+	@Override
+	public List<HashMap<String, String>> getAdinfoList(HashMap<String, String> params) throws Throwable {
+		return iDaoAdminMain.getAdinfoList(params);
+	}
 }
