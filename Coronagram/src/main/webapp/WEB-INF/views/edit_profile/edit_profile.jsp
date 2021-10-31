@@ -129,7 +129,7 @@ $(document).ready(function(){
 						$("#imgFile").val(res.fileName[0]);
 						var imgAdr = res.fileName[0].replace('[', '%5B').replace(']', '%5D');
 						//$("#preView").attr("src", "resources/upload/"+imgAdr);
-						$("#preView").html("<img src=\"resources/images/edit_profile/"+imgAdr+"\" id=\"prevImg"+"\">");
+						$("#preView").html("<img src=\"resources/upload/"+imgAdr+"\" id=\"prevImg"+"\">");
 					}
 				}else{
 					alert("파일 업로드에 실패하였습니다.");
@@ -369,7 +369,7 @@ function readURL(input) {
     <div class="qnaImg">
 		<input type="hidden"  name="imgFile" id="imgFile" value="${data.IMG_ADR}">	
 		<div id="preView" class="img-wrap">
-			<img name="image" id="image" src="resources/images/edit_profile/${fn:replace(fn:replace(data.IMG_ADR, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
+			<img name="image" id="image" src="resources/upload/${fn:replace(fn:replace(data.IMG_ADR, '[', '%5B'), ']', '%5D')}" onerror="this.style.display='none'" />
 		</div>
 		<input type="button" class="fileBtn" id="imgBtn" value="사진 변경"/>
 	</div>
