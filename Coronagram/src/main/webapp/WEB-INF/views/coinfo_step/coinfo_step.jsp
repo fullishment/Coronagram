@@ -641,7 +641,7 @@ $(document).on('click', '.local_link', function(e){
                                             <td colspan="3">동행자 외 좌석 한 칸 띄우기</td>
                                         </tr>
                                         <tr>
-                                            <td rowspan="2">>운영시간 제한×	</td>
+                                            <td rowspan="2">운영시간 제한×	</td>
                                             <td colspan="2">(정규공연시설) 기본방역수칙 적용</td>
                                         </tr>
                                         <tr>
