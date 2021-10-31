@@ -275,6 +275,7 @@ div h3 {
 }
 .group_table0, .group_table1, .group_table2, .group_table3, .group_table4 {
 	width: 121%;
+	min-width: 943px;
     margin-left: -10%;
     margin-bottom: 50px;
 }

@@ -456,14 +456,15 @@ html, body {
   transition: all 1.7s cubic-bezier(0.22, 0.44, 0, 1);
 }
 .content-title {
-  font-size: 12vh;
-  line-height: 1.4;
-  background-color:  rgba(0, 0, 0, 0.3);
-  border-radius: 100px;
-  width : 60vw;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 40px;
+  	font-size: 10vh;
+    line-height: 1.4;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 100px;
+    width: 60vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    padding: 20px;
 }
 
 .background.up-scroll {
@@ -647,3 +648,48 @@ html, body {
     opacity: 1;
   } 
 }
+
+
+
+/* 미디어쿼리 */
+@media only screen and (max-width: 1253px){
+	.content-title {
+    font-size: 10vh;
+    line-height: 1.4;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 100px;
+    width: 35vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+	}
+	
+}	
+
+@media only screen and (max-width: 1046px){
+	.content-title {
+    font-size: 8vh;
+    line-height: 1.4;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 100px;
+    width: 35vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+	}
+	
+}	
+
+@media only screen and (max-width: 842px){
+	.content-title {
+    font-size: 5vh;
+    line-height: 1.4;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 100px;
+    width: 48vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+	}
+	
+}	
