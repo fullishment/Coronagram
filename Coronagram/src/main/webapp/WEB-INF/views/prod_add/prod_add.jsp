@@ -38,12 +38,19 @@
         			alert("내용이 입력되지않았습니다");
         			$("#text_field").focus();
         		}else{
-      
+      				var opt = $("input[name=\"option\"]");
+      				var optArray = new Array ();
+      				for(var i=0;i<opt.length;i++){
+      					optArray.push(opt[i].value);
+      				}
+      				
+      				$("#optInp").val(optArray);
 	        		var srcArray = new Array();
 	        		var imgA = $("img[alt=\"thumbnail\"]"); 
 	        		for(var i=0;i<imgA.length;i++){
 	    				srcArray.push(imgA[i].src.substring(imgA[i].src.lastIndexOf("/")+1));
 	        		}
+	        		$("#bFile").val(srcArray);
 	
 	        		
 	        		var params = $("#productForm").serialize();
@@ -52,14 +59,12 @@
 	    				url : "prodAdds",
 	        			type : "post",
 	        			dataType : "json",
-	        			data : params, 
+	        			data :params,
 	        			success : function(res){
-	        				for(var i =0;i<imgA.length ;i++){
-	        					attcAjax(srcArray,i);
-	        					if(i==cnt){
-	        						location.href="adminShopList";
-	        					}
-	        				}
+        					if(res.result == "success"){
+        						location.href="adminShopList";
+        					}
+	        				
 	        			},
 	        			error : function(request, status, error){
 	        				console.log(error);
@@ -112,26 +117,19 @@
         		});
         		fileForm.submit();
         	});
-        	
+        	$("#plus").on("click",function(){
+        		var html = "<img alt=\"del\" src=\"resources/images/icon/plusNOBorder.png\"  class=\"del_icon\" id=\"delIcon\"><br/><label>옵션 값</label><input type=\"text\" id=\"op\" name=\"option\" class=\"pri_input\"/> ";
+        		$(this).before(html);
+        	});
+        	$("#opt").on("click","#delIcon",function(){
+        		$(this).prev().prev().prev().remove();
+        		$(this).prev().prev().remove();
+        		$(this).prev().remove();
+        		$(this).remove();
+        	});
         });
         
-        function attcAjax(srcArray,i){
-        	console.log("aaa");
-        	$("#bFile").val(srcArray[i]);
-        	var params = $("#productForm").serialize();
-    		$.ajax({
-    			url : "prodAttcAdd",
-    			type : "post",
-    			dataType : "json",
-    			data : params,
-    			success : function(res){
-    				cnt++;
-    			},
-    			error : function(request, status, error){
-    				console.log(error);
-    			}
-    		});
-        }
+       
         function checkVal(sel){
         	if($.trim($(sel).val())==""){
         		return true;
@@ -241,27 +239,33 @@
 
                 </div>
                 
-                <p>
+               
                 	<input type="hidden" id="pNo" name="pNo" value="${nextPNo.NEXTVAL}" />
                 	<input type="hidden" id="sMNo" name="sMNo" value="${sMNo}" />
+                	<input type="hidden" id="optInp" name="opt" value="" />
                     <input type="hidden" name="bFile" id="bFile" value=""/>
-                    <label for="price" class="pri_label">상품명 : </label><input type="text" name="prodNm" id="prodNm" class="pri_input" value=""> <br/>
-                    <label for="price" class="pri_label">카테고리명 : </label>
+                    <label for="prodNm" class="pri_label">상품명 : </label><input type="text" name="prodNm" id="prodNm" class="pri_input" value=""> <br/>
+                    <label for="catNo" class="pri_label">카테고리명 : </label>
                     <select name="catNo" id="catNo">
                     	<c:forEach var ="cat" items="${catList}">
                     		<option value="${cat.CAT_NO}" >${cat.CAT_NM}</option>
                     	</c:forEach>
                     </select><br/>
                     <label for="price" class="pri_label">가격 : </label><input type="text" name="price" id="price" class="pri_input"  value=""> <br/>
-                    <label for="price" class="pri_label">판매상태 : </label>
+                    <label for="saleStat" class="pri_label">판매상태 : </label>
                     
                     <select name="saleStat" id="saleStat">
                     	<option value="0">판매중</option>
                     	<option value="1">상품준비중</option>
-                    </select>   
+                    </select><br/>
+                    <label for="opCategory">옵션 단위</label><input type="text" id="opCategory" name = "opCategory" class="pri_input"/>
+                    <div id="opt">
+                    	<label>옵션 값</label><input type="text" id="op" name="option" class="pri_input"/> 
+                    	<img alt="plus" src="resources/images/icon/plusNOBorder.png"  class="plus" id="plus">   
+                    </div> 
                     <textarea name="con" id="text_field" cols="50" rows="5"
                         placeholder="140자 까지 등록 가능합니다. #태그명 을 통해서 검색 태그를 등록할 수 있습니다. 예시 : I # love # insta!"  ></textarea>
-                </p>
+               
                 <div class="btn_area">
                     <input class="add_btn" type="button" value="추가" id="addBtn">
                     <input class="cancel_btn" type="button" value="취소" id="cancleBtn">

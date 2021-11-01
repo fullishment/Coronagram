@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.btn {
+.slide_btn {
     display: inline-block;
     padding: 13px 20px;
     color: #fff;
@@ -14,7 +14,7 @@
     text-transform: uppercase;
     transition: color 0.1s linear 0.05s;
   }
-  .btn::before {
+  .slide_btn::before {
     content: "";
     display: block;
     position: absolute;
@@ -27,24 +27,24 @@
     opacity: 0;
     transition: height 0.2s ease, top 0.2s ease, opacity 0s linear 0.2s;
   }
-  .btn::after {
+  .slide_btn::after {
     transition: border 0.1s linear 0.05s;
   }
-  .btn .btn-inner {
+  .slide_btn .slide_btn-inner {
     position: relative;
     z-index: 2;
   }
-  .btn:hover {
+  .slide_btn:hover {
     color: #373737;
     transition: color 0.1s linear 0s;
   }
-  .btn:hover::before {
+  .slide_btn:hover::before {
     top: 0;
     height: 100%;
     opacity: 1;
     transition: height 0.2s ease, top 0.2s ease, opacity 0s linear 0s;
   }
-  .btn:hover::after {
+  .slide_btn:hover::after {
     border-color: #373737;
     transition: border 0.1s linear 0s;
   }
@@ -145,11 +145,11 @@
     font-size: 18px;
     line-height: 1.4;
   }
-  .slideshow .slide .btn {
+  .slideshow .slide .slide_btn {
     margin: 15px 0 0;
     border-color: #fff;
   }
-  .slideshow .slide .btn::before {
+  .slideshow .slide .slide_btn::before {
     background: #fff;
   }
   .slideshow .pagination {

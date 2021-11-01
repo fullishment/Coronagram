@@ -26,6 +26,7 @@ public class ShopController {
 	@RequestMapping(value="/shop")
 	public ModelAndView shopMain(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
 		List<HashMap<String,String>> list = iServiceShop.getProdTopList(params);
+		mav.addObject("list",list);
 		mav.setViewName("shop_main/shop_main");
 		return mav;
 	}
@@ -215,20 +216,6 @@ public class ShopController {
 		mav.setViewName("prod_info/prod_info");
 		return mav;
 	}
-	@RequestMapping(value="/prodAttcAdd" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
-	@ResponseBody
-	public String prodAttcAdd(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
-		ObjectMapper mapper = new ObjectMapper();
-		Map<String,Object> modelMap= new HashMap<String,Object>();
-		String result="success";
-		int prodAttcAdd = iServiceShop.prodAttcAdd(params);
-		if(prodAttcAdd ==0) {
-			result="failed";
-		}
-		
-		modelMap.put("result", result);
-		return mapper.writeValueAsString(modelMap);
-	}
 	@RequestMapping(value="/prodAttcDel" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
 	@ResponseBody
 	public String prodAttcDel(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
@@ -236,27 +223,47 @@ public class ShopController {
 		Map<String,Object> modelMap= new HashMap<String,Object>();
 		String result="success";
 		int prodAttcDel = iServiceShop.prodAttcDel(params);
+		
 		if(prodAttcDel ==0) {
 			result="failed";
+		}else {
+			
 		}
 		
 		modelMap.put("result", result);
 		return mapper.writeValueAsString(modelMap);
 	}
-	@RequestMapping(value="/prodU" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@RequestMapping(value="/prodUs" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
 	@ResponseBody
 	public String prodU(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String,Object> modelMap= new HashMap<String,Object>();
 		String result="success";
-		int prodAttcAdd = iServiceShop.prodU(params);
+		String optArray[] = params.get("opt").split(",");
+		String attcArray[] = params.get("bFile").split(",");
+		int prodU = iServiceShop.prodU(params);
 		
-		if(prodAttcAdd ==0) {
+		if(prodU ==0) {
 			result="failed";
 		}else {
 			int prodAttcDel = iServiceShop.prodAttcDel(params);
-			if(prodAttcDel ==0) {
+			int prodOptDel = iServiceShop.prodOptDel(params);
+			if(prodAttcDel ==0 && prodOptDel==0) {
 				result="failed";
+			}
+			for(int i=0;i<optArray.length;i++) {
+				params.put("opt", optArray[i]);
+				int prodOptAdd = iServiceShop.prodOptAdd(params);
+				if(prodOptAdd == 0) {
+					result = "optFailed";
+				}
+			}
+			for(int i = 0;i<attcArray.length;i++) {
+				params.put("attc", attcArray[i]);
+				int prodAttcAdd = iServiceShop.prodAttcAdd(params);
+				if(prodAttcAdd ==0) {
+					result="failed";
+				}
 			}
 		}
 		modelMap.put("result", result);
@@ -266,11 +273,13 @@ public class ShopController {
 	
 	@RequestMapping(value="/prodAdd")
 	public ModelAndView prodAdd(ModelAndView mav, @RequestParam HashMap<String,String> params,HttpSession session) throws Throwable {
-		List<HashMap<String,String>> catlist = iServiceShop.getProdCatList(params);
-		HashMap<String,String> nextPNo = iServiceShop.getProdNextNo(params);
-		mav.addObject("catList", catlist);
-		mav.addObject("nextPNo", nextPNo);
+		
+		
 		if(session.getAttribute("sMNo")!=null) {
+			List<HashMap<String,String>> catlist = iServiceShop.getProdCatList(params);
+			HashMap<String,String> nextPNo = iServiceShop.getProdNextNo(params);
+			mav.addObject("catList", catlist);
+			mav.addObject("nextPNo", nextPNo);
 			mav.setViewName("prod_add/prod_add");
 		}else {
 			mav.setViewName("login/login");
@@ -284,9 +293,26 @@ public class ShopController {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String,Object> modelMap= new HashMap<String,Object>();
 		String result="success";
-		int prodAttcAdd = iServiceShop.prodAdd(params);
-		if(prodAttcAdd ==0) {
+		String optArray[] = params.get("opt").split(",");
+		String attcArray[] = params.get("bFile").split(",");
+		int prodAdd = iServiceShop.prodAdd(params);
+		if(prodAdd ==0) {
 			result="failed";
+		}else {
+			for(int i=0;i<optArray.length;i++) {
+				params.put("opt", optArray[i]);
+				int prodOptAdd = iServiceShop.prodOptAdd(params);
+				if(prodOptAdd == 0) {
+					result = "optFailed";
+				}
+			}
+			for(int i = 0;i<attcArray.length;i++) {
+				params.put("attc", attcArray[i]);
+				int prodAttcAdd = iServiceShop.prodAttcAdd(params);
+				if(prodAttcAdd ==0) {
+					result="failed";
+				}
+			}
 		}
 		
 		modelMap.put("result", result);

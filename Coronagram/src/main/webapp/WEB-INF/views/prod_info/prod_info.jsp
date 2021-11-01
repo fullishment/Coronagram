@@ -28,32 +28,49 @@
     		}
     	});
     	$("#updateBtn").click(function(){
-    		var srcArray = new Array();
-    		var imgA = $("img[alt=\"thumbnail\"]"); 
-    		for(var i=0;i<imgA.length;i++){
-				srcArray.push(imgA[i].src.substring(imgA[i].src.lastIndexOf("/")+1));
-    		}
+    		if(checkVal("#prodNm")){
+    			alert("상품명이 입력되지않았습니다");
+    			$("#prodNm").focus();
+    		}else if(checkVal("#price")){
+    			alert("가격이 입력되지않았습니다");
+    			$("#price").focus();
+    		}else if(checkVal("#text_field")){
+    			alert("내용이 입력되지않았습니다");
+    			$("#text_field").focus();
+    		}else{
+  				var opt = $("input[name=\"option\"]");
+  				var optArray = new Array ();
+  				for(var i=0;i<opt.length;i++){
+  					optArray.push(opt[i].value);
+  				}
+  				
+  				$("#optInp").val(optArray);
+        		var srcArray = new Array();
+        		var imgA = $("img[alt=\"thumbnail\"]"); 
+        		for(var i=0;i<imgA.length;i++){
+    				srcArray.push(imgA[i].src.substring(imgA[i].src.lastIndexOf("/")+1));
+        		}
+        		$("#bFile").val(srcArray);
 
-    		
-    		var params = $("#productForm").serialize();
-    		console.log(params);
-    		$.ajax({
-				url : "prodU",
-    			type : "post",
-    			dataType : "json",
-    			data : params, 
-    			success : function(res){
-    				for(var i =0;i<imgA.length ;i++){
-    					attcAjax(srcArray,i);
-    					if(i==cnt){
+        		
+        		var params = $("#productForm").serialize();
+        		console.log(params);
+        		$.ajax({
+    				url : "prodUs",
+        			type : "post",
+        			dataType : "json",
+        			data :params,
+        			success : function(res){
+    					if(res.result == "success"){
     						location.href="adminShopList";
     					}
-    				}
-    			},
-    			error : function(request, status, error){
-    				console.log(error);
-    			}
-			});
+        				
+        			},
+        			error : function(request, status, error){
+        				console.log(error);
+        			}
+    			});
+    		}
     		
     	});
     	$("td").on("click","img",function(){
@@ -100,9 +117,25 @@
     		});
     		fileForm.submit();
     	});
+    	$("#plus").on("click",function(){
+    		var html = "<img alt=\"del\" src=\"resources/images/icon/plusNOBorder.png\"  class=\"del_icon\" id=\"delIcon\"><br/><label>옵션 값</label><input type=\"text\" id=\"op\" name=\"option\" class=\"pri_input\"/> ";
+    		$(this).before(html);
+    	});
+    	$("#opt").on("click","#delIcon",function(){
+    		$(this).prev().prev().prev().remove();
+    		$(this).prev().prev().remove();
+    		$(this).prev().remove();
+    		$(this).remove();
+    	});
     	
     });
-    
+    function checkVal(sel){
+    	if($.trim($(sel).val())==""){
+    		return true;
+    	}else{
+    		return false;
+    	}
+    };
     function attcAjax(srcArray,i){
     	console.log("aaa");
     	$("#bFile").val(srcArray[i]);
@@ -229,6 +262,8 @@
                 </div>
                 
                 <p>
+                	<input type="hidden" id="optInp" name="opt" value="" />
+                	<input type="hidden" id="sMNo" name="sMNo" value="${sMNo}" />
                     <input type="hidden" id="pNo" name="pNo" value="${data.PROD_NO}" />
                     <input type="hidden" name="bFile" id="bFile" value=""/>
                     <label for="price" class="pri_label">상품명 : </label><input type="text" name="prodNm" id="prodNm" class="pri_input" value="${data.PROD_NM}"> <br/>
@@ -266,7 +301,12 @@
                     			<option value="1" selected>상품준비중</option>
                     		</c:otherwise>
                     	</c:choose>
-                    </select>   
+                    </select> <br/>
+                    <label for="opCategory">옵션 단위</label><input type="text" id="opCategory" name = "opCategory" class="pri_input"/>
+                    <div id="opt">
+                    	<label>옵션 값</label><input type="text" id="op" name="option" class="pri_input"/> 
+                    	<img alt="plus" src="resources/images/icon/plusNOBorder.png"  class="plus" id="plus">   
+                    </div>   
                     <textarea name="con" id="text_field" cols="50" rows="5"
                         placeholder="140자 까지 등록 가능합니다. #태그명 을 통해서 검색 태그를 등록할 수 있습니다. 예시 : I # love # insta!"  >${data.CON}</textarea>
                 

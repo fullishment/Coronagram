@@ -15,9 +15,9 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   
-  <link rel="stylesheet" href="resources/css/shop_main/headercss.css">
-  <link rel="stylesheet" href="resources/css/shop_main/maincss.css">
-  <link rel="stylesheet" href="resources/css/shop_main/slide.css">
+  <link rel="stylesheet" href="resources/css/shop_main/headercss.css?after">
+  <link rel="stylesheet" href="resources/css/shop_main/maincss.css?after">
+  <link rel="stylesheet" href="resources/css/shop_main/slide.css?after">
 	<script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
 	 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
@@ -34,6 +34,10 @@
 		  $("#actionForm").attr("action","prodDetail");
 		  $("#actionForm").submit();
 	  });
+	  $("slideshow-inner").on("click",".header_btn",function(){
+		 $("#prodNo").val($(this).parent().parent().parent().attr("no")); 
+	  });
+	 
   });
   function drawList(list){
 	  var html = "";
@@ -118,35 +122,37 @@
         <div class="slider">
           <div id="top-banner-1" class="banner">
             <div class="banner-inner-wrapper">
-              <h2>Shop launching</h2>
+              <!-- <h2>Shop launching</h2>
               <h1>Time Sale</h1>
               <h2 id="clock"></h2>
               <div class="line"></div>
-              <div class="learn-more-button"><a href="#section-2">Learn More</a></div>
+              <div class="learn-more-button"><a href="#section-2">Learn More</a></div> -->
             </div>
           </div>
           <div id="top-banner-2" class="banner">
             <div class="banner-inner-wrapper">
-              <h2>What We Do</h2>
-              <h1>Great<br>MoGo</h1>
+              <!-- <h2>Co - Weak</h2>
+              <h1>코로나그램 위크<br/></h1>
               <div class="line"></div>
-              <div class="learn-more-button"><a href="#section-4">Learn More</a></div>
+              <div class="learn-more-button"><a href="#section-4">Learn More</a></div> -->
             </div>
           </div>
           <div id="top-banner-3" class="banner">
             <div class="banner-inner-wrapper">
-              <h2>Here We Are</h2>
+              <!-- <h2>Here We Are</h2>
+              
+              
               <h1>We Are<br>MoGo</h1>
               <div class="line"></div>
-              <div class="learn-more-button"><a href="#section-6">Learn More</a></div>
+              <div class="learn-more-button"><a href="#section-6">Learn More</a></div> -->
             </div>
           </div>
           <div id="top-banner-4" class="banner">
             <div class="banner-inner-wrapper">
-              <h2>Our Contacts</h2>
+              <!-- <h2>Our Contacts</h2>
               <h1>Welcome<br>to MoGo</h1>
               <div class="line"></div>
-              <div class="learn-more-button"><a href="#main-footer">Learn More</a></div>
+              <div class="learn-more-button"><a href="#main-footer">Learn More</a></div> -->
             </div>
           </div>
         </div>
@@ -226,14 +232,14 @@
         <div class="slideshow-inner">
         
           <div class="slides">
-            <div class="slide is-active ">
+            <!-- <div class="slide is-active ">
               <div class="slide-content">
                 <div class="caption">
-                  <div class="title">Slide title 1</div>
+                  <div class="title"></div> 
                   <div class="text">
                     <p>Slide description 1</p>
                   </div> 
-                  <a href="#" class="btn">
+                  <a href="#" class="slide_btn">
                     <span class="btn-inner">Learn More</span>
                   </a>
                 </div>
@@ -241,16 +247,24 @@
               <div class="image-container"> 
                 <img src="https://www.alixbdanthenay.fr/wp-content/uploads/2015/07/Indispensable-1.jpg" alt="" class="image" />
               </div>
-            </div>
-            <c:forEach var="data" items="${list}" begin="1"> 
-	        	<div class="slide">
+            </div> -->
+            <c:forEach var="data" items="${list}" varStatus="status"> 
+            	<c:choose>
+            		<c:when test="${status.index ==0}">
+            			<div class="slide is-active" no="${data.PROD_NO}" >
+            		</c:when>
+            		<c:otherwise>
+            			<div class="slide" no="${data.PROD_NO}" >
+            		</c:otherwise>
+            	</c:choose> 
+	        	<%-- <div class="slide" no="${data.PROD_NO}" > --%>
 	              <div class="slide-content">
 	                <div class="caption">
-	                  <div class="title">Slide title 2</div>
+	                  <div class="title">${data.PROD_NM}</div>
 	                  <div class="text">
-	                    <p>Slide description 2</p>
+	                    <p>${data.CON}</p> 
 	                  </div> 
-	                  <a href="#" class="btn">
+	                  <a href="#" class="slide_btn">
 	                    <span class="btn-inner">Learn More</span>
 	                  </a>
 	                </div>
@@ -261,7 +275,7 @@
 	            </div>
 	        
 	        </c:forEach>
-            <div class="slide">
+            <!-- <div class="slide">
               <div class="slide-content">
                 <div class="caption">
                   <div class="title">Slide title 2</div>
@@ -309,7 +323,7 @@
                 <img src="https://www.alixbdanthenay.fr/wp-content/uploads/2016/11/20mars17-sans-typo.jpg" alt="" class="image" />
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="pagination">
             <div class="item is-active"> 
               <span class="icon">1</span>

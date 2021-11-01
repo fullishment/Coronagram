@@ -178,6 +178,18 @@ public class ServiceShop implements IServiceShop{
 		return iDaoShop.getProdTopList(params);
 	}
 
+	@Override
+	public int prodOptAdd(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.prodOptAdd(params);
+	}
+
+	@Override
+	public int prodOptDel(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.prodOptDel(params);
+	}
+
 
 
 	

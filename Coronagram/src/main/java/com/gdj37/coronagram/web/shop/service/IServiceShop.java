@@ -59,6 +59,10 @@ public interface IServiceShop {
 
 	public List<HashMap<String, String>> getProdTopList(HashMap<String, String> params)throws Throwable;
 
+	public int prodOptAdd(HashMap<String, String> params)throws Throwable;
+
+	public int prodOptDel(HashMap<String, String> params)throws Throwable;
+
 
 
 }

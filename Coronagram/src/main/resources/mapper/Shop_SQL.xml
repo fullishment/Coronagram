@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="shop">
 	<select id="getProdTopList" parameterType="hashmap" resultType="hashmap" >
-		SELECT P.PROD_NO,P.PROD_NM, CNT , RNK
+		SELECT P.PROD_NO,P.PROD_NM, CNT , RNK,P.CON
 		FROM PRODUCT P
-		    INNER JOIN (SELECT PROD_NO,RANK()OVER (ORDER BY CNT DESC) AS RNK,CNT
-		                FROM (SELECT PROD_NO,COUNT(*) AS CNT
+		    INNER JOIN (SELECT PROD_NO,ROW_NUMBER() OVER(ORDER BY CNT DESC) AS RNK,CNT 
+		                FROM (SELECT PROD_NO,NVL(COUNT(*),0) AS CNT 
 		                      FROM ORDER_PROD
 		                      GROUP BY PROD_NO) OP) ROP
 		    ON P.PROD_NO = ROP.PROD_NO
-		WHERE <![CDATA[ ROP.RNK <= 3 ]]>
+		WHERE <![CDATA[ ROP.RNK < 5 ]]>
 	</select>
 	<select id="getProdList" parameterType="hashmap" resultType="hashmap">
 		SELECT P.PROD_NO,REG_NO,PC.CAT_NM,PROD_NM,POINT,CON,SALE_STAT,PROD_DT,PA.FILE_ADDR
@@ -164,7 +164,7 @@
 	</select>
 	<insert id="prodAttcAdd" parameterType="hashmap">
 		INSERT INTO PROD_ATTC (ATTC_NO, PROD_NO, FILE_ADDR)
-		VALUES (PROD_ATTC_SEQ.NEXTVAL, #{pNo}, #{bFile}) 
+		VALUES (PROD_ATTC_SEQ.NEXTVAL, #{pNo}, #{attc}) 
 	</insert>
 	<update id="prodU" parameterType="hashmap" >
 		UPDATE PRODUCT SET PROD_NM = #{prodNm}, 
@@ -199,4 +199,13 @@
 		INSERT INTO PRODUCT (PROD_NO,REG_NO,CAT_NO,PROD_NM,POINT,CON,SALE_STAT)
 		VALUES (#{pNo},#{sMNo},#{catNo},#{prodNm},#{price},#{con},#{saleStat})
 	</insert>
+	<insert id="prodOptAdd">
+		INSERT INTO PROD_OPT(OPT_NO,PROD_NO,PRICE,UNIT)
+		VALUES (OPT_SEQ.NEXTVAL,#{pNo},#{opt},#{opCategory})
+	</insert>
+	<delete id="prodOptDel" parameterType="hashmap">
+		DELETE
+		FROM PROD_OPT
+		WHERE PROD_NO = #{pNo}
+	</delete>
 </mapper>

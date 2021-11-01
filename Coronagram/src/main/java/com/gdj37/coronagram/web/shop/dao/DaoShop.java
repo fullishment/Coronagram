@@ -176,6 +176,18 @@ public class DaoShop implements IDaoShop {
 		return sqlSession.selectList("shop.getProdTopList", params);
 	}
 
+	@Override
+	public int prodOptAdd(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("shop.prodOptAdd", params);
+	}
+
+	@Override
+	public int prodOptDel(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("shop.prodOptDel",params);
+	}
+
 
 
 
