@@ -3,7 +3,7 @@
 <mapper namespace="signup">
 	
 	<insert id="addSign" parameterType="hashmap">
-		insert into m (
+insert into M (
 		M_NO,
 		M_ID, 
 		M_NM, 
@@ -16,11 +16,20 @@
 		POST_NO, 
 		ADR, 
 		DTL_ADR    
-		
 		)  
-	values (M_SEQ.NEXTVAL, #{m_id}, #{m_nm}, #{yy}|| '-' || #{mm} || '-' || #{dd} ,  
-	#{nick_nm}, #{m_pw}, #{phone},
-		#{email}, #{vec}, #{cm_postcode}, #{adr}, #{dtl_adr}  )
+	values 
+	(	M_SEQ.NEXTVAL
+	  , #{m_id}
+	  , #{m_nm}
+	  , #{yy}|| '-' || #{mm} || '-' || #{dd} 
+	  , #{nick_nm}
+	  , #{m_pw}
+	  , #{phone}
+	  ,	#{email}
+	  , #{vec}
+	  , #{cm_postcode}
+	  , #{adr}
+	  , #{dtl_adr})
 	</insert> 
 	
 	<!-- 아이디 중복체크 -->
@@ -38,7 +47,7 @@
 	</select>
 	
 	<insert id="crngSet" parameterType="hashmap">
-		insert into crng_setting(m_no) values(#{crngSet})
+		insert into crng_setting(SM_NO) values(#{crngSet})
 	</insert> 
 	
 	<select id="lastNum" parameterType="hashmap" resultType="hashmap">
