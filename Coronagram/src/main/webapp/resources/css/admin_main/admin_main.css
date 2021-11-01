@@ -257,6 +257,14 @@ p {
 
 
 /* Q&A table */
+.qnaList {
+	height: 100%;
+}
+
+.adminList {
+	height: calc(100% - 48px);
+    overflow-y: auto;
+}
 
 .qnaList table {
   border-collapse:collapse;
@@ -270,7 +278,7 @@ p {
    box-shadow:0 5px 10px #e1e5ee;
 }
 .qnaList th {
-   padding :1rem 2rem;
+   padding :1rem 0rem;
    text-transform:uppercase;
    letter-spacing:0.1rem;
    font-size:0.7rem;
@@ -278,16 +286,35 @@ p {
    text-align:center;
 }
 .qnaList td {
-   padding : 1rem 2rem;
+   padding : 1rem 0rem;
    font-size:0.7rem;
    text-align:center;
 }
 .qnaList tr:nth-child(even) {
    background-color: #f4f6fb;
 }
- .qnaList tr:hover{
+ .qnaList tbody tr:hover{
    opacity:.4;
-}  
+}
+
+.qnaList th:nth-child(1), .qnaList td:nth-child(1) {
+	width: 60px;
+}
+.qnaList th:nth-child(2), .qnaList td:nth-child(2) {
+	width: 100px;
+}
+.qnaList th:nth-child(3), .qnaList td:nth-child(3) {
+	width: 100px;
+}
+.qnaList th:nth-child(4), .qnaList td:nth-child(4) {
+	width: 100px;
+}
+.qnaList th:nth-child(5), .qnaList td:nth-child(5) {
+	width: 100px;
+}
+.qnaList th:nth-child(6), .qnaList td:nth-child(6) {
+	width: 160px;
+}
 
 
 /* Info table */

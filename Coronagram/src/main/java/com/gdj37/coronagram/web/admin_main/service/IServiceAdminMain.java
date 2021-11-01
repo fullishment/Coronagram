@@ -15,4 +15,6 @@ public interface IServiceAdminMain {
 
 	public List<HashMap<String, String>> getShopList(HashMap<String, String> params)throws Throwable;
 
+	public List<HashMap<String, String>> getadminList(HashMap<String, String> params)throws Throwable;
+
 }

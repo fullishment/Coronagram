@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="adminMain">
+<!--Admin list -->
+	<select id="getadminList" parameterType="hashmap" resultType="hashmap">
+		SELECT M_NO, M_ID, M_NM, NICK_NM, PHONE, EMAIL
+		FROM M
+		WHERE ACCT_TYPE_NO = 6
+	</select>
+		
 <!--회원관리 list 불러오기 -->
 	<select id="getAdminM" parameterType="hashmap" resultType="hashmap">
 			SELECT COUNT(*) AS TOTALCOUNT

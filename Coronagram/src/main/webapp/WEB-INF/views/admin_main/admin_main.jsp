@@ -15,23 +15,14 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
 <script
 	src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script type="text/javascript"
+		src="resources/script/jquery/jquery.slimscroll.js"></script>
 <script>
-//목록 그리기
-function drawList(list) {
-var html = "";
-
-for(var data of list) {
-	html += "<tr no=\"" + data.QNA_NO+"\">";
-	html += "<td>"+data.QNA_NO+"</td>";
-	html += "<td>"+data.M_NM+"</td>";
-	html += "<td>"+data.TITLE+"</td>";
-	html += "<td>"+data.Q_DT+"</td>";
-	html += "</tr>";
-}
-$("#tbody").html(html);
-
-}
-	
+$(document).ready(function() {
+	$(".adminList").slimScroll({
+		height: "150px"
+	});
+});
 </script>	
 </head>
 <body>
@@ -113,10 +104,40 @@ $("#tbody").html(html);
 			<div class="boxcon">
 				<article class="version">
 					<section class="page-header">
-						<h1 class="page-title">오늘의 방문자</h1>
-						<div class="button-group">
-							<button type="button" class="btn btn-primary">+</button>
+						<h1 class="page-title">관리자 목록</h1>
+					</section>
+					<section class="page-body">
+						<div class="qnaList">
+							<table>
+								 <thead>
+									<tr>
+										<th><p>번호</p></th>
+										<th><p>ID</p></th>
+										<th><p>이름</p></th>
+										<th><p>닉네임</p></th>
+										<th><p>연락처</p></th>
+										<th><p>메일</p></th>
+									</tr>
+								</thead> 
+							</table>
+							<div class="adminList">
+							<table>
+								<tbody>
+								<c:forEach var="data" items="${list0}">
+									<tr>
+										<td>${data.M_NO}</td>
+										<td>${data.M_ID}</td>
+										<td>${data.M_NM}</td>
+										<td>${data.NICK_NM}</td>
+										<td>${data.PHONE}</td>
+										<td>${data.EMAIL}</td>
+									</tr>
+								</c:forEach>
+								</tbody>
+							</table>
+							</div>
 						</div>
+						
 					</section>
 				</article>
 
