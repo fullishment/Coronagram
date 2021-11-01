@@ -32,6 +32,12 @@ public class CalendarDao implements ICalendarDao {
 		return sqlSession.selectOne("cal.getCalendarDateCheck", params);
 	}
 
+
+	@Override
+	public HashMap<String, String> getPoint(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectOne("cal.getPoint", params);
+	}
+
 	/*
 	 * @Override public String getSysDate(HashMap<String, String> params) throws
 	 * Throwable { return sqlSession.selectOne("cal.getSysDate", params); }

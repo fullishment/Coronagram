@@ -11,6 +11,8 @@ public List<HashMap<String, Object>> getCalendarByDate(HashMap<String, String> p
 public HashMap<String,Object> insertSysdate(HashMap<String, Object> params) throws Throwable;
 
 public int getCalendarDateCheck(HashMap<String, String> params) throws Throwable;
+
+public HashMap<String, String> getPoint(HashMap<String, String> params) throws Throwable;
   
 }
 /*public String getSysDate(HashMap<String, String> params) throws Throwable;

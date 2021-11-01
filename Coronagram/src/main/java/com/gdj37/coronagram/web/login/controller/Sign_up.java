@@ -3,6 +3,8 @@ package com.gdj37.coronagram.web.login.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gdj37.coronagram.util.ScriptUtils;
 import com.gdj37.coronagram.util.Utils;
 import com.gdj37.coronagram.web.login.service.IServiceSign_up;
 
@@ -30,7 +33,7 @@ public class Sign_up {
 	   }
 	
 	@RequestMapping(value = "/mAdds")
-	public ModelAndView mAdds(@RequestParam HashMap<String, String> params, ModelAndView mav) throws Throwable {
+	public ModelAndView mAdds(HttpServletResponse response, @RequestParam HashMap<String, String> params, ModelAndView mav) throws Throwable {
 
 		int checkCnt = iServiceSign_up.getMIdCheck(params);
 		int checkNickCnt = iServiceSign_up.getNickCheck(params);
@@ -44,7 +47,8 @@ public class Sign_up {
 			int crngSet = iServiceSign_up.crngSet(params);
 			
 			if (cnt > 0) {
-				mav.setViewName("redirect:login");
+				ScriptUtils.alert(response, "가입을 축하드립니다.");
+				mav.setViewName("login/login");
 				
 			} else {
 				mav.addObject("msg", "등록중 문제가 발생했습니다..");

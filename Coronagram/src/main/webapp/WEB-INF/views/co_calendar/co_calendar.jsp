@@ -87,21 +87,14 @@
 		</div>
 	</header>
 	<main>
-		<%-- <c:choose>
-			 <c:when test="${!empty sMNo}"> --%> 
+			<input type="hidden" name="m_no" id="m_no" value="${sMNo}" />
 			<div class="calendar_wrap">
 				<form action="#" id="calForm" method="post">
 					<input type="hidden" name="m_no" id="m_no" value="${sMNo}" />
-					<div id='calendar'></div>
+					<div id='calendar'>
+					</div>
 				</form>
 			</div>
-			<%-- </c:when>
-			<c:otherwise>
-			<%
-			response.sendRedirect("login");
-			%>
-			</c:otherwise>	
-		</c:choose> --%>
 	</main>
 	<script src="resources/script/co_calendar/co_calendar.js?after"></script>
 	<script src="resources/script/menu_bar/menu_bar.js?after"></script>

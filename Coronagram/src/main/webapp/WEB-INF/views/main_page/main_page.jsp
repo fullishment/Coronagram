@@ -381,7 +381,8 @@
           </div>
           <div class="card_con">
             <span class="heading">오늘 확진자</span>
-            <span class="value"><span>1032K</span></span>
+            <span class="value"><span id="todayCnt"></span></span>
+            <span class="new" id="tdCnt"></span>
           </div>
         </div>
         <div class="card-2">
@@ -390,7 +391,8 @@
           </div>
           <div class="card_con">
             <span class="heading">누적 총 확진자</span>
-            <span class="value"><span>1032K</span></span>
+            <span class="value"><span id="totalCnt"></span></span>
+            <span class="new" id="accCnt"></span>
           </div>
         </div>
         <div class="card-3">
@@ -399,7 +401,8 @@
           </div>
           <div class="card_con">
             <span class="heading">완치자</span>
-            <span class="value"><span>1032K</span></span>
+            <span class="value"><span id="careCnt"></span></span>
+            <span class="new" id="clCnt"></span>
           </div>
         </div>
         <div class="card-4">
@@ -408,7 +411,8 @@
           </div>
           <div class="card_con">
             <span class="heading">사망자</span>
-            <span class="value"><span>1032K</span></span>
+            <span class="value"><span id="deathCnt"></span></span>
+            <span class="new" id="dtCnt"></span>
           </div>
         </div>
         <div class="card-5">
@@ -512,6 +516,7 @@
         <section>
     </div>
   </footer>
+  <script src="resources/script/openAPI/CoronaCntApi.js"></script>
   <script src="resources/script/main_page/main_page.js"></script>
   <script src="resources/script/menu_bar/menu_bar.js"></script>
 </body>

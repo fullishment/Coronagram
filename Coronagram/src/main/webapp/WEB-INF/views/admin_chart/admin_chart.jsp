@@ -103,32 +103,39 @@
                             <div class="rad-info-box rad-txt-today_cornic">
                                 <i class="fa chart1" data-percent="70"></i>
                                 <span class="heading">오늘 확진자</span>
-                                <span class="value"><span>4949</span></span>
+                                <span class="value" ><span id = todayCnt></span></span>
+                                <span class="new" id="tdCnt"></span>
                             </div>
                         </div>
                         <div class="col-lg-3 col-xs-6">
                             <div class="rad-info-box rad-txt-accum_cornic">
                                 <i class="fa chart1" data-percent="30"></i>
                                 <span class="heading">누적 총 확진자</span>
-                                <span class="value"><span>23K</span></span>
+                                <span class="value"><span id = totalCnt></span></span>
+								<span class="new" id="accCnt"></span>
                             </div>
                         </div>
                         <div class="col-lg-3 col-xs-6">
                             <div class="rad-info-box rad-txt-fl_rec">
                                 <i class="fa chart1" data-percent="50"></i>
                                 <span class="heading">완치자</span>
-                                <span class="value"><span>49M</span></span>
+                                <span class="value"><span id = careCnt></span></span>
+                                <span class="new" id="clCnt"></span>
                             </div>
                         </div>
                         <div class="col-lg-3 col-xs-6">
                             <div class="rad-info-box rad-txt-dead">
                                 <i class="fa chart1" data-percent="40"></i>
                                 <span class="heading">사망자</span>
-                                <span class="value"><span>10.9K</span></span>
+                                <span class="value"><span id="deathCnt"></span></span>
+                                <span class="new" id="dtCnt"></span>
                             </div>
                         </div>
+                        <div id = "createDt">
+                        <span></span>
+                        </div>
                     </div>
-                    <div class="row">
+ <!--                    <div class="row">
                         <div class="col-xs-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -144,7 +151,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <div class="panel panel-default">
@@ -389,7 +396,7 @@
                                                         <div class="level_color man"></div>
                                                     </div>
                                                 </td>
-                                                <td>2</td>
+                                                <td id="admin">${data.ADMIN}</td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -398,7 +405,7 @@
                                                         <div class="level_color dia"></div>
                                                     </div>
                                                 </td>
-                                                <td>2</td>
+                                                <td id="diamond">${data.DIAMOND}</td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -407,7 +414,7 @@
                                                         <div class="level_color pla"></div>
                                                     </div>
                                                 </td>
-                                                <td>2</td>
+                                                <td id="platinum">${data.PLATINUM}</td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -416,7 +423,7 @@
                                                         <div class="level_color gol"></div>
                                                     </div>
                                                 </td>
-                                                <td>2</td>
+                                                <td id="gold">${data.GOLD}</td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -425,7 +432,7 @@
                                                         <div class="level_color sil"></div>
                                                     </div>
                                                 </td>
-                                                <td>2</td>
+                                                <td id="silver">${data.SILVER}</td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -434,7 +441,7 @@
                                                         <div class="level_color bron"></div>
                                                     </div>
                                                 </td>
-                                                <td>2</td>
+                                                <td id="bronze">${data.BRONZE}</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -469,6 +476,7 @@
         </section>
     </main>
     <!-- <script src="../../resources/script/admin_chart/doughnutchart2.js"></script> -->
+    <script src="resources/script/openAPI/CoronaCntApi.js"></script>
     <script src="resources/script/admin_chart/admin_chart.js"></script>
     <script src="resources/script/menu_bar/menu_bar.js"></script>
 </body>

@@ -28,7 +28,12 @@ public class CalendarController {
 	@RequestMapping(value = "/calendar", method = RequestMethod.GET, produces = "text/json;charset=UTF-8")
 //	@ResponseBody
 	public ModelAndView calendar(HttpServletResponse response, HttpSession session, @RequestParam HashMap<String, String> params, ModelAndView mav)throws Throwable {
+		HashMap<String,String> data = iCalendarService.getPoint(params);
+		
+		mav.addObject("point",data);
+		
 		if(session.getAttribute("sMNo") != null) {
+			
 			mav.setViewName("co_calendar/co_calendar");
 		} else {
 			ScriptUtils.alert(response, "로그인이 필요한 페이지 입니다.");
@@ -44,7 +49,6 @@ public class CalendarController {
 	public Map<String, Object> attendances( @RequestParam HashMap<String, String> params) throws Throwable{
 		ObjectMapper mapper = new ObjectMapper();
 		
-		Map<String, Object> modelMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		String jsonString = null;
 		
@@ -77,13 +81,7 @@ public class CalendarController {
 		try {
 			
 			resultMap = iCalendarService.insertSysdate(params);
-			//int cnt = iCalendarService.insertSysdate(params);
-			/*
-			 * if( resultMap.size() == oldresult ) { result="failed"; }
-			 */
-//			params.put( "userNO", "1" );
-//			sysdate = iCalendarService.getSysDate(params);
-//			resultMap.put("sysdate", sysdate);
+
 			
 		} catch (Exception e) {
 			e.printStackTrace();

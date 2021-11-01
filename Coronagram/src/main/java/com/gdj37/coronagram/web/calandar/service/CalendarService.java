@@ -31,6 +31,14 @@ public class CalendarService implements ICalendarService {
 		return iCalendarDao.getCalendarDateCheck(params);
 	}
 
+
+	
+	  @Override 
+	  public HashMap<String, String> getPoint(HashMap<String, String> params) throws Throwable {
+		  return iCalendarDao.getPoint(params); 
+	}
+	 
+
 	/*
 	 * @Override public String getSysDate(HashMap<String, String> params) throws
 	 * Throwable { return iCalendarDao.getSysDate(params); }

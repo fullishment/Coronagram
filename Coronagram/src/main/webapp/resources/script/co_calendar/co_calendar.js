@@ -5,26 +5,31 @@ document.addEventListener('DOMContentLoaded', function() {
 	var month = today.getMonth()+1;
 	var day = today.getDate();
 	var fulldate = year+ '-' + month + '-' + day;
-
+	
+	
 	calendar = new FullCalendar.Calendar(calendarEl, {
-		height : '850px',
+		height : '700px',
 		expandRows : true,
 		slotMinTime : '08:00',
 		slotMaxTime : '24:00',
 		headerToolbar : {
 			left : 'title',
+			center : 'ff',
 			right : 'checkAtt prev,today,next'
 		},
-
+		defaultView: 'month',
+	      viewRender: function(view) {
+	          var ff = view.title;
+	          $("#externalTitle").html(title);
+	      }
+,
 		customButtons : {
 			checkAtt : {
 				text : '출석체크',
 				id : 'check',
 
 				click : function() {
-
 					var params = $("#calForm").serialize();
-					
 					$.ajax({
 						url : "calendarDataCheck",
 						type : "POST",
@@ -69,6 +74,10 @@ document.addEventListener('DOMContentLoaded', function() {
 						}
 					});
 				}
+			},
+			checkPt : {
+				text : "포인트 :", 
+				id : 'checkPt'
 			}
 		},
 
@@ -90,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					}
 				});
 			},
-			color : '#B8860B',
+			color : 'transparent',
 			textColor : 'black',
 
 		} ],
@@ -106,8 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 			calendar.unselect()
 			},*/
-			eventRender: function(event, eventElement) { 
-				if (event.imageurl) { eventElement.find("div.fc-event-inner").prepend("<img src='check.png' width='12' height='12'>"); } },
+
 
 
 

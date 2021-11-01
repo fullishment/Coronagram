@@ -17,4 +17,6 @@ public class main_page {
 		mav.setViewName("main_page/main_page");
 		return mav;
 	}
+	
+	
 }

@@ -1551,7 +1551,8 @@ a {
   }
 
   .card_con .value,
-  .card_con .heading {
+  .card_con .heading,
+  .card_con .new {
     display: block;
     position: relative;
 

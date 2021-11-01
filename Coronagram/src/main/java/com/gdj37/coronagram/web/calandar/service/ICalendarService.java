@@ -12,6 +12,8 @@ public interface ICalendarService {
 	public Map<String, Object> insertSysdate(HashMap<String, Object> params) throws Throwable;
 
 	public int getCalendarDateCheck(HashMap<String, String> params) throws Throwable;
+
+	public HashMap<String, String> getPoint(HashMap<String, String> params) throws Throwable;
 	 
 
 	/*

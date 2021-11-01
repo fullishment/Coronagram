@@ -6,7 +6,7 @@
 body {
   background: #f0f0f0;
   line-height: normal;
-  font-size: 16px;
+  font-size: 16px;	
   overflow-Y: scroll;
   -webkit-font-smoothing: antialiased !important;
   font-family: "Noto Sans KR", sans-serif;
@@ -863,7 +863,8 @@ font-size: 12px;
 }
 
 .rad-info-box .value,
-.rad-info-box .heading {
+.rad-info-box .heading,
+.rad-info-box .new {
   display: block;
   position: relative;
   color: #515d6e;
@@ -871,7 +872,8 @@ font-size: 12px;
   z-index: 10;
 }
 
-.rad-info-box .heading {
+.rad-info-box .heading,
+.rad-info-box .new {
   font-size: 1.2em;
   font-weight: 300;
   text-transform: uppercase;
@@ -1318,4 +1320,12 @@ font-size: 12px;
 .flat-theme.twitter.sticky .rad-toggle-btn:hover {
   background: #55acee !important;
   color: #fff !important;
+}
+#createDt{
+	display : inline-block;
+	padding : 0;
+	height : 45px;
+	font-size : 1.5rem;
+	margin-left : 43%;
+	margin-top : 10px;
 }
