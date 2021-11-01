@@ -365,14 +365,11 @@
 			     html+="                           <i class=\"far fa-paper-plane f_size\"></i>                                                                             ";
 			     html+="                       </div>                                                                                                                      ";
 			     html+="                   </div>                                                                                                                          ";
-			     html+="                   <div class=\"right_icon\">                                                                                                      ";
-			     html+="                       <i class=\"far fa-bookmark\"></i>                                                        								   ";
-			     html+="                   </div>                                                                                                                          ";
 			     html+="               </div>                                                                                                                              ";
 			     html+="               <div class=\"likes head_text\"></div>                                                                                               ";
 			     html+="           </div>                                                                                                                                  ";
 			     html+="           <div class=\"cmt_field\" id=\"cmt_field\">                                                                                              ";
-			     html+="			   <div class=\"emoji_area\"></div>																										   ";			    
+			     html+="			   <div id=\"emoji_area\" class=\"emoji_area\"></div>																					";			    
 			     html+="			   <i class=\"far fa-smile\"></i>																										";
 			     html+="               <textarea id=\"cmt_con\" class=\"cmt_con\" placeholder=\"댓글 달기...\"></textarea>                                                    ";
 			     html+="               <div class=\"m_text head_text\" id=\"add_cmt\">게시</div>                                                                    			";
@@ -384,6 +381,7 @@
 	    }
 	    function emojiAreaClick(){
 	    	$(".fa-smile").on("click",function(){	   
+	    		console.log("gd");
 	    		$(this).prev().css("display","block");
 	    		emojiArea();
 	    		var params = $("#modalForm").serialize();
@@ -399,12 +397,22 @@
 						emojiList4(res.emoji);
 						emojiList5(res.emoji);
 						emojiClick();
+						emojiClickEvent();
 					},
 					error : function(request, status, error){
 						console.log(error);
 					}
 				});
 	    	});    	
+	    }
+	    function emojiClickEvent(){
+	    	//emojiAreaClick();
+	    	$(".modal-content").click(function(e){ 
+	    		if(!$(e.target).hasClass('fa-smile')){ 
+	    			$(this).children().children().children('.emoji_area').css("display","none");    			
+	    		}
+	    	});  	
+	    	
 	    }
 	    function emojiArea(){
 	    	 var html="";

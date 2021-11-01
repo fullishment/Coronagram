@@ -103,6 +103,7 @@ video::-webkit-media-controls-fullscreen-button {
     height: 100%;
     display: none;
     position: absolute;
+    top: 80px;
     }
 
 .slide:first-child {

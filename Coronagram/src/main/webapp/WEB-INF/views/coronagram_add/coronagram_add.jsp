@@ -30,42 +30,42 @@
     			  e.stopPropagation();
     	          e.preventDefault();
     		});
-    		$(".upload_area").on("drop", function(e){
-    				e.preventDefault();
-    				var files = e.originalEvent.dataTransfer.files;	
-    				var file = files[0]; 
-    				
-    				var formData = new FormData();    
-    				formData.append("file", file);
-
-    				$.ajax({
-    					url : "fileUploadAjax2",
-    					type : "post",
-    					dataType : "text",
-    					processData:false,	
-    					contentType:false,	
-    					data : formData,
-    					success : function(res){
-    						if(res.result == "SUCCESS"){
-            					//업로드 파일명 적용
-            					if(res.fileName.length > 0){
-            						$("#CrngImgFile").val(res.fileName[0]);
-            						var html="";
-            						html+="<li class=\"preview\">																						  	 ";
-            						html+="		<img src=\"../resources/upload/"+$("#CrngImgFile").val()+"\" class=\"CrngPrevImg\" alt=\"thumbnail\" id=\"preview\" >";
-            						html+=" 	<i class=\"fas fa-times-circle close_prev\"></i>															 ";
-            						html+="</li>																											 ";
-            						$("#preview_area").append(html);
-            						imgMouseOver();
-            					}
-            				}else{
-            					alert("파일 업로드에 실패했습니다.");
-            				}
-    					},
-    					error : function(request, status, error){
-    						console.log(error);
-    					}
-    				});
+    		$(".upload_area").on("drop", function(e,file){
+    			e.stopPropagation();
+    			e.preventDefault();
+    			var uploadFiles = [];
+    			var files = e.originalEvent.dataTransfer.files;
+    			for(var i = 0; i < files.length; i++) {
+	    			var file = files[i];
+	    			console.log(file);
+	    			var size = uploadFiles.push(file);
+    			}
+    			var formData = new FormData();
+    			
+    			$.each(uploadFiles, function(i, file) {
+    				formData.append('att',file,file.name);
+    			});
+    			
+    			$.ajax({
+    				url:'fileUploadAjax2',
+    				data : formData,
+    				type : 'post',
+    				contentType:false,
+    				processData:false,
+    				success:function(res){
+    					$("#CrngImgFile").val(res.fileName[0]);
+						var html="";
+						html+="<li class=\"preview\">																						  	 ";
+						html+="		<img src=\"../resources/upload/"+$("#CrngImgFile").val()+"\" class=\"CrngPrevImg\" alt=\"thumbnail\" id=\"preview\" >";
+						html+=" 	<i class=\"fas fa-times-circle close_prev\"></i>															 ";
+						html+="</li>																											 ";
+						$("#preview_area").append(html);
+						imgMouseOver();
+    				},
+    				error : function(request, status, error){
+        				console.log(error);
+        			}
+    			})
   			});
       		
     		

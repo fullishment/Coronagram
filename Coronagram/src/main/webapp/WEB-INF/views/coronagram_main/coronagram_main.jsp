@@ -114,6 +114,7 @@
 						LkModal();
 						LkModalAjax();
 						crngDtl();
+						delCmt();
 						mediaControl();
 						mediaControl2();
 						mediaControl3();
@@ -144,6 +145,7 @@
 						LkModal();
 						LkModalAjax();
 						crngDtl();
+						delCmt();
 						mediaControl();
 						mediaControl2();
 						mediaControl3();
@@ -329,7 +331,7 @@
 			     for(data2 of list2){			    	 
 			    	 if(data2.WRITING_NO == data.WRITING_NO){
 			    		 html+="<div class=\"cmt_area\"> 																												";
-			    		 html+="<div class=\"comment_container\" no=\""+data2.CMT_WRITER_NO+"\">         																";
+			    		 html+="<div class=\"comment_container\" no=\""+data2.CMT_WRITER_NO+"\" cmno=\""+data2.CMT_NO+"\">         																";
 					     html+="   <div class=\"comment\" id=\"comment-list-ajax-post37\">        																		";
 					     html+="       <div class=\"comment-detail\">                             																		";
 					     html+="           	  <div class=\"cmt_list"+m+" head_text\">      						 														";				     
@@ -474,6 +476,30 @@
 		    	$(".sprite_bubble_icon").on("click",function(){
 		    		$("#writingNo5").val($(this).parent().parent().parent().parent().attr("wtno"));
 		    		$("#crngDtlForm").submit();
+		    	});
+		    }
+		    function delCmt(){ 	
+		    	$(".cmtMore").on("click",function(){
+		    		if(confirm("삭제하시겠습니까?")){
+		    			$("#cmtNo").val($(this).prev().prev().attr("cmno"));
+		    			var params = $("#delCmtForm").serialize();
+						$.ajax({
+							url : "delCmt",
+							type : "post",
+							dataType : "json",
+							data : params,
+							success : function(res){
+								if(res.result=="success"){
+									reloadList();
+								}else{							
+									alert("추가실패");
+								}
+							},
+							error : function(request, status, error){
+								console.log(error);
+							}
+						});
+		    		}		
 		    	});
 		    }
 		    function LkModal(){
@@ -1026,6 +1052,9 @@
 	   	  	  <input type="hidden" name="m_no5" id="m_no5" value="${sMNo}"/>
           	  <input type="hidden" name="writingNo4" id="writingNo5"/> 
 	   	  </form>
+	   	  <form action="#" id="delCmtForm" method="post">
+    	   	  <input type="hidden" name="cmtNo" id="cmtNo"/>
+		   </form>
 	</main>
     <script src="resources/script/menu_bar/menu_bar.js"></script>
 </body>

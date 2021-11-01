@@ -44,8 +44,8 @@
 			ORDER BY C.DT DESC
 	</select>
 	<select id="getPostCmt" parameterType="hashmap" resultType="hashmap">
-		 SELECT CC.CMT_NO, CC.WRITING_NO, CC.CMT_WRITER_NO, CC.NICK_NM, CC.CMT_CON, CC.DT
-		FROM (SELECT CC.CMT_NO, CC.WRITING_NO, CC.CMT_WRITER_NO, M.NICK_NM, CC.CMT_CON, CC.DT, ROW_NUMBER() OVER(PARTITION BY CC.WRITING_NO ORDER BY CC.CMT_NO DESC) AS RNUM
+		SELECT CC.CMT_NO, CC.WRITING_NO, CC.CMT_WRITER_NO, CC.NICK_NM, CC.CMT_CON, CC.DT, CC.DEL
+		FROM (SELECT CC.CMT_NO, CC.WRITING_NO, CC.CMT_WRITER_NO, M.NICK_NM, CC.CMT_CON, CC.DEL,CC.DT, ROW_NUMBER() OVER(PARTITION BY CC.WRITING_NO ORDER BY CC.CMT_NO DESC) AS RNUM
         FROM CRNG_CMT CC 
                         INNER JOIN M M
                                  ON CC.CMT_WRITER_NO = M.M_NO
@@ -54,11 +54,12 @@
                                          FROM CRNG C 
                                          INNER JOIN FOLLOW F
                                                              ON C.WRITER_NO = F.RP_USER
-                                                             AND F.RQ_USER=#{m_no}                                                            
+                                                             AND F.RQ_USER=#{m_no}                                                           
                                          WHERE C.DEL = 1) C
                                      ON CC.WRITING_NO = C.WRITING_NO
                                      AND C.RNUM BETWEEN 1 AND 10
 		WHERE CC.RNUM BETWEEN 1 AND 2
+		AND CC.DEL = 1
 	</select>
 	<select id="getCrngDtl" parameterType="hashmap" resultType="hashmap">
 		SELECT C.WRITING_NO, C.WRITER_NO, C.CON, M.M_NO ,M.M_NM, M.IMG_ADR, M.NICK_NM,CAA.FILE_ADRS,CS.SET1,NVL2(WCT.NICK_NM,WCT.NICK_NM,0) AS CMT_NICK,
@@ -214,5 +215,8 @@
         	ORDER BY DECODE(M.M_NO,#{m_no4},1),
         	L.LK_DT DESC
 	</select>
-	
+	<update id="delCmt" parameterType="hashmap">
+		UPDATE CRNG_CMT SET DEL = 0
+            WHERE CMT_NO = #{cmtNo}
+	</update>
 </mapper>

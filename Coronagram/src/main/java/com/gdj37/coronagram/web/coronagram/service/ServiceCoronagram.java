@@ -109,4 +109,10 @@ public class ServiceCoronagram implements IServiceCoronagram{
 		return iDaoCoronagrma.getCrngDtl(params);
 	}
 
+	@Override
+	public int delCmt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoCoronagrma.delCmt(params);
+	}
+
 }
