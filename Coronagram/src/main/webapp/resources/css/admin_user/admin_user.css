@@ -66,7 +66,7 @@ input:focus{
     margin: 20px;
     height: 400px;
     width: 1295px;
-    margin-left: 10%;
+    margin-left: 12%;
     background: white;
     border-radius: 10px;
 }
@@ -144,6 +144,10 @@ tr:nth-child(even) {
 
 
 /* 버튼 */
+#actionForm{
+	width:390px;
+}
+
 .search_btn {
     display: inline-block;
     position: relative;
@@ -163,3 +167,44 @@ tr:nth-child(even) {
 .search_btn:hover {
     opacity: .8;
 }
+
+@media ( max-width : 1450px) {
+	.side_box {
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    padding: 20px;
+    margin: 20px;
+    height: 585px;
+    width: 842px;
+    margin-left: 2%;
+    background: white;
+    border-radius: 10px;
+	}
+	
+	th {
+	    padding: 5px 0px;
+	    text-transform: uppercase;
+	    letter-spacing: 0.1rem;
+	    font-size: 0.7rem;
+	    font-weight: 900;
+	    text-align: center;
+	}
+	
+	#adm_page {
+    margin-left: 3%;
+    margin-top: 5%;
+    color: gray;
+	}
+	
+	.search_box {
+	    position: absolute;
+	    padding-left: 55%;
+	    padding-top: 2px;
+	}
+	.top_text {
+    display: flex;
+    width: 100%;
+    padding-left: 3%;
+	}
+	
+	
+}	
