@@ -36,7 +36,7 @@ function drawList(z) {
 					"d" : parseInt($(this).find('natDeathCnt').text()),
 					"c" :  $(this).find('stdDay').text(),
 					"name" : $(this).find('nationNmEn').text(),
-					
+					"date" : $(this).find('stdDay').text(),
 				}; 
 				
 			
@@ -97,7 +97,7 @@ function drawList(z) {
 		        name: 'COVID-19',
 		        joinBy: ['name', 'name'],
 		        color: "#E00000",
-		        data: dataArray,
+		        data: data,
 		        minSize: 8,
 		        maxSize: '15%',
 		        tooltip: {

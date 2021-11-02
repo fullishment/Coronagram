@@ -680,6 +680,7 @@ a {
     background: url('../../images/main_page/banner_pointshop.png')no-repeat;
     background-position: left;
     background-size: cover;
+    margin-top: auto;
   }
 
   /*
@@ -1484,7 +1485,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40vh;
+    height: 60vh;
     width: 100vw;
     margin: 1vh 1vw 1vh 1vw;
     padding: 0;
@@ -1653,19 +1654,19 @@ a {
   
 /*미디어쿼리*/
 @media screen and (max-width:1637px) {
-	 .dashboard-container {
-	    margin-top: 0px;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    display: grid;
-    grid-template-columns: repeat(4, 20%);
-    grid-template-rows: 1fr 2fr;
-    grid-gap: 10px;
-    max-width: 1536px;
-    min-width: 1200px;
+ 	.dashboard-container {
+	    width: 100%;
+	    height: 100%;
+	    justify-content: center;
+	    align-items: center;
+	    display: grid;
+	    grid-template-columns: repeat(4, 20%);
+	    grid-template-rows: 1fr 2fr;
+	    grid-gap: 10px;
+	    max-width: 1536px;
+	    min-width: 1200px;
   	}
-  	
+	  	
   	.news-slider__arrow.news-slider-prev {
 	       transform: translateY(-50%);
     top: -385px;
