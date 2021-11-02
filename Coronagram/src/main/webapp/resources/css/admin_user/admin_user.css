@@ -98,7 +98,7 @@ td {
 tr:nth-child(even) {
    background-color: #f4f6fb;
 }
-  tr:hover{
+ tbody tr:hover{
    opacity:.4;
 }  
 .paging {

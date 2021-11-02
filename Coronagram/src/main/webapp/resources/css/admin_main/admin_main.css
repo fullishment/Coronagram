@@ -241,7 +241,7 @@ p {
 }
 
 
-.adminUser tr:hover{
+.adminUser tbody tr:hover{
    opacity:.4;
 }  
 
@@ -346,7 +346,7 @@ p {
 .coinfoList tr:nth-child(even) {
    background-color: #f4f6fb;
 }
- .coinfoList tr:hover{
+ .coinfoList tbody tr:hover{
    opacity:.4;
 }  
 .coinfoList th:nth-child(1) {
@@ -397,7 +397,7 @@ p {
 .shopList tr:nth-child(even) {
    background-color: #f4f6fb;
 }
- .shopList tr:hover{
+ .shopList tbody tr:hover{
    opacity:.4;
 }  
 .shopList th:nth-child(1), .shopList td:nth-child(1) {

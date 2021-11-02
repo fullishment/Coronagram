@@ -223,7 +223,7 @@ $(document).ready(function() {
 					<section class="page-header">
 						<h1 class="page-title">코로나 info 관리</h1>
 						<div class="button-group">
-							<button type="button" class="btn btn-primary">+</button>
+							<a href="admin_coinfo_list"><button type="button" class="btn btn-primary">+</button></a>
 						</div>
 					</section>
 					
@@ -262,7 +262,7 @@ $(document).ready(function() {
 					<section class="page-header">
 						<h1 class="page-title">포인트 샵 관리</h1>
 						<div class="button-group">
-							<button type="button" class="btn btn-primary">+</button>
+							<a href="adminShopList"><button type="button" class="btn btn-primary">+</button></a>
 						</div>
 					</section>
 					<section class="page-body">
