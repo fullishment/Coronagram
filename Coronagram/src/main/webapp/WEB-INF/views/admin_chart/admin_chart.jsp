@@ -98,44 +98,42 @@
         <section>
             <div class="rad-body-wrapper rad-nav-min">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-3 col-xs-6">
-                            <div class="rad-info-box rad-txt-today_cornic">
-                                <i class="fa chart1" data-percent="70"></i>
-                                <span class="heading">오늘 확진자</span>
-                                <span class="value" ><span id = todayCnt></span></span>
-                                <span class="new" id="tdCnt"></span>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-xs-6">
-                            <div class="rad-info-box rad-txt-accum_cornic">
-                                <i class="fa chart1" data-percent="30"></i>
-                                <span class="heading">누적 총 확진자</span>
-                                <span class="value"><span id = totalCnt></span></span>
-								<span class="new" id="accCnt"></span>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-xs-6">
-                            <div class="rad-info-box rad-txt-fl_rec">
-                                <i class="fa chart1" data-percent="50"></i>
-                                <span class="heading">완치자</span>
-                                <span class="value"><span id = careCnt></span></span>
-                                <span class="new" id="clCnt"></span>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-xs-6">
-                            <div class="rad-info-box rad-txt-dead">
-                                <i class="fa chart1" data-percent="40"></i>
-                                <span class="heading">사망자</span>
-                                <span class="value"><span id="deathCnt"></span></span>
-                                <span class="new" id="dtCnt"></span>
-                            </div>
-                        </div>
-                        <div id = "createDt">
-                        <span></span>
-                        </div>
-                    </div>
- <!--                    <div class="row">
+					<div class="row">
+						<div class="col-lg-3 col-xs-6">
+							<div class="rad-info-box rad-txt-today_cornic">
+								<i class="fa chart1" data-percent="70"></i> <span
+									class="heading">오늘 확진자</span> <span class="value"><span
+									id=todayCnt></span></span> <span class="new" id="tdCnt"></span>
+							</div>
+						</div>
+						<div class="col-lg-3 col-xs-6">
+							<div class="rad-info-box rad-txt-accum_cornic">
+								<i class="fa chart1" data-percent="30"></i> <span
+									class="heading">누적 총 확진자</span> <span class="value"><span
+									id=totalCnt></span></span> <span class="new" id="accCnt"></span>
+							</div>
+						</div>
+						<div class="col-lg-3 col-xs-6">
+							<div class="rad-info-box rad-txt-fl_rec">
+								<i class="fa chart1" data-percent="50"></i> <span
+									class="heading">완치자</span> <span class="value"><span
+									id=careCnt></span></span> <span class="new" id="clCnt"></span>
+							</div>
+						</div>
+						<div class="col-lg-3 col-xs-6">
+							<div class="rad-info-box rad-txt-dead">
+								<i class="fa chart1" data-percent="40"></i> <span
+									class="heading">사망자</span> <span class="value"><span
+									id="deathCnt"></span></span> <span class="new" id="dtCnt"></span>
+							</div>
+						</div>
+						<div id="createDtContainer">
+							<div id="createDt">
+								<span></span>
+							</div>
+						</div>
+					</div>
+					<!--                    <div class="row">
                         <div class="col-xs-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -167,7 +165,6 @@
                             </div>
                         </div>
                         <div class="corona_condition">
-
                             <div class="condition">
                                 <div class="coronic">
                                     <div class="coronics"></div>
@@ -261,15 +258,25 @@
                                 <div class="panel-heading">
                                     <h3 class="panel-title">월별 가입자 현황<ul class="rad-panel-action">
                                             <li><i class="fa fa-rotate-right"></i></li>
-
-                                            </li>
                                         </ul>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
-                                    <div id="barChart3" class="rad-chart"></div>
-                                </div>
-                            </div>
+								<div class="panel-body">
+									<div id="barChart3" class="rad-chart"></div>
+								</div>
+								<div class="joinInfo">
+									<div class="joinInfos">
+										<div class="totalJoin">
+											<div class="totalJoins"></div>
+											<span>총 가입자</span>
+										</div>
+										<div class="avgJoin">
+											<div class="avgJoins"></div>
+											<span>평균 가입자</span>
+										</div>
+									</div>
+								</div>
+							</div>
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="panel panel-default">
@@ -291,8 +298,6 @@
                                 <div class="panel-heading">
                                     <h3 class="panel-title">가입자 연령대 현황<ul class="rad-panel-action">
                                             <li><i class="fa fa-rotate-right"></i></li>
-
-                                            </li>
                                         </ul>
                                     </h3>
                                 </div>
@@ -311,8 +316,6 @@
                                 <div class="panel-heading">
                                     <h3 class="panel-title">회원 등급<ul class="rad-panel-action">
                                             <li><i class="fa fa-rotate-right"></i></li>
-
-                                            </li>
                                         </ul>
                                     </h3>
                                 </div>
@@ -326,8 +329,6 @@
                                 <div class="panel-heading">
                                     <h3 class="panel-title">회원 등급 표<ul class="rad-panel-action">
                                             <li><i class="fa fa-rotate-right"></i></li>
-
-                                            </li>
                                         </ul>
                                     </h3>
                                 </div>
@@ -407,8 +408,6 @@
                                 <div class="panel-heading">
                                     <h3 class="panel-title">베스트 5 판매 물품 현황<ul class="rad-panel-action">
                                             <li><i class="fa fa-rotate-right"></i></li>
-
-                                            </li>
                                         </ul>
                                     </h3>
                                 </div>
