@@ -15,110 +15,117 @@ public class ServiceUserPage implements IServiceUserPage{
 
 	@Override
 	public List<HashMap<String, String>> getMPostList(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.getMPostList(params);
 	}
 
 	@Override
 	public List<HashMap<String, String>> getMDtlList(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.getMDtlList(params);
 	}
 	
 	@Override
 	public List<HashMap<String, String>> getModalCmt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.getModalCmt(params);
 	}
 	
 	@Override
 	public HashMap<String, String> getIntroM(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.getIntroM(params);
 	}
 
 	@Override
 	public HashMap<String, String> getModalM(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.getModalM(params);
 	}
 
 	@Override
 	public int getfollowEx2(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.getfollowEx2(params);
 	}
 	
 	@Override
 	public int getfollowEx(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.getfollowEx(params);
 	}
 
 	@Override
 	public int getHeartCnt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.getHeartCnt(params);
 	}	
 
 	@Override
 	public int delModalCmt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.delModalCmt(params);
 	}
 
 	@Override
 	public int addFollow(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.addFollow(params);
 	}
 
 	@Override
 	public int delFollow(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.delFollow(params);
 	}
 
 
 	@Override
 	public int addHeart(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.addHeart(params);
 	}
 
 	@Override
 	public int delHeart(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.delHeart(params);
 	}
 
 	@Override
 	public int getLkCnt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.getLkCnt(params);
 	}	
 
 	@Override
 	public int addMCmt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.addMCmt(params);
 	}
 
 	@Override
 	public int delPost(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.delPost(params);
 	}
 
 	@Override
 	public List<HashMap<String, String>> getVideoList(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.getVideoList(params);
 	}
 
 	@Override
 	public List<HashMap<String, String>> getEmojiList(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoUserPage.getEmojiList(params);
+	}
+
+	@Override
+	public HashMap<String, String> getLastSAcctNum(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.getLastSAcctNum(params);
+	}
+
+	@Override
+	public int storyAdd(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.storyAdd(params);
+	}
+
+	@Override
+	public int storyAcctAdd(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.storyAcctAdd(params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getStoryList(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.getStoryList(params);
+	}
+
+	@Override
+	public HashMap<String, String> getStoryMList(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.getStoryMList(params);
 	}
 }

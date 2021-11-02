@@ -11,38 +11,43 @@
     <link rel="stylesheet" href="../resources/css/user_page/user_page.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css'>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css'>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
     <title><%= request.getAttribute("nicknm") %>님 개인 페이지</title>
     <style>
     	
     </style>
     <script>
-        $(document).ready(function(){
-        	reloadList();       	
-        	
-            $(document).on("click",".gallery-item",function(){
-            	$("#myModal").html("");
-            	$("#writingNo").val($(this).attr("wtno"));
-            	$("#writingNo2").val($(this).attr("wtno"));
-            	modal.style.display="block";
-            	$('body').css("overflow","hidden");
-            	mdDraw();          	
-            });
-            
-            var modal = document.getElementById('myModal');  
-            
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                	if(document.getElementById("player")){
-                		document.getElementById("player").muted = true;
-                	}
-                	$("#myModal").html("");
-                	$('body').css("overflow","auto");
-                    modal.style.display = "none";                    
-                }
-            }  
-            
-        });
+	    $(document).ready(function(){
+	    	reloadList();    	
+	    	storyListAjax();
+	    	var modal = document.getElementById('myModal');
+	    	
+	        $(document).on("click",".gallery-item",function(){
+	        	$("#myModal").html("");
+	        	$("#writingNo").val($(this).attr("wtno"));
+	        	$("#writingNo2").val($(this).attr("wtno"));
+	        	modal.style.display="block";
+	        	$('body').css("overflow","hidden");
+	        	mdDraw();          	
+	        });
+	        	        
+	        window.onclick = function(event) {
+	            if (event.target == modal) {
+	            	if(document.getElementById("player")){
+	            		document.getElementById("player").muted = true;
+	            	}
+	            	$("#myModal").html("");
+	            	$('body').css("overflow","auto");
+	                modal.style.display = "none";                    
+	            }
+	        }  
+		    var _scrollX = $('.scroll_inner').scrollLeft();
+		    var _scrollX = $('.scroll_inner').scrollLeft();
+		    	
+		    $('.scroll_inner').scrollLeft(_scrollX + 600);	  	  	
+	  	  	$('.scroll_inner').scrollLeft(_scrollX - 600);
+	    });
         function modalFunc(){
             $(".close").on("click",function(){
             	if(document.getElementById("player")){
@@ -62,6 +67,17 @@
                 	document.getElementById("myModal").style.display = "none";     
                 }
             });
+            $(".exit").on("click",function(){
+            	if(document.getElementById("player")){
+            		document.getElementById("player").muted = true;
+            	}
+            	$("#myModal").html("");
+            	$('body').css("overflow","auto");
+            	document.getElementById("myModal").style.display="none";          	
+            });
+            $(".story_icon").on("click",function(){
+	    		location.href="../coronagram/storyAdd";
+	    	});
         }
         function reloadList(){
 			var params=$("#addrForm").serialize();		
@@ -84,6 +100,8 @@
 		        	mInfo(res.intro);
 		        	mInfoClick();
 		        	videoListBtn();
+		        	storyAjax();
+		        	modalFunc();
 				},
 				error : function(request,status,error){
 					console.log(error);
@@ -106,6 +124,138 @@
 				}
 			});
 		}
+        function storyListAjax(){
+        	var params=$("#addrForm").serialize();		
+			$.ajax({ 
+				url:"storyList",
+				type:"post",
+				dataType:"json",
+				data:params,
+				success : function(res){
+					StoryList(res.story);
+					
+				},
+				error : function(request,status,error){
+					console.log(error);
+				}
+			});
+        }
+        function storyAjax(){
+        	$(".pGradient0").on("click",function(){
+       			$("#storyNo").val($(this).attr("stno"));	        		
+        		var params=$("#storyForm").serialize();		
+    			$.ajax({ 
+    				url:"storyMList",
+    				type:"post",
+    				dataType:"json",
+    				data:params,
+    				success : function(res){
+    					setTimeout(function() {
+    						$("#myModal").css("display","block");
+    						StoryModal(res.mStory);
+    						progressbar();
+    						modalFunc();	    	        		    	        			
+    	        		},4000);
+    				},
+    				error : function(request,status,error){
+    					console.log(error);
+    				}
+    			});      		
+        	});
+        }
+        function StoryModal(data){
+        	var html="";
+        	
+        	html+="<i class=\"fas fa-times exit\"></i>                                                                                                                     ";
+        	html+="<div class=\"sliderContainer\">                                                                                                                         ";
+        	html+="  	<div class=\"s_user_container\">                                                                									               ";
+		    html+="   		<div class=\"profile_img\">                                                                   								                   ";
+		    html+=" 			<img src=\"../resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> "; 
+		    html+="    		</div>																						 								                   ";
+		    html+="        <div class=\"s_user_name\">                                                                 	 								                   ";
+		    html+="            <div class=\"s_nick_name head_text\">"+data.STORY_TITLE+"</div>                                                                             ";            
+		    html+="            <div class=\"s_date head_text\">"+timeForToday(data.DT)+"</div>                               	 								           ";                  
+		    html+="        </div>                                                                                    	 								                   ";
+		    html+="  	</div>                                                                                     	 	 								                   ";
+			html+="	<div class=\"slider single-item\">                                                                                                                     ";
+	        var fileAdr=data.FILE_ADDRS;                                                                                                                                   
+	        var fileAdrSplit = fileAdr.split(',');                                                                                                                         
+	        for ( var i = 0; i < fileAdrSplit.length; i++) {                                                                                                               
+	        	var fileLen = fileAdrSplit[i].length;                                                                                                                      
+				var ExtensionNm = fileAdrSplit[i].lastIndexOf('.')+1;                                                                                                      
+				var fileExt = fileAdrSplit[i].substring(ExtensionNm, fileLen).toLowerCase();                                                                               
+				if(fileExt=="mp4" || fileExt=="mov"){
+					html+="	  	<div>                                                                                                                                      ";
+					html+="			<video class=\"p_video\" playsinline autoplay muted loop>																			   ";
+		           	html+="				<source src=\"../resources/upload/"+fileAdrSplit[i]+"\" alt=\"\" type=\"video/mp4\"/></source>	   						   		   ";
+		           	html+="			</video>																															   ";       
+					html+="	  	</div>                                                                                                                                     ";
+				}
+				else{
+					html+="	  	<div>                                                                                                                                      ";
+					html+=" 		<img class=\"story_box\" src=\"../resources/upload/"+fileAdrSplit[i]+"\" alt=\"\" />	   						   					   ";
+					html+="	  	</div>                                                                                                                                     ";
+				}				
+	        }                                                                                                                                                              
+			html+="	</div>                                                                                                                                                 ";
+			html+=" 	<div class=\"progress_area\">                                                                                                                      ";
+			html+="	  		<div class=\"progressBarContainer\">                                                                                                           ";
+			for ( var j = 0; j < fileAdrSplit.length; j++) {                                                                                                               
+				html+="		    <div>                                                                                                                                      ";
+				html+="		      <span data-slick-index=\""+j+"\" class=\"progressBar\"></span>                                                                           ";      
+				html+="		    </div>                                                                                                                                     ";
+			}		                                                                                                                                                                                                                                                                   
+			html+="	  		</div>                                                                                                                                         ";
+			html+="  	</div>                                                                                                                                             ";
+			html+="</div>                                                                                                                                                  ";
+			
+			$("#myModal").html(html);
+        }                                                                                                                                                                  
+        function StoryList(list){                                                                                                                                          
+        	var html ="";	
+			
+			 for(data of list){
+				 	html+="<div class=\"pGradient0\" stno=\""+data.STORY_NO+"\"> 																					";
+					html+="		<svg class=\"pGradient\" width=\"453\" height=\"453\" viewBox=\"0 0 453 453\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">	";
+					html+="			<defs>																															";
+					html+="	   			<linearGradient id=\"MyGradient\">																							";
+					html+="	        		<stop offset=\"5%\" stop-color=\"#F9913F\" />																			";				
+					html+="	        		<stop offset=\"40%\" stop-color=\"#e01b6a\" />																			";
+					html+="	        		<stop offset=\"80%\" stop-color=\"#CD51A4\" />																			";
+					html+="	        	</linearGradient>																											";
+					html+="	 		</defs>																															";
+					html+="			<circle cx=\"226.5\" cy=\"226.5\" r=\"216.5\" stroke=\"url(#MyGradient)\" stroke-width=\"20\"/>									";
+					html+="		</svg>																																";
+					html+="		<div class=\"user\">																												";
+					html+="      	<div class=\"thumb_img\" fono=\""+data.M_NO+"\">																				";
+					var fileLen = data.FILE_ADDR.length;
+					var ExtensionNm = data.FILE_ADDR.lastIndexOf('.')+1;
+					var fileExt = data.FILE_ADDR.substring(ExtensionNm, fileLen).toLowerCase();			
+					if(fileExt=="mp4" || fileExt=="mov"){
+						html+= "			<video class=\"modal_video_box\">																						";
+						html+= " 				<source src=\"../resources/upload/"+data.FILE_ADDR+"\" type=\"video/mp4\"></source>									";
+						html+= "			</video>																												";
+					}
+					else{
+						html+=" 			<img src=\"../resources/upload/"+data.FILE_ADDR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" />";
+					}								
+					html+="			</div>																															";
+					html+="       	<div class=\"title_area\">																										";
+					if(data.STORY_TITLE.length<6){
+						html+="				<span class=\"title_nm\">"+data.STORY_TITLE+"</span>																	";
+					}
+					else{
+						var str = data.STORY_TITLE;
+						html+="				<span class=\"title_nm\">"+str.substr(0,8)+"...</span>																	";
+					}
+					
+					html+="			</div>																															";
+					html+="   	</div>																																";
+					html+="</div>																																	";					
+			 }
+			 $(".scroll_inner").prepend(html);
+        }
+        
         function reloadFollowArea(){
         	var params=$("#addrForm").serialize();		
 			$.ajax({ 
@@ -178,6 +328,7 @@
 					addFollow();
 		        	delFollow();
 		        	videoListBtn();
+		        	modalFunc();
 				},
 				error : function(request,status,error){
 					console.log(error);
@@ -203,16 +354,30 @@
             		html+="			<span class=\"btn_font\">&nbsp;새 컬렉션</span>		";
             		html+="		</div>													";
             		html+="</div>														";
-        		}else{
+        		}
+        		else{
         			
         		}       		
-        		$(".nav_line").html(html);      	
+        		$(".nav_line").html(html);
+        	var html2="";
+        		if(data.NICK_NM == "${sMNick}"){
+		        	html2+="<div class=\"add_story_area\">                                                          ";
+					html2+="	<img class=\"story_icon\" src=\"../resources/images/userpage/plus.png\" alt=\"\">   ";
+					html2+="	<div class=\"add_story_span\">                                                      ";
+					html2+="		<span>New</span>                                                                ";
+					html2+="	</div>                                                                              ";
+					html2+="</div>                                                                                  ";
+				}
+        		else{
+        			
+        		} 
+        		$(".add_story_container").html(html2);
         }        
         function introNm(data){
         	var html ="";
-	        	html+="<span class=\"profile-real-name\">"+data.M_NM+"</span>			 	  ";
+	        	html+="<span class=\"profile-real-name\">"+data.M_NM+"</span>			";
 	        	if(data.INTRO_CON != '' && data.INTRO_CON != null){
-	        		html+="<div class=\"intro_con\">"+data.INTRO_CON+"</div>			 	  ";
+	        		html+="<div class=\"intro_con\">"+data.INTRO_CON+"</div>			";
 	        	}	        	
         		$(".profile-bio").html(html);
         }
@@ -221,7 +386,7 @@
 			
 				html +="<li>게시물 <span class=\"profile_pcnt\">"+data.PCNT+"</span></li> ";
 			    html +="<li>팔로워 <span class=\"profile_fwer\">"+data.FWER+"</span></li> ";
-			    html +="<li>팔로우 <span class=\"profile_fwo\">"+data.FWO+"</span></li>  ";
+			    html +="<li>팔로우 <span class=\"profile_fwo\">"+data.FWO+"</span></li>   ";
 			    
 	    		$("#profile-stat").html(html);
         }
@@ -302,7 +467,7 @@
 	    		
 				 html+="   	<div class=\"modal-content\" no=\""+data.WRITING_NO+"\">                                                    								   ";
 			     html+="       <div class=\"modal_img\">                                                                               									   ";
-			     html+="           <div class=\"slider\">                                                                              									   ";
+			     html+="           <div class=\"slider1\">                                                                              									   ";
 			     html+="               <div class=\"slide-viewer\">                                                                    									   ";
 			     html+="               <div id=\"slide-group\" class=\"slide-group\">                                                  									   ";	                                                                        
 			     html+="               </div>                                                                                          									   ";
@@ -436,7 +601,6 @@
 	    	});    	
 	    }
 	    function emojiClickEvent(){
-	    	//emojiAreaClick();
 	    	$(".modal-content").click(function(e){ 
 	    		if(!$(e.target).hasClass('fa-smile')){ 
 	    			$(this).children().children().children('.emoji_area').css("display","none");    			
@@ -524,6 +688,7 @@
 				success : function(res){
 					ModalCmtArea(res.mCmt, res.ModalCmtEx);
 					delModalCmt();
+					
 				},
 				error : function(request, status, error){
 					console.log(error);
@@ -762,8 +927,8 @@
 	    function ProfileImg(data){                                                                                                                         
 			var html ="";
 			
-				html+=" <div class=\"pGradient0\"> 																								   				";
-				html+="		<svg class=\"pGradient\" width=\"453\" height=\"453\" viewBox=\"0 0 453 453\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">	";
+				html+=" <div class=\"pGradient4\"> 																								   				";
+				html+="		<svg class=\"pGradient5\" width=\"453\" height=\"453\" viewBox=\"0 0 453 453\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">	";
 				html+="			<defs>																															";
 				html+="	   			<linearGradient id=\"MyGradient\">																							";
 				html+="	        		<stop offset=\"5%\" stop-color=\"#F9913F\" />																			";				
@@ -773,7 +938,7 @@
 				html+="	 		</defs>																															";
 				html+="			<circle cx=\"226.5\" cy=\"226.5\" r=\"216.5\" stroke=\"url(#MyGradient)\" stroke-width=\"10\"/>									";
 				html+="		</svg>																																";
-				html+=" 	<div class=\"pGradient2\"> 																								   			";
+				html+=" 	<div class=\"pGradient6\"> 																								   			";
 				html+=" 		<img src=\"../resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 		   		";
 				html+=" 	</div> 																								   					   			";
 				html+=" </div>																								   					   				";	
@@ -859,7 +1024,7 @@
 			    html +="</button>											";
 			}else if(data1 == 0 && data2 > 0){
 				html +="<button id=\"editBtn\" class=\"btn profile-edit-btn\">		         	   ";
-				html +="	프로필 편집 <i class=\"fas fa-cog\" aria-hidden=\"true\"></i>		   ";
+				html +="	프로필 편집 <i class=\"fas fa-cog\" aria-hidden=\"true\"></i>		   	   ";
 				html +="</button>																   ";
 			}else{
 				alert("error");
@@ -916,8 +1081,86 @@
 	  			  $("#editForm").submit(); 
 	  		}); 
 	    }
+	    function progressbar(){
+	    	$(".slider").slick({
+	    		  infinite: true,
+	    		  arrows: true,
+	    		  dots: false,
+	    		  autoplay: false,
+	    		  speed: 800,
+	    		  slidesToShow: 1,
+	    		  slidesToScroll: 1,
+	    		   prevArrow: '<div class="slide-arrow prev-arrow"><i class="fas fa-chevron-circle-left sleft"></i></div>',
+	    		   nextArrow: '<div class="slide-arrow next-arrow"><i class="fas fa-chevron-circle-right sright"></i></div>',
+	    		});
+
+	    		 //ticking machine
+	    		    var percentTime;
+	    		    var tick;
+	    		    var time = 1;
+	    		    var progressBarIndex = 0;
+
+	    		    $('.progressBarContainer .progressBar').each(function(index) {
+	    		        var progress = "<div class='inProgress inProgress" + index + "'></div>";
+	    		        $(this).html(progress);
+	    		    });
+
+	    		    function startProgressbar() {
+	    		        resetProgressbar();
+	    		        percentTime = 0;
+	    		        tick = setInterval(interval, 10);
+	    		    }
+
+	    		    function interval() {
+	    		        if (($('.slider .slick-track div[data-slick-index="' + progressBarIndex + '"]').attr("aria-hidden")) === "true") {
+	    		            progressBarIndex = $('.slider .slick-track div[aria-hidden="false"]').data("slickIndex");
+	    		            startProgressbar();
+	    		        } else {
+	    		            percentTime += 1 / (time + 10);
+	    		            $('.inProgress' + progressBarIndex).css({
+	    		                width: percentTime + "%"
+	    		            });
+	    		            if (percentTime >= 100) {
+	    		                $('.single-item').slick('slickNext');
+	    		                progressBarIndex++;
+	    		                if (progressBarIndex > 2) {
+	    		                    progressBarIndex = 0;
+	    		                }
+	    		                startProgressbar();
+	    		            }
+	    		        }
+	    		    }
+
+	    		    function resetProgressbar() {
+	    		        $('.inProgress').css({
+	    		            width: 0 + '%'
+	    		        });
+	    		        clearInterval(tick);
+	    		    }
+	    		    startProgressbar();
+	    		    // End ticking machine
+
+	    		    $('.progressBarContainer div').click(function () {
+	    		    	clearInterval(tick);
+	    		    	var goToThisIndex = $(this).find("span").data("slickIndex");
+	    		    	$('.single-item').slick('slickGoTo', goToThisIndex, false);
+	    		    	startProgressbar();
+	    		    });
+
+
+	    		//close the slider if the slider index is last index
+	    		  var $slider = $('.slider');
+
+	    		  $slider.on('afterChange', function(event, slick, currentSlide, nextSlide) { 
+	    		       console.log(currentSlide);
+	    		  });
+
+	    		 $slider.on('beforeChange', function(event, slick, currentSlide, nextSlide) { 
+	    		       console.log("nextSlide",nextSlide);
+	    		  })
+	    }
 	    function slide(){
-	    	$('.slider').each(function(){
+	    	$('.slider1').each(function(){
 	            var $this = $(this);
 	            var $group = $this.find('.slide-group');
 	            var $slides = $this.find('.slide');
@@ -1066,11 +1309,13 @@
             </div>
             <nav>
             	<div class="nav_menu">
-            		<div class="story_container">
-            			<div class="story_area">
-            			
-            			</div>
-            		</div>
+            		<div class="hidden_menu">
+						<div class="follow_prev" onclick="ScrollPrev()"></div>
+			            <div class="follow_next" onclick="ScrollNext()"></div>
+			            <div class="scroll_inner">
+			            	<div class="add_story_container"></div>
+			            </div>			            
+			        </div> 
             		<hr class="nav_hr">	        		
 		        	<div class="nav_list">
 		        		<div class="nav_list_post">	        			
@@ -1093,7 +1338,9 @@
             </nav>         
         </header>
      	<main>        
-	        <div id="myModal" class="modal"></div>        
+	        <div id="myModal" class="modal">
+	        	
+	        </div>        
 	        <div class="container">
 	            <div id="gallery" class="gallery"></div>     
 	        </div>   
@@ -1101,6 +1348,10 @@
     			<input type="hidden" name="m_no" value="${sMNo}"/>
     			<input type="hidden" name="nickNm" value="<%= request.getAttribute("nicknm") %>"/>
     		</form>
+    		<form action="#" id="storyForm" method="post">
+    	   	  <input type="hidden" name="storyNo" id="storyNo"/>
+    	   	  <input type="hidden" name="nickNm" value="<%=request.getAttribute("nicknm")%>"/>
+		   </form>
            <form action="#" id="editForm" method="post">
                <input type="hidden" name="m_no" value="${sMNo}"/>  
            </form>
@@ -1128,5 +1379,6 @@
 		   </form>
 	 	</main>	   
     	<script src="../resources/script/menu_bar/menu_bar.js"></script>
+    	<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js'></script>
 	</body>
 </html>

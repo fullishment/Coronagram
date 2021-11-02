@@ -207,7 +207,7 @@
 					 var fileExt = fileAdrSplit[i].substring(ExtensionNm, fileLen).toLowerCase();
 					 if(fileExt=="mp4" || fileExt=="mov"){
 						 html+=" <div class=\"slide slide-"+j+"\">                                       									 								";
-						 html+="	<video class=\"p_video\" playsinline autoplay muted loop>																	";
+						 html+="	<video class=\"p_video\" playsinline autoplay muted loop>																				";
 			           	 html+=" 		<source src=\"resources/upload/"+fileAdrSplit[i]+"\" alt=\"\" type=\"video/mp4\"/></source>	   						   				";
 			           	 html+="	</video>																																";
 			           	 html+=" 	<div class=\"play_btn\">																												";
@@ -748,8 +748,7 @@
 						
 						html+="			</div>																															";
 						html+="   	</div>																																";
-						html+="</div>																																	";
-						
+						html+="</div>																																	";					
 				 }
 				 $(".scroll_inner").html(html);
 		    }	

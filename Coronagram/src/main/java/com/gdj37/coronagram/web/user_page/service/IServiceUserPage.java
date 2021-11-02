@@ -41,4 +41,13 @@ public interface IServiceUserPage {
 
 	public List<HashMap<String, String>> getEmojiList(HashMap<String, String> params)throws Throwable;
 
+	public HashMap<String, String> getLastSAcctNum(HashMap<String, String> params)throws Throwable;
+
+	public int storyAdd(HashMap<String, String> params)throws Throwable;
+
+	public int storyAcctAdd(HashMap<String, String> params)throws Throwable;
+
+	public List<HashMap<String, String>> getStoryList(HashMap<String, String> params)throws Throwable;
+
+	public HashMap<String, String> getStoryMList(HashMap<String, String> params)throws Throwable;
 }

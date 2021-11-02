@@ -28,6 +28,67 @@ public class UserPage {
 		mav.setViewName("user_page/user_page");
 		return mav;
 	}
+	@RequestMapping(value="/coronagram/storyAdd" ,method = RequestMethod.GET)
+	public ModelAndView userpage(ModelAndView mav,@RequestParam HashMap<String,String> params) throws Throwable{
+		HashMap<String,String> last = iServiceUserPage.getLastSAcctNum(params);
+
+		mav.addObject("last", last);
+		mav.setViewName("coronagram_story/coronagram_story");
+		return mav;
+	}
+	@RequestMapping(value="/coronagram/storyAdds")
+	@ResponseBody
+	public String crngAdds(ModelAndView mav, @RequestParam HashMap<String,String> params)throws Throwable{
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		String result="success";
+		int storyAdd = iServiceUserPage.storyAdd(params);
+		if(storyAdd ==0) {
+			result="failed";
+		}
+		
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+		
+	}
+	@RequestMapping(value="/coronagram/storyAcctAdd" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String postAcctAdd(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		String result="success";
+		int storyAcctAdd = iServiceUserPage.storyAcctAdd(params);
+		if(storyAcctAdd ==0) {
+			result="failed";
+		}
+		
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/coronagram/storyList" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String storyList(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+
+		List<HashMap<String,String>> story = iServiceUserPage.getStoryList(params);
+		
+		modelMap.put("story", story);
+		
+		return mapper.writeValueAsString(modelMap);	
+	}
+	@RequestMapping(value="/coronagram/storyMList" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String storyMList(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+
+		HashMap<String,String> mStory = iServiceUserPage.getStoryMList(params);
+		
+		modelMap.put("mStory", mStory);
+		
+		return mapper.writeValueAsString(modelMap);	
+	}
 	@RequestMapping(value="/coronagram/userpages" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
 	@ResponseBody
 	public String userpages(ModelAndView mav,@RequestParam HashMap<String,String> params) throws Throwable {

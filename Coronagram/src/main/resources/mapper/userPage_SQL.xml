@@ -28,6 +28,40 @@
 			WHERE C.DEL = 1
 			AND LOWER(SUBSTR(CA.FILE_ADR,INSTR(CA.FILE_ADR,'.',-1)+1)) IN('jpg','jpeg','png','gif')
 	</select>
+	<select id="getStoryList" parameterType="hashmap" resultType="hashmap">
+		SELECT M.M_NO, CS.STORY_NO, CS.STORY_TITLE, CSA.FILE_ADDR, M.NICK_NM, CS.DT, CS.DEL,
+       		ROW_NUMBER() OVER(ORDER BY CS.STORY_NO DESC) AS RNUM
+			FROM CRNG_STORY CS
+			INNER JOIN M M
+                    	ON CS.WRITER_NO = M.M_NO
+                    	AND M.NICK_NM = #{nickNm}
+            INNER JOIN (SELECT STORY_NO, FILE_ADDR,
+                        RANK() OVER(PARTITION BY STORY_NO ORDER BY ATTC_NO ASC) AS RNK
+                        FROM CRNG_STORY_ATTC) CSA
+                    	ON CS.STORY_NO = CSA.STORY_NO
+                   		AND CSA.RNK = 1
+			WHERE CS.DEL = 1
+	</select>
+	<select id="getStoryMList" parameterType="hashmap" resultType="hashmap">
+		SELECT CS.STORY_NO, CS.WRITER_NO, CS.STORY_TITLE, M.M_NO ,M.M_NM, M.IMG_ADR, M.NICK_NM,CST.FILE_ADDRS,
+                TO_CHAR(CS.DT, 'YYYY/MM/DD HH24:MI:SS') AS DT
+                FROM CRNG_STORY CS
+                INNER JOIN M M
+		    			  ON CS.WRITER_NO = M.M_NO
+                INNER JOIN  (SELECT CSA.STORY_NO,SUBSTR(MAX(SYS_CONNECT_BY_PATH(CSA.FILE_ADDR, ',')), 2) AS FILE_ADDRS
+                                FROM (SELECT STORY_NO, FILE_ADDR, ROW_NUMBER() OVER(PARTITION BY STORY_NO ORDER BY ATTC_NO ASC) AS RNUM
+                                        FROM CRNG_STORY_ATTC
+                                        ORDER BY STORY_NO DESC) CSA
+                                START WITH CSA.RNUM = 1
+                                CONNECT BY PRIOR CSA.RNUM = CSA.RNUM - 1
+                                AND PRIOR CSA.STORY_NO = CSA.STORY_NO
+                                GROUP BY CSA.STORY_NO) CST
+                                ON CST.STORY_NO=CS.STORY_NO         
+			WHERE CS.DEL = 1
+            AND CS.WRITER_NO = (SELECT M_NO FROM M WHERE NICK_NM = #{nickNm})
+            AND CS.STORY_NO = #{storyNo}
+			ORDER BY CS.DT DESC
+	</select>
 	<select id="getVideoList" parameterType="hashmap" resultType="hashmap">
 		SELECT M.M_NO, C.WRITING_NO, CA.FILE_ADR, M.NICK_NM, C.CON, C.DT, C.DEL, NVL(L.LCNT, 0) AS LCNT, NVL(CC.CCNT, 0) AS CCNT,NVL(CW.WCNT,0) AS WCNT, 
        		ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
@@ -124,6 +158,19 @@
 			FROM M 
 			WHERE M_NO= #{m_no} AND NICK_NM =#{nickNm}
 	</select>
+	<select id="getLastSAcctNum" parameterType="hashmap" resultType="hashmap">
+		SELECT LAST_NUMBER 
+            FROM USER_SEQUENCES
+            WHERE SEQUENCE_NAME = 'STORY_SEQ'
+	</select>
+	<insert id="storyAdd" parameterType="hashmap">
+		INSERT INTO CRNG_STORY(STORY_TITLE,WRITER_NO) 
+			VALUES ( #{title}, #{m_no} )
+	</insert>
+	<insert id="storyAcctAdd" parameterType="hashmap">
+		INSERT INTO CRNG_STORY_ATTC(ATTC_NO,STORY_NO,FILE_ADDR)
+			VALUES( STORY_ATTC_SEQ.NEXTVAL, #{last_no}, #{CrngImgFile} )
+	</insert>
 	<delete id="delHeart" parameterType="hashmap">
 		DELETE FROM LK 
 			WHERE USER_NO = #{m_no} 

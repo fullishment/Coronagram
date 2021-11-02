@@ -15,55 +15,46 @@ public class DaoUserPage implements IDaoUserPage {
 	
 	@Override
 	public List<HashMap<String, String>> getMPostList(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("userPage.getMPostList",params);
 	}
 
 	@Override
 	public List<HashMap<String, String>> getMDtlList(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("userPage.getMDtlList",params);
 	}
 
 	@Override
 	public List<HashMap<String, String>> getModalCmt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("userPage.getModalCmt",params);
 	}
 	
 	@Override
 	public HashMap<String, String> getIntroM(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("userPage.getIntroM",params);
 	}	
 
 	@Override
 	public HashMap<String, String> getModalM(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("userPage.getModalM",params);
 	}
 	
 	@Override
 	public int getfollowEx2(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("userPage.getfollowEx2",params);
 	}
 	
 	@Override
 	public int getfollowEx(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("userPage.getfollowEx",params);
 	}
 	
 	@Override
 	public int getHeartCnt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("userPage.getHeartCnt",params);
 	}
 	
 	@Override
 	public int delModalCmt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return sqlSession.delete("userPage.delModalCmt",params);
 	}
 	
@@ -74,13 +65,11 @@ public class DaoUserPage implements IDaoUserPage {
 	
 	@Override
 	public int addFollow(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return sqlSession.insert("userPage.addFollow",params);
 	}
 	
 	@Override
 	public int addHeart(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return sqlSession.insert("userPage.addHeart",params);
 	}
 
@@ -106,13 +95,36 @@ public class DaoUserPage implements IDaoUserPage {
 
 	@Override
 	public List<HashMap<String, String>> getVideoList(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("userPage.getVideoList",params);
 	}
 
 	@Override
 	public List<HashMap<String, String>> getEmojiList(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("userPage.getEmojiList",params);
+	}
+
+	@Override
+	public HashMap<String, String> getLastSAcctNum(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectOne("userPage.getLastSAcctNum",params);
+	}
+
+	@Override
+	public int storyAdd(HashMap<String, String> params) throws Throwable {
+		return sqlSession.insert("userPage.storyAdd",params);
+	}
+
+	@Override
+	public int storyAcctAdd(HashMap<String, String> params) throws Throwable {
+		return sqlSession.insert("userPage.storyAcctAdd",params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getStoryList(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectList("userPage.getStoryList",params);
+	}
+
+	@Override
+	public HashMap<String, String> getStoryMList(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectOne("userPage.getStoryMList",params);
 	}
 }

@@ -18,7 +18,7 @@
     <script>
     var cnt=0;
     $(document).ready(function(){
-    		$(".upload_area").on("dragenter", function(e){
+			$(".upload_area").on("dragenter", function(e){
     			  e.stopPropagation();
     	          e.preventDefault();
     		});
@@ -92,13 +92,16 @@
     			var CrngArray = new Array();
         		var Crngimg = $("img[class=\"CrngPrevImg\"]"); 
         		var CrngVideo = $("video[class=\"CrngPrevImg\"]"); 
-        		if(checkVal("#post_cont")){
+        		if(checkVal("#story_title")){
         			alert("내용이 입력되지않았습니다");
-        			$("#post_cont").focus();
-        		}else if(Crngimg.length==0 && CrngVideo==0){
+        			$("#story_title").focus();
+        		}else if($("#story_title").length>10){
+        			alert("10자 이내로 작성해주십시오.");
+        		}
+        		else if(Crngimg.length==0 && CrngVideo==0){
         			alert("사진이 첨부 되지 않았습니다");
-        		}else if(Crngimg.length>5){
-        			alert("사진을 5장 이상 업로드 할 수 없습니다");
+        		}else if(Crngimg.length>10){
+        			alert("사진을 10장 이상 업로드 할 수 없습니다");
         		}
         		else if(Crngimg.length>0){   
         			if(CrngVideo.length>0){
@@ -111,7 +114,7 @@
     	        		var params = $("#postForm").serialize();
     	        		console.log(params);
     	        		$.ajax({
-    	    				url : "crngAdds",
+    	    				url : "storyAdds",
     	        			type : "post",
     	        			dataType : "json",
     	        			data : params, 
@@ -140,7 +143,7 @@
     	        		var params = $("#postForm").serialize();
     	        		console.log(params);
     	        		$.ajax({
-    	    				url : "crngAdds",
+    	    				url : "storyAdds",
     	        			type : "post",
     	        			dataType : "json",
     	        			data : params, 
@@ -156,9 +159,9 @@
     	        				console.log(error);
     	        			}
     	    			});
-        			}        		
+        			}
         		}
-				else{
+        		else{
         			alert("업로드 중 오류 발생");
         		}
         	});
@@ -170,7 +173,7 @@
         	    			$(this).parent().remove();
             			}
             		}else {
-            			if($("li img").length >10){
+            			if($("li img").length >5){
             				alert("이미지 등록 최대갯수를 초과하셨습니다.");
             			}else {
         	    			$("#att").click();   				
@@ -186,7 +189,7 @@
     			$("li").on("mouseleave","img",function(){
             		if($(this).is("#preview_area") ==false){
             			var html = "";
-		            		html+="<div class=\"plus_icon\">";
+		            		html+="<div class=\"plus_icon2\">";
 		            		html+="		<span></span>";
 		            		html+="		<span></span>";
 		            		html+="</div>";
@@ -269,7 +272,7 @@
     	$("#CrngImgFile").val(CrngArray[i]);
     	var params = $("#postForm").serialize();
 		$.ajax({
-			url : "postAcctAdd",
+			url : "storyAcctAdd",
 			type : "post",
 			dataType : "json",
 			data : params,
@@ -351,7 +354,7 @@
         	<form action="#" class="post_form" id="postForm">
 	            <div class ="upload_content">
 	                <div class="upload_area">
-	                    <div class="plus_icon">
+	                    <div class="plus_icon2">
 	                        <span></span>
 	                        <span></span>
 	                    </div>
@@ -368,15 +371,14 @@
 	                            <span>게시판</span>
 	                        </div>
 	                        <div class="page_nm">
-	                            <span>게시물 추가하기</span>
+	                            <span>스토리 추가하기</span>
 	                        </div>
 	                    </div>
-	                    <div class="input_area">
-	                        <div class="cont_area">
-	                            <p class="add_text">내용</p>
-	                            <textarea id="post_cont" class="post_cont" cols="50" rows="5" name="con"></textarea>
+	                    <div class="input_area2">
+	                    	<div class="cont_area">
+	                            <p class="add_text">스토리 제목</p>
+	                            <textarea id="story_title" class="story_title" cols="50" rows="1" name="title"></textarea>
 	                        </div>
-	                        
 	                        <div class="preview_sec">
 	                            <p class="add_text">미리보기</p>
 	                            <ul id="preview_area" class="preview_area">                        
@@ -389,7 +391,7 @@
 	                    </div> 
 	                </div>
 	            </div>
-	            <input type="hidden" id="last_no" name="last_no" value="${lastAcct.LAST_NUMBER}"/>
+	            <input type="hidden" id="last_no" name="last_no" value="${last.LAST_NUMBER}"/>
 	            <input type="hidden" id="m_no" name="m_no" value="${sMNo}" />
 	            <input type="hidden" name="CrngImgFile" id="CrngImgFile" value=""/>	            
             </form>
