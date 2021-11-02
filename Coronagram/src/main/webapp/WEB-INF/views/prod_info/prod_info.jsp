@@ -12,7 +12,7 @@
 
     <title>instagram</title>
     <link rel="stylesheet" href="resources/css/p_coronagram/common.css">
-    <link rel="stylesheet" href="resources/css/p_coronagram/style.css">
+    <link rel="stylesheet" href="resources/css/prod_info/style.css">
     <link rel="stylesheet" href="resources/css/prod_info/prod_info.css">
     <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
@@ -311,11 +311,12 @@
                         placeholder="140자 까지 등록 가능합니다. #태그명 을 통해서 검색 태그를 등록할 수 있습니다. 예시 : I # love # insta!"  >${data.CON}</textarea>
                 
                 </p>
-                </form>
                 <div class="btn_area">
                     <input class="add_btn" type="button" value="수정" id="updateBtn">
                     <input class="cancel_btn" type="button" value="취소" id="cancleBtn">
                 </div>
+                </form>
+               
             
         </div>
     </div>

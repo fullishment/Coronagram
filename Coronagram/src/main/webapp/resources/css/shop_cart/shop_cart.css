@@ -360,7 +360,7 @@
 		border-top: none;
 	}
 	.rcon2_con1 {
-		height: 30%;
+		height: 45%;
 		background-color: #ddd;
 		padding: 10px;
 		width: 463px;
@@ -378,9 +378,7 @@
     flex-direction: column;
     margin-left: 66%;
 	}
-	.rcon2_con3{
-		margin-left:-10%;
-	}
+
 	.order_btn {
 		display: inline-block;
 		color: white;
@@ -394,6 +392,21 @@
 		border: none;
 		border-radius: 7px;
 		background: #0d6efd;
-		margin: 30px 0px 0px 313px;
+		margin: 30px 0px 0px 319px;
 	}
 }
+
+@media screen and (max-width:919px) {
+	#main {
+    display: flex;
+    position: relative;
+    font-family: "Noto Sans KR", sans-serif;
+    width: 100%;
+    min-width: 919px;
+    height: 100vh;
+    padding: 0;
+    top: 5vh;
+    flex-direction: column;
+	}
+	
+}	

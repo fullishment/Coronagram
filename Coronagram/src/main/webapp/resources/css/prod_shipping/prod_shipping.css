@@ -15,7 +15,7 @@ body {
     padding: 0px;
     list-style-type: none;
     width: 100%;
-    max-width: 76%;
+    max-width: 75%;
     height: 100px;
     margin-left: 12%;
     counter-reset: breadcrumb;
@@ -24,10 +24,10 @@ body {
   
   .bc:before {
     position: absolute;
-    top: 45px;
-    left: 10%;
+    top: 34px;
+    left: 3%;
     content: '';
-    width: 80%;
+    width: 94%;
     height: 2px;
     background: black;
     z-index: -10;
@@ -95,6 +95,7 @@ th{
       display: flex;
   }
   .order_list{
+  	margin-top: 10px;
     flex:1;
     float : right;
   }
@@ -144,6 +145,7 @@ th{
 }
 .cancel_select{
     margin-left:30px;
+    width: 484px;
 }
 .edit_btn {
     float: right;
@@ -250,3 +252,38 @@ th {
     border-radius: 7px;
     background: #ffc107;
 }
+
+
+
+/* 미디어쿼리 */
+@media screen and (max-width:935px) {
+	.order_dtl2 {
+    min-height: 347px;
+	}
+	
+}	
+
+@media screen and (max-width:814px) {
+	.order_dtl2 {
+    min-height: 395px;
+    min-width: 483px;
+	}
+	
+}	
+
+@media screen and (max-width:691px) {
+	.order_dtl2 {
+    min-height: 395px;
+	}
+	.order_box {
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    width: 80%;
+    min-width: 549px;
+    margin-left: 10%;
+    background: white;
+	}
+	
+}	

@@ -187,3 +187,31 @@ margin: 10px 0px 0px 110px;
 .find_btn:hover{
     opacity: .8;
   }
+  
+  
+  
+/* 미디어쿼리 */
+@media ( max-width : 1200px){
+	.card {
+    width: 500px;
+    height: 950px;
+    padding: 15px;
+    border-radius: 25px;
+    position: absolute;
+    top: 85px;
+    left: 15%;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    background: #fff;
+    background-repeat: no-repeat, no-repeat;
+    background-position: 120% -5%, 200% -40%;
+    background-size: 40%, 80%;
+    -webkit-animation: open .5s;
+    animation: open .5s;
+    font-family: "Noto Sans KR", sans-serif;
+	}
+	
+	
+
+}  

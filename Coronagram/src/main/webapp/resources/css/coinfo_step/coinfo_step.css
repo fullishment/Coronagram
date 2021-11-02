@@ -286,12 +286,3 @@ div h3 {
 	padding : 0 29px;
 }
 
-/* 반응형 */
-@media (max-width: 980px) {
-    .scImg {
-        display: none;
-    }
-    .scMain {
-        width: 100%;
-    }
-}
