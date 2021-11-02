@@ -141,7 +141,6 @@ th {
 }
 
 tr, td, th {
-	border: 1px solid grey;
 	padding: 4px;
 }
 
@@ -277,6 +276,29 @@ tr:hover {
 
 #del_btn:hover {
 	opacity: .8;
+}
+
+
+@media ( max-width : 1000px) {
+	.searchCon {
+	    margin-left: 2vw;
+	    margin-top: 100px;
+	    width: 60vw;
+	    min-width: 800px;
+	    height: 20px;
+	    display: flex;
+	    justify-content: space-between;
+	}
+	.con1 {
+	    background-color: white;
+	    width: 60vw;
+	    min-width: 800px;
+	    border-radius: 15px;
+	    border: 1px solid white;
+	    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+	    margin: 40px 2vw;
+	}
+
 }
 </style>
 </head>
