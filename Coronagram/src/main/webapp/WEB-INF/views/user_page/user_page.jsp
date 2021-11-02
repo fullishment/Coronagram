@@ -32,17 +32,19 @@
             
             window.onclick = function(event) {
                 if (event.target == modal) {
-                    modal.style.display = "none";
-                    const player = document.getElementById("player");
-                    player.muted = true;
+                	if(document.getElementById("player")){
+                		document.getElementById("player").muted = true;
+                	}
+                    modal.style.display = "none";                    
                 }
             }           
         });
         function modalFunc(){
             $(".close").on("click",function(){
-            	document.getElementById("myModal").style.display="none";
-            	const player = document.getElementById("player");
-            	player.muted = true;
+            	if(document.getElementById("player")){
+            		document.getElementById("player").muted = true;
+            	}
+            	document.getElementById("myModal").style.display="none";          	
             });
         }
         function reloadList(){
@@ -142,12 +144,12 @@
 					introNm(res.intro);				
 					profileCnt(res.intro);
 					mInfo(res.intro);
+					mInfoClick();
 					followArea();
 					editProfile();
 					addFollow();
 		        	delFollow();
 		        	videoListBtn();
-		        	
 				},
 				error : function(request,status,error){
 					console.log(error);

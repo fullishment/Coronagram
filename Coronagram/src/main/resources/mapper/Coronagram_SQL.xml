@@ -61,49 +61,6 @@
 		WHERE CC.RNUM BETWEEN 1 AND 2
 		AND CC.DEL = 1
 	</select>
-	<select id="getCrngDtl" parameterType="hashmap" resultType="hashmap">
-		SELECT C.WRITING_NO, C.WRITER_NO, C.CON, M.M_NO ,M.M_NM, M.IMG_ADR, M.NICK_NM,CAA.FILE_ADRS,CS.SET1,NVL2(WCT.NICK_NM,WCT.NICK_NM,0) AS CMT_NICK,
-        NVL(L.LC,0) AS LC, NVL(CN.CCNT,0) AS CCNT, NVL(LX.LEX,0) AS LEX
-		,TO_CHAR(C.DT, 'YYYY/MM/DD HH24:MI:SS') AS DT
-		FROM CRNG C
-		    INNER JOIN M M
-		    			  ON C.WRITER_NO = M.M_NO
-		    INNER JOIN   (SELECT CA.WRITING_NO,SUBSTR(MAX(SYS_CONNECT_BY_PATH(FILE_ADR, ',')), 2) AS FILE_ADRS
-		                    FROM (SELECT WRITING_NO, FILE_ADR, ROW_NUMBER() OVER(PARTITION BY WRITING_NO ORDER BY ATTC_NO ASC) AS RNUM
-		                            FROM CRNG_ATTC
-		                            ORDER BY WRITING_NO DESC) CA
-                            START WITH CA.RNUM = 1
-                            CONNECT BY PRIOR CA.RNUM = CA.RNUM - 1
-                            AND PRIOR CA.WRITING_NO = CA.WRITING_NO
-                            GROUP BY CA.WRITING_NO) CAA
-                            ON CAA.WRITING_NO=C.WRITING_NO
-            INNER JOIN (SELECT SM_NO,SET1 FROM CRNG_SETTING) CS
-                            ON C.WRITER_NO = CS.SM_NO
-            LEFT OUTER JOIN ( SELECT WCC.WRITING_NO,WCC.NICK_NM,WCC.LK_DT FROM
-                            (SELECT LK.WRITING_NO,MM.NICK_NM,LK.LK_DT,
-                            ROW_NUMBER() OVER(PARTITION BY WRITING_NO ORDER BY WRITING_NO) AS RNUM
-                            FROM LK LK
-                                     LEFT OUTER JOIN M MM
-                                        ON LK.USER_NO = MM.M_NO
-                            ORDER BY LK.WRITING_NO,LK.LK_DT) WCC
-                            WHERE WCC.RNUM =1
-                            ) WCT
-                            ON C.WRITING_NO = WCT.WRITING_NO                               
-            LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS LC FROM LK
-                            GROUP BY WRITING_NO) L
-                            ON C.WRITING_NO = L.WRITING_NO
-            LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS CCNT FROM CRNG_CMT
-                            GROUP BY WRITING_NO) CN
-                            ON C.WRITING_no = CN.WRITING_NO
-            LEFT OUTER JOIN (SELECT WRITING_NO,USER_NO,NVL(COUNT(*),0) AS LEX FROM LK
-                            GROUP BY WRITING_NO,USER_NO) LX
-                            ON C.WRITING_NO = LX.WRITING_NO
-                            AND LX.USER_NO = #{m_no}
-			WHERE C.DEL = 1
-            AND C.WRITER_NO IN (SELECT RP_USER FROM FOLLOW WHERE RQ_USER = #{m_no5})
-            AND C.WRITING_NO = #{writingNo4}
-			ORDER BY C.DT DESC
-	</select>
 	<insert id="aHeart" parameterType="hashmap">
 		INSERT INTO LK(USER_NO,WRITING_NO) 
 			VALUES (#{m_no}, #{writingNo})

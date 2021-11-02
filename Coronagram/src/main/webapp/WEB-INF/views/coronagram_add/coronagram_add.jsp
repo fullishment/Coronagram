@@ -54,11 +54,25 @@
     				processData:false,
     				success:function(res){
     					$("#CrngImgFile").val(res.fileName[0]);
+    					var fileReplace = $("#CrngImgFile").val().replace('[', '%5B').replace(']', '%5D').replace(',', '%2C');
+    					var fileLen = fileReplace.length;
+    					var ExtensionNm = fileReplace.lastIndexOf('.')+1;
+    					var fileExt = fileReplace.substring(ExtensionNm, fileLen).toLowerCase(); 					
+    					
 						var html="";
-						html+="<li class=\"preview\">																						  	 ";
-						html+="		<img src=\"../resources/upload/"+$("#CrngImgFile").val()+"\" class=\"CrngPrevImg\" alt=\"thumbnail\" id=\"preview\" >";
-						html+=" 	<i class=\"fas fa-times-circle close_prev\"></i>															 ";
-						html+="</li>																											 ";
+						if(fileExt=="mp4" || fileExt=="mov"){
+							html+="<li class=\"preview\">																						  	 ";
+							html+="		<video src=\"../resources/upload/"+fileReplace+"\" class=\"CrngPrevImg\" alt=\"thumbnail\" id=\"preview\" ></video>";
+							html+=" 	<i class=\"fas fa-times-circle close_prev\"></i>															 ";
+							html+="</li>																											 ";
+						}
+						else{
+							html+="<li class=\"preview\">																						  	 ";
+							html+="		<img src=\"../resources/upload/"+fileReplace+"\" class=\"CrngPrevImg\" alt=\"thumbnail\" id=\"preview\" >";
+							html+=" 	<i class=\"fas fa-times-circle close_prev\"></i>															 ";
+							html+="</li>																											 ";
+						}
+						
 						$("#preview_area").append(html);
 						imgMouseOver();
     				},
@@ -77,13 +91,17 @@
     		$("#add_btn").click(function(){
     			var CrngArray = new Array();
         		var Crngimg = $("img[class=\"CrngPrevImg\"]"); 
+        		var CrngVideo = $("video[class=\"CrngPrevImg\"]"); 
         		if(checkVal("#post_cont")){
         			alert("내용이 입력되지않았습니다");
         			$("#post_cont").focus();
-        		}else if(Crngimg.length==0){
+        		}else if(Crngimg.length==0 && CrngVideo==0){
         			alert("사진이 첨부 되지 않았습니다");
+        		}else if(Crngimg.length>10){
+        			alert("사진을 10장 이상 업로드 할 수 없습니다");
         		}
-        		else{     	        		
+        		else if(Crngimg.length>0){   
+        			
 	        		for(var i=0;i<Crngimg.length;i++){
 	        			CrngArray.push(Crngimg[i].src.substring(Crngimg[i].src.lastIndexOf("/")+1));
 	        		}
@@ -109,6 +127,37 @@
 	        			}
 	    			});
         		}
+        		else if(CrngVideo.length>0){
+        			if(Crngimg.length>0){
+        				alert("동영상과 사진을 같이 첨부할 수 없습니다");
+        			}
+        			else{
+        				for(var i=0;i<CrngVideo.length;i++){
+    	        			CrngArray.push(CrngVideo[i].src.substring(CrngVideo[i].src.lastIndexOf("/")+1));
+    	        		}  	        		
+    	        		var params = $("#postForm").serialize();
+    	        		console.log(params);
+    	        		$.ajax({
+    	    				url : "crngAdds",
+    	        			type : "post",
+    	        			dataType : "json",
+    	        			data : params, 
+    	        			success : function(res){
+    	        				for(var i =0;i<CrngVideo.length ;i++){
+    	        					CrngAttcAjax(CrngArray,i);
+    	        					if(i==cnt){
+    	        						location.href="../coronagram/${sMNick}";
+    	        					}
+    	        				}
+    	        			},
+    	        			error : function(request, status, error){
+    	        				console.log(error);
+    	        			}
+    	    			});
+        			}        		
+        		}else{
+        			alert("업로드 중 오류 발생");
+        		}
         	});
     		function imgMouseOver(){
     			$("li").on("click","i",function(){
@@ -127,11 +176,31 @@
             	});
     			$("li").on("mouseover","img",function(){
             		if($(this).is("#preview_area") ==false){
-            			var html = "<img src="+$(this).attr("src")+" class=\"prev_area_img\" alt=\"preview\">";
+            			var html = "<img src=\""+$(this).attr("src")+"\" class=\"prev_area_img\" alt=\"preview\">";
             			$(".upload_area").html(html);
             		}
             	});
     			$("li").on("mouseleave","img",function(){
+            		if($(this).is("#preview_area") ==false){
+            			var html = "";
+		            		html+="<div class=\"plus_icon\">";
+		            		html+="		<span></span>";
+		            		html+="		<span></span>";
+		            		html+="</div>";
+		            		html+="<div class=\"upload_text\">";
+		            		html+=" 	사진 및 동영상 파일을 끌어다 놓으세요";
+		            		html+="</div>";
+		            		
+            			$(".upload_area").html(html);
+            		}
+            	});
+    			$("li").on("mouseover","video",function(){
+            		if($(this).is("#preview_area") ==false){
+            			var html = "<video src=\""+$(this).attr("src")+"\" class=\"prev_area_img\" alt=\"preview\" autoplay muted loop></video>";
+            			$(".upload_area").html(html);
+            		}
+            	});
+    			$("li").on("mouseleave","video",function(){
             		if($(this).is("#preview_area") ==false){
             			var html = "";
 		            		html+="<div class=\"plus_icon\">";
@@ -158,11 +227,25 @@
         					//업로드 파일명 적용
         					if(res.fileName.length > 0){
         						$("#CrngImgFile").val(res.fileName[0]);
+        						var fileReplace = $("#CrngImgFile").val().replace('[', '%5B').replace(']', '%5D').replace(',', '%2C');
+            					var fileLen = fileReplace.length;
+            					var ExtensionNm = fileReplace.lastIndexOf('.')+1;
+            					var fileExt = fileReplace.substring(ExtensionNm, fileLen).toLowerCase(); 					
+            					
         						var html="";
-        						html+="<li class=\"preview\">																						  	 ";
-        						html+="		<img src=\"../resources/upload/"+$("#CrngImgFile").val()+"\" class=\"CrngPrevImg\" alt=\"thumbnail\" id=\"preview\" >";
-        						html+=" 	<i class=\"fas fa-times-circle close_prev\"></i>															 ";
-        						html+="</li>																											 ";
+        						if(fileExt=="mp4" || fileExt=="mov"){
+        							html+="<li class=\"preview\">																						  	 ";
+        							html+="		<video src=\"../resources/upload/"+fileReplace+"\" class=\"CrngPrevImg\" alt=\"thumbnail\" id=\"preview\" ></video>";
+        							html+=" 	<i class=\"fas fa-times-circle close_prev\"></i>															 ";
+        							html+="</li>																											 ";
+        						}
+        						else{
+        							html+="<li class=\"preview\">																						  	 ";
+        							html+="		<img src=\"../resources/upload/"+fileReplace+"\" class=\"CrngPrevImg\" alt=\"thumbnail\" id=\"preview\" >";
+        							html+=" 	<i class=\"fas fa-times-circle close_prev\"></i>															 ";
+        							html+="</li>																											 ";
+        						}
+        						
         						$("#preview_area").append(html);
         						imgMouseOver();
         					}

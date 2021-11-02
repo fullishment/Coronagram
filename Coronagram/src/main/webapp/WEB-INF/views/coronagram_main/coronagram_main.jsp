@@ -207,7 +207,7 @@
 					 var fileExt = fileAdrSplit[i].substring(ExtensionNm, fileLen).toLowerCase();
 					 if(fileExt=="mp4" || fileExt=="mov"){
 						 html+=" <div class=\"slide slide-"+j+"\">                                       									 								";
-						 html+="	<video class=\"p_img\" playsinline autoplay muted loop>																	";
+						 html+="	<video class=\"p_video\" playsinline autoplay muted loop>																	";
 			           	 html+=" 		<source src=\"resources/upload/"+fileAdrSplit[i]+"\" alt=\"\" type=\"video/mp4\"/></source>	   						   				";
 			           	 html+="	</video>																																";
 			           	 html+=" 	<div class=\"play_btn\">																												";
@@ -411,7 +411,7 @@
 				});
 		    }
 		    function mediaControl3(){
-		    	$(".p_img").on("click",function(){
+		    	$(".p_video").on("click",function(){
 		    		$(this).get(0).pause();
 					$(this).next().css("width", "100%");
 					$(this).next().css("height", "100%");
@@ -531,8 +531,8 @@
 	    			data : params,
 	    			success : function(res){		    				
 	    				LkModalList(res.lkMList);
-	    				followAdd();
-	    				followDel();
+	    				LkFollowAdd();
+	    				LkFollowDel();
 	    			},
 	    			error : function(request, status, error){
 	    				console.log(error);
@@ -555,12 +555,12 @@
 					else{
 						if(data.CNTF == 1){
 							html+="			<div class=\"rec_follow\">																					 ";
-							html+="				<span class=\"modal_follow1 fispan\">팔로잉</span>														 ";
+							html+="				<span class=\"modal_follow1 fispan2\">팔로잉</span>														 ";
 							html+="			</div>																										 ";
 						}
 						else if(data.CNTF == 0){
 							html+="			<div class=\"rec_follow\">																					 ";
-							html+="				<span class=\"modal_follow2 fospan\">팔로우</span>														 ";
+							html+="				<span class=\"modal_follow2 fospan2\">팔로우</span>														 ";
 							html+="			</div>																										 ";
 						}
 					}				
@@ -570,12 +570,71 @@
 				
 				$(".lk_modal_main").html(html);
 		    }
+		    
+		    function LkFollowAdd(){
+		    	$(".fospan2").on("click",function(){
+		    		$("#m_no2").val($(this).parent().parent().attr("nfo"));
+		    		var params = $("#AddDelFoForm").serialize();
+		    		$.ajax({
+		    			url : "FollowAdd",
+		    			type : "post",
+		    			dataType : "json",
+		    			data : params,
+		    			context: this,
+		    			success : function(res){
+		    				if(res.result=="success"){									
+								LkModalAjax();
+								LkFollowDel();
+		    				}else{
+		    					alert("add실패");
+		    				}
+		    			},
+		    			error : function(request, status, error){
+		    				console.log(error);
+		    			}
+		    		});
+		    	});
+		    }
+		    function LkFollowDel(){
+		    	$(".fispan2").on("click",function(){
+		    		$("#m_no2").val($(this).parent().parent().attr("nfo"));
+		    		var params = $("#AddDelFoForm").serialize();
+		    		$.ajax({
+		    			url : "followDel",
+		    			type : "post",
+		    			dataType : "json",
+		    			data : params,
+		    			context: this,
+		    			success : function(res){
+		    				if(res.result=="success"){
+		    					LkModalAjax();
+		    					LkFollowAdd();
+		    				}else{
+		    					alert("add실패");
+		    				}
+		    			},
+		    			error : function(request, status, error){
+		    				console.log(error);
+		    			}
+		    		});
+		    	});
+		    }	
 		    function modalInfoImg(list){
 		    	var html = "";
 		    	for(data of list){
-		    		 html+="<div pi=\""+data.M_NO+"\"> ";
-			    	 html+=" <img class=\"modal_img_box\" src=\"resources/upload/"+data.FILE_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	"; 
-			    	 html+="</div>";
+		    		var fileLen = data.FILE_ADR.length;
+					var ExtensionNm = data.FILE_ADR.lastIndexOf('.')+1;
+					var fileExt = data.FILE_ADR.substring(ExtensionNm, fileLen).toLowerCase();			
+					if(fileExt=="mp4" || fileExt=="mov"){
+						html+= "			<video class=\"gallery-image\" pi=\""+data.M_NO+"\">";
+						html+= " 				<source src=\"../resources/upload/"+data.FILE_ADR+"\" type=\"video/mp4\"></source>			";
+						html+= "			</video>";
+					}else{
+						html+="<div pi=\""+data.M_NO+"\"> ";
+				    	 html+=" <img class=\"modal_img_box\" src=\"resources/upload/"+data.FILE_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	"; 
+				    	 html+="</div>";
+					}
+		    		 
 		    	}
 		    	$(".modal_info_img2").html(html);
 		    }
@@ -722,17 +781,16 @@
 		    			dataType : "json",
 		    			data : params,
 		    			context: this,
-		    			success : function(res){
+		    			success : function(res){		    				
 		    				if(res.result=="success"){
 		    					var html ="";
 		    					html+="<span class=\"follow_submit fispan\">팔로잉</span>";
-		    					$(this).parent('.rec_follow').html(html);
-		    					reloadPart1();									
-								followDel();
-								LkModalAjax();
+		    					$(this).parent('.rec_follow').html(html);	
+		    					reloadPart1();
+		    					followDel();		    					
 		    				}else{
 		    					alert("add실패");
-		    				}
+		    				}	    				
 		    			},
 		    			error : function(request, status, error){
 		    				console.log(error);
@@ -751,16 +809,16 @@
 		    			data : params,
 		    			context: this,
 		    			success : function(res){
+		    				followList(res.listFo);
 		    				if(res.result=="success"){
 		    					var html ="";
 		    					html+="<span class=\"follow_submit fospan\">팔로우</span>";
 		    					$(this).parent('.rec_follow').html(html);
 		    					reloadPart1();
-		    					followAdd();
-		    					LkModalAjax();
+		    					followAdd();		    					
 		    				}else{
 		    					alert("add실패");
-		    				}
+		    				}	    				
 		    			},
 		    			error : function(request, status, error){
 		    				console.log(error);
@@ -783,10 +841,10 @@
 							dataType : "json",
 							data : params,
 							success : function(res){
-								if(res.result=="success"){
-									reloadList();	
+								if(res.result=="success"){										
 									$(this).prev().val("");
 									$("#cmtVal").val("");
+									reloadList();
 								}else{							
 									alert("추가실패");
 								}

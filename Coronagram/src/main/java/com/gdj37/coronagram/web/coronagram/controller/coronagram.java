@@ -137,9 +137,11 @@ public class coronagram {
 	public String FollowAdd (@RequestParam HashMap<String,String> params) throws Throwable {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String,Object> modelMap = new HashMap<String,Object>();
+		List<HashMap<String,String>> listFo = iServiceCoronagram.getListFollow(params);
 		String result ="success";
 		try {
 			int FollowA = iServiceCoronagram.FollowAdd(params);
+			
 			if(FollowA==0) {
 				result="failed";
 			}
@@ -147,6 +149,7 @@ public class coronagram {
 			e.printStackTrace();
 			result ="error";
 		}		
+		modelMap.put("listFo", listFo);
 		modelMap.put("result", result);
 		
 		return mapper.writeValueAsString(modelMap);
@@ -156,6 +159,7 @@ public class coronagram {
 	public String followDel (@RequestParam HashMap<String,String> params) throws Throwable {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String,Object> modelMap = new HashMap<String,Object>();
+		List<HashMap<String,String>> listFo = iServiceCoronagram.getListFollow(params);
 		String result ="success";
 		try {
 			int followD = iServiceCoronagram.followDel(params);
@@ -166,6 +170,7 @@ public class coronagram {
 			e.printStackTrace();
 			result ="error";
 		}		
+		modelMap.put("listFo", listFo);
 		modelMap.put("result", result);
 		
 		return mapper.writeValueAsString(modelMap);
