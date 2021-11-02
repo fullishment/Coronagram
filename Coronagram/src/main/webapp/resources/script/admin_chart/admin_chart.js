@@ -1,6 +1,6 @@
 /////Last modified 02/06/2016
 getList();
-
+getWeekList();
 let cr_dt = dataA[0].date;
 	document.getElementById('createDt').firstChild.nodeValue ="기준 시간 :" + cr_dt;
 
@@ -166,43 +166,12 @@ $(function () {
 		$(".d3-*").empty();
 
 		 Morris.Line({
-		 	lineColors: ["#E67A77", "#D9DD81", "#79D1CF", "#95D7BB"],
+		 	lineColors: ["#D9DD81", "#E67A77", "#79D1CF"],
 		 	element: "lineChart",
-		 	data: [
-		 		{
-		 			year: "2008",
-		 			value: 45,
-		 			value2: 15,
-		 			value3: 95
-		 		},
-		 		{
-		 			year: "2009",
-		 			value: 10,
-		 			value2: 40,
-		 			value3: 80
-		 		},
-		 		{
-		 			year: "2010",
-		 			value: 45,
-		 			value2: 95,
-		 			value3: 5
-		 		},
-		 		{
-		 			year: "2011",
-		 			value: 20,
-		 			value2: 60,
-		 			value3: 40
-		 		},
-		 		{
-		 			year: "2012",
-		 			value: 45,
-		 			value2: 0,
-		 			value3: 90
-		 		}
-		 	],
-		 	xkey: "year",
-		 	ykeys: ["value", "value2", "value3"],
-		 	labels: ["Value", "value2", "value3"],
+		 	data: listWeek,
+		 	xkey: "mm",
+		 	ykeys: ["dc", "dec", "cc"],
+		 	labels: ["확진자", "사망자", "완치자"],
 		 	pointSize: 0,
 		 	hideHover: "auto"
 		 });

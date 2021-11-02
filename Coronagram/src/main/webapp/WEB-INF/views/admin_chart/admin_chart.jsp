@@ -200,24 +200,20 @@
 								<div class="panel-body">
 									<div id="lineChart" class="rad-chart"></div>
 								</div>
-								<div class="vaccine_name">
-									<div class="az">
-										<div class="azs"></div>
-										<span>아스트로제네카</span>
-									</div>
-									<div class="pfizer">
-										<div class="pfizers"></div>
-										<span>화이자</span>
-									</div>
-									<div class="moderna">
-										<div class="modernas"></div>
-										<span>모더나</span>
-									</div>
-									<div class="jansen">
-										<div class="jansens"></div>
-										<span>얀센</span>
-									</div>
-								</div>
+                            <div class="condition">
+                                <div class="coronic">
+                                    <div class="coronics"></div>
+                                    <span>확진자</span>
+                                </div>
+                                <div class="dead">
+                                    <div class="deads"></div>
+                                    <span>사망자</span>
+                                </div>
+                                <div class="fl_rec">
+                                    <div class="fl_recs"></div>
+                                    <span>완치자</span>
+                                </div>
+                            </div>
 							</div>
 						</div>
                         <div class="col-lg-3 col-md-8 col-xs-12 doughnut-chart">
