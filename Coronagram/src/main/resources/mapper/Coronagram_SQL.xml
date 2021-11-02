@@ -33,7 +33,9 @@
                             GROUP BY WRITING_NO) L
                             ON C.WRITING_NO = L.WRITING_NO
             LEFT OUTER JOIN (SELECT WRITING_NO, NVL(COUNT(*),0) AS CCNT FROM CRNG_CMT
-                            GROUP BY WRITING_NO) CN
+                            WHERE DEL =1
+                            GROUP BY WRITING_NO
+                            ) CN
                             ON C.WRITING_no = CN.WRITING_NO
             LEFT OUTER JOIN (SELECT WRITING_NO,USER_NO,NVL(COUNT(*),0) AS LEX FROM LK
                             GROUP BY WRITING_NO,USER_NO) LX
@@ -45,19 +47,13 @@
 	</select>
 	<select id="getPostCmt" parameterType="hashmap" resultType="hashmap">
 		SELECT CC.CMT_NO, CC.WRITING_NO, CC.CMT_WRITER_NO, CC.NICK_NM, CC.CMT_CON, CC.DT, CC.DEL
-		FROM (SELECT CC.CMT_NO, CC.WRITING_NO, CC.CMT_WRITER_NO, M.NICK_NM, CC.CMT_CON, CC.DEL,CC.DT, ROW_NUMBER() OVER(PARTITION BY CC.WRITING_NO ORDER BY CC.CMT_NO DESC) AS RNUM
-        FROM CRNG_CMT CC 
+		FROM (SELECT CM.CMT_NO, CM.WRITING_NO, CM.CMT_WRITER_NO, M.NICK_NM, CM.CMT_CON, CM.DEL,CM.DT,
+              ROW_NUMBER() OVER(PARTITION BY CM.WRITING_NO ORDER BY CM.CMT_NO DESC) AS RNUM
+                        FROM CRNG_CMT CM 
                         INNER JOIN M M
-                                 ON CC.CMT_WRITER_NO = M.M_NO
-        				 WHERE CC.DEL = 1) CC 
-                         INNER JOIN (SELECT C.WRITING_NO, ROW_NUMBER() OVER(ORDER BY C.WRITING_NO DESC) AS RNUM
-                                         FROM CRNG C 
-                                         INNER JOIN FOLLOW F
-                                                             ON C.WRITER_NO = F.RP_USER
-                                                             AND F.RQ_USER=#{m_no}                                                           
-                                         WHERE C.DEL = 1) C
-                                     ON CC.WRITING_NO = C.WRITING_NO
-                                     AND C.RNUM BETWEEN 1 AND 10
+                                 ON CM.CMT_WRITER_NO = M.M_NO
+        				 WHERE CM.DEL = 1                        
+                         ) CC 
 		WHERE CC.RNUM BETWEEN 1 AND 2
 		AND CC.DEL = 1
 	</select>

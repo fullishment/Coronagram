@@ -366,7 +366,7 @@
 				
 			}
 		    function modalMover(){
-		    	$(".cmt_list1").mouseover(function(){	    		
+		    	$(".cmt_list1").mouseenter(function(){	    		
 		    		$("#m_no3").val($(this).parent().parent().parent().attr('no'));
 		    		var params = $("#modalInfoForm").serialize();
 		    		$(this).children('.modal_info_area2').css("display","block");
@@ -626,9 +626,11 @@
 					var ExtensionNm = data.FILE_ADR.lastIndexOf('.')+1;
 					var fileExt = data.FILE_ADR.substring(ExtensionNm, fileLen).toLowerCase();			
 					if(fileExt=="mp4" || fileExt=="mov"){
-						html+= "			<video class=\"gallery-image\" pi=\""+data.M_NO+"\">";
-						html+= " 				<source src=\"../resources/upload/"+data.FILE_ADR+"\" type=\"video/mp4\"></source>			";
+						html+="<div class=\"modal_img_box\" pi=\""+data.M_NO+"\"> ";
+						html+= "			<video class=\"modal_video_box\">";
+						html+= " 				<source src=\"resources/upload/"+data.FILE_ADR+"\" type=\"video/mp4\"></source>			";
 						html+= "			</video>";
+						html+="</div>";
 					}else{
 						html+="<div pi=\""+data.M_NO+"\"> ";
 				    	 html+=" <img class=\"modal_img_box\" src=\"resources/upload/"+data.FILE_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	"; 
@@ -640,7 +642,7 @@
 		    }
 		   	    
 		    function modalMover2(){
-		    	$(".cmt_list2").mouseover(function(){	    		
+		    	$(".cmt_list2").mouseenter(function(){	    		
 		    		$("#m_no3").val($(this).parent().parent().parent().attr('no'));
 		    		var params = $("#modalInfoForm").serialize();
 		    		$(this).children('.modal_info_area3').attr("style","display:block;");

@@ -353,7 +353,7 @@ body{
 .modal_img_box{
 	width:100px;
 	height:100px;
-	background:red;
+	background:black;
 }
 .modal_img_box:hover{
 	opacity : 0.8;
