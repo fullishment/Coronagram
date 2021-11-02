@@ -454,7 +454,6 @@ a:active {
 }
 .vaccine{
   display: inline-block;
-  margin-top: 25px;
   width: 100%;
 }
 .vaccine_name{
@@ -514,6 +513,7 @@ font-size: 12px;
 .corona_condition{
   display: inline-block;
   margin-top: 25px;
+  margin-bottom: 50px;
   width: 100%;
 }
 .condition{

@@ -165,47 +165,47 @@ $(function () {
 		$(".rad-chart").empty();
 		$(".d3-*").empty();
 
-		// Morris.Line({
-		// 	lineColors: ["#E67A77", "#D9DD81", "#79D1CF", "#95D7BB"],
-		// 	element: "lineChart",
-		// 	data: [
-		// 		{
-		// 			year: "2008",
-		// 			value: 45,
-		// 			value2: 15,
-		// 			value3: 95
-		// 		},
-		// 		{
-		// 			year: "2009",
-		// 			value: 10,
-		// 			value2: 40,
-		// 			value3: 80
-		// 		},
-		// 		{
-		// 			year: "2010",
-		// 			value: 45,
-		// 			value2: 95,
-		// 			value3: 5
-		// 		},
-		// 		{
-		// 			year: "2011",
-		// 			value: 20,
-		// 			value2: 60,
-		// 			value3: 40
-		// 		},
-		// 		{
-		// 			year: "2012",
-		// 			value: 45,
-		// 			value2: 0,
-		// 			value3: 90
-		// 		}
-		// 	],
-		// 	xkey: "year",
-		// 	ykeys: ["value", "value2", "value3"],
-		// 	labels: ["Value", "value2", "value3"],
-		// 	pointSize: 0,
-		// 	hideHover: "auto"
-		// });
+		 Morris.Line({
+		 	lineColors: ["#E67A77", "#D9DD81", "#79D1CF", "#95D7BB"],
+		 	element: "lineChart",
+		 	data: [
+		 		{
+		 			year: "2008",
+		 			value: 45,
+		 			value2: 15,
+		 			value3: 95
+		 		},
+		 		{
+		 			year: "2009",
+		 			value: 10,
+		 			value2: 40,
+		 			value3: 80
+		 		},
+		 		{
+		 			year: "2010",
+		 			value: 45,
+		 			value2: 95,
+		 			value3: 5
+		 		},
+		 		{
+		 			year: "2011",
+		 			value: 20,
+		 			value2: 60,
+		 			value3: 40
+		 		},
+		 		{
+		 			year: "2012",
+		 			value: 45,
+		 			value2: 0,
+		 			value3: 90
+		 		}
+		 	],
+		 	xkey: "year",
+		 	ykeys: ["value", "value2", "value3"],
+		 	labels: ["Value", "value2", "value3"],
+		 	pointSize: 0,
+		 	hideHover: "auto"
+		 });
 		Morris.Donut({
 			element: "donutChart",
 			data: 			[
@@ -225,83 +225,7 @@ $(function () {
 			labelColor: "#23AE89",
 			colors: ["#E67A77", "#D9DD81", "#79D1CF", "#95D7BB"]
 		});
-		Morris.Donut({
-			element: "donutChart2",
-			data: 
-			[
-				{
-					label:"아스트로제네카" ,value: 25
-				},
-				{
-					label:"화이자" ,value: 25
-				},
-				{
-					label:"모더나" ,value: 25
-				},
-				{
-					label:"얀센" ,value: 25
-				}
-			],
-			labelColor: "#23AE89",
-			colors: ["#E67A77", "#D9DD81", "#79D1CF", "#95D7BB"]
-		});
-		Morris.Donut({
-			element: "donutChart3",
-			data: 			[
-				{
-					label:"아스트로제네카" ,value: 25
-				},
-				{
-					label:"화이자" ,value: 25
-				},
-				{
-					label:"모더나" ,value: 25
-				},
-				{
-					label:"얀센" ,value: 25
-				}
-			],
-			labelColor: "#23AE89",
-			colors: ["#E67A77", "#D9DD81", "#79D1CF", "#95D7BB"]
-		});
-		Morris.Donut({
-			element: "donutChart4",
-			data: 			[
-				{
-					label:"아스트로제네카" ,value: 25
-				},
-				{
-					label:"화이자" ,value: 25
-				},
-				{
-					label:"모더나" ,value: 25
-				},
-				{
-					label:"얀센" ,value: 25
-				}
-			],
-			labelColor: "#23AE89",
-			colors: ["#E67A77", "#D9DD81", "#79D1CF", "#95D7BB"]
-		});
-		Morris.Donut({
-			element: "donutChart5",
-			data: 			[
-				{
-					label:"아스트로제네카" ,value: 25
-				},
-				{
-					label:"화이자" ,value: 25
-				},
-				{
-					label:"모더나" ,value: 25
-				},
-				{
-					label:"얀센" ,value: 25
-				}
-			],
-			labelColor: "#23AE89",
-			colors: ["#E67A77", "#D9DD81", "#79D1CF", "#95D7BB"]
-		});
+
 		
 		var ad = document.getElementById('admin').innerHTML;
 		adC= ad*1;

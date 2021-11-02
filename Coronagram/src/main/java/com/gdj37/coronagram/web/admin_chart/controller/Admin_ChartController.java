@@ -66,7 +66,7 @@ public class Admin_ChartController {
 		
 		LocalDate now = LocalDate.now();
 
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYYMMDD");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
 
 		String today = now.format(dtf);
 		

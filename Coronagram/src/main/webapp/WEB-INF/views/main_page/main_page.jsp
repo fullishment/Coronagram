@@ -417,7 +417,7 @@
         </div>
         <div class="card-5">
           <h4 class="chart-lbl">
-            Doughnut Chart
+            백신 접종 현황
           </h4>
           <div class="divider">
           </div>
@@ -431,7 +431,7 @@
 
         <div class="card-6">
           <h4 class="chart-lbl">
-            line Chart
+            주간 코로나 현황
           </h4>
           <div class="divider">
           </div>

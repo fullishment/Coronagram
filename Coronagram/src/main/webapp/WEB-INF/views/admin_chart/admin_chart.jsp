@@ -158,8 +158,6 @@
                                 <div class="panel-heading">
                                     <h3 class="panel-title">월별 코로나 현황<ul class="rad-panel-action">
                                             <li><i class="fa fa-rotate-right"></i></li>
-
-                                            </li>
                                         </ul>
                                     </h3>
                                 </div>
@@ -185,106 +183,56 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-lg-6 col-md-12 col-xs-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">연령대별 코로나 접종 백신 비율%<ul class="rad-panel-action">
-                                            <li><i class="fa fa-rotate-right"></i></li>
-
-                                            </li>
-                                        </ul>
-                                    </h3>
-                                </div>
-                                <div class="panel-body">
-                                    <div id="lineChart" class="rad-chart"></div>
-                                </div>
-                            </div>
-                        </div> -->
+                        
                     </div>
                     <div class="row">
-                        <div class="main_title">
-                            <h1>백신 종류별 접종 현황</h1>
-                        </div>
+<!--                         <div class="main_title">
+                            <h1>백신 접종 현황</h1>
+                        </div> -->
+                        <div class="col-lg-6 col-md-12 col-xs-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">주간 코로나 현황<ul class="rad-panel-action">
+											<li><i class="fa fa-rotate-right"></i></li>
+										</ul>
+									</h3>
+								</div>
+								<div class="panel-body">
+									<div id="lineChart" class="rad-chart"></div>
+								</div>
+								<div class="vaccine_name">
+									<div class="az">
+										<div class="azs"></div>
+										<span>아스트로제네카</span>
+									</div>
+									<div class="pfizer">
+										<div class="pfizers"></div>
+										<span>화이자</span>
+									</div>
+									<div class="moderna">
+										<div class="modernas"></div>
+										<span>모더나</span>
+									</div>
+									<div class="jansen">
+										<div class="jansens"></div>
+										<span>얀센</span>
+									</div>
+								</div>
+							</div>
+						</div>
                         <div class="col-lg-3 col-md-8 col-xs-12 doughnut-chart">
                             <div class=" panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">10대<ul class="rad-panel-action">
-
+                                    <h3 class="panel-title">백신 접종 현황<ul class="rad-panel-action">
                                             <li><i class="fa fa-rotate-right"></i></li>
-
-                                            </li>
                                         </ul>
                                     </h3>
                                 </div>
                                 <div class="panel-body">
                                     <div id="donutChart" class="rad-chart"></div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-8 col-xs-12 doughnut-chart">
-                            <div class=" panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">20대<ul class="rad-panel-action">
-                                            <li><i class="fa fa-rotate-right"></i></li>
-
-                                            </li>
-                                        </ul>
-                                    </h3>
-                                </div>
-                                <div class="panel-body">
-                                    <div id="donutChart2" class="rad-chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-8 col-xs-12 doughnut-chart">
-                            <div class=" panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">30대<ul class="rad-panel-action">
-                                            <li><i class="fa fa-rotate-right"></i></li>
-
-                                            </li>
-                                        </ul>
-                                    </h3>
-                                </div>
-                                <div class="panel-body">
-                                    <div id="donutChart3" class="rad-chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-8 col-xs-12 doughnut-chart">
-                            <div class=" panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">40대<ul class="rad-panel-action">
-                                            <li><i class="fa fa-rotate-right"></i></li>
-
-                                            </li>
-                                        </ul>
-                                    </h3>
-                                </div>
-                                <div class="panel-body">
-                                    <div id="donutChart4" class="rad-chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-8 col-xs-12 doughnut-chart">
-                            <div class=" panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">50대 이후<ul class="rad-panel-action">
-                                            <li><i class="fa fa-rotate-right"></i></li>
-
-                                            </li>
-                                        </ul>
-                                    </h3>
-                                </div>
-                                <div class="panel-body">
-                                    <div id="donutChart5" class="rad-chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="vaccine">
-
+                                 <div class="vaccine">
                             <div class="vaccine_name">
-                                <!-- <p>백신종류</p> -->
                                 <div class="az">
                                     <div class="azs"></div>
                                     <span>아스트로제네카</span>
@@ -303,6 +251,9 @@
                                 </div>
                             </div>
                         </div>
+                            </div>
+                        </div>
+                       
                     </div>
                     <div class="row">
                         <div class="main_title">
@@ -312,7 +263,7 @@
 
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">월별 방문 가입자<ul class="rad-panel-action">
+                                    <h3 class="panel-title">월별 가입자 현황<ul class="rad-panel-action">
                                             <li><i class="fa fa-rotate-right"></i></li>
 
                                             </li>
@@ -327,7 +278,7 @@
                         <div class="col-md-6 col-lg-6">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">일주일간 방문, 가입자 수<ul class="rad-panel-action">
+                                    <h3 class="panel-title">주간 가입자 현황<ul class="rad-panel-action">
                                             <li><i class="fa fa-rotate-right"></i></li>
 
                                             </li>
@@ -342,7 +293,7 @@
                         <div class="col-md-12 col-lg-6">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">가입자 백신 접종률 정보<ul class="rad-panel-action">
+                                    <h3 class="panel-title">가입자 연령대 현황<ul class="rad-panel-action">
                                             <li><i class="fa fa-rotate-right"></i></li>
 
                                             </li>
@@ -357,7 +308,7 @@
                     </div>
                     <div class="row">
                         <div class="main_title">
-                            <h1>회원 등급</h1>
+                            <h1>회원 등급 자료</h1>
                         </div>
                         <div class="col-md-6 member_grade">
                             <div class="panel panel-default">
@@ -452,13 +403,13 @@
                     </div>
                     <div class="row">
                         <div class="main_title">
-                            <h1>상품 판매 현황</h1>
+                            <h1>상품 판매 자료</h1>
                         </div>
                         <div class="col-md-6 col-lg-12">
 
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">상품별 판매 횟수<ul class="rad-panel-action">
+                                    <h3 class="panel-title">베스트 5 판매 물품 현황<ul class="rad-panel-action">
                                             <li><i class="fa fa-rotate-right"></i></li>
 
                                             </li>
