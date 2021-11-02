@@ -199,27 +199,21 @@ $(document).ready(function() {
 										<th><p>날짜</p></th>
 									</tr>
 								</thead> 
+							</table>
+							<div class="adminList">
+							<table>
 								<tbody>
+								<c:forEach var="data" items="${list}">
 									<tr>
-										<td>${list[0].QNA_NO}</td>
-										<td>${list[0].M_NM}</td>
-										<td>${list[0].TITLE}</td>
-										<td>${list[0].Q_DT}</td>
+										<td>${data.QNA_NO}</td>
+										<td>${data.M_NM}</td>
+										<td>${data.TITLE}</td>
+										<td>${data.Q_DT}</td>
 									</tr>
-									<tr>
-										<td>${list[1].QNA_NO}</td>
-										<td>${list[1].M_NM}</td>
-										<td>${list[1].TITLE}</td>
-										<td>${list[1].Q_DT}</td>
-									</tr>
-									<tr>
-										<td>${list[2].QNA_NO}</td>
-										<td>${list[2].M_NM}</td>
-										<td>${list[2].TITLE}</td>
-										<td>${list[2].Q_DT}</td>
-									</tr>
+								</c:forEach>
 								</tbody>
 							</table>
+							</div>
 						</div>
 						
 					</section>
@@ -244,27 +238,21 @@ $(document).ready(function() {
 										<th><p>작성일</p></th>
 									</tr>
 								</thead> 
-								<tbody>
-									<tr>
-										<td>${list1[0].INFO_NO}</td>
-										<td>${list1[0].INFO_TITLE}</td>
-										<td>${list1[0].INFO_SUBHD}</td>
-										<td>${list1[0].DT}</td>
-									</tr>
-									<tr>
-										<td>${list1[1].INFO_NO}</td>
-										<td>${list1[1].INFO_TITLE}</td>
-										<td>${list1[1].INFO_SUBHD}</td>
-										<td>${list1[1].DT}</td>
-									</tr>
-									<tr>
-										<td>${list1[2].INFO_NO}</td>
-										<td>${list1[2].INFO_TITLE}</td>
-										<td>${list1[2].INFO_SUBHD}</td>
-										<td>${list1[2].DT}</td>
-									</tr>
-								</tbody>
 							</table>
+							<div class="adminList">
+								<table>
+									<tbody>
+									<c:forEach var="data" items="${list1}">
+										<tr>
+											<td>${data.INFO_NO}</td>
+											<td>${data.INFO_TITLE}</td>
+											<td>${data.INFO_SUBHD}</td>
+											<td>${data.DT}</td>
+										</tr>
+									</c:forEach>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</section>
 					
@@ -277,51 +265,38 @@ $(document).ready(function() {
 							<button type="button" class="btn btn-primary">+</button>
 						</div>
 					</section>
-					
 					<section class="page-body">
 						<div class="shopList">
 							<table>
 								 <thead>
 									<tr>
 										<th><p>상품번호</p></th>
-										<th><p>등록자 이름</p></th>
+										<th><p>등록자</p></th>
 										<th><p>카테고리명</p></th>
 										<th><p>상품명</p></th>
 										<th><p>가격</p></th>
 										<th><p>판매상태</p></th>
 										<th><p>등록일</p></th>
 									</tr>
-								</thead> 
-								<tbody>
-									<tr>
-										<td>${list2[0].PROD_NO}</td>
-										<td>${list2[0].M_NM}</td>
-										<td>${list2[0].CAT_NM}</td>
-										<td>${list2[0].PROD_NM}</td>
-										<td>${list2[0].POINT}</td>
-										<td>${list2[0].SALE_STAT}</td>
-										<td>${list2[0].PROD_DT}</td>
-									</tr>
-									<tr>
-										<td>${list2[1].PROD_NO}</td>
-										<td>${list2[1].M_NM}</td>
-										<td>${list2[1].CAT_NM}</td>
-										<td>${list2[1].PROD_NM}</td>
-										<td>${list2[1].POINT}</td>
-										<td>${list2[1].SALE_STAT}</td>
-										<td>${list2[1].PROD_DT}</td>
-									</tr>
-									<tr>
-										<td>${list2[2].PROD_NO}</td>
-										<td>${list2[2].M_NM}</td>
-										<td>${list2[2].CAT_NM}</td>
-										<td>${list2[2].PROD_NM}</td>
-										<td>${list2[2].POINT}</td>
-										<td>${list2[2].SALE_STAT}</td>
-										<td>${list2[2].PROD_DT}</td>
-									</tr>
-								</tbody>
+								</thead>
 							</table>
+							<div class="adminList">
+								<table>
+									<tbody>
+									<c:forEach var="data" items="${list2}">
+										<tr>
+											<td>${data.PROD_NO}</td>
+											<td>${data.M_NM}</td>
+											<td>${data.CAT_NM}</td>
+											<td>${data.PROD_NM}</td>
+											<td>${data.POINT}</td>
+											<td>${data.SALE_STAT}</td>
+											<td>${data.PROD_DT}</td>
+										</tr>
+									</c:forEach>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</section>
 					

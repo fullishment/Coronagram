@@ -349,7 +349,24 @@ p {
  .coinfoList tr:hover{
    opacity:.4;
 }  
-
+.coinfoList th:nth-child(1) {
+	width: 70px;
+}
+.coinfoList td:nth-child(1) {
+	width: 83px;
+}
+.coinfoList th:nth-child(2) {
+	width: 76px;
+}
+.coinfoList td:nth-child(2) {
+	width: 100px;
+	}
+.coinfoList th:nth-child(3), .coinfoList td:nth-child(3) {
+	width: 113px;
+}
+.coinfoList th:nth-child(4), .coinfoList td:nth-child(4) {
+	width: 83px;
+}
 
 /* Shop table */
 
@@ -383,3 +400,24 @@ p {
  .shopList tr:hover{
    opacity:.4;
 }  
+.shopList th:nth-child(1), .shopList td:nth-child(1) {
+	width: 117px;
+}
+.shopList th:nth-child(2), .shopList td:nth-child(2) {
+	width: 107px;
+}
+.shopList th:nth-child(3), .shopList td:nth-child(3) {
+	width: 142px;
+}
+.shopList th:nth-child(4), .shopList td:nth-child(4) {
+	width: 106px;
+}
+.shopList th:nth-child(5), .shopList td:nth-child(5) {
+	width: 92px;
+}
+.shopList th:nth-child(6), .shopList td:nth-child(6) {
+	width: 118px;
+}
+.shopList th:nth-child(7), .shopList td:nth-child(7) {
+	width: 127px;
+}
