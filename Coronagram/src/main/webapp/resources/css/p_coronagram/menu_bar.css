@@ -17,7 +17,19 @@
 		    padding: 5px;
 		    background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
         }
-        
+        ul > a{
+        	color : #262626;
+			text-decoration:none;
+			font-weight: bold;
+        }
+        ul > a:link{
+        	color : #262626;
+			text-decoration:none;
+        }
+		ul > a:visited{
+			color : #262626;
+			text-decoration:none;
+		}
         .cm_logo, .cm_home, .cm_msg, .cm_cld, .cm_dot, .cm_user_name {
             position: absolute;
             margin-top: 10px;

@@ -65,7 +65,19 @@
             width: 30px;
             height: 30px;
         }
-
+        ul > a{
+        	color : #262626;
+			text-decoration:none;
+			font-weight: bold;
+        }
+        ul > a:link{
+        	color : #262626;
+			text-decoration:none;
+        }
+		ul > a:visited{
+			color : #262626;
+			text-decoration:none;
+		}
         .cm_menu__toggler {
             position: absolute;
             top: 5px;

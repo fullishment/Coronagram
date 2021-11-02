@@ -21,10 +21,11 @@
         	reloadList();       	
         	
             $(document).on("click",".gallery-item",function(){
-            	$("#myModal").val("");
+            	$("#myModal").html("");
             	$("#writingNo").val($(this).attr("wtno"));
             	$("#writingNo2").val($(this).attr("wtno"));
             	modal.style.display="block";
+            	$('body').css("overflow","hidden");
             	mdDraw();          	
             });
             
@@ -35,16 +36,31 @@
                 	if(document.getElementById("player")){
                 		document.getElementById("player").muted = true;
                 	}
+                	$("#myModal").html("");
+                	$('body').css("overflow","auto");
                     modal.style.display = "none";                    
                 }
-            }           
+            }  
+            
         });
         function modalFunc(){
             $(".close").on("click",function(){
             	if(document.getElementById("player")){
             		document.getElementById("player").muted = true;
             	}
+            	$("#myModal").html("");
+            	$('body').css("overflow","auto");
             	document.getElementById("myModal").style.display="none";          	
+            });
+            $(document).keydown(function(event) {
+                if ( event.keyCode == 27 || event.which == 27 ) {
+                	if(document.getElementById("player")){
+                		document.getElementById("player").muted = true;
+                	}
+                	$("#myModal").html("");
+                	$('body').css("overflow","auto");
+                	document.getElementById("myModal").style.display = "none";     
+                }
             });
         }
         function reloadList(){
@@ -55,7 +71,7 @@
 				dataType:"json",
 				data:params,
 				success : function(res){
-					$("#myModal").val("");
+					$("#myModal").html("");
 					ProfileImg(res.intro);				
 					intro(res.intro);
 					introNm(res.intro);				
@@ -111,10 +127,16 @@
         			"color":"#262626",
         			"border-top":"2px solid #262626"
         		});
+        		var html="";
+        		html+="<img class=\"menu_icon1\" src=\"../resources/images/userpage/grid2.png\" alt=\"\">";
+        		$(".menu_icon_area1").html(html);
         		$(".menu_post").css({
         			"color":"#8e8e8e",
         			"border-top":"2px"
         		});
+        		var html2="";
+        		html2+="<img class=\"menu_icon2\" src=\"../resources/images/userpage/film1.png\" alt=\"\">";
+        		$(".menu_icon_area2").html(html2);
         		reloadVideo();
         	});
         	$(".menu_post").on("click",function(){
@@ -122,10 +144,16 @@
         			"color":"#262626",
         			"border-top":"2px solid #262626"
         		});
+        		var html="";
+        		html+="<img class=\"menu_icon1\" src=\"../resources/images/userpage/grid1.png\" alt=\"\">";
+        		$(".menu_icon_area1").html(html);
         		$(".menu_post2").css({
         			"color":"#8e8e8e",
         			"border-top":"2px"
         		});
+        		var html2="";
+        		html2+="<img class=\"menu_icon2\" src=\"../resources/images/userpage/film2.png\" alt=\"\">";
+        		$(".menu_icon_area2").html(html2);
         		reloadList();
         	});
         }
@@ -137,7 +165,7 @@
 				dataType:"json",
 				data:params,
 				success : function(res){
-					$("#myModal").val("");
+					$("#myModal").html("");
 					imgList(res.video);
 					ProfileImg(res.intro);				
 					intro(res.intro);
@@ -191,9 +219,9 @@
         function profileCnt(data){
 			var html ="";
 			
-				html +="<li>게시물 <span class=\"profile-stat-count\">"+data.PCNT+"</span></li> ";
-				html +="<li>팔로우 <span class=\"profile-stat-count\">"+data.FWO+"</span></li>  ";
-			    html +="<li>팔로워 <span class=\"profile-stat-count\">"+data.FWER+"</span></li> ";
+				html +="<li>게시물 <span class=\"profile_pcnt\">"+data.PCNT+"</span></li> ";
+			    html +="<li>팔로워 <span class=\"profile_fwer\">"+data.FWER+"</span></li> ";
+			    html +="<li>팔로우 <span class=\"profile_fwo\">"+data.FWO+"</span></li>  ";
 			    
 	    		$("#profile-stat").html(html);
         }
@@ -245,7 +273,7 @@
 				dataType : "json",
 				data : params,
 				success : function(res){
-					$("#myModal").val("");
+					$("#myModal").html("");
 					ModalContent(res.modalM);
 					ModalImg(res.md);
 					modalFunc();
@@ -1038,22 +1066,29 @@
             </div>
             <nav>
             	<div class="nav_menu">
+            		<div class="story_container">
+            			<div class="story_area">
+            			
+            			</div>
+            		</div>
             		<hr class="nav_hr">	        		
 		        	<div class="nav_list">
 		        		<div class="nav_list_post">	        			
 		        			<div class="menu_post">
-		        				<i class="fas fa-camera-retro"></i>
+		        				<div class="menu_icon_area1">
+		        					<img class="menu_icon1" src="../resources/images/userpage/grid1.png" alt="">
+		        				</div>	        				
 		        				<span>게시물</span>
 		        			</div>
 		        			<div class="menu_post2">
-		        				<i class="fas fa-video"></i>
-		        				<span>동영상</span>
+		        				<div class="menu_icon_area2">
+		        					<img class="menu_icon2" src="../resources/images/userpage/film2.png" alt="">
+		        				</div>       				
+		        				<span>릴스</span>
 		        			</div>		        			
 		        		</div>
 		        	</div>
-		        	<div class="nav_line">
-		        		      		
-		        	</div>
+		        	<div class="nav_line"></div>
 	        	</div>
             </nav>         
         </header>
