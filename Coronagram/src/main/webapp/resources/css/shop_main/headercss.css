@@ -308,7 +308,7 @@ body a {
   }
 }
 /* Media Queries */
-@media only screen and (min-width: 1920px) {
+/*@media only screen and (min-width: 1920px) {
   body {
     font-size: 22px;
   }
@@ -350,7 +350,7 @@ body a {
     padding-top: 9em;
   }
 }
-@media only screen and (max-width: 1366px) {
+ @media only screen and (max-width: 1366px) {
   body {
     font-size: 16px;
   }
@@ -468,4 +468,4 @@ body a {
   #section-1 .content-slider .slider .banner .banner-inner-wrapper .line {
     margin: 1.7em auto;
   }
-}
+} */

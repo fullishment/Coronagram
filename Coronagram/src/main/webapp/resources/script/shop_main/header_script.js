@@ -4,14 +4,14 @@
     if (next.length) next.prop('checked', true);
     else $('.sec-1-input').first().prop('checked', true);
   }
-/*setInterval(function(){
+setInterval(function(){
         var timer = new Date();
         var h = 23-timer.getHours();
         var m = 59-timer.getMinutes();
         var s = 59-timer.getSeconds();
         document.getElementById('clock').innerHTML = h + ":" + m + ":" + s;
     },1000);
-  var bannerTimer = setInterval(bannerSwitcher, 5000);*/
+  var bannerTimer = setInterval(bannerSwitcher, 5000);
 
   $('nav .controls label').click(function() {
     clearInterval(bannerTimer);
