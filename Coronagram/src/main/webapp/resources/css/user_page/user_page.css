@@ -821,7 +821,7 @@ svg {
     opacity: 0.6;
 }
 
-.slider {
+.slider1 {
     max-width: 750px;
     margin: 0px auto 30px auto;
     position: relative;
@@ -845,7 +845,7 @@ svg {
     bottom: 70px;
     border-radius: 9px;
 }
-.slide1 {
+.slide {
     width: 100%;
     height: 100%;
     display: none;
@@ -855,10 +855,10 @@ svg {
     bottom: 3px;
 }
 
-.slide1:first-child {
+.slide:first-child {
     display: block;
     }
-.slide1 img {
+.slide img {
     width: 100%;
     width: 100%;
 	height: 100%;
