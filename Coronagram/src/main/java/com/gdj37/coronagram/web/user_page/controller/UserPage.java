@@ -28,7 +28,7 @@ public class UserPage {
 		mav.setViewName("user_page/user_page");
 		return mav;
 	}
-	@RequestMapping(value="/coronagram/storyAdd" ,method = RequestMethod.GET)
+	@RequestMapping(value="/coronagram/storyAdd" ,method = RequestMethod.POST)
 	public ModelAndView userpage(ModelAndView mav,@RequestParam HashMap<String,String> params) throws Throwable{
 		HashMap<String,String> last = iServiceUserPage.getLastSAcctNum(params);
 
@@ -254,12 +254,89 @@ public class UserPage {
 	@RequestMapping(value="/coronagram/mCmt",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
 	@ResponseBody
 	public String modalCmt (@RequestParam HashMap<String,String> params) throws Throwable {
-		ObjectMapper mapper = new ObjectMapper();
-		
+		ObjectMapper mapper = new ObjectMapper();		
 		Map<String,Object> modelMap = new HashMap<String,Object>();
+		
 		List<HashMap<String,String>> mCmt = iServiceUserPage.getModalCmt(params);
 
 		modelMap.put("mCmt", mCmt);
+		
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/coronagram/followEvent",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String followEvent (@RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();		
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		
+		List<HashMap<String,String>> eFollow = iServiceUserPage.getfollowEvent(params);
+
+		modelMap.put("eFollow", eFollow);
+		
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/coronagram/followerEvent",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String followerEvent (@RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();		
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		
+		List<HashMap<String,String>> eFollower = iServiceUserPage.getfollowerEvent(params);
+
+		modelMap.put("eFollower", eFollower);
+		
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/coronagram/FollowMAdd",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String FollowMAdd (@RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		String result ="success";
+		try {
+			int addMFollow = iServiceUserPage.FollowMAdd(params);
+			
+			if(addMFollow==0) {
+				result="failed";
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			result ="error";
+		}
+		modelMap.put("result", result);
+		
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/coronagram/searchUser" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String searchUser(ModelAndView mav,@RequestParam HashMap<String,String> params) throws Throwable {
+		System.out.println(params);
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+
+		List<HashMap<String,String>> search = iServiceUserPage.SearchUser(params);
+
+		modelMap.put("search", search);
+				
+		return mapper.writeValueAsString(modelMap);	
+	}
+	@RequestMapping(value="/coronagram/FollowMDel",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String FollowMDel (@RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		String result ="success";
+		try {
+			int delMFollow = iServiceUserPage.FollowMDel(params);
+			
+			if(delMFollow==0) {
+				result="failed";
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			result ="error";
+		}
+		modelMap.put("result", result);
 		
 		return mapper.writeValueAsString(modelMap);
 	}

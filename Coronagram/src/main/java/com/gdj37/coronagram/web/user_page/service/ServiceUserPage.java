@@ -128,4 +128,29 @@ public class ServiceUserPage implements IServiceUserPage{
 	public HashMap<String, String> getStoryMList(HashMap<String, String> params) throws Throwable {
 		return iDaoUserPage.getStoryMList(params);
 	}
+
+	@Override
+	public List<HashMap<String, String>> getfollowEvent(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.getfollowEvent(params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getfollowerEvent(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.getfollowerEvent(params);
+	}
+
+	@Override
+	public int FollowMAdd(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.FollowMAdd(params);
+	}
+
+	@Override
+	public int FollowMDel(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.FollowMDel(params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> SearchUser(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.SearchUser(params);
+	}
 }

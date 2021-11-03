@@ -325,8 +325,57 @@ video::-webkit-media-controls-fullscreen-button {
     width:935px;
     position: relative;
 }
-
-
+.search_area{
+	position: absolute;
+    top: 7px;
+    left: 45%;
+}
+.search_text{
+	height: 25px;
+	outline: none;
+    border: 1px solid #dbdbdb;
+    border-radius: 7px;
+    padding-left: 5px;
+}
+.user_area{
+	display:none;
+	position: absolute;
+    width: 400px;
+    height: 200px;   
+    max-height: 500px;
+    overflow: auto; 
+    background: white;
+    z-index: 100;
+    left: 39%;
+    top: 5%;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    border-radius: 10px;
+}
+.rec_user1:hover{
+	opacity:0.8;
+	cursor:pointer;
+}
+.user_result{
+	display:flex;
+	flex-direction :column;
+}
+.detail1{
+	display: inline-flex;
+    flex-direction: column;
+    font-size:11pt
+}
+.rec_id1{
+	font-weight: bold;
+}
+.search_icon{
+	color: #dbdbdb;
+    position: absolute;
+    right: 6px;
+    top: 2px;
+}
+.fa-times-circle:hover{
+	opacity:.4;
+}
 @media screen and (max-width: 1100px) {
     #main_container {
         padding-top: 220px;

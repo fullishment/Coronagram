@@ -105,14 +105,17 @@ public class ServiceCoronagram implements IServiceCoronagram{
 
 	@Override
 	public HashMap<String, String> getCrngDtl(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoCoronagrma.getCrngDtl(params);
 	}
 
 	@Override
 	public int delCmt(HashMap<String, String> params) throws Throwable {
-		// TODO Auto-generated method stub
 		return iDaoCoronagrma.delCmt(params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getSearchUser(HashMap<String, String> params) throws Throwable {
+		return iDaoCoronagrma.getSearchUser(params);
 	}
 
 }

@@ -51,4 +51,14 @@ public interface IDaoUserPage {
 
 	public HashMap<String, String> getStoryMList(HashMap<String, String> params)throws Throwable;
 
+	public List<HashMap<String, String>> getfollowEvent(HashMap<String, String> params)throws Throwable;
+
+	public List<HashMap<String, String>> getfollowerEvent(HashMap<String, String> params)throws Throwable;
+
+	public int FollowMAdd(HashMap<String, String> params)throws Throwable;
+
+	public int FollowMDel(HashMap<String, String> params)throws Throwable;
+
+	public List<HashMap<String, String>> SearchUser(HashMap<String, String> params)throws Throwable;
+
 }

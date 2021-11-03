@@ -191,6 +191,20 @@ public class coronagram {
 		
 		return mapper.writeValueAsString(modelMap);	
 	}
+	@RequestMapping(value="/searchUser" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String searchUser(ModelAndView mav,@RequestParam HashMap<String,String> params) throws Throwable {
+		System.out.println(params);
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+
+		List<HashMap<String,String>> search = iServiceCoronagram.getSearchUser(params);
+
+		modelMap.put("search", search);
+		
+		
+		return mapper.writeValueAsString(modelMap);	
+	}
 	@RequestMapping(value ="/coronagram/crngAdd")
 	public ModelAndView crng_add(@RequestParam HashMap<String,String> params, ModelAndView mav)throws Throwable {
 		HashMap<String,String> lastAcct = iServiceCoronagram.getLastAcctNum(params);

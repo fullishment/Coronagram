@@ -57,6 +57,14 @@
 		WHERE CC.RNUM BETWEEN 1 AND 2
 		AND CC.DEL = 1
 	</select>
+	<select id="getSearchUser" parameterType="hashmap" resultType="hashmap">
+		SELECT M_NO, NICK_NM, IMG_ADR, INTRO_CON 
+			FROM M 
+				WHERE DEL=1	 
+				<if test="searchText!=null and searchText!=''">
+					AND NICK_NM like lower('%'||#{searchText}||'%')
+				</if>
+	</select>
 	<insert id="aHeart" parameterType="hashmap">
 		INSERT INTO LK(USER_NO,WRITING_NO) 
 			VALUES (#{m_no}, #{writingNo})

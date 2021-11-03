@@ -92,12 +92,12 @@
 	<select id="getModalCmt" parameterType="hashmap" resultType="hashmap">
 		SELECT CC.CMT_NO, CC.CMT_WRITER_NO,CC.WRITING_NO,CC.CMT_CON,M.M_NO, M.M_NM, M.NICK_NM,M.IMG_ADR,
             TO_CHAR(CC.DT, 'YYYY/MM/DD HH24:MI:SS') AS DT,
-            ROW_NUMBER() OVER(ORDER BY cc.WRITING_NO DESC) AS RNUM
+            ROW_NUMBER() OVER(ORDER BY CC.CMT_NO DESC) AS RNUM
             FROM CRNG_CMT CC
             INNER JOIN M M
                     ON CC.CMT_WRITER_NO = M.M_NO
                        WHERE CC.WRITING_NO= #{writingNo}
-            ORDER BY RNUM DESC
+            ORDER BY RNUM
 	</select>
 	<select id="getModalM" parameterType="hashmap" resultType="hashmap">
 	    SELECT C.WRITING_NO, C.WRITER_NO, C.CON,M.M_NO ,M.M_NM, M.IMG_ADR, M.NICK_NM
@@ -108,10 +108,50 @@
             and M.NICK_NM=#{nickNm}
             and C.WRITING_NO = #{writingNo}
 	</select>
+	<select id="getfollowEvent" parameterType="hashmap" resultType="hashmap">
+		SELECT M.M_NO, M.NICK_NM, M.IMG_ADR,NVL(FT.CNTF,0) AS CNTF
+	    FROM FOLLOW F
+	    LEFT OUTER JOIN M M
+	            ON F.RQ_USER = M.M_NO
+	    LEFT OUTER JOIN (SELECT RQ_USER,RP_USER, NVL(COUNT(*),0) AS CNTF 
+	                                FROM FOLLOW
+	                                WHERE RQ_USER = #{m_no} 
+	                                AND RQ_USER != RP_USER
+	                                GROUP BY RQ_USER,RP_USER
+	                ) FT
+	                ON FT.RP_USER = M.M_NO
+	    WHERE F.RP_USER = (SELECT M_NO FROM M WHERE NICK_NM=#{nickNm})
+	    ORDER BY DECODE(M.M_NO,#{m_no},1),
+	    M.M_NO
+	</select>
+	<select id="getfollowerEvent" parameterType="hashmap" resultType="hashmap">
+		SELECT M.M_NO, M.NICK_NM, M.IMG_ADR,NVL(FT.CNTF,0) AS CNTF
+	    FROM FOLLOW F
+	    LEFT OUTER JOIN M M
+	            ON F.RP_USER = M.M_NO
+	    LEFT OUTER JOIN (SELECT RQ_USER,RP_USER, NVL(COUNT(*),0) AS CNTF 
+	                                FROM FOLLOW
+	                                WHERE RQ_USER = #{m_no} 
+	                                AND RQ_USER != RP_USER
+	                                GROUP BY RQ_USER,RP_USER
+	                ) FT
+	                ON FT.RP_USER = M.M_NO
+	    WHERE F.RQ_USER = (SELECT M_NO FROM M WHERE NICK_NM=#{nickNm})
+	    ORDER BY DECODE(M.M_NO,#{m_no},1),
+	    M.M_NO
+	</select>
 	<select id="getLkCnt" parameterType="hashmap" resultType="Integer">
 		SELECT NVL(COUNT(*),0) AS LKCNT 
 			FROM LK 
 			WHERE WRITING_NO = #{writingNo}
+	</select>
+	<select id="SearchUser" parameterType="hashmap" resultType="hashmap">
+		SELECT M_NO, NICK_NM, IMG_ADR, INTRO_CON 
+			FROM M 
+				WHERE DEL=1	 
+				<if test="searchText!=null and searchText!=''">
+					AND NICK_NM like lower('%'||#{searchText}||'%')
+				</if>
 	</select>
 	<select id="getIntroM" parameterType="hashmap" resultType="hashmap">
         SELECT M.M_NO, M.IMG_ADR, M.M_NM, M.NICK_NM,M.INTRO_CON,
@@ -180,6 +220,13 @@
 		INSERT INTO LK(USER_NO,WRITING_NO) 
 			VALUES (#{m_no}, #{writingNo})
 	</insert>    
+	<insert id="FollowMAdd" parameterType="hashmap">
+		INSERT INTO FOLLOW(RQ_USER,RP_USER) 
+			VALUES( #{m_no}, #{m_no2} )
+	</insert>
+	<delete id="FollowMDel" parameterType="hashmap">
+		DELETE FROM FOLLOW WHERE RQ_USER = #{m_no} AND RP_USER = #{m_no2}
+	</delete>
     <insert id="addFollow" parameterType="hashmap">
 		INSERT INTO FOLLOW(RQ_USER,RP_USER) 
 			SELECT #{m_no}, M_NO FROM M WHERE NICK_NM = #{nickNm}

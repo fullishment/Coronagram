@@ -21,8 +21,9 @@
 	    $(document).ready(function(){
 	    	reloadList();    	
 	    	storyListAjax();
+	    	searchUser();
 	    	var modal = document.getElementById('myModal');
-	    	
+	    	var lkmodal = document.getElementById('lk_modal');
 	        $(document).on("click",".gallery-item",function(){
 	        	$("#myModal").html("");
 	        	$("#writingNo").val($(this).attr("wtno"));
@@ -30,8 +31,7 @@
 	        	modal.style.display="block";
 	        	$('body').css("overflow","hidden");
 	        	mdDraw();          	
-	        });
-	        	        
+	        });        	        
 	        window.onclick = function(event) {
 	            if (event.target == modal) {
 	            	if(document.getElementById("player")){
@@ -40,6 +40,10 @@
 	            	$("#myModal").html("");
 	            	$('body').css("overflow","auto");
 	                modal.style.display = "none";                    
+	            }else if(event.target == lkmodal){
+	            	$('body').css("overflow","auto");
+	            	lkmodal.style.display = "none";   
+	            	reloadList();
 	            }
 	        }  
 		    var _scrollX = $('.scroll_inner').scrollLeft();
@@ -96,18 +100,35 @@
 					followArea();
 					editProfile();
 					addFollow();
-		        	delFollow();	
+		        	delFollow();			        	
 		        	mInfo(res.intro);
 		        	mInfoClick();
 		        	videoListBtn();
 		        	storyAjax();
 		        	modalFunc();
+		        	followModal();
+		        	followerModal()
 				},
 				error : function(request,status,error){
 					console.log(error);
 				}
 			});
 		}
+        function reloadPart2(){
+        	var params=$("#addrForm").serialize();		
+			$.ajax({ 
+				url:"userpages",
+				type:"post",
+				dataType:"json",
+				data:params,
+				success : function(res){
+					profileCnt(res.intro);			
+				},
+				error : function(request,status,error){
+					console.log(error);
+				}
+			});
+        }
         function reloadImgList(){
 			var params=$("#addrForm").serialize();		
 			$.ajax({ 
@@ -238,7 +259,7 @@
 						html+= "			</video>																												";
 					}
 					else{
-						html+=" 			<img src=\"../resources/upload/"+data.FILE_ADDR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" />";
+						html+=" 			<img src=\"../resources/upload/"+data.FILE_ADDR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" />";
 					}								
 					html+="			</div>																															";
 					html+="       	<div class=\"title_area\">																										";
@@ -256,7 +277,231 @@
 			 }
 			 $(".scroll_inner").prepend(html);
         }
-        
+        function followModal(){
+        	$(".follow_event").on("click",function(){
+	    		$('.lk_modal').css("display","block");
+	    		$('body').css("overflow","hidden");
+	    		followEvent();
+	    		var modal = document.getElementById('lk_modal');  		            
+	            window.onclick = function(event) {
+	                if (event.target == modal) {
+	                    modal.style.display = "none";
+	                    $('body').css("overflow","auto");
+	                }
+	            }
+	            $(".lk_modal_close").on("click",function(){
+	            	modal.style.display="none";
+	            	$('body').css("overflow","auto");
+	            });	            
+	    	});
+	    }
+		function followEvent(){   		
+   			var params=$("#addrForm").serialize();		
+			$.ajax({ 
+				url:"followEvent",
+				type:"post",
+				dataType:"json",
+				data:params,
+				success : function(res){						
+					FollowMList(res.eFollow);
+					FollowMAdd1();
+					FollowMDel1();
+				},
+				error : function(request,status,error){
+					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+	   	}
+		function followerModal(){
+			$('.follower_event').on("click",function(){	
+	    		$('.lk_modal').css("display","block");
+	    		$('body').css("overflow","hidden");
+	    		followerEvent();
+	    		var modal = document.getElementById('lk_modal');  		            
+	            window.onclick = function(event) {
+	                if (event.target == modal) {
+	                    modal.style.display = "none";
+	                    $('body').css("overflow","auto");
+	                }
+	            }
+	            $(".lk_modal_close").on("click",function(){
+	            	modal.style.display="none";
+	            	$('body').css("overflow","auto");
+	            });	            
+	    	});
+	    }
+		function followerEvent(){
+			var params=$("#addrForm").serialize();		
+			$.ajax({ 
+				url:"followerEvent",
+				type:"post",
+				dataType:"json",
+				data:params,
+				success : function(res){						
+					FollowerMList(res.eFollower);
+					FollowMAdd2();
+					FollowMDel2();
+				},
+				error : function(request,status,error){
+					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+	   	}
+		function FollowMAdd1(){
+	    	$(".fospan2").on("click",function(){
+	    		$("#m_no2").val($(this).parent().parent().attr("nfo"));
+	    		var params = $("#AddDelFoForm").serialize();
+	    		$.ajax({
+	    			url : "FollowMAdd",
+	    			type : "post",
+	    			dataType : "json",
+	    			data : params,
+	    			context: this,
+	    			success : function(res){
+	    				if(res.result=="success"){									
+	    					followEvent();		
+	    					reloadPart2();
+	    				}else{
+	    					alert("add실패");
+	    				}
+	    			},
+	    			error : function(request, status, error){
+	    				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	    			}
+	    		});
+	    	});
+	    }
+	    function FollowMDel1(){
+	    	$(".fispan2").on("click",function(){
+	    		$("#m_no2").val($(this).parent().parent().attr("nfo"));
+	    		var params = $("#AddDelFoForm").serialize();
+	    		$.ajax({
+	    			url : "FollowMDel",
+	    			type : "post",
+	    			dataType : "json",
+	    			data : params,
+	    			context: this,
+	    			success : function(res){
+	    				if(res.result=="success"){
+	    					followEvent();
+	    					reloadPart2();
+	    				}else{
+	    					alert("add실패");
+	    				}
+	    			},
+	    			error : function(request, status, error){
+	    				console.log(error);
+	    			}
+	    		});
+	    	});
+	    }	
+	    function FollowMAdd2(){
+	    	$(".fospan2").on("click",function(){
+	    		$("#m_no2").val($(this).parent().parent().attr("nfo"));
+	    		var params = $("#AddDelFoForm").serialize();
+	    		$.ajax({
+	    			url : "FollowMAdd",
+	    			type : "post",
+	    			dataType : "json",
+	    			data : params,
+	    			context: this,
+	    			success : function(res){
+	    				if(res.result=="success"){									
+	    					followerEvent();
+	    					reloadPart2();
+	    				}else{
+	    					alert("add실패");
+	    				}
+	    			},
+	    			error : function(request, status, error){
+	    				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	    			}
+	    		});
+	    	});
+	    }
+	    function FollowMDel2(){
+	    	$(".fispan2").on("click",function(){
+	    		$("#m_no2").val($(this).parent().parent().attr("nfo"));
+	    		var params = $("#AddDelFoForm").serialize();
+	    		$.ajax({
+	    			url : "FollowMDel",
+	    			type : "post",
+	    			dataType : "json",
+	    			data : params,
+	    			context: this,
+	    			success : function(res){
+	    				if(res.result=="success"){
+	    					followerEvent();
+	    					reloadPart2();
+	    				}else{
+	    					alert("add실패");
+	    				}
+	    			},
+	    			error : function(request, status, error){
+	    				console.log(error);
+	    			}
+	    		});
+	    	});
+	    }	
+		function FollowMList(list){
+	    	var html = "";
+	    	for(data of list){
+	    		html+="<div class=\"rec_user\" nfo=\""+data.M_NO+"\">																								 ";
+				html+="		<div class=\"profile_thumb\">																											 ";
+				html+=" 		<img src=\"../resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 	 "; 
+				html+="		</div>																																	 ";
+				html+="		<div class=\"detail\">																													 ";
+				html+="			<a href=\"coronagram/"+data.NICK_NM+"\" class=\"modal_nick\">"+data.NICK_NM+"</a>																 ";			
+				html+="		</div>																											 						 ";
+				if(data.M_NO == ${sMNo}){
+					
+				}
+				else{
+					if(data.CNTF == 1){
+						html+="			<div class=\"rec_follow\">																			 	";
+						html+="				<span class=\"modal_follow1 fispan2\">팔로잉</span>												 	";
+						html+="			</div>																								 	";
+					}
+					else if(data.CNTF == 0){
+						html+="			<div class=\"rec_follow\">																			 	";
+						html+="				<span class=\"modal_follow2 fospan2\">팔로우</span>												 	";
+						html+="			</div>																								 	";
+					}							
+					html+="</div>																												";
+				}			
+	    	}				
+			$(".lk_modal_main").html(html);
+	    }
+		function FollowerMList(list){
+	    	var html = "";
+	    	for(data of list){
+	    		html+="<div class=\"rec_user\" nfo=\""+data.M_NO+"\">																								 ";
+				html+="		<div class=\"profile_thumb\">																											 ";
+				html+=" 		<img src=\"../resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 	 "; 
+				html+="		</div>																											 						 ";
+				html+="		<div class=\"detail\">																													 ";
+				html+="			<a href=\"coronagram/"+data.NICK_NM+"\" class=\"modal_nick\">"+data.NICK_NM+"</a>																 ";			
+				html+="		</div>																																	 ";
+				if(data.M_NO == ${sMNo}){
+					
+				}
+				else{
+					if(data.CNTF == 1){
+						html+="			<div class=\"rec_follow\">																			 	";
+						html+="				<span class=\"modal_follow1 fispan2\">팔로잉</span>												 	";
+						html+="			</div>																								 	";
+					}
+					else if(data.CNTF == 0){
+						html+="			<div class=\"rec_follow\">																			 	";
+						html+="				<span class=\"modal_follow2 fospan2\">팔로우</span>												 	";
+						html+="			</div>																								 	";
+					}							
+					html+="</div>																												";
+				}								
+				html+="</div>																												 	";
+	    	}				
+			$(".lk_modal_main").html(html);
+	    }
         function reloadFollowArea(){
         	var params=$("#addrForm").serialize();		
 			$.ajax({ 
@@ -386,8 +631,8 @@
 			var html ="";
 			
 				html +="<li>게시물 <span class=\"profile_pcnt\">"+data.PCNT+"</span></li> ";
-			    html +="<li>팔로워 <span class=\"profile_fwer\">"+data.FWER+"</span></li> ";
-			    html +="<li>팔로우 <span class=\"profile_fwo\">"+data.FWO+"</span></li>   ";
+			    html +="<li class=\"follower_event\">팔로워 <span class=\"profile_fwer\">"+data.FWER+"</span></li> ";
+			    html +="<li class=\"follow_event\">팔로우 <span class=\"profile_fwo\">"+data.FWO+"</span></li>   ";
 			    
 	    		$("#profile-stat").html(html);
         }
@@ -606,8 +851,7 @@
 	    		if(!$(e.target).hasClass('fa-smile')){ 
 	    			$(this).children().children().children('.emoji_area').css("display","none");    			
 	    		}
-	    	});  	
-	    	
+	    	});  		    	
 	    }
 	    function emojiArea(){
 	    	 var html="";
@@ -615,13 +859,13 @@
 	    	 html+="					<div class=\"emoji_container\" >       																			 			   ";
 		     html+="						<div class=\"emoji_title\"><span>웃는 얼굴 및 사람</span></div>																	";
 		     html+="						<div class=\"first emoji\"></div>																							";
-		     html+="						<div class=\"emoji_title\"><span>웃는 얼굴 및 사람</span></div>																	";
+		     html+="						<div class=\"emoji_title\"><span>하트 및 기호</span></div>																	";
 		     html+="						<div class=\"second emoji\"></div>																						   	";
-		     html+="						<div class=\"emoji_title\"><span>웃는 얼굴 및 사람</span></div>																	";
+		     html+="						<div class=\"emoji_title\"><span>사람 손 모양</span></div>																	";
 		     html+="						<div class=\"third emoji\"></div>																						   	";
-		     html+="						<div class=\"emoji_title\"><span>웃는 얼굴 및 사람</span></div>																	";
+		     html+="						<div class=\"emoji_title\"><span>동물과 자연</span></div>																	";
 		     html+="						<div class=\"fourth emoji\"></div>																						   	";
-		     html+="						<div class=\"emoji_title\"><span>웃는 얼굴 및 사람</span></div>																	";
+		     html+="						<div class=\"emoji_title\"><span>음식 및 음료</span></div>																	";
 		     html+="						<div class=\"fifth emoji\"></div>																						   	";
 		     html+="			   		</div>																														   ";
 		     
@@ -678,7 +922,7 @@
 	    		var newText = textVal + $(this).attr("emo");
 	    		var emoText = $(this).parent().parent().parent().next().next().val(newText);
 	    	});
-	    }
+	    }	    	   	
 	    function ModalCmt(){
 	    	var params = $("#modalForm").serialize();
 			$.ajax({
@@ -1083,6 +1327,66 @@
 	  			  $("#editForm").submit(); 
 	  		}); 
 	    }
+	    function searchUser(){	    	
+	    	$("#searchText").on("change keyup paste",function(){
+	    		if($("#searchText").val() == '' || $("#searchText").val() == null){
+	    			var html="";
+		    		html+="<i class=\"fas fa-search\"></i>";
+		    		$(".search_icon").html(html);	
+	    			$(".user_area").css("display","none");	    			
+		    	}else{
+		    		$(".user_area").css("display","block");
+		    		var params = $("#searchForm").serialize();		    		
+		    		$.ajax({
+		    			url: "searchUser",
+		    			type : "post",
+		    			dataType:"json",
+		    			data: params,
+		    			success: function(res) {
+		    				searchResult(res.search);
+		    				searchLocate();
+		    			},
+		    			error:function(request, status, error) {
+		    				console.log(error);
+		    			},complete : function() {
+		    				searchExit();    
+		    		    }
+		    		});
+		    	}		    		
+	    	});		    	
+	    }
+	    function searchLocate(){
+	    	$("rec_user1").on("click",function(){
+	    		var user = $(this).attr("nfo");
+	    		location.href="coronagram/"+user+"";
+	    	});
+	    }
+	    function searchResult(list){
+	    	var html="";
+	    	
+	    	for(data of list){
+	    		html+="<div class=\"rec_user1\" nfo=\""+data.NICK_NM+"\">																		 				";
+				html+="		<div class=\"profile_thumb\">																					 					";
+				html+=" 		<img src=\"../resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 	"; 
+				html+="		</div>																											 					";
+				html+="		<div class=\"detail1\">																							 					";
+				html+="			<div class=\"rec_id1\">"+data.NICK_NM+"</div>																 					";
+				if(data.INTRO_CON != null){
+					html+="			<span class=\"rec_con\">"+data.INTRO_CON+"</span>														 					";
+				}					
+				html+="		</div>																											 					";
+				html+="</div>																												 					";
+	    	}
+	    	$(".user_result").html(html);
+	    	var html2="";
+	    		html2+="<i class=\"fas fa-times-circle\"></i>";
+	    	$(".search_icon").html(html2);		    	
+	    }
+	    function searchExit(){
+	    	$(".fa-times-circle").on("click",function(){
+	    		$(".user_area").css("display","none");
+	    	});
+	    }
 	    function progressbar(){
 	    	$(".slider").slick({
 	    		  infinite: true,
@@ -1252,11 +1556,22 @@
 		                    </li>
 		                </ul>
                 	</div>
-	                <div class="cm_user_name">
+	            <div class="cm_user_name">
 					<c:if test="${!empty sMNo}">
 						${sMNm}님 어서오세요.
 					</c:if>
 				</div>
+				<form action="#" id="searchForm" method="post">
+					<div class="search_area">
+						<div class="search_icon">
+							<i class="fas fa-search"></i>
+						</div>						
+						<input type="text" name="searchText" id="searchText" class="search_text">						
+					</div>									
+				</form>	
+				<div class="user_area">
+					<div class="user_result"></div>
+				</div>	
             </div>
 	        <div class="cm_menu" id="cm_menu">
 	            <a href="#" class="cm_mLogo">Coronagram</a>
@@ -1339,7 +1654,18 @@
 	        	</div>
             </nav>         
         </header>
-     	<main>        
+     	<main>    
+     		<div id="lk_modal" class="lk_modal">																											
+				<div class="lk_modal_body">
+					<div class="lk_modal_header">
+						좋아요
+					<i class="fas fa-times lk_modal_close"></i>
+					</div>
+					<div class="lk_modal_main">
+						
+					</div>
+				</div>																								
+	 		</div>    
 	        <div id="myModal" class="modal">
 	        	
 	        </div>        
@@ -1379,6 +1705,10 @@
 		   <form action="crngVideoAdd" id="addCrngVideoForm" method="post">
     	   	  <input type="hidden" name="m_no" value="${sMNo}"/>
 		   </form>
+		   <form action="#" id="AddDelFoForm" method="post">
+          	  <input type="hidden" name="m_no" value="${sMNo}"/>
+          	  <input type="hidden" name="m_no2" id="m_no2"/> 
+	      </form>
 	 	</main>	   
     	<script src="../resources/script/menu_bar/menu_bar.js"></script>
     	<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js'></script>

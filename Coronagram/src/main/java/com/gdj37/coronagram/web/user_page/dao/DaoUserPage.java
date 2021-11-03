@@ -127,4 +127,29 @@ public class DaoUserPage implements IDaoUserPage {
 	public HashMap<String, String> getStoryMList(HashMap<String, String> params) throws Throwable {
 		return sqlSession.selectOne("userPage.getStoryMList",params);
 	}
+
+	@Override
+	public List<HashMap<String, String>> getfollowEvent(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectList("userPage.getfollowEvent",params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getfollowerEvent(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectList("userPage.getfollowerEvent",params);
+	}
+
+	@Override
+	public int FollowMAdd(HashMap<String, String> params) throws Throwable {
+		return sqlSession.insert("userPage.FollowMAdd",params);
+	}
+
+	@Override
+	public int FollowMDel(HashMap<String, String> params) throws Throwable {
+		return sqlSession.delete("userPage.FollowMDel",params);
+	}
+
+	@Override
+	public List<HashMap<String, String>> SearchUser(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectList("userPage.SearchUser",params);
+	}
 }

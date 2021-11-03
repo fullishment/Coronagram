@@ -17,12 +17,18 @@
 	    <script>
 		    $(document).ready(function(){
 		    	reloadList();
+		    	searchUser();
 		    	$(".rec_area").on("click",".fospan",function(){
 		    		followAdd($(this));
 		    	});
 		    	$(".rec_area").on("click",".fispan",function(){
 		    		followDel($(this));
 		    	});
+		    	$("html").on("click",function(e){
+		    		if(!$(e.target).hasClass('user_area')){ 
+		    			$(".user_area").css("display","none");
+		    		}
+		    	});		    	
 		    });
 	    	$(window).load(function(){
 	    		
@@ -111,8 +117,6 @@
 						addPostCmt();
 						followList(res.listFo);
 						notFollowList(res.notFo);
-						//followAdd();			
-						//followDel();
 						modalMover();
 						modalMover2();
 						slide();
@@ -479,6 +483,67 @@
 				     
 				     	$(".modal_info_area2").html(html);
 		    }
+		    function searchUser(){	    	
+		    	$("#searchText").on("change keyup paste",function(){
+		    		if($("#searchText").val() == '' || $("#searchText").val() == null){
+		    			var html="";
+			    		html+="<i class=\"fas fa-search\"></i>";
+			    		$(".search_icon").html(html);	
+		    			$(".user_area").css("display","none");
+			    	}else{
+			    		$(".user_area").css("display","block");
+			    		var params = $("#searchForm").serialize();		    		
+			    		$.ajax({
+			    			url: "searchUser",
+			    			type : "post",
+			    			dataType:"json",
+			    			data: params,
+			    			success: function(res) {
+			    				searchResult(res.search);	
+			    				
+			    			},
+			    			error:function(request, status, error) {
+			    				console.log(error);
+			    			},complete : function() {
+			    				searchExit();  
+			    				searchLocate();
+			    		    }
+			    		});
+			    	}		    		
+		    	});		    	
+		    }
+		    function searchLocate(){
+		    	$("rec_user1").on("click",function(){
+		    		var user = $(this).attr("nfo");
+		    		location.href="coronagram/"+user+"";
+		    	});
+		    }
+		    function searchResult(list){
+		    	var html="";
+		    	
+		    	for(data of list){
+		    		html+="<div class=\"rec_user1\" nfo=\""+data.NICK_NM+"\">																		 				";
+					html+="		<div class=\"profile_thumb\">																					 					";
+					html+=" 		<img src=\"resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	"; 
+					html+="		</div>																											 					";
+					html+="		<div class=\"detail1\">																							 					";
+					html+="			<div class=\"rec_id1\">"+data.NICK_NM+"</div>																 					";
+					if(data.INTRO_CON != null){
+						html+="			<span class=\"rec_con\">"+data.INTRO_CON+"</span>														 					";
+					}					
+					html+="		</div>																											 					";
+					html+="</div>																												 					";
+		    	}
+		    	$(".user_result").html(html);
+		    	var html2="";
+		    		html2+="<i class=\"fas fa-times-circle\"></i>";
+		    	$(".search_icon").html(html2);		    	
+		    }
+		    function searchExit(){
+		    	$(".fa-times-circle").on("click",function(){
+		    		$(".user_area").css("display","none");
+		    	});
+		    }
 		    function crngDtl(){
 		    	$(".sprite_bubble_icon").on("click",function(){
 		    		$("#writingNo5").val($(this).parent().parent().parent().parent().attr("wtno"));
@@ -528,8 +593,7 @@
 		            });	            
 		    	});
 		    }
-		    function LkModalAjax(){
-		    	
+		    function LkModalAjax(){		    	
 		    	var params = $("#modalLkForm").serialize();
 	    		$.ajax({
 	    			url : "lkModalList",
@@ -561,20 +625,18 @@
 					}
 					else{
 						if(data.CNTF == 1){
-							html+="			<div class=\"rec_follow\">																					 ";
-							html+="				<span class=\"modal_follow1 fispan2\">팔로잉</span>														 ";
-							html+="			</div>																										 ";
+							html+="			<div class=\"rec_follow\">																			 ";
+							html+="				<span class=\"modal_follow1 fispan2\">팔로잉</span>												 ";
+							html+="			</div>																								 ";
 						}
 						else if(data.CNTF == 0){
-							html+="			<div class=\"rec_follow\">																					 ";
-							html+="				<span class=\"modal_follow2 fospan2\">팔로우</span>														 ";
-							html+="			</div>																										 ";
+							html+="			<div class=\"rec_follow\">																			 ";
+							html+="				<span class=\"modal_follow2 fospan2\">팔로우</span>												 ";
+							html+="			</div>																								 ";
 						}
 					}				
 					html+="</div>																												 ";
-		    	}
-		    	
-				
+		    	}				
 				$(".lk_modal_main").html(html);
 		    }
 		    
@@ -626,6 +688,7 @@
 		    		});
 		    	});
 		    }	
+		    
 		    function modalInfoImg(list){
 		    	var html = "";
 		    	for(data of list){
@@ -938,8 +1001,7 @@
 		    function LkUsers(list){
 		    	html="";
 		    	for(data of list){
-		    		html+="<div class=\"lk_modal_content\">";
-		    		html+="</div>";
+		    		html+="<div class=\"lk_modal_content\"></div>";
 		    	}
 		    	$(".lk_modal").html(html);
 		    }
@@ -1004,6 +1066,17 @@
                 </div>
                 <div class="cm_user_name">
 				</div>
+				<form action="#" id="searchForm" method="post">
+					<div class="search_area">
+						<div class="search_icon">
+							<i class="fas fa-search"></i>
+						</div>						
+						<input type="text" name="searchText" id="searchText" class="search_text">						
+					</div>									
+				</form>	
+				<div class="user_area">
+					<div class="user_result"></div>
+				</div>				
             </div>
        		<div class="cm_menu" id="cm_menu">
             <a href="#" class="cm_mLogo">Coronagram</a>

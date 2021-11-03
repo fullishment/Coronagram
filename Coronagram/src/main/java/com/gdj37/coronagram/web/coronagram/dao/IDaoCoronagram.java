@@ -40,4 +40,6 @@ public interface IDaoCoronagram {
 	public HashMap<String, String> getCrngDtl(HashMap<String, String> params)throws Throwable;
 
 	public int delCmt(HashMap<String, String> params)throws Throwable;
+
+	public List<HashMap<String, String>> getSearchUser(HashMap<String, String> params)throws Throwable;
 }
