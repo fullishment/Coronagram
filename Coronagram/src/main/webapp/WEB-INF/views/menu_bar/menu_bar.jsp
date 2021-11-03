@@ -16,7 +16,7 @@
 <body>
     <header>
 	    <div class="cm_menuBar" id="cm_menuBar">
-	      <div class="cm_menu__toggler"><span></span></div>
+	      	<div class="cm_menu__toggler"><span></span></div>
 	      	<a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
 	      	<a href="#" class="cm_home" id="cm_home">Home</a>
 	      	<a href="#" class="cm_msg" id="cm_shop">Shop</a>
