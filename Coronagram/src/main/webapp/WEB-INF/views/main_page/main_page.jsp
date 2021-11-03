@@ -96,7 +96,7 @@
         <ul class="cm_mcon" id="cm_mcon">
           <a href="coronagram/${sMNick}">개인 페이지</a> <br>
           <a href="calendar">출석 체크</a> <br>
-          <a href="#">Zoom</a>
+          <a href="https://coronagram-zoom.herokuapp.com/">Zoom</a>
         </ul>
       </a>
       <a href="#" class="cm_mTitle" id="cm_mTitle">
@@ -165,8 +165,8 @@
               <h2 class="txt-tt">My Page</h2>
               <p class="txt-desc" style="font-weight: 500;">내 정보를 수정하고 싶다면 여기</p>
               <div class="txt-btn">
-                <a href="#" class="txt-btn-1">개인 페이지</a>
-                <a href="#" class="txt-btn-2">출석 체크 바로가기</a>
+                <a href="coronagram/${sMNick}" class="txt-btn-1">개인 페이지</a>
+                <a href="calendar" class="txt-btn-2">출석 체크 바로가기</a>
               </div>
             </div>
             <picture class="img-box">

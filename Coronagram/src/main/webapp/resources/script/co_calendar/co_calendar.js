@@ -6,23 +6,16 @@ document.addEventListener('DOMContentLoaded', function() {
 	var day = today.getDate();
 	var fulldate = year+ '-' + month + '-' + day;
 	
-	
 	calendar = new FullCalendar.Calendar(calendarEl, {
 		height : '700px',
 		expandRows : true,
 		slotMinTime : '08:00',
 		slotMaxTime : '24:00',
 		headerToolbar : {
-			left : 'ff',
+			left : '',
 			center : 'title',
 			right : 'checkAtt prev,today,next'
 		},
-		defaultView: 'month',
-	      viewRender: function(view) {
-	          var ff = view.title;
-	          $("#externalTitle").html(title);
-	      }
-,
 		customButtons : {
 			checkAtt : {
 				text : '출석체크',
@@ -75,10 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					});
 				}
 			},
-			checkPt : {
-				text : "포인트 :", 
-				id : 'checkPt'
-			}
+
 		},
 
 		eventSources : [ {
@@ -125,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		selectable : true,
 		nowIndicator : true,
 		dayMaxEvents : true,
-		locale : 'en',
+		locale : 'ko',
 		eventAdd : function(obj) {
 			console.log(obj);
 		},

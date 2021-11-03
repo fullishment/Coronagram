@@ -37,9 +37,9 @@ FROM M
 
 <select id="getJoinData" resultType = "hashmap">
 SELECT M1.CNT, AVGCNT, M1.DT, ROW_NUMBER() OVER(ORDER BY M1.DT DESC) PERIOD
-FROM (select count(*) AS CNT, to_char(m_dt,'yyyy-mm') AS DT
-        from m
-        group by to_char(m_dt,'yyyy-mm') )M1
+FROM (SELECT COUNT(*) AS CNT, TO_CHAR(M_DT,'YYYY-MM') AS DT
+        FROM M
+        GROUP BY TO_CHAR(M_DT,'YYYY-MM') )M1
 INNER JOIN (SELECT ROUND(CM.CNT/LM.LASTDAY,2) AVGCNT, CM.M_DT
             FROM (SELECT COUNT(*) CNT, TO_CHAR(M_DT,'YYYY-MM')M_DT
                   FROM M

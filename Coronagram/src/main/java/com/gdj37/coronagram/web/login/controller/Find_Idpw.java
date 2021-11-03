@@ -39,8 +39,6 @@ public class Find_Idpw {
 		List <HashMap<String, String>> id = iServiceFind_Idpw.findId(params);
 		System.out.println(id);
 		
-		PrintWriter out = response.getWriter();
-
 		String result = "";
 		
 		if( id.size() > 0 ) {

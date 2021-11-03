@@ -173,7 +173,8 @@ $(function () {
 		 	ykeys: ["dc", "dec", "cc"],
 		 	labels: ["확진자", "사망자", "완치자"],
 		 	pointSize: 0,
-		 	hideHover: "auto"
+		 	hideHover: "auto",
+//		 	parseTime : false
 		 });
 		Morris.Donut({
 			element: "donutChart",
