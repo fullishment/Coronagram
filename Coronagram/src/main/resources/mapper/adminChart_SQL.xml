@@ -36,16 +36,20 @@ FROM M
 </select>
 
 <select id="getJoinData" resultType = "hashmap">
-SELECT M1.CNT, ROUND(CCM.A,2) AS AVGCNT, M1.DT, ROW_NUMBER() OVER(ORDER BY M1.DT DESC) PERIOD
+SELECT M1.CNT, AVGCNT, M1.DT, ROW_NUMBER() OVER(ORDER BY M1.DT DESC) PERIOD
 FROM (select count(*) AS CNT, to_char(m_dt,'yyyy-mm') AS DT
         from m
         group by to_char(m_dt,'yyyy-mm') )M1
-INNER JOIN (SELECT AVG(CM.CNT) AS A,CM.DT
-            FROM (SELECT COUNT(*) AS CNT,TO_CHAR(M_DT,'YYYY-MM') AS DT
-                    FROM M
-                    GROUP BY M_DT) CM
-            GROUP BY CM.DT) CCM
-ON M1.DT = CCM.DT
+INNER JOIN (SELECT ROUND(CM.CNT/LM.LASTDAY,2) AVGCNT, CM.M_DT
+            FROM (SELECT COUNT(*) CNT, TO_CHAR(M_DT,'YYYY-MM')M_DT
+                  FROM M
+                  GROUP BY TO_CHAR(M_DT,'YYYY-MM'))CM
+                  INNER JOIN 
+                    (SELECT DISTINCT(TO_CHAR(LAST_DAY(M_DT),'DD'))LASTDAY
+                          , TO_CHAR(M_DT,'YYYY-MM')M_DT
+                     FROM M)LM 
+                     ON CM.M_DT = LM.M_DT) CCM
+ON M1.DT = CCM.M_DT
 WHERE ROWNUM BETWEEN 1 AND 12
 ORDER BY M1.DT
 </select>
