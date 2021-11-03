@@ -141,24 +141,27 @@
 			});
         }
         function storyAjax(){
-        	$(".pGradient0").on("click",function(){
+        	$(".pGradient0").on("click",function(){      		
        			$("#storyNo").val($(this).attr("stno"));	        		
-        		var params=$("#storyForm").serialize();		
-    			$.ajax({ 
-    				url:"storyMList",
-    				type:"post",
-    				dataType:"json",
-    				data:params,
-    				success : function(res){
-   						$("#myModal").css("display","block");
-   						StoryModal(res.mStory);
-   						progressbar();
-   						modalFunc();	    	        		    	        			
-    				},
-    				error : function(request,status,error){
-    					console.log(error);
-    				}
-    			});      		
+           		var params=$("#storyForm").serialize();		
+       			$.ajax({ 
+       				url:"storyMList",
+       				type:"post",
+       				dataType:"json",
+       				data:params,
+       				success : function(res){
+       					setTimeout(function(){
+       						$("#myModal").css("display","block");
+       						$('body').css("overflow","hidden");
+       						StoryModal(res.mStory);
+       						progressbar();
+       						modalFunc();	
+       					},2000);
+       				},
+       				error : function(request,status,error){
+       					console.log(error);
+       				}
+       			});          		    			    		
         	});
         }
         function StoryModal(data){
@@ -781,6 +784,7 @@
 						success : function(res){
 							if(res.result=="success"){
 								document.getElementById('myModal').style.display = "none";
+								$('body').css("overflow","auto");
 								reloadImgList();								
 							}else{							
 								alert("게시글 삭제 실패");

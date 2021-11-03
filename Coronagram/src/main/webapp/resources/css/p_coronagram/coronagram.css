@@ -402,10 +402,12 @@ video::-webkit-media-controls-fullscreen-button {
    	stroke-dasharray: 1360;
 }
 .pGradient0:hover circle{
-	animation: dash 4s linear forwards;
+	animation: dash 4s linear;
+	stroke-dasharray: 15 15;
 }
  @keyframes dash {
       to {
+      	stroke-dashoffset: 800;
         stroke-dasharray: 100 0;
       }
  }
@@ -425,13 +427,9 @@ video::-webkit-media-controls-fullscreen-button {
    	stroke-dasharray: 1360;
 }
 .pGradient1:hover circle{
-	animation: dash 4s linear forwards;
+	animation: dash 4s linear;
+	stroke-dasharray: 15 15;
 }
- @keyframes dash {
-      to {
-        stroke-dasharray: 100 0;
-      }
- }
  .user_name{
  	position: relative;
     right: 32px;

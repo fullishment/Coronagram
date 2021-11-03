@@ -8,6 +8,7 @@
 *::before,
 *::after {
     box-sizing: border-box;
+    
 }
 
 body {
@@ -15,7 +16,7 @@ body {
     min-height: 100vh;
     background-color: #fafafa;
     color: #262626;
-    padding-bottom: 3rem;
+    padding-bottom: 3rem;   
 }
 
 .hidden_menu{
@@ -215,7 +216,6 @@ img {
   height: 2px;
   background-color: rgba(255, 255, 255, 0.4);
   display: block;
-  border-radius: 5px;
 }
 
 .progressBarContainer div span.progressBar .inProgress {
@@ -235,19 +235,17 @@ img {
 	color:#dbdbdb;
 }
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none; 
+    position: fixed;
+    z-index: 1; 
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%; 
+    height: 100%; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
 }
     
-/* Modal Content/Box */
 .modal-content {
     display: flex;
     background-color: #fefefe;
@@ -1005,10 +1003,12 @@ svg {
     font-weight: bold;
 }
 .pGradient0:hover circle{
-	animation: dash 4s linear forwards;
+	animation: dash 4s linear;
+	stroke-dasharray: 15 15;
 }
  @keyframes dash {
-      to {
+      to {     	
+        stroke-dashoffset: 800;
         stroke-dasharray: 100 0;
       }
  }
@@ -1025,16 +1025,8 @@ svg {
 	display: inline-block;
     width: 50px;
     height: 50px;
-   	stroke-dasharray: 1360;
+   	stroke-dasharray: 100;
 }
-.pGradient1:hover circle{
-	animation: dash 4s linear forwards;
-}
- @keyframes dash {
-      to {
-        stroke-dasharray: 100 0;
-      }
- }
 /* Profile Section */
 
 .profile {
@@ -1075,13 +1067,9 @@ svg {
    	stroke-dasharray: 1360;
 }
 .pGradient4:hover circle{
-	animation: dash 4s linear forwards;
+	animation: dash 4s linear;
+	stroke-dasharray: 7 10;
 }
- @keyframes dash {
-      to {
-        stroke-dasharray: 100 0;
-      }
- }
 .pGradient6{
 	position: absolute;
     width: 179px;
