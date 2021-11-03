@@ -242,12 +242,64 @@ function checkVal(sel) {
             </div>
             <div class="sc-wrap">
                 <div class="sc-html">
-                    <input id="tab-1" type="radio" name="tab" class="scm1" checked><label for="tab-1" class="tab"><p>FAQ</p></label>
+                    <input id="tab-1" type="radio" name="tab" class="scm1" checked><label for="tab-1" class="tab"><p>내 질문 보기</p></label>
                     <input id="tab-2" type="radio" name="tab" class="scm2"><label for="tab-2" class="tab"><p>Q&A</p></label>
-                    <input id="tab-3" type="radio" name="tab" class="scm3"><label for="tab-3" class="tab"><p>문의내역</p></label>
+                    <input id="tab-3" type="radio" name="tab" class="scm3"><label for="tab-3" class="tab"><p>FAQ</p></label>
                     <div class="sc-form">
                         <div class="scm1-htm"><!-- FAQ -->
-                            <label for="user" class="sclabel"><p>자주 묻는 질문</p></label>
+                            <label for="user" class="sclabel"><p>나의 질문</p></label>
+                            <div class="group">
+                            <div>
+							   <form action="#" id="actionForm" method="post">
+							      <input type="hidden" id="oldTxt" value="${param.searchTxt}"/>	
+							      <input type="hidden" name="page" id="page" value="${page}"/>
+							      <input type="hidden" name="sMNo" id="sMNo" value="${sMNo}"/>
+							   </form>
+							</div>
+                                <div class= "qnaList">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th><p>번호</p></th>
+                                                <th><p>제목</p></th>
+                                                <th><p>등록일</p></th>
+                                                <th><p>현황</p></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                    
+                                </div>
+                                <div class="paging">
+                                    	<div class="paging_wrap"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="scm2-htm"><!-- 질문추가 -->
+                            <label for="user" class="sclabel"><p>1:1문의하기</p></label>
+                            <div class="group">
+                            <form action="" id="addForm" method="post">
+                                <div class="qnaMain">
+                                    <div class="QnaTitle">
+                                    	<p>작성자 : ${sMNm}</p>
+                                    	<input type = "hidden" name = "m_no" value="${sMNo}" /> </br>
+                                        <p>제목</p><input class="QTI"  type = "text" id = "title" name = "title" />
+                                    </div>
+                                </div>
+                                <div class="qnaMain">
+                                    <div class="QnaCon">
+                                        <p>내용</p><textarea class="QCI" id="con" name="con"></textarea>
+                                    </div>
+                                </div>
+                             </form>
+                             	<div class="qnaBtn">
+                                    <button href="#" type="button" class="add_btn" id="addBtn" />작성</button>
+                                    <button href="#" type="button" class="cancel_btn" id="cancelBtn" />취소</button>
+                                </div>
+                        </div><!-- scm2-htm -->
+                    </div><!-- sc-form -->
+                        <div class="scm3-htm"><!-- 문의list -->
+                            <label for="user" class="sclabel"><p>자주묻는질문</p></label>
                             <div class="group">
                                 <div class="scImg"></div>
                                 <div class="scMain" id="scMain">
@@ -288,58 +340,6 @@ function checkVal(sel) {
                                         <br>A. 반려동물이 코로나19 바이러스에 감염된 사례들이 보고되었는데, 대부분 코로나19에 감염된 사람과 접촉한 후에 감염되었습니다.<br>
                                         <br>A. 코로나19나 다른 질병을 예방하기 위해서는, 반려동물이나 반려동물의 물건을 접촉하기 전·후에 손을 물과 비누로 깨끗이 씻는 예방수칙을 잘 지켜야 합니다.</p>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="scm2-htm"><!-- 질문추가 -->
-                            <label for="user" class="sclabel"><p>1:1문의하기</p></label>
-                            <div class="group">
-                            <form action="" id="addForm" method="post">
-                                <div class="qnaMain">
-                                    <div class="QnaTitle">
-                                    	<p>작성자 : ${sMNm}</p>
-                                    	<input type = "hidden" name = "m_no" value="${sMNo}" /> </br>
-                                        <p>제목</p><input class="QTI"  type = "text" id = "title" name = "title" />
-                                    </div>
-                                </div>
-                                <div class="qnaMain">
-                                    <div class="QnaCon">
-                                        <p>내용</p><textarea class="QCI" id="con" name="con"></textarea>
-                                    </div>
-                                </div>
-                             </form>
-                             	<div class="qnaBtn">
-                                    <button href="#" type="button" class="add_btn" id="addBtn" />작성</button>
-                                    <button href="#" type="button" class="cancel_btn" id="cancelBtn" />취소</button>
-                                </div>
-                        </div><!-- scm2-htm -->
-                    </div><!-- sc-form -->
-                        <div class="scm3-htm"><!-- 문의list -->
-                            <label for="user" class="sclabel"><p>문의내역</p></label>
-                            <div class="group">
-                            <div>
-							   <form action="#" id="actionForm" method="post">
-							      <input type="hidden" id="oldTxt" value="${param.searchTxt}"/>	
-							      <input type="hidden" name="page" id="page" value="${page}"/>
-							      <input type="hidden" name="no" id="no" />
-							   </form>
-							</div>
-                                <div class= "qnaList">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th><p>번호</p></th>
-                                                <th><p>제목</p></th>
-                                                <th><p>등록일</p></th>
-                                                <th><p>현황</p></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody></tbody>
-                                    </table>
-                                    
-                                </div>
-                                <div class="paging">
-                                    	<div class="paging_wrap"></div>
                                 </div>
                             </div>
                         </div>
