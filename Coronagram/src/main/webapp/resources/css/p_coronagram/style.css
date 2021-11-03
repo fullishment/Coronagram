@@ -928,8 +928,7 @@ body{
     flex-direction: column;
 }
 .rec_follow{
-	position: absolute;
-    right: 25px;
+	position: relative;
 }
 .fospan{
 	color:#0095f6;
@@ -974,6 +973,8 @@ body{
 .rec_user{
 	display:inline-flex;
 	padding-left:10px;
+	justify-content:space-between;
+	
 }
 .side_box .scroll_inner{
     height: 182px;

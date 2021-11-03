@@ -195,7 +195,7 @@ $(document).ready(function(){
                   success : function(res){
                      if(res.result == "success"){
                         $("#backForm").submit();
-                        location.href="../coronagram/${sMNick}";
+                        location.href="./coronagram/${sMNick}";
                      } else if(res.result == "failed"){
                         alert("수정에 실패하였습니다.");
                      } else {
@@ -243,6 +243,7 @@ $(document).ready(function(){
             success : function(res){
                if(res.result == "success"){
                   $("#backForm").submit();
+                  location.href="./coronagram/${sMNick}";
                } else if(res.result == "failed"){
                   alert("수정에 실패하였습니다.");
                } else {

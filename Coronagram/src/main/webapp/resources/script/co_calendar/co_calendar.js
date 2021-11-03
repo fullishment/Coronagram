@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		slotMinTime : '08:00',
 		slotMaxTime : '24:00',
 		headerToolbar : {
-			left : 'title',
-			center : 'ff',
+			left : 'ff',
+			center : 'title',
 			right : 'checkAtt prev,today,next'
 		},
 		defaultView: 'month',
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		selectable : true,
 		nowIndicator : true,
 		dayMaxEvents : true,
-		locale : 'ko',
+		locale : 'en',
 		eventAdd : function(obj) {
 			console.log(obj);
 		},

@@ -56,9 +56,9 @@ public class main_page {
         	urlBuilder.append("&" + URLEncoder.encode("startCreateDt","UTF-8") + "=" + URLEncoder.encode(before6, "UTF-8")); /*검색할 생성일 범위의 시작*/
         }
         if(nowTime.isBefore(limitTime)) {
-        	urlBuilder.append("&" + URLEncoder.encode("endCreateDt","UTF-8") + "=" + URLEncoder.encode(today, "UTF-8")); /*검색할 생성일 범위의 종료*/
-        }else {
         	urlBuilder.append("&" + URLEncoder.encode("endCreateDt","UTF-8") + "=" + URLEncoder.encode(todaym, "UTF-8")); /*검색할 생성일 범위의 종료*/
+        }else {
+        	urlBuilder.append("&" + URLEncoder.encode("endCreateDt","UTF-8") + "=" + URLEncoder.encode(today, "UTF-8")); /*검색할 생성일 범위의 종료*/
         	
         }
         URL url = new URL(urlBuilder.toString());

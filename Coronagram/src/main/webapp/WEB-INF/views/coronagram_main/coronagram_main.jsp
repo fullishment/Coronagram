@@ -17,7 +17,12 @@
 	    <script>
 		    $(document).ready(function(){
 		    	reloadList();
-		    	
+		    	$(".rec_area").on("click",".fospan",function(){
+		    		followAdd($(this));
+		    	});
+		    	$(".rec_area").on("click",".fispan",function(){
+		    		followDel($(this));
+		    	});
 		    });
 	    	$(window).load(function(){
 	    		
@@ -106,8 +111,8 @@
 						addPostCmt();
 						followList(res.listFo);
 						notFollowList(res.notFo);
-						followAdd();			
-						followDel();
+						//followAdd();			
+						//followDel();
 						modalMover();
 						modalMover2();
 						slide();
@@ -144,6 +149,8 @@
 						slide();
 						LkModal();
 						LkModalAjax();
+						//followAdd();
+						//followDel();
 						crngDtl();
 						delCmt();
 						mediaControl();
@@ -772,9 +779,9 @@
 				 }
 				 $(".rec_area").html(html);
 		    }
-		    function followAdd(){
-		    	$(".fospan").on("click",function(){
-		    		$("#m_no2").val($(this).parent().parent().attr("nfo"));
+		    function followAdd(e){
+		    	//$(".fospan").on("click",function(){
+		    		$("#m_no2").val(e.parent().parent().attr("nfo"));
 		    		var params = $("#AddDelFoForm").serialize();
 		    		$.ajax({
 		    			url : "FollowAdd",
@@ -786,9 +793,8 @@
 		    				if(res.result=="success"){
 		    					var html ="";
 		    					html+="<span class=\"follow_submit fispan\">팔로잉</span>";
-		    					$(this).parent('.rec_follow').html(html);	
-		    					reloadPart1();
-		    					followDel();		    					
+		    					e.parent('.rec_follow').html(html);	
+		    					reloadPart1();     					
 		    				}else{
 		    					alert("add실패");
 		    				}	    				
@@ -797,11 +803,11 @@
 		    				console.log(error);
 		    			}
 		    		});
-		    	});
+		    	//});
 		    }
-		    function followDel(){
-		    	$(".fispan").on("click",function(){
-		    		$("#m_no2").val($(this).parent().parent().attr("nfo"));
+		    function followDel(e){
+		    	//$(".fispan").on("click",function(){
+		    		$("#m_no2").val(e.parent().parent().attr("nfo"));
 		    		var params = $("#AddDelFoForm").serialize();
 		    		$.ajax({
 		    			url : "followDel",
@@ -814,9 +820,8 @@
 		    				if(res.result=="success"){
 		    					var html ="";
 		    					html+="<span class=\"follow_submit fospan\">팔로우</span>";
-		    					$(this).parent('.rec_follow').html(html);
-		    					reloadPart1();
-		    					followAdd();		    					
+		    					e.parent('.rec_follow').html(html);
+		    					reloadPart1();	    					
 		    				}else{
 		    					alert("add실패");
 		    				}	    				
@@ -825,7 +830,7 @@
 		    				console.log(error);
 		    			}
 		    		});
-		    	});
+		    	//});
 		    }	
 		    function addPostCmt(){
 		    	$(".upload_btn").on("click",function(){
