@@ -24,3 +24,18 @@
                 $(this).next('.cm_mcon').slideDown('fast').addClass('deployed');
             }
         });
+        
+      $("#cm_logo").on("click",function(){
+    	 location.href="coronagram"; 
+      });
+      $("#cm_home").on("click",function(){
+    	  location.href="main"; 
+      });
+      $("#cm_shop").on("click",function(){
+    	  location.href="shop"; 
+      });
+      $("#cm_cld").on("click",function(){
+    	  location.href="calendar"; 
+      });
+      
+      

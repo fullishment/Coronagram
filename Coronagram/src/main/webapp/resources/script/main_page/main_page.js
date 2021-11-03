@@ -193,7 +193,7 @@ class CitiesSlider extends React.Component {
                                 React.createElement("h2", { className: "slider__slide-subheading" },
                                     slide.people.split('').map(l => React.createElement("span", null, l))),
 
-                                React.createElement("a", { className: "slider__slide-readmore", href: "#" }, "Move to WorldMap")),
+                                React.createElement("a", { className: "slider__slide-readmore", href: "MapAPI" }, "Move to WorldMap")),
 
                             React.createElement("div", { className: "slider__slide-parts" },
                                 [...Array(this.IMAGE_PARTS).fill()].map((x, i) =>
@@ -322,4 +322,7 @@ $("#qnaIcon").on("click",function(){
 });
 $("#zoomIcon").on("click",function(){
 	location.href="zoom";
+});
+$(".btn_now").on("click",function(){
+	location.href="shop";
 });

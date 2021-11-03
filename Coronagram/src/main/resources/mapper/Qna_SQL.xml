@@ -7,7 +7,7 @@
 		<select id="getQnaCnt" parameterType="hashmap" resultType="Integer">
 			SELECT COUNT(*) AS CNT
 			FROM QNA
-			WHERE DEL = 1
+			WHERE WRITER_NO = #{sMNo} AND DEL = 1
 		</select>
 	<!-- list -->
 		<select id="getQnaList" parameterType="hashmap" resultType="hashmap">

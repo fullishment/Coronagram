@@ -52,7 +52,7 @@
       <div class="cm_menu__toggler"><span></span></div>
       <a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
       <a href="#" class="cm_home" id="cm_home">Home</a>
-      <a href="#" class="cm_msg" id="cm_msg">Message</a>
+      <a href="#" class="cm_msg" id="cm_shop">Shop</a>
       <a href="#" class="cm_cld" id="cm_cld">Calendar</a>
       <div class="cm_dropdown">
         <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
@@ -84,27 +84,26 @@
       <a href="#" class="cm_mTitle" id="cm_mTitle">
         <div class="cm_info"></div>Corona Info
         <ul class="cm_mcon" id="cm_mcon">
-          <a href="#">관련 정보</a> <br>
-          <a href="#">거리두기</a> <br>
-          <a href="#">News</a>
+          <a href="coinfo_infolist">관련 정보</a> <br>
+          <a href="coinfo_step">거리두기</a> <br>
+          <a href="coinfo_news">News</a>
         </ul>
       </a>
-      <a href="#" class="cm_sTitle">
+      <a href="coronagram" class="cm_sTitle">
         <div class="cm_cam"></div>Coronagram
       </a>
       <a href="#" class="cm_mTitle" id="cm_mTitle">
         <div class="cm_user"></div>My Page
         <ul class="cm_mcon" id="cm_mcon">
-          <a href="#">개인 페이지</a> <br>
-          <a href="#">출석 체크</a> <br>
+          <a href="coronagram/${sMNick}">개인 페이지</a> <br>
+          <a href="calendar">출석 체크</a> <br>
           <a href="#">Message</a>
         </ul>
       </a>
       <a href="#" class="cm_mTitle" id="cm_mTitle">
         <div class="cm_qna"></div>Service Center
         <ul class="cm_mcon" id="cm_mcon">
-          <a href="#">FAQ</a> <br>
-          <a href="#">Q&A</a>
+          <a href="qna">FAQ</a> <br>
         </ul>
       </a>
     </div>
@@ -120,8 +119,8 @@
               <h2 class="txt-tt">Coronagram</h2>
               <p class="txt-desc" style="font-weight: 500;">너만의 사진을 올리고 공유하자</p>
               <div class="txt-btn">
-                <a href="#" class="txt-btn-1" style="color:black;">개인 페이지</a>
-                <a href="#" class="txt-btn-2" style="color:black;">출석 체크 바로가기</a>
+                <a href="coronagram/${sMNick}" class="txt-btn-1" style="color:black;">개인 페이지</a>
+                <a href="calendar" class="txt-btn-2" style="color:black;">출석 체크 바로가기</a>
               </div>
             </div>
             <picture class="img-box">
@@ -136,8 +135,8 @@
               <h2 class="txt-tt">Corona Infomation</h2>
               <p class="txt-desc" style="font-weight: 500;">코로나에 관한 모든것 다 여기에</p>
               <div class="txt-btn">
-                <a href="#" class="txt-btn-1">더 알아보기</a>
-                <a href="#" class="txt-btn-2">방역지침 보기</a>
+                <a href="coinfo_main" class="txt-btn-1">더 알아보기</a>
+                <a href="coinfo_step" class="txt-btn-2">거리두기 단계</a>
               </div>
             </div>
             <picture class="img-box">
@@ -183,8 +182,8 @@
               <h2 class="txt-tt" style="color:black;">Servi</h2><h2 class="txt-tt" style="color:white;">ce&nbsp;center</h2><br>
               <p class="txt-desc" style="display:inline-block; color:black; font-weight: 500;">궁금한건 여기에 물어</p><p class="txt-desc" style="display:inline-block; color:white; font-weight: 500;">봐</p>
               <div class="txt-btn">
-                <a href="#" class="txt-btn-1" style="color:black;">자주하는 질문 보기</a>
-                <a href="#" class="txt-btn-2">내가 한 질문 보기</a>
+                <a href="qna" class="txt-btn-1" style="color:black;">자주하는 질문 보기</a>
+                <a href="qna" class="txt-btn-2">내가 한 질문 보기</a>
               </div>
             </div>
             <picture class="img-box">
@@ -195,9 +194,7 @@
       </div>
       <button class="s-autoplay-btn"></button>
     </div>
-
   </main>
-
   <article>
     <div class="wrapper">
       <div class="news-slider">
