@@ -147,20 +147,7 @@
             transition: 300ms left cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        @media only screen and (max-width: 1200px) {
-            .cm_menu {
-                width: 250px;
-                left: -250px;
-                padding: 30px;
-            }
-
-            .cm_mcon {
-                font-size: 1pt;
-                padding: 0 35px;
-                display: none;
-                overflow: hidden;
-            }
-        }
+       
 
         .cm_menu.active {
             left: 0;
@@ -382,3 +369,31 @@
         .cm_mTitle.deployed {
             opacity: 1;
         }
+        
+         @media only screen and (max-width: 1200px) {
+            .cm_menu {
+                width: 250px;
+                left: -250px;
+                padding: 30px;
+            }
+
+            .cm_mcon {
+                font-size: 1pt;
+                padding: 0 35px;
+                display: none;
+                overflow: hidden;
+            }
+        }
+        
+        @media only screen and (max-width: 700px) {
+        header .cm_user_name {
+   			display: none;
+		}
+		.cm_home {
+		    right: 270px;
+		}
+		.cm_msg {
+		    right: 180px;
+		}
+        
+		} 
