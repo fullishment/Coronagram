@@ -174,7 +174,7 @@ function checkVal(sel){
         <div class="sc" id="sc">
             <div class="scHead" id="scHead">
                 <div class="scName1" id="scName1">
-                    <h4><p>관리자 페이지</p></h4>
+                    <i class="fas fa-user"></i><h4><p>관리자 페이지</p></h4>
                 </div>
                 <div class="scName2" id="scTitle2">
                     <h2><p>Q&A 게시판</p></h2>
@@ -204,7 +204,7 @@ function checkVal(sel){
 		                             </div>
 		                             
 		                             	<div class="btnForm">
-		                             		<button  type="button" class="add_btn" id="updateBtn">수정</button>
+		                             		<button  type="button" class="add_btn" id="updateBtn">답변</button>
 		                             		<button  type="button" class="del_btn" id="deleteBtn">삭제</button>
 		                                	<a href="javascript:window.history.back()"><button type="button" class="cancel_btn" id="backForm">목록</button></a>
 		                                </div>

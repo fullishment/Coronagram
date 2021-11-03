@@ -52,45 +52,46 @@ tr:nth-child(even) {
 	margin: auto;
 }
 .paging {
-	float : left;
+	float: left;
 }
+
 .paging_wrap {
-    position: relative;
-    clear: both;
-    width: 100%;
-    text-align: center;
-    padding-top: 10px;
-    margin: 30px 100%;
+	position: relative;
+	clear: both;
+	width: 100%;
+	text-align: center;
+	padding-top: 10px;
+	margin: 27px 73%;
 }
 
 .paging_wrap h3, .paging_wrap b, .paging_wrap p {
-    display: inline-block;
-    position: relative;
-    min-width: 28px;
-    padding: 6px 4px 7px;
-    border: 1px solid #fff;
-    font-size: 13px;
-    font-weight: normal;
-    color: #444;
-    line-height: 13px;
-    text-decoration: none;
-    vertical-align: top;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+	display: inline-block;
+	position: relative;
+	min-width: 28px;
+	padding: 6px 4px 7px;
+	border: 1px solid #fff;
+	font-size: 13px;
+	font-weight: normal;
+	color: #444;
+	line-height: 13px;
+	text-decoration: none;
+	vertical-align: top;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .paging_wrap h3:hover, .paging_wrap b {
-    border: 1px solid #e0e0e0;
-    color: #3f63bf;
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
+	border: 1px solid #e0e0e0;
+	color: #3f63bf;
+	text-decoration: none;
+	font-weight: bold;
+	cursor: pointer;
 }
 
 .paging_wrap p:hover {
 	cursor: pointer;
-	color: #9f9f9f;	
-}  
+	color: #9f9f9f;
+}
 .sc {
     max-width: 800px;
     margin: auto;
@@ -125,6 +126,7 @@ display:none;
 .sc-html .tab{
 display:inline-block;
 border-bottom:2px solid transparent;
+margin-right : 6px;
 }
 
 #tab-1{
@@ -136,6 +138,7 @@ float: left;
 color:grey;
 border-color:#1161ee;
 }
+
 .sc-form{
 min-height:25px;
 position:relative;
@@ -161,12 +164,15 @@ transform:rotate(0);
     margin-top: 30px;
     margin-left: 20px;
 }
+.scm2, .scm3 {
+	margin-left : 10px;
+}
 .group {
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
     background-color: white;
     padding: 20px;
     margin-top: 10px;
-    min-height: 450px;
+    min-height: 453px;
     min-width: 767px;
     border-radius: 10px;
 }
@@ -186,6 +192,7 @@ transform:rotate(0);
     font-size: 15px;
     transition: 0.4s;
     border-radius: 40px;
+    margin-bottom: 5px;
 }
 
 .SCactive,
@@ -351,7 +358,7 @@ html {
         width: 100%;
     }
     .group {
-        min-height: 435px;
+        min-height: 453px;
         max-width: 400px;
     }
 }
