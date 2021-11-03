@@ -134,7 +134,9 @@ p {
 
 /* 옵션박스 */
 .opt_box {
+	
 	display: flex;
+	justify-content:space-between;
 	width: 100%;
 }
 
@@ -144,6 +146,9 @@ p {
 	padding: 20px 40px;
 	margin-top: 20px;
 	height: 150px;
+	display:flex;
+	flex-direction: column;
+    justify-content: center;
 }
 
 .color_L {
@@ -153,12 +158,13 @@ p {
 }
 
 .color_R {
-	width: 70%;
+	width: 50%;
 	float: left;
 	margin-bottom: 20px;
 }
 
 .select_color {
+	padding : 3px;
 	width: 100px;
 	border-radius: 10px;
 }

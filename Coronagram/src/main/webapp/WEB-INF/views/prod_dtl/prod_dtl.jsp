@@ -20,7 +20,7 @@
     	console.log(${sMNo});
     	
 	   var point= parseInt(${data.POINT});
-	   $(".qt-plus").click(function(){
+	   /* $(".qt-plus").click(function(){
 	   	var qt = parseInt($("#qt").html());
 	       $("#qt").html( qt + 1 );
 	       $("#total").html(point * parseInt($("#qt").html()));
@@ -31,12 +31,12 @@
 	       $("#qt").html( qt - 1);
 	       $("#total").html(point * parseInt($("#qt").html()));
 	       
-	   });
+	   }); */
     	$("#cartBtn").click(function(){
     		if($("#sMNo").val() != null && $("#sMNo").val() != ""){
 	    		$("#priceInp").val($("#color").val());
 	    		$("#unitInp").val($(".color_L p").html());
-	    		$("#qtInp").val($("#qt").html());
+	    		//$("#qtInp").val($("#qt").html());
 	    		var params = $("#addForm").serialize();
 				$.ajax({ 
 					url : "cartAdd", 
@@ -239,14 +239,14 @@
                         <div class="dtl_option"><!--옵션 -->
                             <div class="dtl_color">
                             </div>
-                            <div class="dtl_cnt">
+                            <!-- <div class="dtl_cnt">
                                 <div class="cnt_L"><p>수량</p></div>
                                 <div class="cnt_R">
                                     <span class="qt-minus">-</span>
                                     <span class="qt" id ="qt">1</span>
                                     <span class="qt-plus">+</span>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <br>
                         <div class="gbn"></div>

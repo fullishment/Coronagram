@@ -271,8 +271,63 @@
 .order_btn:hover {
 	opacity: .8;
 }
+.round ,
+.check_all{
+  position: relative;
+}
+.check_all p {
+	position: relative;
+    bottom: 19px;
+    left: 30px;
+}
+.round label ,
+.check_all label{
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 28px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 28px;
+}
+.round label{
+	margin :5px;
+}
 
-.lcon2_up label {
+.round label:after ,
+.check_all label:after{
+  border: 2px solid #fff;
+  border-top: none;
+  border-right: none;
+  content: "";
+  height: 6px;
+  left: 7px;
+  opacity: 0;
+  position: absolute;
+  top: 8px;
+  transform: rotate(-45deg);
+  width: 12px;
+}
+
+.round input[type="checkbox"],
+.check_all input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.round input[type="checkbox"]:checked + label ,
+.check_all input[type="checkbox"]:checked + label{
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.round input[type="checkbox"]:checked + label:after ,
+.check_all input[type="checkbox"]:checked + label:after{
+  opacity: 1;
+}
+
+/* .lcon2_up label {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	border-radius: 50%;
@@ -309,7 +364,7 @@
 
 .lcon2_up input[type="checkbox"]:checked+label:after {
 	opacity: 1;
-}
+} */
 
 .lcon2_up img {
 	width: 15vw;

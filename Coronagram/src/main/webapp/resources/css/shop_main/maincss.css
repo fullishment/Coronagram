@@ -562,6 +562,7 @@ html ::-webkit-scrollbar-track{
         margin:10px;
       }
       .shop_box3{
+      	margin-top:10px;
         width:610px;
         height: 610px;
         border-radius: 10px;

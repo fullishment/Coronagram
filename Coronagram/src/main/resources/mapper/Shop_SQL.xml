@@ -103,9 +103,21 @@
 		WHERE M_NO= #{sMNo}
 	</update>
 	<select id="getPoint" parameterType="hashmap" resultType="hashmap">
-		SELECT POINT
-		FROM M
-		WHERE M_NO = #{sMNo}
+		SELECT (AC.CNT * 500) - ST.S AS POINT 
+		FROM (SELECT COUNT(*) AS CNT ,USER_NO
+		      FROM ATT_CHECK
+		      WHERE USER_NO = #{sMNo}
+		      GROUP BY USER_NO) AC
+		      
+		      INNER JOIN (  SELECT SUM(OP.QTY * P.POINT) AS S,USER_NO
+		                    FROM ORD O
+		                        INNER JOIN ORDER_PROD OP
+		                        ON  O.ORD_NO = OP.ORDER_NO
+		                        INNER JOIN PRODUCT P
+		                        ON OP.PROD_NO = P.PROD_NO
+		                    WHERE USER_NO = #{sMNo}
+		                    GROUP BY USER_NO) ST
+		        ON ST.USER_NO = AC.USER_NO 
 	</select>
 	<select id="getOrdList" parameterType="hashmap" resultType="hashmap">
 		SELECT P.CAT_NO,P.PROD_NO,P.PROD_NM,M.M_NM,O.POST_NO,O.ADR,O.DTL_ADR,TO_CHAR(O.ORD_DT,'YYYY-MM-DD') AS ORD_DT,O.ORD_STAT

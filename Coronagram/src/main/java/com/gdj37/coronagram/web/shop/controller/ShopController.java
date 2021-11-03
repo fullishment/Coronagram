@@ -166,8 +166,7 @@ public class ShopController {
 		Map<String,Object> modelMap= new HashMap<String,Object>();
 		String result="success";
 		int cartAllDel = iServiceShop.cartAllDel(params);
-		int pointM = iServiceShop.pointMinus(params);
-		if(cartAllDel==0 || pointM==0) {
+		if(cartAllDel==0 ) {
 			result="failed";
 		}
 		modelMap.put("result", result);

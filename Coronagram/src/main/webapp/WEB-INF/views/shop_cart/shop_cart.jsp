@@ -32,11 +32,16 @@
     	$("#cartList").on("click",".check_btn",function(){
     		var total = $("input[name=cartCheck]").length;
     		var checked = $("input[name=cartCheck]:checked").length;
-
+			console.log(checked);
     		if(total != checked){
     			$("#allCheck").prop("checked", false);
     		}else {
     			$("#allCheck").prop("checked", true);
+    		}
+    		if(checked>=1){
+    			$("#delBtn").css({"border-color":"red","color":"red"});
+    		}else{
+    			$("#delBtn").css({"border-color":"#ccc","color":"#ccc"});
     		}
     	});
     	
@@ -49,11 +54,16 @@
     	$("#cartList").on("click",".qt-plus",function(){
     	   var qt = parseInt($(this).prev().html());
     	   var no = parseInt($(this).prev().attr("no"));
+    	   var cnt = $("#totalCnt").html().substring(0,$("#totalCnt").html().length-1);
+    	   cnt = (cnt*1)+1;
     	   $(this).prev().html(qt + 1);
     	   $(this).prev().attr("no",no+1);
     	   var total = parseInt($("#totalP").html());
     	   $("#totalP").html( total + (parseInt($(this).parent().next().children().html())));
     	   $("#totalPInp").val(parseInt($("#totalP").html()));
+    	   $("#totalCnt").html(cnt+"개");
+    	  
+    	   
     	   
     	   
    	   	});
@@ -61,15 +71,18 @@
    	   	$("#cartList").on("click",".qt-minus",function(){
    	   		var qt = parseInt($(this).next().html());
    	   		var no = parseInt($(this).next().attr("no"));
+	   	   	var cnt = $("#totalCnt").html().substring(0,$("#totalCnt").html().length-1);
+	 	   	cnt = (cnt*1)+1;
    	   		
    	   		if(qt > 1){ 
+   	   			
 	   	   		$(this).next().html(qt - 1);
 	   	   		$(this).next().attr("no",no-1);
+		   	   	var total = parseInt($("#totalP").html());
+	 	   		$("#totalP").html( total - (parseInt($(this).parent().next().children().html())));
+	 	   		$("#totalPInp").val(parseInt($("#totalP").html()));
+	 	   		$("#totalCnt").html(cnt+"개");
    	   		}
-   	   		var total = parseInt($("#totalP").html());
- 	   		$("#totalP").html( total - (parseInt($(this).parent().next().children().html())));
- 	   		
- 	   		$("#totalPInp").val(parseInt($("#totalP").html()));
     	});
     	   
     	   
@@ -270,15 +283,18 @@
     			html+="<div class=\"lcon2_up\">								";
     			html+="<input type=\"hidden\" name=\"cno"+i+"\" value=\""+data.CART_NO+"\" id=\"cno"+i+"\">";
     			html+="<input type=\"hidden\" name=\"pno"+i+"\" value=\""+data.PROD_NO+"\" id=\"pno"+i+"\">";
-    			html+="<input type=\"hidden\" name=\"ono"+i+"\" value=\""+data.OPT_NO+"\" id=\"ono"+i+"\">";    			
-   				html+="<input type=\"checkbox\" name=\"cartCheck\" class=\"check_btn\" value=\""+data.CART_NO+"\"id=\"checkbox"+i+"\">						";
-   				html+="<label for=\"checkbox"+i+"\"></label>"
+    			html+="<input type=\"hidden\" name=\"ono"+i+"\" value=\""+data.OPT_NO+"\" id=\"ono"+i+"\">";
+    		html+="	<div class=\"round\">                     ";
+			html+="	<input type=\"checkbox\"  value=\""+data.CART_NO+"\"id=\"checkbox"+i+"\" name=\"cartCheck\" class=\"check_btn\"/>    ";
+			html+="	<label for=\"checkbox"+i+"\"></label>              ";
+			html+="	</div>                                      ";
+   				//html+="<input type=\"checkbox\" name=\"cartCheck\" class=\"check_btn\" value=\""+data.CART_NO+"\"id=\"checkbox"+i+"\">						";
+   				//html+="<label for=\"checkbox"+i+"\"></label>"
 				html+="<div class=\"up_con1\"><img alt=\"\" src=\"resources/upload/"+data.FILE_ADDR+"\"></div>                                             ";
 				html+="<div class=\"up_con2\">                                                   ";
 				html+="   	<div class=\"con2_title\">"+data.PROD_NM+"</div>                   ";
 				html+="		<div class=\"con2_subtitle\">"+data.CON+"</div>                       ";
 				html+="		<div class=\"con2_color\"><p>"+data.UNIT+" : "+data.PRICE+"</p></div>  ";             
-				html+="		<div class=\"con2_memo\">메모</div>                                   	";
 				html+="	</div>                                                              ";
 				html+="	<div class=\"up_con3\">                                               ";
 				html+="		<span class=\"qt-minus\">-</span>                                     ";
@@ -375,12 +391,17 @@
                 <div class="lcon1">
                     <div class="input_box">
                         <h1>장바구니</h1>
-                        <div  class="check_all">
-                            <input type="checkbox" name="allCheck" id="allCheck"><label>&nbsp;&nbsp;전체선택</label></button>
-                        </div>
+                        <div class="check_all">
+    						<input type="checkbox"  name="allCheck" id="allCheck" />
+    						<label for="allCheck"></label> 
+    						<p>전체선택</p>
+  						</div>
+                        <!-- <div  class="check_all">
+                            <input type="checkbox" name="allCheck" id="allCheck"><label>&nbsp;&nbsp;전체선택</label>
+                        </div> -->
                     </div>
                     <button class="seldel_btn" id="delBtn">
-                        <span>선택삭제</span>
+                        <span>삭제</span>
                     </button>
                 </div>
                 <div class="lcon2">
