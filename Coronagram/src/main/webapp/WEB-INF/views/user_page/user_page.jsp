@@ -150,12 +150,10 @@
     				dataType:"json",
     				data:params,
     				success : function(res){
-    					setTimeout(function() {
-    						$("#myModal").css("display","block");
-    						StoryModal(res.mStory);
-    						progressbar();
-    						modalFunc();	    	        		    	        			
-    	        		},4000);
+   						$("#myModal").css("display","block");
+   						StoryModal(res.mStory);
+   						progressbar();
+   						modalFunc();	    	        		    	        			
     				},
     				error : function(request,status,error){
     					console.log(error);
