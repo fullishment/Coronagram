@@ -1,4 +1,3 @@
-
 // 상단 메인 배너 slick
 
 $('.main-slider').slick({
@@ -206,38 +205,60 @@ class CitiesSlider extends React.Component {
     }
 }
 
+getWorldList();
+let fr = dataC[104].dc;
+const fr2 = fr.toString()
+.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+
+let sg = dataC[183].dc;
+const sg2 = sg.toString()
+.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+
+let cz = dataC[78].dc;
+const cz2 = cz.toString()
+.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+
+let ned = dataC[88].dc;
+const ned2 = ned.toString()
+.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+
+let ru = dataC[58].dc;
+const ru2 = ru.toString()
+.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+
+
 const slides = [
     {
         city: 'Paris',
         country: 'France',
-        people: '6,782,789명',
+        people: fr2+'명',
         img: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/paris.jpg'
     },
 
     {
         city: 'Singapore',
-        people: '89,539명',
+        people: sg2+'명',
         img: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/singapore.jpg'
     },
 
     {
         city: 'Prague',
         country: 'Czech Republic',
-        people: '1,690,288명',
+        people: cz2+'명',
         img: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/prague.jpg'
     },
 
     {
         city: 'Amsterdam',
         country: 'Netherlands',
-        people: '99,032명',
+        people: ned2+'명',
         img: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/amsterdam.jpg'
     },
 
     {
         city: 'Moscow',
         country: 'Russia',
-        people: '7,464,708명',
+        people: ru2+'명',
         img: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/moscow.jpg'
     }];
 ReactDOM.render(React.createElement(CitiesSlider, { slides: slides }), document.querySelector('#app'));

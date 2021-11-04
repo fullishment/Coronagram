@@ -30,7 +30,7 @@
 </head>
 <body>
     <section>
-        <header>
+     <header>
     <div class="cm_menuBar" id="cm_menuBar">
       <div class="cm_menu__toggler"><span></span></div>
       	<a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
@@ -60,7 +60,7 @@
         <div class="cm_map"></div> Corona Map
         <ul class="cm_mcon" id="cm_mcon">
           <a href="#">국내</a> <br>
-          <a href="#">해외</a>
+          <a href="MapAPI">해외</a>
         </ul>
       </a>
       <a href="#" class="cm_mTitle" id="cm_mTitle">
@@ -432,7 +432,7 @@
 
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">베스트 5 판매 물품 현황<ul class="rad-panel-action">
+                                    <h3 class="panel-title">판매 물품 베스트 10 현황<ul class="rad-panel-action">
                                             <!-- <li><i class="fa fa-rotate-right"></i></li> -->
                                         </ul>
                                     </h3>

@@ -1,4 +1,4 @@
-var data = [];
+var dataC = [];
 
 
 
@@ -6,24 +6,24 @@ var data = [];
 var index=0;
 
 $(document).ready(function() {
-	getList();
+	getWorldList();
 	
 });
 
-function getList(){
+function getWorldList(){
 	$.ajax({
 		type: 'POST', //통신 방식을 지정합니다
 		url: "mapDataApiAjax", //통신을 원하는 URL주소를 입력합니다
 		dataType: 'xml',//서버로부터 받을 데이터 타입을 입력합니다.
 		success: function (res) { // 통신 성공시 호출해야할 함수
 		console.log($(res).find('totalCount').text());
-		drawList(res);
+		drawWorldList(res);
 		}
 	});
 	
 }
 
-function drawList(z) {
+function drawWorldList(z) {
 	//var html = "";
 	
 	$(z).find('item').each(function(index, item){
@@ -34,16 +34,15 @@ function drawList(z) {
 				 var tmp =  {
 					"z" : parseInt($(this).find('natDefCnt').text()),
 					"d" : parseInt($(this).find('natDeathCnt').text()),
-					"c" :  $(this).find('stdDay').text(),
+//					"c" :  $(this).find('stdDay').text(),
 					"name" : $(this).find('nationNmEn').text(),
 					"date" : $(this).find('stdDay').text(),
 				}; 
 				
 			
 				
-				data[index]=tmp;
+				dataC[index]=tmp;
 				index++;
-				console.log(data);
 				//html += "<item>" + $(this).find('stdDay').text() + "</item>       "; //기준일시
 				//html += "<item>" + $(this).find('nationNmEn').text() + "</item>   "; //국가명(영문)
 				//html += "<item>" + $(this).find('natDefCnt').text() + "</item>    "; //국가별 확진자 수
@@ -97,7 +96,7 @@ function drawList(z) {
 		        name: 'COVID-19',
 		        joinBy: ['name', 'name'],
 		        color: "#E00000",
-		        data: data,
+		        data: dataC,
 		        minSize: 8,
 		        maxSize: '15%',
 		        tooltip: {
@@ -107,6 +106,6 @@ function drawList(z) {
 		    
 		   
 		}); 
-		
+		console.log(dataC[2].z);
 		
 	}

@@ -77,7 +77,7 @@
         <div class="cm_map"></div> Corona Map
         <ul class="cm_mcon" id="cm_mcon">
           <a href="#">국내</a> <br>
-          <a href="#">해외</a>
+          <a href="MapAPI">해외</a>
         </ul>
       </a>
       <a href="#" class="cm_mTitle" id="cm_mTitle">
