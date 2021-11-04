@@ -236,29 +236,41 @@
 			});
 	    }
         function ReelsControl1(){
-			$(".reels_content").on("click",function(){
-				
-				const player = document.getElementById("player");
-				player.muted = false;
-							
-				var html="";
-				html+="<i class=\"fas fa-volume-up\"></i>";
-				$(".muted_btn1").html(html);
-				
-				ReelsControl2();
-			});
-			
+        	var player = document.getElementById("player");
+        	if(player.muted == true){
+        		$(".mute_area").on("click",function(){
+    				 				
+    				player.muted = false;
+    							
+    				var html="";
+    				html+="<i class=\"fas fa-volume-up vup\"></i>";
+    				$(".muted_btn1").html(html);
+    				
+    				setTimeout(function(){
+						$(".muted_btn1").html("");
+						
+					},1000);
+    				ReelsControl2();
+    			});
+        	}			
 		}
 	    function ReelsControl2(){
-	    	$(".reels_content").on("click",function(){    		
-				const player = document.getElementById("player");
-				player.muted = true;
-				
-				var html="";
-				html+="<i class=\"fas fa-volume-mute\"></i>";
-				$(".muted_btn1").html(html);
-				 ReelsControl1();
-			});
+	    	if(player.muted == false){
+	    		$(".mute_area").on("click",function(){    		
+					
+					player.muted = true;
+					
+					var html="";
+					html+="<i class=\"fas fa-volume-mute vmute\"></i>";
+					$(".muted_btn1").html(html);
+					
+					setTimeout(function(){
+						$(".muted_btn1").html("");
+					},1000);
+					
+					ReelsControl1();
+				});
+	    	}    	
 	    }
         function ReelsLkArea(data){
         	var html="";
@@ -284,6 +296,12 @@
 		    			success : function(res){
 		    				if(res.result=="success"){
 		    					ReelsLK();
+		    					var html="";
+		    						html+="<i class=\"fas fa-heart hicon\"></i>";
+		    						$(".muted_btn1").html(html);
+		    					setTimeout(function(){
+		    						$(".muted_btn1").html("");
+		    					},2000);
 		    				}else{
 		    					alert("add실패");
 		    				}
@@ -324,13 +342,13 @@
         		html+=" 			<img class=\"music_img\" src=\"../resources/images/userpage/camera.png\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> ";
         		html+="			</div>							";
         		html+=" 		<div class=\"muted_btn1\">																";
-                html+="				<i class=\"fas fa-volume-mute\"></i>												";
                 html+=" 		</div>																					";
         		html+="			<div class=\"reels_video_area\">	";
         		html+="				<video id=\"player\" controls playsinline autoplay muted loop>							"; 
                 html+=" 				<source src=\"../resources/upload/"+data.FILE_ADR+"\" alt=\"\" /></source>	   		";
                 html+="				</video>																				"; 
         		html+="			</div>																						";
+        		html+="			<div class=\"mute_area\"></div>																";
         		html+="			<div class=\"reels_icon\">																	";
         		html+="                       <div class=\"heart_btn\">                                                                 								   ";
 			    html+="                           <div class=\"sprite_heart_icon_outline\" name=\"39\" data-name=\"heartbeat\">         								   ";			     											
@@ -1045,7 +1063,7 @@
 	    		
 				 html+="   	<div class=\"modal-content\" no=\""+data.WRITING_NO+"\">                                                    								   ";
 			     html+="       <div class=\"modal_img\">                                                                               									   ";
-			     html+="           <div class=\"slider1\">                                                                              									   ";
+			     html+="           <div class=\"slider1\">                                                                              								   ";
 			     html+="               <div class=\"slide-viewer\">                                                                    									   ";
 			     html+="               <div id=\"slide-group\" class=\"slide-group\">                                                  									   ";	                                                                        
 			     html+="               </div>                                                                                          									   ";

@@ -1692,13 +1692,66 @@ video::-webkit-media-controls-fullscreen-button {
 	position: absolute;
     top: 45%;
     right: 45%;
-    font-size: 20pt;
-    background: rgba(0,0,0,0.6);
-    width: 50px;
+       
+}
+.vmute{
+	width: 50px;
     padding: 11px;
     height: 50px;
     border-radius: 70%;
+    background: rgba(0,0,0,0.6);
     color: white;
+    font-size: 20pt; 
+}
+.vup{
+	width: 50px;
+    padding: 11px;
+    height: 50px;
+    border-radius: 70%;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    font-size: 20pt; 
+}
+.mute_area{
+	position: absolute;
+    width: 86%;
+    height: 100%;
+    top: 0;
+}
+.hicon{
+	animation: heartbeat 1s infinite;
+    font-size: 150pt;
+    color: white;
+    position: absolute;
+    right: -82px;
+    top: -82px;
+}
+@keyframes heartbeat
+{
+  0%
+  {
+    transform: scale( .75 );
+  }
+  20%
+  {
+    transform: scale( 1 );
+  }
+  40%
+  {
+    transform: scale( .75 );
+  }
+  60%
+  {
+    transform: scale( 1 );
+  }
+  80%
+  {
+    transform: scale( .75 );
+  }
+  100%
+  {
+    transform: scale( .75 );
+  }
 }
 .play_btn{
 	position: absolute;
