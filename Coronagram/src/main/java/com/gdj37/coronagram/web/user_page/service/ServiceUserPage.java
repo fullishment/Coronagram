@@ -153,4 +153,54 @@ public class ServiceUserPage implements IServiceUserPage{
 	public List<HashMap<String, String>> SearchUser(HashMap<String, String> params) throws Throwable {
 		return iDaoUserPage.SearchUser(params);
 	}
+
+	@Override
+	public List<HashMap<String, String>> getReelsList(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.getReelsList(params);
+	}
+
+	@Override
+	public HashMap<String, String> getLastRAcctNum(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.getLastRAcctNum(params);
+	}
+
+	@Override
+	public int reelsAdds(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.reelsAdds(params);
+	}
+
+	@Override
+	public int reelsAcctAdd(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.reelsAcctAdd(params);
+	}
+
+	@Override
+	public HashMap<String, String> reelsModal(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.reelsModal(params);
+	}
+
+	@Override
+	public int reelsViewCnt(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.reelsViewCnt(params);
+	}
+
+	@Override
+	public int ReelsHeartChk(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.ReelsHeartChk(params);
+	}
+
+	@Override
+	public int addReelsHeart(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.addReelsHeart(params);
+	}
+
+	@Override
+	public int delReelsHeart(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.delReelsHeart(params);
+	}
+
+	@Override
+	public int getReelsLk(HashMap<String, String> params) throws Throwable {
+		return iDaoUserPage.getReelsLk(params);
+	}
 }

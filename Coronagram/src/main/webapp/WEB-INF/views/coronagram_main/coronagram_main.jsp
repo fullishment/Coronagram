@@ -153,8 +153,6 @@
 						slide();
 						LkModal();
 						LkModalAjax();
-						//followAdd();
-						//followDel();
 						crngDtl();
 						delCmt();
 						mediaControl();

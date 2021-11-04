@@ -28,8 +28,8 @@ public class UserPage {
 		mav.setViewName("user_page/user_page");
 		return mav;
 	}
-	@RequestMapping(value="/coronagram/storyAdd" ,method = RequestMethod.POST)
-	public ModelAndView userpage(ModelAndView mav,@RequestParam HashMap<String,String> params) throws Throwable{
+	@RequestMapping(value ="/coronagram/storyAdd")
+	public ModelAndView storyAdd(@RequestParam HashMap<String,String> params, ModelAndView mav)throws Throwable {
 		HashMap<String,String> last = iServiceUserPage.getLastSAcctNum(params);
 
 		mav.addObject("last", last);
@@ -59,6 +59,43 @@ public class UserPage {
 		String result="success";
 		int storyAcctAdd = iServiceUserPage.storyAcctAdd(params);
 		if(storyAcctAdd ==0) {
+			result="failed";
+		}
+		
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value ="/coronagram/reelsAdd")
+	public ModelAndView reelsAdd(@RequestParam HashMap<String,String> params, ModelAndView mav)throws Throwable {
+		HashMap<String,String> last = iServiceUserPage.getLastRAcctNum(params);
+
+		mav.addObject("last", last);
+		mav.setViewName("crng_reels_add/crng_reels_add");
+		return mav;
+	}
+	@RequestMapping(value="/coronagram/reelsAdds")
+	@ResponseBody
+	public String reelsAdds(ModelAndView mav, @RequestParam HashMap<String,String> params)throws Throwable{
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		String result="success";
+		int reelsAdds = iServiceUserPage.reelsAdds(params);
+		if(reelsAdds ==0) {
+			result="failed";
+		}
+		
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+		
+	}
+	@RequestMapping(value="/coronagram/reelsAcctAdd" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String reelsAcctAdd(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		String result="success";
+		int reelsAcctAdd = iServiceUserPage.reelsAcctAdd(params);
+		if(reelsAcctAdd ==0) {
 			result="failed";
 		}
 		
@@ -103,6 +140,103 @@ public class UserPage {
 		modelMap.put("list", list);
 		
 		return mapper.writeValueAsString(modelMap);	
+	}
+	@RequestMapping(value="/coronagram/reels" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String reels(ModelAndView mav,@RequestParam HashMap<String,String> params) throws Throwable {
+		System.out.println(params);
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+
+		List<HashMap<String,String>> reels = iServiceUserPage.getReelsList(params);
+		HashMap<String,String> intro = iServiceUserPage.getIntroM(params);
+		
+		modelMap.put("intro", intro);
+		modelMap.put("reels", reels);
+		
+		return mapper.writeValueAsString(modelMap);	
+	}
+	@RequestMapping(value="/coronagram/ReelsModal" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String ReelsModal(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		
+		HashMap<String,String> reelsModal = iServiceUserPage.reelsModal(params);
+	
+		String result ="success";
+		try {
+			int rViewCnt = iServiceUserPage.reelsViewCnt(params);
+			
+			if(rViewCnt==0) {
+				result="failed";
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			result ="error";
+		}		
+		
+		int reelsHChk = iServiceUserPage.ReelsHeartChk(params);
+		
+		modelMap.put("reelsHChk", reelsHChk);
+		modelMap.put("result", result);		
+		modelMap.put("reelsModal", reelsModal);
+		
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/coronagram/ReelsLK" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String ReelsLK(ModelAndView mav,@RequestParam HashMap<String,String> params) throws Throwable {
+		System.out.println(params);
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+
+		int ReelsLk = iServiceUserPage.getReelsLk(params);
+		int reelsHChk = iServiceUserPage.ReelsHeartChk(params);
+		
+		modelMap.put("reelsHChk", reelsHChk);
+		modelMap.put("ReelsLk", ReelsLk);
+		
+		return mapper.writeValueAsString(modelMap);	
+	}
+	@RequestMapping(value="/coronagram/addReelsHeart",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String addReelsHeart (@RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		String result ="success";
+		try {
+			int ReelshAdd = iServiceUserPage.addReelsHeart(params);
+			
+			if(ReelshAdd==0) {
+				result="failed";
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			result ="error";
+		}
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/coronagram/delReelsHeart",method =RequestMethod.POST,produces="text/json;charset=UTF-8")
+	@ResponseBody
+	public String delReelsHeart (@RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		String result ="success";
+		try {
+			int ReelshDel = iServiceUserPage.delReelsHeart(params);
+			if(ReelshDel==0) {
+				result="failed";
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			result ="error";
+		}
+		
+		modelMap.put("result", result);
+		
+		return mapper.writeValueAsString(modelMap);
 	}
 	@RequestMapping(value="/coronagram/videoList" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
 	@ResponseBody

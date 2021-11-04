@@ -152,4 +152,54 @@ public class DaoUserPage implements IDaoUserPage {
 	public List<HashMap<String, String>> SearchUser(HashMap<String, String> params) throws Throwable {
 		return sqlSession.selectList("userPage.SearchUser",params);
 	}
+
+	@Override
+	public List<HashMap<String, String>> getReelsList(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectList("userPage.getReelsList",params);
+	}
+
+	@Override
+	public HashMap<String, String> getLastRAcctNum(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectOne("userPage.getLastRAcctNum",params);
+	}
+
+	@Override
+	public int reelsAdds(HashMap<String, String> params) throws Throwable {
+		return sqlSession.insert("userPage.reelsAdds",params);
+	}
+
+	@Override
+	public int reelsAcctAdd(HashMap<String, String> params) throws Throwable {
+		return sqlSession.insert("userPage.reelsAcctAdd",params);
+	}
+
+	@Override
+	public HashMap<String, String> reelsModal(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectOne("userPage.reelsModal",params);
+	}
+
+	@Override
+	public int reelsViewCnt(HashMap<String, String> params) throws Throwable {
+		return sqlSession.update("userPage.reelsViewCnt",params);
+	}
+
+	@Override
+	public int ReelsHeartChk(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectOne("userPage.ReelsHeartChk",params);
+	}
+
+	@Override
+	public int addReelsHeart(HashMap<String, String> params) throws Throwable {
+		return sqlSession.insert("userPage.addReelsHeart",params);
+	}
+
+	@Override
+	public int delReelsHeart(HashMap<String, String> params) throws Throwable {
+		return sqlSession.delete("userPage.delReelsHeart",params);
+	}
+
+	@Override
+	public int getReelsLk(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectOne("userPage.getReelsLk",params);
+	}
 }

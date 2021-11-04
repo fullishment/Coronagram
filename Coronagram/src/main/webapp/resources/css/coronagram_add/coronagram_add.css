@@ -234,3 +234,25 @@ body{
 .plus_icon2 span:nth-child(2) {
     transform: rotate(90deg);
 }
+.plus_icon3 {
+    position: absolute;
+    left: 150px;
+    top: 250px;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.plus_icon3 span {
+    position: absolute;
+    display: block;
+    width: 9px;
+    height: 120px;
+    border-radius: 30px;
+   background: linear-gradient(45deg, green, lightgreen 69%);
+}
+.plus_icon3 span:nth-child(2) {
+    transform: rotate(90deg);
+}
