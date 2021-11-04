@@ -374,6 +374,7 @@ function readURL(input) {
   	  <input type="hidden" name="no" value="${param.M_NO}" />
  	  <input type="hidden" name="id" value="${param.M_ID}" />
  	  <input type="hidden" id="checkNick" value="false" />
+ 	  <input type="hidden" id="nickNm" name="nickNm" value="${data.NICK_NM}">
  	  
       <p>이름</p>
       <input type="text" id="mNm" name="mNm" value="${data.M_NM}"><br>

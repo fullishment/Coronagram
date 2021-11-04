@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="resources/css/sign_up/sign_up.css">
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
+
 //이메일 유효성체크
 function CheckEmail(str)
 {
@@ -261,7 +262,7 @@ function inputTelNumber(obj) {
           <input type="text" id="m_nm" name="m_nm" placeholder="이름을 입력하세요"><br>
           
           <span class="title_Name">닉네임</span><br>
-          <input type="text" id="nick_nm" name="nick_nm" placeholder="닉네임을 입력하세요"><br>
+          <input type="text" id="nick_nm" name="nick_nm" placeholder="닉네임을 입력하세요" style="text-transform: lowercase;"><br>
           	<p id="checkNc" class="checkSpan"></p><br/>
           
           <span class="title_Name">패스워드</span><br>

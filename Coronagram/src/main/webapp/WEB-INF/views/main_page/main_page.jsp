@@ -80,7 +80,7 @@
           <a href="MapAPI">해외</a>
         </ul>
       </a>
-      <a href="#" class="cm_mTitle" id="cm_mTitle">
+      <a href="coinfo_main" class="cm_mTitle" id="cm_mTitle">
         <div class="cm_info"></div>Corona Info
         <ul class="cm_mcon" id="cm_mcon">
           <a href="coinfo_infolist">관련 정보</a> <br>
@@ -102,7 +102,7 @@
       <a href="#" class="cm_mTitle" id="cm_mTitle">
         <div class="cm_qna"></div>Service Center
         <ul class="cm_mcon" id="cm_mcon">
-          <a href="qna">FAQ</a><br>
+          <a href="qna">FAA</a><br>
         </ul>
       </a>
     </div>
