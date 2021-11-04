@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="resources/css/admin_coinfo/admin_coinfo.css?after">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css'>
 <script type="text/javascript" src="resources/script/jquery/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="resources/script/jquery/jquery.form.js"></script>
 <script type="text/javascript"
@@ -163,7 +164,7 @@ function checkVal(sel){
         <div class="sc">
             <div class="scHead">
                 <div>
-                    <h4>관리자 페이지</h4>
+                    <h4><i class="fas fa-user"></i> 관리자 페이지</h4>
                 </div>
                 <div>
                     <h2><p>코로나 정보 게시판</p></h2>

@@ -113,9 +113,6 @@ $(document).on('click', '.local_link', function(e){
         <div class="sc">
             <div class="scHead">
                 <div>
-                    <h4>관리자 페이지</h4>
-                </div>
-                <div>
                     <h2><p>코로나 정보 게시판</p></h2>
                 </div>
             </div>

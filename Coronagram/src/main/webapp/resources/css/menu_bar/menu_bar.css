@@ -32,12 +32,12 @@
             left: 60px;
         }
         .cm_user_name {
-            right: 380px;
+            right: 335px;
             font-size: 10pt;
             font-family: "Noto Sans KR", sans-serif;
         }
         .cm_home {
-            right: 290px;
+            right: 260px;
         }
 
         .cm_msg {
@@ -390,7 +390,7 @@
    			display: none;
 		}
 		.cm_home {
-		    right: 270px;
+		    right: 240px;
 		}
 		.cm_msg {
 		    right: 180px;

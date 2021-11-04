@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="resources/css/admin_user/admin_user.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css'>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript">
 	var page = 1;
@@ -185,7 +186,7 @@
     </header>
 	<main>
         <div>
-            <h4 id="adm_page">관리자페이지</h4>
+            <h4 id="adm_page"><i class="fas fa-user"></i> 관리자페이지</h4>
         </div>
         <div class="top_text">
             <h2>회원관리</h2>

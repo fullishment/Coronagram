@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="resources/css/admin_qna/admin_qna.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css'>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script>
 $(document).ready(function(){
@@ -174,7 +175,7 @@ $(document).ready(function(){
         <div class="sc" id="sc">
             <div class="scHead" id="scHead">
                 <div class="scName1" id="scName1">
-                    <h4><p>관리자 페이지</p></h4>
+                    <h4><p><i class="fas fa-user"></i> 관리자 페이지</p></h4>
                 </div>
                 <div class="scName2" id="scTitle2">
                     <h2><p>Q&A 게시판</p></h2>

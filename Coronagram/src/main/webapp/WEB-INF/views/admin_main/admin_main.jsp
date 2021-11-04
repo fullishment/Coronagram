@@ -11,12 +11,10 @@
 <link rel="stylesheet" href="resources/css/admin_main/admin_main.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
-<script
-	src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script type="text/javascript"
-		src="resources/script/jquery/jquery.slimscroll.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css'>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script type="text/javascript" src="resources/script/jquery/jquery.slimscroll.js"></script>
 <script>
 $(document).ready(function() {
 	$(".adminList").slimScroll({
@@ -92,7 +90,7 @@ $(document).ready(function() {
 			<div class="scHead" id="scHead">
 				<div class="scName1" id="scName1">
 					<h5>
-						<p>관리자 페이지</p>
+						<p><i class="fas fa-user"></i> 관리자 페이지</p>
 					</h5>
 				</div>
 				<div class="scName2" id="scTitle2">
