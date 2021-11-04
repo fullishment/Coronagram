@@ -5,8 +5,10 @@ getList();
 let cr_dt = dataA[0].date;
 	document.getElementById('createDt').firstChild.nodeValue ="기준 시간 :" + cr_dt;
 
-$(function () {
-
+$(document).ready(function () {
+	
+	$("#userForm").submit()
+	
 	function setFlatTheme() {
 		$("body").toggleClass("flat-theme");
 		$("#rad-color-opts").toggleClass("hide");

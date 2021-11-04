@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
 
     <link rel="stylesheet" href="resources/css/admin_chart/admin_chart.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css" type="text/css">
     <link rel="stylesheet" href="resources/css/admin_chart/3.3.4bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jvectormap/2.0.4/jquery-jvectormap.min.css">
@@ -94,6 +94,10 @@
     <aside>
 
     </aside>
+    
+    <form action="admin_chart" id="userForm" method="post">
+   		 <input type="hidden" name="m_no" value="${sMNo}">
+    </form>
     <main>
         <div class="main_title">
             <h1>코로나 통계 자료</h1>
@@ -254,7 +258,7 @@
                     </div>
                     <div class="row">
                         <div class="main_title">
-                            <h1>방문자 통계 자료</h1>
+                            <h1>가입자 통계 자료</h1>
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="panel panel-default">

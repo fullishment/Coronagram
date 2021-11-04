@@ -30,7 +30,6 @@ public class CalendarController {
 	public ModelAndView calendar(HttpServletResponse response, HttpSession session, @RequestParam HashMap<String, String> params, ModelAndView mav)throws Throwable {
 		HashMap<String,String> data = iCalendarService.getPoint(params);
 		
-		mav.addObject("point",data);
 		
 		if(session.getAttribute("sMNo") != null) {
 			
