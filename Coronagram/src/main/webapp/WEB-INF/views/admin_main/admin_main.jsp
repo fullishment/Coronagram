@@ -6,13 +6,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>AdminMain</title>
 <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">
 <link rel="stylesheet" href="resources/css/admin_main/admin_main.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css'>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script type="text/javascript" src="resources/script/jquery/jquery.slimscroll.js"></script>
 <script>
@@ -20,7 +25,80 @@ $(document).ready(function() {
 	$(".adminList").slimScroll({
 		height: "150px"
 	});
+
+		let today = new Date();
+		let todate = today.getDate();
+		let tomonth = today.getMonth() + 1;
+		let todate6 = today.getDate(today.setDate(today.getDate()-6));
+		let month6 = today.getMonth(today.setDate(today.getDate())) + 1;
+		let todate5 = today.getDate(today.setDate(today.getDate()+1));
+		let month5 = today.getMonth(today.setDate(today.getDate())) + 1;
+		let todate4 = today.getDate(today.setDate(today.getDate()+1));
+		let month4 = today.getMonth(today.setDate(today.getDate())) + 1;
+		let todate3 = today.getDate(today.setDate(today.getDate()+1));
+		let month3 = today.getMonth(today.setDate(today.getDate())) + 1;
+		let todate2 = today.getDate(today.setDate(today.getDate()+1));
+		let month2 = today.getMonth(today.setDate(today.getDate())) + 1;
+		let todate1 = today.getDate(today.setDate(today.getDate()+1));
+		let month1 = today.getMonth(today.setDate(today.getDate())) + 1;
+		
+		let weekdata = getDataList().weekData;
+		
+	 	new Morris.Bar({
+			element: "barChart2",
+			data: [
+				{
+					day: month6 + '월' + todate6 + "일",
+					join: weekdata['6DAYS_AGO']
+				},
+				{
+					day: month5 + '월' + todate5 + "일",
+					join: weekdata['5DAYS_AGO']
+				},
+				{
+					day: month4 + '월' +  todate4 + "일",
+					join: weekdata['4DAYS_AGO']
+				},
+				{
+					day: month3 + '월' +  todate3 + "일",
+					join: weekdata['3DAYS_AGO']
+				},
+				{
+					day: month2 + '월' +  todate2 + "일",
+					join: weekdata['2DAYS_AGO']
+				},
+				{
+					day: month1 + '월' +  todate1 + "일",
+					join: weekdata['1DAYS_AGO']
+				},	
+				{
+					day: tomonth + '월' +  todate + "일", 
+					join: weekdata.TODAY
+				}
+			],
+			xkey: "day",
+			ykeys: ["join"],
+			barColors: ["#00619C"],
+			labels: ["가입자"]
+		});
 });
+
+function getDataList(){
+	let day6;
+	$.ajax({
+		url : "adminChartAjax",
+		type : "post",
+		async : false,
+		data : {},
+		success : function(res){
+			day6 = res;
+		},
+		error : function(request, status, error){
+			console.log(error);	
+		}
+	});
+	return day6;
+}
 </script>	
 </head>
 <body>
@@ -175,6 +253,9 @@ $(document).ready(function() {
 						<div class="button-group">
 							<a href="admin_chart"><button type="button" class="btn btn-primary">+</button></a>
 						</div>
+					</section>
+					<section class="page-body">
+						<div id="barChart2" class="chart"></div>
 					</section>
 				</article>
 
