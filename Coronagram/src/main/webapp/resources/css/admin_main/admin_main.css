@@ -103,6 +103,7 @@ p {
 .btn-primary {
 	color: white;
 	font-weight: 800;
+	border-radius: 15px;
 	background-color: #fd1d1dea;
 	border-color: none;
 	font-size: 13pt;

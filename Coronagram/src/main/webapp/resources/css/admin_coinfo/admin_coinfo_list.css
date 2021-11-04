@@ -136,7 +136,7 @@ table {
   box-shadow: 0 5px 10px #e1e5ee;
   background-color:white;
   text-align:left;
-  overflow:hidden;
+  overflow: hidden;
   width : 100%;
 }
 thead {
