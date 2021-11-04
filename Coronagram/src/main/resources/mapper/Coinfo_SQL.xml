@@ -3,10 +3,10 @@
 <mapper namespace="coinfo">
 
 	<select id="getInfolist" parameterType="hashmap" resultType="hashmap">
-		SELECT INFO_NO, INFO_TITLE, INFO_SUBHD, REP_IMG, DISP_YN
+		SELECT INFO_NO, INFO_TITLE, INFO_SUBHD, REP_IMG
 		FROM INFO
 		WHERE DEL = 1
-			  AND DISP_YN = 'Y'
+		AND DISP_YN = 'Y'
 		ORDER BY INFO_NO ASC
 	</select>
 
