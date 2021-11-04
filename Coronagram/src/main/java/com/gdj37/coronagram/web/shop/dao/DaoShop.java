@@ -194,6 +194,12 @@ public class DaoShop implements IDaoShop {
 		return sqlSession.update("shop.prodDel",params);
 	}
 
+	@Override
+	public HashMap<String, String> getStatCnt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("shop.getStatCnt", params);
+	}
+
 
 
 

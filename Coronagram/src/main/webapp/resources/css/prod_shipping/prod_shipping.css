@@ -42,8 +42,8 @@ body {
   }
   
   .bc .bc_item:after {
-    /*counter-increment: breadcrumb;
-    content: counter(breadcrumb);*/
+    counter-increment: breadcrumb;
+    content: counter(breadcrumb);
     position: absolute;
     top: 0px;
     left: calc(50% - 45px);
@@ -98,6 +98,11 @@ th{
   	margin-top: 10px;
     flex:1;
     float : right;
+    position: relative;
+    left: 20px;
+  }
+  h3{
+  	white-space: nowrap;
   }
   .btn {
       border: none;
@@ -252,7 +257,11 @@ th {
     border-radius: 7px;
     background: #ffc107;
 }
-
+.bc_item span {
+    display: block;
+    font-weight: 700;
+    text-decoration-line: underline;
+}
 
 
 /* 미디어쿼리 */

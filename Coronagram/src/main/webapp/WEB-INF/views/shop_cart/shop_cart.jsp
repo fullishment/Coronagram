@@ -141,7 +141,8 @@
 	 				 							    		dataType : "json",
 	 				 							    		data : params,
 	 				 							    		success : function(res){
-	 				 							    			location.href="prodShipping";
+	 				 							    			location.href="prodShipping"
+	 				 	
 	 				 							    		},
 	 				 							   			error : function(request, status, error){
 	 				 							       			console.log(error);

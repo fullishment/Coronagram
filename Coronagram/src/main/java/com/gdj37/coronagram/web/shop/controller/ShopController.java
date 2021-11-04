@@ -177,7 +177,12 @@ public class ShopController {
 	
 	
 	@RequestMapping(value="/prodShipping")
-	public ModelAndView prodShipping(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+	public ModelAndView prodShipping(ModelAndView mav, @RequestParam HashMap<String,String> params,HttpSession session) throws Throwable {
+		if(session.getAttribute("sMNo") != null) {
+			params.put("sMNo", session.getAttribute("sMNo").toString());
+			HashMap<String,String> data = iServiceShop.getStatCnt(params);
+			mav.addObject("data", data);
+		}
 		mav.setViewName("prod_shipping/prod_shipping");
 		return mav;
 	}

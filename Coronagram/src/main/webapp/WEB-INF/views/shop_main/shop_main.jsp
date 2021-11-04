@@ -46,7 +46,7 @@
 	  for(var data of list){
 		html+= "<div class=\"card\" no=\""+data.PROD_NO+"\">                                                                                          ";
         html+= "<div class=\"top-bar\">                                                                                       ";
-        html+= "  <i class=\"fab fa-apple\"></i>                                                                              ";
+        html+= "  <i class=\"fab fa-instagram\"></i>                                                                               ";
         html+= "  <em class=\"stocks\">"+data.CAT_NM+"</em>                                                                              ";
         html+= "</div>                                                                                                      ";
         html+= "<div class=\"img-container\">                                                                                 ";
@@ -56,7 +56,7 @@
         html+= "  <div class=\"name-fav\">                                                                                    ";
         html+= "    <strong class=\"product-name\">"+data.PROD_NM+"</strong>                                                       ";
         html+= "    <button class=\"heart\">                                                                               ";
-        html+= "        <i class=\"fas fa-heart\"></i>												";
+        html+= "        <i class=\"fab fa-instagram\"></i>												";
         html+= "  </button>                                                                  ";
         html+= "  </div>                                                                                                    ";
         html+= "  <div class=\"wrapper\">                                                                                     ";

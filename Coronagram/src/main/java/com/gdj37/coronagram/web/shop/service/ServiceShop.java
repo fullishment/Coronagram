@@ -196,6 +196,12 @@ public class ServiceShop implements IServiceShop{
 		return iDaoShop.prodDel(params);
 	}
 
+	@Override
+	public HashMap<String, String> getStatCnt(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return iDaoShop.getStatCnt(params);
+	}
+
 
 
 	

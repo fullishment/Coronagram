@@ -88,11 +88,11 @@
             </div>
             <div>
                 <ul class="bc">
-                    <li class="bc_item">주문접수</li>
-                    <li class="bc_item">상품 준비중</li>
-                    <li class="bc_item">배송 준비중</li>
-                    <li class="bc_item">배송중</li>
-                    <li class="bc_item">배송 완료</li>
+                    <li class="bc_item">주문접수<span>${data.ONE}</span></li>
+                    <li class="bc_item">상품 준비중<span>${data.TWO}</span></li>
+                    <li class="bc_item">배송 준비중<span>${data.THREE}</span></li>
+                    <li class="bc_item">배송중<span>${data.FOUR}</span></li>
+                    <li class="bc_item">배송 완료<span>${data.FIVE}</span></li>
                   </ul>
             </div>
         </nav>
