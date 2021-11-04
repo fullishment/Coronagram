@@ -2,42 +2,40 @@ var listAvg = new Array();
 var listWeek = new Array();
 
 $(document).ready(function() {
+	getDayList();
 	getList();
 	getWeekList();
 	getWorldList();
-//	console.log(dataA[1].dc);
 	
-
-	
-	let td_cnt = dataA[0].dc - dataA[1].dc;
+	let td_cnt = dataD[0].dc - dataD[1].dc;
 	const td_cnt2 = td_cnt.toString()
 	  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 	
-	let tt_cnt = dataA[0].dc;
+	let tt_cnt = dataD[0].dc;
 	const tt_cnt2 = tt_cnt.toString()
 	  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 	
-	let c_cnt = dataA[0].cc;
+	let c_cnt = dataD[0].cc;
 	const c_cnt2 = c_cnt.toString()
 	  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 	
-	let dt_cnt = dataA[0].dec - dataA[1].dec;
+	let dt_cnt = dataD[0].dec - dataD[1].dec;
 	const dt_cnt2 = dt_cnt.toString()
 	  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 	
-	let n_td_cnt = ((dataA[0].dc-dataA[1].dc)-(dataA[1].dc-dataA[2].dc))*1;
+	let n_td_cnt = ((dataD[0].dc-dataD[1].dc)-(dataD[1].dc-dataD[2].dc))*1;
 	const n_td_cnt2 = n_td_cnt.toString()
 	  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 	
-	let y_acc_cnt = dataA[1].dc;
+	let y_acc_cnt = dataD[1].dc;
 	const y_acc_cnt2 = y_acc_cnt.toString()
 	  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 	
-	let n_cl_cnt = (dataA[0].cc-dataA[1].cc)*1;
+	let n_cl_cnt = (dataD[0].cc-dataD[1].cc)*1;
 	const n_cl_cnt2 = n_cl_cnt.toString()
 	  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 	
-	let y_dt_cnt = ((dataA[0].dec-dataA[1].dec)-(dataA[1].dec-dataA[2].dec))*1;
+	let y_dt_cnt = ((dataD[0].dec-dataD[1].dec)-(dataD[1].dec-dataD[2].dec))*1;
 	const y_dt_cnt2 = y_dt_cnt.toString()
 	  .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 	
@@ -51,10 +49,10 @@ $(document).ready(function() {
 	document.getElementById('dtCnt').innerHTML = y_dt_cnt2;
 	
 	if(document.getElementById('tdCnt').innerHTML.substr(0,1)!='-'){
-		document.getElementById('tdCnt').innerHTML='+'+((dataA[0].dc-dataA[1].dc)-(dataA[1].dc-dataA[2].dc))*1;
+		document.getElementById('tdCnt').innerHTML='+'+((dataD[0].dc-dataD[1].dc)-(dataD[1].dc-dataD[2].dc))*1;
 	};
 	if(document.getElementById('dtCnt').innerHTML.substr(0,1)!='-'){
-		document.getElementById('dtCnt').innerHTML='+'+((dataA[0].dec-dataA[1].dec)-(dataA[1].dec-dataA[2].dec))*1;
+		document.getElementById('dtCnt').innerHTML='+'+((dataD[0].dec-dataD[1].dec)-(dataD[1].dec-dataD[2].dec))*1;
 	};
 	
 });
@@ -63,6 +61,7 @@ $(document).ready(function() {
 var dataA = new Array();
 var dataB = new Array();
 var dataC = new Array();
+var dataD = new Array();
 var index = 0;
 
 function getList(){
@@ -217,4 +216,37 @@ function drawWorldList(z) {
 				index++;
 		});
 return dataC;
+}
+
+
+function getDayList(){
+	$.ajax({
+		type: 'POST', //통신 방식을 지정합니다
+		async :false,
+		url: "dayCntAjax", //통신을 원하는 URL주소를 입력합니다
+		dataType: 'xml',//서버로부터 받을 데이터 타입을 입력합니다.
+		success: function (res) { // 통신 성공시 호출해야할 함수
+		console.log($(res).find('totalCount').text());
+		drawDayList(res);
+		console.log(res);
+		}
+	});
+}
+
+function drawDayList(z) {
+
+	$(z).find('item').each(function(index, item){
+
+				 var tTmp =  {
+					"dc" : parseInt($(this).find('decideCnt').text()),
+					"dec" : parseInt($(this).find('deathCnt').text()),
+					"cc" : parseInt($(this).find('clearCnt').text()),
+					"date" : $(this).find('createDt').text()
+				}; 
+				
+				dataD[index]=tTmp;
+				index++;
+	
+		});
+	return dataD;
 }

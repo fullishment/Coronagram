@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>출석체크</title>
+<title>CheckAttendance</title>
 
 <link rel="stylesheet"	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
