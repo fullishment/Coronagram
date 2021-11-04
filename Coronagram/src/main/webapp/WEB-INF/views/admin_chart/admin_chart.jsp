@@ -172,15 +172,15 @@
                             <div class="condition">
                                 <div class="coronic">
                                     <div class="coronics"></div>
-                                    <span>확진자</span>
+                                    <span>누적 확진자</span>
                                 </div>
                                 <div class="dead">
                                     <div class="deads"></div>
-                                    <span>사망자</span>
+                                    <span>누적 사망자</span>
                                 </div>
                                 <div class="fl_rec">
                                     <div class="fl_recs"></div>
-                                    <span>완치자</span>
+                                    <span>누적 완치자</span>
                                 </div>
                             </div>
                         </div>

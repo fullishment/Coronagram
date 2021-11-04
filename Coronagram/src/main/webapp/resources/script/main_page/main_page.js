@@ -1,5 +1,6 @@
+
 // 상단 메인 배너 slick
-getWeekList();
+
 $('.main-slider').slick({
     dots: true,
     fade: true,
@@ -241,17 +242,19 @@ const slides = [
     }];
 ReactDOM.render(React.createElement(CitiesSlider, { slides: slides }), document.querySelector('#app'));
 
+getWeekList();
+getList();
 //doughnut chart
 var doughnut = document.getElementById('doughnut');
 doughnut.height = 200;
 var doughnutConfig = new Chart(doughnut, {
     type: 'doughnut',
     data: {
-        labels: ['data-1', 'data-2', 'data-3', 'data-4', 'data-5', 'data-6'],
+        labels: ['아스트로제네카', '화이자', '모더나', '얀센'],
         datasets: [{
             label: '# of data',
-            data: [1100, 3000, 2000, 1000, 2000, 5000],
-            backgroundColor: ['rgba(0, 230, 118, 1)', 'rgba(255, 206, 86, 1)', 'rgba(255,99,132,1)', 'rgba(255,0,255,1)', 'rgba(255,0,0,1)', 'rgba(0,0,255,1)'],
+            data: [10992181, 20837564, 5578806, 1486681],
+            backgroundColor: ["#025373", "#C4EEF2", "#77D9D9", "#F2C6AC"],
             borderWidth: 1,
             fill: false
         }]
@@ -272,24 +275,24 @@ var lineConfig = new Chart(line, {
             label: '확진자', // Name the series
             data: [listWeek[6].dc, listWeek[5].dc, listWeek[4].dc, listWeek[3].dc, listWeek[2].dc, listWeek[1].dc, listWeek[0].dc], // Specify
             fill: false,
-            borderColor: '#FFA500', // Add custom color border (Line)
-            backgroundColor: '#FFA500', // Add custom color background (Point and Fill)
+            borderColor: '#FFD900', // Add custom color border (Line)
+            backgroundColor: '#FFD900', // Add custom color background (Point and Fill)
             borderWidth: 1 // Specify bar border width
         },
         {
             label: '사망자', // Name the series
             data: [listWeek[6].dec, listWeek[5].dec, listWeek[4].dec, listWeek[3].dec, listWeek[2].dec, listWeek[1].dec, listWeek[0].dec],
             fill: false,
-            borderColor: '#FF0000', // Add custom color border (Line)
-            backgroundColor: '#FF0000', // Add custom color background (Point and Fill)
+            borderColor: '#FF358B', // Add custom color border (Line)
+            backgroundColor: '#FF358B', // Add custom color background (Point and Fill)
             borderWidth: 1 // Specify bar border width
         },
         {
         	label: '완치자', // Name the series
         	data: [listWeek[6].cc, listWeek[5].cc, listWeek[4].cc, listWeek[3].cc, listWeek[2].cc, listWeek[1].cc, listWeek[0].cc],
         	fill: false,
-        	borderColor: '#7CFC00', // Add custom color border (Line)
-        	backgroundColor: '#7CFC00', // Add custom color background (Point and Fill)
+        	borderColor: '#01B0F0', // Add custom color border (Line)
+        	backgroundColor: '#01B0F0', // Add custom color background (Point and Fill)
         	borderWidth: 1 // Specify bar border width
     }
         ],

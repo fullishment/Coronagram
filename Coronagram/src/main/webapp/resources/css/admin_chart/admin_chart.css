@@ -457,63 +457,6 @@ a:active {
   display: inline-block;
   width: 100%;
 }
-.vaccine_name{
-  display: flex;
-  justify-content: center;
-  margin-right: 75%;
-  margin-left: 50%;
-}
-.az, .pfizer, .moderna, .jansen{
- display: inherit;
- margin: auto;
-
-}
-.vaccine_name p{
-  width: 150px;
-  margin: auto;
-  padding: 0;
-  font-size: 15px;
-}
-.az span,
-.pfizer span,
-.moderna span,
-.jansen span{
-  white-space: nowrap;
-width: auto;
-margin: auto;
-margin-top: 5px;
-margin-left:10px;
-padding: 0;
-font-size: 12px;
-}
-.azs{
-  background-color: #E67A77;
-  height: 15px;
-  width: 15px;
-  margin-top: 5px;
-  margin-left: 5px;
-}
-.pfizers{
-  background-color: #D9DD81;
-  height: 15px;
-  width: 15px;
-  margin-top: 5px;
-  margin-left: 5px;
-}
-.modernas{
-  background-color: #79D1CF;
-  height: 15px;
-  width: 15px;
-  margin-top: 5px;
-  margin-left: 5px;
-}
-.jansens{
-  background-color: #95D7BB;
-  height: 15px;
-  width: 15px;
-  margin-top: 5px;
-  margin-left: 5px;
-}
 
 .corona_condition,
 .joinInfo,
@@ -527,7 +470,8 @@ font-size: 12px;
 
 .condition,
 .joinInfos,
-.withdrawalInfos
+.withdrawalInfos,
+.vaccine_name
 {
   display: flex;
   justify-content: center;
@@ -541,7 +485,11 @@ font-size: 12px;
 .avgJoin,
 .totalJoin,
 .totalWithdrawal,
-.avgWithdrawal
+.avgWithdrawal,
+.az, 
+.pfizer, 
+.moderna, 
+.jansen
 {
  display: inherit;
  margin: auto;
@@ -550,7 +498,8 @@ font-size: 12px;
 
 .condition p,
 .joinInfos p,
-.withdrawalInfos p
+.withdrawalInfos p,
+.vaccine_name p
 {
   width: 150px;
   margin: auto;
@@ -564,7 +513,11 @@ font-size: 12px;
 .avgJoin span,
 .totalJoin span,
 .totalWithdrawal span,
-.avgWithdrawal span
+.avgWithdrawal span,
+.az span,
+.pfizer span,
+.moderna span,
+.jansen span
 {
 	white-space: nowrap;
 	width: auto;
@@ -575,50 +528,82 @@ font-size: 12px;
 	font-size: 12px;
 }
 
+.azs{
+  background-color: #025373;
+  height: 15px;
+  width: 15px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.pfizers{
+  background-color: #C4EEF2;
+  height: 15px;
+  width: 15px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.modernas{
+  background-color: #77D9D9;
+  height: 15px;
+  width: 15px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.jansens{
+  background-color: #F2C6AC;
+  height: 15px;
+  width: 15px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
 .coronics{
-  background-color: #D9DD81;
+  background-color: #FFD900;
   height: 15px;
   width: 15px;
   margin-top: 5px;
   margin-left: 5px;
 }
 .fl_recs{
-  background-color: #79D1CF;
+  background-color: #01B0F0;
   height: 15px;
   width: 15px;
   margin-top: 5px;
   margin-left: 5px;
 }
 .deads{
-  background-color: #E67A77;
+  background-color: #FF358B;
   height: 15px;
   width: 15px;
   margin-top: 5px;
   margin-left: 5px;
 }
 .avgJoins{
-  background-color: #79D1CF;
+  background-color: #00ABD8;
   height: 15px;
   width: 15px;
   margin-top: 5px;
   margin-left: 5px;
 }
 .totalJoins{
-  background-color: #E67A77;
+  background-color: #00619C;
   height: 15px;
   width: 15px;
   margin-top: 5px;
   margin-left: 5px;
 }
 .avgWithdrawals{
-  background-color: #79D1CF;
+  background-color: #FFC635;
   height: 15px;
   width: 15px;
   margin-top: 5px;
   margin-left: 5px;
 }
 .totalWithdrawals{
-  background-color: #E67A77;
+  background-color: #ED4349;
   height: 15px;
   width: 15px;
   margin-top: 5px;
@@ -637,33 +622,33 @@ font-size: 12px;
 }
 .man{
   white-space: nowrap;
-  background-color: #f75353;
+  background-color: #000000;
   width: 20px;
   height: 20px;
   
 }
 .dia{
-  background-color: #f87d43;
+  background-color: #023859;
   width: 20px;
   height: 20px;
 }
 .pla{
-  background-color: #cafa1e;
+  background-color: #025373;
   width: 20px;
   height: 20px;
 }
 .gol{
-  background-color: #12e23f;
+  background-color: #04ADBF;
   width: 20px;
   height: 20px;
 }
 .sil{
-  background-color: #092ee6;
+  background-color: #04D9D9;
   width: 20px;
   height: 20px;
 }
 .bron{
-  background-color: #a859f1;
+  background-color: #BF4D0B;
   width: 20px;
   height: 20px;
 }

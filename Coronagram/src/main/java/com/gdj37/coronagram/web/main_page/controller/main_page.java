@@ -29,9 +29,10 @@ public class main_page {
 		return mav;
 	}
 	
+	
 	@RequestMapping(value = "/weekDataAjax", method = RequestMethod.POST, produces = "test/xml;charset=UTF-8")
 	@ResponseBody
-	public String testApiAjax() throws Throwable{
+	public String weekDataAjax() throws Throwable{
 		
 		LocalTime nowTime = LocalTime.now();
 		LocalTime limitTime = LocalTime.of(9, 59, 59);
@@ -66,6 +67,7 @@ public class main_page {
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Content-type", "application/json");
         System.out.println("Response code: " + conn.getResponseCode());
+        System.out.println("URL: " + urlBuilder.toString());
         BufferedReader rd;
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
             rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
