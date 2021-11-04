@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>AdminChart</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
 
     <link rel="stylesheet" href="resources/css/admin_chart/admin_chart.css" type="text/css">
@@ -159,7 +159,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">월별 코로나 현황<ul class="rad-panel-action">
-                                            <li><i class="fa fa-rotate-right"></i></li>
+ <!--                                            <li><i class="fa fa-rotate-right"></i></li> -->
                                         </ul>
                                     </h3>
                                 </div>
@@ -194,7 +194,7 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<h3 class="panel-title">주간 코로나 현황<ul class="rad-panel-action">
-											<li><i class="fa fa-rotate-right"></i></li>
+											<!-- <li><i class="fa fa-rotate-right"></i></li> -->
 										</ul>
 									</h3>
 								</div>
@@ -221,7 +221,7 @@
                             <div class=" panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">백신 접종 현황<ul class="rad-panel-action">
-                                            <li><i class="fa fa-rotate-right"></i></li>
+                                            <!-- <li><i class="fa fa-rotate-right"></i></li> -->
                                         </ul>
                                     </h3>
                                 </div>
@@ -256,12 +256,11 @@
                         <div class="main_title">
                             <h1>방문자 통계 자료</h1>
                         </div>
-                        <div class="col-md-6 col-lg-12">
-
+                        <div class="col-md-6 col-lg-6">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">월별 가입자 현황<ul class="rad-panel-action">
-                                            <li><i class="fa fa-rotate-right"></i></li>
+                                            <!-- <li><i class="fa fa-rotate-right"></i></li> -->
                                         </ul>
                                     </h3>
                                 </div>
@@ -285,10 +284,33 @@
                         <div class="col-md-6 col-lg-6">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
+                                    <h3 class="panel-title">월별 탈퇴자 현황<ul class="rad-panel-action">
+                                            <!-- <li><i class="fa fa-rotate-right"></i></li> -->
+                                        </ul>
+                                    </h3>
+                                </div>
+								<div class="panel-body">
+									<div id="barChart5" class="rad-chart"></div>
+								</div>
+								<div class="withdrawalInfo">
+									<div class="withdrawalInfos">
+										<div class="totalWithdrawal">
+											<div class="totalWithdrawals"></div>
+											<span>총 탈퇴자</span>
+										</div>
+										<div class="avgWithdrawal">
+											<div class="avgWithdrawals"></div>
+											<span>평균 탈퇴자</span>
+										</div>
+									</div>
+								</div>
+							</div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
                                     <h3 class="panel-title">주간 가입자 현황<ul class="rad-panel-action">
-                                            <li><i class="fa fa-rotate-right"></i></li>
-
-                                            </li>
+                                            <!-- <li><i class="fa fa-rotate-right"></i></li> -->
                                         </ul>
                                     </h3>
                                 </div>
@@ -301,7 +323,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">가입자 연령대 현황<ul class="rad-panel-action">
-                                            <li><i class="fa fa-rotate-right"></i></li>
+                                            <!-- <li><i class="fa fa-rotate-right"></i></li> -->
                                         </ul>
                                     </h3>
                                 </div>
@@ -319,7 +341,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">회원 등급<ul class="rad-panel-action">
-                                            <li><i class="fa fa-rotate-right"></i></li>
+                                            <!-- <li><i class="fa fa-rotate-right"></i></li> -->
                                         </ul>
                                     </h3>
                                 </div>
@@ -332,7 +354,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">회원 등급 표<ul class="rad-panel-action">
-                                            <li><i class="fa fa-rotate-right"></i></li>
+                                            <!-- <li><i class="fa fa-rotate-right"></i></li> -->
                                         </ul>
                                     </h3>
                                 </div>
@@ -411,7 +433,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">베스트 5 판매 물품 현황<ul class="rad-panel-action">
-                                            <li><i class="fa fa-rotate-right"></i></li>
+                                            <!-- <li><i class="fa fa-rotate-right"></i></li> -->
                                         </ul>
                                     </h3>
                                 </div>
@@ -425,8 +447,8 @@
             </div>
         </section>
     </main>
-    <!-- <script src="../../resources/script/admin_chart/doughnutchart2.js"></script> -->
     <script src="resources/script/openAPI/CoronaCntApi.js"></script>
+    <!-- <script src="resources/script/openAPI/CoronaWeekCntApi.js"></script> -->
     <script src="resources/script/admin_chart/admin_chart.js"></script>
     <script src="resources/script/menu_bar/menu_bar.js"></script>
 </body>

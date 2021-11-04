@@ -38,4 +38,9 @@ public class ServiceAdmin_Chart implements IServiceAdmin_Chart{
 	public List<HashMap<String, Object>> getSellData(HashMap<String, String> params) throws Throwable {
 		return iDaoAdmin_Chart.getSellData(params);
 	}
+
+	@Override
+	public List<HashMap<String, Object>> getWithdrawalData(HashMap<String, String> params) throws Throwable {
+		return iDaoAdmin_Chart.getWithdrawalData(params);
+	}
 }

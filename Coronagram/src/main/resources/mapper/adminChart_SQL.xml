@@ -54,6 +54,34 @@ WHERE ROWNUM BETWEEN 1 AND 12
 ORDER BY M1.DT
 </select>
 
+<select id ="getWithdrawalData" resultType = "hashmap">
+SELECT M1.CNT
+     , AVGCNT
+     , M1.DDT
+     , ROW_NUMBER() OVER(ORDER BY M1.DDT DESC) PERIOD
+  FROM (SELECT COUNT(*) AS CNT
+           , TO_CHAR(DEL_DT,'YYYY-MM') AS DDT
+          FROM M
+         WHERE DEL_DT IS NOT NULL
+      GROUP BY TO_CHAR(DEL_DT,'YYYY-MM') )M1
+	INNER JOIN (SELECT ROUND(CM.CNT/LM.LASTDAY,2) AVGCNT
+		 			 , CM.DEL_DT
+           		  FROM (SELECT COUNT(*) CNT
+           		             , TO_CHAR(DEL_DT,'YYYY-MM') DEL_DT
+                    	  FROM M
+                 	     WHERE DEL_DT IS NOT NULL
+                      GROUP BY TO_CHAR(DEL_DT,'YYYY-MM'))CM
+              	    INNER JOIN(SELECT DISTINCT(TO_CHAR(LAST_DAY(DEL_DT),'DD'))LASTDAY
+      				                , TO_CHAR(DEL_DT,'YYYY-MM')DEL_DT
+                     		     FROM M
+                    	   	 	 WHERE DEL_DT IS NOT NULL)LM 
+                     			   ON CM.DEL_DT = LM.DEL_DT) CCM
+       						ON M1.DDT = CCM.DEL_DT
+WHERE ROWNUM BETWEEN 1 AND 12
+ORDER BY M1.DDT
+
+</select>
+
 <select id="getSellData" resultType = "hashmap">
 SELECT P.PROD_NO,P.PROD_NM, CNT , RNK
       FROM PRODUCT P
@@ -63,5 +91,6 @@ SELECT P.PROD_NO,P.PROD_NM, CNT , RNK
                             GROUP BY PROD_NO) OP) ROP
           ON P.PROD_NO = ROP.PROD_NO
       <![CDATA[WHERE ROP.RNK <= 5]]>
+      ORDER BY RNK
 </select>
 </mapper>

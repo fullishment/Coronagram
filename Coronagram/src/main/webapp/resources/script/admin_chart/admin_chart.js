@@ -1,9 +1,6 @@
 /////Last modified 02/06/2016
 getList();
 getWeekList();
-let cr_dt = dataA[0].date;
-	document.getElementById('createDt').firstChild.nodeValue ="기준 시간 :" + cr_dt;
-
 
 $(function () {
 
@@ -146,20 +143,6 @@ $(function () {
 			person: ageData.OAGE60
 		}
 	];
-	var data4 = [
-		{
-			item: "iphone",
-			quantity: 200
-		},
-		{
-			item: "ipad",
-			quantity: 200
-		},
-		{
-			item: "mask",
-			quantity: 200
-		}
-	];
 
 	function initializeCharts() {
 		$(".rad-chart").empty();
@@ -180,16 +163,16 @@ $(function () {
 			element: "donutChart",
 			data: 			[
 				{
-					label:"아스트로제네카" ,value: 25
+					label:"아스트로제네카" ,value: 10992181
 				},
 				{
-					label:"화이자" ,value: 25
+					label:"화이자" ,value: 20837564
 				},
 				{
-					label:"모더나" ,value: 25
+					label:"모더나" ,value: 5578806
 				},
 				{
-					label:"얀센" ,value: 25
+					label:"얀센" ,value: 1486681
 				}
 			],
 			labelColor: "#23AE89",
@@ -319,45 +302,14 @@ $(function () {
 			barColors: ["#E67A77", "#79D1CF"],
 			labels: ["수량"]
 		});
-
-		// Morris.Area({
-		// 	element: 'areaChart',
-		// 	data:[
-		// 		{
-		// 		y:"2020-1",
-		// 		확진자:1000,
-		// 		사망자:2000,
-		// 		완치자:3000
-		// 	},
-		// 	{
-		// 		y:"2020-2",
-		// 		확진자:1000,
-		// 		사망자:2000,
-		// 		완치자:3000
-		// 	},
-		// 	{
-		// 		y:"2020-3",
-		// 		확진자:1000,
-		// 		사망자:2000,
-		// 		완치자:3000
-		// 	},
-		// 	{
-		// 		y:"2020-4",
-		// 		확진자:1000,
-		// 		사망자:2000,
-		// 		완치자:3000
-		// 	},
-		// 	{
-		// 		y:"2020-5",
-		// 		확진자:1000,
-		// 		사망자:2000,
-		// 		완치자:3000
-		// 	},
-		// ],
-		// xkey: 'y',
-		// ykeys:['확진자','사망자','완치자'],
-		// labels:['확진자','사망자','완치자']
-		// });
+		Morris.Bar({
+			element: "barChart5",
+			data: getDataList().withdrawalData,
+			xkey: "DDT",
+			ykeys: ["CNT","AVGCNT"],
+			barColors: ["#E67A77", "#79D1CF"],
+			labels: ["총 탈퇴자", "평균 탈퇴자"]
+		});
 		Morris.Area({
 			element: "areaChart",
 			padding: 10,
@@ -376,48 +328,8 @@ $(function () {
 			hideHover: "auto"
 		});
 	}
-
 	initializeCharts();
-
 });
-
-var monthNames = [
-		"Jan",
-		"Feb",
-		"Mar",
-		"Apr",
-		"May",
-		"Jun",
-		"Jul",
-		"Aug",
-		"Sep",
-		"Oct",
-		"Nov",
-		"Dec"
-	];
-
-var data = [
-		{
-			label: "Technology",
-			value: 20
-		},
-		{
-			label: "Financial",
-			value: 45
-		},
-		{
-			label: "Industrial Goods",
-			value: 30
-		},
-		{
-			label: "Consumer Goods",
-			value: 10
-		},
-		{
-			label: "Basic Materials",
-			value: 5
-		}
-	];
 
 
 function getDataList(){
@@ -483,9 +395,6 @@ function getDonutData2(group, column) {
 
 	return result;
 }
-
-var dataA =new Array();
-var index=0;
 
 $('.chart1').easyPieChart({
     barColor: '#f16529',  //차트가 그려질 색

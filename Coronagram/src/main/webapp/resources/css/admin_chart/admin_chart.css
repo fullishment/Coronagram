@@ -474,7 +474,10 @@ a:active {
   padding: 0;
   font-size: 15px;
 }
-.az span, .pfizer span, .moderna span, .jansen span{
+.az span,
+.pfizer span,
+.moderna span,
+.jansen span{
   white-space: nowrap;
 width: auto;
 margin: auto;
@@ -511,38 +514,67 @@ font-size: 12px;
   margin-top: 5px;
   margin-left: 5px;
 }
-.corona_condition{
+
+.corona_condition,
+.joinInfo,
+.withdrawalInfo
+{
   display: inline-block;
   margin-top: 15px;
   margin-bottom: 50px;
   width: 100%;
 }
-.condition{
+
+.condition,
+.joinInfos,
+.withdrawalInfos
+{
   display: flex;
   justify-content: center;
   margin-right: 75%;
   margin-left: 50%;
 }
-.coronic, .fl_rec, .dead{
+
+.coronic,
+.fl_rec,
+.dead,
+.avgJoin,
+.totalJoin,
+.totalWithdrawal,
+.avgWithdrawal
+{
  display: inherit;
  margin: auto;
 
 }
-.condition p{
+
+.condition p,
+.joinInfos p,
+.withdrawalInfos p
+{
   width: 150px;
   margin: auto;
   padding: 0;
   font-size: 15px;
 }
-.coronic span, .fl_rec span, .dead span{
-  white-space: nowrap;
-width: auto;
-margin: auto;
-margin-top: 5px;
-margin-left:10px;
-padding: 0;
-font-size: 12px;
+
+.coronic span,
+.fl_rec span,
+.dead span,
+.avgJoin span,
+.totalJoin span,
+.totalWithdrawal span,
+.avgWithdrawal span
+{
+	white-space: nowrap;
+	width: auto;
+	margin: auto;
+	margin-top: 5px;
+	margin-left:10px;
+	padding: 0;
+	font-size: 12px;
 }
+
 .coronics{
   background-color: #D9DD81;
   height: 15px;
@@ -564,38 +596,6 @@ font-size: 12px;
   margin-top: 5px;
   margin-left: 5px;
 }
-.joinInfo{
-  display: inline-block;
-  margin-top: 15px;
-  margin-bottom: 50px;
-  width: 100%;
-}
-.joinInfos{
-  display: flex;
-  justify-content: center;
-  margin-right: 75%;
-  margin-left: 50%;
-}
-.avgJoin, .totalJoin{
- display: inherit;
- margin: auto;
-
-}
-.joinInfos p{
-  width: 150px;
-  margin: auto;
-  padding: 0;
-  font-size: 15px;
-}
-.avgJoin span, .totalJoin span{
-  white-space: nowrap;
-width: auto;
-margin: auto;
-margin-top: 5px;
-margin-left:10px;
-padding: 0;
-font-size: 12px;
-}
 .avgJoins{
   background-color: #79D1CF;
   height: 15px;
@@ -604,6 +604,20 @@ font-size: 12px;
   margin-left: 5px;
 }
 .totalJoins{
+  background-color: #E67A77;
+  height: 15px;
+  width: 15px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+.avgWithdrawals{
+  background-color: #79D1CF;
+  height: 15px;
+  width: 15px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+.totalWithdrawals{
   background-color: #E67A77;
   height: 15px;
   width: 15px;

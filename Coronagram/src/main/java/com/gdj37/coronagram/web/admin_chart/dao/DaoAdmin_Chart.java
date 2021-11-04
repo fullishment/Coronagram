@@ -36,4 +36,9 @@ public class DaoAdmin_Chart implements IDaoAdmin_Chart{
 	public List<HashMap<String, Object>> getSellData(HashMap<String, String> params) throws Throwable {
 		return sqlSession.selectList("chart.getSellData", params);
 	}
+
+	@Override
+	public List<HashMap<String, Object>> getWithdrawalData(HashMap<String, String> params) throws Throwable {
+		return sqlSession.selectList("chart.getWithdrawalData", params);
+	}
 }

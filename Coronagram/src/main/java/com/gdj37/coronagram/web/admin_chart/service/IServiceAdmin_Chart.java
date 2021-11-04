@@ -15,4 +15,6 @@ public interface IServiceAdmin_Chart {
 
 	public List<HashMap<String, Object>> getSellData(HashMap<String, String> params) throws Throwable;
 
+	public List<HashMap<String, Object>> getWithdrawalData(HashMap<String, String> params) throws Throwable;
+
 }

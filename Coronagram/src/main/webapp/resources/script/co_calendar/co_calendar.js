@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	var month = today.getMonth()+1;
 	var day = today.getDate();
 	var fulldate = year+ '-' + month + '-' + day;
+		
 	
 	calendar = new FullCalendar.Calendar(calendarEl, {
 		height : '700px',

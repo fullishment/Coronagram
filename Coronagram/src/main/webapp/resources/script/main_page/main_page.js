@@ -1,5 +1,5 @@
 // 상단 메인 배너 slick
-
+getWeekList();
 $('.main-slider').slick({
     dots: true,
     fade: true,
@@ -204,7 +204,7 @@ class CitiesSlider extends React.Component {
                 React.createElement("div", { className: "slider__control slider__control--right", onClick: () => this.changeSlides(1) })));
     }
 }
-getWeekList();
+
 const slides = [
     {
         city: 'Paris',
@@ -326,3 +326,4 @@ $("#zoomIcon").on("click",function(){
 $(".btn_now").on("click",function(){
 	location.href="shop";
 });
+

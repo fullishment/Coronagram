@@ -4,12 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
-<link href='resources/script/fullcalendar5/main.min.css'
-	rel='stylesheet' />
+<meta charset="UTF-8">
+<title>출석체크</title>
+
+<link rel="stylesheet"	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
+
+<link href='resources/script/fullcalendar5/main.min.css' rel='stylesheet' />
 <!-- <link rel="stylesheet" href="resources/css/admin_chart/3.3.4bootstrap.min.css" type="text/css"> -->
 <link rel="stylesheet" type="text/css"
 	href="resources/css/co_calendar/co_calendar.css?after">
@@ -19,8 +20,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <script src='resources/script/fullcalendar5/main.min.js'></script>
-<script
-	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/locales-all.min.js'></script>
+<script	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/locales-all.min.js'></script>
 </head>
 <body>
 	<header>
@@ -84,7 +84,7 @@
     </div>
   </header>
 	<main>
-			<input type="hidden" name="m_no" id="m_no" value="${sMNo}" />
+	<div id="calTitle"><h3>출석체크</h3></div>
 			<div class="calendar_wrap">
 				<form action="#" id="calForm" method="post">
 					<input type="hidden" name="m_no" id="m_no" value="${sMNo}" />

@@ -513,6 +513,7 @@
     </div>
   </footer>
   <script src="resources/script/openAPI/CoronaCntApi.js"></script>
+  <!-- <script src="resources/script/openAPI/CoronaWeekCntApi.js"></script> -->
   <script src="resources/script/main_page/main_page.js"></script>
   <script src="resources/script/menu_bar/menu_bar.js"></script>
 </body>

@@ -3,7 +3,7 @@ var listWeek = new Array();
 
 $(document).ready(function() {
 	getList();
-	
+	getWeekList();
 //	console.log(dataA[1].dc);
 	
 	let td_cnt = dataA[0].dc - dataA[1].dc;
