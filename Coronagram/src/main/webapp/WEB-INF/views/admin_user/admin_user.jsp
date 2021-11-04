@@ -80,7 +80,7 @@
 		html += "<td>"+data.EMAIL+"</td>";
 		html += "<td>"+data.M_DT+"</td>";
 		html += "<td>"+data.POINT+"</td>";
-		html += "<td>"+data.ACCT_TYPE_NO+"</td>";
+		html += "<td>"+data.TYPE_NM+"</td>";
 		html += "</tr>";
 	}
 	$("tbody").html(html);

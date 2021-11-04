@@ -4,7 +4,7 @@
 
 <!-- list -->
    <select id="getadminUserList" parameterType="hashmap" resultType="hashmap">
-      SELECT M.M_NO, M.M_ID, M.M_NM, M.PHONE, M.EMAIL, M.M_DT, M.POINT, M.ACCT_TYPE_NO
+      SELECT M.M_NO, M.M_ID, M.M_NM, M.PHONE, M.EMAIL, M.M_DT, M.POINT, M.ACCT_TYPE_NO, A.TYPE_NM
       FROM (   SELECT M_NO, M_ID, M_NM, PHONE, EMAIL,
             TO_CHAR(M_DT,'yyyy-mm-dd') AS M_DT, POINT, ACCT_TYPE_NO,
             ROW_NUMBER() OVER(ORDER BY M_NO DESC) AS RNUM
@@ -38,7 +38,7 @@
                </when>
             </choose>
          </if>
-      ) M
+      ) M JOIN ACCT_TYPE A ON M.ACCT_TYPE_NO = A.TYPE_NO
       WHERE M.RNUM BETWEEN #{startCnt} AND #{endCnt}
    </select>
    
