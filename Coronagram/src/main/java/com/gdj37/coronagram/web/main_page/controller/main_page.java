@@ -37,9 +37,11 @@ public class main_page {
 		LocalTime nowTime = LocalTime.now();
 		LocalTime limitTime = LocalTime.of(9, 59, 59);
 		LocalDate now = LocalDate.now();
+		
 		LocalDate nowm = now.minusDays(1);
 		LocalDate weekDays = now.minusDays(7);
 		LocalDate weekDaysm = now.minusDays(8);
+		
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
 		
 		String today = now.format(dtf);

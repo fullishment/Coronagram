@@ -6,6 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,13 +30,17 @@ public class MapAPI {
 	@RequestMapping(value = "/mapDataApiAjax", method = RequestMethod.POST, produces = "text/xml;charset=UTF-8")
 	@ResponseBody
 	public String mapDataApiAjax() throws Throwable {
+		
+		LocalTime nowTime = LocalTime.now();
+		LocalTime limitTime = LocalTime.of(9, 59, 59);
+		
 		LocalDate now = LocalDate.now();
-		LocalDate yday = LocalDate.now().minusDays(2);
+		LocalDate nowm = now.minusDays(1);
 		
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
 
 		String today = now.format(dtf);
-		String yesterday = yday.format(dtf);
+		String todaym = nowm.format(dtf);
 
 		StringBuilder urlBuilder = new StringBuilder(
 				"http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson"); /* URL */
@@ -48,12 +53,16 @@ public class MapAPI {
 		// URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
 		// urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" +
 		// URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
-		
-		  urlBuilder.append("&" + URLEncoder.encode("startCreateDt","UTF-8") + "=" + URLEncoder.encode(today, "UTF-8"));
-		/* 검색할 생성일 범위의 시작 */
-		  urlBuilder.append("&" + URLEncoder.encode("endCreateDt","UTF-8") + "=" + URLEncoder.encode(today, "UTF-8"));
-		 
-		/* 검색할 생성일 범위의 종료 */
+		if(nowTime.isBefore(limitTime)) {
+		  urlBuilder.append("&" + URLEncoder.encode("startCreateDt","UTF-8") + "=" + URLEncoder.encode(todaym, "UTF-8"));
+		}else{
+			urlBuilder.append("&" + URLEncoder.encode("startCreateDt","UTF-8") + "=" + URLEncoder.encode(today, "UTF-8"));
+		}
+		if(nowTime.isBefore(limitTime)) {
+		  urlBuilder.append("&" + URLEncoder.encode("endCreateDt","UTF-8") + "=" + URLEncoder.encode(todaym, "UTF-8"));
+		}else {
+			urlBuilder.append("&" + URLEncoder.encode("endCreateDt","UTF-8") + "=" + URLEncoder.encode(today, "UTF-8"));
+		}
 
 		// 오늘 날짜로 나오게
 		/*
