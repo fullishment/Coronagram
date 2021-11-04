@@ -4,6 +4,10 @@ html{
     background: #ecf0f1;
 }
 
+main{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
 .sc {
 	max-width: 800px;
 	margin: auto;
@@ -31,7 +35,6 @@ html{
 .sc_name1 h5{
 	font-size: 13pt;
 	color: #ffffff;
-	text-decoration-line: underline;
 	
 }
 

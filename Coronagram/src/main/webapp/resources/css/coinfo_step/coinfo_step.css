@@ -1,5 +1,10 @@
 
 /* main */
+
+html{
+    background: #ecf0f1;
+}
+
 main{
     font-family: 'Noto Sans KR', sans-serif;
 	
@@ -11,7 +16,6 @@ p {
     max-width: 800px;
     margin: auto;
     margin-top: 5%;
-    background: white;
     padding: 10px;
 }
 .scHead {
@@ -77,6 +81,11 @@ html {
 overflow-x: auto;
 min-height: 3030px;
 }
+
+.group_table {
+	background: white;
+}
+
 table {
 	box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
 	border: 0px seashell;
@@ -127,6 +136,7 @@ th {
 }
 
 .group {
+	background: white;
     padding: 20px;
     margin-top: 10px;
     height: 480px;

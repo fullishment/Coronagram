@@ -377,6 +377,11 @@
 body { margin:0px; padding:0px; }
 
 /* main */
+
+main{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
 .header {
     height: 360px;
     z-index: 10;
@@ -484,7 +489,6 @@ nav ul li a {
 /* demo content */
 body { 
     color: #292f36;
-    font-family: helvetica;
     line-height: 1.6;
 }
 
@@ -514,7 +518,6 @@ article {
     font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
-    font-family: "Noto Sans KR", sans-serif; 
 	margin-right: 20px;
 }
 

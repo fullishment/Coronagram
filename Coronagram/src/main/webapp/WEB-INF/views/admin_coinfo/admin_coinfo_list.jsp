@@ -92,7 +92,7 @@ $(document).ready(function(){
 	
 	for(var data of list) {
 		html += "<tr no=\"" + data.INFO_NO+"\">";
-		html += "<td>"+data.INFO_NO+"</td>";
+		html += "<td>"+data.RNUM+"</td>";
 		html += "<td>"+data.INFO_TITLE+"</td>";
 		html += "<td>"+data.INFO_SUBHD+"</td>";
 		html += "<td>"+data.DT+"</td>";

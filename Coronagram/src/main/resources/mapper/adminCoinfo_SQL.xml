@@ -42,10 +42,10 @@
 	
 	
 	<select id="getAdinfoList" parameterType="hashmap" resultType="hashmap"> 
- 		SELECT INFO.INFO_NO, INFO.INFO_TITLE, INFO.INFO_SUBHD, INFO.DT, INFO.DISP_YN
+ 		SELECT INFO.RNUM, INFO.INFO_NO, INFO.INFO_TITLE, INFO.INFO_SUBHD, INFO.DT, INFO.DISP_YN
 		FROM (  SELECT INFO_NO, INFO_TITLE, INFO_SUBHD, DISP_YN,
 		        TO_CHAR(DT, 'YYYY-MM-DD') AS DT,
-		        ROW_NUMBER() OVER(ORDER BY INFO_NO DESC) AS RNUM
+		        ROW_NUMBER() OVER(ORDER BY INFO_NO) AS RNUM
 		        FROM INFO
 		        WHERE DEL = 1
 				<if test="searchTxt != null and searchTxt != ''">
@@ -60,6 +60,7 @@
 				</if>
 		        ) INFO
 		WHERE INFO.RNUM BETWEEN #{startCnt} AND #{endCnt}
+		ORDER BY INFO.RNUM DESC
 	</select>
 	
 	<select id="getAdinfo" parameterType="hashmap" resultType="hashmap">
