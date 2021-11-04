@@ -35,12 +35,10 @@
 		INSERT INTO ATT_CHECK
 		          (	ATT_NO
 				  , USER_NO
-				  , POINT 
 				  , TITLE
 				  )VALUES(
 				    ATT_SEQ.NEXTVAL
 				  , #{m_no}
-				  , 10
 				  , '출석체크'
 				  )
 		
