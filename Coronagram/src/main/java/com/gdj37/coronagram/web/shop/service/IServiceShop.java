@@ -63,6 +63,8 @@ public interface IServiceShop {
 
 	public int prodOptDel(HashMap<String, String> params)throws Throwable;
 
+	public int prodDel(HashMap<String, String> params)throws Throwable;
+
 
 
 }

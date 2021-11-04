@@ -209,6 +209,8 @@ public class ShopController {
 		HashMap<String,String> data = iServiceShop.getProdInfo(params);
 		List<HashMap<String,String>> list = iServiceShop.getProdAttcList(params);
 		List<HashMap<String,String>> catlist = iServiceShop.getProdCatList(params);
+		List<HashMap<String,String>> optList = iServiceShop.getOptList(params);
+		mav.addObject("optList",optList);
 		mav.addObject("data", data);
 		mav.addObject("list", list);
 		mav.addObject("catList", catlist);
@@ -224,6 +226,23 @@ public class ShopController {
 		int prodAttcDel = iServiceShop.prodAttcDel(params);
 		
 		if(prodAttcDel ==0) {
+			result="failed";
+		}else {
+			
+		}
+		
+		modelMap.put("result", result);
+		return mapper.writeValueAsString(modelMap);
+	}
+	@RequestMapping(value="/prodDel" ,method = RequestMethod.POST,produces = "text/json;charset=UTF-8")
+	@ResponseBody
+	public String prodDel(ModelAndView mav, @RequestParam HashMap<String,String> params) throws Throwable {
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String,Object> modelMap= new HashMap<String,Object>();
+		String result="success";
+		int prodDel = iServiceShop.prodDel(params);
+		
+		if(prodDel ==0) {
 			result="failed";
 		}else {
 			

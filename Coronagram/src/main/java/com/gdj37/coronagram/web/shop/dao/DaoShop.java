@@ -185,7 +185,13 @@ public class DaoShop implements IDaoShop {
 	@Override
 	public int prodOptDel(HashMap<String, String> params) throws Throwable {
 		// TODO Auto-generated method stub
-		return sqlSession.delete("shop.prodOptDel",params);
+		return sqlSession.update("shop.prodOptDel",params);
+	}
+
+	@Override
+	public int prodDel(HashMap<String, String> params) throws Throwable {
+		// TODO Auto-generated method stub
+		return sqlSession.update("shop.prodDel",params);
 	}
 
 

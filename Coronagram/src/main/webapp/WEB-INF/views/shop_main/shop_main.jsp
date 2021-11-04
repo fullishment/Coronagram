@@ -34,10 +34,12 @@
 		  $("#actionForm").attr("action","prodDetail");
 		  $("#actionForm").submit();
 	  });
-	  $("slideshow-inner").on("click",".header_btn",function(){
+	  $(".slideshow-inner").on("click",".slide_btn",function(){
 		 $("#prodNo").val($(this).parent().parent().parent().attr("no")); 
+		 $("#actionForm").attr("action","prodDetail");
+		 $("#actionForm").submit();
 	  });
-	 
+	
   });
   function drawList(list){
 	  var html = "";
@@ -102,13 +104,12 @@
         <div class="main-logo">Coronagram<sup style="font-size: 1.1rem;">Shop</sup></div>
         <nav>
           <ul class="main-menu">
-            <li><a href="">Main</a></li>
+            <li><a href="main">Main</a></li>
             <li><a href="">Corona Map</a></li>
             <li><a href="">Corona Info</a></li>
-            <li><a href="#">Coronagram</a></li>
-            <li><a href="#">Service Center</a></li>
+            <li><a href="">Coronagram</a></li>
+            <li><a href="">Service Center</a></li>
             <li><a href="shopCart" ><span class="fa fa-shopping-cart"></span></a></li>
-            <li><a href="#"><span class="fa fa-search"></span></a></li>
           </ul>
         </nav>
       </div>
@@ -268,9 +269,9 @@
 	                    <span class="btn-inner">Learn More</span>
 	                  </a>
 	                </div>
-	              </div>
+	              </div> 
 	              <div class="image-container">
-	                <img src="https://www.alixbdanthenay.fr/wp-content/uploads/2015/07/Indispensable-4-1.jpg" alt="" class="image" />
+	                <img src="resources/upload/${data.FILE_ADDR}" alt="" class="image" />
 	              </div>
 	            </div>
 	        

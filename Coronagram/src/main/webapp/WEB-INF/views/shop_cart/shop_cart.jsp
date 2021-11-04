@@ -72,7 +72,7 @@
    	   		var qt = parseInt($(this).next().html());
    	   		var no = parseInt($(this).next().attr("no"));
 	   	   	var cnt = $("#totalCnt").html().substring(0,$("#totalCnt").html().length-1);
-	 	   	cnt = (cnt*1)+1;
+	 	   	cnt = (cnt*1)-1;
    	   		
    	   		if(qt > 1){ 
    	   			

@@ -1,4 +1,9 @@
 /* 메인CSS */
+
+#noticelogin {
+    		margin : 0 auto;
+    		
+    	}
 html {
 	overflow: auto;
 	top: 30px;

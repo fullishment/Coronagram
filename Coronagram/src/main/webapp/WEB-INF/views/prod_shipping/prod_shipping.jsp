@@ -14,85 +14,31 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			if($("#sMNo").val() != null && $("#sMNo").val() != ""){
-				$(".notlogin").remove();
-				redrawList();
-			}
-			$("#dataBtn").on("click",function(){
-				var endDate = $("#order_list2").val();
-				$("#startDate").val($("#order_list1").val());
-				
-				$("#endDate").val($("#order_list2").val());
-				console.log($("#startDate").val());
-				console.log($("#endDate").val());
-				redrawList();
-			});
-		});
-	function redrawList(){
-		var params = $("#actionForm").serialize();
-		$.ajax({
-			url : "prodSpList",
-			type : "post",
-			dataType : "json",
-			data : params,
-			success : function(res){
-				drawList(res.list);
-			},
-			error : function(request, status, error){
-				console.log(error);
-			}
-		});
-	}
-	function drawList(list){
-		var stat = new Array('주문접수','상품 준비중','배송 준비중','배송중','배송 완료');
-		
-		var html="";
-		for(var data of list){
-		html+="<tr>                  ";
-        html+="<td>"+data.CAT_NO+"</td>      ";
-        html+="<td>"+data.PROD_NO+"</td>      ";
-        html+="<td>"+data.PROD_NM+"</td>  ";
-        html+="<td>"+data.M_NM+"</td>      ";
-        html+="<td>"+data.POST_NO+"</br>      ";
-        html+=""+data.ADR+"</br>      ";
-        html+=""+data.DTL_ADR+"</td>      ";
-        html+="<td>"+data.ORD_DT+"</td>      ";
-        html+="<td>"+stat[data.ORD_STAT-1]+"</td>      ";
-        
-        html+="</tr>                 ";
-		}
-		$("tbody").html(html);
-	}
-	</script>
 </head>
-
 <body>
 <header>
     <div class="cm_menuBar" id="cm_menuBar">
       <div class="cm_menu__toggler"><span></span></div>
-      <a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
-      <a href="#" class="cm_home" id="cm_home">Home</a>
-      <a href="#" class="cm_msg" id="cm_msg">Message</a>
-      <a href="#" class="cm_cld" id="cm_cld">Calendar</a>
-      <div class="cm_dropdown">
-        <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
-        <ul class="cm_dropdown-content">
-          <li>
-            <a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
-          </li>
-          <li>
-            <a href="#" class="cm_userinfo">개인정보수정</a>
-          </li>
-      </div>
-      <div class="cm_user_name">
-						<c:if test="${!empty sMNo}">
-							${sMNm}님 어서오세요.
-						</c:if>
-					</div>
-    </div>
-
+      	<a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
+      	<a href="#" class="cm_home" id="cm_home">Home</a>
+      	<a href="#" class="cm_msg" id="cm_shop">Shop</a>
+      	<a href="#" class="cm_cld" id="cm_cld">Calendar</a>
+      	<div class="cm_dropdown">
+        	<a class="cm_dropbtn cm_dot" id="cm_dot"></a>
+        	<ul class="cm_dropdown-content">
+	          	<li>
+	            	<a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
+	          	</li>
+	          	<li>
+	            	<a href="coronagram/${sMNick}" class="cm_userinfo"> 개인정보수정</a>
+	          	</li>
+          	</ul>
+        </div>
+      	<div class="cm_user_name">
+			<c:if test="${!empty sMNo}">
+				${sMNm}님 어서오세요.
+			</c:if>
+		</div>
     </div>
     <div class="cm_menu" id="cm_menu">
       <a href="#" class="cm_mLogo">Coronagram</a>
@@ -106,27 +52,26 @@
       <a href="#" class="cm_mTitle" id="cm_mTitle">
         <div class="cm_info"></div>Corona Info
         <ul class="cm_mcon" id="cm_mcon">
-          <a href="#">관련 정보</a> <br>
-          <a href="#">거리두기</a> <br>
-          <a href="#">News</a>
+          <a href="coinfo_infolist">관련 정보</a> <br>
+          <a href="coinfo_step">거리두기</a> <br>
+          <a href="coinfo_news">News</a>
         </ul>
       </a>
-      <a href="#" class="cm_sTitle">
+      <a href="coronagram" class="cm_sTitle">
         <div class="cm_cam"></div>Coronagram
       </a>
       <a href="#" class="cm_mTitle" id="cm_mTitle">
         <div class="cm_user"></div>My Page
         <ul class="cm_mcon" id="cm_mcon">
-          <a href="#">개인 페이지</a> <br>
-          <a href="#">출석 체크</a> <br>
-          <a href="#">Message</a>
+          <a href="coronagram/${sMNick}">개인 페이지</a> <br>
+          <a href="calendar">출석 체크</a> <br>
+          <a href="https://coronagram-zoom.herokuapp.com/">Zoom</a>
         </ul>
       </a>
       <a href="#" class="cm_mTitle" id="cm_mTitle">
         <div class="cm_qna"></div>Service Center
         <ul class="cm_mcon" id="cm_mcon">
-          <a href="#">FAQ</a> <br>
-          <a href="#">Q&A</a>
+          <a href="qna">FAQ</a><br>
         </ul>
       </a>
     </div>
@@ -237,6 +182,7 @@
        </section>
     </main>
     <script src="resources/script/menu_bar/menu_bar.js"></script>
+    <script src="resources/script/prod_shipping/prod_shipping.js"></script>
 </body>
 
 </html>
