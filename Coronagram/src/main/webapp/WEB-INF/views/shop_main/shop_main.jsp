@@ -56,7 +56,7 @@
         html+= "  <div class=\"name-fav\">                                                                                    ";
         html+= "    <strong class=\"product-name\">"+data.PROD_NM+"</strong>                                                       ";
         html+= "    <button class=\"heart\">                                                                               ";
-        html+= "        <i class=\"fas fa-heart\"></i>												";
+        html+= "        <i class=\"fab fa-instagram\"></i>												";
         html+= "  </button>                                                                  ";
         html+= "  </div>                                                                                                    ";
         html+= "  <div class=\"wrapper\">                                                                                     ";

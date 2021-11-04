@@ -115,20 +115,24 @@
 	</update>
 	<select id="getPoint" parameterType="hashmap" resultType="hashmap">
 		SELECT (AC.CNT * 500) - ST.S AS POINT 
-		FROM (SELECT COUNT(*) AS CNT ,USER_NO
-		      FROM ATT_CHECK
-		      WHERE USER_NO = #{sMNo}
-		      GROUP BY USER_NO) AC
+		FROM (SELECT NVL(CNT,0)AS CNT,M_NO
+                FROM M M
+                    LEFT OUTER JOIN (SELECT COUNT(*) AS CNT ,USER_NO
+                                        FROM ATT_CHECK
+                                        GROUP BY USER_NO) ABC
+                    ON M.M_NO = ABC.USER_NO
+                WHERE M.M_NO = #{sMNo})AC
 		      
-		      INNER JOIN (  SELECT SUM(OP.QTY * P.POINT) AS S,USER_NO
+		      INNER JOIN (  SELECT SUM(NVL(OP.QTY,0) * NVL(P.POINT,0)) AS S,M_NO
 		                    FROM ORD O
-		                        INNER JOIN ORDER_PROD OP
+                            RIGHT OUTER JOIN M M
+                            ON USER_NO = M_NO
+		                        LEFT OUTER JOIN ORDER_PROD OP
 		                        ON  O.ORD_NO = OP.ORDER_NO
-		                        INNER JOIN PRODUCT P
+		                        LEFT OUTER JOIN PRODUCT P
 		                        ON OP.PROD_NO = P.PROD_NO
-		                    WHERE USER_NO = #{sMNo}
-		                    GROUP BY USER_NO) ST
-		        ON ST.USER_NO = AC.USER_NO 
+		                    GROUP BY M_NO) ST
+		        ON ST.M_NO = AC.M_NO
 	</select>
 	<select id="getOrdList" parameterType="hashmap" resultType="hashmap">
 		SELECT P.CAT_NO,P.PROD_NO,P.PROD_NM,M.M_NM,O.POST_NO,O.ADR,O.DTL_ADR,TO_CHAR(O.ORD_DT,'YYYY-MM-DD') AS ORD_DT,O.ORD_STAT
