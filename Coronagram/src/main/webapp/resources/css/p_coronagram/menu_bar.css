@@ -10,26 +10,14 @@
 
         .cm_menuBar {
             display: flex;
-		    flex-wrap: nowrap;
-		    width: 101vw;
-		    height: 60px;
-		    margin: -10px;
-		    padding: 5px;
-		    background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
+            flex-wrap: nowrap;
+            width: 101vw;
+            height: 60px;
+            margin: -10px;
+            padding: 5px;
+            background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
         }
-        ul > a{
-        	color : #262626;
-			text-decoration:none;
-			font-weight: bold;
-        }
-        ul > a:link{
-        	color : #262626;
-			text-decoration:none;
-        }
-		ul > a:visited{
-			color : #262626;
-			text-decoration:none;
-		}
+        
         .cm_logo, .cm_home, .cm_msg, .cm_cld, .cm_dot, .cm_user_name {
             position: absolute;
             margin-top: 10px;
@@ -44,12 +32,12 @@
             left: 60px;
         }
         .cm_user_name {
-            right: 380px;
+            right: 335px;
             font-size: 10pt;
             font-family: "Noto Sans KR", sans-serif;
         }
         .cm_home {
-            right: 290px;
+            right: 260px;
         }
 
         .cm_msg {
@@ -77,7 +65,19 @@
             width: 30px;
             height: 30px;
         }
-
+        ul > a{
+        	color : #262626;
+			text-decoration:none;
+			font-weight: bold;
+        }
+        ul > a:link{
+        	color : #262626;
+			text-decoration:none;
+        }
+		ul > a:visited{
+			color : #262626;
+			text-decoration:none;
+		}
         .cm_menu__toggler {
             position: absolute;
             top: 5px;
@@ -147,20 +147,7 @@
             transition: 300ms left cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        @media only screen and (max-width: 1200px) {
-            .cm_menu {
-                width: 250px;
-                left: -250px;
-                padding: 30px;
-            }
-
-            .cm_mcon {
-                font-size: 1pt;
-                padding: 0 35px;
-                display: none;
-                overflow: hidden;
-            }
-        }
+       
 
         .cm_menu.active {
             left: 0;
@@ -271,9 +258,16 @@
         a.cm_logout {
             border-left: 5px solid #cf2130;
         }
-
+		.cm_icon-userinfo {
+			position: absolute;
+            width: 20px;
+            height: 20px;
+            background-size: cover;
+            background-image: url("../../images/icon/mypage.png");
+			background-color : black;
+		}
         a.cm_userinfo {
-            border-left: 5px solid #008747
+            border-left: 5px solid #008747;            
         }
 
         .cm_dropdown-content li span {
@@ -375,3 +369,31 @@
         .cm_mTitle.deployed {
             opacity: 1;
         }
+        
+         @media only screen and (max-width: 1200px) {
+            .cm_menu {
+                width: 250px;
+                left: -250px;
+                padding: 30px;
+            }
+
+            .cm_mcon {
+                font-size: 1pt;
+                padding: 0 35px;
+                display: none;
+                overflow: hidden;
+            }
+        }
+        
+        @media only screen and (max-width: 700px) {
+        header .cm_user_name {
+   			display: none;
+		}
+		.cm_home {
+		    right: 240px;
+		}
+		.cm_msg {
+		    right: 180px;
+		}
+        
+		} 

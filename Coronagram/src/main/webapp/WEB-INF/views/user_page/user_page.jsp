@@ -40,7 +40,35 @@
 	        	$('body').css("overflow","hidden");
 	        	ReelsModal();   
 	        });  
-	        
+	        $("html").on("click",function(e){
+	    		if(!$(e.target).hasClass('user_area')){ 
+	    			$(".user_area").css("display","none");
+	    			$("#searchText").val("");
+	    			var html="";
+		    		html+="<i class=\"fas fa-search\"></i>";
+		    		$(".search_icon").html(html);
+	    		}	    		
+	    	});	
+	        $(document).on("click",".rec_user1",function(){
+	    		var user = $(this).attr("nfo");
+	    		location.href=""+user+"";
+	    		var html="";
+	    		html+="<i class=\"fas fa-search\"></i>";
+	    		$(".search_icon").html(html);
+	    	});
+	        $(document).on("click",".sprite_bubble_icon1",function(){
+	        	setTimeout(function(){
+	        		$(".reels_cmt_area").css("top","50%");
+	        		$(".reels_cmt_area").css("background","white");       		
+				},50);      
+	        	$(".reels_cmt_area").css("display","block");
+	        });
+	        $(document).on("click",".fa-arrow-left",function(){
+	        	setTimeout(function(){	        		
+	        		$(".reels_cmt_area").css("display","none");
+				},500); 
+	        	$(".reels_cmt_area").css("top","0");   	
+	        });
 	        window.onclick = function(event) {
 	            if (event.target == modal) {
 	            	if(document.getElementById("player")){
@@ -48,9 +76,11 @@
 	            	}
 	            	$("#myModal").html("");
 	            	$('body').css("overflow","auto");
+	            	$('body').css("overflow-x","hidden");
 	                modal.style.display = "none";                    
 	            }else if(event.target == lkmodal){
 	            	$('body').css("overflow","auto");
+	            	$('body').css("overflow-x","hidden");
 	            	lkmodal.style.display = "none";   
 	            	reloadList();
 	            }
@@ -68,6 +98,7 @@
             	}
             	$("#myModal").html("");
             	$('body').css("overflow","auto");
+            	$('body').css("overflow-x","hidden");
             	document.getElementById("myModal").style.display="none";          	
             });
             $(document).keydown(function(event) {
@@ -77,6 +108,7 @@
                 	}
                 	$("#myModal").html("");
                 	$('body').css("overflow","auto");
+                	$('body').css("overflow-x","hidden");
                 	document.getElementById("myModal").style.display = "none";     
                 }
             });
@@ -86,6 +118,7 @@
             	}
             	$("#myModal").html("");
             	$('body').css("overflow","auto");
+            	$('body').css("overflow-x","hidden");
             	document.getElementById("myModal").style.display="none";          	
             });
             $(".story_icon").on("click",function(){
@@ -333,29 +366,49 @@
         }
         function ReelsModalArea(data){
         	var html="";
-        		html+="<div class=\"reels_content\" rno=\""+data.REELS_NO+"\">	";
-        		html+="		<div class=\"reels_area\">";
-        		html+="			<div class=\"reels_title\">		";
-        		html+="				<span>Reels</span>				";
-        		html+="			</div>							";
-        		html+="			<div class=\"reels_title_icon\">		";
+        		html+="<div class=\"reels_content\" rno=\""+data.REELS_NO+"\">										";
+        		html+="		<div class=\"reels_area\">																";
+        		html+="			<div class=\"reels_title\">															";
+        		html+="				<span>Reels</span>																";
+        		html+="			</div>																				";
+        		html+="			<div class=\"reels_title_icon\">													";
         		html+=" 			<img class=\"music_img\" src=\"../resources/images/userpage/camera.png\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> ";
-        		html+="			</div>							";
-        		html+=" 		<div class=\"muted_btn1\">																";
-                html+=" 		</div>																					";
-        		html+="			<div class=\"reels_video_area\">	";
-        		html+="				<video id=\"player\" controls playsinline autoplay muted loop>							"; 
-                html+=" 				<source src=\"../resources/upload/"+data.FILE_ADR+"\" alt=\"\" /></source>	   		";
-                html+="				</video>																				"; 
-        		html+="			</div>																						";
-        		html+="			<div class=\"mute_area\"></div>																";
-        		html+="			<div class=\"reels_icon\">																	";
+        		html+="			</div>																				";
+        		html+=" 		<div class=\"muted_btn1\">															";
+                html+=" 		</div>																				";
+        		html+="			<div class=\"reels_video_area\">													";
+        		html+="				<video id=\"player\" controls playsinline autoplay muted loop>					"; 
+                html+=" 				<source src=\"../resources/upload/"+data.FILE_ADR+"\" alt=\"\" /></source>	";
+                html+="				</video>																		"; 
+        		html+="			</div>																				";
+        		html+="			<div class=\"mute_area\"></div>														";
+        		html+="			<div class=\"reels_cmt_area\">														";
+        		html+="				<i class=\"fas fa-arrow-left\"></i>												";
+        		html+="			</div>																				";
+        		html+="			<div class=\"rec_user1 reels_user\" nfo=\""+data.NICK_NM+"\">																	 			   ";
+				html+="			<div class=\"profile_thumb\">																					 							   ";
+				html+=" 			<img src=\"../resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 		   "; 
+				html+="			</div>																											 							   ";
+				html+="			<div class=\"detail1\">																							 							   ";
+				html+="				<div class=\"rec_id1\">"+data.NICK_NM+"</div>																 							   ";
+				if(data.CON != null){
+					html+="			<span class=\"rec_con\">"+data.CON+"</span>														 									   ";
+				}					
+				html+="				</div>																											 					   ";
+				html+="			</div>																												 					   ";
+				html+="			<div class=\"equalizer\">																												   ";
+				html+="				<span class=\"equalizer-item equalizer-1\"></span>																					   ";
+				html+="				<span class=\"equalizer-item equalizer-2\"></span>                               													   ";
+				html+="				<span class=\"equalizer-item equalizer-3\"></span>																					   ";
+				html+="				<span class=\"equalizer-item equalizer-none\"></span>																				   ";
+				html+="			</div>																																	   ";
+        		html+="			<div class=\"reels_icon\">																												   ";
         		html+="                       <div class=\"heart_btn\">                                                                 								   ";
 			    html+="                           <div class=\"sprite_heart_icon_outline\" name=\"39\" data-name=\"heartbeat\">         								   ";			     											
 			    html+="                                     <input type=\"checkbox\" name=\"checkbox\" id=\"checkbox\" >                								   ";
-			    html+="                                     <label class=\"heart_label\"for=\"checkbox\">                                                    								   ";
-			    html+="                                       <svg id=\"heart-svg\" viewBox=\"467 392 58 57\" xmlns=\"http://www.w3.org/2000/svg\"> ";
-			    html+="                                         <g id=\"Group\" fill=\"none\" fill-rule=\"evenodd\" transform=\"translate(467 392)\">";
+			    html+="                                     <label class=\"heart_label\"for=\"checkbox\">                                                    			   ";
+			    html+="                                       <svg id=\"heart-svg\" viewBox=\"467 392 58 57\" xmlns=\"http://www.w3.org/2000/svg\"> 						";
+			    html+="                                         <g id=\"Group\" fill=\"none\" fill-rule=\"evenodd\" transform=\"translate(467 392)\">						";
 			    html+="                                           <path d=\"M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z\" id=\"heart\" stroke=\"#ffffff\" stroke-width=\"3\"></path>";
 			    html+="                                           <circle id=\"main-circ\" fill=\"#E2264D\" opacity=\"0\" cx=\"29.5\" cy=\"29.5\" r=\"1.5\"></circle>     ";
 			    html+="                                           <g id=\"grp7\" opacity=\"0\" transform=\"translate(7 6)\">                                              ";
@@ -589,11 +642,13 @@
 	                if (event.target == modal) {
 	                    modal.style.display = "none";
 	                    $('body').css("overflow","auto");
+	                    $('body').css("overflow-x","hidden");
 	                }
 	            }
 	            $(".lk_modal_close").on("click",function(){
 	            	modal.style.display="none";
 	            	$('body').css("overflow","auto");
+	            	$('body').css("overflow-x","hidden");
 	            });	            
 	    	});
 	    }
@@ -624,11 +679,13 @@
 	                if (event.target == modal) {
 	                    modal.style.display = "none";
 	                    $('body').css("overflow","auto");
+	                    $('body').css("overflow-x","hidden");
 	                }
 	            }
 	            $(".lk_modal_close").on("click",function(){
 	            	modal.style.display="none";
 	            	$('body').css("overflow","auto");
+	            	$('body').css("overflow-x","hidden");
 	            });	            
 	    	});
 	    }
@@ -1206,18 +1263,18 @@
 	    function emojiArea(){
 	    	 var html="";
 	    	
-	    	 html+="					<div class=\"emoji_container\" >       																			 			   ";
+	    	 html+="					<div class=\"emoji_container\" >       																			 			    ";
 		     html+="						<div class=\"emoji_title\"><span>웃는 얼굴 및 사람</span></div>																	";
 		     html+="						<div class=\"first emoji\"></div>																							";
-		     html+="						<div class=\"emoji_title\"><span>하트 및 기호</span></div>																	";
+		     html+="						<div class=\"emoji_title\"><span>하트 및 기호</span></div>																		";
 		     html+="						<div class=\"second emoji\"></div>																						   	";
-		     html+="						<div class=\"emoji_title\"><span>사람 손 모양</span></div>																	";
+		     html+="						<div class=\"emoji_title\"><span>사람 손 모양</span></div>																		";
 		     html+="						<div class=\"third emoji\"></div>																						   	";
-		     html+="						<div class=\"emoji_title\"><span>동물과 자연</span></div>																	";
+		     html+="						<div class=\"emoji_title\"><span>동물과 자연</span></div>																		";
 		     html+="						<div class=\"fourth emoji\"></div>																						   	";
-		     html+="						<div class=\"emoji_title\"><span>음식 및 음료</span></div>																	";
+		     html+="						<div class=\"emoji_title\"><span>음식 및 음료</span></div>																		";
 		     html+="						<div class=\"fifth emoji\"></div>																						   	";
-		     html+="			   		</div>																														   ";
+		     html+="			   		</div>																														    ";
 		     
 		     $(".emoji_area").html(html);
 	    }
@@ -1379,6 +1436,7 @@
 							if(res.result=="success"){
 								document.getElementById('myModal').style.display = "none";
 								$('body').css("overflow","auto");
+								$('body').css("overflow-x","hidden");
 								reloadImgList();								
 							}else{							
 								alert("게시글 삭제 실패");
@@ -1699,17 +1757,10 @@
 		    				console.log(error);
 		    			},complete : function() {
 		    				searchExit();   
-		    				searchLocate();
 		    		    }
 		    		});
 		    	}		    		
 	    	});		    	
-	    }
-	    function searchLocate(){
-	    	$("rec_user1").on("click",function(){
-	    		var user = $(this).attr("nfo");
-	    		location.href="coronagram/"+user+"";
-	    	});
 	    }
 	    function searchResult(list){
 	    	var html="";
@@ -1735,6 +1786,7 @@
 	    function searchExit(){
 	    	$(".fa-times-circle").on("click",function(){
 	    		$(".user_area").css("display","none");
+	    		$("#searchText").val("");
 	    	});
 	    }
 	    function progressbar(){
@@ -1892,9 +1944,9 @@
             <div class="cm_menuBar" id="cm_menuBar">
                 <div class="cm_menu__toggler"><span></span></div>
 	                <a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
-	                <a href="#" class="cm_home" id="cm_home">Home</a>
-	                <a href="#" class="cm_msg" id="cm_msg">Message</a>
-	                <a href="#" class="cm_cld" id="cm_cld">Calendar</a>
+			      	<a href="#" class="cm_home" id="cm_home">Home</a>
+			      	<a href="#" class="cm_msg" id="cm_shop">Shop</a>
+			      	<a href="#" class="cm_cld" id="cm_cld">Calendar</a>
 	                <div class="cm_dropdown">
 		                <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
 		                <ul class="cm_dropdown-content">
@@ -1924,41 +1976,40 @@
 				</div>	
             </div>
 	        <div class="cm_menu" id="cm_menu">
-	            <a href="#" class="cm_mLogo">Coronagram</a>
-	            <a href="#" class="cm_mTitle" id="cm_mTitle">
-	                <div class="cm_map"></div> Corona Map
-	                <ul class="cm_mcon" id="cm_mcon">
-	                    <a href="#">국내</a> <br>
-	                    <a href="#">해외</a>
-	                </ul>
-	            </a>
-	            <a href="#" class="cm_mTitle" id="cm_mTitle">
-	                <div class="cm_info"></div>Corona Info
-	                <ul class="cm_mcon" id="cm_mcon">
-	                    <a href="#">관련 정보</a> <br>
-	                    <a href="#">거리두기</a> <br>
-	                    <a href="#">News</a>
-	                </ul>
-	            </a>
-	            <a href="#" class="cm_sTitle">
-	                <div class="cm_cam"></div>Coronagram
-	            </a>
-	            <a href="#" class="cm_mTitle" id="cm_mTitle">
-	                <div class="cm_user"></div>My Page
-	                <ul class="cm_mcon" id="cm_mcon">
-	                    <a href="#">개인 페이지</a> <br>
-	                    <a href="#">출석 체크</a> <br>
-	                    <a href="#">Message</a>
-	                </ul>
-	            </a>
-	            <a href="#" class="cm_mTitle" id="cm_mTitle">
-	                <div class="cm_qna"></div>Service Center
-	                <ul class="cm_mcon" id="cm_mcon">
-	                    <a href="#">FAQ</a> <br>
-	                    <a href="#">Q&A</a>
-	                </ul>
-	            </a>
-	        </div>
+		     <a href="#" class="cm_mLogo">Coronagram</a>
+		     <a href="#" class="cm_mTitle" id="cm_mTitle">
+		       <div class="cm_map"></div> Corona Map
+		       <ul class="cm_mcon" id="cm_mcon">
+		         <a href="http://localhost:3000">국내</a> <br>
+		         <a href="../MapAPI">해외</a>
+		       </ul>
+		     </a>
+		     <a href="#" class="cm_mTitle" id="cm_mTitle">
+		       <div class="cm_info"></div>Corona Info
+		       <ul class="cm_mcon" id="cm_mcon">
+		         <a href="../coinfo_infolist">관련 정보</a> <br>
+		         <a href="../coinfo_step">거리두기</a> <br>
+		         <a href="../coinfo_news">News</a>
+		       </ul>
+		     </a>
+		     <a href="../coronagram" class="cm_sTitle">
+		       <div class="../cm_cam"></div>Coronagram
+		     </a>
+		     <a href="#" class="cm_mTitle" id="cm_mTitle">
+		       <div class="cm_user"></div>My Page
+		       <ul class="cm_mcon" id="cm_mcon">
+		         <a href="${sMNick}">개인 페이지</a> <br>
+		         <a href="../calendar">출석 체크</a> <br>
+		         <a href="https://coronagram-zoom.herokuapp.com/">Zoom</a>
+		       </ul>
+		     </a>
+		     <a href="#" class="cm_mTitle" id="cm_mTitle">
+		       <div class="cm_qna"></div>Service Center
+		       <ul class="cm_mcon" id="cm_mcon">
+		         <a href="qna">FAQ</a><br>
+		       </ul>
+		     </a>
+		   </div>
             <div class="container">    
                 <div class="profile">   
                     <div class="profile-image"> 
@@ -2075,7 +2126,7 @@
 	      </form>
 	     
 	 	</main>	   
-    	<script src="../resources/script/menu_bar/menu_bar.js"></script>
+    	<script src="../resources/script/userpage/menu_bar.js"></script>
     	<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js'></script>
 	</body>
 </html>

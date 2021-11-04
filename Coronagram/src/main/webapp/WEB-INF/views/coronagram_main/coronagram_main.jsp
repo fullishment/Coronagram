@@ -28,7 +28,16 @@
 		    		if(!$(e.target).hasClass('user_area')){ 
 		    			$(".user_area").css("display","none");
 		    		}
-		    	});		    	
+		    	});		
+		    	$(document).on("click",".rec_user1",function(){
+		    		var user = $(this).attr("nfo");
+		    		location.href="coronagram/"+user+"";
+		    		$("#searchText").val("");
+		    	});
+		    	$(document).on("click",".fa-times-circle",function(){
+		    		$(".user_area").css("display","none");
+		    		$("#searchText").val("");
+		    	});
 		    });
 	    	$(window).load(function(){
 	    		
@@ -498,23 +507,15 @@
 			    			data: params,
 			    			success: function(res) {
 			    				searchResult(res.search);	
-			    				
 			    			},
 			    			error:function(request, status, error) {
 			    				console.log(error);
 			    			},complete : function() {
-			    				searchExit();  
-			    				searchLocate();
+			    				  		    				
 			    		    }
 			    		});
 			    	}		    		
 		    	});		    	
-		    }
-		    function searchLocate(){
-		    	$("rec_user1").on("click",function(){
-		    		var user = $(this).attr("nfo");
-		    		location.href="coronagram/"+user+"";
-		    	});
 		    }
 		    function searchResult(list){
 		    	var html="";
@@ -536,11 +537,6 @@
 		    	var html2="";
 		    		html2+="<i class=\"fas fa-times-circle\"></i>";
 		    	$(".search_icon").html(html2);		    	
-		    }
-		    function searchExit(){
-		    	$(".fa-times-circle").on("click",function(){
-		    		$(".user_area").css("display","none");
-		    	});
 		    }
 		    function crngDtl(){
 		    	$(".sprite_bubble_icon").on("click",function(){
@@ -616,7 +612,7 @@
 					html+=" 		<img src=\"resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 "; 
 					html+="		</div>																											 ";
 					html+="		<div class=\"detail\">																							 ";
-					html+="			<a href=\"coronagram/"+data.NICK_NM+"\" class=\"modal_nick\">"+data.NICK_NM+"</a>																 ";			
+					html+="			<a href=\"coronagram/"+data.NICK_NM+"\" class=\"modal_nick\">"+data.NICK_NM+"</a>							 ";			
 					html+="		</div>																											 ";
 					if(data.M_NO == ${sMNo}){
 						
@@ -694,15 +690,15 @@
 					var ExtensionNm = data.FILE_ADR.lastIndexOf('.')+1;
 					var fileExt = data.FILE_ADR.substring(ExtensionNm, fileLen).toLowerCase();			
 					if(fileExt=="mp4" || fileExt=="mov"){
-						html+="<div class=\"modal_img_box\" pi=\""+data.M_NO+"\"> ";
-						html+= "			<video class=\"modal_video_box\">";
+						html+="<div class=\"modal_img_box\" pi=\""+data.M_NO+"\"> 														";
+						html+= "			<video class=\"modal_video_box\">															";
 						html+= " 				<source src=\"resources/upload/"+data.FILE_ADR+"\" type=\"video/mp4\"></source>			";
-						html+= "			</video>";
-						html+="</div>";
+						html+= "			</video>																					";
+						html+="</div>																									";
 					}else{
-						html+="<div pi=\""+data.M_NO+"\"> ";
+						html+="<div pi=\""+data.M_NO+"\"> 																				";
 				    	 html+=" <img class=\"modal_img_box\" src=\"resources/upload/"+data.FILE_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	"; 
-				    	 html+="</div>";
+				    	 html+="</div>																									";
 					}
 		    		 
 		    	}
@@ -746,31 +742,31 @@
 					 html+=" 				   					<img class=\"pro_img\" src=\"resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='resources/images/userpage/replace.png'\" /> 	 				";      
 					 html+="								</div>																											";						                 
 					 html+="								<div class=\"pro_dtl\">																							";					                 
-					 html+="									<div class=\"m_nick\">"+data.NICK_NM+"</div>																		";		                     
-					 html+="									<div class=\"m_name\">"+data.M_NM+"</div>																			";						                    
+					 html+="									<div class=\"m_nick\">"+data.NICK_NM+"</div>																";		                     
+					 html+="									<div class=\"m_name\">"+data.M_NM+"</div>																	";						                    
 					 html+="								</div>																											";							                 
 					 html+="							</div>																												";			             	
-				     html+="           	  			</div>      								";
-				     html+="						<div class=\"modal_info_mid3\">				";
-				     html+="							<div class=\"modal_mid_box\">				";
-				     html+="           	  					<div class=\"m_name\">게시글</div>     ";
-				     html+="           	  					<div class=\"m_nick\">"+data.WC+"</div>      						";
-				     html+="           	  				</div>      								";
-				     html+="							<div class=\"modal_mid_box\">				";
-				     html+="           	  					<div class=\"m_name\">팔로우</div>     ";
-				     html+="           	  					<div class=\"m_nick\">"+data.PC+"</div>      						";
-				     html+="           	  				</div>      								";
-				     html+="							<div class=\"modal_mid_box\">				";	
-				     html+="           	  					<div class=\"m_name\">팔로워</div>     ";
-				     html+="           	  					<div class=\"m_nick\">"+data.QC+"</div>      						";
-				     html+="           	  				</div>      								";
-				     html+="           	  			</div>      								";
-				     html+="						<div class=\"modal_info_img3\">				";					     
-				     html+="           	  			</div>      								";
-				     html+="						<div class=\"modal_info_follow3\">			";
-				     html+="           	  			</div>      								";
-				     html+="           	  		</div>      									";
-				     html+="           	  	</div>      										";
+				     html+="           	  			</div>      																											";
+				     html+="						<div class=\"modal_info_mid3\">																							";
+				     html+="							<div class=\"modal_mid_box\">																						";
+				     html+="           	  					<div class=\"m_name\">게시글</div>     																			";
+				     html+="           	  					<div class=\"m_nick\">"+data.WC+"</div>      																	";
+				     html+="           	  				</div>      																										";
+				     html+="							<div class=\"modal_mid_box\">																						";
+				     html+="           	  					<div class=\"m_name\">팔로우</div>     																			";
+				     html+="           	  					<div class=\"m_nick\">"+data.PC+"</div>      																	";
+				     html+="           	  				</div>      																										";
+				     html+="							<div class=\"modal_mid_box\">																						";	
+				     html+="           	  					<div class=\"m_name\">팔로워</div>     																			";
+				     html+="           	  					<div class=\"m_nick\">"+data.QC+"</div>      																	";
+				     html+="           	  				</div>      																										";
+				     html+="           	  			</div>      																											";
+				     html+="						<div class=\"modal_info_img3\">																							";					     
+				     html+="           	  			</div>      																											";
+				     html+="						<div class=\"modal_info_follow3\">																						";
+				     html+="           	  			</div>      																											";
+				     html+="           	  		</div>      																												";
+				     html+="           	  	</div>      																													";
 			     
 			     $(".modal_info_area3").html(html);
 	    	}
@@ -1049,9 +1045,9 @@
             <div class="cm_menuBar" id="cm_menuBar">
                 <div class="cm_menu__toggler"><span></span></div>
                 <a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
-                <a href="#" class="cm_home" id="cm_home">Home</a>
-                <a href="#" class="cm_msg" id="cm_msg">Message</a>
-                <a href="#" class="cm_cld" id="cm_cld">Calendar</a>
+			    <a href="#" class="cm_home" id="cm_home">Home</a>
+			    <a href="#" class="cm_msg" id="cm_shop">Shop</a>
+			    <a href="#" class="cm_cld" id="cm_cld">Calendar</a>
                	<div class="cm_dropdown">
                    <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
                    <ul class="cm_dropdown-content">
@@ -1077,41 +1073,40 @@
 				</div>				
             </div>
        		<div class="cm_menu" id="cm_menu">
-            <a href="#" class="cm_mLogo">Coronagram</a>
-            <a href="#" class="cm_mTitle" id="cm_mTitle">
-                <div class="cm_map"></div> Corona Map
-                <ul class="cm_mcon" id="cm_mcon">
-                    <a href="#">국내</a> <br>
-                    <a href="#">해외</a>
-                </ul>
-            </a>
-            <a href="#" class="cm_mTitle" id="cm_mTitle">
-                <div class="cm_info"></div>Corona Info
-                <ul class="cm_mcon" id="cm_mcon">
-                    <a href="#">관련 정보</a> <br>
-                    <a href="#">거리두기</a> <br>
-                    <a href="#">News</a>
-                </ul>
-            </a>
-            <a href="#" class="cm_sTitle">
-                <div class="cm_cam"></div>Coronagram
-            </a>
-            <a href="#" class="cm_mTitle" id="cm_mTitle">
-                <div class="cm_user"></div>My Page
-                <ul class="cm_mcon" id="cm_mcon">
-                    <a href="#">개인 페이지</a> <br>
-                    <a href="#">출석 체크</a> <br>
-                    <a href="#">Message</a>
-                </ul>
-            </a>
-            <a href="#" class="cm_mTitle" id="cm_mTitle">
-                <div class="cm_qna"></div>Service Center
-                <ul class="cm_mcon" id="cm_mcon">
-                    <a href="#">FAQ</a> <br>
-                    <a href="#">Q&A</a>
-                </ul>
-            </a>
-        </div>
+		     <a href="#" class="cm_mLogo">Coronagram</a>
+		     <a href="#" class="cm_mTitle" id="cm_mTitle">
+		       <div class="cm_map"></div> Corona Map
+		       <ul class="cm_mcon" id="cm_mcon">
+		         <a href="http://localhost:3000">국내</a> <br>
+		         <a href="MapAPI">해외</a>
+		       </ul>
+		     </a>
+		     <a href="#" class="cm_mTitle" id="cm_mTitle">
+		       <div class="cm_info"></div>Corona Info
+		       <ul class="cm_mcon" id="cm_mcon">
+		         <a href="coinfo_infolist">관련 정보</a> <br>
+		         <a href="coinfo_step">거리두기</a> <br>
+		         <a href="coinfo_news">News</a>
+		       </ul>
+		     </a>
+		     <a href="coronagram" class="cm_sTitle">
+		       <div class="cm_cam"></div>Coronagram
+		     </a>
+		     <a href="#" class="cm_mTitle" id="cm_mTitle">
+		       <div class="cm_user"></div>My Page
+		       <ul class="cm_mcon" id="cm_mcon">
+		         <a href="${sMNick}">개인 페이지</a> <br>
+		         <a href="calendar">출석 체크</a> <br>
+		         <a href="https://coronagram-zoom.herokuapp.com/">Zoom</a>
+		       </ul>
+		     </a>
+		     <a href="#" class="cm_mTitle" id="cm_mTitle">
+		       <div class="cm_qna"></div>Service Center
+		       <ul class="cm_mcon" id="cm_mcon">
+		         <a href="qna">FAQ</a><br>
+		       </ul>
+		     </a>
+		   </div>
     </header>
     <main>
     	
