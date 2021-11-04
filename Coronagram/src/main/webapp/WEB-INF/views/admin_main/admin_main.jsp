@@ -174,7 +174,7 @@ $(document).ready(function() {
 					<section class="page-header">
 						<h1 class="page-title">통계</h1>
 						<div class="button-group">
-							<button type="button" class="btn btn-primary">+</button>
+							<a href="admin_chart"><button type="button" class="btn btn-primary">+</button></a>
 						</div>
 					</section>
 				</article>

@@ -181,7 +181,7 @@ transform:rotate(0);
 }
 /* FAQ */
 .scQ {
-    background-color: #eee;
+    background-color: khaki;
     color: #444;
     cursor: pointer;
     padding: 18px;
@@ -197,7 +197,7 @@ transform:rotate(0);
 
 .SCactive,
 .scQ:hover {
-    background-color: #ccc;
+    background-color: gold;
 }
 
 .scA {
