@@ -5,6 +5,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<title>WorldMap</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">	
 <link rel="stylesheet" href="resources/css/menu_bar/menu_bar.css">	
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">

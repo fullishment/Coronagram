@@ -89,6 +89,33 @@
 			WHERE C.DEL = 1
 			AND LOWER(SUBSTR(CA.FILE_ADR,INSTR(CA.FILE_ADR,'.',-1)+1)) IN('mp4','mov')
 	</select>
+	<select id="getReelsList" parameterType="hashmap" resultType="hashmap">
+		SELECT M.M_NO, CS.REELS_NO, CA.FILE_ADR, M.NICK_NM, CS.CON, CS.DT, CS.DEL, CS.VIEW_CNT, NVL(L.LCNT, 0) AS LCNT, NVL(CC.CCNT, 0) AS CCNT,NVL(CW.WCNT,0) AS WCNT, 
+       		ROW_NUMBER() OVER(ORDER BY CS.REELS_NO DESC) AS RNUM
+			FROM CRNG_REELS CS 
+			INNER JOIN M M
+                    	ON CS.WRITER_NO = M.M_NO
+                    	AND M.NICK_NM = #{nickNm}
+            INNER JOIN (SELECT REELS_NO, FILE_ADR,
+                        RANK() OVER(PARTITION BY REELS_NO ORDER BY ATTC_NO ASC) AS RNK
+                        FROM CRNG_REELS_ATTC) CA
+                    	ON CS.REELS_NO = CA.REELS_NO
+                   		AND CA.RNK = 1
+            LEFT OUTER JOIN (SELECT REELS_NO,NVL(count(*),0) AS WCNT
+                        FROM CRNG_REELS_ATTC 
+                        GROUP BY REELS_NO) CW
+                    	ON CS.REELS_NO = CW.REELS_NO
+            LEFT OUTER JOIN (SELECT REELS_NO, NVL(COUNT(*),0) AS CCNT
+                        FROM CRNG_REELS_CMT
+                        GROUP BY REELS_NO) CC
+                        ON CS.REELS_NO = CC.REELS_NO 
+            LEFT OUTER JOIN (SELECT REELS_NO, NVL(COUNT(*),0) AS LCNT
+                        FROM CRNG_REELS_LK
+                        GROUP BY REELS_NO) L
+                        ON CS.REELS_NO = L.REELS_NO
+			WHERE CS.DEL = 1
+			AND LOWER(SUBSTR(CA.FILE_ADR,INSTR(CA.FILE_ADR,'.',-1)+1)) IN('mp4','mov')
+	</select>
 	<select id="getModalCmt" parameterType="hashmap" resultType="hashmap">
 		SELECT CC.CMT_NO, CC.CMT_WRITER_NO,CC.WRITING_NO,CC.CMT_CON,M.M_NO, M.M_NM, M.NICK_NM,M.IMG_ADR,
             TO_CHAR(CC.DT, 'YYYY/MM/DD HH24:MI:SS') AS DT,
@@ -182,10 +209,39 @@
                     	AND CA.WRITING_NO = #{writingNo}
 			WHERE C.DEL = 1
 	</select>	
+	<select id="reelsModal" parameterType="hashmap" resultType="hashmap">
+		SELECT CR.REELS_NO,M.M_NO, M.NICK_NM, M.IMG_ADR, CR.CON, CRA.FILE_ADR, 
+            NVL(CRL.LCNT,0) AS LCNT,NVL(CRC.CCNT,0) AS CCNT
+            FROM CRNG_REELS CR
+            INNER JOIN M M
+                        ON CR.WRITER_NO = M.M_NO                       
+            INNER JOIN CRNG_REELS_ATTC CRA
+                        ON CR.REELS_NO = CRA.REELS_NO
+            LEFT OUTER JOIN (SELECT REELS_NO, NVL(COUNT(*),0) AS LCNT
+                        FROM CRNG_REELS_LK
+                        GROUP BY REELS_NO) CRL
+                        ON CR.REELS_NO = CRL.REELS_NO
+            LEFT OUTER JOIN (SELECT REELS_NO, NVL(COUNT(*),0) AS CCNT
+                        FROM CRNG_REELS_CMT
+                        GROUP BY REELS_NO) CRC
+                        ON CR.REELS_NO = CRC.REELS_NO
+            WHERE M.M_NO = (SELECT M_NO FROM M WHERE NICK_NM = #{nickNm})
+            AND CR.REELS_NO = #{reelsNo}
+	</select>
+	<select id="getReelsLk" parameterType="hashmap" resultType="Integer">
+		SELECT NVL(COUNT(*),0) AS LCNT 
+			FROM CRNG_REELS_LK 
+			WHERE REELS_NO = #{reelsNo}
+	</select>
 	<select id="getHeartCnt" parameterType="hashmap" resultType="Integer">
 		SELECT NVL(COUNT(*),0) AS HC 
 			FROM LK 
 			WHERE USER_NO = #{m_no} and WRITING_NO = #{writingNo}
+	</select>
+	<select id="ReelsHeartChk" parameterType="hashmap" resultType="Integer">
+		SELECT NVL(COUNT(*),0) AS HC 
+			FROM CRNG_REELS_LK 
+			WHERE USER_NO = #{m_no} and REELS_NO = #{reelsNo}
 	</select>
 	<select id="getfollowEx" parameterType="hashmap" resultType="Integer">
 		SELECT NVL(COUNT(*),0) as FEXIST
@@ -203,6 +259,11 @@
             FROM USER_SEQUENCES
             WHERE SEQUENCE_NAME = 'STORY_SEQ'
 	</select>
+	<select id="getLastRAcctNum" parameterType="hashmap" resultType="hashmap">
+		SELECT LAST_NUMBER 
+      		FROM USER_SEQUENCES 
+      		WHERE SEQUENCE_NAME = 'REELS_SEQ'
+	</select>
 	<insert id="storyAdd" parameterType="hashmap">
 		INSERT INTO CRNG_STORY(STORY_TITLE,WRITER_NO) 
 			VALUES ( #{title}, #{m_no} )
@@ -211,15 +272,32 @@
 		INSERT INTO CRNG_STORY_ATTC(ATTC_NO,STORY_NO,FILE_ADDR)
 			VALUES( STORY_ATTC_SEQ.NEXTVAL, #{last_no}, #{CrngImgFile} )
 	</insert>
-	<delete id="delHeart" parameterType="hashmap">
-		DELETE FROM LK 
+	<insert id="reelsAdds" parameterType="hashmap">
+		INSERT INTO CRNG_REELS(CON,WRITER_NO) 
+			VALUES ( #{con}, #{m_no} )
+	</insert>
+	<insert id="reelsAcctAdd" parameterType="hashmap">
+		INSERT INTO CRNG_REELS_ATTC(ATTC_NO,REELS_NO,FILE_ADR)
+			VALUES( REELS_ATTC_SEQ.NEXTVAL, #{last_no}, #{reelsFile} )
+	</insert>
+	<insert id="addReelsHeart" parameterType="hashmap">
+		INSERT INTO CRNG_REELS_LK(USER_NO,REELS_NO) 
+			VALUES (#{m_no}, #{reelsNo})
+	</insert> 
+	<delete id="delReelsHeart" parameterType="hashmap">
+		DELETE FROM CRNG_REELS_LK 
 			WHERE USER_NO = #{m_no} 
-			AND WRITING_NO = #{writingNo}
+			AND REELS_NO = #{reelsNo}
 	</delete>
 	<insert id="addHeart" parameterType="hashmap">
 		INSERT INTO LK(USER_NO,WRITING_NO) 
 			VALUES (#{m_no}, #{writingNo})
-	</insert>    
+	</insert> 
+	<delete id="delHeart" parameterType="hashmap">
+		DELETE FROM LK 
+			WHERE USER_NO = #{m_no} 
+			AND WRITING_NO = #{writingNo}
+	</delete>	   
 	<insert id="FollowMAdd" parameterType="hashmap">
 		INSERT INTO FOLLOW(RQ_USER,RP_USER) 
 			VALUES( #{m_no}, #{m_no2} )
@@ -251,4 +329,9 @@
 		UPDATE CRNG SET DEL = 0 
 			WHERE WRITING_NO =#{writingNo}
 	</update>     
+	<update id="reelsViewCnt" parameterType="hashmap">
+		UPDATE CRNG_REELS 
+        SET VIEW_CNT = VIEW_CNT + 1
+        WHERE REELS_NO = #{reelsNo}
+	</update>
 </mapper>

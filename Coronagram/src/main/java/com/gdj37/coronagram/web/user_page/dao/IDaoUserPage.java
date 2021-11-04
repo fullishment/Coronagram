@@ -61,4 +61,23 @@ public interface IDaoUserPage {
 
 	public List<HashMap<String, String>> SearchUser(HashMap<String, String> params)throws Throwable;
 
+	public List<HashMap<String, String>> getReelsList(HashMap<String, String> params)throws Throwable;
+
+	public HashMap<String, String> getLastRAcctNum(HashMap<String, String> params)throws Throwable;
+
+	public int reelsAdds(HashMap<String, String> params)throws Throwable;
+
+	public int reelsAcctAdd(HashMap<String, String> params)throws Throwable;
+
+	public HashMap<String, String> reelsModal(HashMap<String, String> params)throws Throwable;
+
+	public int reelsViewCnt(HashMap<String, String> params)throws Throwable;
+
+	public int ReelsHeartChk(HashMap<String, String> params)throws Throwable;
+
+	public int addReelsHeart(HashMap<String, String> params)throws Throwable;
+
+	public int delReelsHeart(HashMap<String, String> params)throws Throwable;
+
+	public int getReelsLk(HashMap<String, String> params)throws Throwable;
 }

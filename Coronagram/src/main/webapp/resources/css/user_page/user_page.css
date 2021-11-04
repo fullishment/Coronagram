@@ -430,6 +430,17 @@ svg {
   	padding: 10px 10px 0px 10px;
   	color:#8e8e8e;
   }
+  .menu_post3{
+ 	display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+  	cursor:pointer;
+  	margin-left: 60px;
+  	padding: 10px 10px 0px 10px;
+  	color:#8e8e8e;
+  }
   .nav_list_post:link {	
   	color:#dbdbdb;
   }
@@ -455,6 +466,11 @@ svg {
     	margin-right: 5px;
    }
    .menu_icon2{
+   		width: 17px;
+    	height: 17px;
+    	margin-right: 5px;
+   }
+   .menu_icon3{
    		width: 17px;
     	height: 17px;
     	margin-right: 5px;
@@ -700,6 +716,16 @@ svg {
     right: 1rem;
     font-size: 2.5rem;
     text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
+}
+.gallery-item-type1{
+	display: flex;
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    font-size: 2.5rem;
+    text-shadow: 0.2rem 0.2rem 0.2rem rgb(0 0 0 / 10%);
+    align-items: center;
+    flex-direction: row;
 }
 .profile_img{
     width: 32px;
@@ -1340,7 +1366,94 @@ video{
 .profile_fwer{
 	font-weight:bold;
 }
-
+.reels_content{
+	position: absolute;
+    width: 430px;
+    height: 630px;
+    background: black;
+    top: 18%;
+    left: 39%;
+    border-radius: 20px;
+}
+.reels_area{
+	height:100%;
+}
+.reels_video_area{
+	height:100%;
+}
+.reels_icon{
+	position: absolute;
+    z-index: 150;
+    bottom: 60px;
+    right: 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+.sprite_bubble_icon1{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-top: 9px;
+}
+.view_cnt{
+	font-size: 12pt;
+    font-weight: bold;
+    color: white;
+    padding-top: 2px;
+    padding-left: 13px;
+}
+.sprite_square_icon1{
+	width: 30px;
+    height: 30px;
+    border: 2px solid white;
+    border-radius: 5px;
+    position: absolute;
+    right: 15px;
+    bottom: 25px;
+}
+.reels_title_icon{
+	width: 24px;
+    position: absolute;
+    height: 24px;
+    right: 20px;
+    top: 16px;
+}
+.reels_hcnt_area{
+	padding-left: 6px;
+    font-size: 9pt;
+    font-weight: bold;
+}
+.reels_ccnt_area{
+	margin-top: 5px;
+    margin-bottom: 10px;
+    padding-left: 7px;
+    font-size: 9pt;
+    font-weight: bold;
+}
+.heart_label{
+	position: relative;
+    top: 8px;
+}
+.reels_title{
+	color: white;
+    font-weight: 900;
+    font-size: 15pt;
+    position: absolute;
+    left: 20px;
+    top: 15px;
+}
+.sprite_more_icon1{
+	width:24px;
+	height:18px;
+    margin: 20px 9px 20px 0px;
+    display: flex;
+    justify-content: center;
+}
+.music_img{
+	width: 100%;
+    height: 100%;
+}
 /* Gallery Section */
 
 .gallery {
@@ -1357,9 +1470,26 @@ video{
     color: #fff;
     cursor: pointer;
 }
-
 .gallery-item:hover .gallery-item-info,
 .gallery-item:focus .gallery-item-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.gallery-item1 {
+    position: relative;
+    flex: 1 0 22rem;
+    margin: 1rem;
+    color: #fff;
+    cursor: pointer;
+}
+.gallery-item1:hover .gallery-item-info,
+.gallery-item1:focus .gallery-item-info {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1558,6 +1688,18 @@ video::-webkit-media-controls-fullscreen-button {
     border-radius: 70%;
     color: white;
 }
+.muted_btn1{
+	position: absolute;
+    top: 45%;
+    right: 45%;
+    font-size: 20pt;
+    background: rgba(0,0,0,0.6);
+    width: 50px;
+    padding: 11px;
+    height: 50px;
+    border-radius: 70%;
+    color: white;
+}
 .play_btn{
 	position: absolute;
     /* top: 45%; */
@@ -1601,6 +1743,7 @@ video::-webkit-media-controls-fullscreen-button {
     .profile-stats,
     .profile-bio,
     .gallery-item,
+    .gallery-item1,
     .gallery {
         width: auto;
         margin: 0;

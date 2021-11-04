@@ -28,10 +28,19 @@
 	        	$("#myModal").html("");
 	        	$("#writingNo").val($(this).attr("wtno"));
 	        	$("#writingNo2").val($(this).attr("wtno"));
+	        	
 	        	modal.style.display="block";
 	        	$('body').css("overflow","hidden");
 	        	mdDraw();          	
-	        });        	        
+	        });   
+	        $(document).on("click",".gallery-item1",function(){
+	        	$("#myModal").html("");
+	        	$("#reelsNo").val($(this).attr("wtno"));
+	        	modal.style.display="block";
+	        	$('body').css("overflow","hidden");
+	        	ReelsModal();   
+	        });  
+	        
 	        window.onclick = function(event) {
 	            if (event.target == modal) {
 	            	if(document.getElementById("player")){
@@ -107,13 +116,288 @@
 		        	storyAjax();
 		        	modalFunc();
 		        	followModal();
-		        	followerModal()
+		        	followerModal();
+		        	
 				},
 				error : function(request,status,error){
 					console.log(error);
 				}
 			});
 		}
+        function reloadReels(){
+        	var params=$("#addrForm").serialize();		
+			$.ajax({ 
+				url:"reels",
+				type:"post",
+				dataType:"json",
+				data:params,
+				success : function(res){
+					ReelsList(res.reels);
+					ReelsInfo(res.intro);
+					ReelsInfoClick();
+				},
+				error : function(request,status,error){
+					console.log(error);
+				}
+			});
+        }
+        function ReelsList(list){
+        	var html ="";			
+			for(var data of list){                                                                                    
+				html+= "<div class=\"gallery-item1\" tabindex=\"0\" wtno=\""+data.REELS_NO+"\" no=\""+data.M_NO+"\">                     ";				
+				html+= "			<video class=\"gallery-image\">																		";
+				html+= " 				<source src=\"../resources/upload/"+data.FILE_ADR+"\" type=\"video/mp4\"></source>				";
+				html+= "			</video>																							";   				
+				html+= "		<div class=\"gallery-item-type1\">																		";
+				html+= "        	<i class=\"fas fa-play\"></i>																		";
+				html+="				<span class=\"view_cnt\">"+data.VIEW_CNT+"</span>													";
+				html+= "    	</div>																						    		";				
+			    html+= "    	<div class=\"gallery-item-info\">                                                            			"; 
+			    html+= "        <ul>                                                                                     	 			"; 
+			    html+= "            <li class=\"gallery-item-likes\"><span class=\"visually-hidden\">Likes:</span><i         			"; 
+			    html+= "                    class=\"fas fa-heart\" aria-hidden=\"true\"></i>"+data.LCNT+"</li>               			"; 
+			    html+= "            <li class=\"gallery-item-comments\"><span class=\"visually-hidden\">Comments:</span><i   			"; 
+			    html+= "                    class=\"fas fa-comment\" aria-hidden=\"true\"></i>"+data.CCNT+"</li>             			"; 
+			    html+= "        </ul>                                                                                    	 			";
+			    html+= "    	</div>                                                                                       			"; 
+		    	html+= "</div>                                                                                           	 			"; 
+		    	
+			}			
+			$("#gallery").html(html);
+        }
+        function ReelsInfo(data){
+        	var html="";
+        		if(data.NICK_NM == "${sMNick}"){
+        			html+="<div class=\"btn_area\">										";
+            		html+="		<div id=\"reels_add\" class=\"photo_add\">  			";
+            		html+="			<i class=\"far fa-plus-square\"></i>				";
+            		html+="			<span class=\"btn_font\">&nbsp;새 릴스</span>			";
+            		html+="		</div>													";
+            		html+="</div>														";
+        		}
+        		else{
+        			
+        		}       		
+        		$(".nav_line").html(html);
+        		var html2="";
+        		if(data.NICK_NM == "${sMNick}"){
+		        	html2+="<div class=\"add_story_area\">                                                          ";
+					html2+="	<img class=\"story_icon\" src=\"../resources/images/userpage/plus.png\" alt=\"\">   ";
+					html2+="	<div class=\"add_story_span\">                                                      ";
+					html2+="		<span>New</span>                                                                ";
+					html2+="	</div>                                                                              ";
+					html2+="</div>                                                                                  ";
+				}
+        		else{
+        			
+        		} 
+        		$(".add_story_container").html(html2);
+        }
+        function ReelsInfoClick(){
+        	$("#reels_add").on("click",function(){
+        		$("#addReelsForm").submit();
+        	});
+        }
+        function ReelsModal(){  	
+	    	var params = $("#ReelsMForm").serialize();
+			$.ajax({
+				url : "ReelsModal",
+				type : "post",
+				dataType : "json",
+				data : params,
+				success : function(res){
+					$("#myModal").html("");
+					ReelsModalArea(res.reelsModal);
+					reloadReels();
+					ReelsLK();
+					ReelsAddDelHeart();
+					ReelsControl1();
+					ReelsControl2();
+				},
+				error : function(request, status, error){
+					console.log(error);
+				}
+			});
+	    }
+        function ReelsLK(){  	
+        	var params = $("#ReelsMForm").serialize();
+			$.ajax({
+				url : "ReelsLK",
+				type : "post",
+				dataType : "json",
+				data : params,
+				success : function(res){
+					ReelsHeart(res.reelsHChk);
+					ReelsLkArea(res.ReelsLk);
+				},
+				error : function(request, status, error){
+					console.log(error);
+				}
+			});
+	    }
+        function ReelsControl1(){
+			$(".reels_content").on("click",function(){
+				
+				const player = document.getElementById("player");
+				player.muted = false;
+							
+				var html="";
+				html+="<i class=\"fas fa-volume-up\"></i>";
+				$(".muted_btn1").html(html);
+				
+				ReelsControl2();
+			});
+			
+		}
+	    function ReelsControl2(){
+	    	$(".reels_content").on("click",function(){    		
+				const player = document.getElementById("player");
+				player.muted = true;
+				
+				var html="";
+				html+="<i class=\"fas fa-volume-mute\"></i>";
+				$(".muted_btn1").html(html);
+				 ReelsControl1();
+			});
+	    }
+        function ReelsLkArea(data){
+        	var html="";
+        		html+="<span class=\"reels_heart_cnt\">"+data+"<span>";       		
+        		$(".reels_hcnt_area").html(html);
+        }
+        function ReelsHeart(data){
+	    	if( data == 1 ){
+    			$("#checkbox").attr("checked",true);
+	    	}else{
+            	$("#checkbox").attr("checked",false);
+	    	}
+	    }
+        function ReelsAddDelHeart(){
+        	$("#checkbox").on("click",function(){
+	    		if($(this).is(":checked") == true) {
+		    		var params = $("#ReelsMForm").serialize();
+		    		$.ajax({
+		    			url : "addReelsHeart",
+		    			type : "post",
+		    			dataType : "json",
+		    			data : params,
+		    			success : function(res){
+		    				if(res.result=="success"){
+		    					ReelsLK();
+		    				}else{
+		    					alert("add실패");
+		    				}
+		    			},
+		    			error : function(request, status, error){
+		    				console.log(error);
+		    			}
+		    		});
+	    		}else{
+		    		var params = $("#ReelsMForm").serialize();
+	    			$.ajax({
+	    				url : "delReelsHeart",
+	    				type : "post",
+	    				dataType : "json",
+	    				data : params,
+	    				success : function(res){
+	    					if(res.result=="success"){
+	    						ReelsLK();
+	    					}else{
+	    						alert("삭제실패");
+	    					}
+	    				},
+	    				error : function(request, status, error){
+	    					console.log(error);
+	    				}
+	    			});
+	    		}
+    		});	    		    	
+        }
+        function ReelsModalArea(data){
+        	var html="";
+        		html+="<div class=\"reels_content\" rno=\""+data.REELS_NO+"\">	";
+        		html+="		<div class=\"reels_area\">";
+        		html+="			<div class=\"reels_title\">		";
+        		html+="				<span>Reels</span>				";
+        		html+="			</div>							";
+        		html+="			<div class=\"reels_title_icon\">		";
+        		html+=" 			<img class=\"music_img\" src=\"../resources/images/userpage/camera.png\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> ";
+        		html+="			</div>							";
+        		html+=" 		<div class=\"muted_btn1\">																";
+                html+="				<i class=\"fas fa-volume-mute\"></i>												";
+                html+=" 		</div>																					";
+        		html+="			<div class=\"reels_video_area\">	";
+        		html+="				<video id=\"player\" controls playsinline autoplay muted loop>							"; 
+                html+=" 				<source src=\"../resources/upload/"+data.FILE_ADR+"\" alt=\"\" /></source>	   		";
+                html+="				</video>																				"; 
+        		html+="			</div>																						";
+        		html+="			<div class=\"reels_icon\">																	";
+        		html+="                       <div class=\"heart_btn\">                                                                 								   ";
+			    html+="                           <div class=\"sprite_heart_icon_outline\" name=\"39\" data-name=\"heartbeat\">         								   ";			     											
+			    html+="                                     <input type=\"checkbox\" name=\"checkbox\" id=\"checkbox\" >                								   ";
+			    html+="                                     <label class=\"heart_label\"for=\"checkbox\">                                                    								   ";
+			    html+="                                       <svg id=\"heart-svg\" viewBox=\"467 392 58 57\" xmlns=\"http://www.w3.org/2000/svg\"> ";
+			    html+="                                         <g id=\"Group\" fill=\"none\" fill-rule=\"evenodd\" transform=\"translate(467 392)\">";
+			    html+="                                           <path d=\"M29.144 20.773c-.063-.13-4.227-8.67-11.44-2.59C7.63 28.795 28.94 43.256 29.143 43.394c.204-.138 21.513-14.6 11.44-25.213-7.214-6.08-11.377 2.46-11.44 2.59z\" id=\"heart\" stroke=\"#ffffff\" stroke-width=\"3\"></path>";
+			    html+="                                           <circle id=\"main-circ\" fill=\"#E2264D\" opacity=\"0\" cx=\"29.5\" cy=\"29.5\" r=\"1.5\"></circle>     ";
+			    html+="                                           <g id=\"grp7\" opacity=\"0\" transform=\"translate(7 6)\">                                              ";
+			    html+="                                             <circle id=\"oval1\" fill=\"#9CD8C3\" cx=\"2\" cy=\"6\" r=\"2\"></circle>                             ";
+			    html+="                                             <circle id=\"oval2\" fill=\"#8CE8C3\" cx=\"5\" cy=\"2\" r=\"2\"></circle>                             ";
+			    html+="                                           </g>                                                                                                    ";
+			    html+="                                                                                                                                                   ";
+			    html+="                                           <g id=\"grp6\" opacity=\"0\" transform=\"translate(0 28)\">                                             ";
+			    html+="                                             <circle id=\"oval1\" fill=\"#CC8EF5\" cx=\"2\" cy=\"7\" r=\"2\"></circle>                             ";
+			    html+="                                             <circle id=\"oval2\" fill=\"#91D2FA\" cx=\"3\" cy=\"2\" r=\"2\"></circle>                             ";
+			    html+="                                           </g>                                                                                                    ";
+			    html+="                                                                                                                                                   ";
+			    html+="                                           <g id=\"grp3\" opacity=\"0\" transform=\"translate(52 28)\">                                            ";
+			    html+="                                             <circle id=\"oval2\" fill=\"#9CD8C3\" cx=\"2\" cy=\"7\" r=\"2\"></circle>                             ";
+			    html+="                                             <circle id=\"oval1\" fill=\"#8CE8C3\" cx=\"4\" cy=\"2\" r=\"2\"></circle>                             ";
+			    html+="                                           </g>                                                                                                    ";
+			    html+="                                                                                                                                                   ";
+			    html+="                                           <g id=\"grp2\" opacity=\"0\" transform=\"translate(44 6)\">                                             ";
+			    html+="                                             <circle id=\"oval2\" fill=\"#CC8EF5\" cx=\"5\" cy=\"6\" r=\"2\"></circle>                             ";
+			    html+="                                             <circle id=\"oval1\" fill=\"#CC8EF5\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                             ";
+			    html+="                                           </g>                                                                                                    ";
+			    html+="                                           <g id=\"grp5\" opacity=\"0\" transform=\"translate(14 50)\">                                            ";
+			    html+="                                             <circle id=\"oval1\" fill=\"#91D2FA\" cx=\"6\" cy=\"5\" r=\"2\"></circle>                             ";
+			    html+="                                             <circle id=\"oval2\" fill=\"#91D2FA\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                             ";
+			    html+="                                           </g>                                                                                                    ";
+			    html+="                                           <g id=\"grp4\" opacity=\"0\" transform=\"translate(35 50)\">                                            ";
+			    html+="                                             <circle id=\"oval1\" fill=\"#F48EA7\" cx=\"6\" cy=\"5\" r=\"2\"></circle>                             ";
+			    html+="                                             <circle id=\"oval2\" fill=\"#F48EA7\" cx=\"2\" cy=\"2\" r=\"2\"></circle>                             ";
+			    html+="                                           </g>                                                                                                    ";
+			    html+="                                           <g id=\"grp1\" opacity=\"0\" transform=\"translate(24)\">                                               ";
+			    html+="                                             <circle id=\"oval1\" fill=\"#9FC7FA\" cx=\"2.5\" cy=\"3\" r=\"2\"></circle>                           ";
+			    html+="                                             <circle id=\"oval2\" fill=\"#9FC7FA\" cx=\"7.5\" cy=\"2\" r=\"2\"></circle>                           ";
+			    html+="                                           </g>                                                                                                    ";
+			    html+="                                         </g>                                                                                                      ";
+			    html+="                                       </svg>                                                                                                      ";
+			    html+="                                     </label>                                                                                                      ";
+			    html+="                           </div>                                                                                                                  ";
+			    html+="                       </div>                                                                                                                      ";
+			    html+="							<div class=\"reels_hcnt_area\">										";			    
+			    html+="							</div>																";
+			    html+="                       <div class=\"sprite_bubble_icon1\">                                                                                          ";
+			    html+="                           <i class=\"far fa-comment f_size\"></i>                                                                                 ";
+			    html+="                       </div>                                                                                                                      ";
+			    html+="							<div class=\"reels_ccnt_area\">										";
+			    html+="								<span class=\"reels_cmt_cnt\">"+data.CCNT+"<span>				";
+			    html+="							</div>																";
+			    html+="                       <div class=\"sprite_share_icon1\" data-name=\"share\">                                                                       ";
+			    html+="                           <i class=\"far fa-paper-plane f_size\"></i>                                                                             ";
+			    html+="                       </div>                                                                                                                      ";
+			    html+="						  <div class=\"sprite_more_icon1\">								";
+			    html+=" 						<img class=\"music_img\" src=\"../resources/images/userpage/more.png\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> ";
+        		html+="						  </div>															";			      		
+         		html+="				</div>";
+         		html+="						  <div class=\"sprite_square_icon1\">								";
+        		html+=" 						<img class=\"music_img\" src=\"../resources/images/userpage/replace.png\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> ";
+         		html+="						  </div>															";
+        		html+="		</div>";
+        		html+="</div>";
+        		$("#myModal").html(html);
+        }
         function reloadPart2(){
         	var params=$("#addrForm").serialize();		
 			$.ajax({ 
@@ -443,16 +727,16 @@
 	    		});
 	    	});
 	    }	
-		function FollowMList(list){
+	    function FollowMList(list){
 	    	var html = "";
 	    	for(data of list){
 	    		html+="<div class=\"rec_user\" nfo=\""+data.M_NO+"\">																								 ";
 				html+="		<div class=\"profile_thumb\">																											 ";
 				html+=" 		<img src=\"../resources/upload/"+data.IMG_ADR+"\" alt=\"none\" onerror=\"this.src='../resources/images/userpage/replace.png'\" /> 	 "; 
-				html+="		</div>																																	 ";
+				html+="		</div>																											 						 ";
 				html+="		<div class=\"detail\">																													 ";
 				html+="			<a href=\"coronagram/"+data.NICK_NM+"\" class=\"modal_nick\">"+data.NICK_NM+"</a>																 ";			
-				html+="		</div>																											 						 ";
+				html+="		</div>																																	 ";
 				if(data.M_NO == ${sMNo}){
 					
 				}
@@ -468,7 +752,8 @@
 						html+="			</div>																								 	";
 					}							
 					html+="</div>																												";
-				}			
+				}								
+				html+="</div>																												 	";
 	    	}				
 			$(".lk_modal_main").html(html);
 	    }
@@ -519,6 +804,8 @@
         }
         function videoListBtn(){
         	$(".menu_post2").on("click",function(){
+        		$('#gallery').html("");
+        		$('#gallery').css("grid-template-rows","300px 300px 300px");
         		$(".menu_post2").css({
         			"color":"#262626",
         			"border-top":"2px solid #262626"
@@ -531,11 +818,21 @@
         			"border-top":"2px"
         		});
         		var html2="";
-        		html2+="<img class=\"menu_icon2\" src=\"../resources/images/userpage/film1.png\" alt=\"\">";
+        		html2+="<img class=\"menu_icon2\" src=\"../resources/images/userpage/play1.png\" alt=\"\">";
         		$(".menu_icon_area2").html(html2);
         		reloadVideo();
+        		
+        		$(".menu_post3").css({
+        			"color":"#8e8e8e",
+        			"border-top":"2px"
+        		});
+        		var html3="";
+        		html3+="<img class=\"menu_icon2\" src=\"../resources/images/userpage/film2.png\" alt=\"\">";
+        		$(".menu_icon_area3").html(html3);
         	});
         	$(".menu_post").on("click",function(){
+        		$('#gallery').html("");
+        		$('#gallery').css("grid-template-rows","300px 300px 300px");
         		$(".menu_post").css({
         			"color":"#262626",
         			"border-top":"2px solid #262626"
@@ -551,6 +848,41 @@
         		html2+="<img class=\"menu_icon2\" src=\"../resources/images/userpage/film2.png\" alt=\"\">";
         		$(".menu_icon_area2").html(html2);
         		reloadList();
+        		
+        		$(".menu_post3").css({
+        			"color":"#8e8e8e",
+        			"border-top":"2px"
+        		});
+        		var html3="";
+        		html3+="<img class=\"menu_icon2\" src=\"../resources/images/userpage/film2.png\" alt=\"\">";
+        		$(".menu_icon_area3").html(html3);
+        	});
+        	$(".menu_post3").on("click",function(){
+        		$('#gallery').html("");
+        		$('#gallery').css("grid-template-rows","400px 400px 400px");
+        		$(".menu_post3").css({
+        			"color":"#262626",
+        			"border-top":"2px solid #262626"
+        		});
+        		var html3="";
+        		html3+="<img class=\"menu_icon2\" src=\"../resources/images/userpage/film1.png\" alt=\"\">";
+        		$(".menu_icon_area3").html(html3);
+        		
+        		$(".menu_post").css({
+        			"color":"#8e8e8e",
+        			"border-top":"2px"
+        		});
+        		var html="";
+        		html+="<img class=\"menu_icon1\" src=\"../resources/images/userpage/grid2.png\" alt=\"\">";
+        		$(".menu_icon_area1").html(html);
+        		$(".menu_post2").css({
+        			"color":"#8e8e8e",
+        			"border-top":"2px"
+        		});
+        		var html2="";
+        		html2+="<img class=\"menu_icon2\" src=\"../resources/images/userpage/film2.png\" alt=\"\">";
+        		$(".menu_icon_area2").html(html2);
+        		reloadReels();
         	});
         }
         function reloadVideo(){
@@ -1192,9 +1524,9 @@
 		}
 	    function heart(data){
 	    	if( data == 1 ){
-    			$("#checkbox").attr("checked",true);
+    			$(".checkbox").attr("checked",true);
 	    	}else{
-            	$("#checkbox").attr("checked",false);
+            	$(".checkbox").attr("checked",false);
 	    	}
 	    }
 	    function heartAD(){
@@ -1343,13 +1675,13 @@
 		    			dataType:"json",
 		    			data: params,
 		    			success: function(res) {
-		    				searchResult(res.search);
-		    				searchLocate();
+		    				searchResult(res.search);		    				
 		    			},
 		    			error:function(request, status, error) {
 		    				console.log(error);
 		    			},complete : function() {
-		    				searchExit();    
+		    				searchExit();   
+		    				searchLocate();
 		    		    }
 		    		});
 		    	}		    		
@@ -1644,7 +1976,13 @@
 		        			</div>
 		        			<div class="menu_post2">
 		        				<div class="menu_icon_area2">
-		        					<img class="menu_icon2" src="../resources/images/userpage/film2.png" alt="">
+		        					<img class="menu_icon2" src="../resources/images/userpage/play2.png" alt="">
+		        				</div>       				
+		        				<span>동영상</span>
+		        			</div>
+		        			<div class="menu_post3">
+		        				<div class="menu_icon_area3">
+		        					<img class="menu_icon3" src="../resources/images/userpage/film2.png" alt="">
 		        				</div>       				
 		        				<span>릴스</span>
 		        			</div>		        			
@@ -1702,6 +2040,14 @@
 		   <form action="crngAdd" id="addCrngForm" method="post">
     	   	  <input type="hidden" name="m_no" value="${sMNo}"/>
 		   </form>
+		   <form action="#" id="ReelsMForm" method="post">
+    	   	  <input type="hidden" name="reelsNo" id="reelsNo"/>
+    	   	  <input type="hidden" name="nickNm" value="<%=request.getAttribute("nicknm")%>"/>
+    	   	  <input type="hidden" name="m_no" value="${sMNo}"/>
+		   </form>
+		   <form action="reelsAdd" id="addReelsForm" method="post">
+    	   	  <input type="hidden" name="m_no" value="${sMNo}"/>
+		   </form>
 		   <form action="crngVideoAdd" id="addCrngVideoForm" method="post">
     	   	  <input type="hidden" name="m_no" value="${sMNo}"/>
 		   </form>
@@ -1709,6 +2055,7 @@
           	  <input type="hidden" name="m_no" value="${sMNo}"/>
           	  <input type="hidden" name="m_no2" id="m_no2"/> 
 	      </form>
+	     
 	 	</main>	   
     	<script src="../resources/script/menu_bar/menu_bar.js"></script>
     	<script src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js'></script>

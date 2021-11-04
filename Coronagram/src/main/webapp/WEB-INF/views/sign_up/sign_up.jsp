@@ -12,8 +12,102 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="resources/css/sign_up/sign_up.css">
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
-
 <script type="text/javascript">
+//이메일 유효성체크
+function CheckEmail(str)
+{
+     var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+     if(!reg_email.test(str)) {
+          return false;
+     }
+     else {
+          return true;
+     }
+}
+
+//전화번호 유효성체크
+function autoDtFormat(obj) {
+    if(event.keyCode != 8) {
+        if(obj.value.replace(/[0-9 \-]/g, "").length == 0) {
+            let number = obj.value.replace(/[^0-9]/g,"");
+            let ymd = "";
+            if(number.length < 4) {
+                return number;
+            } else if(number.length < 6){
+                ymd += number.substr(0, 4);
+                ymd += "-";
+                ymd += number.substr(4);
+            } else {
+                ymd += number.substr(0, 4);
+                ymd += "-";
+                ymd += number.substr(4, 2);
+                ymd += "-";
+                ymd += number.substr(6);
+            }
+            obj.value = ymd;
+        } else {
+            alert("숫자 이외의 값은 입력하실 수 없습니다.");
+            obj.value = obj.value.replace(/[^0-9 ^\-]/g,"");
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+function checkValidDate(value) {
+	var result = true;
+	try {
+	    var date = value.split("-");
+	    var y = parseInt(date[0], 10),
+	        m = parseInt(date[1], 10),
+	        d = parseInt(date[2], 10);
+	    
+	    var dateRegex = /^(?=\d)(?:(?:31(?!.(?:0?[2469]|11))|(?:30|29)(?!.0?2)|29(?=.0?2.(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))(?:\x20|$))|(?:2[0-8]|1\d|0?[1-9]))([-.\/])(?:1[012]|0?[1-9])\1(?:1[6-9]|[2-9]\d)?\d\d(?:(?=\x20\d)\x20|$))?(((0?[1-9]|1[012])(:[0-5]\d){0,2}(\x20[AP]M))|([01]\d|2[0-3])(:[0-5]\d){1,2})?$/;
+	    result = dateRegex.test(d+'-'+m+'-'+y);
+	} catch (err) {
+		result = false;
+	}    
+    return result;
+}
+function inputTelNumber(obj) {
+
+    var number = obj.value.replace(/[^0-9]/g, "");
+    var tel = "";
+    var seoul = 0;
+    if(number.substring(0, 2).indexOf('02') == 0) {
+        seoul = 1;
+    }
+    if(event.keyCode != 8) {
+        if(obj.value.replace(/[0-9 \-]/g, "").length == 0) {
+		    if(number.length < (4 - seoul)) {
+		        return number;
+		    } else if(number.length < (7 - seoul )) {
+		        tel += number.substr(0, (3 - seoul));
+		        tel += "-";
+		        tel += number.substr(3 - seoul);
+		    } else if(number.length < ( 11 - seoul)) {
+		        tel += number.substr(0, (3 - seoul));
+		        tel += "-";
+		        tel += number.substr((3 - seoul), 3);
+		        tel += "-";
+		        tel += number.substr(6 - seoul);
+		    } else{
+		        tel += number.substr(0, (3 - seoul));
+		        tel += "-";
+		        tel += number.substr((3 - seoul), 4);
+		        tel += "-";
+		        tel += number.substr(7 - seoul);
+		    }
+        }else {
+            alert("숫자 이외의 값은 입력하실 수 없습니다.");
+            obj.value = obj.value.replace(/[^0-9 ^\-]/g,"");
+            return false;
+        }
+    }else {
+        return false;
+    }
+    obj.value = tel;
+}
   $(document).ready(function(){
   	$("#cancel_btn").on("click",function(){
   		history.back(); 
@@ -72,6 +166,7 @@
 	});
 //add버튼 
   	$("#add_btn").on("click", function(){
+  		var obEmail = document.getElementById("email");
   		if(checkVal("#m_id")){
   			alert("아이디를 입력해 주세요.");
   			$("#m_id").focus();
@@ -100,6 +195,9 @@
   			$("#phone").focus();
   		}  else if (checkVal("#email")){
   			alert("이메일을 입력해 주세요.");
+  			$("#email").focus();
+  		}  else if(!CheckEmail(obEmail.value)){
+  			alert("이메일 형식이 잘못되었습니다");
   			$("#email").focus();
   		}  else if (checkVal("#cm_postcode")){
   			alert("우편번호를 입력해 주세요.");
@@ -173,7 +271,7 @@
           <input type="password" id="m_repw" name="m_repw" placeholder="패스워드를 확인하세요"><br>
           
           <span class="title_Name">휴대폰 번호</span><br>
-          <input type="text" id="phone" name="phone" placeholder="번호를 입력하세요"><br>
+          <input type="text" id="phone" name="phone" placeholder="번호를 입력하세요" onKeyup="inputTelNumber(this);" maxlength="13"><br>
           
           <span class="title_Name">이메일</span><br>
           <input type="email" id="email" name="email" placeholder="이메일을 입력하세요"><br>
@@ -196,11 +294,9 @@
             <input type="text" id="cm_detailAddress" name="dtl_adr"  placeholder="상세주소"><br>  
           </div>
           </form>
-          
           <button id="add_btn" class="add_btn">가입</button>
           <button id="cancel_btn" class="cancel_btn">취소</button>
         </div>
-        
       
       <br>
     </div>
