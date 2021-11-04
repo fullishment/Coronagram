@@ -105,11 +105,12 @@
         <nav>
           <ul class="main-menu">
             <li><a href="main">Main</a></li>
-            <li><a href="">Corona Map</a></li>
-            <li><a href="">Corona Info</a></li>
-            <li><a href="">Coronagram</a></li>
-            <li><a href="">Service Center</a></li>
+            <li><a href="MapAPI">Corona Map</a></li>
+            <li><a href="coinfo_main">Corona Info</a></li>
+            <li><a href="coronagram">Coronagram</a></li>
+            <li><a href="qna">Service Center</a></li>
             <li><a href="shopCart" ><span class="fa fa-shopping-cart"></span></a></li>
+            <li><a href="prodShipping" ><span class="fas fa-shipping-fast"></span></a></li>
           </ul>
         </nav>
       </div>

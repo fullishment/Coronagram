@@ -23,10 +23,10 @@
     	$("#allCheck").on("click",function(){
     		if($("#allCheck").prop("checked")) {
                 $("input[type=checkbox]").prop("checked",true);
-            
+                $("#delBtn").css({"border-color":"red","color":"red"});
             } else {
                 $("input[type=checkbox]").prop("checked",false);
-
+                $("#delBtn").css({"border-color":"#ccc","color":"#ccc"});
             }
     	});
     	$("#cartList").on("click",".check_btn",function(){
@@ -236,6 +236,7 @@
     				if(res.result=="success"){
     					alert("삭제성공");
     					redrawCartList();
+    					$("#delBtn").css({"border-color":"#ccc","color":"#ccc"});
     				}else if (res.result=="failed"){
     					alert("삭제에 실패했습니다");
     				}else{
