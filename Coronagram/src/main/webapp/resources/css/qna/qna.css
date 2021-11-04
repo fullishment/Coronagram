@@ -61,7 +61,7 @@ tr:nth-child(even) {
 	width: 100%;
 	text-align: center;
 	padding-top: 10px;
-	margin: 27px 73%;
+	display : flex;
 }
 
 .paging_wrap h3, .paging_wrap b, .paging_wrap p {
@@ -181,7 +181,7 @@ transform:rotate(0);
 }
 /* FAQ */
 .scQ {
-    background-color: khaki;
+    background-color: #F2CBBD;
     color: #444;
     cursor: pointer;
     padding: 18px;
@@ -197,7 +197,8 @@ transform:rotate(0);
 
 .SCactive,
 .scQ:hover {
-    background-color: gold;
+    background-color: #BF4F36;
+    color: #fff;
 }
 
 .scA {

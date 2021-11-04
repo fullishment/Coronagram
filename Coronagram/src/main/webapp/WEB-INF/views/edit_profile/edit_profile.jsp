@@ -378,7 +378,7 @@ function readURL(input) {
       <p>이름</p>
       <input type="text" id="mNm" name="mNm" value="${data.M_NM}"><br>
       <p>닉네임 <span id="check"></span></p>
-      <input type="text" id="nickNm" name="nickNm" value="${data.NICK_NM}"><br/>
+      <input type="text" id="nickNm" name="nickNm" value="${data.NICK_NM}" disabled><br/>
       <input type="hidden" id="opw" value="${data.M_PW}" />
       <p>현재 비밀번호</p>
       <input type="password" id="ocpw" name="ocpw"><br>

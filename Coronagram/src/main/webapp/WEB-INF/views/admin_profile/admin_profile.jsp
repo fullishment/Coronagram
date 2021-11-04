@@ -394,7 +394,7 @@ function readURL(input) {
       <br>
 <!-- 포인트 -->
       <span>포인트</span> <br>
-      <input type="text" class="point_con" id="point" name="point" value="${data.POINT}">P<br>
+      <input type="text" class="point_con" id="point" name="point" value="${data.POINT}" disabled>P<br>
 <!-- 자기소개 -->
       <p>자기소개</p>
       <input type="text" id="intCon" name="intCon" value="${data.INTRO_CON}"><br>  

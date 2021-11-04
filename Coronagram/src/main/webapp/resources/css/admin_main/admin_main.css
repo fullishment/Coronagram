@@ -83,7 +83,7 @@ p {
 
 .button-group {
 	position: absolute;
-	top: 20px;
+	top: 11px;
 	right: 0px;
 }
 
@@ -253,6 +253,9 @@ p {
 	padding:0.2rem 1rem;
 	width:130px;
 	margin: auto;
+	position: absolute;
+    top: 11px;
+    right: 0;
 }
 
 

@@ -81,6 +81,8 @@ table {
 	box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
 	border: 0px seashell;
 	text-align: center;
+	width : 940px;
+	margin-left:18px;
 }
 td {
 	font-size: 9pt;
@@ -271,16 +273,23 @@ textarea {
   }
 
 div h3 {
-	margin-left:-50px;
+	margin-left:-6px;
+}
+.group_table {
+	padding: 20px;
+    margin-top: 10px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
+    border-radius: 10px;
+    margin-bottom: 50px;
+    width : 1020px;
 }
 .group_table0, .group_table1, .group_table2, .group_table3, .group_table4 {
 	width: 121%;
 	min-width: 943px;
-    margin-left: -10%;
     margin-bottom: 50px;
 }
 .group_table0 {
-	margin-top: 50px;
+	margin-top: 10px;
 }
 .group_table1 td {
 	padding : 0 29px;

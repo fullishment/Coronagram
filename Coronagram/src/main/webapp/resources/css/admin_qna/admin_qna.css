@@ -70,17 +70,14 @@ tbody tr:hover {
 	margin: auto;
 }
 
-.paging {
-	float: left;
-}
+
 
 .paging_wrap {
 	position: relative;
 	clear: both;
 	width: 100%;
 	text-align: center;
-	padding-top: 10px;
-	margin: 60px 65%;
+	top: 65px;
 }
 
 .paging_wrap h3, .paging_wrap b, .paging_wrap p {

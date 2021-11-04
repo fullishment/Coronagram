@@ -180,7 +180,7 @@ $(document).ready(function() {
 
 				<article class="version">
 					<section class="page-header">
-						<h1 class="page-title">Q&A</h1><p class="newqna">새 질문 : ${data1.NEWQ}</p>
+						<h1 class="page-title">Q&A</h1><p class="newqna">미답변 : ${data1.NEWQ}</p>
 						<div class="button-group">
 							<a href="admin_qna"><button type="button" class="btn btn-primary">+</button></a>
 						</div>
