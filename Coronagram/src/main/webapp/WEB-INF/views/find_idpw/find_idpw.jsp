@@ -6,6 +6,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <title>FindIdPw</title>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap">

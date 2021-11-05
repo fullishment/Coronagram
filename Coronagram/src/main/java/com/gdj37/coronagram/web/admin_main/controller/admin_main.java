@@ -3,6 +3,7 @@ package com.gdj37.coronagram.web.admin_main.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gdj37.coronagram.util.ScriptUtils;
 import com.gdj37.coronagram.web.admin_main.service.IServiceAdminMain;
 
 @Controller
@@ -20,7 +22,7 @@ public class admin_main {
 	
 	@RequestMapping(value ="/admin_main")
 	public ModelAndView admin_mainList(@RequestParam HashMap<String, String> params, 
-			ModelAndView mav,HttpSession session)throws Throwable {
+			ModelAndView mav,HttpSession session, HttpServletResponse response)throws Throwable {
 		if(session.getAttribute("acctNo")!=null) {
 			int acctNo = Integer.parseInt(session.getAttribute("acctNo").toString());
 			if(acctNo==6) {
@@ -40,9 +42,11 @@ public class admin_main {
 				mav.addObject("list2", list2);
 				mav.setViewName("admin_main/admin_main");
 			}else {
+				ScriptUtils.alert(response, "관리자 전용 페이지 입니다.");
 				mav.setViewName("main_page/main_page");
 			}
 		}else {
+			ScriptUtils.alert(response, "관리자 전용 페이지 입니다.");
 			mav.setViewName("main_page/main_page");
 		}
 		

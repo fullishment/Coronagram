@@ -18,7 +18,13 @@
             background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
         }
         
-        .cm_logo, .cm_home, .cm_msg, .cm_cld, .cm_dot, .cm_user_name {
+        .cm_logo,
+         .cm_home,
+          .cm_msg,
+           .cm_cld, 
+           .cm_dot,
+            .cm_user_name,
+            .cm_admin {
             position: absolute;
             margin-top: 10px;
             background-color: rgba(255, 255, 255, 0);
@@ -30,6 +36,9 @@
         }
         .cm_logo {
             left: 60px;
+        }
+        .cm_admin {
+            left: 175px;
         }
         .cm_user_name {
             right: 335px;
@@ -47,7 +56,11 @@
         .cm_cld {
             right: 90px;
         }
-        .cm_logo:hover, .cm_home:hover, .cm_msg:hover, .cm_cld:hover {
+        .cm_logo:hover,
+        .cm_home:hover,
+        .cm_msg:hover,
+        .cm_cld:hover,
+        .cm_admin:hover {
             /* transform: scale(1.2); */
             color: rgba(0, 0, 0, 0.2);
         }
@@ -254,9 +267,19 @@
             background-size: cover;
             background-image: url("../../images/icon/logout.png");
         }
+        .cm_icon-logIn {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-size: cover;
+            background-image: url("../../images/icon/enter.png");
+        }
 
         a.cm_logout {
             border-left: 5px solid #cf2130;
+        }
+        a.cm_logIn {
+            border-left: 5px solid #008747;
         }
 		.cm_icon-userinfo {
 			position: absolute;

@@ -34,22 +34,27 @@ public class Admin_ChartController {
 	public IServiceAdmin_Chart iServiceAdmin_Chart;
 
 	@RequestMapping(value = "/admin_chart")
-	public ModelAndView admin_chart(HttpSession session, HttpServletResponse response, @RequestParam HashMap<String, String> params, ModelAndView mav) throws Throwable {
+	public ModelAndView admin_chart(HttpSession session, HttpServletResponse response,
+			@RequestParam HashMap<String, String> params, ModelAndView mav) throws Throwable {
 
 		HashMap<String, String> data = iServiceAdmin_Chart.getGradeData(params);
 
-		if(session.getAttribute("acctNo")!=null) {
+		if (session.getAttribute("acctNo") != null) {
 			int acctNo = Integer.parseInt(session.getAttribute("acctNo").toString());
-			if(acctNo==6) {
-		mav.addObject("data", data);
-		mav.setViewName("admin_chart/admin_chart");
-			}else {
+			if (acctNo == 6) {
+				mav.addObject("data", data);
+				mav.setViewName("admin_chart/admin_chart");
+			} else {
 				ScriptUtils.alert(response, "관리자 전용 페이지 입니다.");
 				mav.setViewName("main_page/main_page");
 			}
+		}else {
+			ScriptUtils.alert(response, "관리자 전용 페이지 입니다.");
+			mav.setViewName("main_page/main_page");
 		}
 		return mav;
 	}
+
 	@RequestMapping(value = "/adminChartAjax", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> adminChartAjax(@RequestParam HashMap<String, String> params) throws Throwable {
@@ -75,7 +80,7 @@ public class Admin_ChartController {
 	@RequestMapping(value = "/chartApiAjax", method = RequestMethod.POST, produces = "test/xml;charset=UTF-8")
 	@ResponseBody
 	public String chartApiAjax() throws Throwable {
-		
+
 		LocalTime nowTime = LocalTime.now();
 		LocalTime limitTime = LocalTime.of(9, 59, 59);
 		LocalDate now = LocalDate.now();
@@ -85,7 +90,7 @@ public class Admin_ChartController {
 
 		String today = now.format(dtf);
 		String todaym = nowm.format(dtf);
-		
+
 		StringBuilder urlBuilder = new StringBuilder(
 				"http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson"); /* URL */
 		urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8")
@@ -96,12 +101,15 @@ public class Admin_ChartController {
 //        urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + URLEncoder.encode("-", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
 //        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
 //        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
-		urlBuilder.append("&" + URLEncoder.encode("startCreateDt", "UTF-8") + "=" + URLEncoder.encode("20200115", "UTF-8")); /* 검색할 생성일 범위의 시작 */
-		if(nowTime.isBefore(limitTime)) {
-			urlBuilder.append("&" + URLEncoder.encode("endCreateDt", "UTF-8") + "="	+ URLEncoder.encode(todaym, "UTF-8")); /* 검색할 생성일 범위의 종료 */
-		}else {
-			urlBuilder.append("&" + URLEncoder.encode("endCreateDt", "UTF-8") + "="	+ URLEncoder.encode(today, "UTF-8")); /* 검색할 생성일 범위의 종료 */
-			
+		urlBuilder.append("&" + URLEncoder.encode("startCreateDt", "UTF-8") + "="
+				+ URLEncoder.encode("20200115", "UTF-8")); /* 검색할 생성일 범위의 시작 */
+		if (nowTime.isBefore(limitTime)) {
+			urlBuilder.append("&" + URLEncoder.encode("endCreateDt", "UTF-8") + "="
+					+ URLEncoder.encode(todaym, "UTF-8")); /* 검색할 생성일 범위의 종료 */
+		} else {
+			urlBuilder.append("&" + URLEncoder.encode("endCreateDt", "UTF-8") + "="
+					+ URLEncoder.encode(today, "UTF-8")); /* 검색할 생성일 범위의 종료 */
+
 		}
 		URL url = new URL(urlBuilder.toString());
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -126,13 +134,14 @@ public class Admin_ChartController {
 
 		return sb.toString();
 	}
+
 	@RequestMapping(value = "/dayCntAjax", method = RequestMethod.POST, produces = "test/xml;charset=UTF-8")
 	@ResponseBody
 	public String dayCntAjax() throws Throwable {
 
 		LocalTime nowTime = LocalTime.now();
 		LocalTime limitTime = LocalTime.of(9, 59, 59);
-		
+
 		LocalDate now = LocalDate.now();
 		LocalDate nowm = now.minusDays(1);
 		LocalDate before2 = LocalDate.now().minusDays(2);
@@ -142,25 +151,30 @@ public class Admin_ChartController {
 
 		String today = now.format(dtf);
 		String todaym = nowm.format(dtf);
-		
+
 		String daysago = before2.format(dtf);
 		String daysagos = before3.format(dtf);
-		
 
-		StringBuilder urlBuilder = new StringBuilder("http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson"); /* URL */
-		urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=iwZFIlKLh4A5tfy0C89hfMwqm3%2Bfk8nR9HsfaLe%2FBP309oMxAJd2l796xiYG8em2N%2FlwQ%2B7YEETT87zAHSMHbw%3D%3D"); /*
-																															 */
-		if(nowTime.isBefore(limitTime)){
-			urlBuilder.append("&" + URLEncoder.encode("startCreateDt", "UTF-8") + "=" + URLEncoder.encode(daysagos, "UTF-8")); /* 검색할 생성일 범위의 시작 */
-		}else {
-			urlBuilder.append("&" + URLEncoder.encode("startCreateDt", "UTF-8") + "=" + URLEncoder.encode(daysago, "UTF-8")); /* 검색할 생성일 범위의 시작 */
+		StringBuilder urlBuilder = new StringBuilder(
+				"http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson"); /* URL */
+		urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8")
+				+ "=iwZFIlKLh4A5tfy0C89hfMwqm3%2Bfk8nR9HsfaLe%2FBP309oMxAJd2l796xiYG8em2N%2FlwQ%2B7YEETT87zAHSMHbw%3D%3D"); /*
+																															*/
+		if (nowTime.isBefore(limitTime)) {
+			urlBuilder.append("&" + URLEncoder.encode("startCreateDt", "UTF-8") + "="
+					+ URLEncoder.encode(daysagos, "UTF-8")); /* 검색할 생성일 범위의 시작 */
+		} else {
+			urlBuilder.append("&" + URLEncoder.encode("startCreateDt", "UTF-8") + "="
+					+ URLEncoder.encode(daysago, "UTF-8")); /* 검색할 생성일 범위의 시작 */
 		}
-		if(nowTime.isBefore(limitTime)) {
-			urlBuilder.append("&" + URLEncoder.encode("endCreateDt", "UTF-8") + "=" + URLEncoder.encode(todaym, "UTF-8")); /* 검색할 생성일 범위의 종료 */
-		}else {
-			urlBuilder.append("&" + URLEncoder.encode("endCreateDt", "UTF-8") + "=" + URLEncoder.encode(today, "UTF-8")); /* 검색할 생성일 범위의 종료 */
+		if (nowTime.isBefore(limitTime)) {
+			urlBuilder.append("&" + URLEncoder.encode("endCreateDt", "UTF-8") + "="
+					+ URLEncoder.encode(todaym, "UTF-8")); /* 검색할 생성일 범위의 종료 */
+		} else {
+			urlBuilder.append("&" + URLEncoder.encode("endCreateDt", "UTF-8") + "="
+					+ URLEncoder.encode(today, "UTF-8")); /* 검색할 생성일 범위의 종료 */
 		}
-		
+
 		URL url = new URL(urlBuilder.toString());
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
@@ -185,6 +199,4 @@ public class Admin_ChartController {
 		return sb.toString();
 	}
 
-	
-	
 }

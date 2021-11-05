@@ -51,7 +51,7 @@
         <property name="host" value="smtp.gmail.com" />
         <property name="port" value="587" />
         <property name="username" value="coronagram07@gmail.com" />
-        <property name="password" value="zhfhskrmfoa123" />
+        <property name="password" value="zhfhskrmfoa1234!" />
         <property name="defaultEncoding" value="utf-8" />
         <property name="javaMailProperties">
             <props>
