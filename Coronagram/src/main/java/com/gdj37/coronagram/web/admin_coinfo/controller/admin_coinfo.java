@@ -28,17 +28,27 @@ public class admin_coinfo {
 	public IPagingService iPagingService;	
 	
 	@RequestMapping(value = "/admin_coinfo_list")
-	public ModelAndView admin_coinfo_list(@RequestParam HashMap<String,String> params, ModelAndView mav) {
-		int page = 1;
-		
-		if(params.get("page") != null) {
-			page = Integer.parseInt(params.get("page"));
+	public ModelAndView admin_coinfo_list(@RequestParam HashMap<String,String> params, 
+			ModelAndView mav,HttpSession session)throws Throwable {
+		if(session.getAttribute("acctNo")!=null) {
+			int acctNo = Integer.parseInt(session.getAttribute("acctNo").toString());
+			if(acctNo==6) {
+				int page = 1;
+				
+				if(params.get("page") != null) {
+					page = Integer.parseInt(params.get("page"));
+				}
+				
+				mav.addObject("page", page);
+				
+				mav.setViewName("admin_coinfo/admin_coinfo_list");
+				
+			}else {
+				mav.setViewName("main_page/main_page");
+			}
+		}else {
+			mav.setViewName("main_page/main_page");
 		}
-		
-		mav.addObject("page", page);
-		
-		mav.setViewName("admin_coinfo/admin_coinfo_list");
-		
 		return mav;
 	}
 	

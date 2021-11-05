@@ -13,13 +13,16 @@ p {
     font-family: "Noto Sans KR", sans-serif;
 }
 .sc {
-    max-width: 800px;
+    width: 1000px;
     margin: auto;
     margin-top: 5%;
-    padding: 10px;
+    padding: 20px 0px 0px 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
 }
 .scHead {
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
 .scHead h4{
     font-size: 15pt;
@@ -29,7 +32,7 @@ p {
 .sc-html .scm1-htm,
 .sc-html .scm2-htm{
 top:10px;
-left:0;
+left:-20px;
 right:0;
 bottom:0;
 position:absolute;
@@ -82,9 +85,6 @@ overflow-x: auto;
 min-height: 3030px;
 }
 
-.group_table {
-	background: white;
-}
 
 table {
 	box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
@@ -105,11 +105,11 @@ th {
 
 /* 거리두기단계 */
 .map_dtl{
-    width: 300px;
+    width: 480px;
     height: 435px;
     border-radius: 10px;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
-    padding: 30px;
+    padding: 35px;
 	color: #5a5a5a;
 }
 
@@ -138,10 +138,11 @@ th {
 .group {
 	background: white;
     padding: 20px;
-    margin-top: 10px;
+    margin-top: 25px;
     height: 480px;
     min-height: 400px;
     min-width: 800px;
+    width : 1000px;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
     display: flex;
     border-radius: 10px;
@@ -287,11 +288,12 @@ div h3 {
 }
 .group_table {
 	padding: 20px;
-    margin-top: 10px;
+    margin-top: 25px;
     box-shadow: 0 1px 6px 0 rgb(32 33 36 / 28%);
     border-radius: 10px;
     margin-bottom: 50px;
-    width : 1020px;
+    width : 1000px;
+    background: white;
 }
 .group_table0, .group_table1, .group_table2, .group_table3, .group_table4 {
 	width: 121%;

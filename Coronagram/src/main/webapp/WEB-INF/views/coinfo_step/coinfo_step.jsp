@@ -53,26 +53,26 @@ $(document).on('click', '.local_link', function(e){
   <header>
     <div class="cm_menuBar" id="cm_menuBar">
       <div class="cm_menu__toggler"><span></span></div>
-      	<a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
-      	<a href="#" class="cm_home" id="cm_home">Home</a>
-      	<a href="#" class="cm_msg" id="cm_shop">Shop</a>
-      	<a href="#" class="cm_cld" id="cm_cld">Calendar</a>
-      	<div class="cm_dropdown">
-        	<a class="cm_dropbtn cm_dot" id="cm_dot"></a>
-        	<ul class="cm_dropdown-content">
-	          	<li>
-	            	<a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
-	          	</li>
-	          	<li>
-	            	<a href="coronagram/${sMNick}" class="cm_userinfo"> 개인정보수정</a>
-	          	</li>
-          	</ul>
+         <a href="#" class="cm_logo" id="cm_logo">Coronagram</a>
+         <a href="#" class="cm_home" id="cm_home">Home</a>
+         <a href="#" class="cm_msg" id="cm_shop">Shop</a>
+         <a href="#" class="cm_cld" id="cm_cld">Calendar</a>
+         <div class="cm_dropdown">
+           <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
+           <ul class="cm_dropdown-content">
+                <li>
+                  <a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
+                </li>
+                <li>
+                  <a href="coronagram/${sMNick}" class="cm_userinfo"> 개인정보수정</a>
+                </li>
+             </ul>
         </div>
-      	<div class="cm_user_name">
-			<c:if test="${!empty sMNo}">
-				${sMNm}님 어서오세요.
-			</c:if>
-		</div>
+         <div class="cm_user_name">
+         <c:if test="${!empty sMNo}">
+            ${sMNm}님 어서오세요.
+         </c:if>
+      </div>
     </div>
     <div class="cm_menu" id="cm_menu">
       <a href="#" class="cm_mLogo">Coronagram</a>
@@ -83,7 +83,7 @@ $(document).on('click', '.local_link', function(e){
           <a href="MapAPI">해외</a>
         </ul>
       </a>
-      <a href="#" class="cm_mTitle" id="cm_mTitle">
+      <a href="coinfo_main" class="cm_mTitle" id="cm_mTitle">
         <div class="cm_info"></div>Corona Info
         <ul class="cm_mcon" id="cm_mcon">
           <a href="coinfo_infolist">관련 정보</a> <br>
@@ -105,7 +105,7 @@ $(document).on('click', '.local_link', function(e){
       <a href="#" class="cm_mTitle" id="cm_mTitle">
         <div class="cm_qna"></div>Service Center
         <ul class="cm_mcon" id="cm_mcon">
-          <a href="qna">FAQ</a><br>
+          <a href="qna">FAA</a><br>
         </ul>
       </a>
     </div>

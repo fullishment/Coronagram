@@ -6,6 +6,12 @@ header a {
   text-decoration-line: none;
 }
 
+header .cm_user_name {
+	font-family: "Noto Sans KR", sans-serif;
+	font-weight: 600;
+	padding-top: 4px;
+}
+
 .cm_menuBar {
   display: flex;
   flex-wrap: nowrap;
@@ -30,22 +36,23 @@ header a {
             font-family: 'Lobster', cursive;
         }
 
+
 .cm_user_name {
-            right: 380px;
+            right: 335px;
             font-size: 10pt;
             font-family: "Noto Sans KR", sans-serif;
-        }
+}
+.cm_home {
+    right: 260px;
+}
+
+.cm_msg {
+    right: 190px;
+}
 
 
 .cm_logo {
   left: 60px;
-}
-.cm_home {
-  right: 290px;
-}
-
-.cm_msg {
-  right: 190px;
 }
 
 .cm_cld {
@@ -69,6 +76,22 @@ header a {
   width: 30px;
   height: 30px;
   margin-top: 2px;
+}
+
+ul > a {
+	color: #262626;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+ul > a:link {
+	color: #262626;
+	text-decoration: none;
+}
+
+ul > a:visited {
+	color: #262626;
+	text-decoration: none;
 }
 
 .cm_menu__toggler {

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,21 +29,28 @@ import com.gdj37.coronagram.web.admin_qna.service.IServiceAdmin_Qna;
 //list
 		@RequestMapping(value ="/admin_qna")
 			public ModelAndView adminqna(@RequestParam HashMap<String, String> params,
-					ModelAndView mav) {
-				
-				int page = 1;
+					ModelAndView mav,HttpSession session)throws Throwable {
+			if(session.getAttribute("acctNo")!=null) {
+				int acctNo = Integer.parseInt(session.getAttribute("acctNo").toString());
+				if(acctNo==6) {
+					int page = 1;
 					
-				if(params.get("page") != null) {
-					page = Integer.parseInt(params.get("page"));
-				}
-					mav.addObject("page", page);
-				
-					mav.setViewName("admin_qna/admin_qna");
+					if(params.get("page") != null) {
+						page = Integer.parseInt(params.get("page"));
+					}
+						mav.addObject("page", page);
 					
-					return mav;
+						mav.setViewName("admin_qna/admin_qna");
+						
+						
+				}else {
+					mav.setViewName("main_page/main_page");
 				}
-				
-				
+			}else {
+				mav.setViewName("main_page/main_page");
+			}
+			return mav;
+		}
 		@RequestMapping(value = "/adminQnaListAjax", method = RequestMethod.POST,
 				produces = "text/json;charset=UTF-8")
 		@ResponseBody
