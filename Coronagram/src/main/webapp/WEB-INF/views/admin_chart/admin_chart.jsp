@@ -95,9 +95,6 @@
 
     </aside>
     
-    <form action="admin_chart" id="userForm" method="post">
-   		 <input type="hidden" name="m_no" value="${sMNo}">
-    </form>
     <main>
         <div class="main_title">
             <h1>코로나 통계 자료</h1>

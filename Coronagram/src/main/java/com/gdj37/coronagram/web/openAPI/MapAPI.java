@@ -32,7 +32,7 @@ public class MapAPI {
 	public String mapDataApiAjax() throws Throwable {
 		
 		LocalTime nowTime = LocalTime.now();
-		LocalTime limitTime = LocalTime.of(9, 59, 59);
+		LocalTime limitTime = LocalTime.of(12, 59, 59);
 		
 		LocalDate now = LocalDate.now();
 		LocalDate nowm = now.minusDays(1);

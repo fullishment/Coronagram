@@ -1464,6 +1464,7 @@ a {
   .card-1 {
     height: 100%;
     padding-top: 20px;
+    padding-bottom: 25px;
   }
 
   .chart-lbl {

@@ -7,8 +7,6 @@ let cr_dt = dataA[0].date;
 
 $(document).ready(function () {
 	
-	$("#userForm").submit()
-	
 	function setFlatTheme() {
 		$("body").toggleClass("flat-theme");
 		$("#rad-color-opts").toggleClass("hide");
@@ -68,8 +66,6 @@ $(document).ready(function () {
 		}, 210);
 	});
 
-
-
 		$(".rad-chk-pin input[type=checkbox]").change(function (e) {
 		$("body").toggleClass("flat-theme");
 		$("#rad-color-opts").toggleClass("hide");
@@ -84,7 +80,6 @@ $(document).ready(function () {
 		
 		changeMapColors(fillColor, scale);
 	});
-	
 
 
 	$(".rad-color-swatch input[type=radio]").change(function (e) {

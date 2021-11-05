@@ -66,9 +66,10 @@ var index = 0;
 
 function getList(){
 	$.ajax({
-		type: 'POST', //통신 방식을 지정합니다
-		async :false,
-		url: "chartApiAjax", //통신을 원하는 URL주소를 입력합니다
+		type: 'get', //통신 방식을 지정합니다
+		async: false,
+		//url: "chartApiAjax", //통신을 원하는 URL주소를 입력합니다
+		url: "resources/xml/getCovid19InfStateJsonAll.xml", //통신을 원하는 URL주소를 입력합니다
 		dataType: 'xml',//서버로부터 받을 데이터 타입을 입력합니다.
 		success: function (res) { // 통신 성공시 호출해야할 함수
 		console.log($(res).find('totalCount').text());
@@ -137,9 +138,10 @@ function drawList(z) {
 
 function getWeekList(){
 	$.ajax({
-		type: 'POST', //통신 방식을 지정합니다
-		async :false,
-		url: "weekDataAjax", //통신을 원하는 URL주소를 입력합니다
+		type: 'get', //통신 방식을 지정합니다
+		async: false,
+		//url: "weekDataAjax", //통신을 원하는 URL주소를 입력합니다
+		url: "resources/xml/getCovid19InfStateJsonWeek.xml", //통신을 원하는 URL주소를 입력합니다
 		dataType: 'xml',//서버로부터 받을 데이터 타입을 입력합니다.
 		success: function (res) { // 통신 성공시 호출해야할 함수
 		console.log($(res).find('totalCount').text());
@@ -191,9 +193,10 @@ function drawWeekList(a) {
 }
 function getWorldList(){
 	$.ajax({
-		type: 'POST', //통신 방식을 지정합니다
-		async :false,
-		url: "mapDataApiAjax", //통신을 원하는 URL주소를 입력합니다
+		type: 'get', //통신 방식을 지정합니다
+		async: false,
+//		url: "mapDataApiAjax", //통신을 원하는 URL주소를 입력합니다
+		url: "resources/xml/getCovid19NatInfStateJson.xml", //통신을 원하는 URL주소를 입력합니다
 		dataType: 'xml',//서버로부터 받을 데이터 타입을 입력합니다.
 		success: function (res) { // 통신 성공시 호출해야할 함수
 		console.log($(res).find('totalCount').text());
@@ -221,9 +224,10 @@ return dataC;
 
 function getDayList(){
 	$.ajax({
-		type: 'POST', //통신 방식을 지정합니다
-		async :false,
-		url: "dayCntAjax", //통신을 원하는 URL주소를 입력합니다
+		type: 'get', //통신 방식을 지정합니다
+		async: false,
+		//url: "dayCntAjax", //통신을 원하는 URL주소를 입력합니다
+		url: "resources/xml/getCovid19InfStateJsonToday.xml", //통신을 원하는 URL주소를 입력합니다
 		dataType: 'xml',//서버로부터 받을 데이터 타입을 입력합니다.
 		success: function (res) { // 통신 성공시 호출해야할 함수
 		console.log($(res).find('totalCount').text());
