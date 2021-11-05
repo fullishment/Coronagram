@@ -271,6 +271,7 @@
             position: absolute;
             width: 20px;
             height: 20px;
+            margin-lefg: -7px;
             background-size: cover;
             background-image: url("../../images/icon/enter.png");
         }
