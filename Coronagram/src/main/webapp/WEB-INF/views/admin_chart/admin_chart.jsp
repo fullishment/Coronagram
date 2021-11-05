@@ -56,7 +56,6 @@
 	            	<c:otherwise>
 	            			<a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
 	            	</c:otherwise>
-	            	
 	            	</c:choose>
 	          	</li>
 	          	<li>

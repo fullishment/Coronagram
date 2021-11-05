@@ -79,7 +79,6 @@
 		html += "<td>"+data.PHONE+"</td>";
 		html += "<td>"+data.EMAIL+"</td>";
 		html += "<td>"+data.M_DT+"</td>";
-		html += "<td>"+data.POINT+"</td>";
 		html += "<td>"+data.TYPE_NM+"</td>";
 		html += "</tr>";
 	}
@@ -221,8 +220,7 @@
 					<option value="3">전화번호</option>
 					<option value="4">Email</option>
 					<option value="5">가입일</option>
-					<option value="6">포인트</option>
-					<option value="7">회원등급</option>
+					<option value="6">회원등급</option>
 				</select> 
 				<input type="text" id="searchTxt" name="searchTxt" value="${param.searchTxt}" />
 				<input type="hidden" id="oldTxt" value="${param.searchTxt}" />
@@ -240,7 +238,6 @@
                             <th>전화번호</th>
                             <th>이메일</th>
                             <th>가입일</th>
-                            <th>보유포인트</th>
                             <th>회원등급</th>
                         </tr>
                     </thead>

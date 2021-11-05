@@ -93,4 +93,4 @@ SELECT P.PROD_NO,P.PROD_NM, CNT , RNK
       <![CDATA[WHERE ROP.RNK <= 10]]>
       ORDER BY RNK
 </select>
-</mapper>
+ </mapper>

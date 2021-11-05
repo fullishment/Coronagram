@@ -1052,10 +1052,17 @@
                    <a class="cm_dropbtn cm_dot" id="cm_dot"></a>
                    <ul class="cm_dropdown-content">
                    <li>
-                       <a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
+                    	<c:choose >
+	          				<c:when test="${empty sMNo}">
+	            				<a href="login" class="cm_logIn"><i class="cm_icon-logIn"></i> <span>로그인</span> </a>
+	            			</c:when>
+	            		<c:otherwise>
+	            				<a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
+	            		</c:otherwise>
+	            		</c:choose>
                    </li>
                    <li>
-                       <a href="edit_profile" class="cm_userinfo">개인정보수정</a>
+                       <a href="coronagram/${sMNick}" class="cm_userinfo">마이페이지</a>
                    </li>
                 </div>
                 <div class="cm_user_name">

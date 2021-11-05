@@ -345,7 +345,7 @@ $("#qnaIcon").on("click",function(){
 	location.href="qna";
 });
 $("#zoomIcon").on("click",function(){
-	location.href="zoom";
+	location.href="https://coronagram-zoom.herokuapp.com/";
 });
 $(".btn_now").on("click",function(){
 	location.href="shop";

@@ -172,7 +172,7 @@
               <h2 class="txt-tt">Corona Map</h2>
               <p class="txt-desc" style="font-weight: 500;">코로나 확진자 경로를 지도로 만나보세요</p>
               <div class="txt-btn">
-                <a href="#" class="txt-btn-2">지도로 이동하기</a>
+                <a href="http://localhost:3000" class="txt-btn-2">지도로 이동하기</a>
               </div>
             </div>
             <picture class="img-box">
@@ -531,7 +531,7 @@
           src="http://www.myiconfinder.com/uploads/iconsets/256-256-732359f7dc388ab9720011bca82aee1b.png">
         <img class="sns"
           src="http://www.myiconfinder.com/uploads/iconsets/256-256-7799b777880e17be4bebb9837c11a342.png">
-        <section>
+        </section>
     </div>
   </footer>
   <script src="resources/script/openAPI/CoronaCntApi.js"></script>
