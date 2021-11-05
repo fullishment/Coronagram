@@ -23,7 +23,7 @@
 <script	src='https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/locales-all.min.js'></script>
 </head>
 <body>
-	header>
+	<header>
     <div class="cm_menuBar" id="cm_menuBar">
       <div class="cm_menu__toggler"><span></span></div>
       	<a href="#" class="cm_logo" id="cm_logo">Coronagram</a>

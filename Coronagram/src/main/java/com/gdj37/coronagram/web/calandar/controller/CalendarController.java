@@ -28,7 +28,7 @@ public class CalendarController {
 	@RequestMapping(value = "/calendar", method = RequestMethod.GET, produces = "text/json;charset=UTF-8")
 //	@ResponseBody
 	public ModelAndView calendar(HttpServletResponse response, HttpSession session, @RequestParam HashMap<String, String> params, ModelAndView mav)throws Throwable {
-		HashMap<String,String> data = iCalendarService.getPoint(params);
+//		HashMap<String,String> data = iCalendarService.getPoint(params);
 		
 		
 		if(session.getAttribute("sMNo") != null) {
