@@ -532,7 +532,7 @@
        						StoryModal(res.mStory);
        						progressbar();
        						modalFunc();	
-       					},2000);
+       					},1000);
        				},
        				error : function(request,status,error){
        					console.log(error);
