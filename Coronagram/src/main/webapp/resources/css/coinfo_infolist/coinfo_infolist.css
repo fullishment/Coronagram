@@ -21,7 +21,7 @@ header .cm_user_name {
 	background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
 }
 
-.cm_logo, .cm_home, .cm_msg, .cm_cld, .cm_dot, .cm_user_name {
+.cm_logo, .cm_home, .cm_msg, .cm_cld, .cm_dot, .cm_user_name, .cm_admin {
             position: absolute;
             margin-top: 10px;
             background-color: rgba(255, 255, 255, 0);
@@ -30,6 +30,9 @@ header .cm_user_name {
             font-size: 15pt;
             color: white;
             font-family: 'Lobster', cursive;
+        }
+.cm_admin {
+            left: 175px;
         }
 
 .cm_user_name {
@@ -55,7 +58,7 @@ header .cm_user_name {
 	right: 90px;
 }
 
-.cm_logo:hover, .cm_home:hover, .cm_msg:hover, .cm_cld:hover {
+.cm_logo:hover, .cm_home:hover, .cm_msg:hover, .cm_cld:hover, .cm_admin:hover {
 	/* transform: scale(1.2); */
 	color: rgba(0, 0, 0, 0.2);
 }

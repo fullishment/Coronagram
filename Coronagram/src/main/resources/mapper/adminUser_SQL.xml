@@ -4,9 +4,9 @@
 
 <!-- list -->
    <select id="getadminUserList" parameterType="hashmap" resultType="hashmap">
-      SELECT M.M_NO, M.M_ID, M.M_NM, M.PHONE, M.EMAIL, M.M_DT, M.POINT, M.ACCT_TYPE_NO, A.TYPE_NM
+      SELECT M.M_NO, M.M_ID, M.M_NM, M.PHONE, M.EMAIL, M.M_DT, M.ACCT_TYPE_NO, A.TYPE_NM
       FROM (   SELECT M_NO, M_ID, M_NM, PHONE, EMAIL,
-            TO_CHAR(M_DT,'yyyy-mm-dd') AS M_DT, POINT, ACCT_TYPE_NO,
+            TO_CHAR(M_DT,'yyyy-mm-dd') AS M_DT, ACCT_TYPE_NO,
             ROW_NUMBER() OVER(ORDER BY M_NO DESC) AS RNUM
          FROM M
          WHERE DEL = 1
@@ -31,9 +31,6 @@
                   AND M_DT LIKE '%' || #{searchTxt} || '%'
                </when>
                <when test="searchGbn eq 6">
-                  AND POINT LIKE '%' || #{searchTxt} || '%'
-               </when>
-               <when test="searchGbn eq 7">
                   AND ACCT_TYPE_NO LIKE '%' || #{searchTxt} || '%'
                </when>
             </choose>
@@ -68,9 +65,6 @@
                   AND M_DT LIKE '%' || #{searchTxt} || '%'
                </when>
                <when test="searchGbn eq 6">
-                  AND POINT LIKE '%' || #{searchTxt} || '%'
-               </when>
-               <when test="searchGbn eq 7">
                   AND ACCT_TYPE_NO LIKE '%' || #{searchTxt} || '%'
                </when>
           </choose>
@@ -80,7 +74,7 @@
 <!-- 불러오기 -->
    <select id="getAProfile" parameterType="hashmap" resultType="hashmap">
       SELECT M_NO, M_ID, M_NM, NICK_NM, PHONE, EMAIL, VAC_YN, POST_NO, ADR, DTL_ADR, 
-            ACCT_TYPE_NO, POINT, IMG_ADR, INTRO_CON, C.SM_NO, C.SET1
+            ACCT_TYPE_NO, IMG_ADR, INTRO_CON, C.SM_NO, C.SET1
       		FROM M M JOIN CRNG_SETTING C
             ON (M.M_NO = C.SM_NO)
 			WHERE M_NO = #{no}
@@ -94,7 +88,6 @@
                    ADR = #{cm_address},
                    DTL_ADR = #{cm_detailAddress},
                    ACCT_TYPE_NO = #{user_tier},
-                   POINT = #{point},
                    IMG_ADR = #{imgFile},
                    INTRO_CON = #{intCon}
       WHERE M_NO = #{no}

@@ -26,7 +26,7 @@
             padding: 5px;
             background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
         }
-        .cm_logo, .cm_home, .cm_msg, .cm_cld, .cm_dot, .cm_user_name {
+        .cm_logo, .cm_home, .cm_msg, .cm_cld, .cm_dot, .cm_user_name, .cm_admin {
             position: absolute;
             margin-top: 10px;
             background-color: rgba(255, 255, 255, 0);
@@ -36,33 +36,37 @@
             color: white;
             font-family: 'Lobster', cursive;
         }
+.cm_admin {
+            left: 175px;
+        }
 
-
-		.cm_user_name {
+.cm_user_name {
             right: 335px;
             font-size: 10pt;
             font-family: "Noto Sans KR", sans-serif;
-        }
-        .cm_home {
-            right: 260px;
-        }
+}
+.cm_home {
+    right: 260px;
+}
 
-        .cm_msg {
-            right: 190px;
-        }
+.cm_msg {
+    right: 190px;
+}
 
 
-        .cm_logo {
-            left: 60px;
-        }
+.cm_logo {
+	left: 60px;
+}
 
-        .cm_cld {
-            right: 90px;
-        }
-        .cm_logo:hover, .cm_home:hover, .cm_msg:hover, .cm_cld:hover {
-            /* transform: scale(1.2); */
-            color: rgba(0, 0, 0, 0.2);
-        }
+
+.cm_cld {
+	right: 90px;
+}
+
+.cm_logo:hover, .cm_home:hover, .cm_msg:hover, .cm_cld:hover, .cm_admin:hover {
+	/* transform: scale(1.2); */
+	color: rgba(0, 0, 0, 0.2);
+}
         
 
         *,
