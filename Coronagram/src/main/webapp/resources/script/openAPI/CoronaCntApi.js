@@ -66,7 +66,7 @@ var index = 0;
 
 function getList(){
 	$.ajax({
-		type: 'get', //통신 방식을 지정합니다
+		type: 'post', //통신 방식을 지정합니다
 		async: false,
 		url: "chartApiAjax", //통신을 원하는 URL주소를 입력합니다
 //		url: "resources/xml/getCovid19InfStateJsonAll.xml", //통신을 원하는 URL주소를 입력합니다
@@ -138,7 +138,7 @@ function drawList(z) {
 
 function getWeekList(){
 	$.ajax({
-		type: 'get', //통신 방식을 지정합니다
+		type: 'post', //통신 방식을 지정합니다
 		async: false,
 		url: "weekDataAjax", //통신을 원하는 URL주소를 입력합니다
 //		url: "resources/xml/getCovid19InfStateJsonWeek.xml", //통신을 원하는 URL주소를 입력합니다
@@ -193,7 +193,7 @@ function drawWeekList(a) {
 }
 function getWorldList(){
 	$.ajax({
-		type: 'get', //통신 방식을 지정합니다
+		type: 'post', //통신 방식을 지정합니다
 		async: false,
 		url: "mapDataApiAjax", //통신을 원하는 URL주소를 입력합니다
 //		url: "resources/xml/getCovid19NatInfStateJson.xml", //통신을 원하는 URL주소를 입력합니다
@@ -224,7 +224,7 @@ return dataC;
 
 function getDayList(){
 	$.ajax({
-		type: 'get', //통신 방식을 지정합니다
+		type: 'post', //통신 방식을 지정합니다
 		async: false,
 		url: "dayCntAjax", //통신을 원하는 URL주소를 입력합니다
 //		url: "resources/xml/getCovid19InfStateJsonToday.xml", //통신을 원하는 URL주소를 입력합니다
