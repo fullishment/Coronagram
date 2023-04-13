@@ -54,7 +54,7 @@
 	            			<a href="login" class="cm_logIn"><i class="cm_icon-logIn"></i> <span>로그인</span> </a>
 	            		</c:when>
 	            	<c:otherwise>
-	            			<a href="logout" class="cm_logout"><i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
+	            			<a href="logout" class="cm_logout">q<i class="cm_icon-logout"></i> <span>로그아웃</span> </a>
 	            	</c:otherwise>
 	            	</c:choose>
 	          	</li>
